@@ -1,6 +1,24 @@
 from django.db import models
 
 
+class Organization(models.Model):
+    name = models.CharField(max_length=20)
+    phoneNumber = models.CharField(max_length=11)
+    websiteAddress = models.CharField(max_length=255)
+    logo = models.CharField(max_length=150)
+    isBanned = models.BooleanField()
+    banDay = models.DateTimeField()
+    isDelete = models.BooleanField()
+    banReason = models.CharField(max_length=250)
+
+
+class College(models.Model):
+    name = models.CharField(max_length=15)
+    short_name = models.CharField(max_length=10)
+    website = models.CharField(max_length=100)
+    logo = models.CharField(max_length=50)
+
+
 class User(models.Model):
     email = models.EmailField(max_length=75)
     password = models.CharField(max_length=32)
@@ -15,6 +33,8 @@ class User(models.Model):
     login_count = models.IntegerField()
     last_login_ip = models.CharField(max_length=40)
     last_login_time = models.DateTimeField()
-    college = models.IntegerField()
+    college = models.ForeignKey(College)
     token = models.CharField(max_length=32)
+    organzation = models.IntegerField()
+    isMaster = models.BooleanField()
 
