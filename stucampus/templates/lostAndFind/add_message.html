@@ -11,8 +11,8 @@
         </style>
     </head>
     <body>
-        <a href="{% url 'property_office:index' %}">index</a>
-        <form action="{% url 'property_office:add_message' %}" method="POST">
+        <a href="{% url 'lostAndFind:index' %}">index</a>
+        <form action="{% url 'lostAndFind:add_message' %}" method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit"/>

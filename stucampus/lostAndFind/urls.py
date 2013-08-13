@@ -1,4 +1,4 @@
-from django .utils import patterns, url
+from django.conf.urls import patterns, url
 from stucampus.lostAndFind.views import IndexView, add_message
 
 urlpatterns = patterns(

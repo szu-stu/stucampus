@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import Context
 
-from stucampus.stucampus_custom.models import Message, MessageForm
+from stucampus.lostAndFind.models import Message, MessageForm
 
 class IndexView(generic.ListView):
     template_name  = 'lostAndFind/index.html'

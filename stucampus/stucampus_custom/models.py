@@ -66,12 +66,11 @@ class CharField(models.CharField):
         defaults.update(kwargs)
         return super(CharField, self).formfield(**defaults)
 
-class ChoiceField(models.ChoiceField):
+class BooleanField(models.BooleanField):
     def formfield(self, **kwargs):
-        defaults = {'form_class': forms.ChoiceField}
+        defaults = {'form_class': forms.BooleanField}
         defaults.update(kwargs)
-        return super(ChoiceField, self).formfield(**defaults)
-
+        return super(BooleanField, self).formfield(**defaults)
 
 
 

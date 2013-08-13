@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _, ungettext_lazy
 this_field_is_required = 'todo : translate it into chinese'
 class CharField(forms.CharField):
     default_error_messages = { \
-        'required':_( this_field_is_required ), \ \
+        'required':_( this_field_is_required ),  \
         }
 
 class IntegerField(forms.IntegerField):
@@ -15,31 +15,31 @@ class IntegerField(forms.IntegerField):
 
 class FloatField(forms.FloatField):
     default_error_messages = { \
-        'required':-( this_field_is_required ),\
+        'required':_( this_field_is_required ),\
         'invalid':_('Enter a numer.'),\
         }
 
-class DateField(form.DateField):
+class DateField(forms.DateField):
     default_error_messages = { \
-        'required':-( this_field_is_required ),\
-        'invalid'=_('Enter a valid date.'),\
+        'required':_( this_field_is_required ),\
+        'invalid':_('Enter a valid date.'),\
         }
 
 class TimeField(forms.TimeField):
     default_error_messages = { \
-        'required':-( this_field_is_required ),\
+        'required':_( this_field_is_required ),\
         'invalid':_('Enter a valid time'),\
         }
 
 class DateTimeField(forms.DateTimeField):
     default_error_messages = { \
-        'required':-( this_field_is_required ),\
+        'required':_( this_field_is_required ),\
         'invalid':_('Enter a valid date/time.'),\
         }
 
 class EmailField(forms.EmailField):
     default_error_messages = { \
-        'required':-( this_field_is_required ),\
+        'required':_( this_field_is_required ),\
         }
 
 class FileField(forms.FileField):
@@ -83,7 +83,7 @@ class ChoiceField(forms.ChoiceField):
 class MultipleChoiceField(forms.MultipleChoiceField):
     default_error_messages = { \
         'required':_( this_field_is_required ), \
-        'invalid_choice':-('chineseSelect a valid choice. %(value)s is not one of the available choices.'),\
+        'invalid_choice':_('chineseSelect a valid choice. %(value)s is not one of the available choices.'),\
         'invalid_list':_('chineseEnter a list of values'),\
         }
 
@@ -92,5 +92,4 @@ class MultiValueField(forms.MultiValueField):
         'required':_( this_field_is_required ), \
         'invalid':_('chineseEnter a list of values'),\
         'incomplete':_('chineseEnter a complete value'),\
-        
-
+        }
