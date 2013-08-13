@@ -17,4 +17,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
+urlpatterns += patterns('',
+    url(r'^lostandfind/', include('stucampus.lostAndFind.urls', namespace='lostAndFind') ),
+)
+
 handler404 = 'stucampus.master.views.page_not_found'

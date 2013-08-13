@@ -39,3 +39,8 @@ venv
 
 # Some configure files
 stucampus/settings.py
+
+# doyoubi
+doyoubi_*
+*~
+.gitignore
