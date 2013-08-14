@@ -42,6 +42,7 @@ class EmailField(models.EmailField):
         defaults = {'form_class': forms.EmailField}
         defaults.update(kwargs)
         return super(EmailField, self).formfield(**defaults)
+
 class FileField(models.FileField):
     def formfield(self, **kwargs):
         defaults = {'form_class': forms.FileField}
@@ -72,5 +73,11 @@ class BooleanField(models.BooleanField):
         defaults.update(kwargs)
         return super(BooleanField, self).formfield(**defaults)
 
+class ChoiceField(models.CharField):
+    def formfield(self, **kwargs):
+        defaults = {}
+        defaults.update(kwargs)
+        defaults['form_class'] = ChoiceField
+        return super(ChoiceField, self).formfield(**defaults)
 
 

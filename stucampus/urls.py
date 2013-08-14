@@ -6,6 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'stucampus.master.views.index', name='home'),
+    url(r'^lostandfound/', include('stucampus.lostandfound.urls', 
+                                  namespace='lostandfound') ),
     # Examples:
     # url(r'^$', 'stucampus.views.home', name='home'),
     # url(r'^stucampus/', include('stucampus.foo.urls')),
@@ -15,10 +17,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-)
-
-urlpatterns += patterns('',
-    url(r'^lostandfind/', include('stucampus.lostAndFind.urls', namespace='lostAndFind') ),
 )
 
 handler404 = 'stucampus.master.views.page_not_found'
