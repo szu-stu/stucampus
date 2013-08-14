@@ -4,12 +4,12 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import Context
 
-from stucampus.lostAndFind.models import Message, MessageForm
+from stucampus.lost_and_found.models import Message, MessageForm
 
 
 class IndexView(generic.ListView):
 
-    template_name = 'lostAndFind/index.html'
+    template_name = 'lost_and_found/index.html'
     context_object_name = 'message_list'
 
     def get_queryset(self):
@@ -26,5 +26,5 @@ def add_message(request):
         form = MessageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('lostAndFind:index'))
-    return render(request, 'lostAndFind/add_message.html', {'form': form})
+            return HttpResponseRedirect(reverse('lost_and_found:index'))
+    return render(request, 'lost_and_found/add_message.html', {'form': form})

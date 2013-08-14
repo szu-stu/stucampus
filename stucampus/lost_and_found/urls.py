@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from stucampus.lostAndFind.views import IndexView, add_message
+from stucampus.lost_and_found.views import IndexView, add_message
 
 urlpatterns = patterns(
     '',

@@ -11,8 +11,8 @@
         </style>
     </head>
     <body>
-        <a href="{% url 'lostAndFind:index' %}">index</a>
-        <form action="{% url 'lostAndFind:add_message' %}" method="POST" enctype="multipart/form-data">
+        <a href="{% url 'lost_and_found:index' %}">index</a>
+        <form action="{% url 'lost_and_found:add_message' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit"/>
