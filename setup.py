@@ -20,4 +20,3 @@ metadata = {"name": "stucampus",
 
 if __name__ == "__main__":
     setup(**metadata)
-

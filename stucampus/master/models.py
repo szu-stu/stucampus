@@ -37,4 +37,3 @@ class User(models.Model):
     token = models.CharField(max_length=32)
     organzation = models.IntegerField()
     isMaster = models.BooleanField()
-
