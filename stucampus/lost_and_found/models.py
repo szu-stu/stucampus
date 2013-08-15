@@ -11,7 +11,7 @@ class Message(django.db.models.Model):
     item_name = models.CharField(max_length=40,
                                  verbose_name='item name in chinese')
     description = models.CharField(max_length=300)
-    picture_file = models.ImageField(upload_to='lostAndFind')
+    picture_file = models.ImageField(upload_to='lost_and_found')
     published_date = models.DateField(auto_now_add=True)
     place = models.CharField(max_length=50)
     # TODO: translte the second value of every tuple to chinese
