@@ -26,4 +26,3 @@ class Article(models.Model):
     is_post = models.BooleanField()
     is_delete = models.BooleanField()
     is_important = models.BooleanField()
-    
