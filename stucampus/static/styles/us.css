@@ -1,0 +1,163 @@
+@CHARSET "UTF-8";
+
+/*主体*/
+.main {
+	width: 991px;
+	margin: 0px auto;
+	background-color: #ffffff;
+}
+
+.top {
+	width: 991px;
+	height: 25px;
+	margin: 0px auto;
+	background: url('/static/images/aboutus/top-binner.png') no-repeat;
+	color: #ffffff;
+	font-size: 12px;
+	line-height: 25px;
+}
+
+.top span {
+	position: relative;
+	left: 45px;
+}
+
+.department {
+	width: 901px;
+	height: 538px;
+	margin: 0px auto;
+	position: relative;
+}
+
+.department-name {
+	width: 122px;
+	position: absolute;
+	margin-top: 30px;
+}
+
+.department-name img:hover {
+	background: url('/static/images/aboutus/department-back.png') no-repeat;
+	margin-top: 1px;
+}
+
+.department-summary {
+	margin-top: 30px;
+	width: 486px;
+	height: 366px;
+	position: absolute;
+	right: 0px;
+}
+
+.departments {
+	font-size: 16px;
+    margin: 0 auto;
+    position: relative;
+    top:50px;
+    text-shadow: 1px 1px 1px #CCCCCC;
+    width: 450px;
+}
+
+.departments p {
+	position: relavive;
+	margin: auto 20px auto 100px;
+}
+
+.departments span {
+	position: absolute;
+	width: 75px;
+	font-size: 16px;
+	left: 16px;
+}
+
+div#news {
+	color: #ec8c22;
+}
+
+div#dev {
+	color: #56adf2;
+}
+
+div#serv {
+	color: #038631;
+}
+
+div#design {
+	color: #214275;
+}
+div#office {
+	color: #68cc14;
+}
+
+.member {
+	width: 960px;
+	height: 450px;
+	margin: 0px auto;
+	margin-top: 140px;
+}
+
+.member-10th {
+	width: 306px;
+	height: 399px;
+	float: left;
+	background: url('/static/images/aboutus/us-summary.png') no-repeat;
+}
+
+span#now {
+	font-size: 13px;
+}
+
+.member-9th {
+	width: 306px;
+	height: 399px;
+	float: left;
+	margin-left: 21px;
+	background: url('/static/images/aboutus/us-summary.png') no-repeat;
+}
+
+.connect-us {
+	width: 306px;
+	height: 399px;
+	float: right;
+	position: relative;
+	background: url('/static/images/aboutus/us-summary.png') no-repeat;
+}
+
+h4 {
+	width: 280px;
+	margin: 35px auto 15px;
+	border-bottom: 2px solid #000000;
+}
+
+.member p {
+	width: 280px;
+	margin: 10px auto;
+	border-bottom: 1px solid #000000;
+	font-size: 14px;
+	
+}
+
+.member a {
+	text-decoration: none;
+}
+
+.member a:link {
+	color: #5c5656;
+	font-size: 14px;
+}
+
+.member a:hover {
+	color: #7e1616;
+}
+
+p span {
+	position: relative;
+	right: -55px;
+	font-size: 14px;
+}
+#join{
+	 position: absolute;
+    right: 140px;
+    top: -180px;
+    width: 30px;
+
+}

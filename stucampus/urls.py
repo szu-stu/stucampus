@@ -9,6 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', 'stucampus.master.views.index', name='home'),
+    url(r'^aboutus$', 'stucampus.master.views.about_us', name='aboutus'),
     url(r'^lost_and_found/', include('stucampus.lost_and_found.urls',
                                      namespace='lost_and_found')),
     url(r'^admin/', include(admin.site.urls)),
