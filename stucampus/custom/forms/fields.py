@@ -1,14 +1,14 @@
-#-*- coding: utf-8 -*-
+#-*- coding: utf-8
 from django import forms
 from django.utils.translation import ugettext_lazy as _, ungettext_lazy
 
 
-ENTER_A_NUMBER = '请输入数字'
+ENTER_A_NUMBER = u'请输入数字'
 
 
 class CharField(forms.CharField):
     default_error_messages = {
-        'required': _('不能为空'),
+        'required': _(u'不能为空'),
     }
 
 
@@ -53,19 +53,19 @@ class DecimalField(IntegerField):
 
 class DateField(forms.DateField):
     default_error_messages = {
-        'invalid': _('请输入合法日期'),
+        'invalid': _(u'请输入合法日期'),
     }
 
 
 class TimeField(forms.TimeField):
     default_error_messages = {
-        'invalid': _('请输入合法时间'),
+        'invalid': _(u'请输入合法时间'),
     }
 
 
 class DateTimeField(forms.DateTimeField):
     default_error_messages = {
-        'invalid': _('请输入合法日期/时间'),
+        'invalid': _(u'请输入合法日期/时间'),
     }
 
 
@@ -74,15 +74,17 @@ class RegexField(forms.RegexField):
 
 
 class EmailField(forms.EmailField):
-    pass
+    default_error_messages = {
+        'invalid': _(u'请输入合法邮箱地址')
+    }
 
 
 class FileField(forms.FileField):
     default_error_messages = {
         # 'invalid': _("No file was submitted. Check the encoding type on the form."),
-        'invalid': _('找不到文件, 请重新上传文件.'),
-        'missing': _('找不到文件, 请重新上传文件.'),
-        'empty': _('文件为空, 上传失败'),
+        'invalid': _(u'找不到文件, 请重新上传文件.'),
+        'missing': _(u'找不到文件, 请重新上传文件.'),
+        'empty': _(u'文件为空, 上传失败'),
         'max_length': ungettext_lazy(
             '文件需小于 %(max)d 字节, (您上传的文件大小为 %(length)d).',
             '文件需小于 %(max)d 字节, (您上传的文件大小为 %(length)d).',
@@ -95,13 +97,13 @@ class FileField(forms.FileField):
 
 class ImageField(forms.ImageField):
     default_error_messages = {
-        'invalid_image': _('您上传的图片不合法, 请重新上传'),
+        'invalid_image': _(u'您上传的图片不合法, 请重新上传'),
     }
 
 
 class URLField(forms.URLField):
     default_error_messages = {
-        'invalid': _('请输入合法 URL'),
+        'invalid': _(u'请输入合法 URL'),
     }
 
 
@@ -115,7 +117,7 @@ class NullBooleanField(BooleanField):
 
 class ChoiceField(forms.ChoiceField):
     default_error_messages = {
-        'invalid_choice': _('请选择合法选项, %(value)s 不是合法选项'),
+        'invalid_choice': _(u'请选择合法选项, %(value)s 不是合法选项'),
     }
 
 
@@ -125,8 +127,8 @@ class TypedChoiceField(ChoiceField):
 
 class MultipleChoiceField(forms.MultipleChoiceField):
     default_error_messages = {
-        'invalid_choice': _('请选择合法选项, %(value)s 不是合法选项'),
-        'invalid_list': _('Enter a list of values'),
+        'invalid_choice': _(u'请选择合法选项, %(value)s 不是合法选项'),
+        'invalid_list': _(u'Enter a list of values'),
     }
 
 
@@ -140,8 +142,8 @@ class ComboField(forms.ComboField):
 
 class MultiValueField(forms.MultiValueField):
     default_error_messages = {
-        'invalid': _('Enter a list of values'),
-        'incomplete': _('Enter a complete value'),
+        'invalid': _(u'Enter a list of values'),
+        'incomplete': _(u'Enter a complete value'),
     }
 
 

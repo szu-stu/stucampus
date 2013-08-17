@@ -1,5 +1,5 @@
 from django.db import models
-from stucampus.stucampus_custom import forms 
+from stucampus.custom import forms 
 
 class CharField(models.CharField):
     def formfield(self, **kwargs):
