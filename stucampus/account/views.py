@@ -70,3 +70,7 @@ def sign_up(request):
             success = False
             messages = form.errors.values()
         return render_json({'success': success, 'messages': messages})
+
+
+def profile(request):
+    return render(request, 'account/profile.html')

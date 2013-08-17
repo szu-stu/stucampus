@@ -2,7 +2,6 @@ import os
 from hashlib import md5
 
 from django import template
-from django.contrib.auth.models import User
 
 from stucampus.settings import APP_ROOT
 

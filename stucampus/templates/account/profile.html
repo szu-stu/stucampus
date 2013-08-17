@@ -1,0 +1,26 @@
+{% extends 'account/base.html' %}
+    {% block inside %}
+        <div class="infor">
+            <h4>{{ user.student.screen_name }}的个人资料</h4>
+                <div>
+                    <ul>
+                        <li>昵称：{{ user.student.screen_name | default:'暂无' }}</li>
+                        <li>性别：{% if user.student.is_male %}男{% else %}女{% endif %}</li>
+                        <li>邮箱：{{ user.email | default:'暂无' }}</li>
+                        <li>学号：{{ user.student.student_id | default:'暂无' }}</li>
+                        {% if user.student.birthday %}
+                        <li>生日：{{ user.student.birthday | date:'Y-m-d' }}</li>
+                        {% else %}
+                        <li>生日：暂无</li>
+                        {% endif %}
+                        <li>手机长号：{{ user.student.mphone_num | default:'暂无' }}</li>
+                        <li>手机短号：{{ user.student.mphone_short_num | default:'暂无' }}</li>
+                        <li>校园卡号：{{ user.student.szucard | default:'暂无' }}</li>
+                        <li>创建时间：{{ user.student.created | date:'Y-m-d' }}</li>
+                        {% if user.masterForOrganization %}
+                        <li>所管组织： {{ user.masterForOrganization }}</li>
+                        {% endif %}
+                    </ul>
+                </div>
+        </div>
+    {% endblock %}

@@ -1,7 +1,7 @@
             <dl class="signer-box" id="signer-box">
             {% if user.is_authenticated %}
             <dt class="signer-head content-block">
-                <a class="usrname-box" href="#">
+                <a class="usrname-box" href="/account/profile">
                 {% load account_custom %}
                     <img class="usr-avatar" src="http://www.gravatar.com/avatar/{{ user|user_avatar }}" alt="[头像]" />
                     <span class="usr-text">{{ user.student.screen_name }}</span>
@@ -10,10 +10,10 @@
             </dt>
             <dd class="signer-expand content-block" id="signer-expand">
                 <ul class="usrmenu">
-                    <li><a href="/account/center">个人中心</a></li>
+                    <li><a href="/account/profile">个人中心</a></li>
                     {% if user.masterOrganization %}
                     <li title="管理您所负责的组织 {{ user.masterOrganization.name }}">
-                        <a href="/admin/organization/{{user.masterOrganization.id}}">管理组织</a>
+                        <a href="/admin/organization/{{ user.masterOrganization.id }}">管理组织</a>
                     </li>
                     {% endif %}
                     <li class="topline"><a href="javascript:void(0);" id="signout-btn">退出</a></li>

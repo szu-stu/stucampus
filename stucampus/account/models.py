@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Student(models.Model):
     user = models.OneToOneField(User)
     screen_name = models.CharField(max_length=20)
-    is_male = models.BooleanField()
-    birthday = models.DateTimeField(auto_now=True)
+    is_male = models.BooleanField(default=True)
+    birthday = models.DateTimeField(blank=True)
     mphone_num = models.CharField(max_length=11)
     mphone_short_num = models.CharField(max_length=6)
     student_id = models.CharField(max_length=10)

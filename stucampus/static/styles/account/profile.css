@@ -1,0 +1,213 @@
+@CHARSET "UTF-8";
+
+.main {
+	width: 860px;
+    min-height: 840px;
+	margin: 0px auto;
+    position: relative;
+	text-shadow: 1px 1px 1px #CCCCCC;
+}
+
+.main li {
+	list-style: none;
+}
+
+.left-side {
+	width: 205px;
+	border: 0.5px solid #e4e8e7;
+	background-color: #ffffff;
+}
+
+.left-side li {
+	width: 145px;
+}
+
+.left-side a {
+	text-decoration: none;
+}
+
+.left-side a:link {
+	color: #000000;
+}
+
+.left-side a:visited {
+	color: #000000;
+}
+
+.left-side li:hover {
+	background-color: #efefef;
+}
+
+.list {
+	width: 164px;
+	height: 200px;
+}
+
+.list span {
+	position: relative;
+	top: -7px;
+	left: 40px;
+}
+
+img#avater {
+	position: relative;
+	left: 20px;
+	top: 10px;
+	border: 1px solid #000000;
+	margin: 0px auto;
+}
+
+.right-side {
+	width: 630px;
+	height: auto !important;
+    min-height: 820px;
+	background-color: #ffffff;
+	border: 0.5px solid #e4e8e7;
+	position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.right-side h4 {
+	padding-bottom: 10px;
+	margin: 20px 0px 0px 0px;  
+	border-bottom: 2px solid #e4e8e7;
+}
+
+.infor {
+	width: 560px;
+	margin: 0px auto;
+}
+
+.infor ul {
+	width: 530px;
+	padding: 0px;
+	margin: 0px auto;
+	font-size: 16px;
+}
+
+.infor li {
+	height: 40px;
+	width: 520px;
+	line-height: 40px;
+	border-bottom: 1px dashed #6b6b6b;
+}
+
+.change {
+	width: 560px;
+	margin: 0px auto;
+}
+
+.element {
+	height: 25px;
+	width: 180px;
+	font-size: 16px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+
+.change ul {
+	width: 530px;
+	padding: 0px;
+	margin: 0px auto;
+	font-size: 16px;
+}
+
+.change li {
+	height: 40px;
+	margin-top: 10px;
+	border-bottom: 1px dashed #6b6b6b;
+}
+
+.select_type {
+	height: 30px;
+	width: 186px;
+	font-size: 16px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+
+li#last {
+	border: 0px dashed #6b6b6b;
+}
+
+#captcha {
+    display: block;
+    float: left;
+    height: 40px;
+    width: 105px;
+    line-height: 40px;
+}
+
+.captcha {
+    display: block;
+    float: left;
+}
+
+input#confirm_botton {
+	background: url("/static/images/elements/button-yellow.png") repeat-x scroll 0 0 #FFAA22;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: inline-block;
+    height: 52px;
+    padding: 5px 20px;
+    text-shadow: 0 1px 0 #FFEE66;
+    font-family: "Microsoft Yahei";
+    font-size: 25px;
+    height: 40px;
+    position: absolute;
+    left: 400px;
+}
+
+/*组织发布信息*/
+
+.post {
+    width: 560px;
+    margin:  0px auto;
+}
+
+.post ul {
+	width: 530px;
+	padding: 0px;
+	margin: 0px auto;
+	font-size: 16px;
+}
+
+.post li {
+	height: 40px;
+    line-height: 40px;
+	margin-top: 10px;
+}
+
+.post select {
+    height: 30px;
+	width: 186px;
+	font-size: 16px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+
+.post textarea {
+    width: 500px;
+    height: 300px;
+}
+
+.post span {
+    left: 0px;
+    position: relative;
+    top: 0px;
+}
+
+.buttons {
+    text-align: right;
+	margin-top: 30px;
+    position: relative;
+    top: 495px;
+    width: 543px;
+}
+
+.button {
+	padding: 4px 20px;
+	font-size: 15px;
+	font-family: "Microsoft Yahei";
+}
+
