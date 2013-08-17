@@ -2,8 +2,7 @@
     <head>
         <style type="text/css">
             .message{
-                width: 500px;
-                height: 30px;
+                height: 50px;
             }
             .detail{
                 margin-left: 10px;
@@ -11,15 +10,21 @@
             input{
                 display: block;
             }
+            img{
+                width: 40px;
+                height: 50px;
+            }
         </style>
+        {% load static from staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'lost_and_found/index.css' %}">
     </head>
     <body>
         {% for message in message_list %}
-        <div class="message">
+        <div class="message red">
             <img src="{{ message.picture_file.url }}"/>
             <span class="detail">{{ message.item_name }}</span>
             <span class="detail">{{ message.place }}</span>
-            <span class="detail">{{ message.discription }}</span>
+            <span class="detail">{{ message.description }}</span>
             <span class="detail">{{ message.published_date }}</span>
         </div>
         {% endfor %}

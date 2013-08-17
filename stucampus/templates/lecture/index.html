@@ -1,0 +1,29 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <table border="1">
+            <tr>
+            {% for list_each_day in table.morning %}
+                <td>
+                {% for msg in list_each_day %}
+                <div>
+                    {{ msg.title }}
+                </div>
+                {% endfor %}
+                </td>
+            {% endfor %}
+
+            {% for list_each_day in table.afternoon %}
+                <td>
+                {% for msg in list_each_day %}
+                <div>
+                    {{ msg.title }}
+                </div>
+                {% endfor %}
+                </td>
+            {% endfor %}
+            </tr>
+        </table>
+    </body>
+</html>
