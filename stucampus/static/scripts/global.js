@@ -66,7 +66,7 @@
 			};
 		}
 		$.ajax({
-			url: '/signin/',
+			url: '/account/signin',
 			type: 'post',
 			cache: false,
 			data: {email:email, password:password, token:token},
@@ -82,7 +82,7 @@
 		if (typeof success == 'undefined') {
 			success = function(){ location.reload();};
 		}
-		$.ajax({url: '/signin/', type: 'delete', success:success });
+		$.ajax({url: '/account/signin', type: 'delete', success:success });
 	};
 		
 	window.StuCampus = window.$S = StuCampus;

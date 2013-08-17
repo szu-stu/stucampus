@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    <link rel="stylesheet" href="/static/styles/account/signup.css" type="text/css" />
+    <script type="text/javascript" src="/static/scripts/account/signin.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="page-center master-framework">
+        <h2 class="top-second-header">用户登录</h2>
+        <form id="signup-form" method="post" class="large-element">
+        {% csrf_token %}
+            <ul>
+                <li>
+                    <label class="label" for="email">邮箱</label>
+                    <input type="textbox" class="textbox" id="email" name="email" />
+                    <span class="comment">用户邮箱</span>
+                </li>
+                <li>
+                    <label class="label" for="password">密码</label>
+                    <input type="password" class="textbox" id="password" name="password" />
+                    <span class="comment">登录密码</span>
+                </li>
+                <!-- 
+                <li>
+                    <label class="label" for="captcha">验证码</label>
+                    <input type="textbox" class="textbox" id="captcha" name="captcha" />
+                    <span class="comment">图片上显示的字母和数字</span>
+                </li>
+                <li class="buttons">
+                    <img src="/captcha/" alt="验证码加载失败" title="看不清楚？点击更换！" onclick="reloadCaptcha(this)" />
+                </li>
+                 -->
+                <li class="buttons">
+                    <input type="submit" class="button" value="登录" id="signinBtn" />
+                    <input type="button" class="button" value="注册" id="signupBtn" /> 
+                </li>
+            </ul>
+        </form>
+    </div>
+{% endblock %}
