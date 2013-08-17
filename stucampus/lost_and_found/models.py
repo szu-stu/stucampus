@@ -2,7 +2,7 @@ from django.forms import ModelForm
 import datetime
 import django.db.models
 
-from stucampus.stucampus_custom import models
+from stucampus.custom import models
 
 
 class Message(django.db.models.Model):
