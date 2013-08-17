@@ -18,7 +18,7 @@ $(function(){
 					}
 				}
 				else{
-					$S.alert(response.message.join('；'), 3500);
+					$S.alert(response.messages.join('；'), 3500);
 				}
 			},
 			error: function() {
