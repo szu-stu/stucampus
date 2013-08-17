@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block htmlhead %}
-    <link rel="stylesheet" href="/static/styles/account/signup.css" type="text/css" />
-    <script type="text/javascript" src="/static/scripts/account/sign_in.js"></script>
+    {% load html_tools %}
+    {{ 'account/signup.css' | as_css }}
+    {{ 'account/sign_in.js' | as_js}}
 {% endblock %}
 
 {% block content %}

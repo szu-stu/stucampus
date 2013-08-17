@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block htmlhead %}
-    <script type="text/javascript" src="/static/scripts/plugins/basic-jquery-slider.js"></script>
-    <link rel="stylesheet" href="/static/styles/index.css" type="text/css" />
-    <link rel="stylesheet" href="/static/styles/basic-jquery-slider.css" type="text/css" />
+    {% load html_tools %}
+    {{ 'plugins/basic-jquery-slider.js' | as_js }}
+    {{ 'index.css' | as_css }}
+    {{ 'basic-jquery-slider.css' | as_css }}
 {% endblock %}
 
 {% block content %}

@@ -7,16 +7,17 @@
     <meta name="keywords" content="{% block keywords %}深圳大学,深大,荔园,学子天地,校园传媒,校媒,大学生{% endblock %}" />
     <meta name="description" content="{% block description %}深圳大学资讯传媒社区, 荔园信息聚集平台{% endblock %}" />
     {% block htmltitle %}<title>深圳大学学子天地</title>{% endblock %}
+    {% load html_tools %}
     <!--[if IE]>
-    <link type="text/css" rel="stylesheet" href="/static/styles/iefix.css">
+    {{ 'iefix.css' | as_css }}
     <![endif]-->
-    <script type="text/javascript" src="/static/scripts/plugins/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/scripts/plugins/jquery.tools.min.js"></script>
-    <script type="text/javascript" src="/static/scripts/global.js"></script>
-    <script type="text/javascript" src="/static/scripts/layout.js"></script>
-    <script type="text/javascript" src="/static/scripts/google-analystics.js"></script>
-    <script type="text/javascript" src="/static/scripts/ga.js"></script>
-    <link rel="stylesheet" href="/static/styles/base.css" type="text/css" />
+    {{ 'plugins/jquery.min.js' | as_js }}
+    {{ 'plugins/jquery.tools.min.js' | as_js }}
+    {{ 'global.js' | as_js }}
+    {{ 'layout.js' | as_js }}
+    {{ 'google-analystics.js' | as_js }}
+    {{ 'ga.js' | as_js }}
+    {{ 'base.css' | as_css }}
     {% block htmlhead %}
     {% endblock %}
 </head>
