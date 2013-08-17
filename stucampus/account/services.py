@@ -1,25 +1,22 @@
-from stucampus.account.models import User
+from django.contrib.auth.models import User
+from stucampus.account.models import Student
 
 
 def find(id):
     try:
-        query_user = User.objects.get(id__exact=id)
+        query_user = User.objects.get(id__exact=id).student
+    except Student.DoesNotExist:
+        return None
     except User.DoesNotExist:
         return None
     return query_user
 
 
-def get_by_email(email):
+def find_by_email(email):
     try:
-        query_user = User.objects.get(email__exact=email)
-    except User.DoesNotExist:
+        query_user = User.objects.get(email__exact=email).student
+    except Student.DoesNotExist:
         return None
-    return query_user
-
-
-def validate_user(email, passwd):
-    try:
-        query_user = User.objects.get(email__exact=email, password__exact=passwd)
     except User.DoesNotExist:
         return None
     return query_user

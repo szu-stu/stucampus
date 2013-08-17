@@ -1,7 +1,7 @@
 $(function(){
-	$('#signup-form').submit(function(){
+	$('#sign_up-form').submit(function(){
 		$.ajax({
-			url: '/account/signin',
+			url: '/account/signup',
 			type: 'post',
 			dataType: 'json',
 			data: $(this).serialize(),
@@ -11,9 +11,9 @@ $(function(){
 					if (document.referrer != '' && (document.referrer != document.location)) {
 						document.location = document.referrer;
 					} else {
-						$S.notice('登录成功', 2000);
+						$S.notice('注册成功', 2000);
 						setTimeout(function(){
-							document.location.reload();
+							document.location = '/account/signin';
 						}, 2050);
 					}
 				}
@@ -27,11 +27,4 @@ $(function(){
 		});
 		return false;
 	});
-
-	$('#signupBtn').click(function(){
-		document.location = '/account/signup/';
-	});
-
-	// 登录框就不要多此一举出现了
-	$('#signer-box').remove();
 });

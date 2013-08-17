@@ -2,13 +2,13 @@
 
 {% block htmlhead %}
     <link rel="stylesheet" href="/static/styles/account/signup.css" type="text/css" />
-    <script type="text/javascript" src="/static/scripts/account/signin.js"></script>
+    <script type="text/javascript" src="/static/scripts/account/sign_in.js"></script>
 {% endblock %}
 
 {% block content %}
     <div class="page-center master-framework">
         <h2 class="top-second-header">用户登录</h2>
-        <form id="signup-form" method="post" class="large-element">
+        <form id="sign_in-form" method="post" class="large-element">
         {% csrf_token %}
             <ul>
                 <li>
@@ -32,8 +32,8 @@
                 </li>
                  -->
                 <li class="buttons">
-                    <input type="submit" class="button" value="登录" id="signinBtn" />
-                    <input type="button" class="button" value="注册" id="signupBtn" /> 
+                    <input type="submit" class="button" value="登录" id="sign_in-btn" />
+                    <input type="button" class="button" value="注册" id="sign_up-btn" /> 
                 </li>
             </ul>
         </form>
