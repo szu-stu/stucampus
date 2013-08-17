@@ -1,7 +1,7 @@
 #-*- coding: utf-8
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 from stucampus.utils import render_json
@@ -36,6 +36,9 @@ def sign_in(request):
             success = False
             messages = form.errors.values()
         return render_json({'success': success, 'messages': messages})
+    elif request.method == 'DELETE':
+        logout(request)
+        return render_json({'success': True})
 
 
 def sign_up(request):
@@ -59,6 +62,8 @@ def sign_up(request):
                 else:
                     new_user = User.objects.create_user(email, email, password)
                     student = Student.objects.create(user=new_user)
+                    student.screen_name = email.split('@')[0]
+                    student.save()
                     success = True
                     messages = []
         else:

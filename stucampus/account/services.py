@@ -9,7 +9,7 @@ def find(id):
         return None
     except User.DoesNotExist:
         return None
-    return query_user
+    return query_user.student
 
 
 def find_by_email(email):
@@ -19,4 +19,4 @@ def find_by_email(email):
         return None
     except User.DoesNotExist:
         return None
-    return query_user
+    return query_user.student

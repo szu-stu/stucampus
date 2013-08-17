@@ -1,0 +1,48 @@
+            <dl class="signer-box" id="signer-box">
+            {% if user.is_authenticated %}
+            <dt class="signer-head content-block">
+                <a class="usrname-box" href="#">
+                {% load account_custom %}
+                    <img class="usr-avatar" src="http://www.gravatar.com/avatar/{{ user|user_avatar }}" alt="[头像]" />
+                    <span class="usr-text">{{ user.student.screen_name }}</span>
+                </a>
+                <a class="signer-more" id="signer-more" href="javascript:void(0);">个人中心</a>
+            </dt>
+            <dd class="signer-expand content-block" id="signer-expand">
+                <ul class="usrmenu">
+                    <li><a href="/account/center">个人中心</a></li>
+                    {% if user.masterOrganization %}
+                    <li title="管理您所负责的组织 {{ user.masterOrganization.name }}">
+                        <a href="/admin/organization/{{user.masterOrganization.id}}">管理组织</a>
+                    </li>
+                    {% endif %}
+                    <li class="topline"><a href="javascript:void(0);" id="signout-btn">退出</a></li>
+                </ul>
+            </dd>
+            {% else %}
+            <dt class="signer-head content-block">
+                <a class="usrname-box" href="/account/signin">
+                    <span class="usr-text">登录</span>
+                </a>
+                <a class="signer-more" id="signer-more" href="javascript:void(0);">登录</a>
+            </dt>
+            <dd class="signer-expand content-block" id="signer-expand">
+                <form action="/signin/" method="post" id="signin-form">
+                <ul class="sign-form">
+                    <li>
+                        <label>登录邮箱</label>
+                        <input type="text" class="textbox" id="signin-email" />
+                    </li>
+                    <li>
+                        <label>密码</label>
+                        <input type="password" class="textbox" id="signin-pwd" />
+                    </li>
+                    <li>
+                        <input type="submit" class="button" value="登录" id="signin-btn" />
+                        <input type="button" class="button" value="注册" onclick="document.location='/account/signup';" />
+                    </li>
+                </ul>
+                </form>
+            </dd>
+            {% endif %}
+            </dl>
