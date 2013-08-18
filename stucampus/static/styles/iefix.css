@@ -1,0 +1,32 @@
+/**
+ * 本样式表在所有版本的 Internet Explorer 生效
+ * 
+ * Hack 说明：
+ * 前缀 * ： 对 IE6、IE7 生效
+ * 前缀 + ： 对 IE7 生效
+ * 前缀 _ ： 对 IE6 生效
+ * 无前缀 ： 对所有版本 IE 生效
+ * 后缀\0 ： 对 IE8、IE9 生效
+ * 
+ * 特别说明：仅适用于 IE8 的样式勿在此添加；添加时注明所 fix 的文件
+ */
+
+/* layout.css */
+ul#nav { *overflow: hidden; }
+ul.header-nav li { *display: inline; *margin-right: 10px; }
+.header, .header-bottom, .signer-box, .signer-expand { *z-index:5 }
+dl.signer-box dd.signer-expand ul.sign-form input.button { *display: inline; }
+
+/* home.css */
+.column-listbox { *display: inline; }
+.column-listbox ul li a { *float: left; }
+.column-horizontal .topic { *display: inline; *margin-top: 70px; }
+#news-express-silder a.express-item span.title {
+	*background-color: #000;
+	*filter:alpha(opacity=70);
+}
+ul.news-express-list li { *height:62px; }
+
+dl.signer-box dt.signer-head {
+    *width: 120px;
+}
