@@ -1,15 +1,13 @@
 
 $(function () {
-	
 	//生日日期插件
 	$(":date").dateinput({
 	format: 'yyyy-mm-dd',
 	selectors: true,
 	yearRange: [-40,10],
-	min: -20000,  
+	min: -20000,
 	max: 10000
 	});
-	
 });
 
 $(function() {
@@ -18,20 +16,20 @@ $(function() {
 	var elements = $('form#changeInfor').find('input');
 	$('form#changeInfor').ajaxForm({
 			success: function(response) {
-				var message = response.message.join("、");
+				var messages = response.messages.join("、");
 				if(response.success){
-					$S.notice(message);
+					$S.notice('修改成功');
 					setTimeout(function(){
-						document.location = '/user';
-					}, 3000);
+						document.location = '/account/profile';
+					}, 2000);
 			}
 			else {
-				$S.alert(response.message.join('、') , 3000);
+				$S.alert(response.messages.join('、') , 3000);
 				elements.delay(1000).removeAttr('disabled');
 			}
 			},
 			error: function() {
-				$S.error('由于服务器错误，您的资料修改失败，对此我们十分抱歉，服务器已经记录此次错误，我们将尽快解决这个问题。');
+				$S.error('由于程序错误，资料修改失败! 服务器已记录此错误，我们将尽快解决这个问题。');
 				elements.delay(2000).removeAttr('disabled');
 			}
 		});

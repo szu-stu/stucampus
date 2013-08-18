@@ -1,12 +1,14 @@
 #-*- coding: utf-8
+from datetime import datetime
+
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from stucampus.utils import render_json
+from stucampus.utils import render_json, get_client_ip, http_request_read
 from stucampus.account.models import Student
-from stucampus.account.forms import SignInForm, SignUpForm
+from stucampus.account.forms import SignInForm, SignUpForm, ProfileEditForm
 from stucampus.account.services import find_by_email
 
 
@@ -23,6 +25,9 @@ def sign_in(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    user.student.login_count = user.student.login_count + 1
+                    user.student.last_login_ip = get_client_ip(request)
+                    user.student.save()
                     success = True
                     messages = [u'登录成功']
                 else:
@@ -73,4 +78,30 @@ def sign_up(request):
 
 
 def profile(request):
-    return render(request, 'account/profile.html')
+    if request.method == 'GET':
+        return render(request, 'account/profile.html')
+    elif request.method == 'PUT':
+        data = http_request_read(request)
+        form = ProfileEditForm(data)
+        if form.is_valid():
+            user = request.user
+            user.student.screen_name = data['screen_name']
+            user.student.is_male = data['is_male']
+            user.student.mphone_num = data['mphone_num']
+            birthday = data['birthday']
+            if len(birthday) > 0:
+                user.student.birthday = datetime.strptime(birthday, '%Y-%m-%d')
+            user.student.mphone_short_num = data['mphone_short_num']
+            user.student.student_id = data['student_id']
+            user.student.szucard = data['szucard']
+            user.student.save()
+            success = True
+            messages = []
+        else:
+            success = False
+            messages = form.errors.values()
+        return render_json({'success': success, 'messages': messages})
+
+
+def profile_edit(request):
+    return render(request, 'account/profile_edit.html')
