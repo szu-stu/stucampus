@@ -5,16 +5,26 @@ from stucampus.custom import forms
 
 
 class SignInForm(d_forms.Form):
-    email = forms.EmailField(label='邮箱')
-    password = forms.CharField(label='密码',
-                               error_messages={'required': '密码不能为空'})
+    email = forms.EmailField(label='邮箱',
+                             error_messages={'required': '请输入邮箱'})
+    password = forms.CharField(label='密码', min_length=6,
+                               error_messages={'required': '密码不能为空',
+                                               'min_length': '密码最少6位'})
 
 
 class SignUpForm(d_forms.Form):
     email = forms.EmailField(label='邮箱',
+                             error_messages={'required': '请输入邮箱'},
                              help_text='常用的邮箱，作为登录用户名')
-    password = forms.CharField(label='密码', help_text='最少 6 位')
-    confirm = forms.CharField(label='密码确认', help_text='再输入一次密码')
+    password = forms.CharField(label='密码', help_text='最少 6 位',
+                               min_length=6,
+                               error_messages={'required': '密码不能为空',
+                                               'min_length': '密码最少6位'})
+    confirm = forms.CharField(label='密码确认', min_length=6,
+                               error_messages={
+                                   'required': '确认密码不能为空',
+                                   'min_length': '确认密码最少6位'},
+                              help_text='再输入一次密码')
 
 
 class ProfileEditForm(d_forms.Form):
@@ -30,3 +40,18 @@ class ProfileEditForm(d_forms.Form):
     mphone_short_num = forms.CharField(label='手机短号',
                                        max_length=6, required=False)
     szucard = forms.CharField(label='校园卡号', max_length=6, required=False)
+
+
+class PasswordForm(d_forms.Form):
+    current_password = forms.CharField(label='当前密码', min_length=6,
+                                       error_messages={
+                                           'required': '当前密码不能为空',
+                                           'min_length': '密码最少6位'})
+    new_password = forms.CharField(label='新密码', min_length=6,
+                                   error_messages={
+                                       'required': '新密码不能为空',
+                                       'min_length': '新密码最少6位'})
+    confirm = forms.CharField(label='密码确认', min_length=6,
+                              error_messages={
+                                  'required': '确认密码不能为空',
+                                  'min_length': '确认密码最少6位'})

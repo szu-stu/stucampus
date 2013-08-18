@@ -7,4 +7,6 @@ urlpatterns = patterns(
     url(r'^profile$', 'stucampus.account.views.profile', name='profile'),
     url(r'^profile/edit$',
         'stucampus.account.views.profile_edit', name='profile_edit'),
+    url(r'^profile/password$',
+        'stucampus.account.views.password', name='password'),
 )

@@ -6,9 +6,10 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from stucampus.utils import render_json, get_client_ip, http_request_read
+from stucampus.utils import render_json, get_client_ip, get_http_data
 from stucampus.account.models import Student
-from stucampus.account.forms import SignInForm, SignUpForm, ProfileEditForm
+from stucampus.account.forms import SignInForm, SignUpForm
+from stucampus.account.forms import ProfileEditForm, PasswordForm
 from stucampus.account.services import find_by_email
 
 
@@ -87,7 +88,7 @@ def profile(request):
     if request.method == 'GET':
         return render(request, 'account/profile.html')
     elif request.method == 'PUT':
-        data = http_request_read(request)
+        data = get_http_data(request)
         form = ProfileEditForm(data)
         if form.is_valid():
             user = request.user
@@ -113,3 +114,33 @@ def profile_edit(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect('/account/signin')
     return render(request, 'account/profile_edit.html')
+
+
+def password(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/account/signin')
+    if request.method == 'GET':
+        return render(request, 'account/password.html')
+    elif request.method == 'PUT':
+        data = get_http_data(request)
+        form = PasswordForm(data)
+        if form.is_valid():
+            current_user = request.user
+            query_user = authenticate(username=current_user.username,
+                                      password=data['current_password'])
+            if not query_user is None:
+                if data['new_password'] == data['confirm']:
+                    current_user.set_password(data['confirm'])
+                    current_user.save()
+                    success = True
+                    messages = []
+                else:
+                    success = False
+                    messages = [u'密码不匹配']
+            else:
+                success = False
+                messages = [u'密码错误!']
+        else:
+            messages = form.errors.values()
+            success = False
+        return render_json({'success': success, 'messages': messages})
