@@ -20,3 +20,17 @@ def find_by_email(email):
     except User.DoesNotExist:
         return None
     return query_user.student
+
+
+def is_exist(email):
+    exist_in_user = True
+    exist_in_student = True
+    try:
+        query_user = User.objects.get(username=email)
+    except User.DoesNotExist:
+        exist_in_user = False
+    try:
+        query_user.student
+    except:
+        exist_in_student = False
+    return (exist_in_student or exist_in_user)

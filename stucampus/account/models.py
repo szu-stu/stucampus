@@ -14,5 +14,5 @@ class Student(models.Model):
     student_id = models.CharField(max_length=10)
     szucard = models.CharField(max_length=6)
     login_count = models.IntegerField(default=0)
-    last_login_ip = models.GenericIPAddressField()
+    last_login_ip = models.GenericIPAddressField(null=True, blank=True)
     is_master = models.BooleanField(default=False)
