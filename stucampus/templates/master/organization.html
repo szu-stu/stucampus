@@ -19,7 +19,7 @@
             </li>
             <li>
                 <label>联系电话</label>
-                <input type="text" name="phoneNumber" id="phoneNumber"/>
+                <input type="text" name="phone" id="phone"/>
             </li>
             <li>
                 <input type="button" value="添加组织" onclick="$S.Organization.create()" />
@@ -58,7 +58,7 @@
         <li>暂无组织被封禁</li>
     {% endif %}
     </ul>
-        <h2>已删组织&amp; Deleted Organization</h2>
+        <h2>已删组织 &amp; Deleted Organization</h2>
     <ul>
         {% if deletedOrgs %}
         {% for org in deletedOrgs %}

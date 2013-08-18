@@ -1,34 +1,31 @@
-/*组织*/
+/* 组织 */
 
 (function($,$S){
     if (typeof $S.Organization == 'undefined'){
         $S.Organization = {};//定义组织命名Stucampus.Organization空间
-}
+    }
 
     /**
     * 定义快速创建组织函数
     */
     $S.Organization.create = function(){
         var name = $("#name").val();
-        var phoneNumber = $("#phoneNumber").val();
+        var phone = $("#phone").val();
         $.ajax({
-            url: '/admin/organization',
+            url: '/manage/organization',
             type: 'POST',
             dataType: 'json',
-            data: {
-                    'name': name,
-                    'phoneNumber': phoneNumber
-            },
+            data: {'name': name, 'phone': phone},
             success: function(response)
             {
                 if (response.success)
                 {
-                    $S.notice(response.message,  3000);
+                    $S.notice('添加成功', 3000);
                     setTimeout(function(){
-					document.location.reload();
-				}, 3000);
-                } else {
-                    $S.alert(response.message.join('、'), 3000);
+					   document.location.reload();
+				    }, 3000);
+                } else{
+                    $S.alert(response.messages.join('、'), 3000);
                 }
             }
         });
