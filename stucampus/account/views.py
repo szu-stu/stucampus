@@ -1,7 +1,7 @@
 #-*- coding: utf-8
 from datetime import datetime
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -13,6 +13,8 @@ from stucampus.account.services import find_by_email
 
 
 def sign_in(request):
+    if request.user.is_authenticated() and request.method != 'DELETE':
+        return HttpResponseRedirect('/')
     if request.method == 'GET':
         form = SignInForm()
         return render(request, 'account/sign_in.html', {'form': form})
@@ -47,6 +49,8 @@ def sign_in(request):
 
 
 def sign_up(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/')
     if request.method == 'GET':
         form = SignUpForm()
         return render(request, 'account/sign_up.html', {'form': form})
@@ -78,6 +82,8 @@ def sign_up(request):
 
 
 def profile(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/account/signin')
     if request.method == 'GET':
         return render(request, 'account/profile.html')
     elif request.method == 'PUT':
@@ -104,4 +110,6 @@ def profile(request):
 
 
 def profile_edit(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/account/signin')
     return render(request, 'account/profile_edit.html')
