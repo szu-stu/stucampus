@@ -11,9 +11,9 @@
             <dd class="signer-expand content-block" id="signer-expand">
                 <ul class="usrmenu">
                     <li><a href="/account/profile">个人中心</a></li>
-                    {% if user.masterOrganization %}
-                    <li title="管理您所负责的组织 {{ user.masterOrganization.name }}">
-                        <a href="/admin/organization/{{ user.masterOrganization.id }}">管理组织</a>
+                    {% if user.groups %}
+                    <li title="管理您所负责的组织">
+                        <a href="/organization">组织管理</a>
                     </li>
                     {% endif %}
                     <li class="topline"><a href="javascript:void(0);" id="signout-btn">退出</a></li>
