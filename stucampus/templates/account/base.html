@@ -17,7 +17,8 @@
     <div class="main">
         <div class="left-side">
             <img id="left-top" src="/static/images/account/left-side.png" alt="左侧上块" />
-            <img id="avater" src="/static/images/infor/infor-sign.png" alt="用户头像" />
+            {% load account_custom %}
+            <img id="avater" src="http://www.gravatar.com/avatar/{{ user|user_avatar }}?s=164" alt="用户头像" />
             <div class="list">
                 <ul>
                     <li><a href="/account/profile"><img src="/static/images/account/infor.png" alt="个人资料" /><span>个人资料</span></a></li>
