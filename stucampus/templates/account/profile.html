@@ -16,7 +16,7 @@
                         <li>手机长号：{{ user.student.mphone_num | default:'暂无' }}</li>
                         <li>手机短号：{{ user.student.mphone_short_num | default:'暂无' }}</li>
                         <li>校园卡号：{{ user.student.szucard | default:'暂无' }}</li>
-                        <li>创建时间：{{ user.student.created | date:'Y-m-d' }}</li>
+                        <li>加入日期：{{ user.date_joined | date:'Y-m-d' }}</li>
                         {% if user.masterForOrganization %}
                         <li>所管组织： {{ user.masterForOrganization }}</li>
                         {% endif %}
