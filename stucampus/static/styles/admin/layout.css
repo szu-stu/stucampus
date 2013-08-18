@@ -1,0 +1,131 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	color: #5e5e5e;
+	background: #f7f7f7;
+	font-family: "微软雅黑";
+}
+body {
+	overflow-y: scroll;
+}
+h1 {
+	margin: 0;
+	font-size: 24px;
+	font-weight: normal;
+	line-height: 40px;
+	display: inline;
+}
+a {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+a:hover {
+	color: #7e7e7e;
+	text-decoration: underline;
+}
+h2 {
+	font-size: 20px;
+	font-weight: normal;
+	font-style: italic;
+	line-height: 30px;
+	border-bottom: dashed 1px #cccccc;
+	text-align: right;
+}
+
+input[type=text], input[type=password] {
+	border: solid 1px #bbbbbb;
+	-moz-border-radius:    3px;
+	-webkit-border-radius: 3px;
+	height:      20px;
+	line-height: 20px;
+}
+/*input[type=text], input[type=password], select {
+	min-width: 200px;
+}*/
+
+input[type=text]:hover, input[type=password]:hover {
+	background: #f7f7f7;
+}
+
+.layout_box {
+	width:  900px;
+	margin: auto;
+	position: relative;
+	right: -40px;
+}/* 布局元素的居中和宽度样式 */
+
+#layout_nav {
+	height: 40px;
+	margin: 10px auto;
+	position: relative;
+}/* 版头导航条 */
+#nav_menu {
+	right:  0;
+	bottom: 0;
+	position: absolute;
+	font-size: 12px;
+}/* 版头导航条的菜单 */
+span.splite_line {
+	margin: auto 10px;
+	color: #7e7e7e;
+}
+
+#layout_main {
+	height: 580px;/* 为该死的IE6设置的hack */
+	height: auto!important;
+	min-height: 580px;
+	border: solid 1px #cccccc;
+	margin: 0 auto;
+	background: #ffffff;
+	position: relative;
+}/* 中心“盒子” */
+#layout_content {
+	margin: 20px;
+}
+
+#layout_left {
+	width: 80px;
+	position: absolute;
+	top:  20px;
+	left: -80px;
+	font-size: 15px;
+}/* 左侧布局 */
+
+#layout_foot {
+	text-align: right;
+	font-size: 12px;
+	min-height: 50px;
+}
+#layout_foot p {
+	margin: 10px;
+}/* 页脚 */
+
+ul.block_menu {
+	padding: 0;
+	margin: 0;
+}
+ul.block_menu li {
+	height: 40px;
+	line-height: 40px;
+	margin: 10px 0;
+	border: solid 1px #cccccc;
+	background: #ffffff;
+	display: block;
+	text-align: center;
+	list-style: none;
+}
+ul.block_menu li a {
+	left: 10px;
+	line-height: 20px;
+	margin: 10px auto;
+	position: absolute;
+	border: 0;
+}
+ul.block_menu li.current {
+	border-left: solid 5px #cccccc;
+	border-right: 0;
+}
+ul.block_menu li:hover {
+	border-left: solid 5px #cccccc;
+}/* 左侧布局中的菜单 */

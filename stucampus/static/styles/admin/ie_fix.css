@@ -1,0 +1,16 @@
+/* 为该死的IE设置的hack */
+#layout_main {
+	_height: 550px;/* fix min-height */
+}
+#layout_foot {
+	_height: 50px;/* fix min-height */
+}
+
+form.list ul li {
+	*display: inline;
+}
+
+form.list input.element, 
+form.list .element-box {
+	*display: inline;
+}
