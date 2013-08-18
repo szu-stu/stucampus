@@ -1,0 +1,212 @@
+/*组织管理*/
+
+p {
+    text-indent: 2.5em;
+    width: 805px;
+    margin: 10px auto;
+}
+
+.add {
+    width: 805px;
+    height: 50px;
+    margin: 0px auto;
+    border: 1px dashed #ccc;
+}
+
+.add ul {
+    list-style: none;
+}
+.add ul li {
+    width: 250px;
+    float: left;
+}
+
+list input {
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.list ul {
+    list-style: none;
+    margin: 0 0 0 15px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+.list ul li {
+    height: 35px;
+    padding: 0;
+	margin: 0px 20px;
+	line-height: 35px;
+	border-bottom: 1px dashed #ccc;
+}
+
+#main {
+    margin-right: 123px;
+}
+
+.listinput,.addinput {
+    float: right;
+    margin-right:20px;
+    padding: 5px;
+}
+
+.addinput {
+    color:	#5E5E5E;
+}
+
+/*组织发布信息*/
+
+form ul {
+	list-style: none;
+	padding: 0;
+	margin: 20px 5px;
+	font-size: 16px;
+}
+
+form ul li {
+	padding: 0;
+	margin: 10px 0 10px 0;
+	display: inline-block;
+}
+
+form ul li.buttons {
+	text-align: right;
+	width: 758px;
+	margin-top: 30px;
+}
+
+form ul li.buttons input.button {
+	padding: 10px 20px;
+	font-size: 15px;
+	font-family: "Microsoft Yahei";
+}
+
+form .element {
+	line-height: 20px;
+	font-size: 14px;
+}
+
+form input.element,
+form .element-box {
+	display: inline-block;
+	width: 160px;
+	width: 300px;
+}
+
+form textarea.element {
+	height: 100px;
+	width: 690px;
+}
+
+form label.head-label {
+	display: inline-block;
+	width: 5em;
+	text-align: left;
+	margin: 0;
+}
+
+html .cke_skin_kama {
+    visibility: inherit;
+}
+
+span.cke_skin_kama {
+    border: 1px solid #D3D3D3;
+    border-radius: 5px 5px 5px 5px;
+    padding: 5px;
+}
+
+span.cke_skin_kama {
+    display: inline-block;
+    vertical-align: text-top;
+    width: 680px;
+}
+
+/*组织概况*/
+
+.org-left {
+    width: 550px;
+    text-align: left;
+}
+
+.org-left li {
+    height: 40px;
+    line-height: 40px;
+    list-style: none;
+    border-bottom: 1px dashed #7e7e7e;
+}
+
+li #orglabel {
+    display: block;
+    margin: 10px 0;
+    border-width: 0px;
+}
+
+.manager {
+    text-align: right;
+}
+
+.manager input {
+    margin-left: 20px;
+}
+
+
+/*组织已发布信息列表*/
+.postlist li{
+    list-style: none;
+    height: 30px;
+    line-height: 30px;
+    border-bottom:  1px dashed #7e7e7e;
+}
+
+.postlist li span {
+    position: absolute;
+    left: 598px;
+}
+
+.delbu {
+    position: absolute;
+    right: 18px;
+    width: 50px;
+    margin-top: 3px;
+}
+
+.editbu {
+    position: absolute;
+    left: 780px;
+    margin-top: 3px;
+}
+
+/*编辑*/
+.edit li{
+    list-style: none;
+}
+
+.commonli{
+    height: 40px;
+    line-height: 40px;
+}
+
+.commonli input {
+    width: 280px;
+}
+
+.textarea {
+    height: 180px;
+}
+
+.button-li {
+    width: 790px;
+    text-align: right;
+}
+
+.button {
+    font-family: "Microsoft Yahei";
+    font-size: 18px;
+    width: 120px;
+    padding: 10px 20px;
+}
+
+#addMan {
+    width: 100px;
+}

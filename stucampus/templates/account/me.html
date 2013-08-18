@@ -11,11 +11,17 @@
             <dd class="signer-expand content-block" id="signer-expand">
                 <ul class="usrmenu">
                     <li><a href="/account/profile">个人中心</a></li>
+                    {% if perms.master.admin_status %}
+                    <li title="系统管理">
+                        <a href="/manage">系统管理</a>
+                    </li>
+                    {% endif %}
                     {% if user.groups %}
                     <li title="管理您所负责的组织">
                         <a href="/organization">组织管理</a>
                     </li>
                     {% endif %}
+
                     <li class="topline"><a href="javascript:void(0);" id="signout-btn">退出</a></li>
                 </ul>
             </dd>

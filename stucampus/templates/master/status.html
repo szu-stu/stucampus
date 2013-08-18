@@ -1,0 +1,17 @@
+{% extends 'master/layout.html' %}
+
+{% block htmlhead %}{% endblock %}
+
+{% block content %}
+	<h2>运行状态 &amp; Runtime Status</h2>
+	<ul>
+		<li>Python 版本号：{{ python_version }}</li>
+		<li>
+			服务环境：
+			<ul>
+			<li>IP 地址：{{ ipaddress }}</li>
+			<li>域名：{{ domain }}</li>
+			</ul>
+		</li>
+	</ul>
+{% endblock %}
