@@ -28,7 +28,7 @@ def admin_redirect(request):
 def admin_status(request):
     python_version = platform.python_version()
     domain = request.get_host()
-    param = {'python_version': python_version, 
+    param = {'python_version': python_version,
              'domain': domain}
     return render(request, 'master/status.html', param)
 
@@ -43,7 +43,7 @@ def admin_organization(request):
     orgs_num = len(orgs)
     normal_orgs_num = len(normal_orgs)
     baned_orgs_num = len(baned_orgs)
-    deleted_orgs_num = len(deleted_orgs) 
+    deleted_orgs_num = len(deleted_orgs)
     param = {'orgs': orgs, 'normal_orgs': normal_orgs,
              'baned_orgs': baned_orgs, 'deleted_orgs': deleted_orgs,
              'orgs_num': orgs_num, 'normal_orgs_num': normal_orgs_num,

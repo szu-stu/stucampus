@@ -1,5 +1,6 @@
 from django.db import models
-from stucampus.custom import forms 
+
+from stucampus.custom import forms
 
 
 class CharField(models.CharField):

@@ -21,9 +21,9 @@ class SignUpForm(d_forms.Form):
                                error_messages={'required': '密码不能为空',
                                                'min_length': '密码最少6位'})
     confirm = forms.CharField(label='密码确认', min_length=6,
-                               error_messages={
-                                   'required': '确认密码不能为空',
-                                   'min_length': '确认密码最少6位'},
+                              error_messages={
+                                  'required': '确认密码不能为空',
+                                  'min_length': '确认密码最少6位'},
                               help_text='再输入一次密码')
 
 

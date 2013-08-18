@@ -42,9 +42,11 @@ class DecimalField(IntegerField):
             # 'max',
             '最大'),
         'max_whole_digits': ungettext_lazy(
-            # 'Ensure that there are no more than %(max)s digit before the decimal point.',
+            # 'Ensure that there are no more than %(max)s '
+            # 'digit before the decimal point.',
             '请确保输入的值不大于 %(max)s'
-            # 'Ensure that there are no more than %(max)s digits before the decimal point.',
+            # 'Ensure that there are no more than %(max)s '
+            # 'digits before the decimal point.',
             '请确保输入的值不大于 %(max)s'
             # 'max',
             '最大'),
@@ -81,7 +83,8 @@ class EmailField(forms.EmailField):
 
 class FileField(forms.FileField):
     default_error_messages = {
-        # 'invalid': _("No file was submitted. Check the encoding type on the form."),
+        # 'invalid': _("No file was submitted. '
+        # 'Check the encoding type on the form."),
         'invalid': _(u'找不到文件, 请重新上传文件.'),
         'missing': _(u'找不到文件, 请重新上传文件.'),
         'empty': _(u'文件为空, 上传失败'),
