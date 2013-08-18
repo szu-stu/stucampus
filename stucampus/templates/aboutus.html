@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'us.css' | as_css }}
+    {{ 'us.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+<div class="top">
+    <span>第十一届站务委员</span>
+</div>
+<div class="main">
+    <div class="department">
+        <div class="department-name" id="depart">
+        <img src="/static/images/aboutus/department-office.png" alt="办公室" />
+        <img src="/static/images/aboutus/department-service.png" alt="外联部" />
+        <img src="/static/images/aboutus/department-dev.png" alt="技术部" />
+        <img src="/static/images/aboutus/department-visual.png" alt="美工部" />
+        <img src="/static/images/aboutus/department-news.png" alt="新闻部" />
+            
+        </div>
+        <div class="department-summary">
+            <div class="departments" id="office">
+                <h1>办公室</h1>
+                <p>
+                    <span>部门职责-</span>
+                    办公室管理，文档资料的分类存档管理。公物、物资以及资料库的管理。承担学子天地网站活动的场地、物资等申请工作。
+                </p>
+                <br />
+                <p>
+                    <span>本届成员-</span>
+                    [部   长]王睿臻
+                    <br />
+                </p>
+            </div>
+            
+            <div class="departments" id="serv">
+                <h1>外联部</h1>
+                <p>
+                    <span>部门职责-</span>
+                    负责外联工作，策划宣传活动并组织实施，塑造和推广网站的总体形象。                                                        
+                </p>
+                <br />
+                <p>
+                    <span>本届成员-</span>
+                    [部   长]张雪晴
+                    <br />
+                </p>
+            </div>
+            
+            <div class="departments" id="dev">
+                <h1>技术部</h1>
+                <p>
+                    <span>部门职责-</span>
+                    开发、维护学子天地网站相关Web应用程序系统，管理网站服务器；检查访问日志，及时发现并解决安全隐患，并根据访问日志定制用户体验优化策略；将美工部设计成品合成前端技术制成页面。                                     
+                </p>
+                <br />
+                <p>
+                    <span>本届成员-</span>
+                    [部   长]刘耀达、王为雄 、钟少华
+                    <br />
+                </p>
+            </div>
+    
+            <div class="departments" id="design">
+                <h1>美工部</h1>
+                <p>
+                    <span>部门职责-</span>
+                    设计制作网站页面，相关图片，制作技术开发部的应用程序前端界面，制作网站宣传品；负责调控设计网站的整体风格，规划完善用户视觉体验。                                                        
+                </p>
+                <br />
+                <p>
+                    <span>本届成员-</span>
+                    [部   长]莫小帅、王静仪
+                    <br />
+                </p>
+            </div>
+            
+            <div class="departments" id="news">
+                <h1>新闻部</h1>
+                <p>
+                    <span>部门职责-</span>
+                    把握校园动态，对深大校园活动以及民生大小事进行跟踪报道；寻找校园内具有新闻价值的人物，发掘深大学子的动人之处；定期更新校园内或社会上的热点话题；丰富学子的娱乐生活，提供生活资讯。                   
+                </p>
+                <br />
+                <p>
+                    <span>本届成员-</span>
+                    [部   长]林丽佳
+                    <br />
+                </p>
+            </div>
+            
+        </div>
+
+    </div>
+    <div class="departments" >
+        <a id="join" href="/join">  <img src="/static/images/festival/join.png" alt="加入我们" />   </a>
+            </div>
+    <div class="member">
+        <div class="member-10th">
+        <h4>学子天地第十届站务委员会委员 <span id="now"></span></h4>
+        <p>指导老师-姚凯</p>
+        <p>站长-黄福源<span>副站长-陈蓓诗、黄泽晓</span></p>
+        【新闻采编部】
+        <p>部长-何守成<span>副部长-黄佳淳、刘琬华</span></p>
+        【技术开发部】
+        <p>部长-周国辉<span>副部长-陈安业、邵浩权</span></p>
+        【秘书外联部】
+        <p>部长- 付 薇 <span>副部长-陈国焕</span></p>
+        【美工设计部】
+        <p>部长-施艳莱<span>副部长-陈秋憧</span></p>
+        </div>
+        <div class="member-9th">
+        <h4>学子天地    第九届站务委员会委员</h4>
+        <p>指导老师-古维<span>名誉站长-韩杰超</span></p>
+        <p>站长-蔡志欧<span>副站长-欧文佳</span></p>
+        【新闻采编部】
+        <p>部长-袁诗茵<span>副部长-陈新宇</span></p>
+        【技术开发部】
+        <p>部长-张江阁<span>副部长-黄泽晓</span></p>
+        【秘书外联部】
+        <p>部长-曾馨萍<span>副部长-王伟宇</span></p>
+        【美工设计部】
+        <p>部长-沈银荣</p>
+        </div>
+        <div class="connect-us">
+        <h4>学子天地:  联系方式</h4>
+        【办公室】
+        <p>地点：学生活动中心3楼308</p>
+        <p>电话：0755-26534404</p>
+        <p>[值班时间]周一至周五 16:00-17:20</p>
+        【E-mail】
+        <p>StuCampus@live.cn</p>
+        【微博】
+        <p><a href="http://t.qq.com/StuCampus" >学子天地腾讯微博</a></p>
+        <p><a href="http://weibo.com/stucampus" >学子天地新浪微博</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

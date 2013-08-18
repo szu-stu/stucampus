@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'account/signup.css' | as_css }}
+    {{ 'account/sign_up.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+    <div class="page-center master-framework">
+        <h2 class="top-second-header">用户注册</h2>
+        <form id="sign_up-form" method="post" class="large-element">
+        {% csrf_token %}
+            <ul>
+                <li>
+                    <label class="label" for="email">邮箱</label>
+                    <input type="textbox" class="textbox" id="email" name="email" />
+                    <span class="comment">常用的邮箱，作为登录用户名</span>
+                </li>
+                <li>
+                    <label class="label" for="password">密码</label>
+                    <input type="password" class="textbox" id="password" name="password" />
+                    <span class="comment">最少 6 位</span>
+                </li>
+                <li>
+                    <label class="label" for="confirm">密码确认</label>
+                    <input type="password" class="textbox" id="confirm" name="confirm" />
+                    <span class="comment">再输入一次密码</span>
+                </li>
+                <li class="buttons">
+                    <input type="submit" class="button" value="注册" />
+                </li>
+            </ul>
+        </form>
+    </div>
+{% endblock %}

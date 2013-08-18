@@ -1,0 +1,280 @@
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, code,/* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
+table, tbody, th, tr, td /* table elements 表格元素 */ 
+{
+	margin: 0;
+	padding: 0;
+}
+
+/* 设置一些常用样式 */
+ul, ol { list-style: none;}
+a { text-decoration: none; }
+img { border: 0; }
+body { background-color: #eef2f1; font-family: "Microsoft Yahei"; min-width: 1000px; font-weight: normal;}
+img.loading { background: url('/static/images/elements/loading-circle.gif') no-repeat center center; }
+
+
+/**
+ * 对话框
+ */
+#message-box {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	z-index: 1000;
+	margin-left:-40%;
+	width: 80%;
+	padding:5px;
+	filter:alpha(Opacity=90);
+	-moz-opacity:0.9;
+	opacity: 0.9;
+	margin-top: 50px;
+}
+#message-box .message-content {
+	width: 80%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	margin: 0 auto;
+	box-shadow: 0 0 10px #999;
+}
+#message-box .message-content.notice {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #B5E5EF url(../images/admin/icn_alert_info.png) no-repeat;
+	background-position: 10px 10px;
+	border: 1px solid #77BACE;
+	color: #082B33;
+}
+#message-box .message-content.alert {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #F5F3BA url(../images/admin/icn_alert_warning.png) no-repeat;
+	background-position: 10px 10px;
+	border: 1px solid #C7A20D;
+	color: #796616;
+}
+#message-box .message-content.error {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #F3D9D9 url(../images/admin/icn_alert_error.png) no-repeat;
+	background-position: 10px 10px;
+	border: 1px solid #D20009;
+	color: #7B040F;
+}
+#message-box .message-content span.message-text {
+	margin: 0 2em;
+}
+#message-box {
+	overflow: hidden;
+}
+#message-box a.button {
+	color: inherit;
+	font-size: 12px;
+	float: right;
+	display: inline-block;
+	margin: 0 0.5em;
+}
+
+/* 板块通用CSS */
+.central-container { margin: 0 auto; width: 995px; position: relative; }
+/**
+ * Header 部分
+ */
+#header {	
+	height: 180px;
+	width: 100%;
+    position: relative;
+    z-index: 2;
+	background: url(/static/images/home/header.png) repeat-x scroll 0 0 transparent;	
+}
+
+.page-center {
+    width: 1020px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/**
+ * 登陆框
+ */
+div.header-bottom {
+	position: relative;
+}
+div.header-bottom dl.signer-box {
+	position: absolute;
+	z-index: 2;
+	right: 0;
+	top: 110px;
+	height: auto;
+}
+dl.signer-box {
+	margin: 20px 15px 0 0;
+}
+
+dl.signer-box .content-block {
+	background-color: #fefefe;
+	border: 1px solid #ddd;
+	color: #5e5e5e;
+	font-size: 12px;
+}
+
+dl.signer-box .content-block a {
+	text-decoration: none;
+	color: #5e5e5e;
+}
+dl.signer-box .content-block a:hover {
+	color: #999;
+}
+dl.signer-box dt.signer-head {
+	margin: 0;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+	border-radius: 5px;
+	padding: 5px;
+	overflow: hidden;
+	height: 18px;
+}
+dl.signer-box dt.signer-head.pushed {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+dl.signer-box a.usrname-box {
+	display: block;
+	height: 18px;
+	line-height: 18px;
+	border-right: 1px solid #ddd;
+	float: left;
+	overflow: hidden;
+}
+dl.signer-box a.usrname-box img.usr-avatar {
+	display: block;
+	float: left;
+	height: 16px;
+	width: 16px;
+	border-width: 0;
+}
+dl.signer-box a.usrname-box span.usr-text {
+	display: block;
+	float: left;
+	padding: 0 5px;
+}
+
+dl.signer-box a.signer-more {
+	display: block;
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin: 0 5px;
+	text-indent: -9999px;
+	background:url("/static/images/elements/expland.png") no-repeat 0 0;
+}
+dl.signer-box a.signer-more:hover {
+	background-position: 0 -18px;
+}
+dl.signer-box a.signer-more.pushed {
+	background-position: 0 -36px;
+}
+dl.signer-box dd.signer-expand {
+	display: none;
+	position: absolute;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+	margin: 0;
+	padding: 0;
+    width: 120px;
+	right: 0;
+	top: 29px;
+	z-index: 2;
+}
+dl.signer-box dd.signer-expand.pushed {
+	display: block;
+}
+dl.signer-box dd.signer-expand ul.usrmenu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border-top-style: none;
+}
+dl.signer-box dd.signer-expand ul.usrmenu li {
+	min-width: 10em;
+	margin: 0;
+	padding: 0;
+}
+dl.signer-box dd.signer-expand ul.usrmenu li.topline {
+	border-top: 1px solid #e5e5e5;
+}
+dl.signer-box dd.signer-expand ul.usrmenu li a {
+	display: block;
+	height: 100%;
+	line-height: 100%;
+	padding: 10px 50px 10px 20px;
+}
+dl.signer-box dd.signer-expand ul.usrmenu li a:hover {
+	background-color: #e5e5e5;
+	color: #999;
+}
+dl.signer-box dd.signer-expand ul.sign-form {
+	margin: 0;
+	padding: 10px;
+	list-style: none;
+    width: 120px;
+}
+dl.signer-box dd.signer-expand ul.sign-form li {
+	margin: 0;
+	padding: 0;
+}
+dl.signer-box dd.signer-expand ul.sign-form label {
+	display: block;
+	line-height: 18px;
+}
+dl.signer-box dd.signer-expand ul.sign-form input.textbox {
+    width: 95px;
+	display: block;
+	margin-bottom: 10px;
+}
+
+/**
+ * Logo
+ */
+h1.stu-logo {
+	background: url(/static/images/home/stucampus-logo.png) no-repeat scroll 0 0 transparent;
+	width: 227px;
+	height: 113px;
+	position: absolute;
+	left: 30px;
+	top: 40px;
+}
+
+a.stu-logo {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-indent: -9999999px;
+}
+
+/**
+ * 导航
+ */
+#nav { position: absolute; top: 90px; right: 5px;}
+ul#nav li{ display: inline;}
+#nav li{ display: inline-block; font-size: 18px; font-weight: 550%; font-family: "Microsoft Yahei"; color: #ffffff; margin-left: 1.5em; }
+#nav li:hover { background: url(/static/images/home/spacity.png) no-repeat scroll 0 0 transparent; }
+#nav a { color: #ffffff; }
+#nav a:visited { color: #ffffff;}
+#nav a:hover  {	color: #8eb839; background-image: url(/static/images/home/spacity.png) scroll 0 0 transparent;}
+
+
+/**
+ * 页脚
+ */
+.footer { height: 100px; margin-top: 20px; border-top: 1px dashed #cccccc; padding-top: 30px;}
+.footer p { text-align: center; font-size: 14px; font-weight: 300; line-height: 180%; }
+.footer a { display: inline-block; margin: 0 5px 0 5px; color: #000000;}
+.footer a:visited { color: #000000; }
+.footer a:hover { color: #ff0000; }

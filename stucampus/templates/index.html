@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'plugins/basic-jquery-slider.js' | as_js }}
+    {{ 'index.css' | as_css }}
+    {{ 'basic-jquery-slider.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+    <!-- 新闻幻灯片和信息中心 Begin -->
+    <div class="central-container news-slider-infor">
+        <!-- 新闻幻灯片  -->
+        <div id="news-slider">
+            <ul class="bjqs">
+            {% for news in tops %}
+                <li><a href="/news/{{news.id}}">
+                    <img src="{{news.coverImage}}" title="{{news.title}}" alt="图片：{{news.title}}" width="605" height="415" />
+                </a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        <!-- 节日图片和信息中心 -->
+        <div id="image-infor">
+            <!-- 节日图片 -->
+            <a href="/topic/christmas/home">
+            <img width="345" height="155" src="/static/images/topic/christmas.jpg" title="Merry Christmas" alt="Merry Christmas" class="festival-img"/>
+            </a>            
+            <!-- 信息中心Begin -->
+            <h2 class="infor-center">信息中心</h2>
+            <div id="inforbox">
+                <ul id="infors">
+                {% for infor in infors %}
+                    <li>
+                        <a href="/infor/{{infor.id}}" title="{{infor.title}}">{{infor.title}}</a>
+                        <div>由  <a href="#">{{ infor.creater.name }}</a>，发布于 {{infor.created}}</div>
+                    </li>
+                {% endfor %}
+                </ul>
+                <span class="scroll-bar" title="滚动鼠标以获取更多信息！">鼠标滚动</span>
+            </div>
+            <!-- 信息中心End -->
+        </div>
+    </div>
+    <!-- 新闻幻灯片和信息中心 End -->
+
+    <!-- 公告宣传板 start -->
+        <!-- <div class="brodcast">
+        <!--    <a href="/szuyouth/fresh" target="_blank"><img style="width:975px;" src="/static/images/magazine/szuyouth/youth_cover_2012.jpg" alt="深大青年杂志--迎新专版" /></a>
+        <!-- </div>
+    <!-- 公告宣传板 end -->
+
+    <!--新闻速递、媒体聚焦、讲座预告 Begin-->
+    <div class="news central-container">
+        <div class="news-column" >
+            <!-- 新闻速递 Begin -->
+            <div class="news-express">
+                <h2>新闻速递</h2>
+                <ul class="news-express-list">
+                {% for i in expresion %}
+                    <li>
+                        <a href="/news/{{i.id}}" title="{{i.title}}">{{i.title}}</a>
+                        <span class="post-date">{{i.created}}</span>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            <!-- 新闻速递 End -->
+            
+            <!-- 媒体聚焦眼 Begin -->
+            <div class="media-eye">
+                <h2>媒体聚焦</h2>
+                <ul class="media-eye-list">
+                {% for i in mediaEye %}
+                    <li>
+                        <a href="/news/{{i.id}}" title="{{i.title}}">{{ i.title}}</a>
+                        <span class="post-date">{{i.created}}</span>
+                    </li>
+                {% endfor %}
+                </ul>           
+            </div>
+            <!-- 媒体聚焦眼 End -->
+            
+            <!-- 讲座预告 Begin -->
+            <div class="speech-preview">
+                <h2>讲座预告</h2>
+                <ul class="speech-preview-list">
+                {% for i in speachPr %}
+                    <li>
+                        <a href="/news/{{i.id}}" title="{{i.title}}">{{i.title}}</a>
+                        <span class="post-date">{{i.created}}</span>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            <!-- 讲座预告 End -->
+        </div>
+    </div>
+    <!--新闻速递、媒体聚焦、讲座预告 End -->
+    
+    <!-- 合作杂志、活动预告 Begin -->
+    <div class="topic-activity central-container">
+        <!-- 合作杂志Begin  -->
+        <div class="topic-subject">
+            <h2>合作杂志</h2>
+            <ul class="topic">
+                <li>
+                    <a href="/szuyouth/pdf" title="深青杂志在线版">
+                        <img src="/static/images/magazine/szuyouth/small_cover.png" alt="深青杂志在线版" class="topic-img"/>
+                    </a>
+                    <div class="topic-introduce">
+                        <h3><a href="/szuyouth/pdf" title="深青杂志在线版">深大青年杂志社</a>  </h3>
+                        <p class="topic-detail">在这里，你可以了解荔园的资讯，<br />在这里，你可以知晓明星师生背后的点点滴滴，<br />在这里，你可以分享自己对热点动态的独特视角，<br />在这里，你可以品读文学，阐释经典，解读行走，<br />在这里，读懂深大。</p>
+                    </div>
+                </li>
+                <li>
+                    <a href="/magazine/ltsshekan" title="浪淘沙文学社">
+                        <img src="/static/images/magazine/langtaosha/ltsLink.png" alt="浪淘沙文学社" class="topic-img"/>
+                    </a>
+                    <div class="topic-introduce">
+                        <h3><a href="/magazine/ltsshekan" title="浪淘沙文学社">浪淘沙文学社</a></h3>
+                        <p class="topic-detail" style="text-indent:2em">假如现实世界残酷分崩离析，至少还有文字可以温暖彼此。</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- 合作杂志 End -->
+        
+        <!-- 活动预告 Begin -->
+        <div class="activity-priview">
+            <h2>活动预告</h2>
+            <ul class="news activity-list">
+            {% for i in activityPre %}
+                <li>
+                    <a href="/news/{{i.id}}" title="{{i.title}}">{{i.title}}</a>
+                    <span class="post-date">{{i.created}}</span>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <!-- 活动预告 End -->
+        <!-- 深大志愿者官网 
+        <a href="http://192.168.2.210/" title="深圳大学大运志愿者网站" class="szu-vol"><img src="/static/images/home/szu-vol.png" width="310" height="140" alt="深圳大学大运志愿者网站" /></a>
+        -->
+        <a href="http://192.168.2.113/" title="火车票订票系统" class="szu-vol"><img src="/static/images/6.8.jpg" width="310" height="140" alt="火车票订票系统" /></a>
+        
+    </div> 
+    <!-- 话题专题、活动预告 End -->
+    
+{% endblock %}
