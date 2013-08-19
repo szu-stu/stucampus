@@ -19,7 +19,8 @@
 }
 
 .left-side li {
-	width: 145px;
+	width: 205px;
+    padding-left: 10px;
 }
 
 .left-side a {
@@ -39,6 +40,7 @@
 }
 
 .list {
+    margin-top: 20px;
 	width: 164px;
 	height: 200px;
 }

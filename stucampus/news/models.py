@@ -1,6 +1,6 @@
 from django.db import models
 
-from stucampus.master.models import User
+from stucampus.account.models import Student
 
 
 class Category(models.Model):
@@ -20,7 +20,7 @@ class Article(models.Model):
     source_url = models.URLField()
     cover_image = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now=False, auto_now_add=True)
-    creater = models.ForeignKey(User)
+    creater = models.ForeignKey(Student)
     creater_ip = models.IPAddressField()
     click_count = models.IntegerField()
     is_post = models.BooleanField()

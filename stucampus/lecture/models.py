@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+
 import django.db.models
 
 from stucampus.custom import models
@@ -44,5 +45,4 @@ class LectureMessage(django.db.models.Model):
         date_of_next_Monday = date_of_this_Monday + timedelta(days=7)
         return LectureMessage.objects.filter(
             date_time__gte=date_of_this_Monday,
-            date_time__lt=date_of_next_Monday,
-            )
+            date_time__lt=date_of_next_Monday)

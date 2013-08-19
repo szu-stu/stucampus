@@ -1,0 +1,76 @@
+{% extends 'master/layout.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'admin/organization.css' | as_css }}
+{{ 'admin/organization.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+    <h2>组织管理&amp; Manage Organization</h2>
+    <p><i>此处由学子管理员对其他组织进行管理，操作包括添加组织、添加及删除组织管理员，目前共有注册组织 &nbsp;{{ orgs_num }} &nbsp;个,
+    正常状态下组织 &nbsp;{{ normal_orgs_num }} &nbsp;个, 被禁组织 &nbsp;{{ baned_orgs_num }} &nbsp;个, 已删除组织 &nbsp;{{ deleted_orgs_num }} &nbsp;个</i></p>
+    <p>快速添加组织</p>
+    <div class="add">
+        <ul>
+            <li>
+                <label>组织名称</label>
+                <input type="text" name="name" id="name"/>
+            </li>
+            <li>
+                <label>联系电话</label>
+                <input type="text" name="phone" id="phone"/>
+            </li>
+            <li>
+                <input type="button" value="添加组织" onclick="$S.Organization.create()" />
+            </li>
+        </ul>
+    </div>
+    <div class="list">
+    <h2>常态组织 &amp; Normal Organization</h2>
+        <ul>
+        {% for org in normal_orgs %}
+            {% if org.group.name == 'StuCampus' %}
+            <li>
+                <span>{{ org.name }}</span>
+                <input type="button" class="listinput" value="添加管理员" id="main" onclick="$S.Organization.addManager({{org.id}})" />
+                <input type="text" class="addinput" placeholder='请输入用户邮箱' id="org{{org.id}}" />
+            </li>
+            {% else %}
+            <li>
+                <span>{{ org.name }}</span>
+                <input type="button" class="listinput"  value="删除该组织" onclick="confirm('确实要删除该组织吗？')?$S.Organization.remove({{org.id}}):false"  />
+                <input type="button" class="listinput" value="添加管理员" onclick="$S.Organization.addManager({{org.id}})" />
+                <input type="text"  class="addinput" placeholder='请输入用户邮箱' id="org{{org.id}}" />
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    <h2>被禁组织 &amp; Baned Organization</h2>
+    <ul>
+    {% if banedOrgs %}
+        {% for org in banedOrgs %}
+            <li>
+                {{org.name}}
+            </li>
+        {% endfor %}
+    {% else %}
+        <li>暂无组织被封禁</li>
+    {% endif %}
+    </ul>
+        <h2>已删组织 &amp; Deleted Organization</h2>
+    <ul>
+        {% if deletedOrgs %}
+        {% for org in deletedOrgs %}
+            <li>
+                <span>{{org.name}}</span>
+            </li>
+        {% endfor %}
+        {% else %}
+        <li>暂无被删除的组织</li>
+        {% endif %}
+        </ul>
+    </div>
+    <div class="aside">
+    </div>
+{% endblock %}
