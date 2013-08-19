@@ -1,0 +1,25 @@
+{% extends 'master/layout.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'admin/organization.css' | as_css }}
+{{ 'admin/organization.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+    <h2>组织管理 &amp; Manage Organization</h2>
+    <div class="list">
+    <p><span>{{ org.name }}</span> 组织资料： </p>
+    <ul>
+        <li>基本信息：
+            <ul>
+                <li>联系电话：<code>{{ org.phone }}</code></li>
+                <li>官方网站：<code><a href='{{ org.url }}'>{{ org.url }}</a></code></li>
+                <li>Logo：<code><a href='{{ org.logo }}'>{{ org.logo }}</a></code></li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+    <div class="aside">
+    </div>
+{% endblock %}

@@ -2,14 +2,15 @@
 import platform
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.views.generic.base import RedirectView
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.models import Group
 
 from stucampus.master.forms import AddOrganizationForm
 from stucampus.organization.models import Organization
-from stucampus.organization.services import is_exist
-from stucampus.utils import render_json
+from stucampus.organization.services import is_exist, find
+from stucampus.utils import spec_json, get_http_data
 
 
 def index(request):
@@ -74,4 +75,22 @@ def admin_organization(request):
         else:
             success = False
             messages = form.errors.values()
-        return render_json({'success': success, 'messages': messages})
+        return spec_json(success, messages)
+
+
+@permission_required('master.admin_status')
+def admin_organization_operate(request, id):
+    if request.method == 'GET':
+        org = get_object_or_404(Organization, id=id)
+        return render(request, 'master/organization_view.html', {'org': org})
+    elif request.method == 'DELETE':
+        org = find(id)
+        if org is None:
+            success = False
+            messages = [u'该组织不存在']
+        else:
+            org.is_deleted = True
+            org.save()
+            success = True
+            messages = []
+        return spec_json(success, messages)
