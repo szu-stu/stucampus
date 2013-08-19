@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
 import django.db.models
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from stucampus.stucampus_custom import models
+from stucampus.custom import models
 
 
 class LectureMessage(django.db.models.Model):

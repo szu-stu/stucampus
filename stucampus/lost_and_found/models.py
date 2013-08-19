@@ -15,13 +15,13 @@ class Message(django.db.models.Model):
     published_date = models.DateField(auto_now_add=True)
     place = models.CharField(max_length=50)
     # TODO: translte the second value of every tuple to chinese
-    KIND_CHOICES = (
+    CATEGORY_CHOICES = (
         ('phone', 'phone'),
         ('bag', 'bag'),
         ('idcard', 'idcard'),
         ('bike', 'bike'),
     )
-    kind = models.ChoiceField(max_length=20, choices=KIND_CHOICES)
+    category = models.ChoiceField(max_length=20, choices=CATEGORY_CHOICES)
 
     publisher_name = models.CharField(max_length=20)
     contact_way = models.CharField(max_length=30)

@@ -11,7 +11,7 @@ class CharField(models.CharField):
 
 class IntegerField(models.IntegerField):
     def formfield(self, **kwargs):
-        defaults = {'form_class': stucampus_FormField.IntegerField}
+        defaults = {'form_class': forms.IntegerField}
         defaults.update(kwargs)
         return super(IntegerField, self).formfield(**defaults)
 
