@@ -1,7 +1,8 @@
 import re
 from urllib2 import urlopen
+from django.db import IntegrityError
 
-#from stucampus.spider.models import Announcement
+from stucampus.spider.models import Announcement
 
 
 def get_announcement():
@@ -17,10 +18,16 @@ def get_announcement():
     needed_text_list = re.findall(needed_text_pattern, html)
     for msg_mixed_with_tags in needed_text_list:
         attrs = text_to_dictionary(msg_mixed_with_tags)
-        write_dic_to_txt(attrs)
-        #announcement = Announcement(attrs[title], attrs[publisher],
-        #                            attrs[category], attrs[url_id, date])
-        #announcement.save()
+        #write_dic_to_txt(attrs)
+        announcement = Announcement(attrs[title], attrs[publisher],
+                                    attrs[category], attrs[url_id],
+                                    attrs[date])
+        repeat = 0
+        try:
+            announcement.save()
+        except IntegrityError:
+            repeat += 1
+        return repeat
 
 
 def get_html(url, code='utf-8'):
@@ -42,15 +49,17 @@ def text_to_dictionary(text):
                            r'</td>')
     attrs['date'] = find_content_between_two_tags(left_tag, right_tag, text,
                                                   r'\d{4}-\d{1,2}-\d{1,2}')
+
     patterns = {
-        'publisher': (r"document.fsearch1.keyword.value='", r"'"),
         'category': (r'<td align="center" style="font-size: 9pt">', r'</td>'),
-        'url_id': (r'<a href="view.asp\?id=', r'"')
+        'url_id': (r'<a href="view.asp\?id=', r'"'),
+        'publisher': (r"document.fsearch1.keyword.value='", r"'"),
         }
     for attr, pattern in patterns.iteritems():
         left_tag, right_tag = pattern
         attrs[attr] = find_content_between_two_tags(left_tag, right_tag, text)
-        return attrs
+
+    return attrs
 
 
 def find_content_between_two_tags(left_tag, right_tag,

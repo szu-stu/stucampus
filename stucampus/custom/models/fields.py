@@ -93,3 +93,11 @@ class ChoiceField(models.CharField):
         defaults.update(kwargs)
         defaults['form_class'] = ChoiceField
         return super(ChoiceField, self).formfield(**defaults)
+
+
+class TextField(models.CharField):
+    def formfield(self, **kwargs):
+        defaults = {}
+        defaults.update(kwargs)
+        defaults['form_class'] = CharField
+        return super(TextField, self).formfield(**defaults)
