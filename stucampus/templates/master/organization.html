@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h2>组织管理&amp; Manage Organization</h2>
+    <h2>组织管理 &amp; Manage Organization</h2>
     <p><i>此处由学子管理员对其他组织进行管理，操作包括添加组织、添加及删除组织管理员，目前共有注册组织 &nbsp;{{ orgs_num }} &nbsp;个,
     正常状态下组织 &nbsp;{{ normal_orgs_num }} &nbsp;个, 被禁组织 &nbsp;{{ baned_orgs_num }} &nbsp;个, 已删除组织 &nbsp;{{ deleted_orgs_num }} &nbsp;个</i></p>
     <p>快速添加组织</p>
@@ -32,13 +32,13 @@
         {% for org in normal_orgs %}
             {% if org.group.name == 'StuCampus' %}
             <li>
-                <span>{{ org.name }}</span>
+                <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
                 <input type="button" class="listinput" value="添加管理员" id="main" onclick="$S.Organization.addManager({{org.id}})" />
                 <input type="text" class="addinput" placeholder='请输入用户邮箱' id="org{{org.id}}" />
             </li>
             {% else %}
             <li>
-                <span>{{ org.name }}</span>
+                <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
                 <input type="button" class="listinput"  value="删除该组织" onclick="confirm('确实要删除该组织吗？')?$S.Organization.remove({{org.id}}):false"  />
                 <input type="button" class="listinput" value="添加管理员" onclick="$S.Organization.addManager({{org.id}})" />
                 <input type="text"  class="addinput" placeholder='请输入用户邮箱' id="org{{org.id}}" />
@@ -48,8 +48,8 @@
         </ul>
     <h2>被禁组织 &amp; Baned Organization</h2>
     <ul>
-    {% if banedOrgs %}
-        {% for org in banedOrgs %}
+    {% if baned_orgs %}
+        {% for org in baned_orgs %}
             <li>
                 {{org.name}}
             </li>
@@ -60,8 +60,8 @@
     </ul>
         <h2>已删组织 &amp; Deleted Organization</h2>
     <ul>
-        {% if deletedOrgs %}
-        {% for org in deletedOrgs %}
+        {% if deleted_orgs %}
+        {% for org in deleted_orgs %}
             <li>
                 <span>{{org.name}}</span>
             </li>

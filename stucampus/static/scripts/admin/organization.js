@@ -106,14 +106,14 @@
 
     $S.Organization.remove = function(id) {
         $.ajax({
-            url: '/admin/organization/' + id,
+            url: '/manage/organization/' + id,
             type: 'delete',
             success: function(response){
                 if (response.success) {
-                    $S.notice(response.message, 3000);
+                    $S.notice('删除成功', 3000);
                     setTimeout(function(){document.location.reload()}, 3000);
                 } else {
-                    $S.alert(response.message.join("、"), 3000);
+                    $S.alert(response.messages.join("、"), 3000);
                     setTimeout(function(){document.location.reload()});
                 }
             }

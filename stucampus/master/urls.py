@@ -8,4 +8,7 @@ urlpatterns = patterns(
     url(r'^organization$',
         'stucampus.master.views.admin_organization',
         name='admin_organization'),
+    url(r'^organization/(?P<id>\d+)$',
+        'stucampus.master.views.admin_organization_operate',
+        name='admin_organization_operate'),
 )

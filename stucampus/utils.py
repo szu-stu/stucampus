@@ -9,6 +9,11 @@ def render_json(context, **response_kwargs):
     return HttpResponse(data, **response_kwargs)
 
 
+def spec_json(success=False, messages=[]):
+    data = {'success': success, 'messages': messages}
+    return render_json(data)
+
+
 def get_client_ip(request):
     '''Get the ip of client'''
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

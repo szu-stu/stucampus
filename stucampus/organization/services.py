@@ -8,3 +8,11 @@ def is_exist(name):
     except Organization.DoesNotExist:
         return False
     return True
+
+
+def find(id):
+    try:
+        org = Organization.objects.get(id=id)
+    except Organization.DoesNotExist:
+        return None
+    return org
