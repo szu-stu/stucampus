@@ -13,7 +13,7 @@ class LectureMessage(django.db.models.Model):
     place = models.CharField(max_length=40)
 
     @staticmethod
-    def get_messages_table():
+    def generate_messages_table():
         message_table = LectureMessage.creat_empty_table()
         message_table = LectureMessage.fill_in_table(message_table)
         return message_table

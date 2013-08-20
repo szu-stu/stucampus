@@ -3,12 +3,8 @@ from django.db import IntegrityError
 
 from stucampus.spider.spider import get_html, delete,\
                                     find_content_between_two_tags
-from stucampus.spider.models import Announcement
-from to_file import clear_file, write_dic_to_txt
-
 
 def get_announcement():
-    clear_file()
     html = get_html('http://www.szu.edu.cn/board/', 'gb2312')
     needed_text_pattern = (
         r'<td align="center">\d+</td>'
@@ -19,27 +15,12 @@ def get_announcement():
         )
     needed_text_list = re.findall(needed_text_pattern, html)
 
-    already_exist = 0
-    print len(needed_text_list)
-    for msg_mixed_with_tags in needed_text_list:
-        print '1'
-        attrs = text_to_dictionary(msg_mixed_with_tags)
-        # TODO: replace get_or_create with a url_id checker
-        announcement, created = Announcement.objects.get_or_create(
-                                    url_id=attrs['url_id'],
-                                    title=attrs['title'],
-                                    publisher=attrs['publisher'],
-                                    category=attrs['category'],
-                                    published_date=attrs['date'])
-        try:
-            announcement.save()
-        except IntegrityError:
-            already_exist += 1
-            
-    return already_exist
+    for text_mixed_with_tags in needed_text_list:
+        dic = extract_needed_to_dictionary(text_mixed_with_tags)
+        yield dic
 
 
-def text_to_dictionary(text):
+def extract_needed_to_dictionary(text):
     attrs = {}
 
     left_tag, right_tag = (r'class=fontcolor3>', r'</a></td>')
@@ -80,7 +61,3 @@ def get_announcement_content(url_id):
     row_text = delete(r'&nbsp;', row_text)
     row_text = re.sub('\n+', '\n',  row_text)
     return row_text
-
-
-if __name__ == '__main__':
-    get_main_content('261911')
