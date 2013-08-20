@@ -11,7 +11,8 @@
             <dd class="signer-expand content-block" id="signer-expand">
                 <ul class="usrmenu">
                     <li><a href="/account/profile">个人中心</a></li>
-                    {% if perms.master.admin_status %}
+                    {% load permission_check %}
+                    {% if user|is_admin %}
                     <li title="系统管理">
                         <a href="/manage">系统管理</a>
                     </li>

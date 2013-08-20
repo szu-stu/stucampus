@@ -29,12 +29,13 @@
     <div id="layout_main" class="layout_box">
         <div id="layout_left">
             <ul class="block_menu">
-                {% if perms.master.admin_status %}<li><a href="/manage/status">运行状态</a></li>{% endif %}
-                {% if perms.organization.organization_manage %}<li><a href="/manage/organization">组织管理</a></li>{% endif %}
-                {% if perms.magazine.magazine_manage %}<li><a href="/manage/magazines">杂志管理</a></li>{% endif %}
-                {% if perms.news.news_post %}<li><a href="#">新闻发布</a></li>{% endif %}
-                {% if perms.news.news_manage %}<li><a href="#">新闻编审</a></li>{% endif %}
-                {% if perms.infor.infor_post %}<li><a href="#">信息发布</a></li> {% endif %}
+                {% load permission_check %}
+                {% if user|is_admin %}<li><a href="/manage/status">运行状态</a></li>{% endif %}
+                {% if perms.organization.organization_view and user|is_admin %}<li><a href="/manage/organization">组织管理</a></li>{% endif %}
+                {% if perms.magazine.magazine_manage and user|is_admin %}<li><a href="/manage/magazines">杂志管理</a></li>{% endif %}
+                {% if perms.news.news_post and user|is_admin %}<li><a href="#">新闻发布</a></li>{% endif %}
+                {% if perms.news.news_manage and user|is_admin %}<li><a href="#">新闻编审</a></li>{% endif %}
+                {% if perms.infor.infor_post and user|is_admin %}<li><a href="#">信息发布</a></li> {% endif %}
 
                 <!-- 以下为提供给社团组织的管理界面 -->
                 {% if perms.organization.organization_status %}<li><a href="/organization">组织概况</a></li>{% endif %}
