@@ -2,8 +2,7 @@ import re
 from urllib2 import urlopen
 
 def get_html(url, code='utf-8'):
-    html = urlopen(url).read().decode(code)
-    return html
+    return urlopen(url).read().decode(code, 'ignore')
 
 
 def find_content_between_two_tags(left_tag, right_tag,

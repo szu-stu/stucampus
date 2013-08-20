@@ -45,7 +45,7 @@ def admin_status(request):
 @user_passes_test(admin_group_check)
 def admin_organization(request):
     if request.method == 'GET':
-        if not request.user.has_perm('organization.organization_view'):
+        if not request.user.has_perm('organization.organization_list'):
             return HttpResponse(status=403)
         orgs = Organization.objects.all()
         normal_orgs = Organization.objects.filter(is_banned=False,
@@ -63,6 +63,8 @@ def admin_organization(request):
                  'deleted_orgs_num': deleted_orgs_num}
         return render(request, 'master/organization.html', param)
     elif request.method == 'POST':
+        if not request.user.has_perm('organization.organization_create'):
+            return HttpResponse(status=403)
         form = AddOrganizationForm(request.POST)
         if form.is_valid():
             data = request.POST
@@ -83,9 +85,13 @@ def admin_organization(request):
 @user_passes_test(admin_group_check)
 def admin_organization_operate(request, id):
     if request.method == 'GET':
+        if not request.user.has_perm('organization.organization_view'):
+            return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)
         return render(request, 'master/organization_view.html', {'org': org})
     elif request.method == 'DELETE':
+        if not request.user.has_perm('organization.organization_del'):
+            return HttpResponse(status=403)
         org = find(id)
         if org is None:
             success = False
@@ -101,6 +107,8 @@ def admin_organization_operate(request, id):
 @user_passes_test(admin_group_check)
 def admin_organization_manager(request, id):
     if request.method == 'POST':
+        if not request.user.has_perm('organization.student_create'):
+            return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)
         form = AddOrganizationManagerForm(request.POST)
         if form.is_valid():

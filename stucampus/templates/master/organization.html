@@ -30,7 +30,7 @@
     <h2>常态组织 &amp; Normal Organization</h2>
         <ul>
         {% for org in normal_orgs %}
-            {% if org.group.name == 'StuCampus' %}
+            {% if org.name == '深圳大学学子天地' %}
             <li>
                 <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
                 <input type="button" class="listinput" value="添加管理员" id="main" onclick="$S.Organization.add_manager({{org.id}})" />
