@@ -1,12 +1,11 @@
 # run to get all publisher(about 100), not run by django
 import re
 
-from announcement_spider import get_html, add_line_to_file, clear_file,\
-                               find_content_between_two_tags
+from spider import get_html, find_content_between_two_tags
+from to_file import add_line_to_file, clear_file
 
 
 def get_publisher():
-    print 'test'
     clear_file()
     html = get_html('http://www.szu.edu.cn/board/userlist.asp', 'gb2312')
     needed_text_pattern = r'>\d+.*?</option>'

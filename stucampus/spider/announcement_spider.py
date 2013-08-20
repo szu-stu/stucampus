@@ -1,8 +1,10 @@
 import re
-from urllib2 import urlopen
 from django.db import IntegrityError
 
+from stucampus.spider.spider import get_html, delete,\
+                                    find_content_between_two_tags
 from stucampus.spider.models import Announcement
+from to_file import clear_file, write_dic_to_txt
 
 
 def get_announcement():
@@ -22,22 +24,19 @@ def get_announcement():
     for msg_mixed_with_tags in needed_text_list:
         print '1'
         attrs = text_to_dictionary(msg_mixed_with_tags)
-        #write_dic_to_txt(attrs)
-        announcement = Announcement(title=attrs['title'],
+        # TODO: replace get_or_create with a url_id checker
+        announcement, created = Announcement.objects.get_or_create(
+                                    url_id=attrs['url_id'],
+                                    title=attrs['title'],
                                     publisher=attrs['publisher'],
                                     category=attrs['category'],
-                                    url_id=attrs['url_id'],
                                     published_date=attrs['date'])
         try:
             announcement.save()
         except IntegrityError:
             already_exist += 1
-        return already_exist
-
-
-def get_html(url, code='utf-8'):
-    html = urlopen(url).read().decode(code)
-    return html
+            
+    return already_exist
 
 
 def text_to_dictionary(text):
@@ -67,33 +66,21 @@ def text_to_dictionary(text):
     return attrs
 
 
-def find_content_between_two_tags(left_tag, right_tag,
-                                  text, to_search=r'.*?'):
-    reg = left_tag + r'(?P<content>' + to_search + r')' + right_tag
-    match = re.search(reg, text)
-    if not match:
-        raise Exception('can not match: '+reg)
-    return match.group('content')
+def get_announcement_content(url_id):
+    url = 'http://www.szu.edu.cn/board/view.asp?id=' + url_id
+    html = get_html(url, 'gb2312')
+    left_tag = (r'<td align=center height=30 style="font-size: 9pt">'
+                r'<font color=#808080>')
+    right_tag = (r'<td height="50" align="right"><table border="0" ce'
+                 r'llpadding="0" cellspacing="0" width="90%">')
+    text_mixed_with_tags = find_content_between_two_tags(left_tag, right_tag,
+                                                         html, r'[\s\S]+?')
+    row_text = delete(r'<.+?>', text_mixed_with_tags)
+    row_text = delete('\r', row_text)
+    row_text = delete(r'&nbsp;', row_text)
+    row_text = re.sub('\n+', '\n',  row_text)
+    return row_text
 
-
-def delete(to_delete, text):
-    return re.sub(to_delete, '', text)
-
-
-# The following 3 function is just used to debug
-def add_line_to_file(filename,string):
-    with open(filename, 'a') as f:
-        f.write((string+'\n').encode('utf-8'))
-
-def write_dic_to_txt(dic):
-    with open('test.txt', 'a') as f:
-        for key, val in dic.iteritems():
-            f.write((key+': '+val+'\n').encode('utf-8'))
-        f.write('\n')
-
-def clear_file(filename='test.txt'):
-    with open(filename, 'w'):
-        pass
 
 if __name__ == '__main__':
-    get_announcement()
+    get_main_content('261911')
