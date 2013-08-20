@@ -13,3 +13,7 @@ class AddOrganizationForm(d_forms.Form):
                             error_messages={
                                 'required': '联系电话不能为空',
                                 'max_length': '联系电话不能大于11个字符'})
+
+
+class AddOrganizationManagerForm(d_forms.Form):
+    email = forms.EmailField(error_messages={'required': '请输入邮箱'})

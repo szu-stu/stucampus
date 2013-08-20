@@ -33,15 +33,15 @@
             {% if org.group.name == 'StuCampus' %}
             <li>
                 <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
-                <input type="button" class="listinput" value="添加管理员" id="main" onclick="$S.Organization.addManager({{org.id}})" />
-                <input type="text" class="addinput" placeholder='请输入用户邮箱' id="org{{org.id}}" />
+                <input type="button" class="listinput" value="添加管理员" id="main" onclick="$S.Organization.add_manager({{org.id}})" />
+                <input type="text" class="addinput" placeholder='请输入用户邮箱' id="org-{{org.id}}" />
             </li>
             {% else %}
             <li>
                 <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
                 <input type="button" class="listinput"  value="删除该组织" onclick="confirm('确实要删除该组织吗？')?$S.Organization.remove({{org.id}}):false"  />
-                <input type="button" class="listinput" value="添加管理员" onclick="$S.Organization.addManager({{org.id}})" />
-                <input type="text"  class="addinput" placeholder='请输入用户邮箱' id="org{{org.id}}" />
+                <input type="button" class="listinput" value="添加管理员" onclick="$S.Organization.add_manager({{org.id}})" />
+                <input type="text"  class="addinput" placeholder='请输入用户邮箱' id="org-{{org.id}}" />
             </li>
             {% endif %}
         {% endfor %}
@@ -51,7 +51,7 @@
     {% if baned_orgs %}
         {% for org in baned_orgs %}
             <li>
-                {{org.name}}
+                <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
             </li>
         {% endfor %}
     {% else %}
@@ -63,7 +63,7 @@
         {% if deleted_orgs %}
         {% for org in deleted_orgs %}
             <li>
-                <span>{{org.name}}</span>
+                <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
             </li>
         {% endfor %}
         {% else %}

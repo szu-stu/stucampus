@@ -31,26 +31,24 @@
         });
     };
 
-    $S.Organization.addManager = function(id){
-        var email = $("#org"+id).val();
-        var orgid = id;
+    $S.Organization.add_manager = function(id){
+        var email = $("#org-"+id).val();
         $.ajax({
-            url: '/organization-manager/',
+            url: '/manage/organization/' + id + '/manager',
             type: 'POST',
             data: {
                 'email' : email,
-                'orgid' : orgid
             },
             success: function(response)
             {
                 if (response.success)
                 {
-                    $S.notice(response.message, 3000);
+                    $S.notice('添加成功!', 3000);
                     setTimeout(function(){
                         document.location.reload()
                     }, 3000);
                 } else {
-                    $S.alert(response.message, 3000);
+                    $S.alert(response.messages.join(', '), 3000);
                 }
             }
         }); 

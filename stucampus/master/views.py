@@ -5,11 +5,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import RedirectView
 from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 from stucampus.master.forms import AddOrganizationForm
+from stucampus.master.forms import AddOrganizationManagerForm
 from stucampus.organization.models import Organization
 from stucampus.organization.services import is_exist, find
+from stucampus.account.services import find_by_email
 from stucampus.utils import spec_json, get_http_data
 
 
@@ -93,4 +95,26 @@ def admin_organization_operate(request, id):
             org.save()
             success = True
             messages = []
+        return spec_json(success, messages)
+
+
+@permission_required('master.admin_status')
+def admin_organization_manager(request, id):
+    if request.method == 'POST':
+        org = get_object_or_404(Organization, id=id)
+        form = AddOrganizationManagerForm(request.POST)
+        if form.is_valid():
+            email = request.POST['email']
+            student = find_by_email(email)
+            if student is None:
+                success = False
+                messages = [u'该邮箱不存在']
+            else:
+                group = org.group
+                student.user.groups.add(group)
+                messages = []
+                success = True
+        else:
+            messages = form.errors.values()
+            success = False
         return spec_json(success, messages)
