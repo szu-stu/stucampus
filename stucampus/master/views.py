@@ -5,13 +5,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import RedirectView
 from django.contrib.auth.decorators import permission_required
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.decorators import user_passes_test
 
 from stucampus.master.forms import AddOrganizationForm
 from stucampus.master.forms import AddOrganizationManagerForm
 from stucampus.organization.models import Organization
 from stucampus.organization.services import is_exist, find
 from stucampus.account.services import find_by_email
+from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json, get_http_data
 
 
@@ -27,12 +28,12 @@ def page_not_found(request):
     return render(request, "404.html")
 
 
-@permission_required('master.admin_status')
+@user_passes_test(admin_group_check)
 def admin_redirect(request):
     return HttpResponseRedirect('/manage/status')
 
 
-@permission_required('master.admin_status')
+@user_passes_test(admin_group_check)
 def admin_status(request):
     python_version = platform.python_version()
     domain = request.get_host()
@@ -41,9 +42,11 @@ def admin_status(request):
     return render(request, 'master/status.html', param)
 
 
-@permission_required('master.admin_status')
+@user_passes_test(admin_group_check)
 def admin_organization(request):
     if request.method == 'GET':
+        if not request.user.has_perm('organization.organization_view'):
+            return HttpResponse(status=403)
         orgs = Organization.objects.all()
         normal_orgs = Organization.objects.filter(is_banned=False,
                                                   is_deleted=False)
@@ -65,10 +68,7 @@ def admin_organization(request):
             data = request.POST
             name = data['name']
             if not is_exist(name):
-                group = Group.objects.create(name=name)
-                Organization.objects.create(name=name,
-                                            phone=data['phone'],
-                                            group=group)
+                Organization.objects.create(name=name, phone=data['phone'])
                 success = True
                 messages = []
             else:
@@ -80,7 +80,7 @@ def admin_organization(request):
         return spec_json(success, messages)
 
 
-@permission_required('master.admin_status')
+@user_passes_test(admin_group_check)
 def admin_organization_operate(request, id):
     if request.method == 'GET':
         org = get_object_or_404(Organization, id=id)
@@ -98,7 +98,7 @@ def admin_organization_operate(request, id):
         return spec_json(success, messages)
 
 
-@permission_required('master.admin_status')
+@user_passes_test(admin_group_check)
 def admin_organization_manager(request, id):
     if request.method == 'POST':
         org = get_object_or_404(Organization, id=id)
@@ -110,8 +110,7 @@ def admin_organization_manager(request, id):
                 success = False
                 messages = [u'该邮箱不存在']
             else:
-                group = org.group
-                student.user.groups.add(group)
+                org.members.add(student)
                 messages = []
                 success = True
         else:
