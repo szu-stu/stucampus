@@ -16,18 +16,23 @@ def get_announcement():
         r'</td>'
         )
     needed_text_list = re.findall(needed_text_pattern, html)
+
+    already_exist = 0
+    print len(needed_text_list)
     for msg_mixed_with_tags in needed_text_list:
+        print '1'
         attrs = text_to_dictionary(msg_mixed_with_tags)
         #write_dic_to_txt(attrs)
-        announcement = Announcement(attrs[title], attrs[publisher],
-                                    attrs[category], attrs[url_id],
-                                    attrs[date])
-        repeat = 0
+        announcement = Announcement(title=attrs['title'],
+                                    publisher=attrs['publisher'],
+                                    category=attrs['category'],
+                                    url_id=attrs['url_id'],
+                                    published_date=attrs['date'])
         try:
             announcement.save()
         except IntegrityError:
-            repeat += 1
-        return repeat
+            already_exist += 1
+        return already_exist
 
 
 def get_html(url, code='utf-8'):

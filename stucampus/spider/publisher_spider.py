@@ -1,8 +1,8 @@
 # run to get all publisher(about 100), not run by django
 import re
 
-from annoucement_spider import get_html, add_line_to_file, clear_file,\
-                               find_content_between_two_tags, delete
+from announcement_spider import get_html, add_line_to_file, clear_file,\
+                               find_content_between_two_tags
 
 
 def get_publisher():
@@ -29,7 +29,7 @@ def create_choice_for_model(publisher_list):
     add_line_to_file(filename, u'#produced by publiser_spider.py')
     add_line_to_file(filename, u'PUBLISHER_CHOICES = (')
     for p in publisher_list:
-        add_line_to_file(filename, u"   ('%s', '%s'),"%(p,p))
+        add_line_to_file(filename, u"    ('%s', '%s'),"%(p,p))
     add_line_to_file(filename, u')')
 
 
