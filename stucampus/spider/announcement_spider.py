@@ -16,11 +16,11 @@ def get_announcement():
     needed_text_list = re.findall(needed_text_pattern, html)
 
     for text_mixed_with_tags in needed_text_list:
-        dic = extract_needed_to_dictionary(text_mixed_with_tags)
+        dic = extract_needed_text_into_dictionary(text_mixed_with_tags)
         yield dic
 
 
-def extract_needed_to_dictionary(text):
+def extract_needed_text_into_dictionary(text):
     attrs = {}
 
     left_tag, right_tag = (r'class=fontcolor3>', r'</a></td>')

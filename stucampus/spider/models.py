@@ -22,10 +22,9 @@ class Announcement(django.db.models.Model):
     publisher = models.CharField(max_length=20, choices=PUBLISHER_CHOICES)
     content = models.TextField(max_length=5000, blank=True)
 
-    def get_content(self, url_id):
+    def get_content(self):
         if not self.content:
-            content = get_announcement_content(url_id)
-            self.content = content
+            self.content = get_announcement_content(self.url_id)
             self.save()
         return self.content
 
@@ -34,7 +33,7 @@ class Announcement(django.db.models.Model):
 
     @staticmethod
     def update_announcements():
-        num_save_this_time = 0
+        num_of_new_announcement = 0
         for a in get_announcement():
             announcement = Announcement(title=a['title'],
                                         publisher=a['publisher'],
@@ -43,6 +42,6 @@ class Announcement(django.db.models.Model):
                                         url_id=a['url_id'])
             if not announcement.already_exist():
                 announcement.save()
-                num_save_this_time += 1
+                num_of_new_announcement += 1
 
-        return num_save_this_time
+        return num_of_new_announcement
