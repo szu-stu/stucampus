@@ -99,14 +99,14 @@ def create_stucampus_organization():
 def create_user():
     global admin_user
     admin_email = (raw_input('Please input the email of admin, '
-                             'or leave blank for %s.' % DEFAULT_ADMIN_EMAIL)
+                             'or leave blank for %s.\n' % DEFAULT_ADMIN_EMAIL)
                    or DEFAULT_ADMIN_EMAIL)
     admin_password = (raw_input('Please input the password of admin, '
-                                'or leave blank for %s'
+                                'or leave blank for %s\n'
                                 % DEFAULT_ADMIN_PASSWORD)
                       or DEFAULT_ADMIN_PASSWORD)
     admin_name = (raw_input('Please input the name of admin, '
-                            'or leave blank for %s'
+                            'or leave blank for %s\n'
                             % DEFAULT_ADMIN_NAME)
                   or DEFAULT_ADMIN_NAME)
     admin_user = User.objects.create_user(username=admin_email,
