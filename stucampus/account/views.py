@@ -94,6 +94,8 @@ def profile(request):
         form = ProfileEditForm(data)
         if form.is_valid():
             user = request.user
+            user.student.true_name = data['true_name']
+            user.student.college = data['college']
             user.student.screen_name = data['screen_name']
             user.student.is_male = data['is_male']
             user.student.mphone_num = data['mphone_num']
@@ -114,7 +116,9 @@ def profile(request):
 
 @login_required
 def profile_edit(request):
-    return render(request, 'account/profile_edit.html')
+    college_list = Student.COLLEGE_CHOICES
+    return render(request, 'account/profile_edit.html',
+                 {'college_list': college_list})
 
 
 @login_required

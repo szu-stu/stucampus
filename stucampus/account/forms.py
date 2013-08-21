@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 from django import forms as d_forms
 
+from stucampus.account.models import Student
 from stucampus.custom import forms
 
 
@@ -28,6 +29,8 @@ class SignUpForm(d_forms.Form):
 
 
 class ProfileEditForm(d_forms.Form):
+    true_name = forms.CharField(label='真实姓名', required=False)
+    college = forms.CharField(label='学院', required=False)
     screen_name = forms.CharField(label='昵称',
                                   error_messages={'required': '昵称不能为空'})
     is_male = forms.ChoiceField(label='性别',

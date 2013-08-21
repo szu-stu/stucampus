@@ -1,3 +1,4 @@
+#-*- coding:utf-8
 from hashlib import md5
 
 from django import template
@@ -15,3 +16,12 @@ def user_avatar(user):
         return hashed_email
     else:
         return None
+
+
+@register.filter(name='get_college_name')
+def get_college_name(student):
+    college_id = student.college
+    if college_id:
+        return student.get_college_display()
+    else:
+        return '暂无'
