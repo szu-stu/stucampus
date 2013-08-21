@@ -29,6 +29,9 @@ def create_permissions():
     organization_content_type = get_content_type(app_label='organization')
 
     # Permissions for student
+    student_list = create_perm(codename='student_list',
+                               name='List all students',
+                               content_type=student_model_content_type)
     student_view = create_perm(codename='student_view', 
                                name='View the information of student.',
                                content_type=student_model_content_type)
@@ -86,6 +89,7 @@ def create_permissions():
 
 
 def create_stucampus_organization():
+    global org
     org = Organization.objects.create(name='深圳大学学子天地')
     org.url = 'http://stu.szu.edu.cn'
     org.logo = '/static/images/layout/logo3.png'
@@ -113,6 +117,7 @@ def create_user():
 
 def bind():
     admin_user.groups.add(admin_group)
+    org.managers.add(admin_user.student)
     perms = Permission.objects.all()
     for perm in perms:
         admin_group.permissions.add(perm)
