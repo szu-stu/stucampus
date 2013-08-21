@@ -4,6 +4,9 @@
             <h4>{{ user.student.screen_name }}的个人资料</h4>
                 <div>
                     <ul>
+                        {% load account_custom %}
+                        <li>真实姓名：{{ user.student.true_name | default:'暂无' }}</li>
+                        <li>学院：{{ user.student | get_college_name }}</li>
                         <li>昵称：{{ user.student.screen_name | default:'暂无' }}</li>
                         <li>性别：{% if user.student.is_male %}男{% else %}女{% endif %}</li>
                         <li>邮箱：{{ user.email | default:'暂无' }}</li>
