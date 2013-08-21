@@ -11,7 +11,7 @@ from stucampus.utils import render_json, get_client_ip, get_http_data
 from stucampus.account.models import Student
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
-from stucampus.account.services import find_by_email, is_exist
+from stucampus.account.services import find_by_email, student_is_exist
 
 
 def sign_in(request):
@@ -66,7 +66,7 @@ def sign_up(request):
                 messages = [u'密码不匹配, 请检查后重新输入']
                 success = False
             else:
-                email_is_exist = is_exist(email)
+                email_is_exist = student_is_exist(email)
                 if email_is_exist:
                     success = False
                     messages = [u'邮箱已存在']

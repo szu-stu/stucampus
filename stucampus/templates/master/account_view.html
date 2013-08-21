@@ -1,0 +1,29 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'admin/organization.css' | as_css }}
+{{ 'admin/organization.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+{% load account_custom %}
+    <h2>用户管理 &amp; Manage Organization</h2>
+    <div class="list">
+    <p><span>{{ student.screen_name }}</span> 用户资料：</p>
+    <ul>
+        <li>邮箱：{{ student.user.email|default:'暂无' }}</li>
+        <li>姓名：{{ student.true_name|default:'暂无' }}</li>
+        <li>性别：{% if student.is_male == True %}男{%else%}女{%endif%}</li>
+        <li>昵称：{{ student.screen_name|default:'暂无' }}</li>
+        <li>学院：{{ student | get_college_name }}</li>
+        <li>长号：{{ student.mphone_num|default:'暂无' }}</li>
+        <li>注册日期：{{ student.user.date_joined }}</li>
+        <li>登录次数：{{ student.login_count }}</li>
+        <li>最后登录时间：{{ student.user.last_login|date:'Y-m-d H:i:s' }}</li>
+        <li>最后登录IP：{{ student.last_login_ip }}</li>
+    </ul>
+    </div>
+    <div class="aside">
+    </div>
+{% endblock %}

@@ -25,3 +25,12 @@ def get_college_name(student):
         return student.get_college_display()
     else:
         return '暂无'
+
+
+@register.filter(name='get_student_status', is_safe=True)
+def get_student_status(student):
+    is_active = student.user.is_active
+    if is_active is False:
+        return '禁用'
+    else:
+        return '正常'

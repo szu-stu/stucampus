@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from stucampus.account.models import Student
 
 
-def find(id):
+def find_student(id):
     try:
         query_user = User.objects.get(id__exact=id).student
     except Student.DoesNotExist:
@@ -22,7 +22,7 @@ def find_by_email(email):
     return query_user
 
 
-def is_exist(email):
+def student_is_exist(email):
     exist_in_user = True
     exist_in_student = True
     try:

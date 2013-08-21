@@ -17,5 +17,8 @@ urlpatterns = patterns(
         name='admin_organization_manager'),
     url(r'^account$',
         'stucampus.master.views.admin.account',
-        name='admin_organization_manager'),
+        name='admin_account'),
+    url(r'^account/(?P<id>\d+)$',
+        'stucampus.master.views.admin.account_operate',
+        name='admin_account_operate'),
 )

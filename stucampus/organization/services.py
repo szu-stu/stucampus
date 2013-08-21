@@ -2,7 +2,7 @@
 from stucampus.organization.models import Organization
 
 
-def is_exist(name):
+def org_is_exist(name):
     try:
         org = Organization.objects.get(name=name)
     except Organization.DoesNotExist:
@@ -10,7 +10,7 @@ def is_exist(name):
     return True
 
 
-def find(id):
+def find_organization(id):
     try:
         org = Organization.objects.get(id=id)
     except Organization.DoesNotExist:
