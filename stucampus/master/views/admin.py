@@ -16,25 +16,13 @@ from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json, get_http_data
 
 
-def index(request):
-    return render(request, "index.html")
-
-
-def about_us(request):
-    return render(request, "aboutus.html")
-
-
-def page_not_found(request):
-    return render(request, "404.html")
-
-
 @user_passes_test(admin_group_check)
-def admin_redirect(request):
+def redirect(request):
     return HttpResponseRedirect('/manage/status')
 
 
 @user_passes_test(admin_group_check)
-def admin_status(request):
+def status(request):
     python_version = platform.python_version()
     domain = request.get_host()
     param = {'python_version': python_version,
@@ -43,7 +31,7 @@ def admin_status(request):
 
 
 @user_passes_test(admin_group_check)
-def admin_organization(request):
+def organization(request):
     if request.method == 'GET':
         if not request.user.has_perm('organization.organization_list'):
             return HttpResponse(status=403)
@@ -61,7 +49,7 @@ def admin_organization(request):
                  'orgs_num': orgs_num, 'normal_orgs_num': normal_orgs_num,
                  'baned_orgs_num': baned_orgs_num,
                  'deleted_orgs_num': deleted_orgs_num}
-        return render(request, 'master/organization.html', param)
+        return render(request, 'master/organizations.html', param)
     elif request.method == 'POST':
         if not request.user.has_perm('organization.organization_create'):
             return HttpResponse(status=403)
@@ -83,7 +71,7 @@ def admin_organization(request):
 
 
 @user_passes_test(admin_group_check)
-def admin_organization_operate(request, id):
+def organization_operate(request, id):
     if request.method == 'GET':
         if not request.user.has_perm('organization.organization_view'):
             return HttpResponse(status=403)
@@ -105,9 +93,9 @@ def admin_organization_operate(request, id):
 
 
 @user_passes_test(admin_group_check)
-def admin_organization_manager(request, id):
+def organization_manager(request, id):
     if request.method == 'POST':
-        if not request.user.has_perm('organization.student_create'):
+        if not request.user.has_perm('account.org_manager_create'):
             return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)
         form = AddOrganizationManagerForm(request.POST)
@@ -118,10 +106,20 @@ def admin_organization_manager(request, id):
                 success = False
                 messages = [u'该邮箱不存在']
             else:
-                org.members.add(student)
+                if not org in student.orgs_as_member.all():
+                    org.members.add(student)
+                org.managers.add(student)
                 messages = []
                 success = True
         else:
             messages = form.errors.values()
             success = False
         return spec_json(success, messages)
+
+
+@user_passes_test(admin_group_check)
+def account(request):
+    if request.method == 'GET':
+        if not request.user.has_perm('account.student_list'):
+            return HttpResponse(status=403)
+        return render(request, 'master/accounts.html')
