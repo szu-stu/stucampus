@@ -8,8 +8,11 @@ from stucampus.spider.announcement_spider import get_announcement,\
 
 
 CATEGORY_CHOICES = (
-    ('teach', 'teach'),
-    ('daily', 'daily'),
+    ('学术', '学术'),
+    ('校园', '校园'),
+    ('行政', '行政'),
+    ('学工', '学工'),
+    ('教务', '教务'),
     )
 
 
@@ -28,7 +31,7 @@ class Announcement(django.db.models.Model):
             self.save()
         return self.content
 
-    def already_exist(self):
+    def content_already_exist(self):
         return Announcement.objects.filter(url_id=self.url_id).exists()
 
     @staticmethod
@@ -40,7 +43,7 @@ class Announcement(django.db.models.Model):
                                         published_date=a['date'],
                                         category=a['category'],
                                         url_id=a['url_id'])
-            if not announcement.already_exist():
+            if not announcement.content_already_exist():
                 announcement.save()
                 num_of_new_announcement += 1
 

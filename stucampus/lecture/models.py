@@ -1,21 +1,39 @@
+#-*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-
 import django.db.models
 
 from stucampus.custom import models
+from stucampus.lecture.implementation import get_lecture_messages
 
 
 class LectureMessage(django.db.models.Model):
 
     title = models.CharField(max_length=100)
-    content = models.CharField(max_length=3000)
     date_time = models.DateTimeField()
     place = models.CharField(max_length=40)
 
-    @staticmethod
-    def generate_messages_table():
-        message_table = LectureMessage.creat_empty_table()
-        message_table = LectureMessage.fill_in_table(message_table)
+    url_id = models.CharField(max_length=20, unique=True)
+    is_check = models.BooleanField(default=False)
+    is_delete = models.BooleanField(default=False)
+
+    
+    @classmethod
+    def get_unchecked_message(cls):
+        for lm in get_lecture_messages():
+            lecture_messages = cls(title=lm['title'],
+                                   date_time=lm['date_time'],
+                                   place=lm['place'],
+                                   url_id=lm['url_id'])
+            yield lecture_messages
+
+    @classmethod
+    def find_lecture_announcement(cls, academic_announcements):
+        pass
+
+    @classmethod
+    def generate_messages_table(cls):
+        message_table = cls.creat_empty_table()
+        message_table = cls.fill_in_table(message_table)
         return message_table
 
     @staticmethod

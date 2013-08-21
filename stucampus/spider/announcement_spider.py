@@ -5,7 +5,7 @@ from stucampus.spider.spider import get_html, delete,\
                                     find_content_between_two_tags
 
 def get_announcement():
-    html = get_html('http://www.szu.edu.cn/board/', 'gb2312')
+    html = get_html('http://www.szu.edu.cn/board/', 'gbk')
     needed_text_pattern = (
         r'<td align="center">\d+</td>'
         r'[\s\S]*?'
@@ -49,7 +49,7 @@ def extract_needed_text_into_dictionary(text):
 
 def get_announcement_content(url_id):
     url = 'http://www.szu.edu.cn/board/view.asp?id=' + url_id
-    html = get_html(url, 'gb2312')
+    html = get_html(url, 'gbk')
     left_tag = (r'<td align=center height=30 style="font-size: 9pt">'
                 r'<font color=#808080>')
     right_tag = (r'<td height="50" align="right"><table border="0" ce'
