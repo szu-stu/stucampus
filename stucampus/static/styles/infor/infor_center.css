@@ -1,0 +1,89 @@
+
+/*信息中心样式*/
+
+h3 {
+    margin: 0;
+}
+
+ul,p {
+    padding: 0px
+}
+
+li {
+    list-style: none;
+}
+
+.left-side {
+    width: 800px;
+    margin: 20px auto;
+    border: 1px solid #dde3e2;
+    background-color: #fbfbfb;
+    overflow: hidden;
+}
+
+.left-content{
+    width: 760px;
+    margin: 20px auto;
+}
+
+.left-content h2 {
+    text-indent: -9999px;
+    margin: 15px 0 15px 35px;
+    background: url('/static/images/infor/information.png') no-repeat;
+}
+
+.left-content ul li {
+    width: 690px;
+    height: 130px;
+    margin: 0;
+    padding: 20px 35px;
+    border-top: 1px solid #C7C7C7;
+}
+
+.left-content ul li p,span {
+    font-size: 12px;
+}
+
+.org-img {
+    float: left;
+}
+
+.infor-summary {
+    float: right;
+    width: 515px;
+    text-align: left;
+}
+
+.infor-summary p {
+    margin-top: 15px;
+}
+
+.left-content ul li span {
+    color: #ffffff;
+    font-size: 14px;
+    padding: 3px 5px;
+    background-color: #000000;
+}
+
+.left-content ul li span a {
+    color: #ffffff;
+}
+
+.left-content ul li a {
+    color: #000000;
+}
+
+.left-content ul li p a {
+    font-size: 14px;
+}
+
+.infor-down ul li {
+    height: 5px;
+    line-height: 6px;
+    overflow: hidden;
+}
+
+.infor-down ul li span{
+    float: right;
+    line-height: 16px;
+}

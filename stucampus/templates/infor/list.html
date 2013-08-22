@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block htmltitle %}<title>信息中心——深圳大学学子天地</title>{% endblock %}
+
+{% block htmlhead %}
+{% load html_tools %}
+    {{ 'infor/infor_center.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+    <!-- 信息中心主题部分 -->
+    <div class="infor-main">
+        <div class="left-side">
+            <div class="left-content">
+                <div class="infor-top">
+                <h2>信息中心</h2>
+                <ul>
+                    {% load py_utils %}
+                    {% for infor in lastly_infors %}
+                    <li>
+                        <div class="org-img">
+                            <img src='{{ infor.organization.logo|default:"/static/images/infor/infor-sign.png" }}' alt="{{infor.organization.name}}" width="128" height="128" />
+                        </div>
+                        <div class="infor-summary">
+                            <h3>
+                                <a href="/infor/{{infor.id}}" title="{{infor.title}}">{{ infor.title }}</a>
+                            </h3>
+                            <span>由：<a href="{{ infor.organization.url|default:'#' }}">{{ infor.organization.name }}</a>发布于 {{infor.created|friendly_date}}
+                                   {{infor.count}}次浏览
+                            </span>
+                            <p>
+                                {{ infor.content|ellipsis:"(125, '...')" }}
+                                [<a href="/infor/{{infor.id}}">阅读全文</a>]
+                            </p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                </div>
+                <div class="infor-down">
+                    <ul>
+                        {% for infor in secondly_lastly_infors %}
+                        <li>
+                            <a href="/infor/{{ infor.id }}" title="{{infor.title}}">{{ infor.title|ellipsis:"(20, '…')" }}</a>
+                            <span>由：<a href="{{ infors.j.organization.url|default:'#' }}">{{ infor.organization.name }}</a>，发布于{{ infor.created|friendly_date}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

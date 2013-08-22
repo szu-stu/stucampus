@@ -1,0 +1,6 @@
+from django.conf.urls import patterns, url
+
+urlpatterns = patterns(
+    '',
+    url(r'^$', 'stucampus.infor.views.list', name='list'),
+)
