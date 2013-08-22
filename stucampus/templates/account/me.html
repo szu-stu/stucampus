@@ -17,7 +17,7 @@
                         <a href="/manage">系统管理</a>
                     </li>
                     {% endif %}
-                    {% if user.groups.name == 'organization_manager' %}
+                    {% if user|is_org_manage %}
                     <li title="管理您所负责的组织">
                         <a href="/manage/organization">组织管理</a>
                     </li>
