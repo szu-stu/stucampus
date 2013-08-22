@@ -8,8 +8,8 @@
 
 {% block content %}
     <h2>组织管理 &amp; Manage Organization</h2>
-    <p><i>此处由学子管理员对其他组织进行管理，操作包括添加组织、添加及删除组织管理员，目前共有注册组织 &nbsp;{{ orgs_num }} &nbsp;个,
-    正常状态下组织 &nbsp;{{ normal_orgs_num }} &nbsp;个, 被禁组织 &nbsp;{{ baned_orgs_num }} &nbsp;个, 已删除组织 &nbsp;{{ deleted_orgs_num }} &nbsp;个</i></p>
+    <p><i>此处由学子管理员对其他组织进行管理，操作包括添加组织、添加及删除组织管理员，目前共有注册组织 &nbsp;{{ orgs.all.count }} &nbsp;个,
+    正常状态下组织 &nbsp;{{ normal_orgs.all.count }} &nbsp;个, 被禁组织 &nbsp;{{ baned_orgs.all.count }} &nbsp;个, 已删除组织 &nbsp;{{ deleted_orgs.all.count }} &nbsp;个</i></p>
     <p>快速添加组织</p>
     <div class="add">
         <ul>

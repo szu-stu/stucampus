@@ -14,6 +14,7 @@ urlpatterns = patterns(
     url(r'^account/', include('stucampus.account.urls', namespace='account')),
     url(r'^organization/', include('stucampus.organization.urls',
                                    namespace='organization')),
+    url(r'^infor/', include('stucampus.infor.urls', namespace='infor')),
     url(r'^lost_and_found/', include('stucampus.lost_and_found.urls',
                                      namespace='lost_and_found')),
     url(r'^lecture/', include('stucampus.lecture.urls',

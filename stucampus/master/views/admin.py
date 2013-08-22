@@ -33,7 +33,7 @@ def status(request):
 
 
 @user_passes_test(admin_group_check)
-def organization(request):
+def organizations(request):
     if request.method == 'GET':
         if not request.user.has_perm('organization.organization_list'):
             return HttpResponse(status=403)
@@ -42,15 +42,8 @@ def organization(request):
                                                   is_deleted=False)
         baned_orgs = Organization.objects.filter(is_banned=True)
         deleted_orgs = Organization.objects.filter(is_deleted=True)
-        orgs_num = len(orgs)
-        normal_orgs_num = len(normal_orgs)
-        baned_orgs_num = len(baned_orgs)
-        deleted_orgs_num = len(deleted_orgs)
         param = {'orgs': orgs, 'normal_orgs': normal_orgs,
-                 'baned_orgs': baned_orgs, 'deleted_orgs': deleted_orgs,
-                 'orgs_num': orgs_num, 'normal_orgs_num': normal_orgs_num,
-                 'baned_orgs_num': baned_orgs_num,
-                 'deleted_orgs_num': deleted_orgs_num}
+                 'baned_orgs': baned_orgs, 'deleted_orgs': deleted_orgs}
         return render(request, 'master/organizations.html', param)
     elif request.method == 'POST':
         if not request.user.has_perm('organization.organization_create'):

@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'stucampus.master',
     'stucampus.account',
-    'stucampus.news',
+    'stucampus.infor',
     'stucampus.organization',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',

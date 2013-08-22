@@ -18,14 +18,15 @@
         <div class="left-side">
             <img id="left-top" src="/static/images/account/left-side.png" alt="左侧上块" />
             {% load account_custom %}
+            {% load permission_check %}
             <img id="avater" src="http://www.gravatar.com/avatar/{{ user|user_avatar }}?s=164" alt="用户头像" />
             <div class="list">
                 <ul>
                     <li><a href="/account/profile"><img src="/static/images/account/infor.png" alt="个人资料" /><span>个人资料</span></a></li>
                     <li><a href="/account/profile/password"><img src="/static/images/account/change-infor.png" alt="修改密码" /><span>修改密码</span></a></li>
                     <li><a href="/account/profile/edit"><img src="/static/images/account/change-infor.png" alt="修改资料" /><span>修改资料</span></a></li>
-                    {% if user.groups %}
-                    <li><a href="/organization"><img src="/static/images/account/to-write.png" alt="组织管理" /><span>组织管理</span></a></li>
+                    {% if user|is_org_manage %}
+                    <li><a href="/manage/organization"><img src="/static/images/account/to-write.png" alt="组织管理" /><span>组织管理</span></a></li>
                     {% endif %}
                 </ul>
             </div>

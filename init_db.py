@@ -16,14 +16,7 @@ create_group = Group.objects.create
 get_content_type = ContentType.objects.get
 
 
-def create_groups():
-    global admin_group
-    admin_group = create_group(name='StuCampus')
-    organization_manager_group = create_group(name='organization_manager')
-    organization_member_group = create_group(name='organization_member')
-
-
-def create_permissions():
+def run():
     # Content_type for permissions
     student_model_content_type = get_content_type(app_label='account')
     organization_content_type = get_content_type(app_label='organization')
@@ -45,7 +38,7 @@ def create_permissions():
                               name='Delete student.',
                               content_type=student_model_content_type)
 
-    # Permissions for organization
+    # Permissions for organizations
     organization_list = create_perm(codename='organization_list',
                                     name='List all organizations.',
                                     content_type=organization_content_type)
@@ -62,7 +55,7 @@ def create_permissions():
                                    name='Delete the organization.',
                                    content_type=organization_content_type)
 
-    # Permissions for adding organization manager.
+    # Permissions for organization managers.
     manager_list = create_perm(codename='org_manager_list',
                                name='List all managers of a organization.',
                                content_type=student_model_content_type)
@@ -88,16 +81,6 @@ def create_permissions():
                              content_type=student_model_content_type)
 
 
-def create_stucampus_organization():
-    global org
-    org = Organization.objects.create(name='深圳大学学子天地')
-    org.url = 'http://stu.szu.edu.cn'
-    org.logo = '/static/images/layout/logo3.png'
-    org.save()
-
-
-def create_user():
-    global admin_user
     admin_email = (raw_input('Please input the email of admin, '
                              'or leave blank for %s.\n' % DEFAULT_ADMIN_EMAIL)
                    or DEFAULT_ADMIN_EMAIL)
@@ -115,17 +98,24 @@ def create_user():
     student = Student.objects.create(user=admin_user, screen_name=admin_name)
 
 
-def bind():
-    admin_user.groups.add(admin_group)
+    admin_group = create_group(name='StuCampus')
+    organization_manager_group = create_group(name='organization_manager')
+    organization_member_group = create_group(name='organization_member')
+
+    
+    org = Organization.objects.create(name='深圳大学学子天地')
+    org.url = 'http://stu.szu.edu.cn'
+    org.logo = '/static/images/layout/logo3.png'
+    org.save()
+
+
+    admin_user.groups.add(admin_group, organization_manager_group)
     org.managers.add(admin_user.student)
     perms = Permission.objects.all()
     for perm in perms:
         admin_group.permissions.add(perm)
 
-
-def run():
-    create_groups()
-    create_permissions()
-    create_stucampus_organization()
-    create_user()
-    bind()
+    organization_manager_group.permissions.add(organization_list,
+                                               organization_view,
+                                               organization_edit,
+                                               organization_del)

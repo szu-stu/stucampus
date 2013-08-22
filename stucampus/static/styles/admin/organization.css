@@ -1,5 +1,11 @@
 /*组织管理*/
-
+ul{
+    list-style:none;
+}
+ul li div{
+    display:inline-block;
+    text-align:center;
+}
 p {
     text-indent: 2.5em;
     width: 805px;
@@ -209,4 +215,8 @@ li #orglabel {
 
 #addMan {
     width: 100px;
+}
+
+.width-400{
+    width: 400px;
 }
