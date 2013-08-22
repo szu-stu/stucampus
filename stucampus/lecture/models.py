@@ -18,17 +18,24 @@ class LectureMessage(django.db.models.Model):
 
     
     @classmethod
-    def get_unchecked_message(cls):
+    def get_message_from_announcement(cls):
+        get_count = 0
         for lm in get_lecture_messages():
-            lecture_messages = cls(title=lm['title'],
+            lecture_message, created = cls.objects.get_or_creat(
+                                   title=lm['title'],
                                    date_time=lm['date_time'],
                                    place=lm['place'],
                                    url_id=lm['url_id'])
-            yield lecture_messages
+            try:
+                lecture_message.save()
+                new_count += 1
+            except IntegrityError:
+                repeat += 1
+        return (get_count, repeat)
 
     @classmethod
-    def find_lecture_announcement(cls, academic_announcements):
-        pass
+    def get_unchecked_message(cls):
+        return cls.objects.filter(is_check=False)
 
     @classmethod
     def generate_messages_table(cls):
