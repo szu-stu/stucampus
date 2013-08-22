@@ -20,6 +20,7 @@ def run():
     # Content_type for permissions
     student_model_content_type = get_content_type(app_label='account')
     organization_content_type = get_content_type(app_label='organization')
+    infor_content_type = get_content_type(app_label='infor')
 
     # Permissions for student
     student_list = create_perm(codename='student_list',
@@ -79,6 +80,20 @@ def run():
     member_del = create_perm(codename='member_del',
                              name='Delete member from a organization',
                              content_type=student_model_content_type)
+
+    # Permission for infor
+    infor_list = create_perm(codename='infor_list',
+                             name='List all informations',
+                             content_type=infor_content_type)
+    infor_view = create_perm(codename='infor_view',
+                             name='View an information.',
+                             content_type=infor_content_type)
+    infor_create = create_perm(codename='infor_create',
+                               name='Create an information.',
+                               content_type=infor_content_type)
+    infor_del = create_perm(codename='infor_del',
+                            name='Delete information',
+                            content_type=infor_content_type)
 
 
     admin_email = (raw_input('Please input the email of admin, '
