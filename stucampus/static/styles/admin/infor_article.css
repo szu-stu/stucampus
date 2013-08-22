@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+/* 信息正文编辑 */
+form.list ul {
+	list-style: none;
+	padding: 0;
+	margin: 20px 5px;
+	font-size: 14px;
+}
+form.list ul li {
+	padding: 0;
+	margin: 10px 0 10px 0;
+	display: inline-block;
+}
+form.list ul li.buttons {
+	text-align: right;
+	width: 780px;
+	margin-top: 30px;
+}
+form.list ul li.buttons input.button {
+	padding: 10px 20px;
+	font-size: 15px;
+	font-family: "Microsoft Yahei";
+}
+form.list .element {
+	line-height: 20px;
+	font-size: 14px;
+}
+form.list input.element, 
+form.list .element-box {
+	display: inline-block;
+	width: 160px;
+	width: 300px;
+}
+form.list textarea.element {
+	height: 100px;
+	width: 690px;
+}
+form.list label.head-label {
+	display: inline-block;
+	width: 5em;
+	text-align: right;
+	margin: 0 5px 0 15px;
+}
+form.list textarea {
+	vertical-align: text-top;
+}
+
+span.cke_skin_kama { 
+	width: 680px;
+	display: inline-block; 
+	vertical-align: text-top;
+}
+
+.insert {
+    width: 300px;
+}

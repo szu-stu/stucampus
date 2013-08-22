@@ -31,16 +31,16 @@
             <ul class="block_menu">
                 {% load permission_check %}
                 {% if user|is_admin %}<li><a href="/manage/status">运行状态</a></li>{% endif %}
-                {% if perms.account.org_manager_list and user|is_admin %}<li><a href="/manage/accounts">用户管理</a></li>{% endif %}
-                {% if perms.organization.organization_view and user|is_admin %}<li><a href="/manage/organizations">组织管理</a></li>{% endif %}
+                {% if perms.account.org_manager_list and user|is_admin %}<li><a href="/manage/account/list">用户管理</a></li>{% endif %}
+                {% if perms.organization.organization_view and user|is_admin %}<li><a href="/manage/organization/list">组织管理</a></li>{% endif %}
                 {% if perms.magazine.magazine_manage and user|is_admin %}<li><a href="/manage/magazines">杂志管理</a></li>{% endif %}
                 {% if perms.news.news_post and user|is_admin %}<li><a href="#">新闻发布</a></li>{% endif %}
                 {% if perms.news.news_manage and user|is_admin %}<li><a href="#">新闻编审</a></li>{% endif %}
 
                 <!-- 以下为提供给社团组织的管理界面 -->
                 {% if perms.organization.organization_view and user|is_org_manage %}<li><a href="/manage/organization">组织概况</a></li>{% endif %}
-                {% if perms.infor.infor_view and user|is_org_manage %}<li><a href="/manage/infor">信息发布</a></li> {% endif %}
-                {% if perms.organization.organization_status_edit %}<li><a href="/organization/edit">修改概况</a></li>{% endif %}
+                {% if perms.infor.infor_list and user|is_org_manage %}<li><a href="/manage/infor/list">信息管理</a></li> {% endif %}
+                {% if perms.infor.infor_view and user|is_org_manage %}<li><a href="/manage/infor/post">信息发布</a></li> {% endif %}
                 {% if perms.infor.posted_infor_view %}<li><a href="#">已发信息</a></li>{% endif %}
                 {% if perms.infor.infor_post %}<li><a href="#">发布信息</a></li>{% endif %}
                 {% if perms.magazine.magazine_view %}<li><a href="/magazine">社团杂志</a></li>{% endif %}
