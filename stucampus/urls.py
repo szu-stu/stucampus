@@ -8,8 +8,8 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', 'stucampus.master.views.index', name='home'),
-    url(r'^aboutus$', 'stucampus.master.views.about_us', name='aboutus'),
+    url(r'^$', 'stucampus.master.views.front.index', name='home'),
+    url(r'^aboutus$', 'stucampus.master.views.front.about_us', name='aboutus'),
     url(r'^manage/', include('stucampus.master.urls', namespace='master')),
     url(r'^account/', include('stucampus.account.urls', namespace='account')),
     url(r'^organization/', include('stucampus.organization.urls',
@@ -22,4 +22,4 @@ urlpatterns = patterns(
 )
 
 
-handler404 = 'stucampus.master.views.page_not_found'
+handler404 = 'stucampus.master.views.front.page_not_found'

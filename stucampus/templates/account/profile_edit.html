@@ -7,6 +7,18 @@
                         <form method="put" action="/account/profile" id="changeInfor">
                         <ul>
                             <li>
+                                <label>真实姓名</label><span>：</span>
+                                <input type="text" name="true_name" class="element" value="{{ user.student.true_name }}" />
+                            </li>
+                            <li>
+                                <label>学院</label><span>：</span>
+                                <select name="college">
+                                    {% for college in college_list %}
+                                    <option value="{{college.0}}" {% if user.student.college == college.0 %}selected{% endif %}>{{college.1}}</option>
+                                    {% endfor %}
+                                </select>
+                            </li>
+                            <li>
                                 <label>昵称</label><span>：</span>
                                 <input type="text" name="screen_name" class="element" value="{{ user.student.screen_name }}" />
                             </li>
@@ -46,7 +58,7 @@
                                 <input type="text" name="szucard" maxlength="6" class="element" value="{{ user.student.szucard }}"/>
                             </li>
                             <li id="last">
-                                <input type="submit" value="确认修改" id="confirm_botton" onclick="confirm('确认修改用户资料？')" />
+                                <input type="submit" value="确认修改" id="confirm_botton" />
                             </li>
                         </ul>
                         </form>

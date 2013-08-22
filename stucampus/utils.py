@@ -1,4 +1,5 @@
 import json
+import urllib2
 
 from django.http import HttpResponse
 
@@ -32,7 +33,7 @@ def get_http_data(request):
     for datum in data:
         d = datum.split('=')
         d_name = d[0]
-        d_val = d[1]
+        d_val = urllib2.unquote(d[1])
         if d_name == 'is_male':
             if d_val == 'False':
                 d_val = False

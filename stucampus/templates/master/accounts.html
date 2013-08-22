@@ -1,0 +1,47 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'admin/account.css' | as_css }}
+{{ 'admin/account.js' | as_js }}
+<!--[if IE 6]>
+<style>
+ul li div{
+    display:inline;
+}
+</style>
+<![endif]-->
+{% endblock %}
+
+{% block content %}
+    <h2>用户管理  &amp; Manage Account</h2>
+    <ul>
+        <li>
+            <div style="width:20%">邮箱</div>
+            <div style="width:15%">姓名</div>
+            <div style="width:15%">昵称</div>
+            <div style="width:15%">学院</div>
+            <div style="width:10%">状态</div>
+            <div style="width:10%">操作</div>
+        </li>
+        {% load account_custom %}
+        {% for stu in students %}
+            <li>
+            <a href="/manage/account/{{stu.id}}">
+                <div style="width:20%">{{ stu.user.email }}</div>
+                <div style="width:15%">{{ stu.true_name | default:'暂无'}}</div>
+                <div style="width:15%">{{ stu.screen_name }}</div>
+                <div style="width:15%">{{ stu | get_college_name }}</div>
+                <div style="width:10%">{{ stu | get_student_status }}</div>
+            </a>
+                <div style="width:10%">
+                    <a href="javascript:void(0)" onclick="$S.Account.remove({{stu.id}})">删除</a> | <a href="javascript:void(0)" onclick="$S.Account.ban({{stu.id}})">禁用</a>
+                </div>
+            </li>
+
+             
+        {% endfor %}
+    </ul>
+    <div id="pageline">
+    </div>
+{% endblock %}
