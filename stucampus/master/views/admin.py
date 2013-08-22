@@ -33,7 +33,7 @@ def status(request):
 
 
 @user_passes_test(admin_group_check)
-def organization(request):
+def organizations(request):
     if request.method == 'GET':
         if not request.user.has_perm('organization.organization_list'):
             return HttpResponse(status=403)

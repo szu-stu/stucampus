@@ -1,0 +1,31 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'admin/organization.css' | as_css }}
+{{ 'admin/org_manage.js' | as_js }}
+<!--[if IE 6]>
+<style>
+ul li div{
+    display:inline;
+}
+</style>
+<![endif]-->
+{% endblock %}
+
+{% block content %}
+    <h2>组织管理 &amp; Manage Organization</h2>
+    <form id="organization-edit-form" method="post">
+    <div class="list">
+    <p><span>{{ organization.name }}</span> 组织资料： </p>
+    <ul>
+        <li>联系电话：<input type='text' class='width-400' value="{{ organization.phone }}" id='phone' name='phone' /></li>
+        <li>官方网站：<input type='text' class='width-400' maxlength="50" value='{{ organization.url }}' id='url' name='url' /></li>
+        <li>Logo：<input type='text' class='width-400' value='{{ organization.logo }}' id='logo' name='logo'></li>
+    </ul>
+    <input type="button" onclick="org_edit({{organization.id}})" value='修改' />
+    </div>
+    </form>
+    <div class="aside">
+    </div>
+{% endblock %}

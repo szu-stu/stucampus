@@ -1,0 +1,41 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'admin/organization.css' | as_css }}
+<!--[if IE 6]>
+<style>
+ul li div{
+    display:inline;
+}
+</style>
+<![endif]-->
+{% endblock %}
+
+{% block content %}
+    <h2>组织列表  &amp; List Organizations</h2>
+    <ul>
+        <li>
+            <div style="width:25%">组织名</div>
+            <div style="width:25%">组织主页</div>
+            <div style="width:25%">组织Logo</div>
+            <div style="width:20%">操作</div>
+        </li>
+        {% for org in organzations %}
+            <li>
+            <a href="/manage/organization/{{ org.id }}">
+                <div style="width:25%">{{ org.name }}</div>
+                <div style="width:25%">{{ org.url | default:'暂无'}}</div>
+                <div style="width:25%">{{ org.logo | default:'暂无' }}</div>
+            </a>
+                <div style="width:20%">
+                    <a href='/manage/organization/{{ org.id }}/edit'>编辑</a>
+                </div>
+            </li>
+
+             
+        {% endfor %}
+    </ul>
+    <div id="pageline">
+    </div>
+{% endblock %}

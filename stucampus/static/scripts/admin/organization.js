@@ -12,7 +12,7 @@
         var name = $("#name").val();
         var phone = $("#phone").val();
         $.ajax({
-            url: '/manage/organization',
+            url: '/manage/organizations',
             type: 'POST',
             dataType: 'json',
             data: {'name': name, 'phone': phone},
@@ -52,25 +52,6 @@
                 }
             }
         }); 
-    }
-
-    $S.Organization.removeManager = function(id) {
-        $.ajax({
-            url: '/organization-manager/' + id,
-            type: 'delete',
-            success:function(response)
-            {
-                if (response.success)
-                {
-                    $S.notice(response.message, 3000);
-                    setTimeout(function(){
-                        document.location.reload();
-                    }, 3000);
-                } else {
-                    $S.alert(response.message.join('、'), 3000);
-                }
-            }
-        });
     }
 
     $S.Organization.edit = function(id) {
@@ -115,39 +96,7 @@
                     setTimeout(function(){document.location.reload()});
                 }
             }
-        })}
-
-/*组织发布信息*/
-$(function(){
-	// 加载所见即所得编辑器
-	$('#content').ckeditor({
-		contentsCss: '/static/styles/news/editor.css',
-		height: '500px'
-	});
-
-	// 绑定表单 ajax
-	var elements = $('form#infor').find('input, textarea');
-	$('form#infor').ajaxForm({
-		beforeSubmit: function(){
-			elements.attr('disabled', 'disabled');
-		},
-		success: function(response){
-			var message = response.message.join("、");
-			if (response.success) {
-				$S.notice(message);
-				setTimeout(function(){
-					document.location = '/activity/new';
-				}, 3000);
-			} else {
-				$S.alert(message);
-				elements.delay(1000).removeAttr('disabled');
-			}
-		},
-		error: function() {
-			$S.error('发生技术问题，操作失败。请联系学子天地技术开发部');
-			elements.delay(2000).removeAttr('disabled');
-		}
-	});
-});
+        })
+    }
 })(jQuery, StuCampus);
 
