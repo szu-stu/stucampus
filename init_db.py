@@ -91,6 +91,9 @@ def run():
     infor_create = create_perm(codename='infor_create',
                                name='Create an information.',
                                content_type=infor_content_type)
+    infor_edit = create_perm(codename='infor_edit',
+                             name='Edit an information',
+                             content_type=infor_content_type)
     infor_del = create_perm(codename='infor_del',
                             name='Delete information',
                             content_type=infor_content_type)
