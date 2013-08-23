@@ -1,25 +1,47 @@
 <html>
     <head>
+        <style>
+            .message{
+                border: 1px solid blue;
+            }
+        </style>
     </head>
     <body>
         <table border="1">
-            <div>{{ empty }}</div>
             <tr>
+                <td>biaoge</td> 
+                <td>xingqi</td>
+                <td>xingqi</td>
+                <td>xingqi</td>
+                <td>xingqi</td>
+                <td>xingqi</td>
+                <td>xingqi</td>
+                <td>xingqi</td>
+            </tr>
+            <tr>
+                <td>morning</td>
             {% for list_each_day in table.morning %}
                 <td>
                 {% for msg in list_each_day %}
-                <div>
+                <div class="message">
                     {{ msg.title }}
+                    {{ msg.date_time }}
+                    {{ msg.place }}
                 </div>
                 {% endfor %}
                 </td>
             {% endfor %}
+            </tr>
 
+            <tr>
+                <td>afternoon</td>
             {% for list_each_day in table.afternoon %}
                 <td>
                 {% for msg in list_each_day %}
-                <div>
+                <div class="message">
                     {{ msg.title }}
+                    {{ msg.date_time }}
+                    {{ msg.place }}
                 </div>
                 {% endfor %}
                 </td>

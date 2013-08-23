@@ -14,7 +14,8 @@ class LectureMessage(django.db.models.Model):
     place = models.CharField(max_length=40)
 
     url_id = models.CharField(max_length=20, unique=True)
-    url_id_backup = models.CharField(max_length=20, unique=True)
+    url_id_backup = models.CharField(max_length=20, unique=True,
+                                     editable=False)
     is_check = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
 
@@ -45,6 +46,7 @@ class LectureMessage(django.db.models.Model):
     @staticmethod
     def creat_empty_table():
         message_table = {}
+        message_table['date'] = []
         message_table['morning'] = []
         message_table['afternoon'] = []
         for i in range(0, 7):
@@ -55,8 +57,8 @@ class LectureMessage(django.db.models.Model):
     @staticmethod
     def fill_in_table(message_table):
         messages_this_week = LectureMessage.get_messages_this_week()
-        checked_messages_this_week = messages_this_week.filter(is_check=True)
-        for msg in checked_messages_this_week:
+        needed = messages_this_week.filter(is_check=True, is_delete=False)
+        for msg in needed:
             if msg.date_time.hour < 12:
                 message_table['morning'][msg.date_time.weekday()].append(msg)
             else:
