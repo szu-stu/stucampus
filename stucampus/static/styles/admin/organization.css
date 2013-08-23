@@ -1,11 +1,12 @@
 /*组织管理*/
-ul{
+#layout_content ul{
     list-style:none;
 }
-ul li div{
+#layout_content ul li div{
     display:inline-block;
     text-align:center;
 }
+
 p {
     text-indent: 2.5em;
     width: 805px;
@@ -42,9 +43,9 @@ list input {
 .list ul li {
     height: 35px;
     padding: 0;
-	margin: 0px 20px;
-	line-height: 35px;
-	border-bottom: 1px dashed #ccc;
+    margin: 0px 20px;
+    line-height: 35px;
+    border-bottom: 1px dashed #ccc;
 }
 
 #main {
@@ -58,58 +59,58 @@ list input {
 }
 
 .addinput {
-    color:	#5E5E5E;
+    color:  #5E5E5E;
 }
 
 /*组织发布信息*/
 
 form ul {
-	list-style: none;
-	padding: 0;
-	margin: 20px 5px;
-	font-size: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 20px 5px;
+    font-size: 16px;
 }
 
 form ul li {
-	padding: 0;
-	margin: 10px 0 10px 0;
-	display: inline-block;
+    padding: 0;
+    margin: 10px 0 10px 0;
+    display: inline-block;
 }
 
 form ul li.buttons {
-	text-align: right;
-	width: 758px;
-	margin-top: 30px;
+    text-align: right;
+    width: 758px;
+    margin-top: 30px;
 }
 
 form ul li.buttons input.button {
-	padding: 10px 20px;
-	font-size: 15px;
-	font-family: "Microsoft Yahei";
+    padding: 10px 20px;
+    font-size: 15px;
+    font-family: "Microsoft Yahei";
 }
 
 form .element {
-	line-height: 20px;
-	font-size: 14px;
+    line-height: 20px;
+    font-size: 14px;
 }
 
 form input.element,
 form .element-box {
-	display: inline-block;
-	width: 160px;
-	width: 300px;
+    display: inline-block;
+    width: 160px;
+    width: 300px;
 }
 
 form textarea.element {
-	height: 100px;
-	width: 690px;
+    height: 100px;
+    width: 690px;
 }
 
 form label.head-label {
-	display: inline-block;
-	width: 5em;
-	text-align: left;
-	margin: 0;
+    display: inline-block;
+    width: 5em;
+    text-align: left;
+    margin: 0;
 }
 
 html .cke_skin_kama {

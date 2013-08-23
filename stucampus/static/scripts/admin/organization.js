@@ -12,7 +12,7 @@
         var name = $("#name").val();
         var phone = $("#phone").val();
         $.ajax({
-            url: '/manage/organizations',
+            url: '/manage/organization/list',
             type: 'POST',
             dataType: 'json',
             data: {'name': name, 'phone': phone},
