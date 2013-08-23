@@ -14,7 +14,7 @@ from stucampus.utils import spec_json
 def list(request):
     if request.method == 'GET':
         if not request.user.has_perm('account.student_list'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         students = Student.objects.all()
         return render(request, 'master/account_list.html',
                      {'students': students})
@@ -24,13 +24,13 @@ def list(request):
 def view(request, id):
     if request.method == 'GET':
         if not request.user.has_perm('account.student_list'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         student = get_object_or_404(Student, id=id)
         return render(request, 'master/account_view.html',
                      {'student': student})
     elif request.method == 'PUT':
         if not request.user.has_perm('account.student_edit'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         student = find_student(id)
         admin_group = Group.objects.get(name='StuCampus')
         if student is None:
@@ -45,7 +45,7 @@ def view(request, id):
         return spec_json(success, messages)
     elif request.method == 'DELETE':
         if not request.user.has_perm('account.student_del'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         student = find_student(id)
         admin_group = Group.objects.get(name='StuCampus')
         if student is None:

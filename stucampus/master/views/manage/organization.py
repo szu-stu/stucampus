@@ -16,7 +16,7 @@ from stucampus.utils import spec_json
 def list(request):
     if request.method == 'GET':
         if not request.user.has_perm('organization.organization_list'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         orgs = Organization.objects.all()
         normal_orgs = Organization.objects.filter(is_banned=False,
                                                   is_deleted=False)
@@ -27,7 +27,7 @@ def list(request):
         return render(request, 'master/organization_list.html', param)
     elif request.method == 'POST':
         if not request.user.has_perm('organization.organization_create'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         form = AddOrganizationForm(request.POST)
         if form.is_valid():
             data = request.POST
@@ -49,12 +49,12 @@ def list(request):
 def view(request, id):
     if request.method == 'GET':
         if not request.user.has_perm('organization.organization_view'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)
         return render(request, 'master/organization_view.html', {'org': org})
     elif request.method == 'DELETE':
         if not request.user.has_perm('organization.organization_del'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         org = find_organization(id)
         if org is None:
             success = False
@@ -71,7 +71,7 @@ def view(request, id):
 def manager(request, id):
     if request.method == 'POST':
         if not request.user.has_perm('account.org_manager_create'):
-            return HttpResponse(status=405)
+            return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)
         form = AddOrganizationManagerForm(request.POST)
         if form.is_valid():
