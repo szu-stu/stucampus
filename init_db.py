@@ -26,7 +26,7 @@ def run():
     student_list = create_perm(codename='student_list',
                                name='List all students',
                                content_type=student_model_content_type)
-    student_view = create_perm(codename='student_view', 
+    student_view = create_perm(codename='student_view',
                                name='View the information of student.',
                                content_type=student_model_content_type)
     student_create = create_perm(codename='student_create',
@@ -98,7 +98,6 @@ def run():
                             name='Delete information',
                             content_type=infor_content_type)
 
-
     admin_email = (raw_input('Please input the email of admin, '
                              'or leave blank for %s.\n' % DEFAULT_ADMIN_EMAIL)
                    or DEFAULT_ADMIN_EMAIL)
@@ -115,17 +114,14 @@ def run():
                                           password=admin_password)
     student = Student.objects.create(user=admin_user, screen_name=admin_name)
 
-
     admin_group = create_group(name='StuCampus')
     organization_manager_group = create_group(name='organization_manager')
     organization_member_group = create_group(name='organization_member')
 
-    
     org = Organization.objects.create(name='深圳大学学子天地')
     org.url = 'http://stu.szu.edu.cn'
     org.logo = '/static/images/layout/logo3.png'
     org.save()
-
 
     admin_user.groups.add(admin_group, organization_manager_group)
     org.managers.add(admin_user.student)

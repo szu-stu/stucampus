@@ -17,7 +17,7 @@ def list(request):
             return HttpResponse(status=403)
         students = Student.objects.all()
         return render(request, 'master/account_list.html',
-                     {'students': students})
+                      {'students': students})
 
 
 @user_passes_test(admin_group_check)
@@ -27,7 +27,7 @@ def view(request, id):
             return HttpResponse(status=403)
         student = get_object_or_404(Student, id=id)
         return render(request, 'master/account_view.html',
-                     {'student': student})
+                      {'student': student})
     elif request.method == 'PUT':
         if not request.user.has_perm('account.student_edit'):
             return HttpResponse(status=403)

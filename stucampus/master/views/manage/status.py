@@ -20,4 +20,3 @@ def status(request):
     param = {'python_version': python_version,
              'domain': domain}
     return render(request, 'master/status.html', param)
-

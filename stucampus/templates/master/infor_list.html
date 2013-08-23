@@ -21,7 +21,7 @@
     {% load infor_custom %}
     {% for infor in infors %}
         <li>
-            <a href="/manage/infor/{{infor.id}}">
+            <a href="/infor/{{infor.id}}">
                 <div style="width:20%">{{ infor.title }}</div>
                 <div style="width:10%">{{ infor.author.true_name  }}</div>
                 <div style="width:17%">{{ infor.organization.name }}</div>

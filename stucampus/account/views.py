@@ -118,7 +118,7 @@ def profile(request):
 def profile_edit(request):
     college_list = Student.COLLEGE_CHOICES
     return render(request, 'account/profile_edit.html',
-                 {'college_list': college_list})
+                  {'college_list': college_list})
 
 
 @login_required
