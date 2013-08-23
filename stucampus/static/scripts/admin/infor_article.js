@@ -3,7 +3,7 @@ $(function(){
 	$('#infor-content').ckeditor({
 		contentsCss: '/static/styles/news/editor.css',
 		height: '400px'
-	}); 
+	});
 	
 	// 绑定表单 ajax
 	var elements = $('#infor-form').find('input, textarea');
@@ -34,13 +34,38 @@ $(function(){
 	if (typeof $S.Infor == 'undefined') {
 		$S.Infor = {}; // 定义 StuCampus.Infor 命名空间
 	}
-	
+
+	$S.Infor.edit = function(id){
+        var title = $("#title").val();
+        var organization_id = $("#organization_id").val();
+        var content = $("#infor-content").val();
+        $.ajax({
+            url: '/manage/infor/' + id,
+            type: 'put',
+            dataType: 'json',
+            data: {'title': title,
+                   'organization_id': organization_id,
+                   'content': content},
+            success: function(response)
+            {
+                if (response.success)
+                {
+                    $S.notice('修改成功', 3000);
+                    setTimeout(function(){
+					   document.location.reload();
+				    }, 3000);
+                } else{
+                    $S.alert(response.messages.join('、'), 3000);
+                }
+            }
+        });
+    };
 	/**
 	 * 定义后台删除信息函数
 	 */
 	$S.Infor.remove = function(id){
 		$.ajax({
-			url: '/infor/' + id,
+			url: '/manage/infor/' + id,
 			type: 'delete',
 			statusCode: {
 				403: function() {
@@ -51,13 +76,13 @@ $(function(){
 				},
 				500: function() {
 					$S.error('发生技术问题，删除失败。请联系技术开发部');
-				}
+				} 
 			},
 			success: function() {
 				$('form#infor').find('input, textarea').attr('disabled', 'disabled');
 				$S.notice('信息删除成功', 3000);
 				setTimeout(function(){
-					document.location = '/admin/infor-list/';
+					document.location = '/manage/infor/list';
 				}, 3000);
 			}
 		});
