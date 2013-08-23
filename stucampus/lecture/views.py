@@ -6,7 +6,7 @@ from django.template import RequestContext
 
 from stucampus.lecture.models import LectureMessage
 from stucampus.spider.models import Announcement
-from stucampus.lecture.forms import LecureFormSet, get_formset
+from stucampus.lecture.forms import LectureForm, LecureFormSet, get_formset
 
 
 def index(request):
@@ -26,6 +26,17 @@ def submit(request):
             model.url_id = model.url_id_backup
             model.save()
     return HttpResponseRedirect(reverse('lecture:manage'))
+
+def add_new(request):
+    form = LectureForm()
+    if request.method == 'POST':
+        form = LectureForm(request.POST)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.url_id_backup = model.url_id
+            model.save()
+            return HttpResponseRedirect(reverse('lecture:manage'))
+    return render(request, 'lecture/add_new.html', {'form': form})
 
 def update(request):
     LectureMessage.get_message_from_announcement()

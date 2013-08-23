@@ -34,10 +34,13 @@ class Announcement(django.db.models.Model):
     def content_already_exist(self):
         return Announcement.objects.filter(url_id=self.url_id).exists()
 
-    @staticmethod
-    def update_announcements():
+    @classmethod
+    def update_announcements(cls):
         num_of_new_announcement = 0
+        url_id_of_lastest = cls.objects.reverse()[0]
         for a in get_announcement():
+            if a['url_id'] == url_id_of_lastest:
+                break
             announcement = Announcement(title=a['title'],
                                         publisher=a['publisher'],
                                         published_date=a['date'],
@@ -46,5 +49,4 @@ class Announcement(django.db.models.Model):
             if not announcement.content_already_exist():
                 announcement.save()
                 num_of_new_announcement += 1
-
         return num_of_new_announcement

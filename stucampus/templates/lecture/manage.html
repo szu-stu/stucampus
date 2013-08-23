@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <style>
+            input{
+                display: block;
+            }
+            .message{
+                width: 300px;
+                overflow: hidden;
+                margin-top: 30px;
+                padding: 30px;
+            }
+            .not_delete{
+                background-color: #789262;
+            }
+            .is_delete{
+                background-color: #c3272b;
+            }
+            .url{
+                margin: 5px;
+                text-align: center;
+                display: block;
+                background-color: #972932;
+                font-weight: 900;
+                width: 90px;
+                color: #000000;
+            }
+            .hidden{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="{% url 'lecture:add_new' %}">add lecture</a>
+        <a href="{% url 'lecture:index' %}">table</a>
+        <form method="POST" action="{% url 'lecture:submit' %}">
+        {% csrf_token %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+
+            {% if form.is_delete.value %}
+            <div class="message is_delete">
+            {% else %}
+            <div class="message not_delete">
+            {% endif %}
+                {{ form.id }}
+                <div>title{{ form.tilte.errors }}{{ form.title }}</div>
+                <div>place{{ form.place.errors }}{{ form.place }}</div>
+                <div>date time{{ form.date_time.errors }}{{ form.date_time }}</div>
+                <div class="hidden">{{ form.url_id }}</div>
+                <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">wang zhi</a>
+                <div>check{{ form.is_check }}</div>
+                <div>delete{{ form.is_delete }}</div>
+            </div>
+            {% endfor %}
+            <input type="submit" value="submit" />
+        </form>
+    </body>
+</html>

@@ -14,7 +14,8 @@ class LectureMessage(django.db.models.Model):
     place = models.CharField(max_length=40)
 
     url_id = models.CharField(max_length=20, unique=True)
-    url_id_backup = models.CharField(max_length=20, unique=True)
+    url_id_backup = models.CharField(max_length=20, unique=True,
+                                     editable=False)
     is_check = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
 
@@ -22,9 +23,12 @@ class LectureMessage(django.db.models.Model):
     def get_message_from_announcement(cls):
         count_get = 0
         repeat = 0
+        newest_url_id_in_db = cls.objects.reverse()[0].url_id
         for lm in get_lecture_messages():
+            if lm['url_id'] == newest_url_id_in_db:
+                break
             count_get += 1
-            lecture_message, created = cls.objects.get_or_create(
+            lecture_message, created = cls(
                                    title=lm['title'],
                                    date_time=lm['date_time'],
                                    place=lm['place'],
@@ -45,9 +49,14 @@ class LectureMessage(django.db.models.Model):
     @staticmethod
     def creat_empty_table():
         message_table = {}
+        message_table['date'] = []
         message_table['morning'] = []
         message_table['afternoon'] = []
+        now = timezone.now()
+        date_of_this_Monday = now - timedelta(days=now.weekday())
         for i in range(0, 7):
+            date = date_of_this_Monday + timedelta(days=i)
+            message_table['date'].append(date)
             message_table['morning'].append([])
             message_table['afternoon'].append([])
         return message_table
@@ -55,8 +64,8 @@ class LectureMessage(django.db.models.Model):
     @staticmethod
     def fill_in_table(message_table):
         messages_this_week = LectureMessage.get_messages_this_week()
-        checked_messages_this_week = messages_this_week.filter(is_check=True)
-        for msg in checked_messages_this_week:
+        needed = messages_this_week.filter(is_check=True, is_delete=False)
+        for msg in needed:
             if msg.date_time.hour < 12:
                 message_table['morning'][msg.date_time.weekday()].append(msg)
             else:
