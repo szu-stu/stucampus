@@ -1,6 +1,7 @@
 from django.conf.urls import url, patterns
 from stucampus.lecture.views import index, manage, submit, update, add_new
 
+
 urlpatterns = patterns(
     '',
     url(r'^$', index, name='index'),

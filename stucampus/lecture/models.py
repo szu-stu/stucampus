@@ -23,9 +23,12 @@ class LectureMessage(django.db.models.Model):
     def get_message_from_announcement(cls):
         count_get = 0
         repeat = 0
+        newest_url_id_in_db = cls.objects.reverse()[0].url_id
         for lm in get_lecture_messages():
+            if lm['url_id'] == newest_url_id_in_db:
+                break
             count_get += 1
-            lecture_message, created = cls.objects.get_or_create(
+            lecture_message, created = cls(
                                    title=lm['title'],
                                    date_time=lm['date_time'],
                                    place=lm['place'],
@@ -49,7 +52,11 @@ class LectureMessage(django.db.models.Model):
         message_table['date'] = []
         message_table['morning'] = []
         message_table['afternoon'] = []
+        now = timezone.now()
+        date_of_this_Monday = now - timedelta(days=now.weekday())
         for i in range(0, 7):
+            date = date_of_this_Monday + timedelta(days=i)
+            message_table['date'].append(date)
             message_table['morning'].append([])
             message_table['afternoon'].append([])
         return message_table

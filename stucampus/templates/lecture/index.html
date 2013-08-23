@@ -2,6 +2,7 @@
     <head>
         <style>
             .message{
+                display: block;
                 border: 1px solid blue;
             }
         </style>
@@ -9,25 +10,24 @@
     <body>
         <table border="1">
             <tr>
-                <td>biaoge</td> 
-                <td>xingqi</td>
-                <td>xingqi</td>
-                <td>xingqi</td>
-                <td>xingqi</td>
-                <td>xingqi</td>
-                <td>xingqi</td>
-                <td>xingqi</td>
+                <td>biaoge</td>
+                {% for date in table.date %}
+                <td>
+                <div class="date">
+                    {{ date|date:"D M d"}}
+                </div>
+                </td>
+                {% endfor %}
             </tr>
             <tr>
                 <td>morning</td>
             {% for list_each_day in table.morning %}
                 <td>
                 {% for msg in list_each_day %}
-                <div class="message">
-                    {{ msg.title }}
-                    {{ msg.date_time }}
-                    {{ msg.place }}
-                </div>
+                <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
+                {{ msg.title }}
+                {{ msg.place }}
+                </a>
                 {% endfor %}
                 </td>
             {% endfor %}
@@ -38,11 +38,10 @@
             {% for list_each_day in table.afternoon %}
                 <td>
                 {% for msg in list_each_day %}
-                <div class="message">
-                    {{ msg.title }}
-                    {{ msg.date_time }}
-                    {{ msg.place }}
-                </div>
+                <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
+                {{ msg.title }}
+                {{ msg.place }}
+                </a>
                 {% endfor %}
                 </td>
             {% endfor %}

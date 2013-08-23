@@ -19,6 +19,7 @@ urlpatterns = patterns(
                                      namespace='lost_and_found')),
     url(r'^lecture/', include('stucampus.lecture.urls',
                               namespace='lecture')),
+    url(r'^spider/', include('stucampus.spider.urls', namespace='spider')),
     url(r'^admin/', include(admin.site.urls)),
 )
 
