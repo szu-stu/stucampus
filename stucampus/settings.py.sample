@@ -1,7 +1,7 @@
 import os
 
 
-APP_ROOT = os.paht.abspath(os.path.dirname(os.path.realpaht(__file__)))
+APP_ROOT = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 
 
 # Django settings for stucampus project.
