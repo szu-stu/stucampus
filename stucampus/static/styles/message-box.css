@@ -1,0 +1,66 @@
+/**
+ * 对话框
+ */
+#message-box {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	z-index: 1000;
+	margin-left:-40%;
+	width: 80%;
+	padding:5px;
+	filter:alpha(Opacity=90);
+	-moz-opacity:0.9;
+	opacity: 0.9;
+	margin-top: 50px;
+}
+#message-box .message-content {
+	width: 80%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	margin: 0 auto;
+	box-shadow: 0 0 10px #999;
+}
+#message-box .message-content.notice {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #B5E5EF url(../images/admin/icn_alert_info.png) no-repeat;
+	background-position: 10px 10px;
+	border: 1px solid #77BACE;
+	color: #082B33;
+}
+#message-box .message-content.alert {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #F5F3BA url(../images/admin/icn_alert_warning.png) no-repeat;
+	background-position: 10px 10px;
+	border: 1px solid #C7A20D;
+	color: #796616;
+}
+#message-box .message-content.error {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #F3D9D9 url(../images/admin/icn_alert_error.png) no-repeat;
+	background-position: 10px 10px;
+	border: 1px solid #D20009;
+	color: #7B040F;
+}
+#message-box .message-content span.message-text {
+	margin: 0 2em;
+}
+#message-box {
+	overflow: hidden;
+}
+#message-box a.button {
+	color: inherit;
+	font-size: 12px;
+	float: right;
+	display: inline-block;
+	margin: 0 0.5em;
+}

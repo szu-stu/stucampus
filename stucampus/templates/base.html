@@ -9,7 +9,7 @@
     {% block htmltitle %}<title>深圳大学学子天地</title>{% endblock %}
     {% load html_tools %}
     <!--[if IE]>
-    {{ 'iefix.css' | as_css }}
+    {{ 'ie-fix.css' | as_css }}
     <![endif]-->
     {{ 'plugins/jquery.min.js' | as_js }}
     {{ 'plugins/jquery.tools.min.js' | as_js }}
@@ -20,6 +20,7 @@
     {{ 'layout.js' | as_js }}
     {{ 'style-fix.css' | as_css }}
     {{ 'base.css' | as_css }}
+    {{ 'message-box.css' | as_css }}
     {% block htmlhead %}
     {% endblock %}
 </head>
