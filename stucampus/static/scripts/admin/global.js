@@ -1,3 +1,18 @@
+(function($, $S){
+	$S.initEditor = function(textarea, height, css){
+		if (typeof height == 'undefined'){
+			height = '400px';
+		}
+		if (typeof css == 'undefined'){
+			css = '/static/styles/news/editor.css';
+		}
+		textarea.ckeditor({
+			contentsCss: css,
+			height: height,
+		});
+	}
+})(jQuery, StuCampus);
+
 // 为后台 tab 添加 class="current" 样式
 $(function(){
 	// 捕获当前 url 和 tab 的 url
