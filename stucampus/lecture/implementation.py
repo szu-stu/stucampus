@@ -55,5 +55,5 @@ def convert(announcement):
         date_time = ''
 
     dic = dict(title=title, place=place, date_time=date_time,
-             url_id=announcement.url_id)
+               url_id=announcement.url_id)
     return dic

@@ -8,11 +8,11 @@ from stucampus.spider.announcement_spider import get_announcement,\
 
 
 CATEGORY_CHOICES = (
-    ('学术', '学术'),
-    ('校园', '校园'),
-    ('行政', '行政'),
-    ('学工', '学工'),
-    ('教务', '教务'),
+    (u'学术', u'学术'),
+    (u'校园', u'校园'),
+    (u'行政', u'行政'),
+    (u'学工', u'学工'),
+    (u'教务', u'教务'),
     )
 
 
@@ -37,7 +37,7 @@ class Announcement(django.db.models.Model):
     @classmethod
     def update_announcements(cls):
         num_of_new_announcement = 0
-        latest_url_id_in_db = SpiderManager.get_lastest_url_id_in_db()
+        latest_url_id_in_db = SpiderManager.get_latest_url_id_in_db()
         for a in get_announcement():
             announcement = Announcement(title=a['title'],
                                         publisher=a['publisher'],
@@ -47,18 +47,18 @@ class Announcement(django.db.models.Model):
             if not announcement.content_already_exist():
                 announcement.save()
                 num_of_new_announcement += 1
-            elif a.url_id == latest_url_id_in_db:
+            elif a['url_id'] == latest_url_id_in_db:
                 break
         if num_of_new_announcement > 0:
-            SpiderManager.update_the_lastest_url_id_in_db(a.url_id)
+            SpiderManager.update_the_lastest_url_id_in_db(a['url_id'])
         return num_of_new_announcement
 
 
 class SpiderManager(django.db.models.Model):
-    lastest_url_id_in_db = models.CharField(max_length=20, default=None)
+    latest_url_id_in_db = models.CharField(max_length=20, default=None)
 
     @classmethod
-    def get_lastest_url_id_in_db(cls):
+    def get_latest_url_id_in_db(cls):
         sm_list = cls.objects.all()
         if sm_list:
             return sm_list[0].lastest_url_id_in_db
@@ -67,6 +67,7 @@ class SpiderManager(django.db.models.Model):
 
     @classmethod
     def update_the_lastest_url_id_in_db(cls, url_id):
-        the_only_one_object = cls.objects.all()[0].lastest_url_id_in_db
+        the_only_one_object, created = cls.objects.get_or_create(
+                   latest_url_id_in_db=cls.get_latest_url_id_in_db)
         the_only_one_object.url_id = url_id
         the_only_one_object.save()
