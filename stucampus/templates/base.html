@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<!DOCTYPE HTML>
 <html lang='zh-CN' xmlns='http://www.w3.org/1999/xhtml'> 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,10 +13,11 @@
     <![endif]-->
     {{ 'plugins/jquery.min.js' | as_js }}
     {{ 'plugins/jquery.tools.min.js' | as_js }}
-    {{ 'global.js' | as_js }}
-    {{ 'layout.js' | as_js }}
+    {{ 'plugins/jquery.form.js' | as_js}}
     {{ 'google-analystics.js' | as_js }}
     {{ 'ga.js' | as_js }}
+    {{ 'global.js' | as_js }}
+    {{ 'layout.js' | as_js }}
     {{ 'style-fix.css' | as_css }}
     {{ 'base.css' | as_css }}
     {% block htmlhead %}
@@ -34,7 +35,6 @@
                 <li><a href="/infor/">信息中心</a></li>
                 <li><a href="/magazine/szuyouth">校媒刊物</a></li>
                 <li><a href="http://stu.szu.edu.cn:8080/web/Service.aspx">服务专区</a></li>
-                <li><a href="/aboutus" >关于我们</a></li>
             </ul>
             <h1 class="stu-logo"><a href="/" title="深圳大学学子天地——荔园校园传媒资讯网" class="stu-logo">深圳大学学子天地</a></h1>
             <div class="header-bottom">
@@ -47,6 +47,7 @@
     
     {% block content %}
     {% endblock %}
+    
     <!-- 友情链接 Begin -->
     <!--
     <div class="central-container friendly-links">
@@ -59,13 +60,13 @@
     <div class="footer">
         <p>版权所有 &copy; 2001～2013  深圳大学学子天地  荔园校园传媒资讯网</p>
         <p>
+            <a href="/aboutus">关于我们</a>|
             <a href="/join">加入我们</a>|
             <a href="http://stu.szu.edu.cn/blog-dev/">开发团队</a>|
             <a href="http://weibo.com/stucampus">新浪微博</a>|
-            <a href="https://www.google.com/analytics/web/">流量统计</a>|
+            <a href="https://www.google.com/analytics/web/">流量统计</a>
         </p>
     </div>
     <!-- 页脚 End -->
-    <script type="text/javascript" src="http://pinglun.la/2298d3a9c46cf7ba6de814407813d0e3b3ce8d2b/cc.js?t=%E5%85%B1%E6%9C%89+%7Bcount%7D+%E6%9D%A1%E8%AF%84%E8%AE%BA&t0=&o=1" charset="utf-8"></script>
 </body>
 </html>

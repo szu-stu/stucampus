@@ -9,7 +9,7 @@
 {% block content %}
     <div class="page-center master-framework">
         <h2 class="top-second-header">用户登录</h2>
-        <form id="sign_in-form" method="post" class="large-element">
+        <form id="sign_in-form" method="post" action="/account/signin" class="large-element">
         {% csrf_token %}
             <ul>
                 <li>
@@ -22,16 +22,6 @@
                     <input type="password" class="textbox" id="password" name="password" />
                     <span class="comment">登录密码</span>
                 </li>
-                <!-- 
-                <li>
-                    <label class="label" for="captcha">验证码</label>
-                    <input type="textbox" class="textbox" id="captcha" name="captcha" />
-                    <span class="comment">图片上显示的字母和数字</span>
-                </li>
-                <li class="buttons">
-                    <img src="/captcha/" alt="验证码加载失败" title="看不清楚？点击更换！" onclick="reloadCaptcha(this)" />
-                </li>
-                 -->
                 <li class="buttons">
                     <input type="submit" class="button" value="登录" id="sign_in-btn" />
                     <input type="button" class="button" value="注册" id="sign_up-btn" /> 

@@ -9,7 +9,7 @@
 {% block content %}
     <div class="page-center master-framework">
         <h2 class="top-second-header">用户注册</h2>
-        <form id="sign_up-form" method="post" class="large-element">
+        <form id="sign_up-form" method="post" action="/account/signup" class="large-element">
         {% csrf_token %}
             <ul>
                 <li>
