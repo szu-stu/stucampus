@@ -7,7 +7,8 @@ class MatchError(Exception):
         self.text = text
         self.reg = reg
     def __str__(self):
-        return "can't match " + self.reg.encode('utf-8') + " in:\n" + self.text.encode('utf-8')
+        return "can't match " + self.reg.encode('utf-8') + " in:\n"\
+               + self.text.encode('utf-8')
 
 
 def get_html(url, code='utf-8'):

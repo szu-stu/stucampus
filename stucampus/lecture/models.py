@@ -9,9 +9,9 @@ from stucampus.lecture.implementation import get_lecture_messages
 
 class LectureMessage(django.db.models.Model):
 
-    title = models.CharField(max_length=100)
-    date_time = models.DateTimeField()
-    place = models.CharField(max_length=40)
+    title = models.CharField(max_length=100, blank=True)
+    date_time = models.DateTimeField(blank=True)
+    place = models.CharField(max_length=40, blank=True)
 
     url_id = models.CharField(max_length=20, unique=True)
     url_id_backup = models.CharField(max_length=20, unique=True,

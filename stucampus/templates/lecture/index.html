@@ -2,6 +2,7 @@
     <head>
         <style>
             .message{
+                margin-top: 20px;
                 display: block;
                 border: 1px solid blue;
             }
@@ -10,11 +11,11 @@
     <body>
         <table border="1">
             <tr>
-                <td>biaoge</td>
+                <td></td>
                 {% for date in table.date %}
                 <td>
                 <div class="date">
-                    {{ date|date:"D M d"}}
+                    {{ date|date:"D n d"}}
                 </div>
                 </td>
                 {% endfor %}

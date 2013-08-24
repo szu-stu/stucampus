@@ -37,10 +37,8 @@ class Announcement(django.db.models.Model):
     @classmethod
     def update_announcements(cls):
         num_of_new_announcement = 0
-        url_id_of_lastest = cls.objects.reverse()[0]
+        latest_url_id_in_db = SpiderManager.get_lastest_url_id_in_db()
         for a in get_announcement():
-            if a['url_id'] == url_id_of_lastest:
-                break
             announcement = Announcement(title=a['title'],
                                         publisher=a['publisher'],
                                         published_date=a['date'],
@@ -49,4 +47,26 @@ class Announcement(django.db.models.Model):
             if not announcement.content_already_exist():
                 announcement.save()
                 num_of_new_announcement += 1
+            elif a.url_id == latest_url_id_in_db:
+                break
+        if num_of_new_announcement > 0:
+            SpiderManager.update_the_lastest_url_id_in_db(a.url_id)
         return num_of_new_announcement
+
+
+class SpiderManager(django.db.models.Model):
+    lastest_url_id_in_db = models.CharField(max_length=20, default=None)
+
+    @classmethod
+    def get_lastest_url_id_in_db(cls):
+        sm_list = cls.objects.all()
+        if sm_list:
+            return sm_list[0].lastest_url_id_in_db
+        else:
+            return None
+
+    @classmethod
+    def update_the_lastest_url_id_in_db(cls, url_id):
+        the_only_one_object = cls.objects.all()[0].lastest_url_id_in_db
+        the_only_one_object.url_id = url_id
+        the_only_one_object.save()

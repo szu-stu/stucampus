@@ -9,12 +9,8 @@ def get_lecture_messages():
     lecture_announcements = find_lecture_announcement()
     lecture_messages = []
     for a in lecture_announcements:
-        try:
-            lecture_message_dict = convert(a)
-        except MatchError as e:
-            print e
-        else:
-            lecture_messages.append(lecture_message_dict)
+        lecture_message_dict = convert(a)
+        lecture_messages.append(lecture_message_dict)
     return lecture_messages
 
 
@@ -42,16 +38,21 @@ def is_about_lecture(content):
 def convert(announcement):
     content = announcement.get_content()
 
-    title = find_content_between_two_tags(u'报告题目：', r'',
-                                          content, r'.+')
-    place = find_content_between_two_tags(u'报告地点：', '\n', content)
-    r = r'\d{4}'+u'年'+r'\d{1,2}'+u'月'+r'\d{1,2}'
-    date = find_content_between_two_tags(u'报告时间：', u'日', content, r)
-    date = date.replace(u'年','-').replace(u'月','-')
-    r = r'\d{1,2}:\d{1,2}-\d{1,2}:\d{1,2}'
-    time = find_content_between_two_tags('', '', content, r)
-    time = time.split('-')[0]
-    date_time=date + ' ' + time
+    try:
+        title = find_content_between_two_tags(u'报告题目：', r'',
+                                              content, r'.+')
+        place = find_content_between_two_tags(u'报告地点：', '\n', content)
+        r = r'\d{4}'+u'年'+r'\d{1,2}'+u'月'+r'\d{1,2}'
+        date = find_content_between_two_tags(u'报告时间：', u'日', content, r)
+        date = date.replace(u'年','-').replace(u'月','-')
+        r = r'\d{1,2}:\d{1,2}-\d{1,2}:\d{1,2}'
+        time = find_content_between_two_tags('', '', content, r)
+        time = time.split('-')[0]
+        date_time=date + ' ' + time
+    except MatchError:
+        title = ''
+        place = ''
+        date_time = ''
 
     dic = dict(title=title, place=place, date_time=date_time,
              url_id=announcement.url_id)

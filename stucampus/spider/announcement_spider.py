@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 import re
 from django.db import IntegrityError
 
@@ -44,6 +45,7 @@ def extract_needed_text_into_dictionary(text):
         left_tag, right_tag = pattern
         attrs[attr] = find_content_between_two_tags(left_tag, right_tag, text)
 
+    attrs['is_sticky'] = '|置顶|' in text
     return attrs
 
 

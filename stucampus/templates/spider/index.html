@@ -1,0 +1,16 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <a href="{% url 'spider:update' %}">update</a>
+        <ul>       
+            {% for a in announcement_list %}
+            <li>
+            {{ a.title }}
+            {{ a.date_time }}
+            <a href="http://www.szu.edu.cn/board/view.asp?id={{ a.url_id }}">wangzhi</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
