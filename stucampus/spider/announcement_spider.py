@@ -17,11 +17,9 @@ needed_text_pattern = (
 def get_announcement():
     html = get_html('http://www.szu.edu.cn/board/', 'gbk')
     needed_text_list = re.findall(needed_text_pattern, html)
-    announcements = []   
-    for text_mixed_with_tags in needed_text_list:
+    for text_mixed_with_tags in needed_text_list.reverse():
         dic = extract_needed_text_into_dictionary(text_mixed_with_tags)
-        announcements.append(dic)
-    return announcements.reverse()
+        yield dic
 
 
 def extract_needed_text_into_dictionary(text):

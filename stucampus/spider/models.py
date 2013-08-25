@@ -37,7 +37,6 @@ class Announcement(django.db.models.Model):
     @classmethod
     def update_announcements(cls):
         num_of_new_announcement = 0
-        latest_url_id_in_db = SpiderManager.get_latest_url_id_in_db()
         for a in get_announcement():
             announcement = Announcement(title=a['title'],
                                         publisher=a['publisher'],
@@ -47,28 +46,6 @@ class Announcement(django.db.models.Model):
             if not announcement.content_already_exist():
                 announcement.save()
                 num_of_new_announcement += 1
-            elif a['url_id'] == latest_url_id_in_db:
+            elif not a['is_sticky']: 
                 break
-        # it ignore the case that announcement is sticky
-        if num_of_new_announcement > 0
-            SpiderManager.update_the_lastest_url_id_in_db(a['url_id'])
         return num_of_new_announcement
-
-
-class SpiderManager(django.db.models.Model):
-    latest_url_id_in_db = models.CharField(max_length=20, null=True)
-
-    @classmethod
-    def get_latest_url_id_in_db(cls):
-        sm_list = cls.objects.all()
-        if sm_list:
-            return sm_list[0].latest_url_id_in_db
-        else:
-            return None
-
-    @classmethod
-    def update_the_lastest_url_id_in_db(cls, url_id):
-        the_only_one_object, created = cls.objects.get_or_create(
-                   latest_url_id_in_db=cls.get_latest_url_id_in_db())
-        the_only_one_object.latest_url_id_in_db= url_id
-        the_only_one_object.save()
