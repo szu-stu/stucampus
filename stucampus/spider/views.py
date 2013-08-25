@@ -14,10 +14,10 @@ class AnnouncementList(generic.ListView):
 
 def update(request):
     num_of_update = Announcement.update_announcements()
-    urlid = SpiderManager.get_lastest_url_id_in_db()
+    urlid = SpiderManager.get_latest_url_id_in_db()
     if urlid != None:
-        lastest_title = Announcement.objects.get(url_id=urlid)
-        return HttpResponse(str(num_of_update)+lastest_title)
+        latest_title = Announcement.objects.get(url_id=urlid).title
+        return HttpResponse(str(num_of_update)+latest_title)
     else:
         return HttpResponse(str(num_of_update))
     #return HttpResponseRedirect(reverse('spider:index'))

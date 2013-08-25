@@ -23,12 +23,13 @@ def find_lecture_announcement():
             lecture_announcements.append(a)
     return lecture_announcements
 
+keywords = (u'报告题目',
+            u'报告地点',
+            u'报告时间',
+            u'报告会',
+            )
 
 def is_about_lecture(content):
-    keywords = (u'报告题目',
-                u'报告地点',
-                u'报告时间',
-                )
     for word in keywords:
         if word in content:
             return True

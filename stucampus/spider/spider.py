@@ -6,6 +6,9 @@ class MatchError(Exception):
     def __init__(self, text, reg):
         self.text = text
         self.reg = reg
+        message = "can't match :\n" + self.reg.encode('utf-8') + "\nin:\n"\
+               + self.text.encode('utf-8')
+        super(MatchError, self).__init__(message)
     def __str__(self):
         return "can't match " + self.reg.encode('utf-8') + " in:\n"\
                + self.text.encode('utf-8')
@@ -26,4 +29,3 @@ def find_content_between_two_tags(left_tag, right_tag,
 
 def delete(to_delete, text):
     return re.sub(to_delete, '', text)
-

@@ -23,7 +23,7 @@ class LectureMessage(django.db.models.Model):
     def get_message_from_announcement(cls):
         count_get = 0
         repeat = 0
-        newest_url_id_in_db = cls.objects.reverse()[0].url_id
+        newest_url_id_in_db = cls.get_latest_url_id_in_db()
         for lm in get_lecture_messages():
             if lm['url_id'] == newest_url_id_in_db:
                 break
@@ -79,3 +79,10 @@ class LectureMessage(django.db.models.Model):
         date_of_next_Monday = date_of_this_Monday + timedelta(days=7)
         return cls.objects.filter(date_time__gte=date_of_this_Monday,
                                   date_time__lt=date_of_next_Monday)
+
+    @classmethod
+    def get_latest_url_id_in_db(cls):
+        if cls.objects.all():
+            return cls.objects.reverse()[0]
+        else:
+            return None

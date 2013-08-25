@@ -2,23 +2,26 @@
 import re
 from django.db import IntegrityError
 
-from stucampus.spider.spider import get_html, delete,\
+from stucampus.spider.spider import get_html, delete, MatchError,\
                                     find_content_between_two_tags
 
-def get_announcement():
-    html = get_html('http://www.szu.edu.cn/board/', 'gbk')
-    needed_text_pattern = (
+
+needed_text_pattern = (
         r'<td align="center">\d+</td>'
         r'[\s\S]*?'
         r'<td align="center" style="font-size: 9pt">'
         r'\d{4}-\d{1,2}-\d{1,2}'
         r'</td>'
         )
-    needed_text_list = re.findall(needed_text_pattern, html)
 
+def get_announcement():
+    html = get_html('http://www.szu.edu.cn/board/', 'gbk')
+    needed_text_list = re.findall(needed_text_pattern, html)
+    announcements = []   
     for text_mixed_with_tags in needed_text_list:
         dic = extract_needed_text_into_dictionary(text_mixed_with_tags)
-        yield dic
+        announcements.append(dic)
+    return announcements.reverse()
 
 
 def extract_needed_text_into_dictionary(text):
@@ -51,7 +54,7 @@ def extract_needed_text_into_dictionary(text):
 
 def get_announcement_content(url_id):
     url = 'http://www.szu.edu.cn/board/view.asp?id=' + url_id
-    html = get_html(url, 'gbk')
+    html = get_html(url, code='gb2312')
     left_tag = (r'<td align=center height=30 style="font-size: 9pt">'
                 r'<font color=#808080>')
     right_tag = (r'<td height="50" align="right"><table border="0" ce'

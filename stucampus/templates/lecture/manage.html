@@ -33,6 +33,7 @@
     <body>
         <a href="{% url 'lecture:add_new' %}">add lecture</a>
         <a href="{% url 'lecture:index' %}">table</a>
+        <a href="{% url 'lecture:update' %}">update</a>
         <form method="POST" action="{% url 'lecture:submit' %}">
         {% csrf_token %}
             {{ formset.management_form }}
