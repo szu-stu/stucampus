@@ -2,9 +2,10 @@
     <head>
     </head>
     <body>
-        <form method="post" action="{% url 'activity:submit" %}>
+        <form method="post" action="{% url 'activity:add_message' %}">
             {% csrf_token %}
-            {{ form }}
+            {{ form.as_p }}
+            <input type="submit" value="submit"/>
         </form>
     </body>
 </html>

@@ -1,13 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
+from django.core.urlresolvers import reverse
 
 from stucampus.activity.models import ActivityMessage
-from stucampus.activity.forms import ActivityMessage, get_formset,\
+from stucampus.activity.forms import ActivityMessageForm, get_formset,\
                                      ActivityMessageFormSet
 
 def index(request):
     activities = ActivityMessage.get_activity_list()
-    return render_to_response('lecture/index.html', {'activities': activities})
+    return render_to_response('activity/index.html', {'activities': activities})
 
 
 def add_message(request):
@@ -17,12 +18,12 @@ def add_message(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('activity:index'))
-    return render(request, 'activity/add_message', {'form': form})
+    return render(request, 'activity/add_message.html', {'form': form})
 
 
 def manage(request):
     formset = get_formset()
-    return render(request, 'activity/manage/', {'formset': form})
+    return render(request, 'activity/manage.html', {'formset': formset})
 
 
 def submit(request):
@@ -30,4 +31,4 @@ def submit(request):
     for form in formset:
         if form.is_valid():
             form.save()
-    return HttpResponseRedirect(reverse('lecture:manage'))
+    return HttpResponseRedirect(reverse('activity:manage'))
