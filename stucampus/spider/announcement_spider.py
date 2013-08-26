@@ -17,6 +17,8 @@ needed_text_pattern = (
 def get_announcement():
     html = get_html('http://www.szu.edu.cn/board/', 'gbk')
     needed_text_list = re.findall(needed_text_pattern, html)
+    # reverse will return None when list is empty, try to find
+    # why needed_text_list is empty later
     for text_mixed_with_tags in needed_text_list.reverse():
         dic = extract_needed_text_into_dictionary(text_mixed_with_tags)
         yield dic
