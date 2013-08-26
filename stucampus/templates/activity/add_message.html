@@ -1,0 +1,10 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <form method="post" action="{% url 'activity:submit" %}>
+            {% csrf_token %}
+            {{ form }}
+        </form>
+    </body>
+</html>
