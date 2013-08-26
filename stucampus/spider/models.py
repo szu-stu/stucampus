@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 import django.db.models
+from django.db import IntegrityError
 
 from stucampus.custom.models import models
 from stucampus.spider.data_for_models import PUBLISHER_CHOICES
@@ -31,7 +32,7 @@ class Announcement(django.db.models.Model):
             self.save()
         return self.content
 
-    def content_already_exist(self):
+    def already_exist(self):
         return Announcement.objects.filter(url_id=self.url_id).exists()
 
     @classmethod
@@ -43,9 +44,9 @@ class Announcement(django.db.models.Model):
                                         published_date=a['date'],
                                         category=a['category'],
                                         url_id=a['url_id'])
-            if not announcement.content_already_exist():
+            if not announcement.already_exist():
                 announcement.save()
                 num_of_new_announcement += 1
-            elif not a['is_sticky']: 
+            elif not a['is_sticky']:
                 break
         return num_of_new_announcement

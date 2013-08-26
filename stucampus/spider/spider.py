@@ -27,5 +27,9 @@ def find_content_between_two_tags(left_tag, right_tag,
     return match.group('content')
 
 
+def delete_tag(text):
+    return delete(r'<.+?>', text)
+
+
 def delete(to_delete, text):
     return re.sub(to_delete, '', text)

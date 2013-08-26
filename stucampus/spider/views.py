@@ -16,3 +16,7 @@ def update(request):
     num_of_update = Announcement.update_announcements()
     return HttpResponse(str(num_of_update))
     #return HttpResponseRedirect(reverse('spider:index'))
+
+def delete(request):
+    Announcement.objects.all().delete()
+    return HttpResponseRedirect(reverse('spider:index'))

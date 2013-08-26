@@ -23,11 +23,13 @@ def find_lecture_announcement():
             lecture_announcements.append(a)
     return lecture_announcements
 
+
 keywords = (u'报告题目',
             u'报告地点',
             u'报告时间',
             u'报告会',
             )
+
 
 def is_about_lecture(content):
     for word in keywords:
@@ -45,11 +47,11 @@ def convert(announcement):
         place = find_content_between_two_tags(u'报告地点：', '\n', content)
         r = r'\d{4}'+u'年'+r'\d{1,2}'+u'月'+r'\d{1,2}'
         date = find_content_between_two_tags(u'报告时间：', u'日', content, r)
-        date = date.replace(u'年','-').replace(u'月','-')
+        date = date.replace(u'年', '-').replace(u'月', '-')
         r = r'\d{1,2}:\d{1,2}-\d{1,2}:\d{1,2}'
         time = find_content_between_two_tags('', '', content, r)
         time = time.split('-')[0]
-        date_time=date + ' ' + time
+        date_time = date + ' ' + time
     except MatchError:
         title = ''
         place = ''

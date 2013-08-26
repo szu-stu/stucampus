@@ -3,12 +3,14 @@ from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
 
 from stucampus.activity.models import ActivityMessage
-from stucampus.activity.forms import ActivityMessageForm, get_formset,\
-                                     ActivityMessageFormSet
+from stucampus.activity.forms import ActivityMessageForm, get_formset
+from stucampus.activity.forms import ActivityMessageFormSet
+
 
 def index(request):
     activities = ActivityMessage.get_activity_list()
-    return render_to_response('activity/index.html', {'activities': activities})
+    return render_to_response('activity/index.html',
+                              {'activities': activities})
 
 
 def add_message(request):

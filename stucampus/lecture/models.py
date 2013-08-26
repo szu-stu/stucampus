@@ -28,12 +28,11 @@ class LectureMessage(django.db.models.Model):
             if lm['url_id'] == newest_url_id_in_db:
                 break
             count_get += 1
-            lecture_message, created = cls(
-                                   title=lm['title'],
-                                   date_time=lm['date_time'],
-                                   place=lm['place'],
-                                   url_id=lm['url_id'],
-                                   url_id_backup=lm['url_id'])
+            lecture_message, created = cls(title=lm['title'],
+                                           date_time=lm['date_time'],
+                                           place=lm['place'],
+                                           url_id=lm['url_id'],
+                                           url_id_backup=lm['url_id'])
             if not created:
                 lecture_message.save()
             else:

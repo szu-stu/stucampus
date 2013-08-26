@@ -2,8 +2,8 @@
 import re
 from django.db import IntegrityError
 
-from stucampus.spider.spider import get_html, delete, MatchError,\
-                                    find_content_between_two_tags
+from stucampus.spider.spider import get_html, delete_tag, MatchError
+from stucampus.spider.spider import delete, find_content_between_two_tags
 
 
 needed_text_pattern = (
@@ -14,31 +14,31 @@ needed_text_pattern = (
         r'</td>'
         )
 
+
 def get_announcement():
     html = get_html('http://www.szu.edu.cn/board/', 'gbk')
     needed_text_list = re.findall(needed_text_pattern, html)
-    # reverse will return None when list is empty, try to find
-    # why needed_text_list is empty later
-    for text_mixed_with_tags in needed_text_list.reverse():
-        dic = extract_needed_text_into_dictionary(text_mixed_with_tags)
+    needed_text_list.reverse()
+    for text_mixed_with_tags in needed_text_list:
+        dic = extract_imformation_into_dictionary(text_mixed_with_tags)
         yield dic
 
 
-def extract_needed_text_into_dictionary(text):
+def extract_imformation_into_dictionary(text):
     attrs = {}
 
+    # get title
     left_tag, right_tag = (r'class=fontcolor3>', r'</a></td>')
     title = find_content_between_two_tags(left_tag, right_tag, text)
-    to_delete = (r'<font color=black>', r'</font>', r'<b>', r'</b>')
-    for pattern in to_delete:
-        title = delete(pattern, title)
+    delete_tag(title)
     attrs['title'] = title[1:] #delete the prefix point 
 
+    # get date
     left_tag, right_tag = (r'<td align="center" style="font-size: 9pt">',
                            r'</td>')
     attrs['date'] = find_content_between_two_tags(left_tag, right_tag, text,
                                                   r'\d{4}-\d{1,2}-\d{1,2}')
-
+    # get category url_id publisher
     patterns = {
         'category': (r'<td align="center" style="font-size: 9pt">', r'</td>'),
         'url_id': (r'<a href="view.asp\?id=', r'"'),
@@ -48,13 +48,14 @@ def extract_needed_text_into_dictionary(text):
         left_tag, right_tag = pattern
         attrs[attr] = find_content_between_two_tags(left_tag, right_tag, text)
 
+    # judge if it's sticky
     attrs['is_sticky'] = u'|置顶|' in text
     return attrs
 
 
 def get_announcement_content(url_id):
     url = 'http://www.szu.edu.cn/board/view.asp?id=' + url_id
-    html = get_html(url, code='gb2312')
+    html = get_html(url, code='gbk')
     left_tag = (r'<td align=center height=30 style="font-size: 9pt">'
                 r'<font color=#808080>')
     right_tag = (r'<td height="50" align="right"><table border="0" ce'
