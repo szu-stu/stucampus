@@ -2,55 +2,48 @@
 import re
 from django.db import IntegrityError
 
-from stucampus.spider.spider import get_html, delete_tag, MatchError
+from stucampus.spider.spider import get_html, get_etree, MatchError
 from stucampus.spider.spider import delete, find_content_between_two_tags
-
-needed_text_pattern = (r'<td align="center">\d+</td>'
-                       r'[\s\S]*?'
-                       r'<td align="center" style="font-size: 9pt">'
-                       r'\d{4}-\d{1,2}-\d{1,2}'
-                       r'</td>'
-                       )
 
 
 def get_announcement():
     html = get_html('http://www.szu.edu.cn/board/', 'gbk')
-    needed_text_list = re.findall(needed_text_pattern, html)
+    etree = get_etree(html)
+    elist = get_needed_element(etree)
 
     collect = []
-    for text_mixed_with_tags in needed_text_list:
-        dic = extract_imformation_into_dictionary(text_mixed_with_tags)
+    for element in elist:
+        dic = extract_imformation_into_dictionary(element)
         collect.append(dic)
     collect.reverse()
     return collect
 
 
-def extract_imformation_into_dictionary(text):
+def get_needed_element(etree):
+    path = ('/html/body/table/tr[2]/td/table/tr[3]/td/table'
+            '/tr[3]/td/table/tr[position()>2]')
+    return etree.xpath(path)
+
+
+def extract_imformation_into_dictionary(element):
     attrs = {}
 
-    # get title
-    left_tag, right_tag = (r'class=fontcolor3>', r'</a></td>')
-    title = find_content_between_two_tags(left_tag, right_tag, text)
-    title = delete_tag(title)
-    attrs['title'] = title[1:]  # delete the prefix point
+    attrs['date'] = element.xpath('td[6]/text()')[0]
+    attrs['publisher'] = element.xpath('td[3]/a/text()')[0]
+    attrs['category'] = element.xpath('td[2]/text()')[0]
 
-    # get date
-    left_tag, right_tag = (r'<td align="center" style="font-size: 9pt">',
-                           r'</td>')
-    attrs['date'] = find_content_between_two_tags(left_tag, right_tag, text,
-                                                  r'\d{4}-\d{1,2}-\d{1,2}')
-    # get category, url_id, publisher
-    patterns = {
-        'category': (r'<td align="center" style="font-size: 9pt">', r'</td>'),
-        'url_id': (r'<a href="view.asp\?id=', r'"'),
-        'publisher': (r"document.fsearch1.keyword.value='", r"'"),
-        }
-    for attr, pattern in patterns.iteritems():
-        left_tag, right_tag = pattern
-        attrs[attr] = find_content_between_two_tags(left_tag, right_tag, text)
+    attrs['title'] = ''.join(element.xpath('td[4]/*//text()'))
+    # sample: |置顶|·XXXXXXXXXXX or ·XXXXXXXXXXX
+    if u'|置顶|' in attrs['title']:
+        is_stikcy = True
+        attrs['title'] = attrs['title'][4:]
+    else:
+        is_stikcy = False
+    attrs['title'] = attrs['title'][1:]  # delete the point prefix '·'
 
-    # judge if it's sticky
-    attrs['is_sticky'] = u'|置顶|' in text
+    # sample: view.asp?id=262297
+    # [12:] to cut view.asp?id=
+    attrs['url_id'] = element.xpath('td[4]/a/@href')[0][12:]
     return attrs
 
 

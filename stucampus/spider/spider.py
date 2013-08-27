@@ -1,6 +1,6 @@
 import re
 from urllib2 import urlopen
-
+import lxml.html
 
 class MatchError(Exception):
 
@@ -20,6 +20,10 @@ class MatchError(Exception):
 
 def get_html(url, code='utf-8'):
     return urlopen(url).read().decode(code, 'ignore')
+
+
+def get_etree(html):
+    return lxml.html.fromstring(html)
 
 
 def find_content_between_two_tags(left_tag, right_tag,
