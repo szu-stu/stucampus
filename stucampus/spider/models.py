@@ -32,21 +32,24 @@ class Announcement(django.db.models.Model):
             self.save()
         return self.content
 
-    def already_exist(self):
-        return Announcement.objects.filter(url_id=self.url_id).exists()
-
     @classmethod
-    def update_announcements(cls):
-        num_of_new_announcement = 0
+    def get_new(cls):
+        num_of_new_get= 0
         for a in get_announcement():
+            if cls.already_exist(a['url_id']):
+                continue
             announcement = Announcement(title=a['title'],
                                         publisher=a['publisher'],
                                         published_date=a['date'],
                                         category=a['category'],
                                         url_id=a['url_id'])
-            if not announcement.already_exist():
+            try:
                 announcement.save()
-                num_of_new_announcement += 1
-            elif not a['is_sticky']:
-                break
-        return num_of_new_announcement
+                num_of_new_get += 1
+            except IntegrityError:
+                raise Exception('repeat saving:'+a['url_id']) 
+        return num_of_new_get
+
+    @classmethod
+    def already_exist(cls, to_check):
+        return Announcement.objects.filter(url_id=to_check).exists()

@@ -4,13 +4,28 @@
     <body>
         <a href="{% url 'spider:update' %}">update</a>
         <ul>       
-            {% for a in announcement_list %}
+            {% for a in page %}
             <li>
-            {{ a.title }}
-            {{ a.date_time }}
-            <a href="http://www.szu.edu.cn/board/view.asp?id={{ a.url_id }}">wangzhi</a>
+            {{ a.published_date|date:"D n d"}}
+            <a href="http://www.szu.edu.cn/board/view.asp?id={{ a.url_id }}">
+                {{ a.title }}
+            </a>
             </li>
             {% endfor %}
         </ul>
+
+            <a href="{% url 'spider:index' %}"> home page </a>&nbsp
+
+            {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}"> last page </a>
+            {% endif %}
+
+            <span> {{ page.number }} </span>
+
+            {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}"> next page </a>
+            {% endif %}
+
+            <a href="?page={{ page.paginator.num_pages }}"> end page </a>
     </body>
 </html>

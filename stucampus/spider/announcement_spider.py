@@ -5,7 +5,6 @@ from django.db import IntegrityError
 from stucampus.spider.spider import get_html, delete_tag, MatchError
 from stucampus.spider.spider import delete, find_content_between_two_tags
 
-
 needed_text_pattern = (
         r'<td align="center">\d+</td>'
         r'[\s\S]*?'
@@ -18,10 +17,13 @@ needed_text_pattern = (
 def get_announcement():
     html = get_html('http://www.szu.edu.cn/board/', 'gbk')
     needed_text_list = re.findall(needed_text_pattern, html)
-    needed_text_list.reverse()
+
+    collect = []
     for text_mixed_with_tags in needed_text_list:
         dic = extract_imformation_into_dictionary(text_mixed_with_tags)
-        yield dic
+        collect.append(dic)
+    collect.reverse()
+    return collect
 
 
 def extract_imformation_into_dictionary(text):
@@ -30,7 +32,7 @@ def extract_imformation_into_dictionary(text):
     # get title
     left_tag, right_tag = (r'class=fontcolor3>', r'</a></td>')
     title = find_content_between_two_tags(left_tag, right_tag, text)
-    delete_tag(title)
+    title = delete_tag(title)
     attrs['title'] = title[1:] #delete the prefix point 
 
     # get date
@@ -38,7 +40,7 @@ def extract_imformation_into_dictionary(text):
                            r'</td>')
     attrs['date'] = find_content_between_two_tags(left_tag, right_tag, text,
                                                   r'\d{4}-\d{1,2}-\d{1,2}')
-    # get category url_id publisher
+    # get category, url_id, publisher
     patterns = {
         'category': (r'<td align="center" style="font-size: 9pt">', r'</td>'),
         'url_id': (r'<a href="view.asp\?id=', r'"'),
