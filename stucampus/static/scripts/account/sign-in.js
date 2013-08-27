@@ -1,7 +1,7 @@
 $(function(){
-    $S.ajaxForm($('#sign_in-form'));
+    $S.ajaxForm($('#sign-in-form'));
 
-    $('#sign_up-btn').click(function(){
+    $('#sign-up-btn').click(function(){
         document.location = '/account/signup';
     });
 

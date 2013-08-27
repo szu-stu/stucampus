@@ -3,13 +3,13 @@
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'account/signup.css' | as_css }}
-    {{ 'account/sign_up.js' | as_js }}
+    {{ 'account/sign-up.js' | as_js }}
 {% endblock %}
 
 {% block content %}
     <div class="page-center master-framework">
         <h2 class="top-second-header">用户注册</h2>
-        <form id="sign_up-form" method="post" action="/account/signup" class="large-element">
+        <form id="sign-up-form" method="post" action="/account/signup" class="large-element">
         {% csrf_token %}
             <ul>
                 <li>

@@ -19,7 +19,7 @@ def sign_in(request):
         return HttpResponseRedirect('/')
     if request.method == 'GET':
         form = SignInForm()
-        return render(request, 'account/sign_in.html', {'form': form})
+        return render(request, 'account/sign-in.html', {'form': form})
     elif request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():
@@ -60,7 +60,7 @@ def sign_up(request):
         return HttpResponseRedirect('/')
     if request.method == 'GET':
         form = SignUpForm()
-        return render(request, 'account/sign_up.html', {'form': form})
+        return render(request, 'account/sign-up.html', {'form': form})
     elif request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -122,7 +122,7 @@ def profile(request):
 @login_required
 def profile_edit(request):
     college_list = Student.COLLEGE_CHOICES
-    return render(request, 'account/profile_edit.html',
+    return render(request, 'account/profile-edit.html',
                   {'college_list': college_list})
 
 

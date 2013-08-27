@@ -3,13 +3,13 @@
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'account/signup.css' | as_css }}
-    {{ 'account/sign_in.js' | as_js}}
+    {{ 'account/sign-in.js' | as_js}}
 {% endblock %}
 
 {% block content %}
     <div class="page-center master-framework">
         <h2 class="top-second-header">用户登录</h2>
-        <form id="sign_in-form" method="post" action="/account/signin" class="large-element">
+        <form id="sign-in-form" method="post" action="/account/signin" class="large-element">
         {% csrf_token %}
             <ul>
                 <li>
@@ -23,8 +23,8 @@
                     <span class="comment">登录密码</span>
                 </li>
                 <li class="buttons">
-                    <input type="submit" class="button" value="登录" id="sign_in-btn" />
-                    <input type="button" class="button" value="注册" id="sign_up-btn" /> 
+                    <input type="submit" class="button" value="登录" id="sign-in-btn" />
+                    <input type="button" class="button" value="注册" id="sign-up-btn" /> 
                 </li>
             </ul>
         </form>
