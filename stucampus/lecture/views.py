@@ -5,7 +5,6 @@ from django.views import generic
 from django.template import RequestContext
 
 from stucampus.lecture.models import LectureMessage
-from stucampus.spider.models import Announcement
 from stucampus.lecture.forms import LectureForm, LecureFormSet, get_formset
 
 
@@ -24,9 +23,9 @@ def submit(request):
     formset = LecureFormSet(request.POST)
     for form in formset:
         if form.is_valid():
-            model = form.save(commit=False)
-            model.url_id = model.url_id_backup
-            model.save()
+            lecture_message = form.save(commit=False)
+            lecture_message.url_id = lecture_message.url_id_backup
+            lecture_message.save()
     return HttpResponseRedirect(reverse('lecture:manage'))
 
 
@@ -35,13 +34,20 @@ def add_new(request):
     if request.method == 'POST':
         form = LectureForm(request.POST)
         if form.is_valid():
-            model = form.save(commit=False)
-            model.url_id_backup = model.url_id
-            model.save()
+            lecture_message = form.save(commit=False)
+            lecture_message.url_id_backup = lecture_message.url_id
+            lecture_message.save()
             return HttpResponseRedirect(reverse('lecture:manage'))
     return render(request, 'lecture/add_new.html', {'form': form})
 
 
+# just used for debug
 def update(request):
     LectureMessage.get_message_from_announcement()
+    return HttpResponseRedirect(reverse('lecture:manage'))
+
+
+# just used for debug
+def delete(request):
+    LectureMessage.objects.all().delete()
     return HttpResponseRedirect(reverse('lecture:manage'))

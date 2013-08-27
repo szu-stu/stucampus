@@ -22,22 +22,18 @@ class LectureMessage(django.db.models.Model):
     @classmethod
     def get_message_from_announcement(cls):
         count_get = 0
-        repeat = 0
-        newest_url_id_in_db = cls.get_latest_url_id_in_db()
+        stop_mark = cls.get_latest_url_id_in_db()
         for lm in get_lecture_messages():
-            if lm['url_id'] == newest_url_id_in_db:
+            if lm['url_id'] == stop_mark:
                 break
             count_get += 1
-            lecture_message, created = cls(title=lm['title'],
-                                           date_time=lm['date_time'],
-                                           place=lm['place'],
-                                           url_id=lm['url_id'],
-                                           url_id_backup=lm['url_id'])
-            if not created:
-                lecture_message.save()
-            else:
-                repeat += 1
-        return (count_get, repeat)
+            lecture_message = cls(title=lm['title'],
+                                  date_time=lm['date_time'],
+                                  place=lm['place'],
+                                  url_id=lm['url_id'],
+                                  url_id_backup=lm['url_id'])
+            lecture_message.save()
+        return count_get
 
     @classmethod
     def generate_messages_table(cls):
@@ -82,6 +78,6 @@ class LectureMessage(django.db.models.Model):
     @classmethod
     def get_latest_url_id_in_db(cls):
         if cls.objects.all():
-            return cls.objects.reverse()[0]
+            return cls.objects.reverse()[0].url_id
         else:
             return None
