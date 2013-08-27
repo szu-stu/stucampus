@@ -17,9 +17,10 @@ def get_publisher():
     for msg_mixed_with_tags in all_needed_list:
         row_text = find_content_between_two_tags(left_tag, right_tag,
                                                  msg_mixed_with_tags)
-        row_text = row_text[1:] # delete the prefix point
+        row_text = row_text[1:]  # delete the prefix point
         publisher_list.append(row_text)
     return publisher_list
+
 
 def create_choice_for_model(publisher_list):
     filename = 'data_for_models.py'
@@ -28,7 +29,7 @@ def create_choice_for_model(publisher_list):
     add_line_to_file(filename, u'#produced by publiser_spider.py')
     add_line_to_file(filename, u'PUBLISHER_CHOICES = (')
     for p in publisher_list:
-        add_line_to_file(filename, u"    ('%s', '%s'),"%(p,p))
+        add_line_to_file(filename, u"    ('%s', '%s')," % (p, p))
     add_line_to_file(filename, u')')
 
 

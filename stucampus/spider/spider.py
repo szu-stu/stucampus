@@ -3,12 +3,16 @@ from urllib2 import urlopen
 
 
 class MatchError(Exception):
+
     def __init__(self, text, reg):
         self.text = text
         self.reg = reg
-        message = "can't match :\n" + self.reg.encode('utf-8') + "\nin:\n"\
-               + self.text.encode('utf-8')
+        message = "can't match :\n"
+        message += self.reg.encode('utf-8')
+        message += "\nin:\n"
+        message += self.text.encode('utf-8')
         super(MatchError, self).__init__(message)
+
     def __str__(self):
         return "can't match " + self.reg.encode('utf-8') + " in:\n"\
                + self.text.encode('utf-8')

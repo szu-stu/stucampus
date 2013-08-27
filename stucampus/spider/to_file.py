@@ -1,5 +1,5 @@
 # The following 3 function is just used to debug
-def add_line_to_file(filename,string):
+def add_line_to_file(filename, string):
     with open(filename, 'a') as f:
         f.write((string+'\n').encode('utf-8'))
 

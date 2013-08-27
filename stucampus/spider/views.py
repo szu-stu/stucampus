@@ -10,7 +10,7 @@ from stucampus.spider.models import Announcement
 def index(request):
     messages = Announcement.objects.order_by('published_date').reverse()
     paginator = Paginator(messages, 5)
-    page_num = request.GET.get('page')	
+    page_num = request.GET.get('page')
     try:
         current_page = paginator.page(page_num)
     except PageNotAnInteger:

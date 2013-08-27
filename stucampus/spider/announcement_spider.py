@@ -5,13 +5,12 @@ from django.db import IntegrityError
 from stucampus.spider.spider import get_html, delete_tag, MatchError
 from stucampus.spider.spider import delete, find_content_between_two_tags
 
-needed_text_pattern = (
-        r'<td align="center">\d+</td>'
-        r'[\s\S]*?'
-        r'<td align="center" style="font-size: 9pt">'
-        r'\d{4}-\d{1,2}-\d{1,2}'
-        r'</td>'
-        )
+needed_text_pattern = (r'<td align="center">\d+</td>'
+                       r'[\s\S]*?'
+                       r'<td align="center" style="font-size: 9pt">'
+                       r'\d{4}-\d{1,2}-\d{1,2}'
+                       r'</td>'
+                       )
 
 
 def get_announcement():
@@ -33,7 +32,7 @@ def extract_imformation_into_dictionary(text):
     left_tag, right_tag = (r'class=fontcolor3>', r'</a></td>')
     title = find_content_between_two_tags(left_tag, right_tag, text)
     title = delete_tag(title)
-    attrs['title'] = title[1:] #delete the prefix point 
+    attrs['title'] = title[1:]  # delete the prefix point
 
     # get date
     left_tag, right_tag = (r'<td align="center" style="font-size: 9pt">',

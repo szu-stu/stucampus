@@ -4,8 +4,8 @@ from django.db import IntegrityError
 
 from stucampus.custom.models import models
 from stucampus.spider.data_for_models import PUBLISHER_CHOICES
-from stucampus.spider.announcement_spider import get_announcement,\
-                                                 get_announcement_content
+from stucampus.spider.announcement_spider import get_announcement
+from stucampus.spider.announcement_spider import get_announcement_content
 
 
 CATEGORY_CHOICES = (
@@ -18,7 +18,7 @@ CATEGORY_CHOICES = (
 
 
 class Announcement(django.db.models.Model):
-    
+
     url_id = models.CharField(max_length=20, unique=True)
     title = models.CharField(max_length=40)
     published_date = models.DateField()
@@ -34,7 +34,7 @@ class Announcement(django.db.models.Model):
 
     @classmethod
     def get_new(cls):
-        num_of_new_get= 0
+        num_of_new_get = 0
         for a in get_announcement():
             if cls.already_exist(a['url_id']):
                 continue
@@ -47,7 +47,7 @@ class Announcement(django.db.models.Model):
                 announcement.save()
                 num_of_new_get += 1
             except IntegrityError:
-                raise Exception('repeat saving:'+a['url_id']) 
+                raise Exception('repeat saving:'+a['url_id'])
         return num_of_new_get
 
     @classmethod
