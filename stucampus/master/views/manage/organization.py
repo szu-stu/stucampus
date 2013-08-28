@@ -24,7 +24,7 @@ def list(request):
         deleted_orgs = Organization.objects.filter(is_deleted=True)
         param = {'orgs': orgs, 'normal_orgs': normal_orgs,
                  'baned_orgs': baned_orgs, 'deleted_orgs': deleted_orgs}
-        return render(request, 'master/organization_list.html', param)
+        return render(request, 'master/organization-list.html', param)
     elif request.method == 'POST':
         if not request.user.has_perm('organization.organization_create'):
             return HttpResponse(status=403)
@@ -51,7 +51,7 @@ def view(request, id):
         if not request.user.has_perm('organization.organization_view'):
             return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)
-        return render(request, 'master/organization_view.html', {'org': org})
+        return render(request, 'master/organization-view.html', {'org': org})
     elif request.method == 'DELETE':
         if not request.user.has_perm('organization.organization_del'):
             return HttpResponse(status=403)

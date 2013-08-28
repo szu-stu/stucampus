@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from stucampus.account.services import find_student
 from stucampus.account.models import Student
 from stucampus.custom.permission import admin_group_check
-from stucampus.utils import spec_json
+from stucampus.utils import spec_json, get_http_data
 
 
 @user_passes_test(admin_group_check)
@@ -16,8 +16,8 @@ def list(request):
         if not request.user.has_perm('account.student_list'):
             return HttpResponse(status=403)
         students = Student.objects.all()
-        return render(request, 'master/account_list.html',
-                     {'students': students})
+        return render(request, 'master/account-list.html',
+                      {'students': students})
 
 
 @user_passes_test(admin_group_check)
@@ -26,11 +26,14 @@ def view(request, id):
         if not request.user.has_perm('account.student_list'):
             return HttpResponse(status=403)
         student = get_object_or_404(Student, id=id)
-        return render(request, 'master/account_view.html',
-                     {'student': student})
+        return render(request, 'master/account-view.html',
+                      {'student': student})
     elif request.method == 'PUT':
         if not request.user.has_perm('account.student_edit'):
             return HttpResponse(status=403)
+        data = get_http_data(request)
+        if data['is_ban'] is not True:
+            return HttpResponse(status=405)
         student = find_student(id)
         admin_group = Group.objects.get(name='StuCampus')
         if student is None:

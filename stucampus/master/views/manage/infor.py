@@ -16,7 +16,7 @@ def list(request):
         if not request.user.has_perm('infor.infor_list'):
             return HttpResponse(status=403)
         infors = Infor.objects.all()
-        return render(request, 'master/infor_list.html', {'infors': infors})
+        return render(request, 'master/infor-list.html', {'infors': infors})
 
 
 @user_passes_test(admin_group_check)
@@ -26,7 +26,7 @@ def post(request):
             return HttpResponse(status=403)
         else:
             orgs = request.user.student.orgs_as_manager.all()
-            return render(request, 'master/infor_post.html', {'orgs': orgs})
+            return render(request, 'master/infor-post.html', {'orgs': orgs})
     elif request.method == 'POST':
         if not request.user.has_perm('infor.infor_create'):
             return HttpResponse(status=403)
@@ -57,7 +57,7 @@ def infor(request, id):
         else:
             orgs = request.user.student.orgs_as_manager.all()
             infor = get_object_or_404(Infor, id=id)
-            return render(request, 'master/infor_post.html',
+            return render(request, 'master/infor-post.html',
                           {'infor': infor, 'orgs': orgs})
     elif request.method == 'DELETE':
         if not request.user.has_perm('infor.infor_del'):
