@@ -1,4 +1,18 @@
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import Group
+from django.contrib.auth import REDIRECT_FIELD_NAME
+
+
+def guest_or_redirect(function=None):
+    actual_decorator = user_passes_test(
+        lambda u: not u.is_authenticated(),
+        login_url='/',
+        redirect_field_name=None
+    )
+    if function:
+        return actual_decorator(function)
+    return actual_decorator
 
 
 def admin_group_check(user):

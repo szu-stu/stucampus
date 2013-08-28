@@ -1,26 +1,30 @@
 #-*- coding: utf-8
 from datetime import datetime
 
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.views.generic import View
+from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from stucampus.utils import spec_json, get_client_ip, get_http_data
+from stucampus.custom.permission import guest_or_redirect
 from stucampus.account.models import Student
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
 from stucampus.account.services import find_by_email, student_is_exist
 
 
-def sign_in(request):
-    if request.user.is_authenticated() and request.method != 'DELETE':
-        return HttpResponseRedirect('/')
-    if request.method == 'GET':
+class SignIn(View):
+
+    @method_decorator(guest_or_redirect)
+    def get(self, request):
         form = SignInForm()
         return render(request, 'account/sign-in.html', {'form': form})
-    elif request.method == 'POST':
+
+    @method_decorator(guest_or_redirect)
+    def post(self, request):
         form = SignInForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
@@ -47,21 +51,24 @@ def sign_in(request):
         return spec_json(success, messages)
 
 
-def sign_out(request):
-    if request.method == 'POST':
+class SignOut(View):
+
+    def post(self, request):
         logout(request)
         success = True
         messages = [u'退出成功']
         return spec_json(success, messages)
 
 
-def sign_up(request):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('/')
-    if request.method == 'GET':
+class SignUp(View):
+
+    @method_decorator(guest_or_redirect)
+    def get(self, request):
         form = SignUpForm()
         return render(request, 'account/sign-up.html', {'form': form})
-    elif request.method == 'POST':
+
+    @method_decorator(guest_or_redirect)
+    def post(self, request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
@@ -89,12 +96,14 @@ def sign_up(request):
         return spec_json(success, messages)
 
 
-def profile(request):
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/account/signin')
-    if request.method == 'GET':
+class Profile(View):
+
+    @method_decorator(login_required)
+    def get(self, request):
         return render(request, 'account/profile.html')
-    elif request.method == 'PUT':
+
+    @method_decorator(login_required)
+    def post(self, request):
         data = get_http_data(request)
         form = ProfileEditForm(data)
         if form.is_valid():
@@ -119,18 +128,23 @@ def profile(request):
         return spec_json(success, messages)
 
 
-@login_required
-def profile_edit(request):
-    college_list = Student.COLLEGE_CHOICES
-    return render(request, 'account/profile-edit.html',
-                  {'college_list': college_list})
+class ProfileEdit(View):
+
+    @method_decorator(login_required)
+    def get(self, request):
+        college_list = Student.COLLEGE_CHOICES
+        return render(request, 'account/profile-edit.html',
+                      {'college_list': college_list})
 
 
-@login_required
-def password(request):
-    if request.method == 'GET':
+class Password(View):
+
+    @method_decorator(login_required)
+    def get(self, request):
         return render(request, 'account/password.html')
-    elif request.method == 'PUT':
+
+    @method_decorator(login_required)
+    def post(self, request):
         data = get_http_data(request)
         form = PasswordForm(data)
         if form.is_valid():
