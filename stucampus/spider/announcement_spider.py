@@ -26,38 +26,32 @@ def get_needed_element(etree):
 
 
 def extract_imformation_into_dictionary(element):
-    attrs = {}
+    date = element.xpath('td[6]/text()')[0]
+    publisher = element.xpath('td[3]/a/text()')[0]
+    category = element.xpath('td[2]/text()')[0]
 
-    attrs['date'] = element.xpath('td[6]/text()')[0]
-    attrs['publisher'] = element.xpath('td[3]/a/text()')[0]
-    attrs['category'] = element.xpath('td[2]/text()')[0]
-
-    attrs['title'] = ''.join(element.xpath('td[4]/*//text()'))
-    # sample: |置顶|·XXXXXXXXXXX or ·XXXXXXXXXXX
-    if u'|置顶|' in attrs['title']:
+    title = ''.join(element.xpath('td[4]/*//text()'))
+    # sample:    |置顶|·XXXXXXXXXXX
+    #         or ·XXXXXXXXXXX
+    if u'|置顶|' in title:
         is_stikcy = True
-        attrs['title'] = attrs['title'][4:]
+        title = title[4:]
     else:
         is_stikcy = False
-    attrs['title'] = attrs['title'][1:]  # delete the point prefix '·'
+    title = title[1:]  # delete the point prefix '·'
 
     # sample: view.asp?id=262297
     # [12:] to cut view.asp?id=
-    attrs['url_id'] = element.xpath('td[4]/a/@href')[0][12:]
-    return attrs
+    url_id = element.xpath('td[4]/a/@href')[0][12:]
+    return  dict(title=title, date=date, publisher=publisher,
+                 category=category, is_stikcy=is_stikcy, url_id=url_id)
 
 
 def get_announcement_content(url_id):
     url = 'http://www.szu.edu.cn/board/view.asp?id=' + url_id
     html = get_html(url, code='gbk')
-    left_tag = (r'<td align=center height=30 style="font-size: 9pt">'
-                r'<font color=#808080>')
-    right_tag = (r'<td height="50" align="right"><table border="0" ce'
-                 r'llpadding="0" cellspacing="0" width="90%">')
-    text_mixed_with_tags = find_content_between_two_tags(left_tag, right_tag,
-                                                         html, r'[\s\S]+?')
-    row_text = delete(r'<.+?>', text_mixed_with_tags)
-    row_text = delete('\r', row_text)
-    row_text = delete(r'&nbsp;', row_text)
-    row_text = re.sub('\n+', '\n',  row_text)
-    return row_text
+    etree = get_etree(html)
+    element_contain_content = etree.xpath('/html/body/table/tr[2]/td/table/'
+                                          'tr[3]/td/table/tr[2]/td/table/tr[3]'
+                                          )[0]
+    return ''.join(element_contain_content.xpath('td//text()'))
