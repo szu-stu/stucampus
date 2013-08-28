@@ -1,5 +1,7 @@
 #-*- coding: utf-8
 from django.http import HttpResponse
+from django.views.generic import View
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 
@@ -12,9 +14,10 @@ from stucampus.organization.services import org_is_exist, find_organization
 from stucampus.utils import spec_json
 
 
-@user_passes_test(admin_group_check)
-def list(request):
-    if request.method == 'GET':
+class ListOrganzation(View):
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request):
         if not request.user.has_perm('organization.organization_list'):
             return HttpResponse(status=403)
         orgs = Organization.objects.all()
@@ -25,7 +28,9 @@ def list(request):
         param = {'orgs': orgs, 'normal_orgs': normal_orgs,
                  'baned_orgs': baned_orgs, 'deleted_orgs': deleted_orgs}
         return render(request, 'master/organization-list.html', param)
-    elif request.method == 'POST':
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def post(self, request):
         if not request.user.has_perm('organization.organization_create'):
             return HttpResponse(status=403)
         form = AddOrganizationForm(request.POST)
@@ -45,14 +50,17 @@ def list(request):
         return spec_json(success, messages)
 
 
-@user_passes_test(admin_group_check)
-def view(request, id):
-    if request.method == 'GET':
+class ShowOrganization(View):
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request, id):
         if not request.user.has_perm('organization.organization_view'):
             return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)
         return render(request, 'master/organization-view.html', {'org': org})
-    elif request.method == 'DELETE':
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def delete(self, request, id):
         if not request.user.has_perm('organization.organization_del'):
             return HttpResponse(status=403)
         org = find_organization(id)
@@ -67,9 +75,10 @@ def view(request, id):
         return spec_json(success, messages)
 
 
-@user_passes_test(admin_group_check)
-def manager(request, id):
-    if request.method == 'POST':
+class OrganzationManager(View):
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request, id):
         if not request.user.has_perm('account.org_manager_create'):
             return HttpResponse(status=403)
         org = get_object_or_404(Organization, id=id)

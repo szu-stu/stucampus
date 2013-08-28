@@ -1,5 +1,7 @@
 #-*- coding: utf-8
 from django.http import HttpResponse
+from django.views.generic import View
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 
@@ -10,24 +12,27 @@ from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json, get_http_data
 
 
-@user_passes_test(admin_group_check)
-def list(request):
-    if request.method == 'GET':
+class ListInfor(View):
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request):
         if not request.user.has_perm('infor.infor_list'):
             return HttpResponse(status=403)
         infors = Infor.objects.all()
         return render(request, 'master/infor-list.html', {'infors': infors})
 
 
-@user_passes_test(admin_group_check)
-def post(request):
-    if request.method == 'GET':
+class PostInfor(View):
+
+    @method_decorator(user_passes_test(admin_group_check))        
+    def get(self, request):
         if not request.user.has_perm('infor.infor_create'):
             return HttpResponse(status=403)
         else:
             orgs = request.user.student.orgs_as_manager.all()
             return render(request, 'master/infor-post.html', {'orgs': orgs})
-    elif request.method == 'POST':
+
+    def post(self, request):
         if not request.user.has_perm('infor.infor_create'):
             return HttpResponse(status=403)
         else:
@@ -49,9 +54,10 @@ def post(request):
             return spec_json(success, messages)
 
 
-@user_passes_test(admin_group_check)
-def infor(request, id):
-    if request.method == 'GET':
+class Information(View):
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request, id):
         if not request.user.has_perm('infor.infor_view'):
             return HttpResponse(status=403)
         else:
@@ -59,14 +65,18 @@ def infor(request, id):
             infor = get_object_or_404(Infor, id=id)
             return render(request, 'master/infor-post.html',
                           {'infor': infor, 'orgs': orgs})
-    elif request.method == 'DELETE':
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def delete(self, request, id):
         if not request.user.has_perm('infor.infor_del'):
             return HttpResponse(status=403)
         else:
             infor = get_object_or_404(Infor, id=id)
             infor.delete()
             return spec_json(True, [u'删除成功'])
-    elif request.method == 'PUT':
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def put(self, request, id):
         if not request.user.has_perm('infor.infor_edit'):
             return HttpResponse(status=403)
         else:

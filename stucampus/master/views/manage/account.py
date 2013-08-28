@@ -1,6 +1,8 @@
 #-*- coding: utf-8
 from django.http import HttpResponse
+from django.views.generic import View
 from django.shortcuts import render, get_object_or_404
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import Group
 
@@ -10,9 +12,10 @@ from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json, get_http_data
 
 
-@user_passes_test(admin_group_check)
-def list(request):
-    if request.method == 'GET':
+class ListAccount(View):
+
+    @method_decorator(user_passes_test(admin_group_check))    
+    def get(self, request):
         if not request.user.has_perm('account.student_list'):
             return HttpResponse(status=403)
         students = Student.objects.all()
@@ -20,15 +23,18 @@ def list(request):
                       {'students': students})
 
 
-@user_passes_test(admin_group_check)
-def view(request, id):
-    if request.method == 'GET':
+class ShowAccount(View):
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request, id):
         if not request.user.has_perm('account.student_list'):
             return HttpResponse(status=403)
         student = get_object_or_404(Student, id=id)
         return render(request, 'master/account-view.html',
                       {'student': student})
-    elif request.method == 'PUT':
+
+    @method_decorator(user_passes_test(admin_group_check))
+    def put(self, request, id):
         if not request.user.has_perm('account.student_edit'):
             return HttpResponse(status=403)
         data = get_http_data(request)
@@ -46,7 +52,8 @@ def view(request, id):
             success = True
             messages = [u'禁用成功']
         return spec_json(success, messages)
-    elif request.method == 'DELETE':
+
+    def delete(self, request, id):
         if not request.user.has_perm('account.student_del'):
             return HttpResponse(status=403)
         student = find_student(id)

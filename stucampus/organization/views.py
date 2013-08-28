@@ -1,5 +1,7 @@
 #-*- coding: utf-8
 from django.http import HttpResponse
+from django.views.generic import View
+from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import login_required, permission_required
@@ -23,14 +25,19 @@ def organization_manage(request):
                   {'organzations': organzations})
 
 
-@user_passes_test(org_manage_group_check)
-@permission_required('organization.organization_edit')
-def organization_edit(request, id):
-    if request.method == 'GET':
+
+class EditOrganzation(View):
+
+    @method_decorator(user_passes_test(org_manage_group_check))
+    @method_decorator(permission_required('organization.organization_edit'))
+    def get(self, request, id):
         organization = get_object_or_404(Organization, id=id)
         return render(request, 'organization/edit.html',
                       {'organization': organization})
-    elif request.method == 'POST':
+
+    @method_decorator(user_passes_test(org_manage_group_check))
+    @method_decorator(permission_required('organization.organization_edit'))
+    def post(self, request, id):
         form = OrganizationManageEditForm(request.POST)
         if form.is_valid():
             org = get_object_or_404(Organization, id=id)
