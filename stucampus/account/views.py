@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from stucampus.utils import render_json, get_client_ip, get_http_data
+from stucampus.utils import spec_json, get_client_ip, get_http_data
 from stucampus.account.models import Student
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
@@ -19,7 +19,7 @@ def sign_in(request):
         return HttpResponseRedirect('/')
     if request.method == 'GET':
         form = SignInForm()
-        return render(request, 'account/sign_in.html', {'form': form})
+        return render(request, 'account/sign-in.html', {'form': form})
     elif request.method == 'POST':
         form = SignInForm(request.POST)
         if form.is_valid():
@@ -44,10 +44,15 @@ def sign_in(request):
         else:
             success = False
             messages = form.errors.values()
-        return render_json({'success': success, 'messages': messages})
-    elif request.method == 'DELETE':
+        return spec_json(success, messages)
+
+
+def sign_out(request):
+    if request.method == 'POST':
         logout(request)
-        return render_json({'success': True})
+        success = True
+        messages = [u'退出成功']
+        return spec_json(success, messages)
 
 
 def sign_up(request):
@@ -55,7 +60,7 @@ def sign_up(request):
         return HttpResponseRedirect('/')
     if request.method == 'GET':
         form = SignUpForm()
-        return render(request, 'account/sign_up.html', {'form': form})
+        return render(request, 'account/sign-up.html', {'form': form})
     elif request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -77,11 +82,11 @@ def sign_up(request):
                     student.last_login_ip = get_client_ip(request)
                     student.save()
                     success = True
-                    messages = []
+                    messages = [u'注册成功']
         else:
             success = False
             messages = form.errors.values()
-        return render_json({'success': success, 'messages': messages})
+        return spec_json(success, messages)
 
 
 def profile(request):
@@ -107,18 +112,18 @@ def profile(request):
             user.student.szucard = data['szucard']
             user.student.save()
             success = True
-            messages = []
+            messages = [u'修改成功']
         else:
             success = False
             messages = form.errors.values()
-        return render_json({'success': success, 'messages': messages})
+        return spec_json(success, messages)
 
 
 @login_required
 def profile_edit(request):
     college_list = Student.COLLEGE_CHOICES
-    return render(request, 'account/profile_edit.html',
-                 {'college_list': college_list})
+    return render(request, 'account/profile-edit.html',
+                  {'college_list': college_list})
 
 
 @login_required
@@ -147,4 +152,4 @@ def password(request):
         else:
             messages = form.errors.values()
             success = False
-        return render_json({'success': success, 'messages': messages})
+        return spec_json(success, messages)

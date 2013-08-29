@@ -2,28 +2,24 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'plugins/jquery.tools.min.js' | as_js }}
     {{ 'plugins/ckeditor/ckeditor.js' | as_js }}
     {{ 'plugins/ckeditor/adapters/jquery.js' | as_js }}
-    {{ 'plugins/jquery.form.js' | as_js }}
-    {{ 'plugins/google/api.js' | as_js }}
-    {{ 'admin/infor_article.js' | as_js }}
-    {{ 'admin/date_input.css' | as_css }}
-    {{ 'admin/infor_article.css' | as_css }}
+    {{ 'admin/infor-article.js' | as_js }}
+    {{ 'admin/infor-article.css' | as_css }}
 {% endblock %}
 
 {% block content %}
     <h2>{% if infor %}编辑{%else%}添加{%endif%}信息文章 &amp; {% if infor %}Edit{%else%}Add{%endif%} Infor Article</h2>
-    <form method="{% if infor %}put{%else%}post{%endif%}" action="/manage/infor" class="list" id="infor-form">
+    <form class="list" id="infor-form" method='{% if infor %}put{%else%}post{%endif%}' action='/manage/infor{%if infor%}/{{infor.id}}{%endif%}'>
     {% csrf_token %}
     <ul>
         <li>
             <label class="head-label">标题</label>
-            <input type="text" class="element" name="title" id="form-title" value="{{infor.title}}" />
+            <input type="text" class="element" name="title" id="title" value="{{infor.title}}" />
         </li>
         <li>
             <label class="head-label">发布组织</label>
-            <select class="element-box" name="organization_id">
+            <select class="element-box" name="organization_id" id="organization_id">
             {% for org in orgs %}
             <option value="{{org.id}}"{% if org == infor.organization %}selected{%endif%}>
             {{ org.name }}
@@ -39,14 +35,11 @@
         {% if infor %}
             <input type="button" value="删除" class="button" onclick="confirm('确实要删除这篇信息吗？') ? $S.Infor.remove({{infor.id}}) : false" />
             <input type="button" value="查看" class="button" onclick="document.location='/infor/{{infor.id}}';" />
-            <input type="submit" class="button" value="修改" />
+            <input type="submit" value="修改" class="button"/>
         {% else %}
             <input type="submit" class="button" value="发布" />
         {% endif %}
         </li>
     </ul>
     </form>
-    <script type="text/javascript">
-            $(":date").dateinput();
-        </script>
 {% endblock %}

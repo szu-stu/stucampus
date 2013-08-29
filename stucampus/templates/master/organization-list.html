@@ -33,14 +33,14 @@
             {% if org.name == '深圳大学学子天地' %}
             <li>
                 <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
-                <input type="button" class="listinput" value="添加管理员" id="main" onclick="$S.Organization.add_manager({{org.id}})" />
+                <input type="button" class="listinput" value="添加管理员" id="main" onclick="$S.Organization.addManager({{org.id}})" />
                 <input type="text" class="addinput" placeholder='请输入用户邮箱' id="org-{{org.id}}" />
             </li>
             {% else %}
             <li>
                 <span><a href="/manage/organization/{{ org.id }}">{{ org.name }}</a></span>
                 <input type="button" class="listinput"  value="删除该组织" onclick="confirm('确实要删除该组织吗？')?$S.Organization.remove({{org.id}}):false"  />
-                <input type="button" class="listinput" value="添加管理员" onclick="$S.Organization.add_manager({{org.id}})" />
+                <input type="button" class="listinput" value="添加管理员" onclick="$S.Organization.addManager({{org.id}})" />
                 <input type="text"  class="addinput" placeholder='请输入用户邮箱' id="org-{{org.id}}" />
             </li>
             {% endif %}

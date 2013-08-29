@@ -32,7 +32,7 @@ urlpatterns = patterns(
     url(r'^infor/post$',
         'stucampus.master.views.manage.infor.post',
         name='manage_infor_post'),
-    url(r'^infor$',
+    url(r'^infor/(?P<id>\d+)$',
         'stucampus.master.views.manage.infor.infor',
         name='manage_infor_infor'),
 

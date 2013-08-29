@@ -1,0 +1,41 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'admin/organization.css' | as_css }}
+{{ 'admin/infor-article.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+    <h2>信息管理 &amp; Manage Information</h2>
+    <div class="list">
+    <ul>
+        <li>
+            <div style="width:20%">标题</div>
+            <div style="width:10%">作者</div>
+            <div style="width:17%">发布组织</div>
+            <div style="width:23%">发布时间</div>
+            <div style="width:5%">状态</div>
+            <div style="width:10%">操作</div>
+        </li>
+    {% load infor_custom %}
+    {% for infor in infors %}
+        <li>
+            <a href="/infor/{{infor.id}}">
+                <div style="width:20%">{{ infor.title }}</div>
+                <div style="width:10%">{{ infor.author.true_name  }}</div>
+                <div style="width:17%">{{ infor.organization.name }}</div>
+                <div style="width:23%">{{ infor.created|date:'Y-m-d H:i:s' }}</div>
+                <div style="width:5%">{{ infor|get_infor_status }}</div>
+            </a>
+                <div style="width:10%">
+                    <a href="/manage/infor/{{infor.id}}">编辑</a>
+                    <a href="javascript:void(0)" onclick="$S.Infor.remove({{infor.id}})">删除</a>
+                </div>
+            </li>
+    {% endfor %}
+    </ul>
+    </div>
+    <div class="aside">
+    </div>
+{% endblock %}

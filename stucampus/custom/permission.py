@@ -10,4 +10,3 @@ def admin_group_check(user):
 def org_manage_group_check(user):
     org_manage_group = Group.objects.get(name='organization_manager')
     return (org_manage_group in user.groups.all())
-    

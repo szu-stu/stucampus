@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Student(models.Model):
-    
+
     COLLEGE_CHOICES = (
         ('SF', '师范学院'), ('WX', '文学院'), ('WGY', '外国语学院'),
         ('CB', '传播学院'), ('JJ', '经济学院'), ('GL', '管理学院'),
