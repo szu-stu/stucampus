@@ -10,7 +10,7 @@ def get_lecture_messages():
     lecture_announcements = look_up_lecture_announcement()
     lecture_messages = []
     for a in lecture_announcements:
-        lecture_imfor_dict = get_imfor(a)
+        lecture_imfor_dict = get_infor(a)
         lecture_messages.append(lecture_imfor_dict)
     return lecture_messages
 
@@ -39,9 +39,9 @@ def is_about_lecture(content):
     return False
 
 
-def get_imfor(announcement):
-    ''' get lecture imformation from announcement
-        put the imformation into a dictionary
+def get_infor(announcement):
+    ''' get lecture information from announcement
+        put the information into a dictionary
     '''
 
     content = announcement.get_content()

@@ -11,7 +11,3 @@ class LectureForm(ModelForm):
 
 LecureFormSet = modelformset_factory(LectureMessage,
                                      form=LectureForm, extra=0)
-
-
-def get_formset():
-    return LecureFormSet(queryset=LectureMessage.get_messages_this_week())

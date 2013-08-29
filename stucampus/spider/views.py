@@ -9,7 +9,7 @@ from stucampus.spider.models import Announcement
 
 def index(request):
     messages = Announcement.objects.order_by('published_date').reverse()
-    paginator = Paginator(messages, 5)
+    paginator = Paginator(messages, 30)
     page_num = request.GET.get('page')
     try:
         current_page = paginator.page(page_num)
@@ -21,7 +21,7 @@ def index(request):
 
 
 def update(request):
-    num_of_update = Announcement.get_new()
+    num_of_update = Announcement.fetch_new_announcement()
     return HttpResponse(str(num_of_update))
 
 

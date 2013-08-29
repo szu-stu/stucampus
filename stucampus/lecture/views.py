@@ -5,7 +5,7 @@ from django.views import generic
 from django.template import RequestContext
 
 from stucampus.lecture.models import LectureMessage
-from stucampus.lecture.forms import LectureForm, LecureFormSet, get_formset
+from stucampus.lecture.forms import LectureForm, LecureFormSet
 
 
 def index(request):
@@ -14,9 +14,13 @@ def index(request):
 
 
 def manage(request):
-    formset = get_formset()
+    formset = LecureFormSet(queryset=LectureMessage.get_messages_this_week())
     return render_to_response('lecture/manage.html', {'formset': formset},
                               context_instance=RequestContext(request))
+
+def manage_all(request):
+    formset = LecureFormSet()
+    return render(request, 'lecture/manage.html', {'formset': formset})
 
 
 def submit(request):

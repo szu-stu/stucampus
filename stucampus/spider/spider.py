@@ -1,6 +1,7 @@
 import re
 from urllib2 import urlopen
 import lxml.html
+import requests
 
 class MatchError(Exception):
 
@@ -18,12 +19,18 @@ class MatchError(Exception):
                + self.text.encode('utf-8')
 
 
-def get_html(url, code='utf-8'):
-    return urlopen(url).read().decode(code, 'ignore')
+def fetch_html_by_get(url, encoding=None):
+    response = requests.get(url)
+    response.raise_for_status()
+    response.encoding = encoding or response.encoding
+    return response.text
 
 
-def get_etree(html):
-    return lxml.html.fromstring(html)
+def fetch_html_by_post(url, form_data, encoding=None):
+    response = requests.post(url, data=form_data)
+    response.raise_for_status()
+    response.encoding = encoding or response.encoding
+    return response.text
 
 
 def find_content_between_two_tags(left_tag, right_tag,
@@ -33,10 +40,6 @@ def find_content_between_two_tags(left_tag, right_tag,
     if not match:
         raise MatchError(text, reg)
     return match.group('content')
-
-
-def delete_tag(text):
-    return delete(r'<.+?>', text)
 
 
 def delete(to_delete, text):
