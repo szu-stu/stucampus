@@ -1,4 +1,3 @@
-#-*- coding: utf-8
 from datetime import datetime
 
 from django.shortcuts import render
@@ -25,38 +24,32 @@ class SignIn(View):
     @method_decorator(guest_or_redirect)
     def post(self, request):
         form = SignInForm(request.POST)
-        if form.is_valid():
-            email = request.POST['email']
-            password = request.POST['password']
-            user = authenticate(username=email, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    user.student.login_count = user.student.login_count + 1
-                    user.student.last_login_ip = get_client_ip(request)
-                    user.student.save()
-                    success = True
-                    messages = '登录成功'
-                else:
-                    success = False
-                    messages = '账户停用'
-            else:
-                # user not found.
-                success = False
-                messages = '邮箱或密码错误'
-        else:
-            success = False
+        if not form.is_valid():
             messages = form.errors.values()
-        return spec_json(success, messages)
+            return spec_json(status='form_errors', messages=messages)
+
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(username=email, password=password)
+        if user is None:
+            return spec_json(status='user_not_valid')
+
+        if not user.is_active:
+            return spec_json(status='user_not_active')
+        
+        login(request, user)
+        user.student.login_count = user.student.login_count + 1
+        user.student.last_login_ip = get_client_ip(request)
+        user.student.save()
+        return spec_json(status='success')
 
 
 class SignOut(View):
     '''View of account sign out page'''
     def post(self, request):
         logout(request)
-        success = True
-        messages = '退出成功'
-        return spec_json(success, messages)
+        status = 'success'
+        return spec_json(status)
 
 
 class SignUp(View):
@@ -68,30 +61,27 @@ class SignUp(View):
     @method_decorator(guest_or_redirect)
     def post(self, request):
         form = SignUpForm(request.POST)
-        if form.is_valid():
-            email = request.POST['email']
-            password = request.POST['password']
-            confirm = request.POST['confirm']
-            if not password == confirm:
-                success = False
-                messages = '密码不匹配, 请检查后重新输入'
-            else:
-                email_is_exist = is_email_exist(email)
-                if email_is_exist:
-                    success = False
-                    messages = '邮箱已存在'
-                else:
-                    new_user = User.objects.create_user(email, email, password)
-                    student = Student.objects.create(user=new_user)
-                    student.screen_name, email_domain = email.split('@')
-                    student.last_login_ip = get_client_ip(request)
-                    student.save()
-                    success = True
-                    messages = '注册成功'
-        else:
-            success = False
+        if not form.is_valid():
             messages = form.errors.values()
-        return spec_json(success, messages)
+            return spec_json(status='form_errors', messages=messages)
+
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm = request.POST['confirm']
+        if not password == confirm:
+            return spec_json(status='passwords_not_match')
+
+        email_is_exist = is_email_exist(email)
+        if email_is_exist:
+            return spec_json(status='email_existed')
+
+        new_user = User.objects.create_user(email, email, password)
+        student = Student.objects.create(user=new_user)
+        student.screen_name, email_domain = email.split('@')
+        student.last_login_ip = get_client_ip(request)
+        student.save()
+        login(username=email, password=password)
+        return spec_json(status='success')
 
 
 class Profile(View):
@@ -101,28 +91,27 @@ class Profile(View):
         return render(request, 'account/profile.html')
 
     @method_decorator(login_required)
-    def post(self, request):
-        form = ProfileEditForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            user.student.true_name = data['true_name']
-            user.student.college = data['college']
-            user.student.screen_name = data['screen_name']
-            user.student.is_male = data['is_male']
-            user.student.mphone_num = data['mphone_num']
-            birthday = data['birthday']
-            if len(birthday) > 0:
-                user.student.birthday = datetime.strptime(birthday, '%Y-%m-%d')
-            user.student.mphone_short_num = data['mphone_short_num']
-            user.student.student_id = data['student_id']
-            user.student.szucard = data['szucard']
-            user.student.save()
-            success = True
-            messages = '修改成功'
-        else:
-            success = False
+    def put(self, request):
+        data = get_http_data(request)
+        form = ProfileEditForm(data)
+        if not form.is_valid():
             messages = form.errors.values()
-        return spec_json(success, messages)
+            return spec_json(status='form_errors', messages=messages)
+
+        user = request.user
+        user.student.true_name = data['true_name']
+        user.student.college = data['college']
+        user.student.screen_name = data['screen_name']
+        user.student.is_male = data['is_male']
+        user.student.mphone_num = data['mphone_num']
+        birthday = data['birthday']
+        if len(birthday) > 0:
+            user.student.birthday = datetime.strptime(birthday, '%Y-%m-%d')
+        user.student.mphone_short_num = data['mphone_short_num']
+        user.student.student_id = data['student_id']
+        user.student.szucard = data['szucard']
+        user.student.save()
+        return spec_json(status='success')
 
 
 class ProfileEdit(View):
@@ -141,26 +130,22 @@ class Password(View):
         return render(request, 'account/password.html')
 
     @method_decorator(login_required)
-    def post(self, request):
+    def put(self, request):
         data = get_http_data(request)
         form = PasswordForm(data)
-        if form.is_valid():
-            current_user = request.user
-            query_user = authenticate(username=current_user.username,
-                                      password=data['current_password'])
-            if not query_user is None:
-                if data['new_password'] == data['confirm']:
-                    current_user.set_password(data['confirm'])
-                    current_user.save()
-                    success = True
-                    messages = []
-                else:
-                    success = False
-                    messages = '密码不匹配'
-            else:
-                success = False
-                messages = '密码错误!'
-        else:
-            success = False
+        if not form.is_valid():
             messages = form.errors.values()
-        return spec_json(success, messages)
+            return spec_json(status='form_errors', messages=messages)
+
+        current_user = request.user
+        query_user = authenticate(username=current_user.username,
+                                  password=data['current_password'])
+        if query_user is None:
+            return spec_json(status='wrong_password')
+
+        if not data['new_password'] == data['confirm']:
+            return spec_json(status='passwords_not_match')
+
+        current_user.set_password(data['confirm'])
+        current_user.save()
+        return spec_json(status='success')

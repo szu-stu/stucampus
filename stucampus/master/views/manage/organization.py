@@ -1,4 +1,3 @@
-#-*- coding: utf-8
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
@@ -33,20 +32,17 @@ class ListOrganzation(View):
     @method_decorator(user_passes_test(admin_group_check))
     def post(self, request):
         form = AddOrganizationForm(request.POST)
-        if form.is_valid():
-            data = request.POST
-            name = data['name']
-            if not is_org_exist(name):
-                Organization.objects.create(name=name, phone=data['phone'])
-                success = True
-                messages = '添加成功'
-            else:
-                success = False
-                messages = '组织已存在'
-        else:
-            success = False
+        if not form.is_valid():
             messages = form.errors.values()
-        return spec_json(success, messages)
+            return spec_json(status='form_errors', messages=messages)
+
+        data = request.POST
+        name = data['name']
+        if is_org_exist(name):
+            return spec_json(status='org_name_exist')
+
+        Organization.objects.create(name=name, phone=data['phone'])
+        return spec_json(status='success')
 
 
 class ShowOrganization(View):
@@ -62,14 +58,11 @@ class ShowOrganization(View):
     def delete(self, request, id):
         org = find_organization(id)
         if org is None:
-            success = False
-            messages = '该组织不存在'
+            return spec_json(status='org_not_exist')
         else:
             org.is_deleted = True
             org.save()
-            success = True
-            messages = '删除陈功'
-        return spec_json(success, messages)
+            return spec_json(status='success')
 
 
 class OrganzationManager(View):
@@ -79,21 +72,18 @@ class OrganzationManager(View):
     def get(self, request, id):
         org = get_object_or_404(Organization, id=id)
         form = AddOrganizationManagerForm(request.POST)
-        if form.is_valid():
-            email = request.POST['email']
-            student = find_by_email(email)
-            if student is None:
-                success = False
-                messages = '该邮箱不存在'
-            else:
-                if not org in student.orgs_as_member.all():
-                    org.members.add(student)
-                org.managers.add(student)
-                org_mng_group = get_group_by_name(name='organization_manager')
-                student.user.groups.add(org_mng_group)
-                success = True
-                messages = '添加成功'
-        else:
-            success = False
+        if not form.is_valid():
             messages = form.errors.values()
-        return spec_json(success, messages)
+            return spec_json(status='form_errors', messages=messages)
+
+        email = request.POST['email']
+        student = find_by_email(email)
+        if student is None:
+            return spec_json(status='email_not_exist')
+
+        if not org in student.orgs_as_member.all():
+            org.members.add(student)
+        org.managers.add(student)
+        org_mng_group = get_group_by_name(name='organization_manager')
+        student.user.groups.add(org_mng_group)
+        return spec_json(status='success')

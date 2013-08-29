@@ -1,4 +1,3 @@
-#-*- coding: utf-8
 from django.views.generic import View
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
@@ -36,22 +35,19 @@ class ShowAccount(View):
     def put(self, request, id):
         data = get_http_data(request)
         if data['is_ban'] is not True:
-            success = False
-            messages = '该用户已被禁用'
-        else:
-            student = find_student(id)
-            admin_group = get_group_by_name(name='StuCampus')
-            if student is None:
-                success = False
-                messages = '该用户不存在'
-            elif admin_group in student.user.groups.all():
-                success = False
-                messages = '不能禁用管理员'
-            else:
-                student.user.is_active = False
-                success = True
-                messages = '禁用成功'
-            return spec_json(success, messages)
+            return spec_json(status='wrong_data')
+
+        student = find_student(id)
+        admin_group = get_group_by_name(name='StuCampus')
+        if student is None:
+            return spec_json(status='user_not_exist')
+
+        if admin_group in student.user.groups.all():
+            return spec_json(status='user_is_admin')
+
+        student.user.is_active = False
+        student.user.save()
+        return spec_json(status='success')
 
     @method_decorator(permission_required('account.student_del'))
     @method_decorator(user_passes_test(admin_group_check))
@@ -59,14 +55,11 @@ class ShowAccount(View):
         student = find_student(id)
         admin_group = get_group_by_name(name='StuCampus')
         if student is None:
-            success = False
-            messages = '该用户不存在'
-        elif admin_group in student.user.groups.all():
-            success = False
-            messages = '不能删除管理员!'
-        else:
-            student.user.delete()
-            student.delete()
-            success = True
-            messages = '删除成功'
-        return spec_json(success, messages)
+            return spec_json(status='user_not_exist')
+
+        if admin_group in student.user.groups.all():
+            return spec_json(status='user_is_admin')
+
+        student.user.delete()
+        student.delete()
+        return spec_json(status='success')

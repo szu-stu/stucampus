@@ -1,4 +1,3 @@
-#-*- coding: utf-8
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
@@ -33,20 +32,18 @@ class PostInfor(View):
     @method_decorator(user_passes_test(admin_group_check))
     def post(self, request):
         form = InforCreateForm(request.POST)
-        if form.is_valid():
-            title = request.POST['title']
-            content = request.POST['content']
-            organization_id = request.POST['organization_id']
-            author = request.user.student
-            organization = find_organization(organization_id)
-            Infor.objects.create(title=title, content=content,
-                                 author=author, organization=organization)
-            success = True
-            messages = '发布成功'
-        else:
-            success = False
+        if not form.is_valid():
             messages = form.errors.values()
-        return spec_json(success, messages)
+            return spec_json(status='form_errors', messages=messages)
+
+        title = request.POST['title']
+        content = request.POST['content']
+        organization_id = request.POST['organization_id']
+        author = request.user.student
+        organization = find_organization(organization_id)
+        Infor.objects.create(title=title, content=content,
+                             author=author, organization=organization)
+        return spec_json(status='success')
 
 
 class Information(View):
@@ -64,7 +61,7 @@ class Information(View):
     def delete(self, request, id):
         infor = get_object_or_404(Infor, id=id)
         infor.delete()
-        return spec_json(success=True, messages='删除成功')
+        return spec_json(status='success')
 
     @method_decorator(permission_required('infor.infor_edit'))
     @method_decorator(user_passes_test(admin_group_check))
@@ -72,14 +69,12 @@ class Information(View):
         data = get_http_data(request)
         infor = get_object_or_404(Infor, id=id)
         form = InforEditForm(data)
-        if form.is_valid():
-            infor.title = data['title']
-            infor.content = data['content']
-            infor.organization_id = data['organization_id']
-            infor.save()
-            success = True
-            messages = '修改成功'
-        else:
-            success = False
-            messages = forms.errors.values()
-        return spec_json(success, messages)
+        if not form.is_valid():
+            messages = form.errors.values()
+            return spec_json(status='form_errors', messages=messages)
+
+        infor.title = data['title']
+        infor.content = data['content']
+        infor.organization_id = data['organization_id']
+        infor.save()
+        return spec_json(status='success')

@@ -53,27 +53,10 @@
     }
 
     StuCampus.ajax = function(url, method, args){
-        var data = "";
-        var tips_type = "";
-        var status_dict = "";
-        if (typeof args != 'undefined'){
-            if (typeof args['data'] != 'undefined'){
-                data = args['data'];
-            }else{
-                data = {};
-            }
-
-            if (typeof args['tips_type'] != 'undefined'){
-                tips_type = args['tips_type'];
-            }else{
-                tips_type = 'label';
-            }
-
-            if (typeof args['status'] != 'undefined'){
-                status_dict = args['status'];
-            }else{
-                status_dict = {};
-            }
+        if (typeof args != 'undefined' && typeof args['data'] != 'undefined'){
+            data = args['data'];
+        }else{
+            var data = {};
         }
         $.ajax({
             url: url,
@@ -89,20 +72,14 @@
                 }
             },
             success: function(response){
+                status_dict = args['status'];
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
                     StuCampus._jump_to_refer();
                     return false;
                 }
-                if (response.status == 'errors'){
-                    if (tips_type != 'label'){
-                        StuCampus.alert(response.messages.join(', '), 2000);
-                    }else{
-                        for (i=0;i<response.messages.length();++i){
-                            var message = response.messages[i];
-                            $("#"+message[0]+"-tips").html(message[1]);
-                        }
-                    }
+                if (response.status == 'form_errors'){
+                    StuCampus.alert(response.messages.join(', '), 2000);
                     return false;
                 }
                 StuCampus.alert(status_dict[response.status], 2000);
@@ -115,21 +92,6 @@
     };
 
     StuCampus.ajaxForm = function(forms, args){
-        var tips_type = "";
-        var status_dict = "";
-        if (typeof args != 'undefined'){
-            if (typeof args['tips_type'] != 'undefined'){
-                tips_type = args['tips_type'];
-            }else{
-                tips_type = 'label';
-            }
-
-            if (typeof args['status'] != 'undefined'){
-                status_dict = args['status'];
-            }else{
-                status_dict = {};
-            }
-        }
         forms.ajaxForm({
             statusCode:{
                 403: function() {
@@ -140,21 +102,14 @@
                 }
             },
             success: function(response){
+                status_dict = args['status'];
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
                     StuCampus._jump_to_refer();
                     return false;
                 }
-                if (response.status == 'errors'){
-                    if (tips_type != 'label'){
-                        StuCampus.alert(response.messages.join(', '), 2000);
-                    }
-                    else{
-                        for (i=0;i<messages.length();++i){
-                            var message = messages[i];
-                            $("#"+message[0]+"-tips").html(message[1]);
-                        }
-                    }
+                if (response.status == 'form_errors'){
+                    StuCampus.alert(response.messages.join(', '), 2000);
                     return false;
                 }
                 StuCampus.alert(status_dict[response.status], 2000);
@@ -171,7 +126,9 @@
         url = '/account/signin';
         method = 'POST';
         data = {'email': email, 'password': password};
-        var status = {'success': '登录成功'}
+        var status = {'success': '登录成功',
+                      'user_not_valid': '邮箱或密码错误',
+                      'user_not_active': '该用户被停用，'}
         StuCampus.ajax(url, method, {'data': data, 'status': status});
     };
 
