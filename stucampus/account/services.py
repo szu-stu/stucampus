@@ -22,7 +22,7 @@ def find_by_email(email):
     return query_user
 
 
-def student_is_exist(email):
+def is_email_exist(email):
     exist_in_user = True
     exist_in_student = True
     try:

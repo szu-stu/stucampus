@@ -13,15 +13,14 @@ from stucampus.custom.permission import guest_or_redirect
 from stucampus.account.models import Student
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
-from stucampus.account.services import find_by_email, student_is_exist
+from stucampus.account.services import find_by_email, is_email_exist
 
 
 class SignIn(View):
-
+    '''View of account sign in page'''
     @method_decorator(guest_or_redirect)
     def get(self, request):
-        form = SignInForm()
-        return render(request, 'account/sign-in.html', {'form': form})
+        return render(request, 'account/sign-in.html')
 
     @method_decorator(guest_or_redirect)
     def post(self, request):
@@ -37,14 +36,14 @@ class SignIn(View):
                     user.student.last_login_ip = get_client_ip(request)
                     user.student.save()
                     success = True
-                    messages = [u'登录成功']
+                    messages = '登录成功'
                 else:
                     success = False
-                    messages = [u'账户停用']
+                    messages = '账户停用'
             else:
                 # user not found.
                 success = False
-                messages = [u'邮箱或密码错误']
+                messages = '邮箱或密码错误'
         else:
             success = False
             messages = form.errors.values()
@@ -52,20 +51,19 @@ class SignIn(View):
 
 
 class SignOut(View):
-
+    '''View of account sign out page'''
     def post(self, request):
         logout(request)
         success = True
-        messages = [u'退出成功']
+        messages = '退出成功'
         return spec_json(success, messages)
 
 
 class SignUp(View):
-
+    '''View of account sign up page.'''
     @method_decorator(guest_or_redirect)
     def get(self, request):
-        form = SignUpForm()
-        return render(request, 'account/sign-up.html', {'form': form})
+        return render(request, 'account/sign-up.html')
 
     @method_decorator(guest_or_redirect)
     def post(self, request):
@@ -75,21 +73,21 @@ class SignUp(View):
             password = request.POST['password']
             confirm = request.POST['confirm']
             if not password == confirm:
-                messages = [u'密码不匹配, 请检查后重新输入']
                 success = False
+                messages = '密码不匹配, 请检查后重新输入'
             else:
-                email_is_exist = student_is_exist(email)
+                email_is_exist = is_email_exist(email)
                 if email_is_exist:
                     success = False
-                    messages = [u'邮箱已存在']
+                    messages = '邮箱已存在'
                 else:
                     new_user = User.objects.create_user(email, email, password)
                     student = Student.objects.create(user=new_user)
-                    student.screen_name = email.split('@')[0]
+                    student.screen_name, email_domain = email.split('@')
                     student.last_login_ip = get_client_ip(request)
                     student.save()
                     success = True
-                    messages = [u'注册成功']
+                    messages = '注册成功'
         else:
             success = False
             messages = form.errors.values()
@@ -97,15 +95,14 @@ class SignUp(View):
 
 
 class Profile(View):
-
+    '''View of profile'''
     @method_decorator(login_required)
     def get(self, request):
         return render(request, 'account/profile.html')
 
     @method_decorator(login_required)
     def post(self, request):
-        data = get_http_data(request)
-        form = ProfileEditForm(data)
+        form = ProfileEditForm(request.POST)
         if form.is_valid():
             user = request.user
             user.student.true_name = data['true_name']
@@ -121,7 +118,7 @@ class Profile(View):
             user.student.szucard = data['szucard']
             user.student.save()
             success = True
-            messages = [u'修改成功']
+            messages = '修改成功'
         else:
             success = False
             messages = form.errors.values()
@@ -129,7 +126,7 @@ class Profile(View):
 
 
 class ProfileEdit(View):
-
+    '''View of editing profile'''
     @method_decorator(login_required)
     def get(self, request):
         college_list = Student.COLLEGE_CHOICES
@@ -138,7 +135,7 @@ class ProfileEdit(View):
 
 
 class Password(View):
-
+    '''View of editing password'''
     @method_decorator(login_required)
     def get(self, request):
         return render(request, 'account/password.html')
@@ -159,11 +156,11 @@ class Password(View):
                     messages = []
                 else:
                     success = False
-                    messages = [u'密码不匹配']
+                    messages = '密码不匹配'
             else:
                 success = False
-                messages = [u'密码错误!']
+                messages = '密码错误!'
         else:
-            messages = form.errors.values()
             success = False
+            messages = form.errors.values()
         return spec_json(success, messages)

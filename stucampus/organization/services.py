@@ -2,7 +2,7 @@
 from stucampus.organization.models import Organization
 
 
-def org_is_exist(name):
+def is_org_exist(name):
     try:
         org = Organization.objects.get(name=name)
     except Organization.DoesNotExist:

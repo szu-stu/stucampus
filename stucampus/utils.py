@@ -10,7 +10,11 @@ def render_json(context, **response_kwargs):
     return HttpResponse(data, **response_kwargs)
 
 
-def spec_json(success=False, messages=[]):
+def spec_json(success=False, messages=None):
+    if not messages:
+        messages = []
+    elif isinstance(messages, str) or isinstance(messages, unicode):
+        messages = [messages]
     data = {'success': success, 'messages': messages}
     return render_json(data)
 

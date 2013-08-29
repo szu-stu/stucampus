@@ -25,7 +25,6 @@ def organization_manage(request):
                   {'organzations': organzations})
 
 
-
 class EditOrganzation(View):
 
     @method_decorator(user_passes_test(org_manage_group_check))
@@ -46,7 +45,7 @@ class EditOrganzation(View):
             org.logo = request.POST['logo']
             org.save()
             success = True
-            messages = [u'修改成功']
+            messages = '修改成功'
         else:
             success = False
             messages = form.errors.values()
