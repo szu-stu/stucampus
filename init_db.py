@@ -130,6 +130,6 @@ def run():
         admin_group.permissions.add(perm)
 
     organization_manager_group.permissions.add(organization_list,
-                                               organization_view,
+                                               organization_show,
                                                organization_edit,
                                                organization_del)
