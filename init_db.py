@@ -26,8 +26,8 @@ def run():
     student_list = create_perm(codename='student_list',
                                name='List all students',
                                content_type=student_model_content_type)
-    student_view = create_perm(codename='student_view',
-                               name='View the information of student.',
+    student_show = create_perm(codename='student_show',
+                               name='Show the information of student.',
                                content_type=student_model_content_type)
     student_create = create_perm(codename='student_create',
                                  name='Create new student.',
@@ -43,8 +43,8 @@ def run():
     organization_list = create_perm(codename='organization_list',
                                     name='List all organizations.',
                                     content_type=organization_content_type)
-    organization_view = create_perm(codename='organization_view',
-                                    name='View information of organization.',
+    organization_show = create_perm(codename='organization_show',
+                                    name='Show information of organization.',
                                     content_type=organization_content_type)
     organization_create = create_perm(codename='organization_create',
                                       name='Create organization.',
@@ -71,8 +71,8 @@ def run():
     member_list = create_perm(codename='member_list',
                               name='List the members in a organization.',
                               content_type=student_model_content_type)
-    member_view = create_perm(codename='member_view',
-                              name='View the information of member.',
+    member_show = create_perm(codename='member_show',
+                              name='Show the information of member.',
                               content_type=student_model_content_type)
     member_create = create_perm(codename='member_create',
                                 name='Create member in a organization.',
@@ -85,8 +85,8 @@ def run():
     infor_list = create_perm(codename='infor_list',
                              name='List all informations',
                              content_type=infor_content_type)
-    infor_view = create_perm(codename='infor_view',
-                             name='View an information.',
+    infor_show = create_perm(codename='infor_show',
+                             name='Show an information.',
                              content_type=infor_content_type)
     infor_create = create_perm(codename='infor_create',
                                name='Create an information.',
