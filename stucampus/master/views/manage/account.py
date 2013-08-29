@@ -1,12 +1,11 @@
 #-*- coding: utf-8
-from django.http import HttpResponse
 from django.views.generic import View
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
-from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
+from stucampus.master.services import get_group_by_name
 from stucampus.account.services import find_student
 from stucampus.account.models import Student
 from stucampus.custom.permission import admin_group_check
@@ -41,7 +40,7 @@ class ShowAccount(View):
             messages = '该用户已被禁用'
         else:
             student = find_student(id)
-            admin_group = Group.objects.get(name='StuCampus')
+            admin_group = get_group_by_name(name='StuCampus')
             if student is None:
                 success = False
                 messages = '该用户不存在'
@@ -58,7 +57,7 @@ class ShowAccount(View):
     @method_decorator(user_passes_test(admin_group_check))
     def delete(self, request, id):
         student = find_student(id)
-        admin_group = Group.objects.get(name='StuCampus')
+        admin_group = get_group_by_name(name='StuCampus')
         if student is None:
             success = False
             messages = '该用户不存在'

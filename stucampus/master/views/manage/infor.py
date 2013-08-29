@@ -1,5 +1,4 @@
 #-*- coding: utf-8
-from django.http import HttpResponse
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
@@ -7,7 +6,6 @@ from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
 from stucampus.infor.models import Infor
-from stucampus.organization.models import Organization
 from stucampus.organization.services import find_organization
 from stucampus.master.forms import InforCreateForm, InforEditForm
 from stucampus.custom.permission import admin_group_check

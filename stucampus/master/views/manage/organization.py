@@ -1,12 +1,11 @@
 #-*- coding: utf-8
-from django.http import HttpResponse
 from django.views.generic import View
 from django.utils.decorators import method_decorator
-from django.contrib.auth.models import Group
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
+from stucampus.master.services import get_group_by_name
 from stucampus.account.services import find_by_email
 from stucampus.master.forms import AddOrganizationForm
 from stucampus.master.forms import AddOrganizationManagerForm
@@ -90,7 +89,7 @@ class OrganzationManager(View):
                 if not org in student.orgs_as_member.all():
                     org.members.add(student)
                 org.managers.add(student)
-                org_mng_group = Group.objects.get(name='organization_manager')
+                org_mng_group = get_group_by_name(name='organization_manager')
                 student.user.groups.add(org_mng_group)
                 success = True
                 messages = '添加成功'
