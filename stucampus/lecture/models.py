@@ -20,10 +20,10 @@ class LectureMessage(django.db.models.Model):
     is_delete = models.BooleanField(default=False)
 
     @classmethod
-    def get_message_from_announcement(cls):
+    def add_new_message_from_announcement(cls):
         count_get = 0
         stop_mark = cls.get_latest_url_id_in_db()
-        for lm in get_lecture_messages():
+        for lm in fetch_lecture_messages():
             if lm['url_id'] == stop_mark:
                 break
             count_get += 1

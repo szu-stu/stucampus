@@ -3,10 +3,10 @@ import re
 from django.utils import timezone
 
 from stucampus.spider.models import Announcement
-from stucampus.spider.spider import find_content_between_two_tags, MatchError
+from stucampus.spider.spider import find_content_between_two_marks, MatchError
 
 
-def get_lecture_messages():
+def fetch_lecture_messages():
     lecture_announcements = look_up_lecture_announcement()
     lecture_messages = []
     for a in lecture_announcements:
@@ -41,7 +41,7 @@ def is_about_lecture(content):
 
 def get_infor(announcement):
     ''' get lecture information from announcement
-        put the information into a dictionary
+        put attributes into a dictionary
     '''
 
     content = announcement.get_content()
@@ -65,22 +65,34 @@ def get_infor(announcement):
                 url_id=announcement.url_id)
 
 
+TITLE_PATTERN = (
+    (u'', u''),
+    (u'', u''),
+    )
 def get_title(content):
-    return find_content_between_two_tags(u'报告题目：', r'',
+    return find_content_between_two_marks(u'报告题目：', r'',
                                          content, r'.+')
 
 
+PLACE_PATTERN = (
+    (u'', u''),
+    (u'', u''),
+    )
 def get_place(content):
-    return find_content_between_two_tags(u'报告地点：', '\n', content)
+    return find_content_between_two_marks(u'报告地点：', '\n', content)
 
 
+DATETIME_PATTERN = (
+    (u'', u''),
+    (u'', u''),
+    )
 def get_date_time(content):
     r = r'\d{4}'+u'年'+r'\d{1,2}'+u'月'+r'\d{1,2}'
-    date = find_content_between_two_tags(u'报告时间：', u'日', content, r)
+    date = find_content_between_two_marks(u'报告时间：', u'日', content, r)
     date = date.replace(u'年', '-').replace(u'月', '-')
 
     r = r'\d{1,2}:\d{1,2}-\d{1,2}:\d{1,2}'
-    time = find_content_between_two_tags('', '', content, r)
+    time = find_content_between_two_marks('', '', content, r)
     time = time.split('-')[0]
 
     return date + ' ' + time

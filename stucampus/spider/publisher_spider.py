@@ -1,7 +1,7 @@
 # run to get all publisher(about 100), not run by django
 import re
 
-from spider import get_html, find_content_between_two_tags
+from spider import get_html, fing_content_between_two_marks
 from to_file import add_line_to_file, clear_file
 
 
@@ -15,7 +15,7 @@ def get_publisher():
     left_tag, right_tag = (r'>\d+', r'</option>')
     publisher_list = []
     for msg_mixed_with_tags in all_needed_list:
-        row_text = find_content_between_two_tags(left_tag, right_tag,
+        row_text = fing_content_between_two_marks(left_tag, right_tag,
                                                  msg_mixed_with_tags)
         row_text = row_text[1:]  # delete the prefix point
         publisher_list.append(row_text)
