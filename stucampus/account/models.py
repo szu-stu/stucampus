@@ -30,5 +30,10 @@ class Student(models.Model):
     mphone_short_num = models.CharField(max_length=6)
     student_id = models.CharField(max_length=10)
     szucard = models.CharField(max_length=6)
-    login_count = models.IntegerField(default=0)
     last_login_ip = models.GenericIPAddressField(null=True, blank=True)
+
+
+class LogInfor(models.Model):
+    student = models.ForeignKey(Student)
+    login_ip = models.GenericIPAddressField(null=True, blank=True)
+    login_time = models.DateTimeField(auto_now=False, auto_now_add=True)
