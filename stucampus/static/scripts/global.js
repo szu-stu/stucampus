@@ -78,7 +78,7 @@
                     StuCampus._jump_to_refer();
                     return false;
                 }
-                if (response.status == 'form_errors'){
+                if (response.status == 'errors'){
                     StuCampus.alert(response.messages.join(', '), 2000);
                     return false;
                 }
@@ -108,7 +108,7 @@
                     StuCampus._jump_to_refer();
                     return false;
                 }
-                if (response.status == 'form_errors'){
+                if (response.status == 'errors'){
                     StuCampus.alert(response.messages.join(', '), 2000);
                     return false;
                 }
@@ -126,9 +126,7 @@
         url = '/account/signin';
         method = 'POST';
         data = {'email': email, 'password': password};
-        var status = {'success': '登录成功',
-                      'user_not_valid': '邮箱或密码错误',
-                      'user_not_active': '该用户被停用，'}
+        var status = {'success': '登录成功'}
         StuCampus.ajax(url, method, {'data': data, 'status': status});
     };
 
