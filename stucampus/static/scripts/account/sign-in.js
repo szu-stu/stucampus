@@ -1,7 +1,5 @@
 $(function(){
-    var status = {'success': '登录成功',
-                  'user_not_valid': '邮箱或密码错误',
-                  'user_not_active': '该用户被停用，'}
+    var status = {'success': '登录成功'}
 
     $S.ajaxForm($('#sign-in-form'), {'status': status});
 

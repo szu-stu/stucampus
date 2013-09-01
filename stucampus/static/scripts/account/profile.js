@@ -11,8 +11,6 @@ $(function () {
 
 $(function() {
     //绑定表单ajax
-    var status = {'success': '修改成功',
-                  'wrong_password': '密码错误',
-                  'passwords_not_match': '密码不匹配'}
+    var status = {'success': '修改成功'}
     $S.ajaxForm($('#changeInfor'), {'status': status});
 });
