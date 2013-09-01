@@ -20,9 +20,6 @@
                         <li>手机短号：{{ user.student.mphone_short_num | default:'暂无' }}</li>
                         <li>校园卡号：{{ user.student.szucard | default:'暂无' }}</li>
                         <li>加入日期：{{ user.date_joined | date:'Y-m-d' }}</li>
-                        {% if user.masterForOrganization %}
-                        <li>所管组织： {{ user.masterForOrganization }}</li>
-                        {% endif %}
                     </ul>
                 </div>
         </div>
