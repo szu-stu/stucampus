@@ -5,8 +5,9 @@ from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
 from stucampus.infor.models import Infor
+from stucampus.infor.services import post_infor, infor_update
 from stucampus.organization.models import Organization
-from stucampus.master.forms import InforCreateForm, InforEditForm
+from stucampus.infor.forms import InforPostForm, InforEditForm
 from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json, get_http_data
 
@@ -31,21 +32,12 @@ class PostInfor(View):
     @method_decorator(permission_required('infor.infor_create'))
     @method_decorator(user_passes_test(admin_group_check))
     def post(self, request):
-        form = InforCreateForm(request.POST)
+        form = InforPostForm(request.POST)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
-        title = request.POST['title']
-        content = request.POST['content']
-        organization_id = request.POST['organization_id']
-        author = request.user.student
-        try:
-            organization = Organization.objects.get(id=organization_id)
-        except Organization.DoesNotExist:
-            organization = None
-        Infor.objects.create(title=title, content=content,
-                             author=author, organization=organization)
+        post_infor(request, form.cleaned_data)
         return spec_json(status='success')
 
 
@@ -74,10 +66,7 @@ class Information(View):
         form = InforEditForm(data)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
-        infor.title = data['title']
-        infor.content = data['content']
-        infor.organization_id = data['organization_id']
-        infor.save()
+        infor_update(infor, form.cleaned_data)
         return spec_json(status='success')

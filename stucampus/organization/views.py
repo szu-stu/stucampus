@@ -16,7 +16,7 @@ def organization(request):
 
 
 @user_passes_test(org_manage_group_check)
-@permission_required('organization.organization_list')
+@permission_required('organization.organizations_list')
 def organization_manage(request):
     organzations = request.user.student.orgs_as_manager.all()
     return render(request, 'organization/list.html',
@@ -39,7 +39,7 @@ class EditOrganzation(View):
         form = OrganizationManageEditForm(request.POST)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
         org = get_object_or_404(Organization, id=id)
         org.url = request.POST['url']

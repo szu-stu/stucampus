@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.shortcuts import render
 from django.views.generic import View
 from django.utils.decorators import method_decorator
@@ -7,9 +5,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from stucampus.utils import spec_json, get_client_ip, get_http_data
+from stucampus.utils import spec_json, get_http_data
 from stucampus.custom.permission import guest_or_redirect
-from stucampus.account.models import Student, LogInfor
+from stucampus.account.models import Student
+from stucampus.account.services import (account_signin, account_signup,
+                                        account_update)
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
 
@@ -25,15 +25,11 @@ class SignIn(View):
         form = SignInForm(request.POST)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
         email = form.cleaned_data['email']
         password = form.cleaned_data['password']
-        user = authenticate(username=email, password=password)
-        login(request, user)
-        log_infor = LogInfor.objects.create(student=user.student)
-        log_infor.login_ip = get_client_ip(request)
-        log_infor.save()
+        account_signin(request, email, password)
         return spec_json(status='success')
 
 
@@ -55,18 +51,13 @@ class SignUp(View):
         form = SignUpForm(request.POST)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
         email = form.cleaned_data['email']
         password = form.cleaned_data['password']
+        account_signup(request, form.cleaned_data)
+        account_signin(request, email, password)
 
-        new_user = User.objects.create_user(email, email, password)
-        student = Student.objects.create(user=new_user)
-        student.screen_name, email_domain = email.split('@')
-        student.last_login_ip = get_client_ip(request)
-        student.save()
-        user = authenticate(username=email, password=password)
-        login(request, user)
         return spec_json(status='success')
 
 
@@ -82,21 +73,9 @@ class Profile(View):
         form = ProfileEditForm(data)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
-        user = request.user
-        user.student.true_name = data['true_name']
-        user.student.college = data['college']
-        user.student.screen_name = data['screen_name']
-        user.student.is_male = data['is_male']
-        user.student.mphone_num = data['mphone_num']
-        birthday = data['birthday']
-        if len(birthday) > 0:
-            user.student.birthday = datetime.strptime(birthday, '%Y-%m-%d')
-        user.student.mphone_short_num = data['mphone_short_num']
-        user.student.student_id = data['student_id']
-        user.student.szucard = data['szucard']
-        user.student.save()
+        account_update(request, request.user, form.cleaned_data)
         return spec_json(status='success')
 
 
@@ -121,7 +100,7 @@ class Password(View):
         form = PasswordForm(data)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
         current_user = request.user
         current_user.set_password(form.cleaned_data.get('new_password'))

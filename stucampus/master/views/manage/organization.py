@@ -1,13 +1,13 @@
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
-from stucampus.master.forms import AddOrganizationForm
-from stucampus.master.forms import AddOrganizationManagerForm
+from stucampus.organization.forms import AddOrganizationForm
+from stucampus.organization.forms import AddOrganizationManagerForm
 from stucampus.organization.models import Organization
+from stucampus.organization.services import organization_update
 from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json
 
@@ -32,11 +32,10 @@ class ListOrganzation(View):
         form = AddOrganizationForm(request.POST)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
         name = form.cleaned_data['name']
         phone = form.cleaned_data['phone']
-
         Organization.objects.create(name=name, phone=phone)
         return spec_json(status='success')
 
@@ -63,21 +62,15 @@ class OrganzationManager(View):
     @method_decorator(permission_required('organization.organization_create'))
     @method_decorator(user_passes_test(admin_group_check))
     def get(self, request, id):
-        org = get_object_or_404(Organization, id=id)
+        organization = get_object_or_404(Organization, id=id)
         form = AddOrganizationManagerForm(request.POST)
         if not form.is_valid():
             messages = form.errors.values()
-            return spec_json(status='form_errors', messages=messages)
+            return spec_json(status='errors', messages=messages)
 
         email = form.cleaned_data['email']
-        student = find_by_email(email)
+        user = get_object_or_404(User, username=email)
+        student = user.student
+        organization_update(student, organization)
 
-        if not org in student.orgs_as_member.all():
-            org.members.add(student)
-        org.managers.add(student)
-        try:
-            org_mng_group = Group.objects.get(name='organization_manager')
-        except Group.DoesNotExist:
-            org_mng_group = None
-        student.user.groups.add(org_mng_group)
         return spec_json(status='success')

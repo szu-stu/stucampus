@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
-from stucampus.master.forms import AccountBanForm
+from stucampus.account.forms import AccountBanForm
 from stucampus.account.models import Student
 from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json, get_http_data
