@@ -12,11 +12,10 @@ from stucampus.custom.permission import guest_or_redirect
 from stucampus.account.models import Student, LogInfor
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
-from stucampus.account.services import find_by_email, is_email_exist
 
 
 class SignIn(View):
-    '''View of account sign in page'''
+    """Class-base view to handle account sign in request"""
     @method_decorator(guest_or_redirect)
     def get(self, request):
         return render(request, 'account/sign-in.html')
@@ -28,15 +27,9 @@ class SignIn(View):
             messages = form.errors.values()
             return spec_json(status='form_errors', messages=messages)
 
-        email = request.POST['email']
-        password = request.POST['password']
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
         user = authenticate(username=email, password=password)
-        if user is None:
-            return spec_json(status='user_not_valid')
-
-        if not user.is_active:
-            return spec_json(status='user_not_active')
-
         login(request, user)
         log_infor = LogInfor.objects.create(student=user.student)
         log_infor.login_ip = get_client_ip(request)
@@ -48,8 +41,7 @@ class SignOut(View):
     '''View of account sign out page'''
     def post(self, request):
         logout(request)
-        status = 'success'
-        return spec_json(status)
+        return spec_json(status='success')
 
 
 class SignUp(View):
@@ -65,22 +57,16 @@ class SignUp(View):
             messages = form.errors.values()
             return spec_json(status='form_errors', messages=messages)
 
-        email = request.POST['email']
-        password = request.POST['password']
-        confirm = request.POST['confirm']
-        if not password == confirm:
-            return spec_json(status='passwords_not_match')
-
-        email_is_exist = is_email_exist(email)
-        if email_is_exist:
-            return spec_json(status='email_existed')
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
 
         new_user = User.objects.create_user(email, email, password)
         student = Student.objects.create(user=new_user)
         student.screen_name, email_domain = email.split('@')
         student.last_login_ip = get_client_ip(request)
         student.save()
-        login(username=email, password=password)
+        user = authenticate(username=email, password=password)
+        login(request, user)
         return spec_json(status='success')
 
 
@@ -138,14 +124,6 @@ class Password(View):
             return spec_json(status='form_errors', messages=messages)
 
         current_user = request.user
-        query_user = authenticate(username=current_user.username,
-                                  password=data['current_password'])
-        if query_user is None:
-            return spec_json(status='wrong_password')
-
-        if not data['new_password'] == data['confirm']:
-            return spec_json(status='passwords_not_match')
-
-        current_user.set_password(data['confirm'])
+        current_user.set_password(form.cleaned_data.get('new_password'))
         current_user.save()
         return spec_json(status='success')

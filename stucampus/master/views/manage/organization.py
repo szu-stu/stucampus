@@ -1,16 +1,14 @@
 from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
-from stucampus.master.services import get_group_by_name
-from stucampus.account.services import find_by_email
 from stucampus.master.forms import AddOrganizationForm
 from stucampus.master.forms import AddOrganizationManagerForm
 from stucampus.organization.models import Organization
 from stucampus.custom.permission import admin_group_check
-from stucampus.organization.services import is_org_exist, find_organization
 from stucampus.utils import spec_json
 
 
@@ -36,12 +34,10 @@ class ListOrganzation(View):
             messages = form.errors.values()
             return spec_json(status='form_errors', messages=messages)
 
-        data = request.POST
-        name = data['name']
-        if is_org_exist(name):
-            return spec_json(status='org_name_exist')
+        name = form.cleaned_data['name']
+        phone = form.cleaned_data['phone']
 
-        Organization.objects.create(name=name, phone=data['phone'])
+        Organization.objects.create(name=name, phone=phone)
         return spec_json(status='success')
 
 
@@ -56,13 +52,10 @@ class ShowOrganization(View):
     @method_decorator(permission_required('organization.organization_del'))
     @method_decorator(user_passes_test(admin_group_check))
     def delete(self, request, id):
-        org = find_organization(id)
-        if org is None:
-            return spec_json(status='org_not_exist')
-        else:
-            org.is_deleted = True
-            org.save()
-            return spec_json(status='success')
+        org = get_object_or_404(Organization, id=id)
+        org.is_deleted = True
+        org.save()
+        return spec_json(status='success')
 
 
 class OrganzationManager(View):
@@ -76,14 +69,15 @@ class OrganzationManager(View):
             messages = form.errors.values()
             return spec_json(status='form_errors', messages=messages)
 
-        email = request.POST['email']
+        email = form.cleaned_data['email']
         student = find_by_email(email)
-        if student is None:
-            return spec_json(status='email_not_exist')
 
         if not org in student.orgs_as_member.all():
             org.members.add(student)
         org.managers.add(student)
-        org_mng_group = get_group_by_name(name='organization_manager')
+        try:
+            org_mng_group = Group.objects.get(name='organization_manager')
+        except Group.DoesNotExist:
+            org_mng_group = None
         student.user.groups.add(org_mng_group)
         return spec_json(status='success')

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
 from stucampus.infor.models import Infor
-from stucampus.organization.services import find_organization
+from stucampus.organization.models import Organization
 from stucampus.master.forms import InforCreateForm, InforEditForm
 from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json, get_http_data
@@ -40,7 +40,10 @@ class PostInfor(View):
         content = request.POST['content']
         organization_id = request.POST['organization_id']
         author = request.user.student
-        organization = find_organization(organization_id)
+        try:
+            organization = Organization.objects.get(id=organization_id)
+        except Organization.DoesNotExist:
+            organization = None
         Infor.objects.create(title=title, content=content,
                              author=author, organization=organization)
         return spec_json(status='success')
