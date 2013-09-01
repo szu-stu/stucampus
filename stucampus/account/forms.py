@@ -60,20 +60,11 @@ class SignUpForm(d_forms.Form):
 
 
 class ProfileEditForm(d_forms.Form):
-    true_name = forms.CharField(label='真实姓名', required=False)
-    college = forms.CharField(label='学院', required=False)
-    screen_name = forms.CharField(label='昵称',
-                                  error_messages={'required': '昵称不能为空'})
-    is_male = forms.ChoiceField(label='性别',
-                                choices=((True, '男'), (False, '女')),
-                                error_messages={'required': '性别不能为空'})
-    student_id = forms.CharField(label='学号', max_length=10, required=False)
-    birthday = forms.DateTimeField(label='生日', required=False)
-    mphone_num = forms.CharField(label='手机长号',
-                                 max_length=11, required=False)
-    mphone_short_num = forms.CharField(label='手机短号',
-                                       max_length=6, required=False)
-    szucard = forms.CharField(label='校园卡号', max_length=6, required=False)
+    class Meta:
+        model = Student
+        fields = ('true_name', 'college', 'screen_name', 'is_male',
+                  'student_id', 'mphone_num', 'mphone_short_num', 'szucard',
+                  'birthday')
 
 
 class PasswordForm(d_forms.Form):
@@ -107,3 +98,13 @@ class PasswordForm(d_forms.Form):
         if not password == confirm:
             raise d_forms.ValidationError('确认密码不匹配')
         return confirm
+
+
+class AccountBanForm(d_forms.Form):
+    ban = forms.BooleanField(error_messages={'required': '数据出错！'})
+
+    def clean_ban(self):
+        ban = self.cleaned_data.get('ban')
+        if not ban:
+            raise d_forms.ValidationError('参数出错！')
+        return ban
