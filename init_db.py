@@ -18,7 +18,8 @@ get_content_type = ContentType.objects.get
 
 def run():
     # Content_type for permissions
-    student_model_content_type = get_content_type(app_label='account')
+    student_model_content_type = get_content_type(app_label='account',
+                                                  model='student')
     organization_content_type = get_content_type(app_label='organization')
     infor_content_type = get_content_type(app_label='infor')
 
