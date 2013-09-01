@@ -23,7 +23,7 @@ def run():
     infor_content_type = get_content_type(app_label='infor')
 
     # Permissions for student
-    student_list = create_perm(codename='student_list',
+    students_list = create_perm(codename='students_list',
                                name='List all students',
                                content_type=student_model_content_type)
     student_show = create_perm(codename='student_show',
@@ -40,7 +40,7 @@ def run():
                               content_type=student_model_content_type)
 
     # Permissions for organizations
-    organization_list = create_perm(codename='organization_list',
+    organizations_list = create_perm(codename='organizations_list',
                                     name='List all organizations.',
                                     content_type=organization_content_type)
     organization_show = create_perm(codename='organization_show',
@@ -57,10 +57,10 @@ def run():
                                    content_type=organization_content_type)
 
     # Permissions for organization managers.
-    manager_list = create_perm(codename='org_manager_list',
+    managers_list = create_perm(codename='org_managers_list',
                                name='List all managers of a organization.',
                                content_type=student_model_content_type)
-    managers_create = create_perm(codename='org_manager_create',
+    manager_create = create_perm(codename='org_manager_create',
                                   name='Create new manager.',
                                   content_type=student_model_content_type)
     managers_del = create_perm(codename='org_manager_del',
@@ -68,7 +68,7 @@ def run():
                                content_type=student_model_content_type)
 
     # Permissions for organization members
-    member_list = create_perm(codename='member_list',
+    members_list = create_perm(codename='members_list',
                               name='List the members in a organization.',
                               content_type=student_model_content_type)
     member_show = create_perm(codename='member_show',
@@ -82,7 +82,7 @@ def run():
                              content_type=student_model_content_type)
 
     # Permission for infor
-    infor_list = create_perm(codename='infor_list',
+    infors_list = create_perm(codename='infors_list',
                              name='List all informations',
                              content_type=infor_content_type)
     infor_show = create_perm(codename='infor_show',
@@ -129,7 +129,7 @@ def run():
     for perm in perms:
         admin_group.permissions.add(perm)
 
-    organization_manager_group.permissions.add(organization_list,
+    organization_manager_group.permissions.add(organizations_list,
                                                organization_show,
                                                organization_edit,
                                                organization_del)

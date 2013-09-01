@@ -13,7 +13,7 @@ from stucampus.utils import spec_json, get_http_data
 
 class ListAccount(View):
 
-    @method_decorator(permission_required('account.student_list'))
+    @method_decorator(permission_required('account.students_list'))
     @method_decorator(user_passes_test(admin_group_check))
     def get(self, request):
         students = Student.objects.all()

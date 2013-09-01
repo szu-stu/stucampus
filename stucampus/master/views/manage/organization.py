@@ -16,7 +16,7 @@ from stucampus.utils import spec_json
 
 class ListOrganzation(View):
 
-    @method_decorator(permission_required('organization.organization_list'))
+    @method_decorator(permission_required('organization.organizations_list'))
     @method_decorator(user_passes_test(admin_group_check))
     def get(self, request):
         orgs = Organization.objects.all()

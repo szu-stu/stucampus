@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 from stucampus.utils import spec_json, get_client_ip, get_http_data
 from stucampus.custom.permission import guest_or_redirect
-from stucampus.account.models import Student
+from stucampus.account.models import Student, LogInfor
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
 from stucampus.account.services import find_by_email, is_email_exist
@@ -36,11 +36,11 @@ class SignIn(View):
 
         if not user.is_active:
             return spec_json(status='user_not_active')
-        
+
         login(request, user)
-        user.student.login_count = user.student.login_count + 1
-        user.student.last_login_ip = get_client_ip(request)
-        user.student.save()
+        log_infor = LogInfor.objects.create(student=user.student)
+        log_infor.login_ip = get_client_ip(request)
+        log_infor.save()
         return spec_json(status='success')
 
 
