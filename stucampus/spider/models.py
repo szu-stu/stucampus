@@ -33,9 +33,9 @@ class Announcement(django.db.models.Model):
         return self.content
 
     @classmethod
-    def fetch_new_announcement(cls):
+    def fetch_new_announcement(cls, days=1):
         num_of_new_get = 0
-        for announcement in search_announcements(days=90):
+        for announcement in search_announcements(days):
             try:
                 announcement.save()
                 num_of_new_get += 1

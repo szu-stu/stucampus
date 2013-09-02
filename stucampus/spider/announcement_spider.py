@@ -70,6 +70,21 @@ def factory_announcement(element):
                                                 category=category,
                                                 url_id=url_id)
 
+def get_announcement_content(url_id):
+    url = 'http://www.szu.edu.cn/board/view.asp?id=' + url_id
+    html = get_html(url, 'gbk')
+    left_tag = (r'<td align=center height=30 style="font-size: 9pt">'
+                r'<font color=#808080>')
+    right_tag = (r'<td height="50" align="right"><table border="0" ce'
+                 r'llpadding="0" cellspacing="0" width="90%">')
+    text_mixed_with_tags = find_content_between_two_tags(left_tag, right_tag,
+                                                         html, r'[\s\S]+?')
+    row_text = delete(r'<.+?>', text_mixed_with_tags)
+    row_text = delete('\r', row_text)
+    row_text = delete(r'&nbsp;', row_text)
+    row_text = re.sub('\n+', '\n',  row_text)
+    return row_text
+
 
 def get_announcement_content(url_id):
     url = BOARD_URL + 'view.asp?id=' + url_id
@@ -78,4 +93,6 @@ def get_announcement_content(url_id):
     element_contain_content = etree.xpath('/html/body/table/tr[2]/td/table/'
                                           'tr[3]/td/table/tr[2]/td/table/tr[3]'
                                           )[0]
-    return ''.join(element_contain_content.xpath('td//text()'))
+    content = element_contain_content.text_content()
+    #content = ''.join(element_contain_content.xpath('td//text()'))
+    return content.replace('\r', '\n')

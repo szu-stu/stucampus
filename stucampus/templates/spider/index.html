@@ -1,21 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-    <head>
-    </head>
-    <body>
-        <a href="{% url 'spider:update' %}">update</a>
-        <ul>       
-            {% for a in page %}
-            <li>
-            {{ a.published_date|date:"D n d"}}
-            <a href="http://www.szu.edu.cn/board/view.asp?id={{ a.url_id }}">
-                {{ a.title }}
-            </a>
-            </li>
-            {% endfor %}
-        </ul>
-
-            <a href="{% url 'spider:index' %}"> home page </a>&nbsp
-
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link href="document.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <!-- 标题  Begin -->
+        <div class="header">MESSAGE</div>
+        <!-- 标题  End -->
+        {% for a in page %}
+        <!-- 信息列表  Begin -->
+        <div class="banner">
+            <div class="ban_class_who_date">类别</div>
+            <div class="ban_class_who_date">发文单位</div>
+            <div class="ban_ele">标题</div>
+            <div class="ban_class_who_date">日期</div>
+        </div>
+        <!-- 消息  Begin -->
+        <div class="list odd">
+            <div class="class_who_date">{{ a.category }}</div>
+            <div class="class_who_date">{{ a.publisher }}</div>
+            <a href="http://www.szu.edu.cn/board/view.asp?id={{ a.url_id }}" class="ele">{{ a.title }}</a>
+            <div class="class_who_date">{{ a.published_date|date:"D-n-d"}}</div>
+        </div>
+        <!-- 消息  End -->
+        {% endfor %}
+        <!-- 信息列表  End -->
             {% if page.has_previous %}
             <a href="?page={{ page.previous_page_number }}"> last page </a>
             {% endif %}
@@ -27,5 +38,6 @@
             {% endif %}
 
             <a href="?page={{ page.paginator.num_pages }}"> end page </a>
-    </body>
+    </div>
+</body>
 </html>

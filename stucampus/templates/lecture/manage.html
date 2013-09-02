@@ -1,60 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <style>
-            input{
-                display: block;
-            }
-            .message{
-                width: 300px;
-                overflow: hidden;
-                margin-top: 30px;
-                padding: 30px;
-            }
-            .not_delete{
-                background-color: #789262;
-            }
-            .is_delete{
-                background-color: #c3272b;
-            }
-            .url{
-                margin: 5px;
-                text-align: center;
-                display: block;
-                background-color: #972932;
-                font-weight: 900;
-                width: 90px;
-                color: #000000;
-            }
-            .hidden{
-                display: none;
-            }
-        </style>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <link href="Message.css" rel="stylesheet" type="text/css">
     </head>
-    <body>
-        <a href="{% url 'lecture:add_new' %}">add lecture</a>
-        <a href="{% url 'lecture:index' %}">table</a>
-        <a href="{% url 'lecture:update' %}">update</a>
-        <form method="POST" action="{% url 'lecture:submit' %}">
+    
+<body>
+    <!-- 浮动链接  Begin -->
+    <div class="float">
+        <a class="float_link" href="{% url 'lecture:add_new' %}">add</a>
+        <a class="float_link" href="{% url 'lecture:index' %}">table</a>
+    </div>
+    <!-- 浮动链接  End -->
+    <div class="container">
+        <!-- 标题  Begin -->
+        <div class="header">MESSAGE</div>
+        <!-- 标题  End -->
+        <!-- 信息列表  Begin -->
+        <form method="POST" action="/lecture/submit">
         {% csrf_token %}
-            {{ formset.management_form }}
-            {% for form in formset %}
+        {{ formset.management_form }}
+            
+        {% for form in formset %}
+            <!-- 信息 Begin-->
 
-            {% if form.is_delete.value %}
+        {% if form.is_delete.value %}
             <div class="message is_delete">
-            {% else %}
+        {% else %}
             <div class="message not_delete">
-            {% endif %}
-                {{ form.id }}
-                <div>title{{ form.tilte.errors }}{{ form.title }}</div>
-                <div>place{{ form.place.errors }}{{ form.place }}</div>
-                <div>date time{{ form.date_time.errors }}{{ form.date_time }}</div>
-                <div class="hidden">{{ form.url_id }}</div>
-                <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">wang zhi</a>
-                <div>check{{ form.is_check }}</div>
-                <div>delete{{ form.is_delete }}</div>
+        {% endif %}
+
+            {{ form.id }}
+                <div class="box">
+                    <input id="id_form-0-id" name="form-0-id" type="hidden" value="1" />
+                    <div class="meslist">
+                        <div class="text">标题</div>
+                        {{ form.tilte.errors }}{{ form.title }}
+                    </div>
+                    <div class="meslist">
+                        <div class="text">地点</div>
+                        {{ form.place.errors }}{{ form.place }}
+                    </div>
+                    <div class="meslist">
+                        <div class="text">日期时间</div>
+                        {{ form.date_time.errors }}{{ form.date_time }}
+                    </div>
+                    <div class="line"></div>
+                    <div class="hidden">{{ form.url_id }}</div>
+                    <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">~公文通~</a>
+                <div class="chose check">已核{{ form.is_check }}</div>
+                <div class="chose delete">删除{{ form.is_delete }}</div>
+                </div>   
             </div>
-            {% endfor %}
-            <input type="submit" value="submit" />
+            <!-- 信息  End -->
+        {% endfor %}
+            <!-- submit按钮  Begin -->
+            <div class="linedec"></div>
+            <div style=margin-top:50px;margin-bottom:100px;text-align:center><input class="button" type="submit" value="submit" /></div>
+            <!-- submit按钮  End -->
         </form>
-    </body>
+        <!-- 信息列表  End -->
+    </div> 
+</body>
 </html>

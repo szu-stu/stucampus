@@ -2,9 +2,10 @@
 from datetime import datetime, timedelta
 from django.utils import timezone
 import django.db.models
+from django.db import IntegrityError
 
 from stucampus.custom import models
-from stucampus.lecture.implementation import get_lecture_messages
+from stucampus.lecture.implementation import fetch_lecture_messages
 
 
 class LectureMessage(django.db.models.Model):
@@ -20,7 +21,7 @@ class LectureMessage(django.db.models.Model):
     is_delete = models.BooleanField(default=False)
 
     @classmethod
-    def add_new_message_from_announcement(cls):
+    def add_new_lecture_from_announcement(cls):
         count_get = 0
         stop_mark = cls.get_latest_url_id_in_db()
         for lm in fetch_lecture_messages():
@@ -32,7 +33,10 @@ class LectureMessage(django.db.models.Model):
                                   place=lm['place'],
                                   url_id=lm['url_id'],
                                   url_id_backup=lm['url_id'])
-            lecture_message.save()
+            try:
+                lecture_message.save()
+            except IntegrityError:
+                raise Exception('repeat saveing:'+lecture_message.url_id)
         return count_get
 
     @classmethod
@@ -69,7 +73,7 @@ class LectureMessage(django.db.models.Model):
 
     @classmethod
     def get_messages_this_week(cls):
-        now = timezone.now()
+        now = datetime.now()
         date_of_this_Monday = now - timedelta(days=now.weekday())
         date_of_next_Monday = date_of_this_Monday + timedelta(days=7)
         return cls.objects.filter(date_time__gte=date_of_this_Monday,

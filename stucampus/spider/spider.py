@@ -33,7 +33,7 @@ def fetch_html_by_post(url, form_data, encoding=None):
     return response.text
 
 
-def fing_content_between_two_marks(left_tag, right_tag,
+def find_content_between_two_marks(left_tag, right_tag,
                                   text, to_search=r'.*?'):
     reg = left_tag + r'(?P<content>' + to_search + r')' + right_tag
     match = re.search(reg, text)

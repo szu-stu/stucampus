@@ -1,0 +1,100 @@
+            *{
+                margin:0px;
+                padding: 0px;
+            }
+            body{
+                background-color: #fdeff2;
+            }
+            .container{
+                width: 900px;
+                position: relative;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+            .title{
+                width: 100%;
+                height: 41px;
+                font-family: "微软雅黑";
+                color: #007bbb;
+                font-size: 40px;
+                position: relative;
+                text-align: center;
+                margin-top: 58px;
+            }
+            .main{
+                width: 100%;
+                height: 450px;
+                background: url(blue.png) repeat-x top left;
+                background-color: #a0d8ef;
+                position: relative;
+                margin-bottom: 58px;
+                overflow: hidden;            
+            }
+            .text_container{
+                width: 840px; 
+                height: 340px;
+                position: relative;
+                margin: 80px 30px 0px 30px;
+                overflow: hidden;
+            }
+            .meslist{
+                width: 100%;
+                height: 50px;
+                position: relative;
+                overflow: hidden;
+            }
+            .text{
+                width: 100px;
+                height: 100%;
+                position: relative;
+                margin-right: 10px;
+                float: left;
+                font-family: "微软雅黑";
+                font-size: 22px;
+                color: #ffffff;
+                text-align: center;
+                line-height: 50px;
+                vertical-align: middle;
+            }
+            .textbox{
+                font-family: "Microsoft Yahei";
+                font-size: 18px;
+                width: 610px;
+                height: 30px;
+                position: relative;
+                margin-top: 10px;
+                float: left;
+            }
+            .chose{
+                height: 30px;
+                font-family: "微软雅黑";
+                font-size: 22px;
+                color: #ffffff;
+                line-height: 30px;
+                vertical-align: middle;
+                position: absolute;
+                bottom: 90px;
+                overflow: hidden;
+            }
+            .check{
+                left: 200px;
+            }
+            .delete{
+                right: 200px;
+            }
+            .tick{
+                margin-left: 5px;
+            }
+            .button{
+                font-family: "微软雅黑";
+                font-size: 24px;
+                color: #ffffff;
+                display: inline-block;
+                background-color:#007bbb;
+                height: 50px;
+                width: 280px;
+                border-width: 0;
+                border-radius: 5px;
+                cursor: pointer;
+                box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+            }
