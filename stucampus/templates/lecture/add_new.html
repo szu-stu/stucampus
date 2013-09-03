@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-        <link href="AddLecture.css" rel="stylesheet" type="text/css">
+        {% load html_tools %}
+        {{ 'lecture/AddLecture.css' | as_css }}
     </head>
     <body>
         <div class="container">

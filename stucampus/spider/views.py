@@ -21,7 +21,7 @@ def index(request):
 
 
 def update(request):
-    num_of_update = Announcement.fetch_new_announcement(90)
+    num_of_update = Announcement.fetch_new_announcement(30)
     return HttpResponse(str(num_of_update))
 
 
