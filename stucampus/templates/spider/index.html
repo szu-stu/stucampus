@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    <link href="document.css" rel="stylesheet" type="text/css">
+    {% load html_tools %}
+    {{ 'spider/document.css' | as_css }}
 </head>
 <body>
     <div class="container">
         <!-- 标题  Begin -->
         <div class="header">MESSAGE</div>
         <!-- 标题  End -->
-        {% for a in page %}
         <!-- 信息列表  Begin -->
         <div class="banner">
             <div class="ban_class_who_date">类别</div>
@@ -17,8 +17,9 @@
             <div class="ban_ele">标题</div>
             <div class="ban_class_who_date">日期</div>
         </div>
+        {% for a in page %}
         <!-- 消息  Begin -->
-        <div class="list odd">
+        <div class="list {% cycle 'odd' 'even' %}">
             <div class="class_who_date">{{ a.category }}</div>
             <div class="class_who_date">{{ a.publisher }}</div>
             <a href="http://www.szu.edu.cn/board/view.asp?id={{ a.url_id }}" class="ele">{{ a.title }}</a>

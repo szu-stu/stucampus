@@ -76,7 +76,7 @@ def get_title(content):
 
 PLACE_PATTERN = (
     (u'讲座地点：' + WHITESPACE, u'\n'),
-    (u'报告地点：' + WHITESPACE, u''),
+    (u'报告地点：' + WHITESPACE, u'\n'),
     (u'地点：' + WHITESPACE, u'\n'),
     )
 

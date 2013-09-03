@@ -40,7 +40,7 @@ class Announcement(django.db.models.Model):
                 announcement.save()
                 num_of_new_get += 1
             except IntegrityError:
-                raise Exception('repeat saving:'+announcement['url_id'])
+                raise Exception('repeat saving:'+announcement.url_id)
         return num_of_new_get
 
     @classmethod
