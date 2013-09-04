@@ -4,7 +4,17 @@
     <body>
         <form method="post" action="{% url 'activity:submit' %}">
             {% csrf_token %}
-            {{ formset.as_ul }}
+            {{ formset.management_form }}
+
+            {% for form in formset %}
+            {{ form.id }}
+
+            {{ form.tilte.errors }}{{ form.title }}
+            {{ form.date_time.errors }}{{ form.date_time }}
+            {{ form.place.errors }}{{ form.place }}
+            {{ form.summary.errors }}{{ form.summary }}
+
+            {% endfor %}
             <input type="submit" value="submit"/>
         </form>
     </body>

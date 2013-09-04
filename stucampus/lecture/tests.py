@@ -18,6 +18,7 @@ from stucampus.lecture.implementation import get_place, get_time, get_date
 from stucampus.lecture.implementation import get_datetime
 from stucampus.lecture.implementation import search_lecture_announcement
 
+
 class ParseTest(TestCase):
     def test_parse(self):
         url_id_all = ('264016', '260145', '259928', '258344', '257332', '256927', '256700', '258106')

@@ -16,6 +16,7 @@ class LectureMessage(django.db.models.Model):
     speaker = models.CharField(max_length=40, blank=True)
 
     url_id = models.CharField(max_length=20, unique=True)
+    down_date = models.DateTimeField(editable=False)
     url_id_backup = models.CharField(max_length=20, unique=True,
                                      editable=False)
     is_check = models.BooleanField(default=False)
@@ -74,7 +75,7 @@ class LectureMessage(django.db.models.Model):
 
     @classmethod
     def get_messages_this_week(cls):
-        now = datetime.now()
+        now = timezone.now()
         date_of_this_Monday = now - timedelta(days=now.weekday())
         date_of_next_Monday = date_of_this_Monday + timedelta(days=7)
         return cls.objects.filter(date_time__gte=date_of_this_Monday,

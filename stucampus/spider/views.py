@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.views import generic
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator, InvalidPage
 
 from stucampus.spider.models import Announcement
 
@@ -13,15 +13,13 @@ def index(request):
     page_num = request.GET.get('page')
     try:
         current_page = paginator.page(page_num)
-    except PageNotAnInteger:
+    except InvalidPage:
         current_page = paginator.page(1)
-    except EmptyPage:
-        current_page = paginator.page(paginator.num_pages)
     return render(request, 'spider/index.html', {'page': current_page})
 
 
 def update(request):
-    num_of_update = Announcement.fetch_new_announcement(30)
+    num_of_update = Announcement.fetch_new_announcement(182)
     return HttpResponse(str(num_of_update))
 
 

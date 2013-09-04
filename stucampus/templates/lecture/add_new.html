@@ -17,20 +17,32 @@
                         {% csrf_token %}
                         <div class="meslist">
                             <div class="text">标题</div>
-                            {{ form.title.errors }}{{ form.title }}
+                            {% for error in form.title.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                            {{ form.title }}
                         </div>
                         <div class="meslist">
                             <div class="text">地点</div>
-                            {{ form.place.errors }}{{ form.place }}
+                            {% for error in form.place.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                            {{ form.place }}
                         </div>
                         <div class="meslist">
                             <div class="text">日期时间</div> 
-                            {{ form.date_time.errors }}{{ form.date_time }}
+                            {% for error in form.date_time.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                            {{ form.date_time }}
                             <div class="text" style=width:120px;font-size:14px;margin-right:0px>如2013-9-1 21:22</div>
                         </div>
                         <div class="meslist">
                             <div class="text">URL ID</div>
-                            {{ form.url_id.errors }} {{ form.url_id }}
+                            {% for error in form.url_id.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                            {{ form.url_id }}
                         </div>
                         <div class="chose check">已核 {{ form.is_check }}</div>
                         <div class="chose delete">删除 {{ form.is_delete }}</div>

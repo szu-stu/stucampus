@@ -3,6 +3,7 @@ from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import RequestContext
+from django.core.paginator import Paginator, InvalidPage
 
 from stucampus.lecture.models import LectureMessage
 from stucampus.lecture.forms import LectureForm, LecureFormSet
@@ -15,12 +16,17 @@ def index(request):
 
 def manage(request):
     formset = LecureFormSet(queryset=LectureMessage.get_messages_this_week())
-    return render_to_response('lecture/manage.html', {'formset': formset},
-                              context_instance=RequestContext(request))
+    return render(request, 'lecture/manage.html', {'formset': formset})
 
 def manage_all(request):
     formset = LecureFormSet()
-    return render(request, 'lecture/manage.html', {'formset': formset})
+    paginator = Paginator(formset, 2)
+    page_num = request.GET.get('page')
+    try:
+        current_page = paginator.page(page_num)
+    except InvalidPage:
+        current_page = paginator.page(1)
+    return render(request, 'lecture/manage_all.html', {'page': current_page})
 
 
 def submit(request):

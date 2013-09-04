@@ -22,7 +22,7 @@
         {% csrf_token %}
         {{ formset.management_form }}
             
-        {% for form in page %}
+        {% for form in formset %}
             <!-- 信息 Begin-->
 
         {% if form.is_delete.value %}
