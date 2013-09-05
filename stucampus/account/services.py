@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db import models
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
@@ -13,9 +14,8 @@ def account_signin(request, email, password):
         return False
     else:
         login(request, user)
-        log_infor = LogInfor.objects.create(student=user.student)
-        log_infor.login_ip = get_client_ip(request)
-        log_infor.save()
+        log_infor = LogInfor.objects.create(student=user.student,
+                                            login_ip=get_client_ip(request))
     return True
 
 
@@ -23,10 +23,8 @@ def account_signup(request, cleaned_data):
     email = cleaned_data['email']
     password = cleaned_data['password']
     new_user = User.objects.create_user(email, email, password)
-    student = Student.objects.create(user=new_user)
-    student.screen_name, email_domain = email.split('@')
-    studnet.last_login_ip = get_client_ip(request)
-    student.save()
+    screen_name, email_domain = email.split('@')
+    student = Student.objects.create(user=new_user, screen_name=screen_name)
 
 
 def account_update(request, user, cleaned_data):
