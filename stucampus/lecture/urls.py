@@ -1,6 +1,6 @@
 from django.conf.urls import url, patterns
 from stucampus.lecture.views import index, manage, manage_all, submit
-from stucampus.lecture.views import delete, update, add_new
+from stucampus.lecture.views import delete, update, add_lecture
 
 
 urlpatterns = patterns(
@@ -11,5 +11,5 @@ urlpatterns = patterns(
     url(r'^submit/$', submit, name='submit'),
     url(r'^update/$', update, name='update'),
     url(r'^delete/$', delete, name='delete'),
-    url(r'^add_new/$', add_new, name='add_new'),
+    url(r'^add_lecture/$', add_lecture, name='add_lecture'),
 )

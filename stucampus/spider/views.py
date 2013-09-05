@@ -18,11 +18,13 @@ def index(request):
     return render(request, 'spider/index.html', {'page': current_page})
 
 
+# for debug
 def update(request):
-    num_of_update = Notification.fetch_new_notification(182)
+    num_of_update = Notification.fetch_new_notification(30)
     return HttpResponse(str(num_of_update))
 
 
+# for debug
 def delete(request):
     Notification.objects.all().delete()
     return HttpResponseRedirect(reverse('spider:index'))

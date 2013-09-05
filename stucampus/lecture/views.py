@@ -39,7 +39,7 @@ def submit(request):
     return HttpResponseRedirect(reverse('lecture:manage'))
 
 
-def add_new(request):
+def add_lecture(request):
     form = LectureForm()
     if request.method == 'POST':
         form = LectureForm(request.POST)
@@ -53,8 +53,8 @@ def add_new(request):
 
 # just used for debug
 def update(request):
-    LectureMessage.add_new_lecture_from_notification()
-    return HttpResponseRedirect(reverse('lecture:manage'))
+    num = LectureMessage.add_new_lecture_from_notification()
+    return HttpResponse(num)
 
 
 # just used for debug

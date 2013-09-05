@@ -7,7 +7,7 @@ from stucampus.spider.models import Notification
 from stucampus.spider.spider import find_content_between_two_marks, MatchError
 
 
-def fetch_lecture_messages():
+def fetch_lecture():
     academic_notif= Notification.objects.filter(category=u'学术')
     lecture_notif= search_lecture_notification(academic_notif)
     lecture_messages = []
@@ -15,6 +15,7 @@ def fetch_lecture_messages():
         lecture_infor_dict = parse_content(notif.get_content())
         lecture_infor_dict['url_id'] = notif.url_id
         lecture_messages.append(lecture_infor_dict)
+    lecture_messages.reverse()
     return lecture_messages
 
 

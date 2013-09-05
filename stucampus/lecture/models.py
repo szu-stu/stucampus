@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+from itertools import chain
 from datetime import datetime, timedelta
 from django.utils import timezone
 import django.db.models
@@ -6,7 +7,7 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
 from stucampus.custom import models
-from stucampus.lecture.implementation import fetch_lecture_messages
+from stucampus.lecture.implementation import fetch_lecture
 
 
 class LectureMessage(django.db.models.Model):
@@ -30,19 +31,23 @@ class LectureMessage(django.db.models.Model):
         except ObjectDoesNotExist:
             stop_mark = None
 
-        for count_get, lm in enumerate(fetch_lecture_messages()):
-            if lm['url_id'] == stop_mark:
+        count_get = 0
+        for lect in fetch_lecture():
+            if lect['url_id'] == stop_mark:
                 break
-            lecture_message = cls(title=lm['title'],
-                                  date_time=lm['date_time'],
-                                  place=lm['place'],
-                                  speaker=lm['speaker'],
-                                  url_id=lm['url_id'],
-                                  url_id_backup=lm['url_id'])
-            try:
-                lecture_message.save()
-            except IntegrityError:
-                raise Exception('repeat saveing:'+lecture_message.url_id)
+            raise Exception(lect['url_id'])
+            lecture, created = cls.objects.get_or_create(
+                url_id=lect['url_id'])
+
+            lecture.title = lect['title']
+            lecture.date_time = lect['date_time']
+            lecture.place = lect['place']
+            lecture.speaker = lect['speaker'],
+            lecture.download_date = timezone.now().isoformat()
+            lecture.url_id_backup = lect['url_id']
+
+            lecture.save()
+            count_get += 1
         return count_get
 
     @classmethod
@@ -88,4 +93,4 @@ class LectureMessage(django.db.models.Model):
         msg_fetch_this_week = cls.objects.filter(
             download_date__gte=date_of_this_Monday,
             download_date__lt=date_of_next_Monday)
-        return lecture_held_this_week + msg_fetch_this_week
+        return lecture_held_this_week | msg_fetch_this_week

@@ -13,14 +13,14 @@ def index(request):
                               {'activities': activities})
 
 
-def add_message(request):
+def add_activity(request):
     form = ActivityMessageForm()
     if request.method == 'POST':
         form = ActivityMessageForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('activity:index'))
-    return render(request, 'activity/add_message.html', {'form': form})
+    return render(request, 'activity/add_activity.html', {'form': form})
 
 
 def manage(request):

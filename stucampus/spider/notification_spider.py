@@ -75,7 +75,7 @@ def get_notification_content(url_id):
     url = BOARD_URL + 'view.asp?id=' + url_id
     html = fetch_html_by_get(url, encoding='gbk')
     etree = lxml.html.fromstring(html)
-    xp = '/html/body/table/tr[2]/tdtable/tr[3]/td/table/tr/td/table/tr[3]'
+    xp = '/html/body/table/tr[2]/td/table/tr[3]/td/table/tr/td/table/tr[3]'
     try:
         element_contain_content = etree.xpath(xp)[0]
     except IndexError:
