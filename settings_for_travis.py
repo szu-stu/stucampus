@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'tmp/stucampus-dev.sqlite',
+        'NAME': '/tmp/stucampus-dev.sqlite',
     }
 }
 
@@ -50,7 +50,7 @@ STATICFILES_FINDERS = (
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-SECRET_KEY = '$dgly%@&wkwx*rxdf-c=0js1@)xo9ex6f7)r@&w_&81_xka(r7'
+SECRET_KEY = '###TODO:GENERATE-A-SECRET-KEY###'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
