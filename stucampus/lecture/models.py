@@ -16,7 +16,7 @@ class LectureMessage(django.db.models.Model):
     speaker = models.CharField(max_length=40, blank=True)
 
     url_id = models.CharField(max_length=20, unique=True)
-    down_date = models.DateTimeField(editable=False)
+    download_date = models.DateTimeField(editable=False)
     url_id_backup = models.CharField(max_length=20, unique=True,
                                      editable=False)
     is_check = models.BooleanField(default=False)
@@ -78,8 +78,12 @@ class LectureMessage(django.db.models.Model):
         now = timezone.now()
         date_of_this_Monday = now - timedelta(days=now.weekday())
         date_of_next_Monday = date_of_this_Monday + timedelta(days=7)
-        return cls.objects.filter(date_time__gte=date_of_this_Monday,
-                                  date_time__lt=date_of_next_Monday)
+        messages = cls.objects.filter(date_time__gte=date_of_this_Monday,
+                                      date_time__lt=date_of_next_Monday)
+        messages.extend(cls.objects.filter(
+            download_date__gte=date_of_this_Monday,
+            download_date__lt=date_of_next_Monday)
+        return messages
 
     @classmethod
     def get_latest_url_id_in_db(cls):

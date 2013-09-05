@@ -21,7 +21,9 @@
     <body>
         {% for message in message_list %}
         <div class="message red">
+            {% if message.picture_file %}
             <img src="{{ message.picture_file.url }}"/>
+            {% endif %}
             <span class="detail">{{ message.item_name }}</span>
             <span class="detail">{{ message.place }}</span>
             <span class="detail">{{ message.description }}</span>
