@@ -1,45 +1,65 @@
 #-*- coding: utf-8 -*-
-from django import forms as d_forms
+from django import forms
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _lazy
 
-from stucampus.custom import forms
 from stucampus.account.models import Student
 from stucampus.organization.models import Organization
 
 
-class OrganizationManageEditForm(d_forms.Form):
-    phone = forms.CharField(label='联系电话', required=False,
-                            error_messages={'required': '请输入联系电话'})
-    url = forms.CharField(label='官方主页', max_length=50, required=False,
-                          error_messages={'required': '密码不能为空'})
-    logo = forms.CharField(label='Logo', required=False,
-                           error_messages={'required': 'Logo不能为空'})
+EMAIL_LABEL = _lazy(u'Email address of organization manager')
+PHONE_LABEL = _lazy(u'Phone number')
+URL_LABEL = _lazy(u'Homepage of organization')
+LOGO_LABEL = _lazy(u'Logo of organization')
+ORGANIZATION_NAME_LABEL = _lazy('Name of organization')
+ORGANIZATION_PHONE_LABEL = _lazy('Phone of organization manager')
+
+EMAIL_REQUIRED = _lazy(u'Email address is required.')
+PHONE_REQUIRED = _lazy(u'Phone number is required.')
+ORGANIZATION_NAME_REQUIRED = _lazy(u'The name of organization is required.')
+
+URL_MAX_LENGTH_MSG = _lazy(u'URL of homepage must less than 50 characters.')
+ORGANIZATION_NAME_MAX_LENGTH_MSG = _lazy(u'URL of homepage must less than '
+                                         '20 characters.')
+PHONE_MAX_LENGTH_MSG = _lazy(u'Phone number must less than 11 digitals.')
+
+ORGANIZATION_EXISTS = _lazy(u'Organization is already exists.')
 
 
-class AddOrganizationForm(d_forms.Form):
-    name = forms.CharField(max_length=20,
+class OrganizationManageEditForm(forms.Form):
+    phone = forms.CharField(
+        label=PHONE_LABEL, max_length=11,
+        error_messages={'required': PHONE_REQUIRED,
+                        'max_length': PHONE_MAX_LENGTH_MSG})
+    url = forms.CharField(label=URL_LABEL, max_length=50, required=False,
+                          error_messages={'max_length': URL_MAX_LENGTH})
+    logo = forms.CharField(label=LOGO_LABEL, required=False)
+
+
+class AddOrganizationForm(forms.Form):
+    name = forms.CharField(label=ORGANIZATION_NAME_LABEL, max_length=20,
                            error_messages={
-                               'required': '组织名称不能为空',
-                               'max_length': '组织名称不能超过20个字'})
-    phone = forms.CharField(max_length=11,
+                               'required': ORGANIZATION_NAME_REQUIRED,
+                               'max_length': ORGANIZATION_NAME_MAX_LENGTH_MSG})
+    phone = forms.CharField(label=ORGANIZATION_PHONE_LABEL, max_length=11,
                             error_messages={
-                                'required': '联系电话不能为空',
-                                'max_length': '联系电话不能大于11个字符'})
+                                'required': PHONE_REQUIERD
+                                'max_length': PHONE_MAX_LENGTH_MSG})
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
-        count = Organization.objects.filter(name=name).count()
-        if count > 0:
-            raise d_forms.ValidationError('该组织已存在')
+        if Organization.objects.filter(name=name).exists():
+            raise forms.ValidationError(ORGANIZATION_EXISTS)
         return name
 
 
-class AddOrganizationManagerForm(d_forms.Form):
-    email = forms.EmailField(error_messages={'required': '请输入邮箱'})
+class AddOrganizationManagerForm(forms.Form):
+    email = forms.EmailField(label=EMAIL_LABEL,
+        error_messages={'required': EMAIL_REQUIRED})
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        count = User.objects.filter(username=email).count()
-        if count <= 0:
-            raise d_forms.ValidationError('该用户不存在')
+        if User.objects.filter(username=email).exists():
+            msg = _lazy('User is not exists')
+            raise forms.ValidationError(msg)
         return email
