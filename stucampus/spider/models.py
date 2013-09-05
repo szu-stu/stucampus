@@ -4,8 +4,8 @@ from django.db import IntegrityError
 
 from stucampus.custom.models import models
 from stucampus.spider.data_for_models import PUBLISHER_CHOICES
-from stucampus.spider.announcement_spider import search_announcements
-from stucampus.spider.announcement_spider import get_announcement_content
+from stucampus.spider.notification_spider import search_notifications
+from stucampus.spider.notification_spider import get_notification_content
 
 
 CATEGORY_CHOICES = (
@@ -17,7 +17,7 @@ CATEGORY_CHOICES = (
     )
 
 
-class Announcement(django.db.models.Model):
+class Notification(django.db.models.Model):
 
     url_id = models.CharField(max_length=20, unique=True)
     title = models.CharField(max_length=40)
@@ -28,21 +28,21 @@ class Announcement(django.db.models.Model):
 
     def get_content(self):
         if not self.content:
-            self.content = get_announcement_content(self.url_id)
+            self.content = get_notification_content(self.url_id)
             self.save()
         return self.content
 
     @classmethod
-    def fetch_new_announcement(cls, days=1):
+    def fetch_new_notification(cls, days=1):
         num_of_new_get = 0
-        for announcement in search_announcements(days):
+        for notification in search_notifications(days):
             try:
-                announcement.save()
+                notification.save()
                 num_of_new_get += 1
             except IntegrityError:
-                raise Exception('repeat saving:'+announcement.url_id)
+                raise Exception('repeat saving:'+notification.url_id)
         return num_of_new_get
 
     @classmethod
     def already_exist(cls, to_check):
-        return Announcement.objects.filter(url_id=to_check).exists()
+        return Notification.objects.filter(url_id=to_check).exists()

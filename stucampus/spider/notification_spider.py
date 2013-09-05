@@ -19,9 +19,9 @@ DAYS_CHOICE = {1: '1#一天',
                365: '365#一年',}
 
 
-def search_announcements(days=30, keyword='', search_type='title',
+def search_notifications(days=30, keyword='', search_type='title',
                          keyword_user='', searchb1='搜索'):
-    ''' return a list containing Announcement object '''
+    ''' return a list containing Notification object '''
 
     # the number of days should be in the range of days_choice
     form_data = {'dayy': DAYS_CHOICE[days],
@@ -31,24 +31,24 @@ def search_announcements(days=30, keyword='', search_type='title',
                  'searchb1': searchb1}
     html = fetch_html_by_post(BOARD_URL, form_data, encoding='gbk')
     etree = lxml.html.fromstring(html)
-    # fetch all elements containing announcement information
+    # fetch all elements containing notification information
     xpath = ('/html/body/table/tr[2]/td/table/tr[3]/td/table'
              '/tr[3]/td/table/tr[position()>2]')
     elist = etree.xpath(xpath) 
 
-    collect = []
+    notif_list = []
     for element in elist:
-        announcement = factory_announcement(element)
-        if announcement != None:
-            collect.append(announcement)
-    collect.reverse()
-    return collect
+        notification = factory_notification(element)
+        if notification != None:
+            notif_list.append(notification)
+    notif_list.reverse()
+    return notif_list
 
 
-def factory_announcement(element):
-    ''' extract announcement attributes value from element
-        return announcement produce from the value
-        return None when the announcement has been saved before
+def factory_notification(element):
+    ''' extract notification attributes value from element
+        return notification produce from the value
+        return None when the notification has been saved before
     '''
 
     date = element.findtext('td[6]')
@@ -62,21 +62,23 @@ def factory_announcement(element):
     # sample: view.asp?id=262297
     url_id = element.xpath('td[4]/a/@href')[0].lstrip('view.asp?id=')
 
-    if stucampus.spider.models.Announcement.already_exist(url_id):
+    if stucampus.spider.models.Notification.already_exist(url_id):
         return None
-    return stucampus.spider.models.Announcement(title=title, 
+    return stucampus.spider.models.Notification(title=title, 
                                                 published_date=date,
                                                 publisher=publisher,
                                                 category=category,
                                                 url_id=url_id)
 
 
-def get_announcement_content(url_id):
+def get_notification_content(url_id):
     url = BOARD_URL + 'view.asp?id=' + url_id
     html = fetch_html_by_get(url, encoding='gbk')
     etree = lxml.html.fromstring(html)
-    element_contain_content = etree.xpath('/html/body/table/tr[2]/td/table/'
-                                          'tr[3]/td/table/tr[2]/td/table/tr[3]'
-                                          )[0]
+    xp = '/html/body/table/tr[2]/tdtable/tr[3]/td/table/tr/td/table/tr[3]'
+    try:
+        element_contain_content = etree.xpath(xp)[0]
+    except IndexError:
+        return ''
     content = element_contain_content.text_content()
     return content.replace('\r', '\n')

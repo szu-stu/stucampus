@@ -53,7 +53,7 @@ def add_new(request):
 
 # just used for debug
 def update(request):
-    LectureMessage.add_new_lecture_from_announcement()
+    LectureMessage.add_new_lecture_from_notification()
     return HttpResponseRedirect(reverse('lecture:manage'))
 
 

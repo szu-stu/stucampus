@@ -4,11 +4,11 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.core.paginator import Paginator, InvalidPage
 
-from stucampus.spider.models import Announcement
+from stucampus.spider.models import Notification
 
 
 def index(request):
-    messages = Announcement.objects.order_by('published_date').reverse()
+    messages = Notification.objects.order_by('published_date').reverse()
     paginator = Paginator(messages, 30)
     page_num = request.GET.get('page')
     try:
@@ -19,10 +19,10 @@ def index(request):
 
 
 def update(request):
-    num_of_update = Announcement.fetch_new_announcement(182)
+    num_of_update = Notification.fetch_new_notification(182)
     return HttpResponse(str(num_of_update))
 
 
 def delete(request):
-    Announcement.objects.all().delete()
+    Notification.objects.all().delete()
     return HttpResponseRedirect(reverse('spider:index'))

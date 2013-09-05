@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 import django.db.models
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 
 from stucampus.custom import models
 from stucampus.lecture.implementation import fetch_lecture_messages
@@ -10,29 +11,32 @@ from stucampus.lecture.implementation import fetch_lecture_messages
 
 class LectureMessage(django.db.models.Model):
 
-    title = models.CharField(max_length=100, blank=True)
+    title = models.CharField(max_length=100)
     date_time = models.DateTimeField(blank=True)
-    place = models.CharField(max_length=40, blank=True)
-    speaker = models.CharField(max_length=40, blank=True)
-
+    place = models.CharField(max_length=40)
+    speaker = models.CharField(max_length=40)
     url_id = models.CharField(max_length=20, unique=True)
     download_date = models.DateTimeField(editable=False)
+
     url_id_backup = models.CharField(max_length=20, unique=True,
                                      editable=False)
     is_check = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
 
     @classmethod
-    def add_new_lecture_from_announcement(cls):
-        count_get = 0
-        stop_mark = cls.get_latest_url_id_in_db()
-        for lm in fetch_lecture_messages():
+    def add_new_lecture_from_notification(cls):
+        try:
+            stop_mark = cls.objects.latest('pk').url_id
+        except ObjectDoesNotExist:
+            stop_mark = None
+
+        for count_get, lm in enumerate(fetch_lecture_messages()):
             if lm['url_id'] == stop_mark:
                 break
-            count_get += 1
             lecture_message = cls(title=lm['title'],
                                   date_time=lm['date_time'],
                                   place=lm['place'],
+                                  speaker=lm['speaker'],
                                   url_id=lm['url_id'],
                                   url_id_backup=lm['url_id'])
             try:
@@ -78,16 +82,10 @@ class LectureMessage(django.db.models.Model):
         now = timezone.now()
         date_of_this_Monday = now - timedelta(days=now.weekday())
         date_of_next_Monday = date_of_this_Monday + timedelta(days=7)
-        messages = cls.objects.filter(date_time__gte=date_of_this_Monday,
-                                      date_time__lt=date_of_next_Monday)
-        messages.extend(cls.objects.filter(
+        lecture_held_this_week = cls.objects.filter(
+            date_time__gte=date_of_this_Monday,
+            date_time__lt=date_of_next_Monday)
+        msg_fetch_this_week = cls.objects.filter(
             download_date__gte=date_of_this_Monday,
             download_date__lt=date_of_next_Monday)
-        return messages
-
-    @classmethod
-    def get_latest_url_id_in_db(cls):
-        if cls.objects.all():
-            return cls.objects.reverse()[0].url_id
-        else:
-            return None
+        return lecture_held_this_week + msg_fetch_this_week

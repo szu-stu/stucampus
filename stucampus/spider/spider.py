@@ -5,7 +5,7 @@ import requests
 
 class MatchError(Exception):
 
-    def __init__(self, text, reg):
+    def __init__(self, text='', reg=''):
         self.text = text
         self.reg = reg
         message = "can't match :\n"
