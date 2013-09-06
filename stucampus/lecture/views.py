@@ -48,7 +48,7 @@ def add_lecture(request):
             lecture_message.url_id_backup = lecture_message.url_id
             lecture_message.save()
             return HttpResponseRedirect(reverse('lecture:manage'))
-    return render(request, 'lecture/add_new.html', {'form': form})
+    return render(request, 'lecture/add_lecture.html', {'form': form})
 
 
 # just used for debug

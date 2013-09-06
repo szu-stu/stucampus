@@ -1,0 +1,73 @@
+{% extends 'activity/add_base.html' %}
+
+{% block htmltitle %}
+
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'lecture/add_lecture.css'|as_css }}
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'lecture:add_lecture' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="input_list">
+            <div class="title">标题</div>
+            {{ form.title }}
+        </div>
+        <div class="error">
+            {% for error in form.title.errors %}
+                {{ error|escape }}
+            {% endfor %}
+        </div>
+
+        <div class="input_list">
+            <div class="title">地点</div>
+            {{ form.place }}
+        </div>
+        <div class="error">
+            {% for error in form.place.errors %}
+                {{ error|escape }}
+            {% endfor %}
+        </div>
+
+        <div class="input_list">
+            <div class="title">报告人</div>
+            {{ form.speaker }}
+        </div>
+        <div class="error">
+            {% for error in form.speaker.errors %}
+                {{ error|escape }}
+            {% endfor %}
+        </div>
+
+        <div class="input_list">
+            <div class="title">日期时间</div> 
+            {{ form.date_time }}
+            <div class="title" style=width:120px;font-size:14px;margin-right:0px>如2013-9-1 21:22</div>
+        </div>
+        <div class="error">
+            {% for error in form.date_time.errors %}
+                {{ error|escape }}
+            {% endfor %}
+        </div>
+
+        <div class="input_list">
+            <div class="title">URL ID</div>
+            {{ form.url_id }}
+        </div>
+        <div class="error">
+            {% for error in form.url_id.errors %}
+                {{ error|escape }}
+            {% endfor %}
+        </div>
+
+        <div class="chose_container">
+            <div class="chose check">已核{{ form.is_check }}</div>
+            <div class="chose delete">删除{{ form.is_delete }}</div>
+        </div>         
+        <div class="button"><input type="submit" value="submit" /></div>
+    </form>
+{% endblock %}
