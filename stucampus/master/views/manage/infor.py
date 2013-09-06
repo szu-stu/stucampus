@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import (user_passes_test,
                                             permission_required)
 
 from stucampus.infor.models import Infor
-from stucampus.infor.services import post_infor, infor_update
+from stucampus.infor.services import post_infor
 from stucampus.organization.models import Organization
 from stucampus.infor.forms import InforPostForm, InforEditForm
 from stucampus.custom.permission import admin_group_check
@@ -32,7 +32,7 @@ class PostInfor(View):
     @method_decorator(permission_required('infor.infor_create'))
     @method_decorator(user_passes_test(admin_group_check))
     def post(self, request):
-        form = InforPostForm(request.POST)
+        form = InforPostForm(request.POST, user=request.user)
         if not form.is_valid():
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
@@ -63,10 +63,11 @@ class Information(View):
     def put(self, request, id):
         data = get_http_data(request)
         infor = get_object_or_404(Infor, id=id)
-        form = InforEditForm(data)
+        form = InforEditForm(data, user=request.user, instance=infor)
         if not form.is_valid():
+            print form.errors
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
 
-        infor_update(infor, form.cleaned_data)
+        form.save()
         return spec_json(status='success')
