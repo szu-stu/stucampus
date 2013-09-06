@@ -19,7 +19,7 @@
         </li>
         <li>
             <label class="head-label">发布组织</label>
-            <select class="element-box" name="organization_id" id="organization_id">
+            <select class="element-box" name="organization" id="organization">
             {% for org in orgs %}
             <option value="{{org.id}}"{% if org == infor.organization %}selected{%endif%}>
             {{ org.name }}
