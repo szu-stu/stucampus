@@ -12,11 +12,13 @@ PASSWORD_LABEL = _lazy(u'Password')
 REPEAT_PW_LABEL = _lazy(u'Repeat password')
 CURRENT_PW_LABEL = _lazy(u'Current password')
 NEW_PW_LABEL = _lazy(u'New password')
+TRUE_NAME_LABEL = _lazy(u'True name')
 
 EAMIL_REQUIRED = _lazy(u'Email is required.')
 PASSWORD_REQUIRED = _lazy(u'Password is required.')
 REPEAT_PW_REQUIRED = _lazy(u'Repeat password is required.')
 NEW_PW_REQUIRED = _lazy(u'New password is required.')
+TRUE_NAME_REQUIRED = _lazy(u'True name is required')
 
 PASSWORD_MIN_LENGTH_MSG = _lazy(u'Password must be 6 or more characters.')
 REPEAT_PW_MIN_LENGTH_MSG = _lazy(u'Repeat password is required.')
@@ -40,14 +42,17 @@ class SignInForm(forms.Form):
     def clean(self):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
-        user = authenticate(username=email, password=password)
-        if user is None:
+        self.user = authenticate(username=email, password=password)
+        if self.user is None:
             msg = _lazy(u'Your email or password were incorrect.')
             raise forms.ValidationError(msg)
-        if not user.is_active:
+        if not self.user.is_active:
             msg = _lazy(u'Your account is invalid!')
             raise forms.ValidationError(msg)
         return self.cleaned_data
+
+    def get_user(self):
+        return self.user
 
 
 class SignUpForm(forms.Form):
@@ -79,7 +84,16 @@ class SignUpForm(forms.Form):
         return confirm
 
 
-class ProfileEditForm(forms.Form):
+class ProfileEditForm(forms.ModelForm):
+    true_name = forms.CharField(max_length=20, required=False)
+    college = forms.ChoiceField(choices=Student.COLLEGE_CHOICES)
+    screen_name = forms.CharField(max_length=20, required=False)
+    is_male = forms.ChoiceField(choices=((True, u'男'), (False, u'女')))
+    birthday = forms.DateTimeField(required=False)
+    mphone_num = forms.CharField(max_length=11, required=False)
+    mphone_short_num = forms.CharField(max_length=6, required=False)
+    student_id = forms.CharField(max_length=10, required=False)
+    szucard = forms.CharField(max_length=6, required=False)
     class Meta:
         model = Student
         fields = ('true_name', 'college', 'screen_name', 'is_male',
@@ -88,7 +102,7 @@ class ProfileEditForm(forms.Form):
 
 
 class PasswordForm(forms.Form):
-    current_email = forms.EmailField(label=EMAIL_LABEL, required=False))
+    current_email = forms.EmailField(label=EMAIL_LABEL, required=False)
     current_password = forms.CharField(
         label=CURRENT_PW_LABEL, min_length=6,
         error_messages={'required': PASSWORD_REQUIRED,

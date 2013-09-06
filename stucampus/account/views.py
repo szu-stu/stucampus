@@ -1,15 +1,14 @@
-from django.shortcuts import render
 from django.views.generic import View
+from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from stucampus.utils import spec_json, get_http_data
+from stucampus.utils import spec_json, get_http_data, get_client_ip
 from stucampus.custom.permission import guest_or_redirect
-from stucampus.account.models import Student
-from stucampus.account.services import (account_signin, account_signup,
-                                        account_update)
+from stucampus.account.models import Student, UserActivityLog
+from stucampus.account.services import account_signup
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
 
@@ -27,9 +26,10 @@ class SignIn(View):
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
 
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-        account_signin(request, email, password)
+        user = form.get_user()
+        login(request, user)
+        UserActivityLog.objects.create(student=user.student,
+                                       login_ip=get_client_ip(request))
         return spec_json(status='success')
 
 
@@ -56,8 +56,6 @@ class SignUp(View):
         email = form.cleaned_data['email']
         password = form.cleaned_data['password']
         account_signup(request, form.cleaned_data)
-        account_signin(request, email, password)
-
         return spec_json(status='success')
 
 
@@ -70,12 +68,12 @@ class Profile(View):
     @method_decorator(login_required)
     def put(self, request):
         data = get_http_data(request)
-        form = ProfileEditForm(data)
+        student = get_object_or_404(Student, id=request.user.id)
+        form = ProfileEditForm(data, instance=student)
         if not form.is_valid():
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
-
-        account_update(request, request.user, form.cleaned_data)
+        form.save()
         return spec_json(status='success')
 
 
