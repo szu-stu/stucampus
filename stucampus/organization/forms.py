@@ -32,7 +32,7 @@ class OrganizationManageEditForm(forms.Form):
         error_messages={'required': PHONE_REQUIRED,
                         'max_length': PHONE_MAX_LENGTH_MSG})
     url = forms.CharField(label=URL_LABEL, max_length=50, required=False,
-                          error_messages={'max_length': URL_MAX_LENGTH})
+                          error_messages={'max_length': URL_MAX_LENGTH_MSG})
     logo = forms.CharField(label=LOGO_LABEL, required=False)
 
 
@@ -43,7 +43,7 @@ class AddOrganizationForm(forms.Form):
                                'max_length': ORGANIZATION_NAME_MAX_LENGTH_MSG})
     phone = forms.CharField(label=ORGANIZATION_PHONE_LABEL, max_length=11,
                             error_messages={
-                                'required': PHONE_REQUIERD
+                                'required': PHONE_REQUIRED,
                                 'max_length': PHONE_MAX_LENGTH_MSG})
 
     def clean_name(self):

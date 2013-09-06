@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import (user_passes_test,
 from stucampus.organization.forms import AddOrganizationForm
 from stucampus.organization.forms import AddOrganizationManagerForm
 from stucampus.organization.models import Organization
-from stucampus.organization.services import organization_update
+from stucampus.organization.services import organization_manager_update
 from stucampus.custom.permission import admin_group_check
 from stucampus.utils import spec_json
 
@@ -71,6 +71,6 @@ class OrganzationManager(View):
         email = form.cleaned_data['email']
         user = get_object_or_404(User, username=email)
         student = user.student
-        organization_update(student, organization)
+        organization_manager_update(student, organization)
 
         return spec_json(status='success')
