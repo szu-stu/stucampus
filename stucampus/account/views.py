@@ -29,7 +29,8 @@ class SignIn(View):
         user = form.get_user()
         login(request, user)
         UserActivityLog.objects.create(student=user.student,
-                                       login_ip=get_client_ip(request))
+                                       ip_address=get_client_ip(request)
+                                       behavior="Login")
         return spec_json(status='success')
 
 

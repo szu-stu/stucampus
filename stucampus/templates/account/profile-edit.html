@@ -25,8 +25,8 @@
                             <li>
                                 <label>性别</label><span>：</span>
                                 <select name="is_male" class="select_type">
-                                    <option value="False">女</option>
-                                    <option value="True" {% if user.student.is_male %} selected="selected" {% endif %}>男</option>
+                                    <option value="F">女</option>
+                                    <option value="M" {% if user.student.is_male == 'M' %} selected="selected" {% endif %}>男</option>
                                 </select>
                             </li>
                             <li>
@@ -35,7 +35,7 @@
                             </li>
                             <li>
                                 <label>学号</label><span>：</span>
-                                <input type="text" name="student_id" maxlength="10" class="element" value="{{ user.student.student_id }}"/>
+                                <input type="text" name="job_id" maxlength="10" class="element" value="{{ user.student.job_id }}"/>
                             </li>
                             <li>
                                 <label>生日</label><span>：</span>
@@ -47,15 +47,15 @@
                             </li>
                             <li>
                                 <label>手机长号</label><span>：</span>
-                                <input type="text" name="mphone_num" class="element" value="{{ user.student.mphone_num }}" />
+                                <input type="text" name="mobile_phone_number" class="element" value="{{ user.student.mobile_phone_number }}" />
                             </li>
                             <li>
                                 <label>手机短号</label><span>：</span>
-                                <input type="text" name="mphone_short_num" class="element" value="{{ user.student.mphone_short_num }}"/>
+                                <input type="text" name="internal_phone_number" class="element" value="{{ user.student.internal_phone_number }}"/>
                             </li>
                             <li>
                                 <label>校园卡号</label><span>：</span>
-                                <input type="text" name="szucard" maxlength="6" class="element" value="{{ user.student.szucard }}"/>
+                                <input type="text" name="card_id" maxlength="6" class="element" value="{{ user.student.card_id }}"/>
                             </li>
                             <li id="last">
                                 <input type="submit" value="确认修改" id="confirm_botton" />
