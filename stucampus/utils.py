@@ -13,7 +13,7 @@ def render_json(context, **response_kwargs):
 def spec_json(status='Error', messages=None):
     if not messages:
         messages = []
-    elif isinstance(messages, str) or isinstance(messages, unicode):
+    elif not isinstance(target, (list, tuple)):
         messages = [messages]
     data = {'status': status, 'messages': messages}
     return render_json(data)
@@ -38,10 +38,5 @@ def get_http_data(request):
         d = datum.split('=')
         d_name = d[0]
         d_val = urllib2.unquote(d[1])
-        if d_name == 'is_male':
-            if d_val == 'False':
-                d_val = False
-            else:
-                d_val = True
         output_dic.update({d_name: d_val})
     return output_dic
