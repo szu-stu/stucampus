@@ -1,7 +1,12 @@
 {% extends 'activity/add_base.html' %}
 
 {% block htmltitle %}
-
+<script>
+    $(function(){
+        var status = {'success': 'doyoubi success'}
+        $S.ajaxForm($('#add_lecture_form'), {'status': status});
+    })()
+</script>
 {% endblock %}
 
 {% block htmlhead %}
@@ -10,17 +15,14 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{% url 'lecture:add_lecture' %}" method="POST">
+    <form id="add_lecture_form" action="{% url 'lecture:add_lecture' %}" method="POST">
         {% csrf_token %}
 
         <div class="input_list">
             <div class="title">标题</div>
             {{ form.title }}
         </div>
-        <div class="error">
-            {% for error in form.title.errors %}
-                {{ error|escape }}
-            {% endfor %}
+        <div id="title-tips">
         </div>
 
         <div class="input_list">

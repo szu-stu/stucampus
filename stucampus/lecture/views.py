@@ -5,6 +5,7 @@ from django.views import generic
 from django.template import RequestContext
 from django.core.paginator import Paginator, InvalidPage
 
+from stucampus.utils import spec_json
 from stucampus.lecture.models import LectureMessage
 from stucampus.lecture.forms import LectureForm, LecureFormSet
 
@@ -44,6 +45,8 @@ def add_lecture(request):
             lecture_message.url_id_backup = lecture_message.url_id
             lecture_message.save()
             return HttpResponseRedirect(reverse('lecture:manage'))
+        else:
+            return spec_json(success='errors', form.errors)
     return render(request, 'lecture/add_lecture.html', {'form': form})
 
 

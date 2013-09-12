@@ -3,6 +3,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
         {% load html_tools %}
+        {{ 'plugins/jquery.min.js' | as_js }}
+        {{ 'plugins/jquery.tools.min.js' | as_js }}
+        {{ 'plugins/jquery.form.js' | as_js }}
+        {{ 'google-analystics.js' | as_js }}
+        {{ 'global.js' | as_js }}
+
         {{ 'activity/add_base.css' | as_css }}
 
         {% block htmltitle %}

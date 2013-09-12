@@ -21,7 +21,7 @@ class Message(django.db.models.Model):
 
     MESSAGE_TYPE = ((True, u'find item'), (False, u'find owner'))
 
-    seeking_item = models.BooleanField(default=True, choices=MESSAGE_TYPE)
+    message_type = models.BooleanField(default=True, choices=MESSAGE_TYPE)
     item_name = models.CharField(max_length=40,
                                  verbose_name='item name in chinese')
     description = models.CharField(max_length=300)

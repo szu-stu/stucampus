@@ -45,26 +45,26 @@ def is_about_lecture(content):
 
 def parse_content(content):
     ''' annalyse the content and find attributes
-        put attributes into a dictionary
+        pack attributes into a dictionary
     '''
     try:
         title = parse_title(content)
-    except MatchError as e:
+    except MatchError:
         title = 'not found'
 
     try:
         place = parse_place(content)
-    except MatchError as e:
+    except MatchError:
         place = 'not found'
 
     try:
         date_time = parse_datetime(content)
-    except MatchError as e:
+    except MatchError:
         date_time = None
 
     try:
         speaker = parse_speaker(content)
-    except MatchError as e:
+    except MatchError:
         speaker = 'not found'
 
     return dict(title=title, place=place, date_time=date_time,
@@ -150,6 +150,7 @@ def parse_datetime(content):
             break
     return parse_date(date_infor) + ' ' + parse_time(date_infor)
  
+
 DATE_PATTERN = (
     r'\d{4}'+u'年'+r'\d{1,2}'+u'月'+r'\d{1,2}' + u'日',
     r'\d{4}'+r'\w'+r'\d{1,2}'+r'\w'+r'\d{1,2}',
