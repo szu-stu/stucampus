@@ -2,41 +2,22 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _lazy
+from django.utils.translation import ugettext_ as _
 
 from stucampus.account.models import Student
 
 
-EMAIL_LABEL = _lazy(u'Email address')
-PASSWORD_LABEL = _lazy(u'Password')
-REPEAT_PW_LABEL = _lazy(u'Repeat password')
-CURRENT_PW_LABEL = _lazy(u'Current password')
-NEW_PW_LABEL = _lazy(u'New password')
-TRUE_NAME_LABEL = _lazy(u'True name')
-
-EAMIL_REQUIRED = _lazy(u'Email is required.')
-PASSWORD_REQUIRED = _lazy(u'Password is required.')
-REPEAT_PW_REQUIRED = _lazy(u'Repeat password is required.')
-NEW_PW_REQUIRED = _lazy(u'New password is required.')
-TRUE_NAME_REQUIRED = _lazy(u'True name is required')
-
-PASSWORD_MIN_LENGTH_MSG = _lazy(u'Password must be 6 or more characters.')
-REPEAT_PW_MIN_LENGTH_MSG = _lazy(u'Repeat password is required.')
-NEW_PW_MIN_LENGTH_MSG = _lazy(u'New password must be 6 or more characters.')
-
-PASSWORD_MUST_BE_MATCH = _lazy(u'Password must match')
-
-
 class SignInForm(forms.Form):
     email = forms.EmailField(
-        label=EMAIL_LABEL,
-        error_messages={'required': EAMIL_REQUIRED}
+        label=_(u'Email address'),
+        error_messages={'required': _(u'Email is required.')}
     )
     password = forms.CharField(
-        label=PASSWORD_LABEL,
-        min_length=6,
-        error_messages={'required': PASSWORD_REQUIRED,
-                        'min_length': PASSWORD_MIN_LENGTH_MSG}
+        label=_(u'Password'), min_length=6,
+        error_messages={
+            'required': _(u'Password is required.'),
+            'min_length': _(u'Password must be 6 or more characters.')
+        }
     )
 
     def clean(self):
@@ -44,10 +25,10 @@ class SignInForm(forms.Form):
         password = self.cleaned_data.get('password')
         self.user = authenticate(username=email, password=password)
         if self.user is None:
-            msg = _lazy(u'Your email or password were incorrect.')
+            msg = _(u'Your email or password were incorrect.')
             raise forms.ValidationError(msg)
         if not self.user.is_active:
-            msg = _lazy(u'Your account is invalid!')
+            msg = _(u'Your account is invalid!')
             raise forms.ValidationError(msg)
         return self.cleaned_data
 
@@ -57,22 +38,29 @@ class SignInForm(forms.Form):
 
 class SignUpForm(forms.Form):
     email = forms.EmailField(
-        label=EMAIL_LABEL,
-        error_messages={'required': EAMIL_REQUIRED})
+        label=_(u'Email address'),
+        error_messages={'required': _(u'Email is required.')}
+    )
     password = forms.CharField(
-        label=PASSWORD_LABEL, help_text=PASSWORD_MIN_LENGTH_MSG,
-        min_length=6,
-        error_messages={'required': PASSWORD_REQUIRED,
-                        'min_length': PASSWORD_MIN_LENGTH_MSG})
-    confirm = forms.CharField(label=REPEAT_PW_LABEL, min_length=6,
-                              error_messages={
-                                  'required': REPEAT_PW_REQUIRED,
-                                  'min_length': REPEAT_PW_MIN_LENGTH_MSG})
+        label=_(u'Password'), min_length=6,
+        help_text=_(u'Password must be 6 or more characters.'),
+        error_messages={
+            'required': _(u'Password is required.'),
+            'min_length': _(u'Password must be 6 or more characters.')
+        }
+    )
+    confirm = forms.CharField(
+        label=_(u'Repeat password'), min_length=6,
+        error_messages={
+            'required': _(u'Repeat password is required.'),
+            'min_length': _(u'Repeat password is required.')
+        }
+    )
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            msg = _lazy(u'Email is already exists.')
+            msg = _(u'Email is already exists.')
             raise forms.ValidationError(msg)
         return email
 
@@ -80,7 +68,7 @@ class SignUpForm(forms.Form):
         password = self.cleaned_data.get('password')
         confirm = self.cleaned_data.get('confirm')
         if not password == confirm:
-            raise forms.ValidationError(PASSWORD_MUST_BE_MATCH)
+            raise forms.ValidationError(_(u'Password must match'))
         return confirm
 
 
@@ -88,40 +76,49 @@ class ProfileEditForm(forms.ModelForm):
     true_name = forms.CharField(max_length=20, required=False)
     college = forms.ChoiceField(choices=Student.COLLEGE_CHOICES)
     screen_name = forms.CharField(max_length=20, required=False)
-    is_male = forms.ChoiceField(choices=((True, u'男'), (False, u'女')))
+    gender = forms.ChoiceField(choices=(("M", u'男'), ("F", u'女')))
     birthday = forms.DateTimeField(required=False)
-    mphone_num = forms.CharField(max_length=11, required=False)
-    mphone_short_num = forms.CharField(max_length=6, required=False)
-    student_id = forms.CharField(max_length=10, required=False)
-    szucard = forms.CharField(max_length=6, required=False)
+    mobile_phone_number = forms.CharField(max_length=11, required=False)
+    internal_phone_number = forms.CharField(max_length=6, required=False)
+    job_id = forms.CharField(max_length=10, required=False)
+    card_id = forms.CharField(max_length=6, required=False)
     class Meta:
         model = Student
-        fields = ('true_name', 'college', 'screen_name', 'is_male',
-                  'student_id', 'mphone_num', 'mphone_short_num', 'szucard',
-                  'birthday')
+        fields = ('true_name', 'college', 'screen_name', 'gender', 'birthday',
+                  'job_id', 'mobile_phone_number', 'internal_phone_number',
+                  'card_id')
 
 
 class PasswordForm(forms.Form):
-    current_email = forms.EmailField(label=EMAIL_LABEL, required=False)
+    current_email = forms.EmailField(label=_(u'Email address'), required=False)
     current_password = forms.CharField(
-        label=CURRENT_PW_LABEL, min_length=6,
-        error_messages={'required': PASSWORD_REQUIRED,
-                        'min_length': PASSWORD_MIN_LENGTH_MSG})
-    new_password = forms.CharField(label=NEW_PW_LABEL, min_length=6,
-                                   error_messages={
-                                       'required': NEW_PW_REQUIRED,
-                                       'min_length': NEW_PW_MIN_LENGTH_MSG})
-    confirm = forms.CharField(label=REPEAT_PW_REQUIRED, min_length=6,
-                              error_messages={
-                                  'required': REPEAT_PW_REQUIRED,
-                                  'min_length': REPEAT_PW_MIN_LENGTH_MSG})
+        label=_(u'Current password'), min_length=6,
+        error_messages={
+            'required': _(u'Password is required.'),
+            'min_length': _(u'Password must be 6 or more characters.')
+        }
+    )
+    new_password = forms.CharField(
+        label=_(u'New password'), min_length=6,
+        error_messages={
+            'required': _(u'New password is required.'),
+            'min_length': _(u'New password must be 6 or more characters.')
+        }
+    )
+    confirm = forms.CharField(
+        label=_(u'Repeat password is required.'), min_length=6,
+        error_messages={
+            'required': _(u'Repeat password is required.'),
+            'min_length': _(u'Repeat password is required.')
+        }
+    )
 
     def clean_current_password(self):
         email = self.cleaned_data.get('current_email')
         password = self.cleaned_data.get('current_password')
         user = authenticate(username=email, password=password)
         if user is None:
-            msg = _lazy(u'Current password is invalid.')
+            msg = _(u'Current password is invalid.')
             raise forms.ValidationError(msg)
         return password
 
@@ -129,7 +126,7 @@ class PasswordForm(forms.Form):
         password = self.cleaned_data.get('new_password')
         confirm = self.cleaned_data.get('confirm')
         if not password == confirm:
-            raise forms.ValidationError(PASSWORD_MUST_BE_MATCH)
+            raise forms.ValidationError(_(u'Password must match'))
         return confirm
 
 
@@ -139,6 +136,6 @@ class AccountBanForm(forms.Form):
     def clean_ban(self):
         ban = self.cleaned_data.get('ban')
         if not ban:
-            msg = _lazy(u'Data is invalid.')
+            msg = _(u'Data is invalid.')
             raise forms.ValidationError(msg)
         return ban

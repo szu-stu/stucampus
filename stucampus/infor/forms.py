@@ -1,31 +1,26 @@
 #-*- coding: utf-8
 from django import forms
-from django.utils.translation import ugettext_lazy as _lazy
+from django.utils.translation import ugettext_ as _
 
 from stucampus.infor.models import Infor
-
-
-TITLE_LABEL = _lazy(u'Title')
-ORGANIZATION_LABEL = _lazy(u'Organization')
-CONTENT_LABEL = _lazy(u'Content')
-
-TITLE_REQUIRED = _lazy(u'Title is required.')
-ORGANIZATION_REQUIRED = _lazy(u'Select an organization.')
-CONTENT_REQUIRED = _lazy(u'Content is required.')
-
-TITLE_MAX_LENGTH_MSG = _lazy(u'Title must less than 50 characters.')
 
 
 class InforPostForm(forms.Form):
 
     title = forms.CharField(
-        label=TITLE_LABEL, max_length=50,
-        error_messages={'required': TITLE_REQUIRED,
-                        'max_length': TITLE_MAX_LENGTH_MSG})
+        label=_(u'Title'), max_length=50,
+        error_messages={
+            'required': _(u'Title is required.'),
+            'max_length': _(u'Title must less than 50 characters.')
+        }
+    )
     organization = forms.ModelChoiceField(
-        label=ORGANIZATION_LABEL, queryset=None,
-        error_messages={'required': ORGANIZATION_REQUIRED})
-    content = forms.CharField(error_messages={'required': CONTENT_REQUIRED})
+        label=_(u'Organization'), queryset=None,
+        error_messages={'required': _(u'Select an organization.')}
+    )
+    content = forms.CharField(
+        error_messages={'required': _(u'Content is required.')}
+    )
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -35,14 +30,20 @@ class InforPostForm(forms.Form):
 
 
 class InforEditForm(forms.ModelForm):
-    title = forms.CharField(label=TITLE_LABEL, max_length=50,
-        error_messages={'required': TITLE_REQUIRED,
-                        'max_length': TITLE_MAX_LENGTH_MSG})
+    title = forms.CharField(label=_(u'Title'), max_length=50,
+        error_messages={
+            'required': _(u'Title is required.'),
+            'max_length': _(u'Title must less than 50 characters.')
+        }
+    )
     organization = forms.ModelChoiceField(
-        label=ORGANIZATION_LABEL, queryset=None,
-        error_messages={'required': ORGANIZATION_REQUIRED})
-    content = forms.CharField(label=CONTENT_LABEL,
-                              error_messages={'required': CONTENT_REQUIRED})
+        label=_(u'Organization'), queryset=None,
+        error_messages={'required': _(u'Select an organization.')}
+    )
+    content = forms.CharField(
+        label=_(u'Content'),
+        error_messages={'required': _(u'Content is required.')}
+    )
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
