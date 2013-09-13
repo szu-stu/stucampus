@@ -7,48 +7,21 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 
 from stucampus.custom import models
-from stucampus.lecture.implementation import fetch_lecture
 
 
 class LectureMessage(django.db.models.Model):
 
     title = models.CharField(max_length=100)
-    date_time = models.DateTimeField()
+    date_time = models.DateTimeField(null=True)
     place = models.CharField(max_length=40)
     speaker = models.CharField(max_length=40)
     url_id = models.CharField(max_length=20, unique=True)
 
-    download_date = models.DateTimeField(editable=False)
     url_id_backup = models.CharField(max_length=20, unique=True,
                                      editable=False)
+    download_date = models.DateTimeField(editable=False)
     is_check = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
-
-    @classmethod
-    def add_new_lecture_from_notification(cls):
-        try:
-            stop_mark = cls.objects.latest('pk').url_id
-        except ObjectDoesNotExist:
-            stop_mark = None
-
-        count_get = 0
-        for lect in fetch_lecture():
-            if lect['url_id'] == stop_mark:
-                break
-            raise Exception(lect['url_id'])
-            lecture, created = cls.objects.get_or_create(
-                url_id=lect['url_id'])
-
-            lecture.title = lect['title']
-            lecture.date_time = lect['date_time']
-            lecture.place = lect['place']
-            lecture.speaker = lect['speaker'],
-            lecture.download_date = timezone.now().isoformat()
-            lecture.url_id_backup = lect['url_id']
-
-            lecture.save()
-            count_get += 1
-        return count_get
 
     @classmethod
     def generate_messages_table(cls):

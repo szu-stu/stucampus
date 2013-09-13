@@ -2,10 +2,11 @@
 import django.db.models
 from django.db import IntegrityError
 
+import lxml.html
+
 from stucampus.custom.models import models
 from stucampus.spider.data_for_models import PUBLISHER_CHOICES
-from stucampus.spider.notification_spider import search_notifications
-from stucampus.spider.notification_spider import get_notification_content
+from stucampus.spider.spider import fetch_html_by_get
 
 
 CATEGORY_CHOICES = (
@@ -28,14 +29,28 @@ class Notification(django.db.models.Model):
 
     def get_content(self):
         if not self.content:
-            self.content = get_notification_content(self.url_id)
+            self.content = Notification.download_content(self.url_id)
             self.save()
         return self.content
 
     @classmethod
-    def fetch_new_notification(cls, days=1):
+    def download_content(cls, url_id):
+        url = 'http://www.szu.edu.cn/board/view.asp?id=' + url_id
+        html = fetch_html_by_get(url, encoding='gbk')
+        etree = lxml.html.fromstring(html)
+        xp = ('/html/body/table/tr[2]/td/table/tr[3]/td/'
+              'table/tr/td/table/tr[3]')
+        try:
+            element_contain_content = etree.xpath(xp)[0]
+        except IndexError:  # can not find
+            return ''
+        content = element_contain_content.text_content()
+        return content.replace('\r', '\n')
+
+    @classmethod
+    def fetch_new_notification(cls, new_notif):
         num_of_new_get = 0
-        for notification in search_notifications(days):
+        for notification in new_notif: 
             try:
                 notification.save()
                 num_of_new_get += 1

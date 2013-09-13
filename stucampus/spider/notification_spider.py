@@ -5,7 +5,16 @@ import lxml.html
 
 from stucampus.spider.spider import fetch_html_by_post, fetch_html_by_get
 from stucampus.spider.spider import MatchError
-import stucampus.spider.models
+from stucampus.spider.models import Notification
+from stucampus.lecture.implementation import update_lecture_from_notification
+
+
+def update_notification(days):
+    new_notif = search_notifications(days)
+    # dispatch new notification
+    Notification.fetch_new_notification(new_notif)
+    update_lecture_from_notification(new_notif)
+    return len(new_notif)
 
 
 BOARD_URL = 'http://www.szu.edu.cn/board/'
@@ -39,7 +48,7 @@ def search_notifications(days=30, keyword='', search_type='title',
     notif_list = []
     for element in elist:
         notification = factory_notification(element)
-        if notification != None:
+        if not Notification.already_exist(notification.url_id):
             notif_list.append(notification)
     notif_list.reverse()
     return notif_list
@@ -48,13 +57,12 @@ def search_notifications(days=30, keyword='', search_type='title',
 def factory_notification(element):
     ''' extract notification attributes value from element
         return notification produce from the value
-        return None when the notification has been saved before
     '''
 
-    date = element.findtext('td[6]')
     publisher = element.findtext('td[3]/a')
     category = element.findtext('td[2]')
     title = ''.join(element.xpath('td[4]/*//text()'))
+    date = element.findtext('td[6]')
     # sample:    |置顶|·XXXXXXXXXXX
     #         or ·XXXXXXXXXXX
     title.lstrip(u'|置顶|')
@@ -62,23 +70,6 @@ def factory_notification(element):
     # sample: view.asp?id=262297
     url_id = element.xpath('td[4]/a/@href')[0].lstrip('view.asp?id=')
 
-    if stucampus.spider.models.Notification.already_exist(url_id):
-        return None
-    return stucampus.spider.models.Notification(title=title, 
-                                                published_date=date,
-                                                publisher=publisher,
-                                                category=category,
-                                                url_id=url_id)
-
-
-def get_notification_content(url_id):
-    url = BOARD_URL + 'view.asp?id=' + url_id
-    html = fetch_html_by_get(url, encoding='gbk')
-    etree = lxml.html.fromstring(html)
-    xp = '/html/body/table/tr[2]/td/table/tr[3]/td/table/tr/td/table/tr[3]'
-    try:
-        element_contain_content = etree.xpath(xp)[0]
-    except IndexError:
-        return ''
-    content = element_contain_content.text_content()
-    return content.replace('\r', '\n')
+    return Notification(title=title, published_date=date,
+                        publisher=publisher, category=category,
+                        url_id=url_id)

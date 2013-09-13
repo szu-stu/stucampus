@@ -4,7 +4,8 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.core.paginator import Paginator, InvalidPage
 
-from stucampus.spider.models import Notification
+from stucampus.spider.notification_spider import update_notification
+from stucampus.spider.notification_spider import Notification
 
 
 def index(request):
@@ -20,7 +21,7 @@ def index(request):
 
 # for debug
 def update(request):
-    num_of_update = Notification.fetch_new_notification(30)
+    num_of_update = update_notification(30)
     return HttpResponse(str(num_of_update))
 
 

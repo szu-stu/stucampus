@@ -46,14 +46,8 @@ def add_lecture(request):
             lecture_message.save()
             return HttpResponseRedirect(reverse('lecture:manage'))
         else:
-            return spec_json(success='errors', form.errors)
+            return spec_json(False, form.errors)
     return render(request, 'lecture/add_lecture.html', {'form': form})
-
-
-# just used for debug
-def update(request):
-    num = LectureMessage.add_new_lecture_from_notification()
-    return HttpResponse(num)
 
 
 # just used for debug

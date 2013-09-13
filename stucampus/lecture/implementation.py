@@ -5,18 +5,20 @@ import datetime
 
 from stucampus.spider.models import Notification
 from stucampus.spider.spider import find_content_between_two_marks, MatchError
+from stucampus.lecture.models import LectureMessage
 
 
-def fetch_lecture():
-    academic_notif= Notification.objects.filter(category=u'学术')
-    lecture_notif= search_lecture_notification(academic_notif)
+def update_lecture_from_notification(new_notif_list):
+    academic_notif = [ n for n in new_notif_list if n.category == u'学术' ]
+    lecture_notif = search_lecture_notification(academic_notif)
     lecture_messages = []
     for notif in lecture_notif:
         lecture_infor_dict = parse_content(notif.get_content())
         lecture_infor_dict['url_id'] = notif.url_id
         lecture_messages.append(lecture_infor_dict)
     lecture_messages.reverse()
-    return lecture_messages
+
+    add_new_lecture_from_notification(lecture_messages)
 
 
 def search_lecture_notification(academic_notifications):
@@ -64,6 +66,7 @@ def parse_content(content):
 
     try:
         speaker = parse_speaker(content)
+    url(r'^update/$', update, name='update'),
     except MatchError:
         speaker = 'not found'
 
@@ -193,3 +196,21 @@ def parse_time(content):
         except MatchError as e:
             if 0 == pattern_iter.__length_hint__():
                 raise e
+
+
+def add_new_lecture_from_notification(new_notif):
+    for lect in new_notif:
+        if LectureMessage.objects.filter(url_id=lect['url_id']).exists():
+            lecture = LectureMessage.objects.get(url_id=lect['url_id'])
+        else:
+            lecture = LectureMessage()
+
+        lecture.url_id = lect['url_id']
+        lecture.title = lect['title']
+        lecture.date_time = lect['date_time']
+        lecture.place = lect['place']
+        lecture.speaker = lect['speaker'],
+        lecture.download_date = timezone.now().isoformat()
+        lecture.url_id_backup = lecture.url_id
+
+        lecture.save()
