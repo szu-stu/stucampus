@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from django import forms
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_ as _
+from django.utils.translation import ugettext as _
 
 from stucampus.account.models import Student
 from stucampus.organization.models import Organization
