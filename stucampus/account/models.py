@@ -40,7 +40,7 @@ class Student(models.Model):
     college = models.CharField(max_length=4, choices=COLLEGE_CHOICES,
                                null=True, blank=True)
     screen_name = models.CharField(max_length=20)
-    gender = models.CharField(default=True, max_length=1,
+    gender = models.CharField(default="M", max_length=1,
                               choices=(("M", u'男'), ("F", u'女')))
     birthday = models.DateTimeField(blank=True, null=True)
     mobile_phone_number = models.CharField(max_length=11)
@@ -50,7 +50,7 @@ class Student(models.Model):
 
 
 class UserActivityLog(models.Model):
-    user_id = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
     time = models.DateTimeField(auto_now=False, auto_now_add=True)
     behavior = models.CharField(max_length=250)
