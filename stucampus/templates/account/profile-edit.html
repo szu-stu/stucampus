@@ -24,9 +24,9 @@
                             </li>
                             <li>
                                 <label>性别</label><span>：</span>
-                                <select name="is_male" class="select_type">
+                                <select name="gender" class="select_type">
                                     <option value="F">女</option>
-                                    <option value="M" {% if user.student.is_male == 'M' %} selected="selected" {% endif %}>男</option>
+                                    <option value="M" {% if user.student.gender == 'M' %} selected="selected" {% endif %}>男</option>
                                 </select>
                             </li>
                             <li>
