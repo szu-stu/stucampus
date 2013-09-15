@@ -9,5 +9,5 @@ def account_signup(request, cleaned_data):
     email = cleaned_data['email']
     password = cleaned_data['password']
     new_user = User.objects.create_user(email, email, password)
-    screen_name, email_domain = email.split('@')
+    screen_name = email.split('@', 1)
     student = Student.objects.create(user=new_user, screen_name=screen_name)
