@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from stucampus.utils import spec_json, get_http_data, get_client_ip
+from stucampus.utils import spec_json, get_client_ip
 from stucampus.custom.permission import guest_or_redirect
 from stucampus.account.models import Student, UserActivityLog
 from stucampus.account.services import account_signup
@@ -68,9 +68,8 @@ class Profile(View):
 
     @method_decorator(login_required)
     def put(self, request):
-        data = get_http_data(request)
         student = get_object_or_404(Student, id=request.user.id)
-        form = ProfileEditForm(data, instance=student)
+        form = ProfileEditForm(request.PUT, instance=student)
         if not form.is_valid():
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
@@ -95,8 +94,7 @@ class Password(View):
 
     @method_decorator(login_required)
     def put(self, request):
-        data = get_http_data(request)
-        form = PasswordForm(data)
+        form = PasswordForm(request.PUT)
         if not form.is_valid():
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)

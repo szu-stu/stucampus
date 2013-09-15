@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import (user_passes_test,
 from stucampus.account.forms import AccountBanForm
 from stucampus.account.models import Student
 from stucampus.custom.permission import admin_group_check
-from stucampus.utils import spec_json, get_http_data
+from stucampus.utils import spec_json
 
 
 class ListAccount(View):
@@ -34,12 +34,8 @@ class ShowAccount(View):
     @method_decorator(permission_required('account.student_edit'))
     @method_decorator(user_passes_test(admin_group_check))
     def put(self, request, id):
-        data = get_http_data(request)
-        # TODO: Rewrite the behavior of getting PUT data, using Middleware.
-        form = AccountBanForm(data)
-
+        form = AccountBanForm(request.PUT)
         student = get_object_or_404(Student, id=id)
-
         try:
             admin_group = Group.objects.get(name=name)
         except Group.DoesNotExist:

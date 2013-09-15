@@ -9,7 +9,7 @@ from stucampus.infor.services import post_infor
 from stucampus.organization.models import Organization
 from stucampus.infor.forms import InforPostForm, InforEditForm
 from stucampus.custom.permission import admin_group_check
-from stucampus.utils import spec_json, get_http_data
+from stucampus.utils import spec_json
 
 
 class ListInfor(View):
@@ -61,9 +61,8 @@ class Information(View):
     @method_decorator(permission_required('infor.infor_edit'))
     @method_decorator(user_passes_test(admin_group_check))
     def put(self, request, id):
-        data = get_http_data(request)
         infor = get_object_or_404(Infor, id=id)
-        form = InforEditForm(data, user=request.user, instance=infor)
+        form = InforEditForm(request.PUT, user=request.user, instance=infor)
         if not form.is_valid():
             print form.errors
             messages = form.errors.values()

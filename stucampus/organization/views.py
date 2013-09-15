@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from stucampus.custom.permission import org_manage_group_check
 from stucampus.organization.models import Organization
 from stucampus.organization.forms import OrganizationManageEditForm
-from stucampus.utils import spec_json, get_http_data
+from stucampus.utils import spec_json
 
 
 @login_required

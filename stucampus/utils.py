@@ -27,16 +27,3 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
-
-
-def get_http_data(request):
-    '''Get form data, used by PUT and DELETE method.'''
-    raw_data = request.read()
-    data = raw_data.split('&')
-    output_dic = {}
-    for datum in data:
-        d = datum.split('=')
-        d_name = d[0]
-        d_val = urllib2.unquote(d[1])
-        output_dic.update({d_name: d_val})
-    return output_dic
