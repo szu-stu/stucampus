@@ -1,0 +1,12 @@
+- model: organization.organization
+  pk: 1
+  fields:
+    name: "学子天地"
+    url: 'http://stu.szu.edu.cn'
+    logo: '/static/images/layout/logo3.png'
+    managers: [1]
+    ban_reason: null
+    is_banned: false
+    is_deleted: false
+    members: []
+    phone: ''
