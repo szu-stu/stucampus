@@ -7,7 +7,7 @@ class Student(models.Model):
 
     class Meta:
         permissions = (
-            ('student_list', 'List all students'),
+            ('students_list', 'List all students'),
             ('student_show', 'Show the information of student.'),
             ('student_create', 'Create a new student.'),
             ('student_edit', 'Edit the information of students.'),

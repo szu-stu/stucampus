@@ -7,7 +7,7 @@ class Organization(models.Model):
 
     class Meta:
         permissions = (
-            ('organization_list', 'List all organizations'),
+            ('organizations_list', 'List all organizations'),
             ('organization_show', 'Show information of an organization.'),
             ('organization_create', 'Create an organization'),
             ('organization_edit', 'Edit information of an organization'),
