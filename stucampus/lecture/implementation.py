@@ -192,7 +192,7 @@ def add_new_lecture_from_notification(new_notif):
         lecture.title = lect['title']
         lecture.date_time = lect['date_time']
         lecture.place = lect['place']
-        lecture.speaker = lect['speaker'],
+        lecture.speaker = lect['speaker']
         lecture.download_date = timezone.now().isoformat()
         lecture.url_id_backup = lecture.url_id
 

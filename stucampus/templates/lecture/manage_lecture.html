@@ -1,5 +1,14 @@
 {% extends 'activity/manage_base.html' %}
 
+{% block htmltitle %}
+    title
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'lecture/manage_lecture.css'|as_css }}
+{% endblock %}
+
 {% block header %}
 	Lecture Manage
 {% endblock %}
@@ -7,6 +16,7 @@
 {% block add %}
     {% url 'lecture:add_new' %}
 {% endblock %}
+
 {% block index %}
     {% url 'lecture' %}
 {% endblock %}

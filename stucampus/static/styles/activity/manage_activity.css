@@ -3,7 +3,7 @@
     position: relative;
     margin-top: 50px;
     overflow: hidden;
-    background-image: url(green.png);
+    background-image: url(/static/images/lecture/green.png);
     background-repeat: repeat-x;
     background-color: #98d98e;
 }

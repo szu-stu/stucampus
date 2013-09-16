@@ -17,13 +17,7 @@ def index(request):
 
 def manage(request):
     formset = LecureFormSet(queryset=LectureMessage.get_messages_this_week())
-    paginator = Paginator(formset, 2)
-    page_num = request.GET.get('page')
-    try:
-        current_page = paginator.page(page_num)
-    except InvalidPage:
-        current_page = paginator.page(1)
-    return render(request, 'lecture/manage.html', {'page': current_page})
+    return render(request, 'lecture/manage.html', {'formset': formset})
 
 
 def submit(request):

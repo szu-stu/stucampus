@@ -1,16 +1,31 @@
 {% extends 'activity/manage_base.html' %}
 
+{% block htmltitle %}
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'lecture/manage_lecture.css'|as_css }}
+{% endblock %}
+
 {% block header %}
-	Lecture Manage
+    Lecture Manage
+{% endblock %}
+
+{% block add %}
+    {% url 'lecture:add_lecture' %}
+{% endblock %}
+
+{% block index %}
+    {% url 'lecture:index' %}
 {% endblock %}
 
 {% block manage_form %}
-
-<form method="POST" action="/lecture/submit">
+<form method="POST" action="{% url 'lecture:submit' %}">
 {% csrf_token %}
 {{ formset.management_form }}
 
-{% for form in page %}
+{% for form in formset %}
 
     <!-- 信息  Begin -->
 {% if form.is_delete.value %}
@@ -20,7 +35,6 @@
 {% endif %}
 
         <div class="message_container">
-            {{ form.id }}
 
             <!-- 标题  Begin -->
             <div class="input_list">
@@ -66,7 +80,8 @@
                 </div>
             </div>
             <!-- 已核-删除  End -->
-        </div>    
+        </div>
+        {{ form.id }}   
     </div>
     <!-- 信息  End -->
 
