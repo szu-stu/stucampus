@@ -1,0 +1,16 @@
+.message{
+    width: 900px;
+    position: relative;
+    margin-top: 50px;
+    overflow: hidden;
+}
+.is_delete{
+    background-image: url(red.png);
+    background-repeat: repeat-x;
+    background-color: #ee827c;
+}
+.not_delete{
+    background-image: url(green.png);
+    background-repeat: repeat-x;
+    background-color: #98d98e;
+}

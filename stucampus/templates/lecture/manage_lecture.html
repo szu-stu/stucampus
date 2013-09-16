@@ -4,6 +4,13 @@
 	Lecture Manage
 {% endblock %}
 
+{% block add %}
+    {% url 'lecture:add_new' %}
+{% endblock %}
+{% block index %}
+    {% url 'lecture' %}
+{% endblock %}
+
 {% block manage_form %}
 
 <form method="POST" action="/lecture/submit">

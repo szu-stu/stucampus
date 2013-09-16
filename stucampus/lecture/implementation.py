@@ -66,7 +66,6 @@ def parse_content(content):
 
     try:
         speaker = parse_speaker(content)
-    url(r'^update/$', update, name='update'),
     except MatchError:
         speaker = 'not found'
 
