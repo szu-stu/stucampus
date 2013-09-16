@@ -85,14 +85,8 @@ TITLE_PATTERN = (
 
 
 def parse_title(content):
-    pattern_iter = TITLE_PATTERN.__iter__()
-    for left, right in pattern_iter:
-        try:
-            return find_content_between_two_marks(left, right, content,
-                                                  r'.+')
-        except MatchError as e:
-            if 0 == pattern_iter.__length_hint__():
-                raise e
+    title = find_by_iter_wrap_pattern(TITLE_PATTERN, content)
+    return title
 
 
 PLACE_PATTERN = (
@@ -103,14 +97,8 @@ PLACE_PATTERN = (
 
 
 def parse_place(content):
-    pattern_iter = PLACE_PATTERN.__iter__()
-    for left, right in pattern_iter:
-        try:
-            return find_content_between_two_marks(left, right, content,
-                                                  r'.+')
-        except MatchError as e:
-            if 0 == pattern_iter.__length_hint__():
-                raise e
+    place = find_by_iter_wrap_pattern(PLACE_PATTERN, content)
+    return place
 
 
 SPEAKER_PATTERN = (
@@ -123,14 +111,8 @@ SPEAKER_PATTERN = (
 
 
 def parse_speaker(content):
-    pattern_iter = SPEAKER_PATTERN.__iter__()
-    for left, right in pattern_iter:
-        try:
-            return find_content_between_two_marks(left, right, content,
-                                                  r'.+')
-        except MatchError as e:
-            if 0 == pattern_iter.__length_hint__():
-                raise e
+    speaker = find_by_iter_wrap_pattern(SPEAKER_PATTERN, content)
+    return speaker
 
 
 DATETIME_PATTERN = (
@@ -141,17 +123,9 @@ DATETIME_PATTERN = (
 
 
 def parse_datetime(content):
-    prefix_iter = DATETIME_PATTERN.__iter__()
-    for left, right in prefix_iter:
-        try:
-            date_infor = find_content_between_two_marks(left, right, content)
-        except MatchError as e:
-            if 0 == prefix_iter.__length_hint__():
-                raise e
-        else:
-            break
+    date_infor = find_by_iter_wrap_pattern(DATETIME_PATTERN, content)
     return parse_date(date_infor) + ' ' + parse_time(date_infor)
- 
+
 
 DATE_PATTERN = (
     r'\d{4}'+u'年'+r'\d{1,2}'+u'月'+r'\d{1,2}' + u'日',
@@ -161,18 +135,9 @@ DATE_PATTERN = (
 
 
 def parse_date(content):
-    pattern_iter = DATE_PATTERN.__iter__()
-    for pattern in pattern_iter:
-        try:
-            date = find_content_between_two_marks('', '', content, pattern)
-        except MatchError as e:
-            if 0 == pattern_iter.__length_hint__():
-                raise e
-        else:
-            return date.replace(u'年', '-')\
-                       .replace(u'月', '-')\
-                       .replace(u'日', '')\
-                       .replace('.', '-')
+    date = find_by_iter_single_pattern(DATE_PATTERN, content)
+    return date.replace(u'年', '-').replace(u'月', '-')\
+               .replace(u'日', '').replace('.', '-')
 
 
 TIME_PATTERN = (
@@ -184,17 +149,36 @@ TIME_PATTERN = (
 
 
 def parse_time(content):
-    pattern_iter = TIME_PATTERN.__iter__()
-    for pattern in pattern_iter:
-        try:
-            time_range = find_content_between_two_marks('', '', content,
-                                                        pattern)
-            time_range = time_range.replace(u'：', ':').replace(u'—', '-')
-            start_time = time_range.split('-')[0]
-            return start_time
-        except MatchError as e:
-            if 0 == pattern_iter.__length_hint__():
-                raise e
+    time_range = find_by_iter_single_pattern(TIME_PATTERN, content)
+    time_range = time_range.replace(u'：', ':').replace(u'—', '-')
+    start_time = time_range.split('-')[0]
+    return start_time
+
+
+def find_by_iter_wrap_pattern(patterns, content, to_search=r'.*?'):
+    ''' to find and return the text wraped in pattern
+        try match all pattern to content until find it
+        raise an error if no pattern match
+    '''
+    for left, right in patterns:
+        reg = left+ r'(?P<content>' + to_search + r')' + right
+        match = re.search(reg, content)
+        if match:
+            return match.group('content')
+    raise MatchError(content, reg)
+
+
+def find_by_iter_single_pattern(patterns, content):
+    ''' to find and return the text march the pattern
+        try match all pattern to content untile find it
+        raise an error if no pattern match
+    '''
+    for pattern in patterns:
+        reg = r'(?P<content>' + pattern + r')'
+        match = re.search(reg, content)
+        if match:
+            return match.group('content')
+    raise MatchError(content, reg)
 
 
 def add_new_lecture_from_notification(new_notif):
