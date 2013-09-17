@@ -23,70 +23,71 @@
 {% block manage_form %}
 <form method="POST" action="{% url 'lecture:submit' %}">
 {% csrf_token %}
-{{ formset.management_form }}
+{% with formset=page.formset %}
+    {{ formset.management_form }}
 
-{% for form in formset %}
-
-    <!-- 信息  Begin -->
-{% if form.is_delete.value %}
-	<div class="message is_delete">
-{% else %}
-	<div class="message not_delete">
-{% endif %}
-
-        <div class="message_container">
-
-            <!-- 标题  Begin -->
-            <div class="input_list">
-                <div class="title">Title</div>
-                {{ form.title }}
-            </div>
-            <div class="error"></div>
-            <!-- 标题  End -->
-            <!-- 地点  Begin -->
-            <div class="input_list">
-                <div class="title">Place</div>
-                {{ form.place }}
-            </div>
-            <div class="error"></div>
-            <!-- 地点  End -->
-            <!-- 日期时间  Begin -->
-            <div class="input_list">
-                <div class="title">Date Time</div>
-                {{ form.date_time }}}
-            </div>
-            <div class="error"></div>
-            <!-- 日期时间  End -->
-            <!-- 演讲者  Begin -->
-            <div class="input_list">
-                <div class="title">Speaker</div>
-                {{ form.speaker }}
-            </div>
-            <div class="error"></div>
-            <!-- 演讲者  End -->
-            <!-- URL ID  Begin -->
-            <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">~公文通~</a>
-            <div class="error"></div>
-            <!-- URL ID End -->
-
-            <div class="hidden">{{ form.url_id }}</div>
-            <!-- 已核-删除  Begin -->
-            <div class="choose_container">
-                <div class="choose check">checked
-                    {{ form.is_check }}
+    {% for form in formset %}
+    
+        <!-- 信息  Begin -->
+    {% if form.is_delete.value %}
+    	<div class="message is_delete">
+    {% else %}
+    	<div class="message not_delete">
+    {% endif %}
+    
+            <div class="message_container">
+    
+                <!-- 标题  Begin -->
+                <div class="input_list">
+                    <div class="title">Title</div>
+                    {{ form.title }}
                 </div>
-                <div class="choose delete">delete
-                    {{ form.is_delete }}
+                <div class="error"></div>
+                <!-- 标题  End -->
+                <!-- 地点  Begin -->
+                <div class="input_list">
+                    <div class="title">Place</div>
+                    {{ form.place }}
                 </div>
+                <div class="error"></div>
+                <!-- 地点  End -->
+                <!-- 日期时间  Begin -->
+                <div class="input_list">
+                    <div class="title">Date Time</div>
+                    {{ form.date_time }}}
+                </div>
+                <div class="error"></div>
+                <!-- 日期时间  End -->
+                <!-- 演讲者  Begin -->
+                <div class="input_list">
+                    <div class="title">Speaker</div>
+                    {{ form.speaker }}
+                </div>
+                <div class="error"></div>
+                <!-- 演讲者  End -->
+                <!-- URL ID  Begin -->
+                <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">~公文通~</a>
+                <div class="error"></div>
+                <!-- URL ID End -->
+    
+                <div class="hidden">{{ form.url_id }}</div>
+                <!-- 已核-删除  Begin -->
+                <div class="choose_container">
+                    <div class="choose check">checked
+                        {{ form.is_check }}
+                    </div>
+                    <div class="choose delete">delete
+                        {{ form.is_delete }}
+                    </div>
+                </div>
+                <!-- 已核-删除  End -->
             </div>
-            <!-- 已核-删除  End -->
+            {{ form.id }}   
         </div>
-        {{ form.id }}   
-    </div>
-    <!-- 信息  End -->
-
-{% endfor %}
-
+        <!-- 信息  End -->
+    
+    {% endfor %}
+{% endwith %}
     <!-- submit按钮  Begin -->
     <div class="line"></div>
     <div class="button"><input type="submit" value="submit" /></div>

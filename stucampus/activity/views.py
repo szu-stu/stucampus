@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
-from django.core.paginator import Paginator, InvalidPage
+from django.core.paginator import InvalidPage
 
 from stucampus.activity.models import ActivityMessage
 from stucampus.activity.forms import ActivityMessageForm, FormsetPaginator
