@@ -3,7 +3,6 @@ from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import RequestContext
-from django.core.paginator import Paginator, InvalidPage
 
 from stucampus.utils import spec_json
 from stucampus.lecture.models import LectureMessage

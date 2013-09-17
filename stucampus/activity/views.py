@@ -1,9 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, InvalidPage
 
 from stucampus.activity.models import ActivityMessage
-from stucampus.activity.forms import ActivityMessageForm, get_formset
+from stucampus.activity.forms import ActivityMessageForm, FormsetPaginator
 from stucampus.activity.forms import ActivityMessageFormSet
 
 
@@ -19,12 +20,14 @@ def add_activity(request):
         form = ActivityMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('activity:index'))
+            return HttpResponseRedirect(reverse('activity:manage'))
     return render(request, 'activity/add_activity.html', {'form': form})
 
 
 def manage(request):
-    formset = get_formset()
+    paginator = FormsetPaginator(ActivityMessage,
+                                 ActivityMessage.objects.all(), 2)
+    formset = paginator.get_formset_on_page(1)
     return render(request, 'activity/manage.html', {'formset': formset})
 
 

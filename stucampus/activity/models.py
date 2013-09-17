@@ -10,6 +10,9 @@ class ActivityMessage(django.db.models.Model):
     place = models.CharField(max_length=20)
     summary = models.CharField(max_length=140)
 
+    def is_out_of_date():
+        return self.date_time < timezone.now()
+
     @classmethod
     def get_activity_list(cls):
         return cls.objects.filter(date_time__gte=timezone.now())
