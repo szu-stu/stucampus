@@ -24,11 +24,14 @@ def add_activity(request):
     return render(request, 'activity/add_activity.html', {'form': form})
 
 
-def manage(request):
+def manage(request, page_num='1'):
     paginator = FormsetPaginator(ActivityMessage,
                                  ActivityMessage.objects.all(), 2)
-    formset = paginator.get_formset_on_page(1)
-    return render(request, 'activity/manage.html', {'formset': formset})
+    try:
+        page = paginator.page(int(page_num))
+    except InvalidPage:
+        page = paginator.page(1)
+    return render(request, 'activity/manage.html', {'page': page})
 
 
 def submit(request):

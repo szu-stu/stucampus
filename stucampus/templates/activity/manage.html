@@ -1,21 +1,78 @@
-<html>
-    <head>
-    </head>
-    <body>
-        <form method="post" action="{% url 'activity:submit' %}">
-            {% csrf_token %}
-            {{ formset.management_form }}
+{% extends 'activity/manage_base.html' %}
 
-            {% for form in formset %}
-            {{ form.id }}
+{% block htmltitle %}
+{% endblock %}
 
-            {{ form.tilte.errors }}{{ form.title }}
-            {{ form.date_time.errors }}{{ form.date_time }}
-            {{ form.place.errors }}{{ form.place }}
-            {{ form.summary.errors }}{{ form.summary }}
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'activity/manage_activity.css'|as_css }}
+{% endblock %}
 
-            {% endfor %}
-            <input type="submit" value="submit"/>
-        </form>
-    </body>
-</html>
+{% block header %}
+    Activity Manage
+{% endblock %}
+
+{% block add %}
+    {% url 'activity:add_activity' %}
+{% endblock %}
+
+{% block index %}
+    {% url 'activity:index' %}
+{% endblock %}
+
+{% block manage_form %}
+
+<form method="POST" action="{% url 'activity:submit' %}">
+{% csrf_token %}
+{% with formset=page.formset %}
+    {{ formset.management_form }}
+    
+    {% for form in formset %}
+    
+        <!-- 信息  Begin -->
+        <div class="act_message">
+            <div class="message_container">
+                <input id="id_form-0-id" name="form-0-id" type="hidden" value="1" />
+    
+                <!-- 标题  Begin -->
+                <div class="input_list">
+                    <div class="title">Title</div>
+                    {{ form.title }}
+                </div>
+                <div class="error"></div>
+                <!-- 标题  End -->
+                <!-- 地点  Begin -->
+                <div class="input_list">
+                    <div class="title">Place</div>
+                    {{ form.place }}
+                </div>
+                <div class="error"></div>
+                <!-- 地点  End -->
+                <!-- 日期时间  Begin -->
+                <div class="input_list">
+                    <div class="title">Date Time</div>
+                    {{ form.date_time }}
+                </div>
+                <div class="error"></div>
+                <!-- 日期时间  End -->
+                <!-- 概要  Begin -->
+                <div class="input_list">
+                    <div class="title">Summary</div>
+                    {{ form.summary }}
+                </div>
+                <div class="error"></div>
+                <!-- 概要  End -->
+    
+                {{ form.id }}
+            </div>
+        </div>
+        <!-- 信息  End -->
+    
+    {% endfor %}
+{% endwith %}
+    <!-- submit按钮  Begin -->
+    <div class="line"></div>
+    <div class="button"><input type="submit" value="submit" /></div>
+    <!-- submit按钮  End -->
+</form>
+{% endblock %}
