@@ -24,7 +24,7 @@
             <div class="class_who_date">{{ a.category }}</div>
             <div class="class_who_date">{{ a.publisher }}</div>
             <a href="http://www.szu.edu.cn/board/view.asp?id={{ a.url_id }}" class="ele">{{ a.title }}</a>
-            <div class="class_who_date">{{ a.published_date|date:"D-n-d"}}</div>
+            <div class="class_who_date">{{ a.published_date|date:"D-n-d" }}</div>
         </div>
         <!-- 消息  End -->
         {% endfor %}
@@ -33,13 +33,13 @@
         <div class="nav">
             <a href="?page={{ page.paginator.num_pages }}">首页<a>
             {% if page.has_previous %}
-            <a href="?page={{ page.previous_page_number }}" class="previous">上一页</a>
+                <a href="?page={{ page.previous_page_number }}" class="previous">上一页</a>
             {% endif %}
             <span class="num">
                 <span class="present">{{ page.number }}</span>
             </span>
             {% if page.has_next %}
-            <a class="next" href="?page={{ page.next_page_number }}">下一页</a>
+                <a class="next" href="?page={{ page.next_page_number }}">下一页</a>
             {% endif %}
             <a href="?page={{ page.paginator.num_pages }}">尾页<a>
         </div>
