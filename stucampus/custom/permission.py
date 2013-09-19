@@ -17,10 +17,16 @@ def guest_or_redirect(function=None):
 
 def admin_group_check(user):
     '''Admin group check function for user_passes_test.'''
-    admin_group = Group.objects.get(name='StuCampus')
+    try:
+        admin_group = Group.objects.get(name='StuCampus')
+    except Group.DoesNotExist:
+        return False
     return (admin_group in user.groups.all())
 
 
 def org_manage_group_check(user):
-    org_manage_group = Group.objects.get(name='organization_manager')
+    try:
+        org_manage_group = Group.objects.get(name='organization_manager')
+    except Group.DoesNotExist:
+        return False
     return (org_manage_group in user.groups.all())
