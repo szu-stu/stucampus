@@ -1,44 +1,27 @@
 #-*- coding: utf-8 -*-
+from itertools import chain
 from datetime import datetime, timedelta
 from django.utils import timezone
 import django.db.models
+from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 
 from stucampus.custom import models
-from stucampus.lecture.implementation import get_lecture_messages
 
 
 class LectureMessage(django.db.models.Model):
 
     title = models.CharField(max_length=100)
-    date_time = models.DateTimeField()
+    date_time = models.DateTimeField(null=True)
     place = models.CharField(max_length=40)
-
+    speaker = models.CharField(max_length=40)
     url_id = models.CharField(max_length=20, unique=True)
+
     url_id_backup = models.CharField(max_length=20, unique=True,
                                      editable=False)
+    download_date = models.DateTimeField(editable=False)
     is_check = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
-
-    @classmethod
-    def get_message_from_announcement(cls):
-        count_get = 0
-        repeat = 0
-        newest_url_id_in_db = cls.objects.reverse()[0].url_id
-        for lm in get_lecture_messages():
-            if lm['url_id'] == newest_url_id_in_db:
-                break
-            count_get += 1
-            lecture_message, created = cls(
-                                   title=lm['title'],
-                                   date_time=lm['date_time'],
-                                   place=lm['place'],
-                                   url_id=lm['url_id'],
-                                   url_id_backup=lm['url_id'])
-            if not created:
-                lecture_message.save()
-            else:
-                repeat += 1
-        return (count_get, repeat)
 
     @classmethod
     def generate_messages_table(cls):
@@ -77,5 +60,10 @@ class LectureMessage(django.db.models.Model):
         now = timezone.now()
         date_of_this_Monday = now - timedelta(days=now.weekday())
         date_of_next_Monday = date_of_this_Monday + timedelta(days=7)
-        return cls.objects.filter(date_time__gte=date_of_this_Monday,
-                                  date_time__lt=date_of_next_Monday)
+        lecture_held_this_week = cls.objects.filter(
+            date_time__gte=date_of_this_Monday,
+            date_time__lt=date_of_next_Monday)
+        msg_fetch_this_week = cls.objects.filter(
+            download_date__gte=date_of_this_Monday,
+            download_date__lt=date_of_next_Monday)
+        return lecture_held_this_week | msg_fetch_this_week

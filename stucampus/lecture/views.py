@@ -3,41 +3,54 @@ from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.template import RequestContext
+from django.core.paginator import InvalidPage
 
+from stucampus.utils import spec_json
 from stucampus.lecture.models import LectureMessage
-from stucampus.spider.models import Announcement
-from stucampus.lecture.forms import LectureForm, LecureFormSet, get_formset
+from stucampus.lecture.forms import LectureForm, LecureFormSet
+from stucampus.activity.forms import FormsetPaginator
 
 
 def index(request):
     table = LectureMessage.generate_messages_table()
     return render_to_response('lecture/index.html', {'table': table})
 
-def manage(request):
-    formset = get_formset()
-    return render_to_response('lecture/manage.html', {'formset': formset},
-                              context_instance=RequestContext(request))
+
+def manage(request, page_num='1'):
+    queryset = LectureMessage.get_messages_this_week()
+    paginator = FormsetPaginator(LectureMessage, queryset, 2)
+    try:
+        page = paginator.page(int(page_num))
+    except InvalidPage:
+        page = paginator.page(1)
+    return render(request, 'lecture/manage.html', {'page': page})
+
 
 def submit(request):
     formset = LecureFormSet(request.POST)
     for form in formset:
         if form.is_valid():
-            model = form.save(commit=False)
-            model.url_id = model.url_id_backup
-            model.save()
+            lecture_message = form.save(commit=False)
+            lecture_message.url_id = lecture_message.url_id_backup
+            lecture_message.save()
     return HttpResponseRedirect(reverse('lecture:manage'))
 
-def add_new(request):
+
+def add_lecture(request):
     form = LectureForm()
     if request.method == 'POST':
         form = LectureForm(request.POST)
         if form.is_valid():
-            model = form.save(commit=False)
-            model.url_id_backup = model.url_id
-            model.save()
+            lecture_message = form.save(commit=False)
+            lecture_message.url_id_backup = lecture_message.url_id
+            lecture_message.save()
             return HttpResponseRedirect(reverse('lecture:manage'))
-    return render(request, 'lecture/add_new.html', {'form': form})
+        else:
+            return spec_json(False, form.errors)
+    return render(request, 'lecture/add_lecture.html', {'form': form})
 
-def update(request):
-    LectureMessage.get_message_from_announcement()
+
+# just used for debug
+def delete(request):
+    LectureMessage.objects.all().delete()
     return HttpResponseRedirect(reverse('lecture:manage'))

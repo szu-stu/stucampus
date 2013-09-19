@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    {% load html_tools %}
+    {{ 'plugins/jquery.min.js' | as_js }}
+    {{ 'plugins/jquery.tools.min.js' | as_js }}
+    {{ 'plugins/jquery.form.js' | as_js }}
+    {{ 'google-analystics.js' | as_js }}
+    {{ 'global.js' | as_js }}
+
+    {{ 'activity/manage_base.css' | as_css }}
+
+    {% block htmltitle %}
+    {% endblock %}
+
+    {% block htmlhead %}
+    {% endblock %}
+</head>
+<body>
+	<!-- 浮动链接  Begin -->
+    <div class="fixed">
+        <a class="fixed_link" href="{% block add %}{% endblock %}">add</a>
+        <a class="fixed_link" href="{% block index %}{% endblock %}">table</a>
+    </div>
+    <!-- 浮动链接  End -->
+    <div class="container">
+    	<!-- 标题  Begin -->
+        <div class="header">{% block header %}{% endblock %}</div>
+        <!-- 标题  End -->
+        <!-- 信息列表  Begin -->
+        {% block manage_form %}
+        {% endblock %}
+        <!-- 信息列表  End -->
+    </div>
+</body>
+</html>

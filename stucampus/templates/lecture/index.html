@@ -1,20 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <style>
-            .message{
-                display: block;
-                border: 1px solid blue;
-            }
-        </style>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <link href="Message.css" rel="stylesheet" type="text/css">
     </head>
-    <body>
-        <table border="1">
+    
+<body>
+    <!-- 浮动链接  Begin -->
+    <div class="float">
+        <a class="float_link" href="/lecture/add_new">add</a>
+        <a class="float_link" href="/lecture/">table</a>
+    </div>
+    <!-- 浮动链接  End -->
+    <div class="container">
+        <!-- 标题  Begin -->
+        <div class="header">MESSAGE</div>
+        <!-- 标题  End -->
+        <!-- 信息列表  Begin -->
+        <form method="POST" action="/lecture/submit">
+        <input type='hidden' name='csrfmiddlewaretoken' value='OxPsm72zCZLuayI5h6RsRJKqucdH4MqK' />
+            <input id="id_form-TOTAL_FORMS" name="form-TOTAL_FORMS" type="hidden" value="6" /><input id="id_form-INITIAL_FORMS" name="form-INITIAL_FORMS" type="hidden" value="6" /><input id="id_form-MAX_NUM_FORMS" name="form-MAX_NUM_FORMS" type="hidden" value="1000" />
+            
+
+            <!-- not_delete信息 Begin-->
+            <div class="message not_delete">
+                <div class="box">
+                    <input id="id_form-0-id" name="form-0-id" type="hidden" value="1" />
+                    <div class="meslist">
+                        <div class="text">标题</div>
+                        <input class="textbox" id="id_form-0-title" maxlength="100" name="form-0-title" type="text" value="尺度空间理论问题研究" />
+                    </div>
+                    <div class="meslist">
+                        <div class="text">地点</div>
+                        <input class="textbox" id="id_form-0-place" maxlength="40" name="form-0-place" type="text" value="科技楼401室" />
+                    </div>
+                    <div class="meslist">
+                        <div class="text">日期时间</div>
+                        <input class="textbox" id="id_form-0-date_time" name="form-0-date_time" type="text" value="2013-08-22 10:08:07" />
+                    </div>
+                    <div class="line"></div>
+                    <div class="hidden"><input id="id_form-0-url_id" maxlength="20" name="form-0-url_id" type="text" value="264096" /></div>
+                <a class="url" href="http://www.szu.edu.cn/board/view.asp?id=264096">~公文通~</a>
+                <div class="chose check">已核<input class="tick" checked="checked" id="id_form-0-is_check" name="form-0-is_check" type="checkbox" /></div>
+                <div class="chose delete">删除<input class="tick" id="id_form-0-is_delete" name="form-0-is_delete" type="checkbox" /></div>
+                </div>   
+            </div>
+            <!-- not_delete信息  End -->
+            <!-- submit按钮  Begin -->
+            <div class="linedec"></div>
+            <div style=margin-top:50px;margin-bottom:100px;text-align:center><input class="button" type="submit" value="submit" /></div>
+            <!-- submit按钮  End -->
+        </form>
+        <!-- 信息列表  End -->
+    </div> 
+</body>
+</html>
+
+
+
+
+ <!--       <table border="1">
             <tr>
-                <td>biaoge</td>
+                <td></td>
                 {% for date in table.date %}
                 <td>
                 <div class="date">
-                    {{ date|date:"D M d"}}
+                    {{ date|date:"D n d"}}
                 </div>
                 </td>
                 {% endfor %}
@@ -47,5 +98,4 @@
             {% endfor %}
             </tr>
         </table>
-    </body>
-</html>
+        -->

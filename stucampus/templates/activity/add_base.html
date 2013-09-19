@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        {% load html_tools %}
+        {{ 'plugins/jquery.min.js' | as_js }}
+        {{ 'plugins/jquery.tools.min.js' | as_js }}
+        {{ 'plugins/jquery.form.js' | as_js }}
+        {{ 'google-analystics.js' | as_js }}
+        {{ 'global.js' | as_js }}
+
+        {{ 'activity/add_base.css' | as_css }}
+
+        {% block htmltitle %}
+        {% endblock %}
+
+        {% block htmlhead %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            <!-- 标题  Begin -->
+            <div class="headline">讲座信息添加</div>
+            <!-- 标题  End -->
+            <!-- 输入框  Begin -->
+            <div class="main">
+                <div class="main_container">
+
+                        {% block content %}
+                        {% endblock %}
+                        
+                </div>       
+            </div>   
+            <!-- 输入框  End    -->
+        </div>
+    </body>
+</html>

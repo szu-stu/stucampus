@@ -20,6 +20,8 @@ urlpatterns = patterns(
     url(r'^lecture/', include('stucampus.lecture.urls',
                               namespace='lecture')),
     url(r'^spider/', include('stucampus.spider.urls', namespace='spider')),
+    url(r'^activity/', include('stucampus.activity.urls',
+                               namespace='activity')),
     url(r'^admin/', include(admin.site.urls)),
 )
 

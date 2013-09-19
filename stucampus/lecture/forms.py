@@ -1,4 +1,4 @@
-from django.forms import ModelForm, HiddenInput
+from django.forms import ModelForm
 from django.forms.models import modelformset_factory
 
 from stucampus.lecture.models import LectureMessage
@@ -9,8 +9,5 @@ class LectureForm(ModelForm):
         model = LectureMessage
 
 
-LecureFormSet = modelformset_factory(LectureMessage, 
+LecureFormSet = modelformset_factory(LectureMessage,
                                      form=LectureForm, extra=0)
-def get_formset():
-    return LecureFormSet(queryset=LectureMessage.get_messages_this_week())
-

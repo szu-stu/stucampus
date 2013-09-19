@@ -5,37 +5,34 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'lecture/manage_lecture.css'|as_css }}
+    {{ 'activity/manage_activity.css'|as_css }}
 {% endblock %}
 
 {% block header %}
-    Lecture Manage
+    Activity Manage
 {% endblock %}
 
 {% block add %}
-    {% url 'lecture:add_lecture' %}
+    {% url 'activity:add_activity' %}
 {% endblock %}
 
 {% block index %}
-    {% url 'lecture:index' %}
+    {% url 'activity:index' %}
 {% endblock %}
 
 {% block manage_form %}
-<form method="POST" action="{% url 'lecture:submit' %}">
+
+<form method="POST" action="{% url 'activity:submit' %}">
 {% csrf_token %}
 {% with formset=page.formset %}
     {{ formset.management_form }}
-
+    
     {% for form in formset %}
     
         <!-- 信息  Begin -->
-    {% if form.is_delete.value %}
-    	<div class="message is_delete">
-    {% else %}
-    	<div class="message not_delete">
-    {% endif %}
-    
+        <div class="act_message">
             <div class="message_container">
+                <input id="id_form-0-id" name="form-0-id" type="hidden" value="1" />
     
                 <!-- 标题  Begin -->
                 <div class="input_list">
@@ -54,35 +51,20 @@
                 <!-- 日期时间  Begin -->
                 <div class="input_list">
                     <div class="title">Date Time</div>
-                    {{ form.date_time }}}
+                    {{ form.date_time }}
                 </div>
                 <div class="error"></div>
                 <!-- 日期时间  End -->
-                <!-- 演讲者  Begin -->
+                <!-- 概要  Begin -->
                 <div class="input_list">
-                    <div class="title">Speaker</div>
-                    {{ form.speaker }}
+                    <div class="title">Summary</div>
+                    {{ form.summary }}
                 </div>
                 <div class="error"></div>
-                <!-- 演讲者  End -->
-                <!-- URL ID  Begin -->
-                <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">~公文通~</a>
-                <div class="error"></div>
-                <!-- URL ID End -->
+                <!-- 概要  End -->
     
-                <div class="hidden">{{ form.url_id }}</div>
-                <!-- 已核-删除  Begin -->
-                <div class="choose_container">
-                    <div class="choose check">checked
-                        {{ form.is_check }}
-                    </div>
-                    <div class="choose delete">delete
-                        {{ form.is_delete }}
-                    </div>
-                </div>
-                <!-- 已核-删除  End -->
+                {{ form.id }}
             </div>
-            {{ form.id }}   
         </div>
         <!-- 信息  End -->
     
