@@ -1,13 +1,14 @@
 from django.conf.urls import patterns, url
 
+from stucampus.account.views import SignIn, SignOut, SignUp, Profile
+from stucampus.account.views import ProfileEdit, Password
+
 urlpatterns = patterns(
     '',
-    url(r'^signup$', 'stucampus.account.views.sign_up', name='sign_up'),
-    url(r'^signin$', 'stucampus.account.views.sign_in', name='sign_in'),
-    url(r'^signout$', 'stucampus.account.views.sign_out', name='sign_out'),
-    url(r'^profile$', 'stucampus.account.views.profile', name='profile'),
-    url(r'^profile/edit$',
-        'stucampus.account.views.profile_edit', name='profile_edit'),
-    url(r'^profile/password$',
-        'stucampus.account.views.password', name='password'),
+    url(r'^signup$', SignUp.as_view(), name='sign_up'),
+    url(r'^signin$', SignIn.as_view(), name='sign_in'),
+    url(r'^signout$', SignOut.as_view(), name='sign_out'),
+    url(r'^profile$', Profile.as_view(), name='profile'),
+    url(r'^profile/edit$', ProfileEdit.as_view(), name='profile_edit'),
+    url(r'^profile/password$', Password.as_view(), name='profile_password'),
 )

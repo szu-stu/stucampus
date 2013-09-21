@@ -1,18 +1,12 @@
-#-*- coding: utf-8
-from stucampus.organization.models import Organization
+from django.contrib.auth.models import Group
 
 
-def org_is_exist(name):
+def organization_manager_update(student, organization):
+    if not organization in student.orgs_as_member.all():
+        organization.members.add(student)
+    organization.managers.add(student)
     try:
-        org = Organization.objects.get(name=name)
-    except Organization.DoesNotExist:
-        return False
-    return True
-
-
-def find_organization(id):
-    try:
-        org = Organization.objects.get(id=id)
-    except Organization.DoesNotExist:
-        return None
-    return org
+        org_mng_group = Group.objects.get(name='organization_manager')
+        student.user.groups.add(org_mng_group)
+    except Group.DoesNotExist:
+        pass

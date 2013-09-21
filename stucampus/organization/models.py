@@ -4,6 +4,16 @@ from stucampus.account.models import Student
 
 
 class Organization(models.Model):
+
+    class Meta:
+        permissions = (
+            ('organizations_list', 'List all organizations'),
+            ('organization_show', 'Show information of an organization.'),
+            ('organization_create', 'Create an organization'),
+            ('organization_edit', 'Edit information of an organization'),
+            ('organization_del', 'Delete an organization')
+        )
+
     name = models.CharField(max_length=20)
     phone = models.CharField(max_length=11)
     url = models.URLField()

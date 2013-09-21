@@ -1,0 +1,1 @@
+from stucampus.middleware.put import PutHTTPMethodDataMiddleware
