@@ -28,11 +28,8 @@ def manage(request, page_num='1'):
 
 def submit(request):
     formset = LecureFormSet(request.POST)
-    for form in formset:
-        if form.is_valid():
-            lecture_message = form.save(commit=False)
-            lecture_message.url_id = lecture_message.url_id_backup
-            lecture_message.save()
+    if formset.is_valid():
+        formset.save()
     return HttpResponseRedirect(reverse('lecture:manage'))
 
 
@@ -41,9 +38,7 @@ def add_lecture(request):
     if request.method == 'POST':
         form = LectureForm(request.POST)
         if form.is_valid():
-            lecture_message = form.save(commit=False)
-            lecture_message.url_id_backup = lecture_message.url_id
-            lecture_message.save()
+            form.save()
             return HttpResponseRedirect(reverse('lecture:manage'))
         else:
             return spec_json(False, form.errors)

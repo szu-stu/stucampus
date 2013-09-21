@@ -40,6 +40,7 @@ def search_notifications(days=30, keyword='', search_type='title',
                  'searchb1': searchb1}
     html = fetch_html_by_post(BOARD_URL, form_data, encoding='gbk')
     etree = lxml.html.fromstring(html)
+
     # fetch all elements containing notification information
     xpath = ('/html/body/table/tr[2]/td/table/tr[3]/td/table'
              '/tr[3]/td/table/tr[position()>2]')
