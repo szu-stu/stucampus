@@ -3,7 +3,8 @@ $(function(){
     $S.initEditor($('#infor-content'));
 
     // 绑定表单 ajax
-    $S.ajaxForm($('#infor-form'));
+    var status = {'success': '发布成功'};
+    $S.ajaxForm($('#infor-form'), {'status': status});
 });
 
 (function($,$S){
@@ -15,18 +16,20 @@ $(function(){
         var title = $("#title").val();
         var organization_id = $("#organization_id").val();
         var content = $("#infor-content").val();
-        url = '/manage/infor/' + id;
-        method = 'PUT';
-        data = {'title': title,
-                'organization_id': organization_id,
-                'content': content};
-        $S.ajax(url, method, data);
+        var url = '/manage/infor/' + id;
+        var method = 'PUT';
+        var data = {'title': title,
+                    'organization_id': organization_id,
+                    'content': content};
+        var status = {'success': '修改成功', }
+        $S.ajax(url, method, {'data': data, 'status': status});
     };
 
     $S.Infor.remove = function(id){
-        url = '/manage/infor/' + id;
-        method = 'DELETE';
-        $S.ajax(url, method);
+        var url = '/manage/infor/' + id;
+        var method = 'DELETE';
+        var status = {'success': '删除成功'};
+        $S.ajax(url, method, {'status': status});
     };
 
 })(jQuery, StuCampus);
