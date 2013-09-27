@@ -1,15 +1,12 @@
 import os
 
-try:
-    from stucampus.config.production import *
-except ImportError:
-    from stucampus.config.develop import *
-
 
 # Repository directory.
 ROOT = os.path.dirname(os.path.dirname(__file__))
+
 # path bases things off of ROOT
-path = lambda *a: os.path.abspath(os.path.join(ROOT, *a))
+def path(*a):
+    return os.path.abspath(os.path.join(ROOT, *a))
 
 
 ALLOWED_HOSTS = ["*"]
@@ -99,3 +96,10 @@ LOGGING = {
         },
     }
 }
+
+
+
+try:
+    from stucampus.config.production import *
+except ImportError:
+    from stucampus.config.development import *

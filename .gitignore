@@ -38,7 +38,8 @@ nosetests.xml
 venv
 
 #develop config file.
-stucampus/config/develop.py
+stucampus/config/development.py
+stucampus/config/production.py
 
 # doyoubi
 doyoubi_*
