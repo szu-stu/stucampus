@@ -1,25 +1,8 @@
 ADMINS = ()
 MANAGERS = ADMINS
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 SECRET_KEY = '1234567890'
-
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'stucampus.master',
-    'stucampus.account',
-    'stucampus.infor',
-    'stucampus.organization',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
-)
 
 DATABASES = {
     'default': {
