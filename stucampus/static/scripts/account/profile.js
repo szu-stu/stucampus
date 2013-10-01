@@ -11,5 +11,6 @@ $(function () {
 
 $(function() {
     //绑定表单ajax
-    $S.ajaxForm($('#changeInfor'));
+    var status = {'success': '修改成功'}
+    $S.ajaxForm($('#changeInfor'), {'status': status});
 });

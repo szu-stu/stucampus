@@ -37,8 +37,9 @@ nosetests.xml
 # Virtualenv Folder
 venv
 
-# Some configure files
-stucampus/settings.py
+#develop config file.
+stucampus/config/development.py
+stucampus/config/production.py
 
 # doyoubi
 doyoubi_*

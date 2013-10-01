@@ -1,65 +1,67 @@
-#-*- coding: utf-8
 from django.http import HttpResponse
+from django.views.generic import View
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import user_passes_test
+from django.utils.decorators import method_decorator
 from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import (user_passes_test,
+                                            permission_required)
 
-from stucampus.account.services import find_student
+from stucampus.account.forms import AccountBanForm
 from stucampus.account.models import Student
 from stucampus.custom.permission import admin_group_check
-from stucampus.utils import spec_json, get_http_data
+from stucampus.utils import spec_json
 
 
-@user_passes_test(admin_group_check)
-def list(request):
-    if request.method == 'GET':
-        if not request.user.has_perm('account.student_list'):
-            return HttpResponse(status=403)
+class ListAccount(View):
+    """List all accounts class-base view"""
+    @method_decorator(permission_required('account.students_list'))
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request):
         students = Student.objects.all()
         return render(request, 'master/account-list.html',
                       {'students': students})
 
 
-@user_passes_test(admin_group_check)
-def view(request, id):
-    if request.method == 'GET':
-        if not request.user.has_perm('account.student_list'):
-            return HttpResponse(status=403)
+class ShowAccount(View):
+    """Show a specific account class-base view"""
+    @method_decorator(permission_required('account.student_show'))
+    @method_decorator(user_passes_test(admin_group_check))
+    def get(self, request, id):
         student = get_object_or_404(Student, id=id)
         return render(request, 'master/account-view.html',
                       {'student': student})
-    elif request.method == 'PUT':
-        if not request.user.has_perm('account.student_edit'):
+
+    @method_decorator(permission_required('account.student_edit'))
+    @method_decorator(user_passes_test(admin_group_check))
+    def put(self, request, id):
+        form = AccountBanForm(request.PUT)
+        student = get_object_or_404(Student, id=id)
+        try:
+            admin_group = Group.objects.get(name=name)
+        except Group.DoesNotExist:
             return HttpResponse(status=403)
-        data = get_http_data(request)
-        if data['is_ban'] is not True:
-            return HttpResponse(status=405)
-        student = find_student(id)
-        admin_group = Group.objects.get(name='StuCampus')
-        if student is None:
-            success = False
-            messages = [u'该用户不存在']
-        elif admin_group in student.user.groups.all():
-            success = False
-            messages = [u'不能禁用管理员']
-        else:
-            success = True
-            messages = [u'禁用成功']
-        return spec_json(success, messages)
-    elif request.method == 'DELETE':
-        if not request.user.has_perm('account.student_del'):
+
+        if admin_group in student.user.groups.all():
+            return spec_json(status='user_is_admin')
+
+        student.user.is_active = False
+        student.user.save()
+        return spec_json(status='success')
+
+    @method_decorator(permission_required('account.student_del'))
+    @method_decorator(user_passes_test(admin_group_check))
+    def delete(self, request, id):
+        student = get_object_or_404(Student, id=id)
+        try:
+            admin_group = Group.objects.get(name=name)
+        except Group.DoesNotExist:
             return HttpResponse(status=403)
-        student = find_student(id)
-        admin_group = Group.objects.get(name='StuCampus')
-        if student is None:
-            success = False
-            messages = [u'该用户不存在']
-        elif admin_group in student.user.groups.all():
-            success = False
-            messages = [u'不能删除管理员!']
-        else:
-            student.user.delete()
-            student.delete()
-            success = False
-            messages = [u'删除成功']
-        return spec_json(success, messages)
+
+        student = get_object_or_404(Student, id=id)
+
+        if admin_group in student.user.groups.all():
+            return spec_json(status='user_is_admin')
+
+        student.user.delete()
+        student.delete()
+        return spec_json(status='success')

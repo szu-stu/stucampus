@@ -3,9 +3,10 @@ $(function(){
         var phone = $("#phone").val();
         var homepage = $("#url").val();
         var logo = $("#logo").val();
-        url = '/manage/organization/' + id + '/edit';
-        method = 'POST';
-        $S.ajax(url, method, data);
-        data = {'phone': phone, 'url': homepage, 'logo': logo};
+        var url = '/manage/organization/' + id + '/edit';
+        var method = 'post';
+        var data = {'phone': phone, 'url': homepage, 'logo': logo};
+        var status = {'success': '修改成功'}
+        $S.ajax(url, method, {'data': data, 'status': status});
     };
 });

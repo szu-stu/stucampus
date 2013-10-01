@@ -3,12 +3,12 @@ from hashlib import md5
 
 from django import template
 
-from stucampus.settings import APP_ROOT
+from stucampus.settings import path
 
 
 register = template.Library()
-STYLE_ROOT = os.path.join(APP_ROOT, 'static/styles')
-SCRIPT_ROOT = os.path.join(APP_ROOT, 'static/scripts')
+STYLE_ROOT = path('stucampus', 'static', 'styles')
+SCRIPT_ROOT = path('stucampus', 'static', 'scripts')
 
 
 @register.filter(name='as_css', is_safe=True)
