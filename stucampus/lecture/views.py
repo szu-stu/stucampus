@@ -41,7 +41,7 @@ def add_lecture(request):
             form.save()
             return HttpResponseRedirect(reverse('lecture:manage'))
         else:
-            return spec_json(False, form.errors)
+            return spec_json('errors', form.errors)
     return render(request, 'lecture/add_lecture.html', {'form': form})
 
 

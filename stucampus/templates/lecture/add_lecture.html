@@ -1,17 +1,17 @@
 {% extends 'activity/add_base.html' %}
 
 {% block htmltitle %}
-<script>
-    $(function(){
-        var status = {'success': 'doyoubi success'}
-        $S.ajaxForm($('#add_lecture_form'), {'status': status});
-    })()
-</script>
 {% endblock %}
 
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'lecture/add_lecture.css'|as_css }}
+    <script>
+        (function(){
+            var status = {'success': 'doyoubi success'}
+            $S.ajaxForm($('#add_lecture_form'), {'status': status});
+        })()
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -28,6 +28,8 @@
         <div class="input_list">
             <div class="title">地点</div>
             {{ form.place }}
+        </div>
+        <div id="title-tips" class="error">
         </div>
         <div class="error">
             {% for error in form.place.errors %}
@@ -49,6 +51,8 @@
             <div class="title">日期时间</div> 
             {{ form.date_time }}
             <div class="title" style=width:120px;font-size:14px;margin-right:0px>如2013-9-1 21:22</div>
+        </div>
+        <div id="date_time-tips" class="error">
         </div>
         <div class="error">
             {% for error in form.date_time.errors %}
