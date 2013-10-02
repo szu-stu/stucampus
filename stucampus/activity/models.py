@@ -11,6 +11,8 @@ class ActivityMessage(django.db.models.Model):
     summary = models.CharField(max_length=140)
 
     modified_date_time = models.DateTimeField(editable=False, auto_now=True) 
+    is_check = models.BooleanField(default=False)
+    is_delete = models.BooleanField(default=False)
 
     @classmethod
     def get_activity_list(cls):

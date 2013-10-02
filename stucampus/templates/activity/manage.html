@@ -30,9 +30,12 @@
     {% for form in formset %}
     
         <!-- 信息  Begin -->
-        <div class="act_message">
+    {% if form.is_delete.value %}
+    	<div class="act_message is_delete">
+    {% else %}
+    	<div class="act_message not_delete">
+    {% endif %}
             <div class="message_container">
-                <input id="id_form-0-id" name="form-0-id" type="hidden" value="1" />
     
                 <!-- 标题  Begin -->
                 <div class="input_list">
@@ -63,6 +66,10 @@
                 <div class="error"></div>
                 <!-- 概要  End -->
     
+                <div class="choose_container">
+                    <div class="choose check">已核{{ form.is_check }}</div>
+                    <div class="choose delete">删除{{ form.is_delete }}</div>
+                </div>         
                 {{ form.id }}
             </div>
         </div>

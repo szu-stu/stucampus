@@ -62,31 +62,6 @@ body{
     margin-top: 10px;
     float: left;
 }
-.choose_container{
-    width: 100%;
-    height: 30px;
-    position: relative;
-    margin-top: 30px;
-    overflow: hidden;
-}
-.choose{
-    height: 30px;
-    font-size: 22px;
-    color: #ffffff;
-    line-height: 30px;
-    vertical-align: middle;
-    position: absolute;
-    top: 0px;
-}
-.check{
-    left: 200px;
-}
-.delete{
-    right: 200px;
-}
-.choose input{
-    margin-left: 5px;
-}
 .button{
     margin-top: 20px;
     margin-bottom: 10px;

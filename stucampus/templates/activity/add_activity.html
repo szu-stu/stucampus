@@ -54,8 +54,11 @@
         <div id="summary-tips" class="error-messages">
         </div>
 
-        <div class="button">
-		<input type="submit" value="submit" />
+        <div class="choose_container">
+            <div class="choose check">已核{{ form.is_check }}</div>
+            <div class="choose delete">删除{{ form.is_delete }}</div>
+        </div>         
+        <div class="button"><input type="submit" value="submit" /></div>
 	</div>
     </form>
 {% endblock %}
