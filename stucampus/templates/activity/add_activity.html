@@ -10,7 +10,8 @@
     <script>
         (function(){
             var status = {'success': 'doyoubi success'}
-            $S.ajaxForm($('#add_activity_form'), {'status': status});
+            var redirect = function(){ window.location.replace("../manage"); }
+            $S.ajaxForm($('#add_activity_form'), {'status': status, 'redirect': redirect});
         })()
     </script>
 {% endblock %}

@@ -137,6 +137,11 @@
             }else{
                 status_dict = {};
             }
+            if (typeof args != 'undefined'){
+                $S.redirect = args['redirect'];
+            }else{
+                $S.redirect = "";
+            }
         }
         forms.ajaxForm({
             statusCode:{
@@ -150,7 +155,11 @@
             success: function(response){
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
-                    StuCampus._jump_to_refer();
+                    if($S.redirect != ""){
+                        $S.redirect();
+                    }else{
+                        StuCampus._jump_to_refer();
+                    }
                     return false;
                 }
                 if (response.status == 'errors'){
