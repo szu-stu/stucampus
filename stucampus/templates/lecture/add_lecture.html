@@ -22,29 +22,21 @@
             <div class="title">标题</div>
             {{ form.title }}
         </div>
-        <div id="title-tips">
+        <div id="title-tips" class="error-messages">
         </div>
 
         <div class="input_list">
             <div class="title">地点</div>
             {{ form.place }}
         </div>
-        <div id="title-tips" class="error">
-        </div>
-        <div class="error">
-            {% for error in form.place.errors %}
-                {{ error|escape }}
-            {% endfor %}
+        <div id="place-tips" class="error-messages">
         </div>
 
         <div class="input_list">
             <div class="title">报告人</div>
             {{ form.speaker }}
         </div>
-        <div class="error">
-            {% for error in form.speaker.errors %}
-                {{ error|escape }}
-            {% endfor %}
+        <div id="speaker-tips" class="error-messages">
         </div>
 
         <div class="input_list">
@@ -52,22 +44,14 @@
             {{ form.date_time }}
             <div class="title" style=width:120px;font-size:14px;margin-right:0px>如2013-9-1 21:22</div>
         </div>
-        <div id="date_time-tips" class="error">
-        </div>
-        <div class="error">
-            {% for error in form.date_time.errors %}
-                {{ error|escape }}
-            {% endfor %}
+        <div id="date_time-tips" class="error-messages">
         </div>
 
         <div class="input_list">
             <div class="title">URL ID</div>
             {{ form.url_id }}
         </div>
-        <div class="error">
-            {% for error in form.url_id.errors %}
-                {{ error|escape }}
-            {% endfor %}
+        <div id="url_id-tips" class="error-messages">
         </div>
 
         <div class="chose_container">

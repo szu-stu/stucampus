@@ -39,7 +39,7 @@ def add_lecture(request):
         form = LectureForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('lecture:manage'))
+            return spec_json('success', 'add success');
         else:
             return spec_json('errors', form.errors)
     return render(request, 'lecture/add_lecture.html', {'form': form})

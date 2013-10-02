@@ -17,9 +17,7 @@ class LectureMessage(django.db.models.Model):
     speaker = models.CharField(max_length=40)
     url_id = models.CharField(max_length=20, unique=True)
 
-    url_id_backup = models.CharField(max_length=20, unique=True,
-                                     editable=False)
-    download_date = models.DateTimeField(editable=False)
+    download_date = models.DateTimeField(editable=False, auto_now_add=True)
     is_check = models.BooleanField(default=False)
     is_delete = models.BooleanField(default=False)
 

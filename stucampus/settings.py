@@ -67,6 +67,9 @@ INSTALLED_APPS = (
     'stucampus.account',
     'stucampus.infor',
     'stucampus.organization',
+    'stucampus.lecture',
+    'stucampus.spider',
+    'stucampus.activity',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

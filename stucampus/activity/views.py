@@ -6,6 +6,7 @@ from django.core.paginator import InvalidPage
 from stucampus.activity.models import ActivityMessage
 from stucampus.activity.forms import ActivityMessageForm, FormsetPaginator
 from stucampus.activity.forms import ActivityMessageFormSet
+from stucampus.utils import spec_json
 
 
 def index(request):
@@ -20,7 +21,9 @@ def add_activity(request):
         form = ActivityMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('activity:manage'))
+            return spec_json('success', 'add success')
+        else:
+            return spec_json('errors', form.errors)
     return render(request, 'activity/add_activity.html', {'form': form})
 
 
