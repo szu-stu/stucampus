@@ -1,0 +1,20 @@
+<!-- 分页栏  Begin -->
+<div class="nav">
+    <span class="num">
+        <a href="?page=1">首页</a>
+    </span>
+    {% if page.has_previous %}
+        <a href="?page={{ page.previous_page_number }}" class="previous">上一页</a>
+    {% endif %}
+    <span class="num">
+        <span class="present">{{ page.number }}</span>
+    </span>
+    {% if page.has_next %}
+        <a class="next" href="?page={{ page.next_page_number }}">下一页</a>
+    {% endif %}
+    <span class="num">
+        <a href="?page={{ page.paginator.num_pages }}">尾页</a>
+    </span>
+</div>
+<!-- 分页栏  End -->
+    

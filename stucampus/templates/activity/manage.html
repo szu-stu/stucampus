@@ -1,4 +1,4 @@
-{% extends 'activity/manage_base.html' %}
+{% extends 'plugin/manage_base.html' %}
 
 {% block htmltitle %}
 {% endblock %}
@@ -6,6 +6,7 @@
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'activity/manage_activity.css'|as_css }}
+    {{ 'plugin/paginator.css' | as_css }}
 {% endblock %}
 
 {% block header %}
@@ -21,7 +22,6 @@
 {% endblock %}
 
 {% block manage_form %}
-
 <form method="POST" action="{% url 'activity:submit' %}">
 {% csrf_token %}
 {% with formset=page.formset %}
@@ -75,4 +75,8 @@
     <div class="button"><input type="submit" value="submit" /></div>
     <!-- submit按钮  End -->
 </form>
+{% endblock %}
+
+{% block paginator %}
+    {% include 'plugin/paginator.html' with page=page %}
 {% endblock %}

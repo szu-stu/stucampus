@@ -1,10 +1,12 @@
-{% extends 'activity/add_base.html' %}
+{% extends 'plugin/add_base.html' %}
 
 {% block htmltitle %}
 
 {% endblock %}
 
 {% block htmlhead %}
+    {% load html_tools %}
+    {{ 'plugin/fixed_hyperlink.css' | as_css }}
     <script>
         (function(){
             var status = {'success': 'doyoubi success'}
@@ -14,6 +16,12 @@
 {% endblock %}
 
 {% block content %}
+    <!-- 浮动链接  Begin -->
+    <div class="fixed">
+        <a class="fixed_link" href="{% url 'activity:manage' %}">manage</a>
+        <a class="fixed_link" href="{% url 'activity:index' %}">table</a>
+    </div>
+    <!-- 浮动链接  End -->
     <form id="add_activity_form" action="{% url 'activity:add_activity' %}" method="POST">
         {% csrf_token %}
         <div class="input_list">
