@@ -7,6 +7,8 @@
     {{ 'basic-jquery-slider.css' | as_css }}
 {% endblock %}
 
+{% load py_utils %}
+
 {% block content %}
     <div class="main">
         <div class="container">
@@ -21,32 +23,42 @@
             </div>
             <div class="infor-center">
                 <h2 class="right">信息中心</h2>
-                {% for infor in infors %}
-                <li>
-                    <a href="/infor/{{infor.id}}" title="{{infor.title}}">{{infor.title}}</a>
-                    <div class="time-asso">
-                        <span>{{infor.create}}&nbsp&nbsp来自</span>
-                        <a href="#">{{infor.organization}}</a>
-                    </div>
-                </li>
-                {% endfor %}
+                <ul>
+                    {% for infor in infors %}
+                    <li>
+                        <a href="/infor/{{infor.id}}" title="{{infor.title}}">{{infor.title|ellipsis:"(10, '...')"}}</a>
+                        <div class="time-asso">
+                            <span>{{infor.create|friendly_date}}&nbsp&nbsp来自</span>
+                            <a href="#">{{infor.organization}}</a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
 
         <div class="container">
             <div class="subfield left">
                 <h2 class="left">新闻速递</h2>
-                <li>
-                    <a href="#" title="【小编推荐】你唯一能把握的是变成最好的自己">【小编推荐】你唯一能把握的是变成最好的自己</a>
-                    <span>7天前</span>
-                </li>
+                <ul>
+                    {% for news in newslist %}
+                    <li>
+                        <a href="/news/{{news.id}}" title="{{news.title}}">{{ news.title|ellipsis:"(10, '...')" }}</a>
+                        <span>{{ news.created|friendly_date }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
             <div class="subfield right">
                 <h2 class="right">媒体聚焦</h2>
-                <li>
-                    <a href="#" title="【小编推荐】你唯一能把握的是变成最好的自己">【小编推荐】你唯一能把握的是变成最好的自己</a>
-                    <span>7天前</span>
-                </li>
+                <ul>
+                    {% for medium in media %}
+                    <li>
+                        <a href="/news/{{ medium.id }}" title="{{ medium.title }}">{{ medium.title|ellipsis:"(10, '...')" }}</a>
+                        <span>{{ news.created|friendly_date }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
 
@@ -71,7 +83,7 @@
             <div class="magazine">
                 <h2 class="left">合作杂志</h2>
                 <div class="container">
-                    <a href="#" title="深青杂志在线版">
+                    <a href="/szuyouth/pdf" title="深青杂志在线版">
                         <img src="/static/images/new_index/suy.png">
                     </a>
                     <div class="introduction">
@@ -81,7 +93,7 @@
                 </div>
                 <div class="magazine-line"></div>
                 <div class="container">
-                    <a href="#" title="浪淘沙文学社">
+                    <a href="/magazine/ltsshekan" title="浪淘沙文学社">
                         <img src="/static/images/new_index/lts.png">
                     </a>
                     <div class="introduction">
@@ -93,7 +105,7 @@
 
             <div class="railway">
                 <h2 class="right">订票系统</h2>
-                <img src="/static/images/new_index/railway.jpg" title="火车票订票系统" width="225px" height="100px">
+                <a href="http://192.168.2.113/"><img src="/static/images/new_index/railway.jpg" title="火车票订票系统" width="225px" height="100px"></a>
                 <h3>回家•路</h3>
                 <div class="railway-blue"></div>
             </div>
