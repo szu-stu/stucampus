@@ -14,3 +14,14 @@
     background-repeat: repeat-x;
     background-color: #98d98e;
 }
+.url{
+    display: block;
+    font-family: "Microsoft Yahei";
+    color: #ffffff;
+    font-size: 22px;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+}
+.url:hover{ color:#3eb370}
