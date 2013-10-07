@@ -1,356 +1,257 @@
-/**
- * 首页通用样式
- */
-body { font-family: "Microsoft Yahei"; }
-h2 { font-weight: normal; font-size: 18px; color: #ffffff; font-family: "Microsoft Yahei";}
-a { text-decoration: none; color: #000000; }
-a:visited { text-decoration: none; color: #000000; }
-img { border: 3px solid #CCCCCC; }
-.central-container { margin: 0 auto; width: 995px; position: relative; }
-
-
-/**
- * 新闻幻灯片和信息中心
- */
-.news-slider-infor {
-	height: 415px;
-	margin-top: 5px;
+.nav a:hover{
+	color: #8bc4dc;
 }
 
-/* 新闻幻灯片  */
-#news-slider {
-	width: 605px;
-	height: 415px;
+.subfield li:hover{
+	background-color: #a0d8ef;
+}
+
+.infor-center li:hover{
+	background-color: #a0d8ef;
+}
+
+.infor-center a:hover{
+	text-decoration: underline;
+}
+
+.login{
+	width: 118px;
+	height: 39px;
+	background: url(/static/images/new_index/login.png) no-repeat;
 	position: absolute;
-	left: 10px;
+	bottom: 24px;
+	right: 0px;
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+	color: #0388c9;
+	font-weight: bold;
+	text-decoration: none;
+	text-indent: 48px;
+	line-height: 39px;
+	vertical-align: middle;
 }
 
-#news-slider img { border: none;}
-
-#image-infor {
-	position: absolute;
-	right: 0;	
-	hight: 415px;
-	width: 365px;
-	text-align: center;
-
-}
-
-.festival-img {
-	margin-bottom: 5px;	
-}
-
-/* 信息中心 */
-h2.infor-center{
-	background: url(/static/images/home/infor-center.png) no-repeat scroll 0 0 transparent;
-	text-align: left;
-	text-indent: 160px;
-	line-height: 250%;
-	height:47px;
-}
-
-#inforbox {
-    height: 192px;
-    overflow: hidden;
-    position: relative;
-}
-
-ul#infors {
-	width: 319px;
-	height: 1345px;
-    position: absolute;
-    left: 0;
-	margin-left: 8px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: left;
-	font-weight: lighter;
-	font-size: 14px;
-	word-spacing: 3px;
-    background-color: #ffffff;
-}
-
-ul#infors li { height: 55px; padding-top: 5px; padding-left: 15px; border-bottom: 1px solid #cccccc; }
-ul#infors li:hover { background-color: #dfe3e2; }
-ul#infors a:hover { border-bottom: 1px solid #000000; }
-ul#infors div { margin-top: 8px; font-size: 12px; }
-
-.scroll-bar {
-	display: inline-block;
-	background: url(/static/images/home/infor-scroll.png) no-repeat scroll 0 0 transparent;
-	width: 30px;
-	height: 193px;
-	position: absolute;
-	right: 8px;
-	bottom: -2px;
-    text-indent: -9999px;
-}
-
-/**
-* 幻灯片下的宣传div
-*/
-.brodcast {
-	width: 980px;
-	margin: 10px auto;
-	overflow:hidden;
-}
-
-
-/**
- * 新闻模块：新闻速递、媒体聚焦、讲座预告
- */
-.news {
-	width: 995px;
-	height: 160px;
-	background: url(/static/images/home/news-banner.png) no-repeat scroll 0 0 transparent;
-	margin-top: 15px;
-	padding-top: 47px;
-}
-
-.news-column {
-	width: 978px;
-	height: 150px;
-	margin-left: 9px;
+.main{
+	width: 950px;
 	position: relative;
-	background-color: #ffffff;
-}
-
-/* 新闻列表通用CSS */
-.news li{
-	width: 305px;
-	height: 25px;
-	text-align: left;
-	border-bottom: 1.5px dashed #cccccc;
-	line-height: 180%;
-	font-size: 14px;
-	text-indent: 0.5em;
-}
-
-.news ul { margin-top: 5px; margin-left: 15px; }
-.news li:hover { background-color: #efefef; }
-.news a:hover { color: 7e7e7e; }
-.news h2 { width: 100%; text-indent: 125px; line-height: 270%; }
-.post-date { position: absolute; right: 1em; }
-
-/* 新闻速递 */
-.news-express, .media-eye, .speech-preview{
-	display: inline-block;
-	width: 330px;
-	height: 200px;
-	position: absolute;
-	top: -47px;
-}
-
-/* 媒体聚焦 */
-.media-eye {
-	position: absolute;
-	left: 330px;
-	width: 325px;
-}
-
-/* 讲座预告 */
-.speech-preview {
-	position: absolute;
-	right: 10px;
-	width: 320px;
-}
-
-.speech-preview h2 {
-	text-indent: 135px;
-}
-
-/**
- * 话题专题、活动预告
- */
-.topic-activity {
-	width: 995px;
-	background: url(/static/images/home/topic-banner.png) no-repeat scroll 0 0 transparent;
-	margin-top: 10px;
-	padding-top: 45px;
-}
-
-/* 话题专题  */
-.topic-subject {
-	width: 649px;
-	margin-left: 8px;
-	background-color: #ffffff;
-	position: relative;
-}
-
-.topic-subject h2{
-	width: 100%;
-	text-indent: 130px; 
-	position: absolute;
-	top: -36px;
-}
-
-
-.topic li{
-	height: 170px;
-	width: 98%;
-	border-bottom: 1.5px dashed #cccccc;
 	margin: 0 auto;
+	overflow: hidden;
+}
+
+.container{
+	width: 100%;
 	position: relative;
+	overflow: hidden;
 }
 
-.topic-img {
-	margin-left: 15px;
-	margin-top: 20px;
-}
-
-.topic-introduce {
-	position: absolute;
-	right: 20px;
-	top: 20px;
-	width: 270px;
-}
-
-.topic-introduce h3 {
-	width: 100%;
-	text-align: center;
-	color: #2e71b6;
-	font-size: 18px;
-}
-
-.topic-detail {
-	width: 100%;
-	color: #6a6969;
-	margin-top: 10px;
-	line-height: 150%;
-	font-size:12px;
-}
-
-.topic-down {
-    margin: 15px auto auto auto;
-    width: 636px;
-    position: relative;
-
-}
-
-.topic-down a img {
-    border: 1px solid #cccccc;
-    width: 312px;
-    height: 130px;
-}
-
-/* 专题图片 */
-a.subject {
-	display: inline-block;
-	position: absolute;
-	right: 0;
-	margin-left: 3px;
-}
-
-/* 活动预告 */
-.activity-priview {
-	width: 310px;
-	position: absolute;
-	right: 8px;
-	top: 45px;
+.slider{
+	width: 525px;
+	height: 400px;
 	background-color: #ffffff;
-}
-
-.activity-priview h2 {
-	width: 100%;
-	line-height: 240%;
-	margin-bottom: 40px;
-	text-indent: 120px;
-	position: absolute;
-	top: -45px;
-}
-
-.activity-list {
-	width: 90%;
-	background: none;
-	margin-top: 7px;
-	padding: 0 10px 0 10px;
-}
-
-.activity-list li{
-	width: 100%;
-}
-
-/* 深大大运官网链接  */
-.szu-vol {
-	position: absolute;
-	right: 6px;
-	top: 230px;
-}
-.szu-vol img {
-    border: 1px solid #cccccc;
-}
-
-
-/**
- * 荔园人物
- */
-.szu-people-container {
-	background: url(/static/images/home/szu-people-banner.png) no-repeat scroll 0 0 transparent;
-	width: 995px;
-	height: 200px;
+	position: relative;
+	float: left;
 	margin-top: 30px;
-	padding-top: 50px;
+	overflow: hidden;
 }
 
-.szu-people {
-	width: 978px;
-	height: 200px;
-	background-color: #ffffff;	
-	margin-left: 8px;
+.infor-center{
+	width: 400px;
+	height: 400px;
+	position: relative;
+	float: right;
+	margin-top: 30px;
+	overflow: hidden;
 }
 
-.szu-people h2 {
+.infor-center img{
+	display: block;
 	position: absolute;
-	top: 13px;
-	left: 135px;
+	bottom: 0px;
+	right: 0px;
+	z-index: 2;
 }
 
-/* 荔园从物：最新 */
-a.first-people {
+.infor-center li{
+	width: 380px;
+	position: relative;
+	margin: 0 10px;
+	overflow: hidden;
+	border-bottom: 1px #727272 solid;
+	font-family: "Microsoft Yahei";
+	font-size: 0px;
+}
+
+.infor-center a{
 	display: inline-block;
-	margin-top: 25px;
-	margin-left: 40px;
-}
-
-.szu-people h3,.szu-people p{
-	color: #678212;
-	text-align: center;
-	font-size: 18px;
-	width: 320px;
-	position: absolute;
-	left: 225px;
-	top: 70px;
-}
-
-.szu-people p{
-	text-align: left;
-	text-indent: 2em;
 	font-size: 14px;
-	line-height: 150%;
 	color: #000000;
-	top: 120px;
+	text-decoration: none;
+	text-indent: 10px;
+	line-height: 225%;
 }
 
-/* 往期人物列表  */
-.szu-people-list { width: 410px; height: 175px; position: absolute; right: 7px; top: 65px; border-left: 1px solid #cccccc;}
-.szu-people-list li { height: 75px; width: 375px; border-bottom: 1px solid #cccccc; margin: 10px; position: relative; }
-.szu-people-list img { border: none; margin-top: -3px; margin-left: 18px; }
-.szu-people-list a { display: inline-block; }
-.szu-people-list h4{ font-weight: bold; display: inline-block; width: 250px; text-align: center; font-size: 14px;}
+.time-asso{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
 
-a.people-list {
+.time-asso a{
+	font-size: 12px;
+}
+
+.time-asso span{
+	display: inline-block;
+	font-size: 12px;
+	color: #6a6969;
+	text-indent: 10px;
+	line-height: 225%;
+}
+
+.subfield{
+	width: 450px;
+	position: relative;
+	margin-top: 30px;
+	overflow: hidden;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.subfield li{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	border-bottom: 1px dashed #cccccc;
+	font-family: "Microsoft Yahei";
+	font-size: 0px;
+
+}
+
+.subfield a{
+	display: inline-block;
+	width: 350px;
+	font-size: 14px;
+	color: #000000;
+	text-decoration: none;
+	text-indent: 10px;
+	line-height: 200%;
+}
+
+.subfield span{
+	display: inline-block;
+	width: 90px;
+	font-size: 14px;
+	color: #6a6969;
+	text-align: right;
+	margin-right: 10px;
+	line-height: 200%;
+}
+
+.magazine{
+	width: 650px;
+	position: relative;
+	float: left;
+	margin-top: 30px;
+	overflow: hidden; 
+}
+
+.container h2{
+	height: 40px;
+	background: url(/static/images/new_index/square.png) no-repeat;
+	position: relative;
+	font-family: "Microsoft Yahei";
+	font-size: 24px;
+	color: #2f73a9;
+	font-weight: normal;
+	line-height: 40px;
+	vertical-align: middle;
+	text-indent: 64px;
+}
+
+.magazine a{
+	display: block;
+	position: relative;
+	float: left;
+	margin: 25px 20px;
+}
+
+.magazine img{
+	border:3px solid #cccccc;
+}
+
+.introduction{
+	width: 272px;
+	position: relative;
+	float: left;
+	margin: 25px 0;
+	overflow: hidden;
+}
+
+.introduction h3{
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+	color: #000000;
+	text-align: center;
+	line-height: 200%;
+}
+
+.introduction p{
+	font-family: "Microsoft Yahei";
+	font-size: 12px;
+	color: #6a6969;
+	line-height: 150%;
+}
+
+.magazine-line{
+	border: 1px #727272 solid;
+}
+
+.railway{
+	width: 275px;
+	height: 425px;
+	position: relative;
+	margin-top: 30px;
+	float: right;
+	overflow: hidden;
+}
+
+.railway img{
+	display: block;
 	position: absolute;
-	top: 15px;
-	width:280px;
+	top: 100px;
+	right: 20px;
+	border: 2px #007bbb solid;
+	z-index: 2;
 }
 
+.railway h3{
+	width: 225px;
+	height: 100px;
+	background-color: #007bbb;
+	position: absolute;
+	top:255px;
+	right: 20px;
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+	color: #ffffff;
+	font-weight: normal;
+	line-height: 100px;
+	vertical-align: middle;
+	text-align: center;
+	z-index: 2
+}
 
-/**
- * 友情链接
- */
-.friendly-links {
-	width: 980px;
-	height: 120px;
-	background-color: #ffffff;
-	margin-top: 10px;
+.railway-blue{
+	width: 270px;
+	height: 335px;
+	background-color: #a0d8ef;
+	position: absolute;
+	top: 65px;
+	right: 0px;
 }

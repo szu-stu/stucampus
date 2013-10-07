@@ -1,195 +1,91 @@
-/* 板块通用CSS */
-.central-container { margin: 0 auto; width: 995px; position: relative; }
-/**
- * Header 部分
- */
-#header {	
-	height: 180px;
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+body{
+	background-color: #eaf4fc;
+}
+
+.header{
 	width: 100%;
-    position: relative;
-    z-index: 2;
-	background: url(/static/images/home/header.png) repeat-x scroll 0 0 transparent;	
-}
-
-.page-center {
-    width: 1020px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/**
- * 登陆框
- */
-div.header-bottom {
+	height: 236px;
+	background: url(/static/images/new_index/header.png) repeat-x;
 	position: relative;
-}
-div.header-bottom dl.signer-box {
-	position: absolute;
-	z-index: 2;
-	right: 0;
-	top: 110px;
-	height: auto;
-}
-dl.signer-box {
-	margin: 20px 15px 0 0;
-}
-
-dl.signer-box .content-block {
-	background-color: #fefefe;
-	border: 1px solid #ddd;
-	color: #5e5e5e;
-	font-size: 12px;
-}
-
-dl.signer-box .content-block a {
-	text-decoration: none;
-	color: #5e5e5e;
-}
-dl.signer-box .content-block a:hover {
-	color: #999;
-}
-dl.signer-box dt.signer-head {
-	margin: 0;
-	box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-	border-radius: 5px;
-	padding: 5px;
-	overflow: hidden;
-	height: 18px;
-}
-dl.signer-box dt.signer-head.pushed {
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
-}
-dl.signer-box a.usrname-box {
-	display: block;
-	height: 18px;
-	line-height: 18px;
-	border-right: 1px solid #ddd;
-	float: left;
 	overflow: hidden;
 }
-dl.signer-box a.usrname-box img.usr-avatar {
-	display: block;
-	float: left;
-	height: 16px;
-	width: 16px;
-	border-width: 0;
-}
-dl.signer-box a.usrname-box span.usr-text {
-	display: block;
-	float: left;
-	padding: 0 5px;
-}
 
-dl.signer-box a.signer-more {
-	display: block;
-	width: 18px;
-	height: 18px;
-	float: left;
-	margin: 0 5px;
-	text-indent: -9999px;
-	background:url("/static/images/elements/expland.png") no-repeat 0 0;
-}
-dl.signer-box a.signer-more:hover {
-	background-position: 0 -18px;
-}
-dl.signer-box a.signer-more.pushed {
-	background-position: 0 -36px;
-}
-dl.signer-box dd.signer-expand {
-	display: none;
-	position: absolute;
-	box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-	margin: 0;
-	padding: 0;
-    width: 120px;
-	right: 0;
-	top: 29px;
-	z-index: 2;
-}
-dl.signer-box dd.signer-expand.pushed {
-	display: block;
-}
-dl.signer-box dd.signer-expand ul.usrmenu {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	border-top-style: none;
-}
-dl.signer-box dd.signer-expand ul.usrmenu li {
-	min-width: 10em;
-	margin: 0;
-	padding: 0;
-}
-dl.signer-box dd.signer-expand ul.usrmenu li.topline {
-	border-top: 1px solid #e5e5e5;
-}
-dl.signer-box dd.signer-expand ul.usrmenu li a {
-	display: block;
+.header-container{
+	width: 950px;
 	height: 100%;
-	line-height: 100%;
-	padding: 10px 50px 10px 20px;
-}
-dl.signer-box dd.signer-expand ul.usrmenu li a:hover {
-	background-color: #e5e5e5;
-	color: #999;
-}
-dl.signer-box dd.signer-expand ul.sign-form {
-	margin: 0;
-	padding: 10px;
-	list-style: none;
-    width: 120px;
-}
-dl.signer-box dd.signer-expand ul.sign-form li {
-	margin: 0;
-	padding: 0;
-}
-dl.signer-box dd.signer-expand ul.sign-form label {
-	display: block;
-	line-height: 18px;
-}
-dl.signer-box dd.signer-expand ul.sign-form input.textbox {
-    width: 95px;
-	display: block;
-	margin-bottom: 10px;
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
 }
 
 /**
  * Logo
  */
-h1.stu-logo {
-	background: url(/static/images/home/stucampus-logo.png) no-repeat scroll 0 0 transparent;
-	width: 227px;
-	height: 113px;
+ .logo{
+	width: 225px;
+	height: 146px;
+	background: url(/static/images/new_index/logo.png) no-repeat;
 	position: absolute;
-	left: 30px;
-	top: 40px;
-}
-
-a.stu-logo {
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	text-indent: -9999999px;
+	top: 42px;
+	left: 0px;
 }
 
 /**
  * 导航
  */
-#nav { position: absolute; top: 90px; right: 5px;}
-ul#nav li{ display: inline;}
-#nav li{ display: inline-block; font-size: 18px; font-weight: 550%; font-family: "Microsoft Yahei"; color: #ffffff; margin-left: 1.5em; }
-#nav li:hover { background: url(/static/images/home/spacity.png) no-repeat scroll 0 0 transparent; }
-#nav a { color: #ffffff; }
-#nav a:visited { color: #ffffff;}
-#nav a:hover  {	color: #8eb839; background-image: url(/static/images/home/spacity.png) scroll 0 0 transparent;}
+.nav{
+	height: 24px;
+	position: absolute;
+	top: 115px;
+	right: 40px;
+	overflow: hidden;
+	font-size: 0px;
+}
 
+.nav a{
+	font-family: "Microsoft Yahei";
+	font-size: 20px;
+	color: #000000;
+	text-decoration: none;
+	line-height: 24px;
+	vertical-align: middle;
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+.nav a.selected {
+	color: #8bc4dc;
+}
+
+.nav li{
+	float: left;
+}
 
 /**
  * 页脚
  */
-.footer { height: 100px; margin-top: 20px; border-top: 1px dashed #cccccc; padding-top: 30px;}
-.footer p { text-align: center; font-size: 14px; font-weight: 300; line-height: 180%; }
-.footer a { display: inline-block; margin: 0 5px 0 5px; color: #000000;}
-.footer a:visited { color: #000000; }
-.footer a:hover { color: #ff0000; }
+.footer{
+	height: 100px;
+	position: relative;
+	margin: 0 5px;
+	padding-top: 30px;
+	border-top:1px #cccccc dashed; 
+	overflow: hidden;
+	font-family: "Microsoft Yahei";
+	font-size: 14px;
+	line-height: 180%;
+	text-align: center;
+}
+
+.footer a{
+	color: #000;
+}
+
+.footer a:hover{
+	text-decoration: none;
+}
