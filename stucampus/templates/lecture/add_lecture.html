@@ -10,8 +10,8 @@
     <script>
         (function(){
             var status = { 'success': 'doyoubi success' };
-            var redirect = function(){ window.location.replace("../manage"); }
-            $S.ajaxForm($('#add_lecture_form'), {'status': status, 'redirect': redirect});
+            var callback = function(){ window.location.replace("../manage"); }
+            $S.ajaxForm($('#add_lecture_form'), {'status': status, 'callback': callback});
         })()
     </script>
 {% endblock %}

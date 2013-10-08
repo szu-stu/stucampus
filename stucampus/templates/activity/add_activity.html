@@ -10,7 +10,7 @@
     <script>
         (function(){
             var status = {'success': 'doyoubi success'}
-            var redirect = function(){ window.location.replace("../manage"); }
+            var callback = function(){ window.location.replace("../manage"); }
             $S.ajaxForm($('#add_activity_form'), {'status': status, 'callback': callback});
         })()
     </script>
