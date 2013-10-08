@@ -56,6 +56,7 @@
         var data = "";
         var tips_type = "";
         var status_dict = "";
+        var callback = "";
         if (typeof args != 'undefined'){
             if (typeof args['data'] != 'undefined'){
                 data = args['data'];
@@ -74,6 +75,11 @@
             }else{
                 status_dict = {};
             }
+            if (typeof args['callback'] != 'undefined'){
+                callback = args['callback'];
+            }else{
+                callback = "";
+            }
         }
         $.ajax({
             url: url,
@@ -91,7 +97,11 @@
             success: function(response){
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
-                    StuCampus._jump_to_refer();
+                    if (callback != ""){
+                        callback();
+                    }else{
+                        StuCampus._jump_to_refer();
+                    }
                     return false;
                 }
                 if (response.status == 'errors'){
@@ -125,22 +135,22 @@
     StuCampus.ajaxForm = function(forms, args){
         var tips_type = "";
         var status_dict = "";
+        var callback = "";
         if (typeof args != 'undefined'){
             if (typeof args['tips_type'] != 'undefined'){
                 tips_type = args['tips_type'];
             }else{
                 tips_type = 'label';
             }
-
             if (typeof args['status'] != 'undefined'){
                 status_dict = args['status'];
             }else{
                 status_dict = {};
             }
-            if (typeof args != 'undefined'){
-                $S.redirect = args['redirect'];
+            if (typeof args['callback'] != 'undefined'){
+                callback = args['callback'];
             }else{
-                $S.redirect = "";
+                callback = "";
             }
         }
         forms.ajaxForm({
@@ -155,8 +165,8 @@
             success: function(response){
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
-                    if($S.redirect != ""){
-                        $S.redirect();
+                    if (callback != ""){
+                        callback();
                     }else{
                         StuCampus._jump_to_refer();
                     }

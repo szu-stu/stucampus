@@ -45,3 +45,4 @@ stucampus/config/production.py
 doyoubi_*
 *~
 .gitignore
+*swp

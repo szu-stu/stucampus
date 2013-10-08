@@ -24,9 +24,13 @@
                     <li><a href="/account/profile"><img src="/static/images/account/infor.png" alt="个人资料" /><span>个人资料</span></a></li>
                     <li><a href="/account/profile/password"><img src="/static/images/account/change-infor.png" alt="修改密码" /><span>修改密码</span></a></li>
                     <li><a href="/account/profile/edit"><img src="/static/images/account/change-infor.png" alt="修改资料" /><span>修改资料</span></a></li>
+                    {% if user|is_admin %}
+                    <li><a href="/manage"><img src="/static/images/account/to-write.png" alt="系统管理" /><span>系统管理</span></a></li>
+                    {% endif %}
                     {% if user|is_org_manage %}
                     <li><a href="/manage/organization"><img src="/static/images/account/to-write.png" alt="组织管理" /><span>组织管理</span></a></li>
                     {% endif %}
+                    <li><a href="javascript:void(0);" onclick="$S.signOut()"><img src="/static/images/account/infor.png" alt="退出" /><span>退出</span></a></li>
                 </ul>
             </div>
         </div>

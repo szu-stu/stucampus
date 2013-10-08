@@ -12,5 +12,7 @@ $(function () {
 $(function() {
     //绑定表单ajax
     var status = {'success': '修改成功'}
-    $S.ajaxForm($('#changeInfor'), {'status': status});
+    $S.ajaxForm($('#changeInfor'), {'status': status, 'tips_type': 'message-box'});
+
+    $('#signer-box').remove();
 });
