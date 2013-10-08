@@ -14,3 +14,8 @@
     background-repeat: repeat-x;
     background-color: #98d98e;
 }
+.url{
+    display: block;
+    width: 100%;
+    text-align: center;
+}

@@ -1,4 +1,4 @@
-{% extends 'activity/manage_base.html' %}
+{% extends 'plugin/manage_base.html' %}
 
 {% block htmltitle %}
 {% endblock %}
@@ -6,6 +6,7 @@
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'lecture/manage_lecture.css'|as_css }}
+    {{ 'plugin/paginator.css' | as_css }}
 {% endblock %}
 
 {% block header %}
@@ -93,4 +94,8 @@
     <div class="button"><input type="submit" value="submit" /></div>
     <!-- submit按钮  End -->
 </form>
+{% endblock %}
+
+{% block paginator %}
+    {% include 'plugin/paginator.html' with page=page %}
 {% endblock %}

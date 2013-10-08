@@ -10,8 +10,12 @@ def render_json(context, **response_kwargs):
     return HttpResponse(data, **response_kwargs)
 
 
-def spec_json(success=False, messages=[]):
-    data = {'success': success, 'messages': messages}
+def spec_json(status='Error', messages=None):
+    if not messages:
+        messages = []
+    elif not isinstance(messages, (dict, list, tuple)):
+        messages = [messages]
+    data = {'status': status, 'messages': messages}
     return render_json(data)
 
 
@@ -23,21 +27,3 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
-
-
-def get_http_data(request):
-    '''Get form data, used by PUT and DELETE method.'''
-    raw_data = request.read()
-    data = raw_data.split('&')
-    output_dic = {}
-    for datum in data:
-        d = datum.split('=')
-        d_name = d[0]
-        d_val = urllib2.unquote(d[1])
-        if d_name == 'is_male':
-            if d_val == 'False':
-                d_val = False
-            else:
-                d_val = True
-        output_dic.update({d_name: d_val})
-    return output_dic

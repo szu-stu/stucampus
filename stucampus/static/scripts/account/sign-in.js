@@ -1,5 +1,7 @@
 $(function(){
-    $S.ajaxForm($('#sign-in-form'));
+    var status = {'success': '登录成功'}
+
+    $S.ajaxForm($('#sign-in-form'), {'status': status});
 
     $('#sign-up-btn').click(function(){
         document.location = '/account/signup';

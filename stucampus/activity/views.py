@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
@@ -6,6 +7,7 @@ from django.core.paginator import InvalidPage
 from stucampus.activity.models import ActivityMessage
 from stucampus.activity.forms import ActivityMessageForm, FormsetPaginator
 from stucampus.activity.forms import ActivityMessageFormSet
+from stucampus.utils import spec_json
 
 
 def index(request):
@@ -20,15 +22,17 @@ def add_activity(request):
         form = ActivityMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('activity:manage'))
+            return spec_json('success', '讲座信息添加成功')
+        else:
+            return spec_json('errors', form.errors)
     return render(request, 'activity/add_activity.html', {'form': form})
 
 
-def manage(request, page_num='1'):
-    paginator = FormsetPaginator(ActivityMessage,
-                                 ActivityMessage.objects.all(), 2)
+def manage(request):
+    paginator = FormsetPaginator(ActivityMessage, 
+                                 ActivityMessage.objects.all(), 3)
     try:
-        page = paginator.page(int(page_num))
+        page = paginator.page(request.GET.get('page'))
     except InvalidPage:
         page = paginator.page(1)
     return render(request, 'activity/manage.html', {'page': page})

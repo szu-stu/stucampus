@@ -41,7 +41,7 @@
         });
     };
     StuCampus.notice = function(message, timeout) { this._messagebox(message, timeout, 'notice'); };
-    StuCampus.alert  = function(message, timeout) { this._messagebox(message, timeout, 'alert');  };
+    StuCampus.alert  = function(message, timeout) { this._messagebox(message, timeout, 'alert'); };
     StuCampus.error  = function(message, timeout) { this._messagebox(message, timeout, 'error'); };
 
     StuCampus._jump_to_refer = function(){
@@ -95,12 +95,20 @@
                     return false;
                 }
                 if (response.status == 'errors'){
+                    messages = response.messages;
                     if (tips_type != 'label'){
                         StuCampus.alert(response.messages.join(', '), 2000);
                     }else{
-                        for (i=0;i<response.messages.length();++i){
-                            var message = response.messages[i];
-                            $("#"+message[0]+"-tips").html(message[1]);
+                        // the following code has not been tested yet;
+                        $(".error-messages").html("");
+                        var error_messages, error_messages_array;
+                        for(attr in messages){
+                            error_messages_array = messages[attr];
+                            error_messages = "";
+                            for(var i = 0; i < error_messages_array.length; ++i){
+                                error_messages += error_messages_array[i];
+                            }
+                            $("#"+attr+"-tips").html(error_messages);
                         }
                     }
                     return false;
@@ -129,6 +137,11 @@
             }else{
                 status_dict = {};
             }
+            if (typeof args != 'undefined'){
+                $S.redirect = args['redirect'];
+            }else{
+                $S.redirect = "";
+            }
         }
         forms.ajaxForm({
             statusCode:{
@@ -142,17 +155,28 @@
             success: function(response){
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
-                    StuCampus._jump_to_refer();
+                    if($S.redirect != ""){
+                        $S.redirect();
+                    }else{
+                        StuCampus._jump_to_refer();
+                    }
                     return false;
                 }
                 if (response.status == 'errors'){
+                    messages = response.messages;
                     if (tips_type != 'label'){
-                        StuCampus.alert(response.messages.join(', '), 2000);
+                        StuCampus.alert(messages.join(', '), 2000);
                     }
                     else{
-                        for (i=0;i<messages.length();++i){
-                            var message = messages[i];
-                            $("#"+message[0]+"-tips").html(message[1]);
+                        $(".error-messages").html("");
+                        var error_messages, error_messages_array;
+                        for(attr in messages){
+                            error_messages_array = messages[attr];
+                            error_messages = "";
+                            for(var i = 0; i < error_messages_array.length; ++i){
+                                error_messages += error_messages_array[i];
+                            }
+                            $("#"+attr+"-tips").html(error_messages);
                         }
                     }
                     return false;

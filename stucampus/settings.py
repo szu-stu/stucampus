@@ -1,61 +1,48 @@
 import os
 
 
-TEMPLATES_PREFIX = os.path.abspath(".")
+# Repository directory.
+ROOT = os.path.dirname(os.path.dirname(__file__))
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+# path bases things off of ROOT
+def path(*a):
+    return os.path.abspath(os.path.join(ROOT, *a))
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
 
-MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/tmp/stucampus-dev.sqlite',
-    }
-}
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 TIME_ZONE = 'Asia/Shanghai'
-
 LANGUAGE_CODE = 'zh-cn'
-
 SITE_ID = 1
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 MEDIA_ROOT = ''
-
 MEDIA_URL = ''
 
 STATIC_ROOT = ''
-
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
+    path('stucampus', 'static'),
 )
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+   # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-SECRET_KEY = '###TODO:GENERATE-A-SECRET-KEY###'
+ROOT_URLCONF = 'stucampus.urls'
+
+WSGI_APPLICATION = 'stucampus.wsgi.application'
+
+TEMPLATE_DIRS = (
+    path('stucampus', 'templates'),
+)
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-    # 'django.template.loaders.eggs.Loader',
+#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,16 +51,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'stucampus.middleware.PutHTTPMethodDataMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-
-ROOT_URLCONF = 'stucampus.urls'
-
-WSGI_APPLICATION = 'stucampus.wsgi.application'
-
-TEMPLATE_DIRS = (
-    os.path.join(TEMPLATES_PREFIX, "templates"),
 )
 
 INSTALLED_APPS = (
@@ -83,8 +63,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'stucampus.master',
+    'stucampus.account',
+    'stucampus.infor',
+    'stucampus.organization',
+    'stucampus.lecture',
+    'stucampus.spider',
+    'stucampus.activity',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -112,3 +99,10 @@ LOGGING = {
         },
     }
 }
+
+
+
+try:
+    from stucampus.config.production import *
+except ImportError:
+    from stucampus.config.development import *

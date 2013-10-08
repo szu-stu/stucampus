@@ -150,3 +150,19 @@ body{
     color: #ec6d71;
     text-indent: 120px;
 }
+.message{
+    width: 900px;
+    position: relative;
+    margin-top: 50px;
+    overflow: hidden;
+}
+.is_delete{
+    background-image: url(/static/images/lecture/red.png);
+    background-repeat: repeat-x;
+    background-color: #ee827c;
+}
+.not_delete{
+    background-image: url(/static/images/lecture/green.png);
+    background-repeat: repeat-x;
+    background-color: #98d98e;
+}

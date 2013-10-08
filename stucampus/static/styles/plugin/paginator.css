@@ -1,0 +1,93 @@
+.white{
+    background-color: #ffffff;
+}
+.blue{
+    background-color: #d5f3ff;
+}
+.nav{
+    height: 30px;
+    position: relative;
+    margin: 50px 0px 50px 0px;
+    overflow: hidden;
+    font-family: "Microsoft Yahei";
+    font-size: 0px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    vertical-align: middle;
+}
+.previous{
+    display: inline-block;
+    width: 75px;
+    height: 30px;
+    background: url(/static/images/spider/previous.png) no-repeat;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: left;
+    text-indent: 20px;
+    text-decoration: none;
+}
+.next{
+    display: inline-block;
+    width: 75px;
+    height: 30px;
+    background: url(/static/images/spider/next.png) no-repeat;
+    font-size: 15px;
+    color: #ffffff;
+    text-align: left;
+    text-indent: 10px;
+    text-decoration: none;
+}
+.num{
+    display: inline-block;
+    height: 30px;
+}
+.num a{
+    display: inline-block; 
+    height: 30px;
+    padding:0em 0.7em;
+    margin: 0em 0.3em 0em 0.3em;
+    font-size: 15px;
+    color: #2ca9e1;
+    text-decoration: none;
+}
+.present{
+    display: inline-block;
+    height: 30px;
+    background-color: #2ca9e1;
+    padding:0em 0.7em;
+    margin: 0em 0.3em 0em 0.3em;
+    font-size: 15px;
+    color: #ffffff;
+}
+.text{
+    display: inline-block;
+    height: 30px;
+    padding:0em 0.4em;
+    font-size: 16px;
+    color: #2ca9e1;
+    font-weight: normal;
+}
+.nav input{
+    border:1px solid #efefef;
+    width: 45px;
+    height: 30px;
+    font-family: "Microsoft Yahei";
+    font-size: 15px;
+    color: #2ca9e1;
+    text-align: center;
+}
+.skip{
+    display: inline-block;
+    height: 30px;
+    background-color: #2ca9e1;
+    padding:0em 0.7em;
+    margin: 0em 0.3em 0em 0.3em;
+    font-size: 15px;
+    color: #ffffff;
+    text-decoration: none;
+}
+.num a:hover{
+    background-color: #2ca9e1;
+    color: #ffffff
+}

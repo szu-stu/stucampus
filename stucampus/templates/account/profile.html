@@ -8,21 +8,18 @@
                         <li>真实姓名：{{ user.student.true_name | default:'暂无' }}</li>
                         <li>学院：{{ user.student | get_college_name }}</li>
                         <li>昵称：{{ user.student.screen_name | default:'暂无' }}</li>
-                        <li>性别：{% if user.student.is_male %}男{% else %}女{% endif %}</li>
+                        <li>性别：{{ user.student.get_gender_display }}</li>
                         <li>邮箱：{{ user.email | default:'暂无' }}</li>
-                        <li>学号：{{ user.student.student_id | default:'暂无' }}</li>
+                        <li>学号：{{ user.student.job_id | default:'暂无' }}</li>
                         {% if user.student.birthday %}
                         <li>生日：{{ user.student.birthday | date:'Y-m-d' }}</li>
                         {% else %}
                         <li>生日：暂无</li>
                         {% endif %}
-                        <li>手机长号：{{ user.student.mphone_num | default:'暂无' }}</li>
-                        <li>手机短号：{{ user.student.mphone_short_num | default:'暂无' }}</li>
-                        <li>校园卡号：{{ user.student.szucard | default:'暂无' }}</li>
+                        <li>手机长号：{{ user.student.mobile_phone_number | default:'暂无' }}</li>
+                        <li>手机短号：{{ user.student.internal_phone_number | default:'暂无' }}</li>
+                        <li>校园卡号：{{ user.student.card_id | default:'暂无' }}</li>
                         <li>加入日期：{{ user.date_joined | date:'Y-m-d' }}</li>
-                        {% if user.masterForOrganization %}
-                        <li>所管组织： {{ user.masterForOrganization }}</li>
-                        {% endif %}
                     </ul>
                 </div>
         </div>
