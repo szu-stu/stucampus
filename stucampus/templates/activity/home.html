@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'lecture/lec_act_show.css' | as_css }}
+    {{ 'table/table.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+    <!-- 主体  Begin -->
+    <div class="main-container">
+        <a href="#">首页</a><span>></span><a href="{% url 'lecture:index' %}">讲座预告</a>
+        <table>
+            <caption>活动信息平台</caption>
+            <tbody>
+                <tr>
+                    <td class="time">时间</td>
+                    <td class="day1" id="date1">周一</td>
+                    <td class="day2" id="date2">周二</td>
+                    <td class="day3" id="date3">周三</td>
+                    <td class="day4" id="date4">周四</td>
+                    <td class="day5" id="date5">周五</td>
+                    <td class="day6" id="date6">周六</td>
+                    <td class="day7" id="date7">周日</td>
+                </tr>
+                <tr>
+                    <td class="time">上午</td>
+                    {% for msg_list in table.morning %}
+                        <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
+                        {% for msg in msg_list %}
+                            <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
+                                <b>{{ msg.title }}</b><br />
+                                <b>——&nbsp</b>{{ msg.speaker }}<br />
+                                <b>——&nbsp</b>{{ msg.place }}<br />
+                                <b>——&nbsp</b>{{ msg.date_time | date:'G:i'}}<br />
+                                <b>——&nbsp</b>{{ msg.summary }}<br />
+                            </a>
+                        {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td class="time">下午</td>
+                    {% for msg_list in table.afternoon %}
+                        <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
+                        {% for msg in msg_list %}
+                            <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
+                                <b>{{ msg.title }}</b><br />
+                                <b>——&nbsp</b>{{ msg.speaker }}<br />
+                                <b>——&nbsp</b>{{ msg.place }}<br />
+                                <b>——&nbsp</b>{{ msg.date_time | date:'G:i'}}<br />
+                                <b>——&nbsp</b>{{ msg.summary }}<br />
+                            </a>
+                        {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 主体  End -->
+{% endblock %}

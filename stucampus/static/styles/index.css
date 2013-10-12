@@ -14,23 +14,6 @@
 	text-decoration: underline;
 }
 
-.login{
-	width: 118px;
-	height: 39px;
-	background: url(/static/images/new_index/login.png) no-repeat;
-	position: absolute;
-	bottom: 24px;
-	right: 0px;
-	font-family: "Microsoft Yahei";
-	font-size: 18px;
-	color: #0388c9;
-	font-weight: bold;
-	text-decoration: none;
-	text-indent: 48px;
-	line-height: 39px;
-	vertical-align: middle;
-}
-
 .main{
 	width: 950px;
 	position: relative;

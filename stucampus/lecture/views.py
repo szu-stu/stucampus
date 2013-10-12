@@ -13,12 +13,12 @@ from stucampus.activity.forms import FormsetPaginator
 
 def index(request):
     table = LectureMessage.generate_messages_table()
-    return render_to_response('lecture/index.html', {'table': table})
+    return render_to_response('lecture/home.html', {'table': table})
 
 
 def manage(request):
     queryset = LectureMessage.get_messages_this_week()
-    paginator = FormsetPaginator(LectureMessage, queryset, 2)
+    paginator = FormsetPaginator(LectureMessage, queryset, 5)
     try:
         page = paginator.page(request.GET.get('page'))
     except InvalidPage:
@@ -28,8 +28,11 @@ def manage(request):
 
 def submit(request):
     formset = LecureFormSet(request.POST)
-    if formset.is_valid():
-        formset.save()
+    for form in formset:
+        if form.is_valid():
+            form.save()
+        else:
+            return spec_json('errors', form.errors)
     return HttpResponseRedirect(reverse('lecture:manage'))
 
 

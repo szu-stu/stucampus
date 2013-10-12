@@ -1,0 +1,59 @@
+.main-container{
+	width: 90%;
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.main-container a,span{
+	font-family: "Microsoft Yahei";
+	font-size: 14px;
+	color: #57595b;
+	line-height: 300%;
+	text-decoration: none;
+}
+
+.message{
+	display: block;
+}
+
+table{
+	width:100%;
+	border: 3px #007bbb solid;
+	background-color: #ffffff;
+	margin-bottom: 25px;
+}
+
+caption{
+	font-family: "Microsoft Yahei";
+	font-size: 24px;
+	color: #57595b;
+	line-height: 200%;
+}
+
+td{
+	font-family: "Microsoft Yahei";
+	font-size: 14px;
+	vertical-align: middle;
+	line-height: 200%;
+	border: 1px #eaf4fc solid;
+	padding: 0px 5px;
+	min-width: 72px;
+	color: #000000;
+	text-align: left;	
+}
+
+.time{
+	width: 6%;
+	color: #007bbb;
+	text-align: center;
+}
+
+#date1,#date2,#date3,#date4,#date5,#date6,#date7{
+	color: #007bbb;
+	text-align: center;
+}
+
+.day1,.day2,.day3,.day4,.day5,.day6,.day7{
+	background-color: #a0d8ef;
+}

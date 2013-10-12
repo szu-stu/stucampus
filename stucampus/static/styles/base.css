@@ -36,6 +36,26 @@ body{
 }
 
 /**
+ * login
+ */
+.login{
+	width: 118px;
+	height: 39px;
+	background: url(/static/images/new_index/login.png) no-repeat;
+	position: absolute;
+	bottom: 24px;
+	right: 0px;
+	font-family: "Microsoft Yahei";
+	font-size: 18px;
+	color: #0388c9;
+	font-weight: bold;
+	text-decoration: none;
+	text-indent: 48px;
+	line-height: 39px;
+	vertical-align: middle;
+}
+
+/**
  * 导航
  */
 .nav{
@@ -56,6 +76,10 @@ body{
 	vertical-align: middle;
 	margin-left: 10px;
 	font-weight: bold;
+}
+
+.nav a:hover{
+	color: #8bc4dc;
 }
 
 .nav a.selected {

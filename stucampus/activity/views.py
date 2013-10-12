@@ -12,7 +12,7 @@ from stucampus.utils import spec_json
 
 def index(request):
     activities = ActivityMessage.get_activity_list()
-    return render_to_response('activity/index.html',
+    return render_to_response('activity/home.html',
                               {'activities': activities})
 
 
