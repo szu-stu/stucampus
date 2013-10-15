@@ -12,7 +12,7 @@ from stucampus.custom import models
 class LectureMessage(django.db.models.Model):
 
     title = models.CharField(max_length=100)
-    date_time = models.DateTimeField(null=True, blank=True)
+    date_time = models.DateTimeField()
     place = models.CharField(max_length=40)
     speaker = models.CharField(max_length=40)
     url_id = models.CharField(max_length=20, unique=True)

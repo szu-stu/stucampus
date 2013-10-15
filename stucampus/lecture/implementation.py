@@ -64,7 +64,7 @@ def parse_content(content):
     try:
         date_time = parse_datetime(content)
     except MatchError:
-        date_time = None
+        date_time = timezone.now()
 
     try:
         speaker = parse_speaker(content)
