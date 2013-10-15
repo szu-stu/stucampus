@@ -15,13 +15,13 @@
             <tbody>
                 <tr>
                     <td class="time">时间</td>
-                    <td class="day1" id="date1">周一</td>
-                    <td class="day2" id="date2">周二</td>
-                    <td class="day3" id="date3">周三</td>
-                    <td class="day4" id="date4">周四</td>
-                    <td class="day5" id="date5">周五</td>
-                    <td class="day6" id="date6">周六</td>
-                    <td class="day7" id="date7">周日</td>
+                    <td class="day1" id="date1">周一<br/>{{ table.date.0 | date:"m月d日" }}</td>
+                    <td class="day2" id="date2">周二<br/>{{ table.date.1 | date:"m月d日" }}</td>
+                    <td class="day3" id="date3">周三<br/>{{ table.date.2 | date:"m月d日" }}</td>
+                    <td class="day4" id="date4">周四<br/>{{ table.date.3 | date:"m月d日" }}</td>
+                    <td class="day5" id="date5">周五<br/>{{ table.date.4 | date:"m月d日" }}</td>
+                    <td class="day6" id="date6">周六<br/>{{ table.date.5 | date:"m月d日" }}</td>
+                    <td class="day7" id="date7">周日<br/>{{ table.date.6 | date:"m月d日" }}</td>
                 </tr>
                 <tr>
                     <td class="time">上午</td>
