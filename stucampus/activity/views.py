@@ -11,9 +11,9 @@ from stucampus.utils import spec_json
 
 
 def index(request):
-    activities = ActivityMessage.get_activity_list()
+    table = ActivityMessage.generate_messages_table()
     return render_to_response('activity/home.html',
-                              {'activities': activities})
+                              {'table': table})
 
 
 def add_activity(request):
