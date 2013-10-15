@@ -61,7 +61,4 @@ class LectureMessage(django.db.models.Model):
         lecture_held_this_week = cls.objects.filter(
             date_time__gte=date_of_this_Monday,
             date_time__lt=date_of_next_Monday)
-        msg_fetched_this_week = cls.objects.filter(
-            download_date__gte=date_of_this_Monday,
-            download_date__lt=date_of_next_Monday)
-        return lecture_held_this_week | msg_fetched_this_week
+        return lecture_held_this_week
