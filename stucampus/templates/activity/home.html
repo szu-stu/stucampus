@@ -28,13 +28,12 @@
                     {% for msg_list in table.morning %}
                         <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
                         {% for msg in msg_list %}
-                            <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
+                            <div class="message">
                                 <b>{{ msg.title }}</b><br />
-                                <b>——&nbsp</b>{{ msg.speaker }}<br />
                                 <b>——&nbsp</b>{{ msg.place }}<br />
                                 <b>——&nbsp</b>{{ msg.date_time | date:'G:i'}}<br />
                                 <b>——&nbsp</b>{{ msg.summary }}<br />
-                            </a>
+                            </div>
                         {% endfor %}
                         </td>
                     {% endfor %}
@@ -44,13 +43,12 @@
                     {% for msg_list in table.afternoon %}
                         <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
                         {% for msg in msg_list %}
-                            <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
+                            <div class="message">
                                 <b>{{ msg.title }}</b><br />
-                                <b>——&nbsp</b>{{ msg.speaker }}<br />
                                 <b>——&nbsp</b>{{ msg.place }}<br />
                                 <b>——&nbsp</b>{{ msg.date_time | date:'G:i'}}<br />
                                 <b>——&nbsp</b>{{ msg.summary }}<br />
-                            </a>
+                            </div>
                         {% endfor %}
                         </td>
                     {% endfor %}
