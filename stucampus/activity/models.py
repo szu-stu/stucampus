@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+
 import django.db.models
 from django.utils import timezone
 
@@ -21,12 +22,12 @@ class ActivityMessage(django.db.models.Model):
 
     @classmethod
     def generate_messages_table(cls):
-        message_table = cls.creat_empty_table()
+        message_table = cls.create_empty_table()
         message_table = cls.fill_in_table(message_table)
         return message_table
 
     @staticmethod
-    def creat_empty_table():
+    def create_empty_table():
         message_table = {}
         message_table['date'] = []
         message_table['morning'] = []

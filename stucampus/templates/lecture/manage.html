@@ -5,7 +5,6 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'lecture/manage_lecture.css'|as_css }}
     {{ 'plugin/paginator.css' | as_css }}
 {% endblock %}
 
@@ -67,7 +66,7 @@
                 <div class="error"></div>
                 <!-- 演讲者  End -->
                 <!-- URL ID  Begin -->
-                <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">~公文通~</a>
+                <a class="url" href="http://www.szu.edu.cn/board/view.asp?id={{ form.url_id.value }}">公文通</a>
                 <div class="error"></div>
                 <!-- URL ID End -->
     
