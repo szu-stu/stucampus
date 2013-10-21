@@ -96,6 +96,8 @@
 	position: relative;
 	margin-top: 30px;
 	overflow: hidden;
+    height: 185px;
+    // remove this fixed height can make layout flexible
 }
 
 .left{
