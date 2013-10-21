@@ -49,11 +49,8 @@ td{
 	text-align: center;
 }
 
-#date1,#date2,#date3,#date4,#date5,#date6,#date7{
-	color: #007bbb;
-	text-align: center;
-}
-
 .day1,.day2,.day3,.day4,.day5,.day6,.day7{
 	background-color: #a0d8ef;
+	color: #007bbb;
+	text-align: center;
 }
