@@ -41,7 +41,7 @@
         });
     };
     StuCampus.notice = function(message, timeout) { this._messagebox(message, timeout, 'notice'); };
-    StuCampus.alert  = function(message, timeout) { this._messagebox(message, timeout, 'alert');  };
+    StuCampus.alert  = function(message, timeout) { this._messagebox(message, timeout, 'alert'); };
     StuCampus.error  = function(message, timeout) { this._messagebox(message, timeout, 'error'); };
 
     StuCampus._jump_to_refer = function(){
@@ -53,10 +53,33 @@
     }
 
     StuCampus.ajax = function(url, method, args){
-        if (typeof args != 'undefined' && typeof args['data'] != 'undefined'){
-            data = args['data'];
-        }else{
-            var data = {};
+        var data = "";
+        var tips_type = "";
+        var status_dict = "";
+        var callback = "";
+        if (typeof args != 'undefined'){
+            if (typeof args['data'] != 'undefined'){
+                data = args['data'];
+            }else{
+                data = {};
+            }
+
+            if (typeof args['tips_type'] != 'undefined'){
+                tips_type = args['tips_type'];
+            }else{
+                tips_type = 'label';
+            }
+
+            if (typeof args['status'] != 'undefined'){
+                status_dict = args['status'];
+            }else{
+                status_dict = {};
+            }
+            if (typeof args['callback'] != 'undefined'){
+                callback = args['callback'];
+            }else{
+                callback = "";
+            }
         }
         $.ajax({
             url: url,
@@ -72,14 +95,32 @@
                 }
             },
             success: function(response){
-                status_dict = args['status'];
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
-                    StuCampus._jump_to_refer();
+                    if (callback != ""){
+                        callback();
+                    }else{
+                        StuCampus._jump_to_refer();
+                    }
                     return false;
                 }
                 if (response.status == 'errors'){
-                    StuCampus.alert(response.messages.join(', '), 2000);
+                    messages = response.messages;
+                    if (tips_type != 'label'){
+                        StuCampus.alert(response.messages.join(', '), 2000);
+                    }else{
+                        // the following code has not been tested yet;
+                        $(".error-messages").html("");
+                        var error_messages, error_messages_array;
+                        for(attr in messages){
+                            error_messages_array = messages[attr];
+                            error_messages = "";
+                            for(var i = 0; i < error_messages_array.length; ++i){
+                                error_messages += error_messages_array[i];
+                            }
+                            $("#"+attr+"-tips").html(error_messages);
+                        }
+                    }
                     return false;
                 }
                 StuCampus.alert(status_dict[response.status], 2000);
@@ -92,6 +133,26 @@
     };
 
     StuCampus.ajaxForm = function(forms, args){
+        var tips_type = "";
+        var status_dict = "";
+        var callback = "";
+        if (typeof args != 'undefined'){
+            if (typeof args['tips_type'] != 'undefined'){
+                tips_type = args['tips_type'];
+            }else{
+                tips_type = 'label';
+            }
+            if (typeof args['status'] != 'undefined'){
+                status_dict = args['status'];
+            }else{
+                status_dict = {};
+            }
+            if (typeof args['callback'] != 'undefined'){
+                callback = args['callback'];
+            }else{
+                callback = "";
+            }
+        }
         forms.ajaxForm({
             statusCode:{
                 403: function() {
@@ -102,14 +163,32 @@
                 }
             },
             success: function(response){
-                status_dict = args['status'];
                 if (response.status == 'success'){
                     StuCampus.notice(status_dict[response.status], 2000);
-                    StuCampus._jump_to_refer();
+                    if (callback != ""){
+                        callback();
+                    }else{
+                        StuCampus._jump_to_refer();
+                    }
                     return false;
                 }
                 if (response.status == 'errors'){
-                    StuCampus.alert(response.messages.join(', '), 2000);
+                    messages = response.messages;
+                    if (tips_type != 'label'){
+                        StuCampus.alert(messages.join(', '), 2000);
+                    }
+                    else{
+                        $(".error-messages").html("");
+                        var error_messages, error_messages_array;
+                        for(attr in messages){
+                            error_messages_array = messages[attr];
+                            error_messages = "";
+                            for(var i = 0; i < error_messages_array.length; ++i){
+                                error_messages += error_messages_array[i];
+                            }
+                            $("#"+attr+"-tips").html(error_messages);
+                        }
+                    }
                     return false;
                 }
                 StuCampus.alert(status_dict[response.status], 2000);

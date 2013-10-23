@@ -1,4 +1,4 @@
-{% extends 'activity/add_base.html' %}
+{% extends 'plugin/add_base.html' %}
 
 {% block htmltitle %}
 
@@ -6,30 +6,37 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'activity/add_activity.css'|as_css }}
+    {{ 'plugin/fixed_hyperlink.css' | as_css }}
+    <script>
+        (function(){
+            var status = {'success': 'doyoubi success'}
+            var callback = function(){ window.location.replace("../manage"); }
+            $S.ajaxForm($('#add_activity_form'), {'status': status, 'callback': callback});
+        })()
+    </script>
 {% endblock %}
 
 {% block content %}
-    <form action="{% url 'activity:add_activity' %}" method="POST">
+    <!-- 浮动链接  Begin -->
+    <div class="fixed">
+        <a class="fixed_link" href="{% url 'activity:manage' %}">manage</a>
+        <a class="fixed_link" href="{% url 'activity:index' %}">table</a>
+    </div>
+    <!-- 浮动链接  End -->
+    <form id="add_activity_form" action="{% url 'activity:add_activity' %}" method="POST">
         {% csrf_token %}
         <div class="input_list">
             <div class="title">标题</div>
             {{ form.title }}
         </div>
-        <div class="error">
-            {% for error in form.title.errors %}
-                {{ error }}
-            {% endfor %}
+        <div id="title-tips" class="error-messages">
         </div>
 
         <div class="input_list">
             <div class="title">地点</div>
             {{ form.place }}
         </div>
-        <div class="error">
-            {% for error in form.place.errors %}
-                {{ error }}
-            {% endfor %}
+        <div id="place-tips" class="error-messages">
         </div>
 
         <div class="input_list">
@@ -37,24 +44,21 @@
             {{ form.date_time }}
             <div class="title" style=width:120px;font-size:14px;margin-right:0px>如2013-9-1 21:22</div>
         </div>
-        <div class="error">
-            {% for error in form.date_time.errors %}
-                {{ error }}
-            {% endfor %}
+        <div id="date_time-tips" class="error-messages">
         </div>
 
         <div class="input_list">
             <div class="title">概括</div>
             {{ form.summary}}
         </div>
-        <div class="error">
-            {% for error in form.summary.errors %}
-                {{ error }}
-            {% endfor %}
+        <div id="summary-tips" class="error-messages">
         </div>
 
-        <div class="button">
-		<input type="submit" value="submit" />
+        <div class="choose_container">
+            <div class="choose check">已核{{ form.is_check }}</div>
+            <div class="choose delete">删除{{ form.is_delete }}</div>
+        </div>         
+        <div class="button"><input type="submit" value="submit" /></div>
 	</div>
     </form>
 {% endblock %}

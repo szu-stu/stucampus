@@ -9,7 +9,7 @@
     {{ 'google-analystics.js' | as_js }}
     {{ 'global.js' | as_js }}
 
-    {{ 'activity/manage_base.css' | as_css }}
+    {{ 'plugin/manage_base.css' | as_css }}
 
     {% block htmltitle %}
     {% endblock %}
@@ -33,5 +33,7 @@
         {% endblock %}
         <!-- 信息列表  End -->
     </div>
+    {% block paginator %}
+    {% endblock %}
 </body>
 </html>

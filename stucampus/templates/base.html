@@ -17,7 +17,6 @@
     {{ 'google-analystics.js' | as_js }}
     {{ 'ga.js' | as_js }}
     {{ 'global.js' | as_js }}
-    {{ 'layout.js' | as_js }}
     {{ 'style-fix.css' | as_css }}
     {{ 'base.css' | as_css }}
     {{ 'message-box.css' | as_css }}
@@ -27,47 +26,35 @@
 
 <body>
     {% block header %}
-    <!-- 版头 Begin -->
-    <div id="header">
-        <div class="central-container">
-            <ul id="nav">
+    <div class="header">
+        <div class="header-container">
+            <a href="/" title="深圳大学学子天地——荔园校园传媒资讯网" class="logo"></a>
+            <ul class="nav">
                 <li><a href="/">学子首页</a></li>
                 <li><a href="/news/">新闻资讯</a></li>
-                <li><a href="/infor/">信息中心</a></li>
+                <li><a href="/infor">信息中心</a></li>
                 <li><a href="/magazine/szuyouth">校媒刊物</a></li>
                 <li><a href="http://stu.szu.edu.cn:8080/web/Service.aspx">服务专区</a></li>
+                <li><a href="/aboutus">关于我们</a></li>
             </ul>
-            <h1 class="stu-logo"><a href="/" title="深圳大学学子天地——荔园校园传媒资讯网" class="stu-logo">深圳大学学子天地</a></h1>
             <div class="header-bottom">
             {% include 'account/me.html' %}
             </div>
         </div>
     </div>
-    <!-- 版头 End -->
     {% endblock %}
     
     {% block content %}
     {% endblock %}
-    
-    <!-- 友情链接 Begin -->
-    <!--
-    <div class="central-container friendly-links">
-        
-    </div>
-    -->
-    <!-- 友情链接 End -->
-    
-    <!-- 页脚 Begin -->
+
     <div class="footer">
         <p>版权所有 &copy; 2001～2013  深圳大学学子天地  荔园校园传媒资讯网</p>
-        <p>
-            <a href="/aboutus">关于我们</a>|
-            <a href="/join">加入我们</a>|
-            <a href="http://stu.szu.edu.cn/blog-dev/">开发团队</a>|
-            <a href="http://weibo.com/stucampus">新浪微博</a>|
-            <a href="https://www.google.com/analytics/web/">流量统计</a>
-        </p>
+        <a href="http://stu.szu.edu.cn/join">加入我们</a> |
+        <a href="http://stu.szu.edu.cn/blog-dev/">开发团队</a> |
+        <a href="http://weibo.com/stucampus">新浪微博</a> |
+        <a href="http://stu.szu.edu.cn/admin/organization">组织管理</a> |
+        <a href="https://www.google.com/analytics/web/">流量统计</a> |
+        <a href="http://stu.szu.edu.cn/lead/infor" style="color: red;">信息中心使用引导</a>
     </div>
-    <!-- 页脚 End -->
 </body>
 </html>

@@ -5,13 +5,9 @@ import django.db.models
 from stucampus.custom import models
 
 
-
-
-
-
 class Message(django.db.models.Model):
 
-    # TODO: translte the second value of every tuple to chinese
+    # TODO: translate the second value of every tuple to chinese
     CATEGORY_CHOICES = (
         ('phone', 'phone'),
         ('bag', 'bag'),
@@ -39,9 +35,6 @@ class Message(django.db.models.Model):
 
     def how_many_days_since_published(self):
         return (datetime.date.today() - published_date).days
-
-    def __unicode__(self):
-        return self.item_name
 
 
 class MessageForm(ModelForm):

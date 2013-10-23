@@ -17,6 +17,8 @@ body{
     width: 100px;
     height: 50px;
     background-color:#007bbb;
+    position: relative;
+    margin:10px 0px;
     font-family: "Microsoft Yahei";
     font-size: 24px;
     color: #ffffff;
@@ -28,8 +30,6 @@ body{
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
-    position: relative;
-    margin:10px 0px;
     z-index: 50;
 }
 .container{
@@ -41,23 +41,23 @@ body{
 .header{
     width: 100%;
     height: 150px;
-    font-family: "Microsoft Yahei";
-    color: #007bbb;
-    font-size: 40px;
-    line-height: 420%;
-    position: relative;
     background: url(/static/images/lecture/blue.png) repeat-x bottom left;
+    position: relative;
+    font-family: "Microsoft Yahei";
+    font-size: 40px;
+    color: #007bbb;
     text-align: center;
+    line-height: 420%; 
 }
 .message_container{
     width: 840px;
     position: relative;
-    margin: 80px 30px 30px 30px;
+    margin: 35px 30px 10px 30px;
     overflow: hidden;
 }
 .input_list{
     width: 100%;
-    height: 50px;
+    height: 35px;
     position: relative;
     overflow: hidden;
     font-size: 0px;
@@ -69,45 +69,61 @@ body{
     float: left;
     margin-right: 10px;
     font-family: "Microsoft Yahei";
-    font-size: 24px;
+    font-size: 18px;
     color: #ffffff;
     text-align: center;
-    line-height: 50px;
+    line-height: 35px;
     vertical-align: middle;
 }
 .input_list input{
-    width: 700px;
-    height: 30px;
+    width: 600px;
+    height: 25px;
+    border: 0px;
     position: relative;
-    margin: 8px 0 8px 0;
+    margin: 5px 0 5px 0;
     float: left;
     font-family: "Microsoft Yahei";
-    font-size: 18px;
+    font-size: 14px;
     text-indent: 0.5em;
 }
+.url{
+    display: block;
+    width: 96px;
+    border: solid 2px #ffffff;
+    position: absolute;
+    top:15px;
+    right: 0px;
+    font-family: "Microsoft Yahei";
+    color:#ffffff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 150%;
+    text-decoration: none;   
+}
 .choose_container{
-    width: 100%;
-    height: 30px;
-    position: relative;
-    margin-top: 20px;
+    width: 100px;
+    height: 75px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
     overflow: hidden;
 }
 .choose{
-    height: 30px;
-    font-family: "Microsoft Yahei";
-    font-size: 24px;
-    color: #ffffff;
-    line-height: 30px;
-    vertical-align: middle;
+    height: 20px;
     position: absolute;
-    top: 0px;
+    right: 0px;
     overflow: hidden;
+    font-family: "Microsoft Yahei";
+    font-size: 18px;
+    color: #ffffff;
+    line-height: 20px;
+    vertical-align: middle;
 }
 .check{
-    left: 200px;
+    top: 0px;
 }
 .delete{
-    right: 200px;
+    bottom: 15px;
 }
 .choose input{
     margin-left: 5px;
@@ -122,16 +138,16 @@ body{
 .button{
     margin-top:50px;
     margin-bottom:80px;
-    text-align:center
+    text-align:center;
 }
 .button input{
+    display: inline-block;
     width: 280px;
     height: 50px;
+    background-color:#007bbb;
     font-family: "Microsoft Yahei";
     font-size: 24px;
     color: #ffffff;
-    display: inline-block;
-    background-color:#007bbb;
     border-width: 0;
     border-radius: 5px;
     cursor: pointer;
@@ -145,8 +161,22 @@ body{
     position: relative;
     font-family: "Microsoft Yahei";
     font-size: 15px;
+    color: #ec6d71;
     line-height: 120%;
     vertical-align:middle; 
-    color: #ec6d71;
     text-indent: 120px;
+}
+.message{
+    width: 900px;
+    position: relative;
+    margin-top: 25px;
+    overflow: hidden;
+}
+.is_delete{
+    background: url(/static/images/lecture/red.png) #ee827c repeat-x;
+    background-size: 400px 25px;
+}
+.not_delete{
+    background: url(/static/images/lecture/green.png) #98d98e repeat-x;
+    background-size: 400px 25px;
 }

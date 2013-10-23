@@ -35,6 +35,8 @@ KEYWORDS = (u'报告题目',
             u'报告时间',
             u'报告会',
             u'学术沙龙',
+            u'论坛',
+            u'讲座',
             )
 
 
@@ -62,7 +64,7 @@ def parse_content(content):
     try:
         date_time = parse_datetime(content)
     except MatchError:
-        date_time = None
+        date_time = timezone.now()
 
     try:
         speaker = parse_speaker(content)

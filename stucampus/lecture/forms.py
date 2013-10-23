@@ -9,5 +9,5 @@ class LectureForm(ModelForm):
         model = LectureMessage
 
 
-LecureFormSet = modelformset_factory(LectureMessage,
+LectureFormset = modelformset_factory(LectureMessage,
                                      form=LectureForm, extra=0)

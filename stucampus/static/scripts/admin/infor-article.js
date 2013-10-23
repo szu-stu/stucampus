@@ -4,7 +4,7 @@ $(function(){
 
     // 绑定表单 ajax
     var status = {'success': '发布成功'};
-    $S.ajaxForm($('#infor-form'), {'status': status});
+    $S.ajaxForm($('#infor-form'), {'status': status, 'tips_type': 'message-box'});
 });
 
 (function($,$S){
@@ -22,14 +22,14 @@ $(function(){
                     'organization_id': organization_id,
                     'content': content};
         var status = {'success': '修改成功', }
-        $S.ajax(url, method, {'data': data, 'status': status});
+        $S.ajax(url, method, {'data': data, 'status': status, 'tips_type': 'message-box'});
     };
 
     $S.Infor.remove = function(id){
         var url = '/manage/infor/' + id;
         var method = 'DELETE';
         var status = {'success': '删除成功'};
-        $S.ajax(url, method, {'status': status});
+        $S.ajax(url, method, {'status': status, 'tips_type': 'message-box'});
     };
 
 })(jQuery, StuCampus);

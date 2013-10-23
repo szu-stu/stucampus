@@ -1,0 +1,27 @@
+.fixed{
+    width: 100px;
+    height: 120px;
+    position: fixed;
+    top: 200px;
+    right:80px; 
+}
+.fixed_link{
+    display: block;
+    width: 100px;
+    height: 50px;
+    background-color:#007bbb;
+    font-family: "Microsoft Yahei";
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    line-height: 50px;
+    vertical-align: middle;
+    border-width: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.3);
+    position: relative;
+    margin:10px 0px;
+    z-index: 50;
+}
