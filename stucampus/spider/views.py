@@ -21,7 +21,7 @@ def index(request):
 
 # for debug
 def update(request):
-    num_of_update = update_notification(3)
+    num_of_update = update_notification(7)
     return HttpResponse(str(num_of_update))
 
 
