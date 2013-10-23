@@ -9,7 +9,7 @@
     {{ 'plugin/fixed_hyperlink.css' | as_css }}
     <script>
         (function(){
-            var status = { 'success': 'doyoubi success' };
+            var status = { 'success': '成功添加讲座消息' };
             var callback = function(){ window.location.replace("../manage"); }
             $S.ajaxForm($('#add_lecture_form'), {'status': status, 'callback': callback});
         })()

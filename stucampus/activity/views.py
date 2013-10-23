@@ -12,8 +12,7 @@ from stucampus.utils import spec_json
 
 def index(request):
     table = ActivityMessage.generate_messages_table()
-    return render_to_response('activity/home.html',
-                              {'table': table})
+    return render_to_response('activity/home.html', {'table': table})
 
 
 def add_activity(request):
@@ -29,8 +28,11 @@ def add_activity(request):
 
 
 def manage(request):
+    if request.method == 'POST':
+        return submit(request)
+
     paginator = FormsetPaginator(ActivityMessage, 
-                                 ActivityMessage.objects.all(), 3)
+                                 ActivityMessage.objects.all(), 5)
     try:
         page = paginator.page(request.GET.get('page'))
     except InvalidPage:
@@ -43,4 +45,9 @@ def submit(request):
     for form in formset:
         if form.is_valid():
             form.save()
-    return HttpResponseRedirect(reverse('activity:manage'))
+
+    queryset = ActivityMessage.objects.all()
+    paginator = FormsetPaginator(ActivityMessage, queryset, 5)
+    page = paginator.page(request.GET.get('page'))
+    page.formset = formset
+    return render(request, 'activity/manage.html', {'page': page})

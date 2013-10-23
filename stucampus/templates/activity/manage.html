@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block manage_form %}
-<form method="POST" action="{% url 'activity:submit' %}">
+<form method="POST" action="{% url 'activity:manage' %}?page={{ page.number }}">
 {% csrf_token %}
 {% with formset=page.formset %}
     {{ formset.management_form }}
@@ -42,28 +42,44 @@
                     <div class="title">Title</div>
                     {{ form.title }}
                 </div>
-                <div class="error"></div>
+                <div class="error">
+                    {% for error in form.title.errors %}
+                        {{ error }}&nbsp
+                    {% endfor %}
+                </div>
                 <!-- 标题  End -->
                 <!-- 地点  Begin -->
                 <div class="input_list">
                     <div class="title">Place</div>
                     {{ form.place }}
                 </div>
-                <div class="error"></div>
+                <div class="error">
+                    {% for error in form.place.errors %}
+                        {{ error }}&nbsp
+                    {% endfor %}
+                </div>
                 <!-- 地点  End -->
                 <!-- 日期时间  Begin -->
                 <div class="input_list">
                     <div class="title">Date Time</div>
                     {{ form.date_time }}
                 </div>
-                <div class="error"></div>
+                <div class="error">
+                    {% for error in form.date_time.errors %}
+                        {{ error }}&nbsp
+                    {% endfor %}
+                </div>
                 <!-- 日期时间  End -->
                 <!-- 概要  Begin -->
                 <div class="input_list">
                     <div class="title">Summary</div>
                     {{ form.summary }}
                 </div>
-                <div class="error"></div>
+                <div class="error">
+                    {% for error in form.summary.errors %}
+                        {{ error }}&nbsp
+                    {% endfor %}
+                </div>
                 <!-- 概要  End -->
     
                 <div class="choose_container">

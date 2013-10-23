@@ -7,7 +7,7 @@ from django.core.paginator import InvalidPage
 
 from stucampus.utils import spec_json
 from stucampus.lecture.models import LectureMessage
-from stucampus.lecture.forms import LectureForm, LecureFormSet
+from stucampus.lecture.forms import LectureForm, LectureFormset
 from stucampus.activity.forms import FormsetPaginator
 
 
@@ -17,8 +17,11 @@ def index(request):
 
 
 def manage(request):
-    queryset = LectureMessage.get_messages_this_week()
-    paginator = FormsetPaginator(LectureMessage, queryset, 5)
+    if request.method == 'POST':
+        return submit(request)
+
+    paginator = FormsetPaginator(LectureMessage,
+                                 LectureMessage.objects.all(), 5)
     try:
         page = paginator.page(request.GET.get('page'))
     except InvalidPage:
@@ -27,13 +30,16 @@ def manage(request):
 
 
 def submit(request):
-    formset = LecureFormSet(request.POST)
+    formset = LectureFormset(request.POST)
     for form in formset:
         if form.is_valid():
             form.save()
-        else:
-            return spec_json('errors', form.errors)
-    return HttpResponseRedirect(reverse('lecture:manage'))
+
+    queryset = LectureMessage.objects.all()
+    paginator = FormsetPaginator(LectureMessage, queryset, 5)
+    page = paginator.page(request.GET.get('page'))
+    page.formset = formset
+    return render(request, 'lecture/manage.html', {'page': page})
 
 
 def add_lecture(request):
@@ -46,9 +52,3 @@ def add_lecture(request):
         else:
             return spec_json('errors', form.errors)
     return render(request, 'lecture/add_lecture.html', {'form': form})
-
-
-# just used for debug
-def delete(request):
-    LectureMessage.objects.all().delete()
-    return HttpResponseRedirect(reverse('lecture:manage'))
