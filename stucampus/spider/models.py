@@ -48,7 +48,7 @@ class Notification(django.db.models.Model):
         return content.replace('\r', '\n')
 
     @classmethod
-    def fetch_new_notification(cls, new_notif):
+    def save_new_notification(cls, new_notif):
         num_of_new_get = 0
         for notification in new_notif: 
             try:
@@ -57,7 +57,3 @@ class Notification(django.db.models.Model):
             except IntegrityError:
                 raise Exception('repeat saving:'+notification.url_id)
         return num_of_new_get
-
-    @classmethod
-    def already_exist(cls, to_check):
-        return Notification.objects.filter(url_id=to_check).exists()

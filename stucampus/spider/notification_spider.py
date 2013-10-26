@@ -12,7 +12,7 @@ from stucampus.lecture.implementation import update_lecture_from_notification
 def update_notification(days):
     new_notif = search_notifications(days)
     # dispatch new notification
-    Notification.fetch_new_notification(new_notif)
+    Notification.save_new_notification(new_notif)
     update_lecture_from_notification(new_notif)
     return len(new_notif)
 
@@ -49,7 +49,8 @@ def search_notifications(days=30, keyword='', search_type='title',
     notif_list = []
     for element in elist:
         notification = factory_notification(element)
-        if not Notification.already_exist(notification.url_id):
+        if not Notification.objects.filter(
+                url_id=notification.url_id).exists():
             notif_list.append(notification)
     notif_list.reverse()
     return notif_list
