@@ -1,0 +1,45 @@
+.list_title{
+    width: 100%;
+    height: 45px;
+    background: #e5e5e5;
+    position: relative;
+    overflow: hidden;
+    line-height: 45px;
+    vertical-align: middle;
+    text-align: center;
+}
+.list_title span,.message_container span{
+    display: inline-block;
+    text-align: center;
+}
+.message_container{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 45px;
+}
+.message_container li{
+    list-style: none;
+    text-align: center;
+    margin: 10px 0px;
+}
+.message_container a:hover{
+    color: #38c2a8;
+}
+.message_container a{
+    color: #7e7e7e;
+    text-decoration: none;
+}
+.line_list{
+    width: 95%;
+    margin: 0 auto;
+    border-top: solid 1px #f7f7f7;
+}
+.right_content li,.right_content span,.right_content label{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;;
+}
+.right_content a{
+    overflow: hidden;
+}

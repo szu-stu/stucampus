@@ -1,0 +1,59 @@
+.content{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.content li{
+    list-style: none;
+    line-height: 300%;
+    vertical-align: middle;
+}
+.content label{
+    display: inline-block;
+    width: 13%;
+    text-indent: 5%;
+}
+.content select{
+    border: 0px;
+    font-size: 14px;
+    line-height: 200%;
+    font-family: "Microsoft Yahei";
+    color: #7e7e7e;
+}
+.content input[type=text]{
+    width: 300px;
+    border: solid 0px #e5e5e5;
+    font-size: 14px;
+    line-height: 200%;
+    font-family: "Microsoft Yahei";
+    color: #7e7e7e;
+}
+.content textarea{
+    width: 400px;
+    height: 60px;
+    font-size: 14px;
+    font-family: "Microsoft Yahei";
+    color: #7e7e7e;
+    vertical-align: middle;
+    margin: 10px 0px;
+    border: 0px;
+    resize: none;
+}
+.content_title{
+    width: 13%;
+    text-indent: 5%;
+    line-height: 300%;
+    vertical-align: middle;
+}
+.line_list{
+    width: 95%;
+    margin: 0 auto;
+    border-top: solid 1px #f7f7f7;
+}
+.line_aside{
+    width: 100%;
+    border-top: solid 1px #e5e5e5;
+}
+.error{
+    color: #ff804d;
+}

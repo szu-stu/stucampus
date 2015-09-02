@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'minivideo/minivideo.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="central">
+    {% load permission_check %}
+    {% if perms.minivideo.manager %}
+    <!-- 审核start -->
+    <div class="resource_info">
+
+        <h2>队伍信息</h2>
+        <p>队长姓名: {{ resource.team_captain }}</p>
+        <p>队长学号: {{ resource.team_captain_stuno }}</p>
+        <p>队长学院: {{ resource.team_captain_college }}</p>
+        <p>队长电话: {{ resource.team_captain_phone }}</p>
+        <p><span>队员1: {{ resource.team_members1_name }}</span><span>学号: {{ resource.team_members1_id }}</span></p>
+        <p><span>队员2: {{ resource.team_members2_name }}</span><span>学号: {{ resource.team_members2_id }}</span></p>
+        <p><span>队员3: {{ resource.team_members3_name }}</span><span>学号: {{ resource.team_members3_id }}</span></p>
+        <p><span>队员4: {{ resource.team_members4_name }}</span><span>学号: {{ resource.team_members4_id }}</span></p>
+        <p><span>队员5: {{ resource.team_members5_name }}</span><span>学号: {{ resource.team_members5_id }}</span></p>
+
+        <h2>视频信息</h2>
+        <p>视频名字: {{ resource.video_name }}</p>
+
+        {% if resource.video_cover %}
+        <p>视频封面: <a href="{{ resource.video_cover.url }}" target="_blank"><img style="width:100%" src="{{ resource.video_cover.url }}" alt=""></a></p>
+        {% else %}
+        <p>视频封面: </p>
+        {% endif %}
+
+        <div class="youku_container">
+            {% if resource.video_link %}
+            <embed src="http://player.youku.com/player.php/sid/{{ number }}/v.swf" allowFullScreen="true" quality="high" width="700" height="360" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+            {% else %}
+            <p>视频链接: </p>
+            {% endif %}
+        </div>
+
+        <p>视频简介: {{ resource.video_intro }}</p>
+        
+        <p>投票数: {{ resource.votes }}</p>
+
+        {% if resource.has_verified %}
+        <p>审核状态: 已审核</p>
+        {% else %}
+        <p>审核状态: 未审核</p>
+        {% endif %}
+    </div>   
+
+    <a class="verify" href="{% url 'minivideo:verify' %}?id={{resource.id}}">
+        {% if resource.has_verified %}
+        设为未审核
+        {% else %}
+        通过审核
+        {% endif %}
+    </a>
+
+    {% if resource.video_name %}
+    <p style="text-align:center;"><a class="details_btn" href="{% url 'minivideo:details' %}?id={{ resource.id }}">查看详情</a></p>
+    {% endif %}
+
+    <p style="text-align:center;"><a class="delete_btn" href="{% url 'minivideo:delete' %}?id={{ resource.id }}" onclick="return confirm('当前资源将被删除？')" >删除</a></p>
+    <!-- 审核end -->
+
+    {% else %}
+    <div class="stop">
+        报名和提交作品时间已截止
+    </div>
+
+    {% endif %}
+</div>
+{% endblock %}

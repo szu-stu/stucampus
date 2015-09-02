@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'deny/deny.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<p class="deny">{{ message }}</p>
+{% endblock %}

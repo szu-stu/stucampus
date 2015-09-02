@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block htmltitle %}
+<title>{{ magazine_publisher }} - 深圳大学学子天地</title>
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'magazine/list.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="main_container">
+    <h2>{{ magazine_publisher }} 杂志列表</h2>
+    <div class="line_title"></div>
+    {% for magazine in list %}
+    <li>
+        <a href="{% url 'magazine:display' magazine.id %}">{{ magazine.title }}</a>
+        <a href="{{ magazine.pdf_file.url }}" style="float: right; padding-right: 5px;">下载</a>
+    </li>
+    <div class="line"></div>
+    {% endfor %}
+</div>
+{% endblock %}

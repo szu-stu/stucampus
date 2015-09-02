@@ -53,7 +53,7 @@ class AddOrganizationManagerForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if User.objects.filter(username=email).exists():
+        if not User.objects.filter(username=email).exists():
             msg = _('User is not exists')
             raise forms.ValidationError(msg)
         return email

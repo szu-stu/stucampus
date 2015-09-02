@@ -1,54 +1,64 @@
-from django.http import HttpResponse, HttpResponseRedirect
+#-*- coding: utf-8 -*-
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.core.urlresolvers import reverse
 from django.views import generic
-from django.template import RequestContext
 from django.core.paginator import InvalidPage
+from django.utils.decorators import method_decorator
 
-from stucampus.utils import spec_json
 from stucampus.lecture.models import LectureMessage
-from stucampus.lecture.forms import LectureForm, LectureFormset
-from stucampus.activity.forms import FormsetPaginator
+from stucampus.lecture.forms import LectureFormset
+from stucampus.custom.forms_utils import FormsetPaginator
+from stucampus.spider.models import Notification
+from stucampus.lecture.implementation import update_lecture_from_notification
+from stucampus.account.permission import check_perms
 
 
 def index(request):
     table = LectureMessage.generate_messages_table()
-    return render_to_response('lecture/home.html', {'table': table})
+    return render(request, 'lecture/home.html', {'table': table})
 
 
-def manage(request):
-    if request.method == 'POST':
-        return submit(request)
-
-    paginator = FormsetPaginator(LectureMessage,
-                                 LectureMessage.objects.all(), 5)
-    try:
-        page = paginator.page(request.GET.get('page'))
-    except InvalidPage:
-        page = paginator.page(1)
-    return render(request, 'lecture/manage.html', {'page': page})
+def mobile(request):
+    table = LectureMessage.generate_messages_table()
+    return render(request, 'lecture/mobile.html', {'table': table})
 
 
-def submit(request):
-    formset = LectureFormset(request.POST)
-    for form in formset:
-        if form.is_valid():
-            form.save()
-
-    queryset = LectureMessage.objects.all()
-    paginator = FormsetPaginator(LectureMessage, queryset, 5)
-    page = paginator.page(request.GET.get('page'))
-    page.formset = formset
-    return render(request, 'lecture/manage.html', {'page': page})
+@check_perms('spider.spider_manager')
+def auto_add(request):
+    ''' add lecture from notification '''
+    noti_list = Notification.objects.all()
+    update_lecture_from_notification(noti_list)
+    return HttpResponseRedirect(reverse('lecture:manage'))
 
 
-def add_lecture(request):
-    form = LectureForm()
-    if request.method == 'POST':
-        form = LectureForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return spec_json('success', 'add success');
-        else:
-            return spec_json('errors', form.errors)
-    return render(request, 'lecture/add_lecture.html', {'form': form})
+class ManageView(generic.View):
+
+    @classmethod
+    def __create_page(cls, request):
+        paginator = FormsetPaginator(LectureMessage,
+                                     LectureMessage.objects.all(), 5,
+                                     formset=LectureFormset)
+        try:
+            page = paginator.page(request.GET.get('page'))
+        except InvalidPage:
+            page = paginator.page(1)
+        return page
+
+    @method_decorator(check_perms('account.website_admin'))
+    def get(self, request):
+        return render(request, 'lecture/manage.html',
+                      {'page': ManageView.__create_page(request)})
+
+    @method_decorator(check_perms('account.website_admin'))
+    def post(self, request):
+        formset = LectureFormset(request.POST)
+        if not formset.is_valid():
+            page = ManageView.__create_page(request)
+            page.formset = formset
+            return render(request, 'lecture/manage.html',
+                          {'page': page})
+        # 当extra>0的时候，不能循环form来save()
+        formset.save()
+        page = request.GET.get('page')
+        return HttpResponseRedirect(reverse('lecture:index'))

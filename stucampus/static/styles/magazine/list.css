@@ -1,0 +1,33 @@
+.main_container{
+    width: 60%;
+    position: relative;
+    margin: 20px auto;
+    overflow: hidden;
+}
+.main_container h2{
+    font-family: "Microsoft Yahei";
+    font-size: 18px;
+    color: #7e7e7e;
+}
+.main_container li{
+    list-style: none;
+    margin: 10px 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.main_container a{
+    color: #7e7e7e;
+    text-decoration: none;
+}
+.line_title{
+    width: 100%;
+    border-top: solid 2px #7e7e7e;
+    margin: 10px 0px;
+}
+.line{
+    width: 100%;
+    border-top: solid 1px #f7f7f7;
+    margin: 5px 0px;
+}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'minivideo/minivideo.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="central">
+       
+    <div class="video_index">
+        <h2>青春的轨迹——在深大的日子</h2>
+        
+        <div id="grid_container">
+            
+            <h2>一等奖</h2>
+            <a class="grid" href="/minivideo/details/?id=4" style="margin:auto;float:none;">
+                <div>
+                    <img src="/media/minivideo/cover/%E6%B2%A1%E6%97%B6%E9%97%B4.jpg" alt="">
+                </div>
+                <div class="videoName">没时间mv</div>
+                <div class="captainName">队长： 陈静</div>
+            </a>
+            
+            <h2>二等奖</h2>
+            <div style="width:640px;overflow:hidden;margin:0 auto;">
+                <a class="grid" href="/minivideo/details/?id=5">
+                    <div>
+                        <img src="/media/minivideo/cover/Untitled-2.jpg" alt="">
+                    </div>
+                    <div class="videoName">让爱传递</div>
+                    <div class="captainName">队长： 宓特朗</div>
+                </a>
+                <a class="grid" href="/minivideo/details/?id=21">
+                    <div>
+                        <img src="/media/minivideo/cover/Untitled-2_4.jpg" alt="">
+                    </div>
+                    <div class="videoName">大学最难忘的暑期实践</div>
+                    <div class="captainName">队长： 彭子娟</div>
+                </a>
+            </div>
+
+            <h2>三等奖</h2>
+            <div style="width:640px;overflow:hidden;margin:0 auto;">
+                <a class="grid" href="/minivideo/details/?id=17">
+                    <div>
+                        <img src="/media/minivideo/cover/1EF55HETO(%25%5D6ANU_MFE%602M.jpg" alt="">
+                    </div>
+                    <div class="videoName">荔人</div>
+                    <div class="captainName">队长： 赵原瑾</div>
+                </a>
+                <a class="grid" href="/minivideo/details/?id=20">
+                    <div>
+                        <img src="/media/minivideo/cover/Untitled-2_3.jpg" alt="">
+                    </div>
+                    <div class="videoName">深大院际舞蹈大赛的一次彩排</div>
+                    <div class="captainName">队长： 靳琳琳</div>
+                </a>
+            </div>
+
+            <h2>人气奖</h2>
+            <a class="grid" href="/minivideo/details/?id=18" style="margin:auto;float:none;" >
+                <div>
+                    <img src="/media/minivideo/cover/A0UXFAW%25NR6U%7B0%5BGTY%606QNG.jpg" alt="">
+                </div>
+                <div class="videoName">镜头下的深大</div>
+                <div class="captainName">队长： 夏涵</div>
+            </a>
+
+            <h2>入围奖</h2>
+            <div style="overflow:hidden;margin:0 auto;">
+                <a class="grid" href="/minivideo/details/?id=19">
+                    <div>
+                        <img src="/media/minivideo/cover/%E6%97%A0%E6%A0%87%E9%A2%98.png" alt="">
+                    </div>
+                    <div class="videoName">Everybody</div>
+                    <div class="captainName">队长： 陈国华</div>
+                </a>
+
+                <a class="grid" href="/minivideo/details/?id=3">
+                    <div>
+                        <img src="/media/minivideo/cover/QQ%E5%9B%BE%E7%89%8720140525212118.jpg" alt="">
+                    </div>
+                    <div class="videoName">他们三</div>
+                    <div class="captainName">队长： 黄淑儒</div>
+                </a>
+
+                <a class="grid" href="/minivideo/details/?id=2">
+                    <div>
+                        <img src="/media/minivideo/cover/8%7B2Z%5DV8%25(F%7BE492IB%25I8%5BFL.jpg" alt="">
+                    </div>
+                    <div class="videoName">我在深大</div>
+                    <div class="captainName">队长： 陈桂洪</div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    
+</div><!--end of central-->
+{% endblock %}

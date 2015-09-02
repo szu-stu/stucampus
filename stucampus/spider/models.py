@@ -3,6 +3,7 @@ import django.db.models
 from django.db import IntegrityError
 
 import lxml.html
+import html2text
 
 from stucampus.custom.models import models
 from stucampus.spider.data_for_models import PUBLISHER_CHOICES
@@ -20,8 +21,13 @@ CATEGORY_CHOICES = (
 
 class Notification(django.db.models.Model):
 
+    class Meta:
+        permissions = (
+            ('spider_manager', u'爬虫管理员'),
+        )
+
     url_id = models.CharField(max_length=20, unique=True)
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length=150)
     published_date = models.DateField()
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     publisher = models.CharField(max_length=20, choices=PUBLISHER_CHOICES)
@@ -44,7 +50,10 @@ class Notification(django.db.models.Model):
             element_contain_content = etree.xpath(xp)[0]
         except IndexError:  # can not find
             return ''
-        content = element_contain_content.text_content()
+        h = html2text.HTML2Text()
+        h.ignore_emphasis = True
+        content = h.handle(lxml.html.etree.tostring(element_contain_content))
+        #content = element_contain_content.text_content()
         return content.replace('\r', '\n')
 
     @classmethod

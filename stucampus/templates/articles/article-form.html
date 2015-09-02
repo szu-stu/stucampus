@@ -1,0 +1,98 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'manage/add_articles.css' | as_css }}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data"action="{{ post_url }}?id={{ article_id }}&page={{ page }}">
+    {% csrf_token %}
+    <div class="content">
+        <li>
+            <label>标题</label>
+            {{ form.title }}
+            <span class="error">
+                {% for error in form.title.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </li>
+        <div class="line_list"></div>
+        <li>
+            <label>作者</label>
+            {{ form.author }}
+            <span class="error">
+                {% for error in form.author.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </li>
+        <div class="line_list"></div>
+        <li>
+            <label>文章分类</label>
+            {{ form.category }}
+            <span class="error">
+                {% for error in form.category.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </li>
+        <div class="line_list"></div>
+        <li>
+            <label>摘要</label>
+            {{ form.summary }}
+            <span class="error">
+                {% for error in form.summary.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </li>
+    </div>
+    <div class="line_aside"></div>
+    <div class="content">
+        <li>
+            <label>来源</label>
+            {{ form.source }}
+            <span class="error">
+                {% for error in form.source.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </li>
+        <div class="line_list"></div>
+        <li>
+            <label>来源链接</label>
+            {{ form.source_link }}
+            <span class="error">
+                {% for error in form.source_link.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </li>
+        <div class="line_list"></div>
+        <li>
+            <label>封面图片</label>
+            {{ form.cover }}
+            <span class="error">
+                {% for error in form.cover.errors %}
+                    {{ error }}
+                {% endfor %}
+            </span>
+        </li>
+    </div>
+    <div class="line_aside"></div>
+    <div class="content">
+        <p class="content_title">内容</p>
+        {{ form.content }}
+        <p class="error" style="margin:10px 0px">
+            {% for error in form.content.errors %}
+                {{ error }}
+            {% endfor %}
+        </p>
+    </div>
+    <div class="line_aside"></div>   
+    <input type="submit" value="提交" class="add">    
+</form>  
+{% endblock %}

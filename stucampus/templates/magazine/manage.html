@@ -1,0 +1,31 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'manage/list.css' | as_css }}
+    {{ 'manage/magazine.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="list_title">
+	<span style="width:8%">杂志</span>
+    <span style="width:27%">标题</span>
+    <span style="width:7%">期数</span>
+    <span style="width:45%">文件</span>
+    <span style="width:10%">操作</span>
+</div>
+<div class="message_container">
+{% for magazine in list %}
+	<li>
+		<span style="width:10%">{{ magazine.name }}</span>
+		<span style="width:26%">{{ magazine.title }}</span>
+		<span style="width:5%">{{ magazine.issue }}</span>
+		<span style="width:45%">{{ magazine.pdf_file }}</span>
+		<a href="{% url 'magazine:modify' %}?id={{ magazine.id }}" class="modify">修改</a>
+		<a href="{% url 'magazine:delete' %}?id={{ magazine.id }}" class="modify">删除</a>
+	</li>
+	<div class="line_list"></div>
+{% endfor %}
+</div> 
+<a href="{% url 'magazine:add' %}" class="add">新增</a>
+{% endblock %}

@@ -1,0 +1,95 @@
+﻿.content .categories_list{
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 28px;
+}
+
+.content .categories_list a{
+	position: relative;
+	overflow: hidden;
+	display: block;
+	text-decoration: none;
+	margin: 5px 0;
+}
+
+.content .categories_list a:hover{
+	background: #f7f7f7;
+}
+
+.content .categories_list a .categories_list_entry{
+	position: relative;
+	overflow: hidden;
+	padding: 0 8px 0 148px;
+	height: 90px;
+}
+
+.content .categories_list a .categories_list_entry .entry_pic{
+	position: absolute;
+	overflow: hidden;
+	background: #f3f3f3;
+	height: 90px;
+	width: 135px;
+	left: 0;
+}
+
+.content .categories_list a .categories_list_entry h3{
+	position: relative;
+	overflow: hidden;
+	font-weight: normal;
+	font-size: 18px;
+	padding: 3px 0;
+	margin-bottom: 3px;
+	color: rgb(9,108,111);
+	text-align: left;
+}
+
+.content .categories_list a .categories_list_entry h3 span{
+	position: absolute;
+	overflow: hidden;
+	right: 8px;
+	top: 3px;
+	font-size: 13px;
+	color: #ababab;
+}
+
+.content .categories_list a .categories_list_entry p{
+	position: relative;
+	overflow: hidden;
+	font-size: 14px;
+	font-family: serif;
+	color: #999;
+	line-height: 17px;
+	padding: 0 3px;
+}
+
+.content .pagingbar{
+	position: relative;
+	overflow: hidden;
+	text-align: left;
+	margin-bottom: 38px;
+}
+
+.content .pagingbar a{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	background: #5bc4be;
+	text-decoration: none;
+	color: #fff;
+	font-size: 14px;
+	padding: 5px 8px 6px;
+	border-radius: 1px;
+}
+
+.content .pagingbar a:hover{
+	background: rgb(9,108,111)
+}
+
+.content .pagingbar span{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	font-size: 14px;
+	padding: 5px 8px 6px;
+	color: #666;
+}

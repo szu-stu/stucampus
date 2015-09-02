@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block htmltitle %}
+<title>{{ category.name }} - 深圳大学学子天地</title>
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'categories.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+
+<div class="central">
+	<div class="content">
+
+		<div class="categories_list">
+			<h2>{{ category.name }}</h2>
+			{% for article in page %}
+			<a href="{% url 'articles:display' article.pk %}">
+				<div class="categories_list_entry">
+					<div class="entry_pic"><img src="{{ article.cover }}" width=135 height=90 ></div>
+					<h3>{{ article.title }}<span>{{ article.create_date | date:"Y年n月d日"}}</span></h3>
+					<p>{{ article.summary }}</p>
+				</div>
+			</a>
+			{% endfor %}
+		</div><!--end of categories_list-->
+
+		<div class="pagingbar">
+        	<a href="?category={{ category }}&page=1">首页</a>
+   			{% if page.has_previous %}
+        		<a href="?category={{ category }}&page={{ page.previous_page_number }}" class="previous">上一页</a>
+    		{% endif %}
+
+    		<span>第 {{ page.number }} 页，共 {{ page.paginator.num_pages }} 页</span>
+    
+    		{% if page.has_next %}
+        		<a class="next" href="?category={{ category }}&page={{ page.next_page_number }}">下一页</a>
+    		{% endif %}
+        	<a href="?category={{ category }}&page={{ page.paginator.num_pages }}">尾页</a>
+		</div>
+
+	</div><!--end of content-->
+
+	<div class="sidebar">
+		<div class="widget">
+			<h2>热门排行</h2><a class="widget_more" href="">更多…</a>
+			<div class="widget_content">
+				<ul class="widget_content_list">
+					{% for article in hot_articles_list %}
+					<li>
+						<a href="{% url 'articles:display' article.pk %}">{{ article.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div class="widget">
+			<h2>最近更新</h2><a class="widget_more" href="">更多…</a>
+			<div class="widget_content">
+				<ul class="widget_content_list">
+					{% for article in newest_articles_list %}
+					<li>
+						<a href="{% url 'articles:display' article.pk %}">{{ article.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div><!--end of sidebar-->
+
+</div><!--end of central-->
+
+{% endblock %}

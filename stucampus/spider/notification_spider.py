@@ -65,10 +65,6 @@ def factory_notification(element):
     category = element.findtext('td[2]')
     title = ''.join(element.xpath('td[4]/*//text()'))
     date = element.findtext('td[6]')
-    # sample:    |置顶|·XXXXXXXXXXX
-    #         or ·XXXXXXXXXXX
-    title.lstrip(u'|置顶|')
-    title.lstrip(u'·')
     # sample: view.asp?id=262297
     url_id = element.xpath('td[4]/a/@href')[0].lstrip('view.asp?id=')
 

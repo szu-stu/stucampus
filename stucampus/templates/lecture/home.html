@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
 
+{% block htmltitle %}
+<title>深大校园讲座预告 - 深圳大学学子天地</title>
+{% endblock %}
+
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'lecture/lec_act_show.css' | as_css }}
-    {{ 'table/table.js' | as_js }}
+    {{ 'table/table_lecture.js' | as_js }}
 {% endblock %}
 
 {% block content %}
     <!-- 主体  Begin -->
-    <div class="main-container">
-        <a href="#">首页</a><span>></span><a href="{% url 'activity:index' %}">讲座预告</a>
+    <div id="main-container">
         <table>
-            <caption>讲座信息平台</caption>
+            <caption>深圳大学校园讲座预告</caption>
             <tbody>
                 <tr>
                     <td class="time">时间</td>
                     {% for date in table.date %}
-                        <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' %}">
+                        <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' %}" style="text-align:center">
                             {% cycle '周一' '周二' '周三' '周四' '周五' '周六' '周日' %}<br/>
                             {{ date | date:"m月d日" }}
                         </td>
@@ -27,11 +30,21 @@
                     {% for msg_list in table.morning %}
                         <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
                         {% for msg in msg_list %}
-                            <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
-                                <b>{{ msg.title }}</b><br />
-                                <b>——&nbsp</b>{{ msg.speaker }}<br />
-                                <b>——&nbsp</b>{{ msg.place }}<br />
-                                <b>——&nbsp</b>{{ msg.date_time | date:'G:i'}}<br />
+                            {% if msg.url_id %}
+                            <a href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}" target="_blank">
+                            {% else %}
+                            <a>
+                            {% endif %}
+                                <p><strong>{{ msg.title }}</strong></p>
+                                <div class="line"></div>
+                                <li>
+                                    <img src="/static/images/act_lec/speaker.png">
+                                    <span>{{ msg.speaker }}</span>
+                                </li>
+                                <li>
+                                    <img src="/static/images/act_lec/place.png">
+                                    <span>{{ msg.place }}</span>
+                                </li>
                             </a>
                         {% endfor %}
                         </td>
@@ -42,11 +55,21 @@
                     {% for msg_list in table.afternoon %}
                         <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
                         {% for msg in msg_list %}
-                            <a class="message" href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}">
-                                <b>{{ msg.title }}</b><br />
-                                <b>——&nbsp</b>{{ msg.speaker }}<br />
-                                <b>——&nbsp</b>{{ msg.place }}<br />
-                                <b>——&nbsp</b>{{ msg.date_time | date:'G:i'}}<br />
+                            {% if msg.url_id %}
+                            <a href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}" target="_blank">
+                            {% else %}
+                            <a>
+                            {% endif %}
+                                <p><strong>{{ msg.title }}</strong></p>
+                                <div class="line"></div>
+                                <li>
+                                    <img src="/static/images/act_lec/speaker.png">
+                                    <span>{{ msg.speaker }}</span>
+                                </li>
+                                <li>
+                                    <img src="/static/images/act_lec/place.png">
+                                    <span>{{ msg.place }}</span>
+                                </li>
                             </a>
                         {% endfor %}
                         </td>

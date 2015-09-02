@@ -1,0 +1,14 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+    {{ 'manage/view.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="message_view">
+    <li style="font-size:18px"><strong>后台管理</strong></li>
+    <div class="line_view"></div>
+    <li>{{ user.student.screen_name }} 你好。</li>
+</div>
+{% endblock %}

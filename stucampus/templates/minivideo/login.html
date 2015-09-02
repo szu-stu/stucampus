@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'minivideo/minivideo.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="central">
+    <div class="minivideo_login">
+        <h2>微视频大赛参赛者登录</h2>
+        
+        <form method="post" action="{% url 'minivideo:login' %}">
+        {% csrf_token %}
+
+        <p><span>队长学号</span><span>{{ form.team_captain_stuno }}</span></p>
+        <span class="error">
+        {% for error in form.team_captain_stuno.errors %}
+            {{ error }}
+        {% endfor %}
+        </span>
+
+        <p><span>队伍密码</span><span>{{ form.confirm }}</span></p>
+        <span class="error">
+        {% for error in form.confirm.errors %}
+           {{ error }}
+        {% endfor %}
+        </span>
+        
+        <p><input class="login_btn" type="submit" value="登录" /></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

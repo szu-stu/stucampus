@@ -3,6 +3,7 @@ from urllib2 import urlopen
 import lxml.html
 import requests
 
+
 class MatchError(Exception):
 
     def __init__(self, text='', reg=''):

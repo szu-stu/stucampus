@@ -1,0 +1,94 @@
+﻿/**style of article**/
+
+.article{
+	position: relative;
+	overflow: hidden;
+	clear: both;
+	margin: 38px auto 28px;
+}
+
+.article .article_header{
+	position: relative;
+	overflow: hidden;
+	clear: both;
+	text-align: center;
+}
+
+.article .article_header h1{
+	position: relative;
+	overflow: hidden;
+	font-size: 33px;
+	font-weight: normal;
+	line-height: 48px;
+}
+
+.article .article_header .article_meta{
+	position: relative;
+	overflow: hidden;
+	padding: 28px;
+	font-family: serif;
+	font-size: 14px;
+	color: #666;
+}
+
+.article .article_header .article_meta span{
+	padding: 0 8px;
+	line-height: 28px;
+	display: inline-block;
+}
+
+.article .article_header .article_meta span a{
+	color: #333;
+}
+
+.article .article_header .article_meta span a:hover{
+	text-decoration: underline;
+}
+
+.article .article_body,.article .article_footer{
+	position: relative;
+	overflow: hidden;
+	clear: both;
+	padding: 0 58px;
+	margin-bottom: 18px;
+}
+
+.article .article_body .article_text{
+	position: relative;
+	overflow: hidden;
+	clear: both;
+	font-size: 18px;
+	line-height: 36px;
+}
+
+.article .article_body .article_text p{
+	margin-bottom: 18px;
+}
+
+.article .article_body .article_text img{
+	border: 1px solid #eee;
+	background: #f8f8f8;
+	padding: 8px;
+}
+
+.article .article_body .article_share{
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	padding: 18px;
+}
+
+.article .article_body .article_share .bdsharebuttonbox{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+}
+
+.article .article_footer h2{
+	font-weight: normal;
+	font-size: 28px;
+	margin-bottom: 8px;
+	padding-bottom: 3px;
+	color: #000;
+	border-bottom: 2px solid #5bc4be;
+}

@@ -12,7 +12,6 @@ class Student(models.Model):
             ('student_create', 'Create a new student.'),
             ('student_edit', 'Edit the information of students.'),
             ('student_del', 'Delete students'),
-
             ('org_managers_list', 'List all managers of an organization.'),
             ('org_managers_create', 'Create a new manager.'),
             ('org_managers_del', 'Remove a manager from an organization.'),
@@ -20,6 +19,8 @@ class Student(models.Model):
             ('member_show', 'Show the information of member.'),
             ('member_create', 'Create a new member in organization.'),
             ('member_del', 'Remove a member from an organization.')
+            ('website_admin', u'学子天地网站管理员'),
+            ('student_manager', u'学生帐号管理员'),
         )
 
     COLLEGE_CHOICES = (

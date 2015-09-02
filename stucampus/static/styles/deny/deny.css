@@ -1,0 +1,12 @@
+.deny{
+    width: 90%;
+    position: relative;
+    margin: 40px auto;
+    overflow: hidden;
+    font-family: "Microsoft Yahei";
+    font-size: 24px;
+    color: #7e7e7e;
+    font-weight: bold;
+    text-align: center;
+    line-height: 200%;
+}

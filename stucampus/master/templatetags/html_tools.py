@@ -1,4 +1,5 @@
 import os
+import re
 from hashlib import md5
 
 from django import template
@@ -35,3 +36,20 @@ def as_js(path):
     html = ('<script type="text/javascript"'
             ' src="/static/scripts/%s%s"></script>' % (path, ver))
     return html
+
+
+class StripspacesNode(template.base.Node):
+    def __init__(self, nodelist, replacement=' '):
+        self.nodelist = nodelist
+        self.replacement = replacement
+
+    def render(self, context):
+        return re.sub(r'\s{2,}', self.replacement,
+                      (self.nodelist.render(context).strip()))
+
+
+@register.tag
+def nospaces(parser, token):
+    nodelist = parser.parse(('endnospaces',))
+    parser.delete_first_token()
+    return StripspacesNode(nodelist, replacement='')

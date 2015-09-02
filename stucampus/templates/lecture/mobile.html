@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block htmltitle %}
+<title>深大校园讲座预告移动版 - 深圳大学学子天地</title>
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'lecture/lec_act_mobile.css' | as_css }}
+    {{ 'table/table_activity.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+    <!-- 主体  Begin -->
+    <div id="main-container">
+        <div class="table-header">
+            <h2>深圳大学校园讲座预告</h2>
+            <p>由学子天地与深大百科联合驱动</p>
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="time" style="width: 55px;">时间</td>
+                    <td class="time">上午</td>
+                    <td class="time">下午</td>
+                </tr>
+
+                {% for day_list in table.day_tr %}
+                <tr>
+                    <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' %}" style="text-align: center; vertical-align: middle;">
+                        {% cycle '周一' '周二' '周三' '周四' '周五' '周六' '周日' %}<br />
+                        {{ day_list.date | date:"m月d日" }}
+                    </td>
+
+                    <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
+                        {% for msg in day_list.morning %}
+                            {% if msg.url_id %}
+                            <a href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}" target="_blank">
+                            {% else %}
+                            <a>
+                            {% endif %}
+                                <p><strong>{{ msg.title }}</strong></p>
+                                <div class="line"></div>
+                                <li>
+                                    <img src="/static/images/act_lec/speaker.png">
+                                    <span>{{ msg.speaker }}</span>
+                                </li>
+                                <li>
+                                    <img src="/static/images/act_lec/place.png">
+                                    <span>{{ msg.place }}</span>
+                                </li>
+                            </a>
+                        {% endfor %}
+                    </td>
+
+                    <td class="{% cycle 'day1' 'day2' 'day3' 'day4' 'day5' 'day6' 'day7' as day %}">
+                        {% for msg in day_list.afternoon %}
+                            {% if msg.url_id %}
+                            <a href="http://www.szu.edu.cn/board/view.asp?id={{ msg.url_id }}" target="_blank">
+                            {% else %}
+                            <a>
+                            {% endif %}
+                                <p><strong>{{ msg.title }}</strong></p>
+                                <div class="line"></div>
+                                <li>
+                                    <img src="/static/images/act_lec/speaker.png">
+                                    <span>{{ msg.speaker }}</span>
+                                </li>
+                                <li>
+                                    <img src="/static/images/act_lec/place.png">
+                                    <span>{{ msg.place }}</span>
+                                </li>
+                            </a>
+                        {% endfor %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- 主体  End -->
+{% endblock %}

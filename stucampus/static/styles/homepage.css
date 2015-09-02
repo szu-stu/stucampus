@@ -1,0 +1,319 @@
+﻿.content .cont_headline{
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 58px;
+}
+
+.content .cont_headline a{
+	position: relative;
+	overflow: hidden;
+	display: block;
+	text-decoration: none;
+	margin: 8px 0;
+}
+
+.content .cont_headline a:hover .cont_headline_entry h3{
+	background: #5bc4be;
+	color: #fff;
+}
+
+.content .cont_headline a .cont_headline_entry{
+	position: relative;
+	overflow: hidden;
+	padding: 0 8px 0 192px;
+	height: 120px;
+}
+
+.content .cont_headline a .cont_headline_entry .headline_pic{
+	position: absolute;
+	overflow: hidden;
+	background: #f3f3f3;
+	height: 120px;
+	width: 180px;
+	left: 0;
+}
+
+.content .cont_headline a .cont_headline_entry h3{
+	position: relative;
+	overflow: hidden;
+	font-weight: normal;
+	font-size: 22px;
+	padding: 5px 0;
+	margin-bottom: 5px;
+	color: rgb(9,108,111);
+	text-align: center;
+}
+
+.content .cont_headline a .cont_headline_entry p{
+	position: relative;
+	overflow: hidden;
+	font-size: 14px;
+	font-family: serif;
+	color: #999;
+	line-height: 21px;
+	padding: 0 5px;
+}
+
+.content .cont_articles{
+	position: relative;
+	overflow: hidden;
+}
+
+ .content .cont_articles .mgright{
+ 	margin-right: 50px;
+ }
+
+.content .articles_list{
+	float: left;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 58px;
+	width: 300px;
+}
+
+.content .cont_articles .articles_list a.articles_list_more{
+	position: absolute;
+	overflow: hidden;
+	font-size: 14px;
+	right: 10px;
+	top: 10px;
+	text-decoration: none;
+	color: #333;
+	visibility: hidden;
+}
+
+.content .cont_articles .articles_list:hover a.articles_list_more{
+	visibility: visible;
+}
+
+.content .cont_articles .articles_list a.articles_list_more:hover{
+	text-decoration: underline;
+}
+
+.content .cont_articles .articles_list ul{
+
+}
+
+.content .cont_articles .articles_list ul a p{
+	font-family: serif;
+	font-size: 13px;
+	color: #999;
+	padding: 8px 5px 2px;
+}
+
+.content .cont_articles .articles_list ul a p img{
+	float: left;
+	margin-right: 8px;
+}
+
+.content .cont_articles .articles_list ul a{
+	position: relative;
+	overflow: hidden;
+	display: block;
+	padding: 4px 3px 4px;
+	font-size: 15px;
+	text-decoration: none;
+	color: #222;
+}
+
+.content .cont_articles .articles_list ul a:hover,.content .cont_articles .articles_list ul a:hover p{
+	background: #5bc4be;
+	color: #fff;
+}
+
+.content .co_social{
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 58px;
+}
+
+.content .co_social a{
+	position: relative;
+	overflow: hidden;
+	float: left;
+	display: block;
+	text-decoration: none;
+	margin: 2px 0 8px;
+	width: 49%;
+}
+
+.content .co_social .co_social_box{
+	position: relative;
+	overflow: hidden;
+	border-radius: 1px;
+	padding: 2px 2px 2px 150px;
+	height: 130px;
+	font-family: serif;
+	font-size: 13px;
+	line-height: 19px;
+	color: #666;
+}
+
+.content .co_social .co_social_box .co_social_logo{
+	position: absolute;
+	overflow: hidden;
+	height: 130px;
+	width: 130px;
+	left: 8px;
+	background: #f8f8f8;
+	border: 1px #eee solid;
+	border-radius: 2px;
+}
+
+.content .co_social .co_social_box h3{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	background-color: #5bc4be;
+	color: #fff;
+	padding: 3px 5px 3px;
+	border-radius: 2px;
+	margin-bottom: 8px;
+	font-family: Microsoft Yahei, sans-serif;
+	font-weight: normal;
+	font-size: 15px;
+	letter-spacing: 1pt;
+}
+
+.content .co_social a:hover .co_social_box h3{
+	background: rgb(9,108,111);
+}
+
+.content .co_media{
+	position: relative;
+	overflow: hidden;
+}
+
+.content .co_media a{
+	position: relative;
+	overflow: hidden;
+	display: block;
+	text-decoration: none;
+	margin: 8px 0;
+}
+
+.content .co_media .co_media_box{
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #eee;
+	border-radius: 1px;
+	padding: 18px 18px 18px 343px;
+	height: 130px;
+	font-family: serif;
+	font-size: 13px;
+	line-height: 19px;
+	color: #666;
+}
+
+.content .co_media .co_media_box .co_media_logo{
+	position: absolute;
+	overflow: hidden;
+	height: 130px;
+	width: 310px;
+	left: 18px;
+	background: #f8f8f8;
+	border-radius: 2px;
+}
+
+.content .co_media .co_media_box h3{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	background-color: #5bc4be;
+	color: #fff;
+	padding: 3px 5px 3px;
+	border-radius: 2px;
+	margin-bottom: 8px;
+	font-family: Microsoft Yahei, sans-serif;
+	font-weight: normal;
+	font-size: 15px;
+	letter-spacing: 1pt;
+}
+
+.content .co_media a:hover .co_media_box h3{
+	background: rgb(9,108,111);
+}
+
+/**style of widget_co_guide**/
+.sidebar .widget .widget_content ul.widget_co_guide{
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #eee;
+	border-top: none;
+	border-bottom: none;
+	
+}
+
+.sidebar .widget .widget_content ul.widget_co_guide li{
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.sidebar .widget .widget_content ul.widget_co_guide h3{
+	color: #5bc4be;
+}
+
+.sidebar .widget .widget_content ul.widget_co_guide a{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	font-size: 16px;
+	text-decoration: none;
+	padding: 2px 6px 3px;
+	margin: 2px;
+	color: #fff;
+	background-color: #5bc4be;
+	border-radius: 2px;
+}
+
+.sidebar .widget .widget_content ul.widget_co_guide a:hover{
+	color: #fff;
+	background-color: rgb(9,108,111);
+}
+
+/**style of widget_co_league**/
+
+.sidebar .widget .widget_content ul.widget_co_league{
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #eee;
+	border-top: none;
+	padding: 10px;
+}
+
+.sidebar .widget .widget_content ul.widget_co_league a{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	font-size: 15px;
+	text-decoration: none;
+	padding: 3px 8px 4px;
+	margin: 2px;
+	color: #fff;
+	background-color: #5bc4be;
+	border-radius: 2px;
+}
+
+.sidebar .widget .widget_content ul.widget_co_league a:hover{
+	background-color: rgb(9,108,111);
+}
+
+.sidebar .widget .widget_content .ds-recent-comments,.sidebar .widget .widget_content .ds-recent-visitors{
+	position: relative;
+	overflow: hidden;
+	list-style: none;
+	border-bottom: 1px solid #e3e3e3;
+	color: #888;
+}
+
+.sidebar .widget .widget_content .ds-recent-comments  a{
+	color: #000;
+}
+
+.sidebar .widget .widget_content .ds-recent-comments  a:hover{
+	color: #5bc4be;
+}
+.sidebar .widget .widget_banner li{
+	margin-bottom: 8px;
+	text-align: center;
+}

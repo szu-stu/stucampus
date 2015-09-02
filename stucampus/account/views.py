@@ -66,16 +66,6 @@ class Profile(View):
     def get(self, request):
         return render(request, 'account/profile.html')
 
-    @method_decorator(login_required)
-    def put(self, request):
-        student = get_object_or_404(Student, id=request.user.id)
-        form = ProfileEditForm(request.PUT, instance=student)
-        if not form.is_valid():
-            messages = form.errors.values()
-            return spec_json(status='errors', messages=messages)
-        form.save()
-        return spec_json(status='success')
-
 
 class ProfileEdit(View):
     '''View of editing profile'''
@@ -84,6 +74,16 @@ class ProfileEdit(View):
         college_list = Student.COLLEGE_CHOICES
         return render(request, 'account/profile-edit.html',
                       {'college_list': college_list})
+
+    @method_decorator(login_required)
+    def put(self, request):
+        student = request.user.student
+        form = ProfileEditForm(request.PUT, instance=student)
+        if not form.is_valid():
+            messages = form.errors.values()
+            return spec_json(status='errors', messages=messages)
+        form.save()
+        return spec_json(status='success')
 
 
 class Password(View):

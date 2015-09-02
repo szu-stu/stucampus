@@ -2,10 +2,10 @@
 
 .main {
 	width: 860px;
-    min-height: 840px;
-	margin: 0px auto;
-    position: relative;
-	text-shadow: 1px 1px 1px #CCCCCC;
+	margin: 28px auto;
+  position: relative;
+  overflow: hidden;
+  clear: both;
 }
 
 .main li {
@@ -13,14 +13,19 @@
 }
 
 .left-side {
+	position: relative;
+	overflow: hidden;
+	float: left;
 	width: 205px;
 	border: 0.5px solid #e4e8e7;
 	background-color: #ffffff;
 }
 
 .left-side li {
+	position: relative;
+	overflow: hidden;
 	width: 205px;
-    padding-left: 10px;
+  padding-left: 20px;
 }
 
 .left-side a {
@@ -54,20 +59,19 @@
 img#avater {
 	position: relative;
 	left: 20px;
-	top: 10px;
-	border: 1px solid #000000;
-	margin: 0px auto;
+	top: 20px;
+	margin: 0px auto 18px;
 }
 
 .right-side {
+	position: relative;
+	overflow: hidden;
+	float: right;
 	width: 630px;
 	height: auto !important;
-    min-height: 820px;
+	padding: 5px 0 20px;
 	background-color: #ffffff;
 	border: 0.5px solid #e4e8e7;
-	position: absolute;
-    top: 0px;
-    right: 0px;
 }
 
 .right-side h4 {
@@ -92,10 +96,12 @@ img#avater {
 	height: 40px;
 	width: 520px;
 	line-height: 40px;
-	border-bottom: 1px dashed #6b6b6b;
+	border-bottom: 1px solid #eee;
 }
 
 .change {
+	position: relative;
+	overflow: hidden;
 	width: 560px;
 	margin: 0px auto;
 }
@@ -104,10 +110,11 @@ img#avater {
 	height: 25px;
 	width: 180px;
 	font-size: 16px;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.3);
 }
 
 .change ul {
+	position: relative;
+	overflow: hidden;
 	width: 530px;
 	padding: 0px;
 	margin: 0px auto;
@@ -115,20 +122,25 @@ img#avater {
 }
 
 .change li {
+	position: relative;
+	overflow: hidden;
 	height: 40px;
 	margin-top: 10px;
-	border-bottom: 1px dashed #6b6b6b;
+	border-bottom: 1px solid #eee;
 }
 
 .select_type {
 	height: 30px;
 	width: 186px;
 	font-size: 16px;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.3);
 }
 
 li#last {
-	border: 0px dashed #6b6b6b;
+	position: relative;
+	overflow: hidden;
+	border: none;
+	padding: 8px;
+	text-align: center;
 }
 
 #captcha {
@@ -145,20 +157,26 @@ li#last {
 }
 
 input#confirm_botton {
-	background: url("/static/images/elements/button-yellow.png") repeat-x scroll 0 0 #FFAA22;
-    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    overflow: hidden;
+    background: #acd340;
+    color: #fff;
+    border-radius: 2px;
     border-width: 0;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
     cursor: pointer;
     display: inline-block;
-    height: 52px;
     padding: 5px 20px;
-    text-shadow: 0 1px 0 #FFEE66;
+    height: 40px;   
     font-family: "Microsoft Yahei";
     font-size: 25px;
-    height: 40px;
-    position: absolute;
-    left: 400px;
+}
+
+input#confirm_botton:hover {
+    background: #9bc513;
+}
+
+input#confirm_botton:active {
+    background: #819e30;
 }
 
 /*组织发布信息*/
@@ -177,15 +195,14 @@ input#confirm_botton {
 
 .post li {
 	height: 40px;
-    line-height: 40px;
+  line-height: 40px;
 	margin-top: 10px;
 }
 
 .post select {
-    height: 30px;
+  height: 30px;
 	width: 186px;
 	font-size: 16px;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.3);
 }
 
 .post textarea {

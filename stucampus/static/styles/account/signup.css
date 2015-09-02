@@ -17,28 +17,30 @@ form.large-element label.label {
 	display: inline-block;
 	text-align: right;
 	width: 200px;
-	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 form.large-element input.textbox {
 	width: 300px;
 	padding: 5px;
 	margin: 0 1em;
 	border: 1px solid #ccc;
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
+
+
 form.large-element input.button {
 	display: inline-block;
 	height: 52px;
-	padding: 5px 20px;
+	padding: 5px 28px;
 	border-width: 0;
-	border-radius: 5px;
-	background:url('/static/images/elements/button-yellow.png') repeat-x #FFAA22;
-	text-shadow: 0 1px 0 #FFEE66;
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+	border-radius: 2px;
+	background: #ff696a;
+	color: #fff;
 	cursor: pointer;
 }
 form.large-element input.button:hover {
-	background-position: 0 -3px;
+	background: #ff5552;
+}
+form.large-element input.button:active {
+	background: #bf4f4f;
 }
 form.large-element input.button:active {
 	background-image: none;
@@ -46,7 +48,6 @@ form.large-element input.button:active {
 
 form.large-element span.comment {
 	display: inline-block;
-	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 form.large-element ul {

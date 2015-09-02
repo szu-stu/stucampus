@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block htmltitle %}
+<title>深大演讲 - 深圳大学学子天地</title>
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'plugins/jquery.min.js' | as_js }}
+    {{ 'szuspeech/jquery.colorbox-min.js' | as_js }}
+    {{ 'szuspeech/szuspeech.css' | as_css }}
+    {{ 'szuspeech/colorbox.css' | as_css }}
+
+    <script type="text/javascript">
+    	{% for resource in page_list %}
+    	{% if resource.is_preview %}
+    	$(document).ready(function(){
+        	$(".imgGroup{{forloop.counter}}").colorbox({ rel: 'imgGroup{{forloop.counter}}' });
+        });
+        {% endif %}
+        {% endfor %}
+    </script>
+
+{% endblock %}
+
+{% block content %}
+<div class="central">
+	<div class="content">
+
+		<div class="szuspeech_search">
+			<form action="" method="get">
+				<span class="triangle"></span>
+				<input type="text"  class="ipt" name="search" value="" /><input type="submit" class="btn" value="搜 一 下" />
+			</form>
+		</div>
+
+		<div class="szuspeech_list">
+			<h2>深大演讲
+				<span>
+					{% if search == None or search == '' %}
+					<a class="current" href="/szuspeech/">所有</a>
+					{% else %}
+					<a href="/szuspeech/">所有</a>
+					{% endif %}
+
+					{% if search == "ppt" %}
+					<a class="current" href="?search=ppt">PPT</a>
+					{% else %}
+					<a href="?search=ppt">PPT</a>
+					{% endif %}
+
+					{% if search == "视频" %}
+					<a class="current" href="?search=视频">视频</a>
+					{% else %}
+					<a href="?search=视频">视频</a>
+					{% endif %}
+
+					{% if search == "音频" %}
+					<a class="current" href="?search=音频">音频</a>
+					{% else %}
+					<a href="?search=音频">音频</a>
+					{% endif %}
+				</span>
+			</h2>
+			{% for resource in page_list %}
+			<div class="szuspeech_list_entry">
+				<h3>{% if resource.is_top %}
+					<span class="setTop">[置顶]</span>
+					{% endif %}
+					{{ resource.resource_title }}
+					<span>{{ resource.published_date|date:"Y年m月d日" }}</span>
+				</h3>
+				<p>{{ resource.resource_intro }}</p>
+				<p class="szuspeech_list_button">
+					{% nospaces %}
+					{% if resource.is_preview %}
+
+					{% if resource.preview1 %}
+					<a class="imgGroup{{forloop.counter}}" href="{{ resource.preview1.url }}" style="display:none;">预览</a>
+					{% endif %}
+					{% if resource.preview2 %}
+					<a class="imgGroup{{forloop.counter}}" href="{{ resource.preview2.url }}" style="display:none;">预览</a>
+					{% endif %}
+					{% if resource.preview3 %}
+					<a class="imgGroup{{forloop.counter}}" href="{{ resource.preview3.url }}" style="display:none;">预览</a>
+					{% endif %}
+
+					{% endif %}
+					<a href="{% url 'szuspeech:download' resource.id %}">下载</a>
+					{% endnospaces %}
+				</p>
+			</div>
+			{% endfor %}
+		</div><!--end of categories_list-->
+
+		<div class="pagingbar">
+			<a href="?page=1">首页</a>
+			{% if page_list.has_previous %}
+			<a href="?page={{ page_list.previous_page_number }}">上一页</a>
+			{% endif %}
+			<span>第 {{ page_list.number }} 页，共 {{ page_list.paginator.num_pages }} 页</span>
+			{% if page_list.has_next %}
+			<a href="?page={{ page_list.next_page_number }}">下一页</a>
+			{% endif %}
+			<a href="?page={{ page_list.paginator.num_pages }}">末页</a>
+		</div>
+
+	</div><!--end of content-->
+
+	<div class="sidebar">
+
+		<div class="widget" id="szuspeech_logo">
+			<img class="szuspeech_logo" src="/static/images/szuspeech/LOGO.png" alt="深大演讲" />
+		</div>
+
+		<div class="widget" id="szuspeech_weibo">
+			<iframe width="100%" height="600" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=600&fansRow=2&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=5048030884&verifier=36be7ae1&colors=5bc4be,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe> 
+		</div>
+		
+	</div>
+</div>
+{% endblock %}

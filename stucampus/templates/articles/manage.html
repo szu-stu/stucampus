@@ -1,0 +1,111 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'manage/articles_manage.css' | as_css }}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<div class="articles_container">
+    {% for article in page %}
+    <div class="articles">
+        <div class="row">
+            <li style="width:70%">
+                <label>标题</label>
+                {{ article.title }}
+            </li>
+            <li>
+                <label>文章ID</label>
+                {{ article.pk }}
+            </li>
+        </div>
+        <div class="line"></div>
+        <div class="row">
+            <li style="width:70%">
+                <label>文章分类</label>
+                {% if article.category %}
+                    {{ article.category }}
+                {% else %}
+                    未分类
+                {% endif %}
+            </li>
+            <li>
+            <label>创建日期</label>
+            {{ article.create_date | date:"Y年n月d日" }}
+        </li>
+        </div>
+        <div class="line"></div>
+        <div class="row">
+            <li style="width:70%">
+                <label>小编</label>
+                {{ article.editor.student.true_name }}
+            </li>
+            <li>
+                <label>修改日期</label>
+                {{ article.modify_date | date:"Y年n月d日" }}
+            </li>
+        </div>
+        <div class="line"></div>
+        <div class="row">
+            <li style="width:70%">
+                <label>点击次数</label>
+                {{ article.click_count }}
+            </li>
+            <li>
+                <label>创建人IP</label>
+                {{ article.create_ip }}
+            </li>
+        </div>
+        <div class="line"></div>
+        <div class="row" style="text-align:center">
+            {% if perms.articles.article_manage %}
+            <a href="{% url 'articles:del_article' %}?id={{ article.pk }}">
+                {% if article.deleted %}
+                    恢复
+                {% else %}
+                    删除
+                {% endif %}
+            </a>
+            {% endif %}
+            {% if perms.articles.article_manage %}
+            <a href="{% url 'articles:set_important' %}?id={{ article.pk }}">
+                {% if article.important %}
+                    从首页焦点下架
+                {% else %}
+                    放上首页焦点
+                {% endif %}
+            </a>
+            {% else %}
+            <a href="">
+                {% if article.important %}
+                    已被设为焦点
+                {% else %} 
+                    尚未设为焦点
+                {% endif %}
+            {% endif %}
+            {% if perms.articles.article_manage %}
+                {% if article.publish %}
+                    <a href="{% url 'articles:publish' %}?id={{ article.pk }}">
+                    解除发布
+                {% else %}
+                    <a href="{% url 'articles:publish' %}?id={{ article.pk }}", style="background:#ff696a ">
+                    发布文章
+                {% endif %}
+            </a>
+            {% else %}
+            <a href="">
+                {% if article.publish %}
+                    已通过
+                {% else %}
+                    未审核
+                {% endif %}
+            </a>
+            {% endif %}
+            <a href="{% url 'articles:modify' %}?id={{ article.pk }}&page={{ pageid }}">编辑</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% include 'utils/paginator.html' with page=page %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'szuspeech/manage_list.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="articles_container">
+    
+    {% for resource in page %}
+    <div class="articles">
+        <div class="row">
+            <li style="width:70%">
+                <label>标题</label>
+                {{ resource.resource_title }}
+            </li>
+            <li>
+                <label>资源ID</label>
+                {{ resource.pk }}
+            </li>
+        </div>
+        <div class="line"></div>
+        <div class="row">
+            <li style="width:70%">
+                <label>预览</label>
+                {% if resource.is_preview %}
+                是
+                {% else %}
+                否
+                {% endif %}
+            </li>
+            <li>
+                <label>修改日期</label>
+                {{ resource.published_date | date:"Y年n月d日" }}
+            </li>
+
+        </div>
+        <div class="line"></div>
+        <div class="row">
+            <li>
+                <label>简介</label>
+                <p style="max-width:84%;vertical-align:middle;display:inline-block;">{{ resource.resource_intro }}</p>
+            </li>
+        </div>
+        <div class="line"></div>
+        <div class="row" style="text-align:center">
+            <a href="{% url 'szuspeech:edit' %}?id={{ resource.id }}">
+                编辑
+            </a>
+            <a href="{% url 'szuspeech:del_resource' %}?id={{ resource.id }}" onclick="return confirm('ID为{{ resource.id }}的资源将被删除？')">
+                删除
+            </a>
+            <a href="{% url 'szuspeech:set_top' %}?id={{ resource.pk }}">
+                {% if resource.is_top %} 
+                    取消置顶
+                {% else %} 
+                    置顶
+                {% endif %}
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% include 'utils/paginator.html' with page=page %}
+{% endblock %}

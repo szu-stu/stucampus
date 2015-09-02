@@ -15,7 +15,6 @@
 {% block content %}
     <div class="main">
         <div class="left-side">
-            <img id="left-top" src="/static/images/account/left-side.png" alt="左侧上块" />
             {% load account_custom %}
             {% load permission_check %}
             <img id="avater" src="http://www.gravatar.com/avatar/{{ user|user_avatar }}?s=164" alt="用户头像" />
@@ -35,7 +34,6 @@
             </div>
         </div>
             <div class="right-side">
-                <img id="right-top" src="/static/images/account/right-side.png" alt="右侧上块"/>
                 {% block inside %}
                 {% endblock %}
         </div>

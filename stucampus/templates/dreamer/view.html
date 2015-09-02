@@ -1,0 +1,62 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'manage/view.css' | as_css }}
+{{ 'admin/organization.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+{% load account_custom %}
+<div class="message_view">
+    <li style="font-size:18px"><strong>{{ app.stu_num }}</strong> 报名详情</li>
+       <li>
+            <label>学号</label>
+            {{ app.stu_num }}
+        </li>
+
+        <li>
+            <label>姓名</label>
+            {{ app.name }}
+        </li>
+
+        <li>
+            <label>学院</label>
+            {{ app.college }}
+        </li>
+
+        <li>
+            <label>性别</label>
+            {{ app.sex }}
+        </li>
+
+        <li>
+            <label>志愿</label>
+            {% for volunteer in app.volunteers %}
+                {{ volunteer }}
+            {% endfor %}
+        </li>
+
+        <li>
+            <label>联系方式</label>
+            {{ app.telphone }}
+        </li>
+
+        <li>
+            <label>喜欢的运动</label>
+            {{ app.fav_sports }}
+        </li>
+        
+
+        <li>
+            <label>兴趣特长</label>
+            {{ app.interest }}
+        </li>
+
+        <li>
+            <label>注册日期</label>
+            {{ app.apply_date|date:'Y-m-d H:i:s' }}
+        </li>
+
+</div>
+{% endblock %}

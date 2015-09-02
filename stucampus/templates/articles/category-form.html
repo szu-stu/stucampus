@@ -1,0 +1,63 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'manage/category_articles.css' | as_css }}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<div class="category">
+        {% for name, count in category_list.items %}
+            <a href="{% url 'articles:manage' %}?category={{ name }}">{{ name }}&nbsp;{{ count }}</a>
+        {% endfor %}
+</div>
+<form method="post" enctype="multipart/form-data"action="{% url 'articles:category' %}">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {% for form in formset %}
+    {{ form.id }}
+    <div class="category_add">
+        <li>
+            <label>分类名</label>
+            {{ form.name }}
+            <span class="error">
+                {% for error in form.name.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </li>
+        <div class="line"></div>
+        <li>
+            <label>英文名</label>
+            {{ form.english_name }}
+            <span class="error">
+                {% for error in form.english_name.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </li>
+        <div class="line"></div>
+        <li>
+            <label>优先级</label>
+            {{ form.priority }}
+            <span class="error">
+                {% for error in form.priority.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>
+        </li>
+        <div class="checkbox">
+            <span>删除</span>
+            {{ form.DELETE }}
+            <span class="error">
+                {% for error in form.DELETE.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </div>
+    </div>
+    {% endfor %}
+    <input type="submit" value="提交" class="add">
+</form>
+{% endblock %}

@@ -15,3 +15,7 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default.
     }
 }
+
+RAVEN_CONFIG = {
+    'dsn': '',
+}

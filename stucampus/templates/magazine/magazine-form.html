@@ -1,0 +1,60 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'manage/form.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="add_container">
+    <form method="post" enctype="multipart/form-data" action="{{ post_url }}">
+        {% csrf_token %}
+        <li>
+            <label>杂志</label>
+            {{ form.name }}
+            <span class="error">
+                {% for error in form.name.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </li>
+        <li>
+            <label>标题</label>
+            {{ form.title }}
+            <span class="error">
+                {% for error in form.title.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </li>
+        <li>
+            <label>期数</label>
+            {{ form.issue }}
+            <span class="error">
+                {% for error in form.issue.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </li>
+        <li>
+            <label>概括</label>
+            {{ form.summary }}
+            <span class="error">
+                {% for error in form.summary.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </li>
+        <li>
+            <label>文件</label>
+            <span class="file">{{ form.pdf_file }}</span>
+            <span class="error">
+                {% for error in form.pdf_file.errors %}
+                    {{ error }}&nbsp;
+                {% endfor %}
+            </span>  
+        </li>
+        <input type="submit" value="提交" class="add">
+    </form>
+</div> 
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block htmltitle %}
+<title>{{ article.title }} - 深圳大学学子天地</title>
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'articles.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+
+<div class="central article">
+	<div class="article_header">
+		<h1>{{ article.title }}</h1>
+		<div class="article_meta">
+			<span>日期：{{ article.create_date | date:"Y年n月d日"}}</span>
+			<span>分类：{{ article.category }}</span>
+			{% if article.source %}
+			<span>来源：{% if article.source_link %}<a href="{{ article.source_link }}" target="_blank">{{ article.source }}</a>{% else %}{{ article.source }}{% endif %}</span>
+			{% endif %}
+			<span>作者：{{ article.author }}</span>
+			<span>责任编辑：{{ article.editor.student.true_name }}</span>
+			<span>浏览：{{ article.click_count }}</span>
+			<span>评论：<span class="ds-thread-count" data-thread-key="article-comments-{{ article.id }}"></span></span>
+		</div>
+	</div>
+
+	<div class="article_body">
+		<div class="article_text">
+		{% autoescape off %}
+			{{ article.content }}
+		{% endautoescape %}
+		</div>
+		<div class="article_share">
+			<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a></div>
+		</div>
+	</div>
+
+	<div class="article_footer">
+		<h2>网友评论</h2>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"szustu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+	</div>
+</div><!--end of central article-->
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+{% endblock %}

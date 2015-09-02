@@ -1,0 +1,179 @@
+.content .szuspeech_search{
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 28px;
+}
+
+.content .szuspeech_search .ipt{
+	position: relative;
+	overflow: hidden;
+	padding: 12px;
+	font-family: Microsoft Yahei;
+	font-size: 20px;
+	color: #eee;
+	border: 1px solid #767575;
+	background: #767575;
+	border-right: none;
+	border-radius: 5px 0 0 5px;
+	width: 509px;
+}
+
+.content .szuspeech_search .triangle{
+	position: absolute;
+	display:inline-block;
+	width: 0;
+	height: 0;
+	top: 19px;
+	left: 519px;
+	overflow:hidden;
+	font-size:0;
+	border:8px solid transparent;
+	_border-style:dashed;
+	border-right-style:solid;
+	border-right-color:#5bc4be;
+	z-index: 999;
+}
+
+.content .szuspeech_search .btn{
+	position: relative;
+	overflow: hidden;
+	padding: 12px 18px;
+	font-family: Microsoft Yahei;
+	font-size: 20px;
+	color: #fff;
+	background: #5bc4be;
+	border: 1px solid #5bc4be;
+	border-radius: 0 5px 5px 0;
+	cursor: pointer;
+}
+
+.content .szuspeech_list{
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 28px;
+}
+
+
+.szuspeech_list h2 span{
+	position: relative;
+	overflow: hidden;
+	float: right;
+}
+
+.szuspeech_list h2 span a{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 17px;
+	padding: 3px 8px;
+	margin: 10px 8px 0 0;
+	color: #5bc4be;
+	background: none;
+	border: 1px solid #5bc4be;
+	border-radius: 5px 5px 0 0;
+
+}
+
+.szuspeech_list h2 span a.current{
+	color: #fff;
+	background: #5bc4be;
+}
+
+.content .szuspeech_list .szuspeech_list_entry{
+	position: relative;
+	overflow: hidden;
+	display: block;
+	text-decoration: none;
+	margin: 0;
+	padding: 10px 8px 0 8px;
+	border-bottom: 1px #eee solid;
+}
+
+.content .szuspeech_list .szuspeech_list_entry:hover{
+	background: #f7f7f7;
+}
+
+.content .szuspeech_list .szuspeech_list_entry h3{
+	position: relative;
+	overflow: hidden;
+	font-weight: normal;
+	font-size: 18px;
+	padding: 3px 0;
+	margin-bottom: 3px;
+	color: rgb(9,108,111);
+	text-align: left;
+}
+
+.content .szuspeech_list .szuspeech_list_entry h3 span{
+	position: absolute;
+	overflow: hidden;
+	right: 8px;
+	top: 3px;
+	font-size: 13px;
+	color: #ababab;
+}
+
+.content .szuspeech_list .szuspeech_list_entry .setTop{
+	position: static;
+	color:rgb(255,105,106);
+}
+
+.content .szuspeech_list .szuspeech_list_entry p{
+	position: relative;
+	overflow: hidden;
+	clear: both;
+	font-size: 14px;
+	font-family: serif;
+	color: #999;
+	line-height: 17px;
+	padding: 0 3px;
+}
+
+.content .szuspeech_list .szuspeech_list_entry .szuspeech_list_button{
+	text-align: right;
+}
+
+.content .szuspeech_list .szuspeech_list_entry .szuspeech_list_button a{
+	margin: 5px 7px;
+}
+
+.content .pagingbar{
+	position: relative;
+	overflow: hidden;
+	text-align: left;
+	margin-bottom: 38px;
+}
+
+.content .pagingbar a,.content .szuspeech_list .szuspeech_list_entry .szuspeech_list_button a{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	background: #5bc4be;
+	text-decoration: none;
+	color: #fff;
+	font-size: 14px;
+	padding: 5px 8px 6px;
+	border-radius: 1px;
+}
+
+.content .pagingbar a:hover,.content .szuspeech_list .szuspeech_list_entry .szuspeech_list_button a:hover{
+	background: rgb(9,108,111);
+}
+
+.content .pagingbar span{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	font-size: 14px;
+	padding: 5px 8px 6px;
+	color: #666;
+}
+
+.szuspeech_logo{
+	width:290px;
+}
+
+.szuspeech_list_button>a:first-child{
+	display: inline-block !important;
+}

@@ -1,105 +1,92 @@
-{% extends 'plugin/manage_base.html' %}
-
-{% block htmltitle %}
-{% endblock %}
+{% extends 'master/base.html' %}
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'activity/manage_activity.css'|as_css }}
-    {{ 'plugin/paginator.css' | as_css }}
+    {{ 'manage/act_lec.css'|as_css }}
 {% endblock %}
 
-{% block header %}
-    Activity Manage
-{% endblock %}
-
-{% block add %}
-    {% url 'activity:add_activity' %}
-{% endblock %}
-
-{% block index %}
-    {% url 'activity:index' %}
-{% endblock %}
-
-{% block manage_form %}
+{% block content %}
 <form method="POST" action="{% url 'activity:manage' %}?page={{ page.number }}">
 {% csrf_token %}
 {% with formset=page.formset %}
     {{ formset.management_form }}
     
     {% for form in formset %}
-    
-        <!-- 信息  Begin -->
-    {% if form.is_delete.value %}
-    	<div class="act_message is_delete">
-    {% else %}
-    	<div class="act_message not_delete">
-    {% endif %}
-            <div class="message_container">
-    
-                <!-- 标题  Begin -->
-                <div class="input_list">
-                    <div class="title">Title</div>
-                    {{ form.title }}
-                </div>
-                <div class="error">
+        <div class="act_lec_add">
+            <div class="line"></div>
+            <li>
+                <label>标题</label>
+                {{ form.title }}
+                <span class="error">
                     {% for error in form.title.errors %}
-                        {{ error }}&nbsp
+                        {{ error }}&nbsp;
                     {% endfor %}
-                </div>
-                <!-- 标题  End -->
-                <!-- 地点  Begin -->
-                <div class="input_list">
-                    <div class="title">Place</div>
-                    {{ form.place }}
-                </div>
-                <div class="error">
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>地点</label>
+                {{ form.place }}
+                <span class="error">
                     {% for error in form.place.errors %}
-                        {{ error }}&nbsp
+                        {{ error }}&nbsp;
                     {% endfor %}
-                </div>
-                <!-- 地点  End -->
-                <!-- 日期时间  Begin -->
-                <div class="input_list">
-                    <div class="title">Date Time</div>
-                    {{ form.date_time }}
-                </div>
-                <div class="error">
-                    {% for error in form.date_time.errors %}
-                        {{ error }}&nbsp
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>日期</label>
+                {{ form.date }}
+                <span class="error">
+                    {% for error in form.date.errors %}
+                        {{ error }}&nbsp;
                     {% endfor %}
-                </div>
-                <!-- 日期时间  End -->
-                <!-- 概要  Begin -->
-                <div class="input_list">
-                    <div class="title">Summary</div>
-                    {{ form.summary }}
-                </div>
-                <div class="error">
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>时间</label>
+                {{ form.time }}
+                <span class="error">
+                    {% for error in form.time.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>具体时间</label>
+                {{ form.specific_time }}
+                <span class="error">
+                    {% for error in form.specific_time.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>概括</label>
+                {{ form.summary }}
+                <span class="error">
                     {% for error in form.summary.errors %}
-                        {{ error }}&nbsp
+                        {{ error }}&nbsp;
                     {% endfor %}
-                </div>
-                <!-- 概要  End -->
-    
-                <div class="choose_container">
-                    <div class="choose check">已核{{ form.is_check }}</div>
-                    <div class="choose delete">删除{{ form.is_delete }}</div>
-                </div>         
-                {{ form.id }}
-            </div>
+                </span>  
+            </li>
+            <div class="line"></div>
+            <li>
+                <label>已核</label>
+                {{ form.checked }}
+                <label>删除</label>
+                {{ form.DELETE }}
+            </li>
         </div>
-        <!-- 信息  End -->
-    
+        {{ form.id }}
     {% endfor %}
 {% endwith %}
-    <!-- submit按钮  Begin -->
-    <div class="line"></div>
-    <div class="button"><input type="submit" value="submit" /></div>
-    <!-- submit按钮  End -->
+    <input type="submit" value="提交" class="add" style="margin-bottom:75px;" />
 </form>
-{% endblock %}
 
-{% block paginator %}
-    {% include 'plugin/paginator.html' with page=page %}
+{% include 'plugin/paginator.html' with page=page %}
+
 {% endblock %}

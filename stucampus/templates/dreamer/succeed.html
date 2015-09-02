@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>报名成功</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="/static/styles/dreamer/succeed.css" />
+		<link rel="stylesheet" media="screen and (max-width:600px)" href="succeed_moble.css" />
+	</head>
+	<body>
+		<div class="Rtn_HomePage">
+			<a href="http://stu.szu.edu.cn/">点击返回学子首页</a>
+		</div>
+		<div class="Rtn_Message">
+			<img src="/static/images/dreamer/succeed.png" class="pic">
+			<div class="Common">恭喜<span></span>同学报名成功，很期待与你一同逗逼~</div>
+			<table>
+				<tr>
+					<caption>报名信息如下~：</caption>
+				<tr>
+					<th>姓名</th>
+					<td name="name">{{ form.name }}</td>
+				</tr>
+				<tr>
+					<th>性别</th>
+					<td name="sex">{{ form.gender }}</td>
+				</tr>
+				<tr>
+					<th>学院</th>
+					<td name="college">{{ form.college }}</td>
+				</tr>
+				<tr>
+					<th>学号</th>
+					<td name="nunmber">{{ form.stu_ID }}</td>
+				</tr>
+				<tr>
+					<th>手机</th>
+					<td name="tel">{{ form.mobile }}</td>
+				</tr>
+				<tr>
+					<th>已报名部门</th>
+					<td name="department">{{ form.dept1 }}， {{ form.dept2 }}</td>
+				</tr>
+			</table>
+			<p class="Common">欢迎加入学子新生咨询招新Q群：466404878</p>
+			<p class="Common">学子天地首页：<a href="http://stu.szu.edu.cn/">http://stu.szu.edu.cn/</a></p>
+			<img src="/static/images/socialaccount/stucampusweixin.jpg">
+			<p>(听说，扫扫会更健康……)</p>
+		</div>
+	</body>
+</html>

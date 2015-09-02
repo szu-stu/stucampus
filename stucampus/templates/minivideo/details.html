@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'minivideo/minivideo.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="central">
+    
+    <div class="minivideo_details">
+        <h2>{{ resource.video_name }}</h2>
+        <div class="minivideo_details_view">
+            <div class="minivideo_details_youku">
+                <embed src="http://player.youku.com/player.php/sid/{{ number }}/v.swf" allowFullScreen="true" quality="high" width="700" height="360" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+
+            </div>
+            <div class="minivideo_details_vote">
+                <h3>队伍信息</h3>
+                <div class="team_category" >
+                    <p>队长：</p>
+                    {% if resource.team_members1_name %}
+                    <p>队员：</p>
+                    {% endif %}
+                </div>
+                <div class="team_member" >
+                    <p>{{ resource.team_captain }}</p>
+
+                    {% if resource.team_members1_name %}
+                    <p class="member_name">{{ resource.team_members1_name }}</p>
+                    {% endif %}
+                    
+                    {% if resource.team_members2_name %}
+                    <p class="member_name">{{ resource.team_members2_name }}</p>
+                    {% endif %}
+                    
+                    
+                    {% if resource.team_members3_name %}
+                    <p class="member_name">{{ resource.team_members3_name }}</p>
+                    {% endif %}
+                    
+                    {% if resource.team_members4_name %}
+                    <p class="member_name">{{ resource.team_members4_name }}</p>
+                    {% endif %}
+                    
+                    {% if resource.team_members5_name %}
+                    <p class="member_name">{{ resource.team_members5_name }}</p>
+                    {% endif %}
+                </div>
+                
+            </div>
+        </div>
+        <div class="minivideo_details_intro">
+            <h2>参赛视频介绍</h2>
+            <p>{{ resource.video_intro }}</p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

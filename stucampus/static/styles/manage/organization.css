@@ -1,0 +1,74 @@
+.infor{
+    padding: 1%;
+    background: #e5e5e5;
+    line-height: 200%;
+}
+.message_container{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.message_container h2{
+    font-size: 18px;
+    line-height: 250%;
+    text-indent: 5%;
+}
+.fast_add{
+    width: 90%;
+    position: relative;
+    margin: 0px auto;
+    border: solid 1px #e5e5e5;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    line-height: 350%;
+    vertical-align: middle;
+}
+.fast_add label{
+    display: inline-block;
+    width: 12%;
+    text-align: center;
+}
+.fast_add input[type=text]{
+    width: 250px;
+    border: solid 0px #e5e5e5;
+    font-size: 14px;
+    line-height: 200%;
+    font-family: "Microsoft Yahei";
+    color: #7e7e7e;
+    border-radius: 3px;
+}
+.aside{
+    width: 100%;
+    margin: 25px 0 0 0;
+    border-top: solid 1px #e5e5e5;
+}
+.message_container li{
+    width: 90%;
+    position: relative;
+    margin: 0 auto;
+    list-style: none;
+    line-height: 300%; 
+    vertical-align: middle;    
+}
+.message_container a{
+    display: inline-block;
+    color: #7e7e7e;
+    text-decoration: none;
+}
+.message_container a:hover{
+    color: #38c2a8;
+}
+.line_org{
+    width: 90%;
+    margin: 0 auto;
+    border-top: solid 1px #f7f7f7;
+}
+.message_container input[type=text]{
+    border: solid 1px #e5e5e5;
+    font-size: 14px;
+    line-height: 180%;
+    font-family: "Microsoft Yahei";
+    color: #7e7e7e;
+    border-radius: 3px;
+}

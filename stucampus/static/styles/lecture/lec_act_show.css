@@ -1,27 +1,58 @@
-.main-container{
+#main-container{
 	width: 90%;
 	position: relative;
 	margin: 0 auto;
-	overflow: hidden;
+	overflow: auto;
 }
 
-.main-container a,span{
-	font-family: "Microsoft Yahei";
-	font-size: 14px;
-	color: #57595b;
-	line-height: 300%;
-	text-decoration: none;
+#main-container a{
+	display: block;
+	position: relative;
+	margin: 5px;
+	padding: 10px;
+	overflow: hidden;
+	background: #ffffff;
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color: #7e7e7e;
+    text-decoration: none;
+    min-width: 125px;
 }
 
 .message{
-	display: block;
+	position: relative;
+	margin: 5px;
+	padding: 10px;
+	overflow: hidden;
+	background: #ffffff;
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    color: #7e7e7e;
+    min-width: 125px;
+}
+
+#main-container li{
+    list-style: none;
+}
+
+.line{
+	width: 100%;
+	border-top: solid #e5e5e5 1px;
+	margin: 5px auto;
+}
+
+#main-container img{
+	vertical-align: middle;
 }
 
 table{
 	width:100%;
-	border: 3px #007bbb solid;
+	min-width: 1000px;
 	background-color: #ffffff;
 	margin-bottom: 25px;
+
 }
 
 caption{
@@ -34,23 +65,22 @@ caption{
 td{
 	font-family: "Microsoft Yahei";
 	font-size: 14px;
-	vertical-align: middle;
 	line-height: 200%;
-	border: 1px #eaf4fc solid;
-	padding: 0px 5px;
+	border: 0px #f7f7f7 solid;
 	min-width: 72px;
-	color: #000000;
-	text-align: left;	
+	text-align: left;
+	vertical-align: top;	
 }
 
 .time{
-	width: 6%;
-	color: #007bbb;
+	width: 55px;
+	background: #f7f7f7;
+	color: #7e7e7e;
 	text-align: center;
+	vertical-align: middle;
 }
 
 .day1,.day2,.day3,.day4,.day5,.day6,.day7{
 	background-color: #a0d8ef;
 	color: #007bbb;
-	text-align: center;
 }

@@ -8,6 +8,15 @@ ROOT = os.path.dirname(os.path.dirname(__file__))
 def path(*a):
     return os.path.abspath(os.path.join(ROOT, *a))
 
+# DjangoUeditor setting
+UEDITOR_SETTINGS = {
+    "images_upload":{
+        'allow_type': 'jpg, png, gif',
+        'path': 'img_upload_file/',
+        'max_size': '3000kb',
+        },
+    }
+
 
 ALLOWED_HOSTS = ["*"]
 TIME_ZONE = 'Asia/Shanghai'
@@ -16,10 +25,13 @@ SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-MEDIA_ROOT = ''
-MEDIA_URL = ''
 
-STATIC_ROOT = ''
+LOGIN_URL = '/account/signin'
+
+MEDIA_ROOT = path(ROOT, 'webroot', 'media')
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = path(ROOT, 'webroot', 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     path('stucampus', 'static'),
@@ -63,13 +75,21 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'raven.contrib.django.raven_compat',
+    'DjangoUeditor',
     'stucampus.master',
     'stucampus.account',
     'stucampus.infor',
     'stucampus.organization',
     'stucampus.lecture',
-    'stucampus.spider',
     'stucampus.activity',
+    'stucampus.articles',
+    'stucampus.magazine',
+    'stucampus.spider',
+    'stucampus.szuspeech',
+    'stucampus.minivideo',
+    'stucampus.dreamer',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -79,12 +99,25 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '''[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s]
+                         %(message)s''',
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+         }
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
     'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'stucampus_error.log',
+            'formatter': 'verbose',
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -92,6 +125,10 @@ LOGGING = {
         }
     },
     'loggers': {
+        'stucampus': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',

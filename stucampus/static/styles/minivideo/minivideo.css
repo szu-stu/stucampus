@@ -1,0 +1,521 @@
+.minivideo_list{
+    position: relative;
+    overflow: hidden;
+    padding: 28px 0;
+}
+
+.minivideo_list h2{
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    color: #000;
+    border-bottom: 2px solid #5bc4be;
+}
+
+.minivideo_list .minivideo_list_grid{
+    position: relative;
+    overflow: hidden;
+    margin: 1px;
+    margin-top: 28px;
+    border-top: 2px solid #5bc4be;
+    border-left: 2px solid #5bc4be;
+}
+
+.minivideo_list .minivideo_list_grid a{
+    color: black;
+}
+
+.minivideo_list .minivideo_list_grid ul{
+    position: relative;
+    overflow: hidden;
+}
+
+.minivideo_list .minivideo_list_grid ul.minivideo_list_grid_head{
+    background-color: #5bc4be;
+    color: #fff;
+}
+
+.minivideo_list .minivideo_list_grid a:hover ul li{
+    background-color: rgb(232,242,211);
+}
+
+.minivideo_list .minivideo_list_grid ul li span{
+    background: #f0f0f0;
+    color: black;
+    padding: 1px 15px 2px;
+    border-radius: 15px;
+}
+
+.minivideo_list .minivideo_list_grid a:hover ul li span{
+    background-color: #5bc4be;
+    color: #fff;
+}
+
+.minivideo_list .minivideo_list_grid ul li{
+    position: relative;
+    overflow: hidden;
+    font-size: 18px;
+    float: left;
+    border-right: 2px solid #5bc4be;
+    border-bottom: 2px solid #5bc4be;
+    width: 232px;
+    padding: 5px;
+    text-align: center;
+}
+
+.minivideo_form{
+    position: relative;
+    overflow: hidden;
+    padding: 28px 0;
+}
+
+.minivideo_form h2{
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    color: #000;
+    border-bottom: 2px solid #5bc4be;
+}
+
+.minivideo_form form{
+    position: relative;
+    overflow: hidden;
+    font-size: 18px;
+    width: 300px;
+    margin: 0 auto;
+    padding: 8px 0;
+}
+
+.minivideo_form form p{
+    position: relative;
+    overflow: hidden;
+    padding: 5px 0;
+}
+
+.minivideo_form form span{
+    position: relative;
+    overflow: hidden;
+    padding: 3px 5px;
+    display:block;
+}
+
+.minivideo_form form input{
+    font-size: 18px;
+    font-family: Microsoft Yahei;
+    padding: 2px;
+    border-radius: 2px;
+    border: 1px solid #5bc4be;
+    width:97%;
+}
+
+.minivideo_form form textarea{
+    font-size: 18px;
+    font-family: Microsoft Yahei;
+    padding: 2px;
+    border-radius: 2px;
+    border: 1px solid #5bc4be;
+    width:97%;
+    resize:none;
+}
+
+.minivideo_form form .form_btn{
+    font-size: 20px;
+    background-color: #5bc4be;
+    color: #fff;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 3px;
+    width:70px;
+}
+
+.minivideo_form form .form_btn:hover{
+    background: rgb(9,108,111);
+    cursor: pointer;
+}
+
+
+.resource_info{
+    margin:10px auto;
+}
+
+.resource_info>h2{
+    margin:20px auto 5px auto;
+    width: 500px;
+}
+
+.resource_info>p{
+    width: 500px;
+    padding: 5px 0;
+    margin:0 auto;
+}
+
+.resource_info .youku_container{
+    margin: 30px auto;
+    width: 700px;
+}
+
+.resource_info>p>span{
+    margin-right:20px;
+    display: inline-block;
+    width: 180px;
+}
+
+.central .pagingbar{
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.central .pagingbar a{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    background: #5bc4be;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px 8px 6px;
+    border-radius: 1px;
+}
+
+.central .pagingbar a:hover{
+    background: rgb(9,108,111)
+}
+
+.central .pagingbar span{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 14px;
+    padding: 5px 8px 6px;
+    color: #666;
+}
+
+span.error{
+    color:rgb(255,105,106);
+}
+
+#video_cover-clear_id{width: 20px;display: inline;}
+
+.stop{
+    margin:40px 0;
+    text-align:center;
+    font-size:35px;
+}
+
+.verify{
+    text-align: center;
+    background: #5bc4be;
+    padding: 10px 5px;
+    margin: 20px auto;
+    display: block;
+    width: 130px;
+    color: white;
+    font-size: 20px;
+}
+.verify:hover{
+    background: rgb(9,108,111);
+}
+
+.minivideo_details{
+    position: relative;
+    overflow: hidden;
+    padding: 28px 0;
+    color:#515151;
+}
+
+.minivideo_details h2{
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    color: #000;
+    border-bottom: 2px solid #5bc4be;
+}
+
+.minivideo_details .minivideo_details_view{
+    position: relative;
+    overflow: hidden;
+}
+
+.minivideo_details .minivideo_details_youku{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    text-align: center;
+    padding: 28px 0 0;
+}
+
+.minivideo_details .minivideo_details_vote{
+    position: relative;
+    overflow: hidden;
+    float: right;
+    text-align: left;
+    padding: 28px 0 0 10px;
+    width: 230px;
+    height: 380px;
+    font-size: 20px;
+}
+
+.minivideo_details .minivideo_details_vote h3{
+    color: #5bc4be;
+    font-weight: normal;
+    font-size: 23px;
+}
+
+.minivideo_details .minivideo_details_vote p{
+    line-height: 38px;
+}
+
+.minivideo_details .minivideo_details_vote .vote_con{
+    clear:both;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    height: 130px;
+    bottom: 20px;
+
+}
+
+.minivideo_details .minivideo_details_vote .minivideo_details_vote_now{
+    overflow: hidden;
+    display: block;
+    font-size: 24px;
+    color: rgb(238,156,69);
+}
+
+.minivideo_details .minivideo_details_vote .minivideo_details_vote_btn{
+    display: inline-block;
+    overflow: hidden;
+    background: #5bc4be;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 7px 10px;
+    font-size: 22px;
+    font-family: Microsoft Yahei;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.minivideo_details .minivideo_details_vote .minivideo_details_vote_btn:hover{
+    background: rgb(9,108,111);
+}
+
+.minivideo_details .minivideo_details_vote .vote_hint{
+    overflow: hidden;
+    display: block;
+    font-size: 18px;
+    color: rgb(238,156,69);
+    line-height: 32px;
+}
+
+.minivideo_details .minivideo_details_intro{
+    position: relative;
+    overflow: hidden;
+    padding: 28px 0;
+}
+
+.minivideo_details .minivideo_details_intro p{
+    margin: 8px;
+    font-size: 20px;
+}
+
+.minivideo_details .team_category{
+    float: left;
+    height: 190px;
+}
+
+.minivideo_details .team_member{
+    float: left;
+    height: 190px;
+    width: 165px;
+}
+
+.minivideo_details .member_name{
+    float: left;
+    margin-right: 8px;
+    min-width: 60px;
+}
+
+
+.video_index{
+    padding: 28px 0;
+}
+
+.video_index>h2{
+    font-weight: normal;
+    font-size: 28px;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    color: #000;
+    border-bottom: 2px solid #5bc4be;
+    position: relative;
+}
+
+.video_index>h2>span{
+    position: absolute;
+    overflow: hidden;
+    float: right;
+    right: 0;
+    bottom: -8px;
+
+}
+
+.video_index>h2>span>a{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 6px 8px 4px 8px;
+    margin: 0px 8px 0 0;
+    color: #5bc4be;
+    background: none;
+    border: 1px solid #5bc4be;
+    border-radius: 5px 5px 0 0;
+}
+
+
+#grid_container{
+    position: relative;
+    margin-left: 20px;
+    overflow: hidden;
+}
+
+#grid_container>h2{
+    margin:20px 0;
+    text-align: center;
+}
+
+#grid_container .grid{
+    color:black;
+    display: block;
+    padding: 10px 13px;
+    background: rgb(189,231,229);
+    /*box-shadow: 0 0 3px gray;*/
+    border:solid 1px rgb(220,220,220);
+    transition: box-shadow 1s;
+    -moz-transition: box-shadow 1s;  /* Firefox 4 */
+    -webkit-transition: box-shadow 1s;   /* Safari 和 Chrome */
+    -o-transition: box-shadow 1s;    /* Opera */
+    width: 276px;
+    float: left;
+    margin: 0 8px;
+}
+
+#grid_container .grid:visited{
+    color:black;
+}
+
+#grid_container .grid:hover{
+    box-shadow: 0 0 10px rgb(70,70,70);
+}
+
+#grid_container .grid:active{
+    color:black;
+}
+
+#grid_container .grid img{
+    width: 100%;
+}
+
+#grid_container .videoName{
+   margin-top: 6px;
+   font-size: 18px;
+}
+#grid_container .captainName{
+    text-align: right;
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+
+.hint_con{
+    width: 420px;
+    font-size: 18px;
+    margin:0 auto;
+    font-weight: 700;
+}
+.hint{
+    padding: 3px 0;
+}
+
+
+.delete_btn,.details_btn{
+    display: inline-block;
+    color:white;
+    padding: 8px 10px;
+    background: #5bc4be;
+    border-radius: 3px;
+    font-size: 20px;
+    margin:8px auto;
+}
+
+
+/*login*/
+.minivideo_login h2{
+    font-weight: normal;
+    font-size: 28px;
+    margin-top: 30px;
+    margin-bottom: 8px;
+    padding-bottom: 3px;
+    color: #000;
+    border-bottom: 2px solid #5bc4be;
+}
+
+.minivideo_login form{
+    position: relative;
+    overflow: hidden;
+    font-size: 23px;
+    margin: 0 auto;
+    padding: 8px 0;
+    text-align: center;
+}
+
+.minivideo_login form p{
+    position: relative;
+    overflow: hidden;
+    padding: 5px 0;
+}
+
+.minivideo_login form span{
+    position: relative;
+    overflow: hidden;
+    padding: 3px 5px;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.minivideo_login form span.error{
+    margin-left: 1em;
+}
+
+.minivideo_login form input{
+    height: 33px;
+    font-size: 23px;
+    font-family: Microsoft Yahei;
+    padding: 2px;
+    border-radius: 2px;
+    border: 1px solid #5bc4be;
+    display: inline-block;
+}
+
+.minivideo_login form input.login_btn{
+    font-size: 23px;
+    background-color: #5bc4be;
+    color: #fff;
+    padding: 8px 15px;
+    display: block;
+    width: 100px;
+    margin:20px auto;
+    height: auto;
+}
+
+.minivideo_login form input.login_btn:hover{
+    background: rgb(9,108,111);
+    cursor: pointer;
+}

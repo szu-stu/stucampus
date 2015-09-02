@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'minivideo/minivideo.css' | as_css }}
+{% endblock %}
+
+{% block content %}
+<div class="central">
+    {% load permission_check %}
+    {% if perms.minivideo.manager %}
+    <div class="minivideo_list">
+        <h2>青春的轨迹 - 已报名列表</h2>
+        <div class="minivideo_list_grid">
+            <ul class="minivideo_list_grid_head">
+                <li>队长</li>
+                <li>队长学号</li>
+                <li>参赛视频</li>
+                <li>状态</li>
+            </ul>
+            {% for resource in page_list %}
+            <a href="{% url 'minivideo:signup' %}?id={{resource.id}}">
+                <ul>
+                    <li>{{ resource.team_captain }}</li>
+                    <li>{{ resource.team_captain_stuno }}</li>
+                    <li>
+                        <span class="btn">
+                        {% load permission_check %}
+                        {% if perms.minivideo.manager %}
+                            {% if resource.video_link %}
+
+                            {% if resource.has_verified %}
+                            点击查看
+                            {% else %}
+                            点击审核
+                            {% endif %}
+
+                            {% else %}
+                            未提交
+                            {% endif %}
+                        {% else %}
+                            {% if resource.video_link %}
+                            重新提交
+                            {% else %}
+                            点击提交
+                            {% endif %}
+                        {% endif %}
+                        </span>
+                    </li>
+                    <li>
+                        {% if resource.has_verified %}
+                        审查通过
+                        {% else %}
+                            {% if resource.video_link %}
+                            未审核
+                            {% else %}
+                            未提交
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                </ul>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="pagingbar">
+        <a href="?page=1">首页</a>
+        {% if page_list.has_previous %}
+            <a href="?page={{ page_list.previous_page_number }}" class="previous">上一页</a>
+        {% endif %}
+
+        <span>第 {{ page_list.number }} 页，共 {{ page_list.paginator.num_pages }} 页</span>
+
+        {% if page_list.has_next %}
+            <a class="next" href="?page={{ page_list.next_page_number }}">下一页</a>
+        {% endif %}
+        <a href="?page={{ page_list.paginator.num_pages }}">尾页</a>
+    </div>
+
+    {% else %}
+    <div class="stop" >
+        报名和提交作品时间已截止  
+    </div>
+    {% endif %}
+
+</div><!--end of central-->
+{% endblock %}

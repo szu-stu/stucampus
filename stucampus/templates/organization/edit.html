@@ -2,30 +2,27 @@
 
 {% block htmlhead %}
 {% load html_tools %}
-{{ 'admin/organization.css' | as_css }}
+{{ 'manage/form.css' | as_css }}
 {{ 'admin/org-manage.js' | as_js }}
-<!--[if IE 6]>
-<style>
-ul li div{
-    display:inline;
-}
-</style>
-<![endif]-->
 {% endblock %}
 
 {% block content %}
-    <h2>组织管理 &amp; Manage Organization</h2>
+<div class="add_container">
     <form id="organization-edit-form" method="post">
-    <div class="list">
-    <p><span>{{ organization.name }}</span> 组织资料： </p>
-    <ul>
-        <li>联系电话：<input type='text' class='width-400' value="{{ organization.phone }}" id='phone' name='phone' /></li>
-        <li>官方网站：<input type='text' class='width-400' maxlength="50" value='{{ organization.url }}' id='url' name='url' /></li>
-        <li>Logo：<input type='text' class='width-400' value='{{ organization.logo }}' id='logo' name='logo'></li>
-    </ul>
-    <input type="button" onclick="org_edit({{organization.id}})" value='修改' />
-    </div>
+        <p style="font-size:18px;margin-top:30px;text-indent:5%"><strong>{{ organization.name }}</strong> 组织资料</p>
+        <li>
+            <label>联系电话</label>
+            <input type='text' class='width-400' value="{{ organization.phone }}" id='phone' name='phone' />
+        </li>
+        <li>
+            <label>官方网站</label>
+            <input type='text' class='width-400' maxlength="50" value='{{ organization.url }}' id='url' name='url' />
+        </li>
+        <li>
+            <label>Logo</label>
+            <input type='text' class='width-400' value='{{ organization.logo }}' id='logo' name='logo'>
+        </li>
+        <input type="button" class="add" onclick="org_edit({{organization.id}})" value='修改' />
     </form>
-    <div class="aside">
-    </div>
+</div>
 {% endblock %}

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html lang='zh-CN' xml:lang='zh-CN' xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,10 +6,10 @@
     <meta name="robots" content="noindex,nofollow" />
     <title>深圳大学学子天地管理系统</title>
     {% load html_tools %}
-    {{ 'base.css' | as_css }}
+    {{ 'manage/base.css' | as_css }}
+    {{ 'manage/manage_base.js' | as_js }}
     {{ 'message-box.css' | as_css }}
-    {{ 'admin/layout.css' | as_css }}
-    <!--[if IE]>{{ 'admin/ie-fix.css' | as_css }}<![endif]--> 
+
     {{ 'plugins/jquery.min.js' | as_js }}
     {{ 'global.js' | as_js }}
     {{ 'admin/global.js' | as_js }}
@@ -17,43 +17,81 @@
     {{ 'admin/upload.js' | as_js }}
     {% block htmlhead %}{% endblock %}
 </head>
-<body>
-    <div id="layout_nav" class="layout_box">
-        <h1>深圳大学学子天地 后台管理系统</h1>(Beta)
-        <span id="nav_menu">
-            <span><strong>{{ user.student.screen_name }}</strong> 已登录</span>
-            <span class="splite_line">|</span>
-            <a href="/">返回首页</a>
-            <a href="javascript:;" onclick="StuCampus.signOut()">退出登录</a>
+<body onload="heightCtrol()" onresize="heightCtrol()">
+    <div class="container">
+        <div id="header">
+            <h1>深圳大学学子天地 后台管理系统</h1>
+            <span class="nav" id="nav_menu">
+                <span><strong>{{ user.student.screen_name }}</strong></span>
+                <a href="/">返回首页</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'account:profile' %}">用户信息</a>
+                <a href="javascript:;" onclick="StuCampus.signOut()">退出登录</a>
+                {% else %}
+                <a href="{% url 'account:sign_in' %}">登录</a>
+                {% endif %}
             </span>
-    </div>
-    <div id="layout_main" class="layout_box">
-        <div id="layout_left">
-            <ul class="block_menu">
+        </div>
+        <div class="main" id="layout_main">
+            <div class="menu_container" id="menu_box">
+                <div class="left_menu" id="layout_left">
                 {% load permission_check %}
-                {% if user|is_admin %}<li><a href="/manage/status">运行状态</a></li>{% endif %}
-                {% if perms.account.org_managers_list and user|is_admin %}<li><a href="/manage/account/list">用户管理</a></li>{% endif %}
-                {% if perms.organization.organization_show and user|is_admin %}<li><a href="/manage/organization/list">组织管理</a></li>{% endif %}
-                {% if perms.magazine.magazine_manage and user|is_admin %}<li><a href="/manage/magazines">杂志管理</a></li>{% endif %}
-                {% if perms.news.news_post and user|is_admin %}<li><a href="#">新闻发布</a></li>{% endif %}
-                {% if perms.news.news_manage and user|is_admin %}<li><a href="#">新闻编审</a></li>{% endif %}
+                {% if user %}
+                    <a href="/manage/index">后台管理</a>
+                {% endif %}
 
+                {% if perms.account.student_manager %}
+                    <a href="/manage/account/list">用户管理</a>
+                {% endif %}
+                {% if perms.magazine.magazine_add%}
+                    <a href="/magazine/manage/">杂志管理</a>
+                {% endif %}
+                {% if perms.organization.organization_manager %}
+                    <a href="/manage/organization/list">组织管理</a>
+                    <a href="/manage/organization">组织概况</a>
+                {% endif %}
+                {% if perms.articles.article_add %}
+                    <a href="{% url 'articles:add' %}">添加文章</a>
+                    <a href="{% url 'articles:manage' %}">文章列表</a>
+                {% endif %}
+                {% if perms.articles.article_manage %}
+                    <a href="{% url 'articles:category' %}">文章分类</a>
+                {% endif %}
+                {% if perms.account.website_admin %}
+                    <a href="{% url 'lecture:manage' %}">讲座信息</a>
+                    <a href="{% url 'activity:manage' %}">活动信息</a>
+                {% endif %}
+                {% if perms.szuspeech.manager %}
+                    <a href="{% url 'szuspeech:manage_list' %}">讲座资源</a>
+                    <a href="{% url 'szuspeech:add' %}">资源添加</a>
+                {% endif %}
+
+                <!-- 以下代码未完成 -->
                 <!-- 以下为提供给社团组织的管理界面 -->
-                {% if perms.organization.organization_show and user|is_org_manage %}<li><a href="/manage/organization">组织概况</a></li>{% endif %}
-                {% if perms.infor.infors_list and user|is_org_manage %}<li><a href="/manage/infor/list">信息管理</a></li> {% endif %}
-                {% if perms.infor.infor_create and user|is_org_manage %}<li><a href="/manage/infor/post">发布信息</a></li> {% endif %}
-                {% if perms.infor.posted_infor_view %}<li><a href="#">已发信息</a></li>{% endif %}
-                {% if perms.magazine.magazine_view %}<li><a href="/magazine">社团杂志</a></li>{% endif %}
-            </ul>
+                {% if 0 %}
+                    <a href="/organization/">组织管理</a>
+                {% endif %}
+                {% if perms.infor.infors_list and user|is_org_manage %}
+                    <a href="/manage/infor/list">信息管理</a>
+                {% endif %}
+                {% if perms.infor.infor_create and user|is_org_manage %}
+                    <a href="/manage/infor/post">发布信息</a>
+                {% endif %}
+                {% if perms.infor.posted_infor_view %}
+                    <a href="#">已发信息</a>{% endif %}
+                {% if perms.magazine.magazine_view %}
+                    <a href="/magazine">社团杂志</a>
+                {% endif %}
+                </div>
+            </div>    
+            <div class="right_content" id="layout_content">
+            {% block content %}
+            {% endblock content %}
+            </div>
         </div>
-        <div id="layout_content">
-        {% block content %}
-        {% endblock content %}
+        <div id="footer">
+            <p>Power By 深圳大学学子天地 技术开发部 Copyright &copy; 2010-2013 深圳大学学子天地 站务委员会</p>
         </div>
-    </div>
-    <div id="layout_foot" class="layout_box">
-        <p>Power By <strong>深圳大学学子天地 技术开发部</strong></p>
-        <p>Copyright &copy;<span class="splite_line">2010-2013</span>深圳大学学子天地 站务委员会</p>
     </div>
 </body>
 </html>

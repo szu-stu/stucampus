@@ -8,32 +8,28 @@ from stucampus.custom.permission import org_manage_group_check
 from stucampus.organization.models import Organization
 from stucampus.organization.forms import OrganizationManageEditForm
 from stucampus.utils import spec_json
+from stucampus.account.permission import check_perms
 
 
-@login_required
 def organization(request):
-    return render(request, 'organization/list.html')
-
-
-@user_passes_test(org_manage_group_check)
-@permission_required('organization.organizations_list')
-def organization_manage(request):
-    organzations = request.user.student.orgs_as_manager.all()
+    organizations = request.user.student.orgs_as_manager.all()
     return render(request, 'organization/list.html',
-                  {'organzations': organzations})
+                  {'organizations': organizations})
 
 
-class EditOrganzation(View):
+@check_perms('organization.organization_manager')
+def organization_manage(request):
+    return render(request, 'organization/list.html',
+                  {'organizations': Organization.objects.all()})
 
-    @method_decorator(user_passes_test(org_manage_group_check))
-    @method_decorator(permission_required('organization.organization_edit'))
+
+class EditOrganization(View):
+
     def get(self, request, id):
         organization = get_object_or_404(Organization, id=id)
         return render(request, 'organization/edit.html',
                       {'organization': organization})
 
-    @method_decorator(user_passes_test(org_manage_group_check))
-    @method_decorator(permission_required('organization.organization_edit'))
     def post(self, request, id):
         # TODO: be RESTful
         form = OrganizationManageEditForm(request.POST)

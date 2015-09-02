@@ -1,0 +1,187 @@
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'dreamer/pc_form.css' | as_css }}
+{% endblock %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+	<title>加入我们 - 深圳大学学子天地</title>
+	<link href="static/styles/dreamer/pc_form.css" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<div class="stucampus-title"></div>
+			<h1>社团招新</h1>
+			<div class="slogan">You may say I'm a dreamer, but I'm not the only one.</div>
+			<div class="intro">
+				<p> 
+					学子天地网站始创于2001年<br />
+					共青团深圳大学团委员领导下全面反映学生生活及服务学生的综合性网站<br />
+					深圳大学校内唯一由学生自由运营的官方传媒网站
+				</p>
+			</div>
+			<div class="arrow"></div>
+		</div>
+
+		<div class="content">
+			<div class="row">
+				<div class="department">
+					<div class="picture">
+						<img src="/static/images/dreamer/IT_department.jpg" height="343px" width="349px" />
+					</div>
+					<div class="words_intro">
+						<h2>
+							技术部
+						</h2>
+						<p class="brief_intro">
+							技术部是学子天地的筋骨。技术部人有着一股Geek精神，信仰代码如诗。得益于技术部的强力驱动，学子各项网络服务常年稳定如新。快来领取启动人生的权限！
+						</p>
+						<a class="icon" href="#form">立即加入</a>
+					</div>
+				</div>
+
+				<div class="department">
+					<div class="picture">
+						<img src="/static/images/dreamer/office.jpg" height="343px" width="349px" />
+					</div>
+					<div class="words_intro">
+						<h2>
+							办公室
+						</h2>
+						<p class="brief_intro">
+							办公室是学子天地的心脏。办公室人接触着各种各样的行政工作，以严肃活泼的态度，保证学子天地这个社团机器的高效运行，生生不息。这支高度规范化的队伍正在招新。
+						</p>
+						<a class="icon" href="#form">立即加入</a>
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="department">
+					<div class="words_intro">
+						<h2>
+							美工部
+						</h2>
+						<p class="brief_intro">
+							美工部是学子天地的衣装。美工部人认为，每一个像素都要在正确的位置，每一种颜色都要舒适地表达。来吧，一起在完美主义与Deadline之间寻找我们的位置！
+						</p>
+						<a class="icon" href="#form">立即加入</a>
+					</div>
+					<div class="picture">
+						<img src="/static/images/dreamer/art_design.jpg" height="343px" width="349px" />
+					</div>
+				</div>
+
+				<div class="department">
+					<div class="words_intro">
+						<h2>
+							采编部
+						</h2>
+						<p class="brief_intro">
+							采编部是学子天地的灵魂。采编部的才子才女们重视发布的每一个文字，每一张图片，生怕它们不能完整表达学子天地的态度。你是我最苦涩的等待，让我欢喜又害怕未来！
+						</p>
+						<a class="icon" href="#form">立即加入</a>
+					</div>
+					<div class="picture">
+						<img src="/static/images/dreamer/newsroom.jpg" height="343px" width="349px" />
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="joinus" id="form">
+			<form method="post" action="">
+			{% csrf_token %} 
+			<h2>报名加入</h2>
+			<p>
+				<label for="sid">学号</label>
+				{{ form.stu_num }}
+                <span class="error">
+                {% for error in form.stu_num.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+			</p>
+			<p>
+				<label for="studentname">姓名</label>
+				{{ form.name }}
+                <span class="error">
+                {% for error in form.name.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+			</p>
+			<p>
+				<label for="college">学院</label>
+				{{ form.college }}
+                <span class="error">
+                {% for error in form.college.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+			</p>
+			<div>
+				<label>性别</label>
+				{{ form.sex }}
+                <span class="error">
+                {% for error in form.sex.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+			</div>
+			<div>
+				<label>志愿（可多选）</label>
+				{{ form.volunteers }}
+                <span class="error">
+                {% for error in form.volunteers.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+			</div>
+            <p>
+                <label for="sport">联系手机号</label>
+                {{ form.telphone }}
+                <span class="error">
+                {% for error in form.telphone.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+            </p>
+			<p>
+				<label for="sport">喜欢的运动</label>
+				{{ form.fav_sports }}
+                <span class="error">
+                {% for error in form.fav_sports.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+			</p>
+			<p>
+				<label for="interest">兴趣与特长</label>
+				{{ form.interest }}
+                <span class="error">
+                {% for error in form.interest.errors %}
+                    {{ error }}
+                {% endfor %}
+                </span>
+			</p>
+			<p style="text-align: center; border: none;">
+				<input type="submit" class="formbutton" value="提交报名" />
+			</p>
+			</form>
+		</div>
+
+		<div class="footer">
+			版权所有 © 2001～2014 深圳大学学子天地
+		</div>
+
+	</div>
+	<div style="display: none;">
+		<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5826529'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/stat.php%3Fid%3D5826529' type='text/javascript'%3E%3C/script%3E"));</script>
+	</div>
+</body>
+</html>

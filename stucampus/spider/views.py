@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, InvalidPage
 
 from stucampus.spider.notification_spider import update_notification
 from stucampus.spider.notification_spider import Notification
+from stucampus.account.permission import check_perms
 
 
 def index(request):
@@ -19,13 +20,14 @@ def index(request):
     return render(request, 'spider/index.html', {'page': current_page})
 
 
-# for debug
+@check_perms('spider.spider_manager')
 def update(request):
     num_of_update = update_notification(7)
     return HttpResponse(str(num_of_update))
 
 
 # for debug
+@check_perms('spider.spider_manager')
 def delete(request):
     Notification.objects.all().delete()
     return HttpResponseRedirect(reverse('spider:index'))
