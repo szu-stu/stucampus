@@ -39,7 +39,7 @@ class SignUp(View):
                 print "1"
                 return render(request, 'dreamer/failed.html')
             else:
-                if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>5:  
+                if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>=5:  
                     return HttpResponse("您当前IP已于同一天成功报名五次，请等候第二天或换另一台电脑再进行报名.")
                 else:
                     msg.save()
@@ -147,13 +147,13 @@ def alllist(request):
         page = paginator.page(1)
     return render(request,'dreamer/list.html',{'page':page})
 
-@check_perms('dreamer.apply_manage')
+@check_perms('dreamer.manager')
 def delete(request):
     apply_id = request.GET.get('id')
     app = get_object_or_404(Register,id=apply_id)
     app.status = False
     app.save()
-    return HttpResponseRedirect('/dreamer/management')
+    return HttpResponseRedirect('/dreamer/manage/')
 
 @check_perms('dreamer.manager')
 def search(request):
