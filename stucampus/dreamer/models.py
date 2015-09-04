@@ -3,8 +3,8 @@
 from django.db import models
 
 SEX = (
-    ('boy', u'男'),
-    ('girl', u'女'),
+    ('male', u'男'),
+    ('female', u'女'),
     )
 
 DEPT = (
@@ -18,10 +18,10 @@ DEPT = (
 class Register(models.Model):
     class Meta:
         permissions = (
-            ('apply_manage', u'manage the applicant'),
+            ('manager', u'报名信息管理员'),
         )
     name = models.CharField(max_length = 20)
-    gender = models.CharField(max_length = 6, choices = SEX, default="boy")
+    gender = models.CharField(max_length = 6, choices = SEX, default="male")
     stu_ID = models.IntegerField(max_length = 10)
     college = models.CharField(max_length = 30)
     mobile = models.CharField(max_length = 11)
