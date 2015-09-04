@@ -1,0 +1,50 @@
+{% extends 'master/base.html' %}
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'dreamer/list.css' | as_css }}
+{{ 'manage/account.css' | as_css }}
+{% endblock %}
+{% block content %}	
+		<div class="search_form">
+			<form method="GET" action='/dreamer/manage/search/'>
+				<input name='search' class="search_input" type="text">
+				<input class="search_btn" type="submit" value="搜索">
+			</form>
+		</div>	
+		<div class="content">
+			<table>
+				<tr>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>学院</th>
+					<th>学号</th>
+					<th>手机号</th>
+					<th>第一志愿</th>
+					<th>第二志愿</th>
+				</tr>
+                {% for resource in page %}
+				<tr>
+					<td><a href="{% url 'dreamer:detail' %}?id={{ resource.id }}">{{ resource.name }}<a></td>
+					<td>{{ resource.get_gender_display }}</td>
+					<td>{{ resource.college }}</td>
+					<td>{{ resource.stu_ID }}</td>
+					<td>{{ resource.mobile }}</td>
+					<td>{{ resource.get_dept1_display }}</td>
+					<td>{{ resource.get_dept2_display }}</td>
+				</tr>
+                 {% endfor %} 
+			</table>
+			<div class="pagination">
+                <a href="?page=1" class="prev">首页</a>
+                {% if page.has_previous %}
+                    <a href="?page={{ page.previous_page_number }}" class="prev">上一页</a>
+                {% endif %}
+                <span>第 {{ page.number }} 页，共 {{ page.paginator.num_pages }} 页</span>
+                {% if page.has_next %}
+                    <a class="next" href="?page={{ page.next_page_number }}">下一页</a>
+                {% endif %}
+                <a href="?page={{ page.paginator.num_pages }}" class="next" >尾页</a>
+            </div>
+		</div>
+	</div>
+{% endblock %}

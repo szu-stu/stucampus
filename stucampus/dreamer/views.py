@@ -85,7 +85,7 @@ class CheckMsg(View):
 
     def post(self, request):
         search=req.POST['search']
-        objects = Register.objects.filter(Q(name=search)|Q(stuID=search)&Q(status=True)).count()
+        objects = Register.objects.filter(Q(name=search)|Q(stu_ID=search)&Q(status=True)).count()
         if objects>0:
             return HttpResponse("已报名成功")
         else:
@@ -150,15 +150,15 @@ def alllist(request):
 @check_perms('dreamer.manager')
 def delete(request):
     apply_id = request.GET.get('id')
-    app = get_object_or_404(Register,id=apply_id)
+    app = Register.objects.get(id=apply_id)
     app.status = False
     app.save()
     return HttpResponseRedirect('/dreamer/manage/')
 
 @check_perms('dreamer.manager')
 def search(request):
-    search=request.POST.get('search')
-    app = Register.objects.filter(status=True).filter(Q(name=search)|Q(stuID=search))
+    search=request.GET.get('search')
+    app = Register.objects.filter(status=True).filter(Q(name=search)|Q(stu_ID=search))
     paginator = Paginator(app,8)
     page = request.GET.get('page')
     try:
@@ -170,5 +170,6 @@ def search(request):
 @check_perms('dreamer.manager')
 def detail(request):
     apply_id = request.GET.get('id')
-    app = get_object_or_404(Register,id=apply_id)
+    app = Register.objects.get(id=apply_id)
+    print app.name
     return render(request,'dreamer/detail.html',{'app':app})

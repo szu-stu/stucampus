@@ -1,0 +1,24 @@
+.cont{
+	margin:25% auto 0 auto;
+	width:80%;
+}
+table
+{
+	margin: 0 auto;
+	width: 100%;
+	background-color:#aaa;
+	line-height:25px；
+}
+
+th
+{
+	background-color:#fff;
+	width: 15%;
+}
+
+td
+{
+	background-color:#fff;
+	text-align:center;
+	width:15%;
+}

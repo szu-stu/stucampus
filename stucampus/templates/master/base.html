@@ -17,6 +17,7 @@
     {{ 'admin/upload.js' | as_js }}
     {% block htmlhead %}{% endblock %}
 </head>
+{% block beforeload %}{% endblock %}
 <body onload="heightCtrol()" onresize="heightCtrol()">
     <div class="container">
         <div id="header">

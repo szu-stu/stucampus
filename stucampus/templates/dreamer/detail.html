@@ -1,0 +1,129 @@
+{% extends 'master/base.html' %}
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'dreamer/detail.css' | as_css }}
+{{ 'manage/account.css' | as_css }}
+{% endblock %}
+{% block beforeload %}
+<script type="text/javascript">
+    var nowid = {{app.id}};
+    var nextid = nowid+1;
+    var status="{{ app.status }}";
+    var urlf = "{% url 'dreamer:detail' %}?id="+nextid;
+    if(status=="False")
+    {
+        location.href=urlf;
+    }
+</script>
+{% endblock %}
+{% block content %}
+		<div class="content">
+			<form class="modified_form" method="post">
+				<table>
+					<tr>
+						<th>姓名:</th>
+						<td class="name">{{ app.name }}</td>
+					</tr>
+					<tr>
+						<th>性别:</th>
+						<td class="sex">{{ app.get_gender_display }}</td>
+					</tr>
+					<tr>
+						<th>学号:</th>
+						<td class="stu_id">{{ app.stu_ID }}</td>
+					</tr>
+					<tr>
+						<th>学院:</th>
+						<td class="college">{{ app.college }}</td>
+					</tr>
+					<tr>
+						<th>手机号:</th>
+						<td class="mobile">{{ app.mobile }}</td>
+					</tr>
+					<tr>
+						<th>第一志愿:</th>
+						<td class="desired_dept_1">{{ app.get_dept1_display }}</td>
+					</tr>
+					<tr>
+						<th>第二志愿:</th>
+						<td class="desired_dept_2">{{ app.get_dept2_display }}</td>
+					</tr>
+					<tr>
+						<th>自我介绍：</th>
+						<td class="introduce">{{ app.self_intro }}</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div class="dialog_modal"></div>
+		<div class="management">
+			<a href="{% url 'dreamer:delete' %}?id={{ app.id }}" class="btn_delete">删除</a>
+			<a href="" class="btn_modify">修改</a>
+		</div>
+		</form>
+		<div class="pagination" id='pag'>
+		</div>
+	</div>
+<script type="text/javascript">
+        var nowid = {{app.id}};
+        var lastid = nowid-1;
+        var nextid = nowid+1;
+        var str = "<a href='{% url 'dreamer:detail' %}?id="+lastid+"' class='prev'>上一个报名者</a><a href='{% url 'dreamer:detail' %}?id="+nextid+"' class='next'>下一个报名者</a>";
+        document.getElementById('pag').innerHTML = str;
+		$(function () {
+                $(".btn_delete").bind("click", function () { //询问按钮事件
+                    if ($(".name").html() != null) { //如果对象不为空
+                    	var url=$(".btn_delete").attr("href");//跳转到该url
+                    	sys_Confirm("您真的要删除该报名者信息吗？",url);
+                    	return false;
+                    }
+                });
+            });
+            function sys_Confirm(content,url) { //弹出询问信息窗口
+            	$(".dialog_modal").dialog({
+            		height: 100,
+            		modal: true,
+            		title: '系统提示',
+            		buttons: {
+            			'确定': function () {
+            				location.href =url;//实现删除后的跳转
+            				$(this).dialog("close");
+            			},
+            			'取消': function () {
+            				$(this).dialog("close");
+            			}
+            		},
+            		open: function (event, ui) {
+            			$(this).html(content)
+            		}
+            	});
+            }
+            //修改按钮
+        $(function(){
+        	$(".btn_modify").bind("click",function(){
+        		var name="<input type='text' name='name' value='"+$(".name").text()+"'>";
+        		var sex="<input type='text' name='sex' value='"+$(".sex").text()+"'>";
+        		var stu_id="<input type='text' name='stu_id' value='"+$(".stu_id").text()+"'>";
+        		var college="<input type='text' name='college' value='"+$(".college").text()+"'>";
+        		var mobile="<input type='text' name='mobile' value='"+$(".mobile").text()+"'>";
+        		var desired_dept_1="<input type='text' name='desired_dept_1' value='"+$(".desired_dept_1").text()+"'>";
+        		var desired_dept_2="<input type='text' name='desired_dept_2' value='"+$(".desired_dept_2").text()+"'>";
+        		var introduce="<input type='text' name='introduce' value='"+$(".introduce").text()+"'>";
+        		var submit_input="<input type='submit' value='完成'>"
+        		var return_input="<input type='button' value='返回'>"
+        		$(".name").replaceWith(name);
+        		$(".sex").replaceWith(sex);
+        		$(".stu_id").replaceWith(stu_id);
+        		$(".college").replaceWith(college);
+        		$(".mobile").replaceWith(mobile);
+        		$(".desired_dept_1").replaceWith(desired_dept_1);
+        		$(".desired_dept_2").replaceWith(desired_dept_2);
+        		$(".introduce").replaceWith(introduce);
+        		$(".btn_delete").replaceWith(submit_input);
+        		$(".btn_modify").replaceWith(return_input);
+        		return false;
+        	})
+        })
+        </script>
+</script>
+{% endblock %}

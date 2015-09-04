@@ -1,0 +1,144 @@
+
+.content
+
+{
+	margin-top:50px;
+	text-align: center;
+
+}
+
+.search_form
+
+{
+
+	margin-top: 50px;
+
+	text-align: center;
+
+}
+
+.search_input
+
+{
+
+	margin: 0;
+
+	display: inline-block;
+
+	width: 535px;
+
+	height: 36px;
+
+	line-height: 36px;
+
+}
+
+.search_btn
+
+{
+
+	margin: 0;
+
+	display: inline-block;
+
+	width: 100px;
+
+	height: 36px;
+
+	background-color: rgb(43,176,173);
+
+	border: 0;
+
+	font-size: 16px;
+
+	color: white;
+
+
+
+}
+
+table
+
+{
+
+	margin: 0 auto;
+
+	width: 80%;
+
+	background-color:#aaa;
+
+	line-height:25px；
+
+}
+
+th
+
+{
+
+	background-color:#fff;
+
+	width: 15%;
+
+
+
+}
+
+td
+
+{
+
+	background-color:#fff;
+
+	text-align:center;
+
+	width:15%;
+
+}
+
+.pagination
+
+{
+
+	margin: 20px 0 10px 0;
+
+}
+
+.pagination>a,.management>a
+
+{
+
+	width: 30px;
+
+	height: 28px;
+
+	text-align: center;
+
+	line-height: 28px;
+
+	margin: 0px 0 0px 4px;
+
+	display: inline-block;
+
+	text-decoration: none;
+
+	border: 1px #dfdfdf solid;
+
+	background: rgb(223,243,223);
+
+	color: rgb(42,35,52);;
+
+}
+
+.pagination .prev,.pagination .next
+
+{
+
+	width: 54px;
+
+	height: 28px;
+
+	text-align: center;
+
+	
+
+}
