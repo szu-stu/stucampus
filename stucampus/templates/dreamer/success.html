@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block htmltitle %}
+<title>手机报名成功 - 加入我们 - 深圳大学学子天地</title>
+{% endblock %}
+
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'dreamer/apply_mobile.css' | as_css }}
+{{ 'dreamer/apply_mobile.js' | as_js }}
+{% endblock %}
+
+{% block content %}
+<!-- 主体  Begin -->
+
+<h3><img src="/static/images/dreamer/congratulation.gif">恭喜你，<span>{{ form.name }}</span></h3>
+<h3>你已经成功报名学子天地的<span>{{ form.dept1 }}</span>和<span>{{ form.dept2 }}</span></h3>
+<p>如果你还有什么疑问,欢迎加入我们的<span>qq群:</span> 466404878</p>
+<p>想要了解更多我们社团的文化，欢迎访问我们的网站<a href="http://stu.szu.edu.cn/">http://stu.szu.edu.cn/</a></p>
+<p>扫一扫了解更多</p>
+<p><img src="/static/images/dreamer/stucampusweixin.jpg"></p>
+<div style="display: none;">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5826529'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/stat.php%3Fid%3D5826529' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+<!-- 主体  End -->
+{% endblock %}

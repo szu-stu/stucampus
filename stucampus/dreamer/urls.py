@@ -6,6 +6,7 @@ urlpatterns = patterns(
     '',
     url(r'index$', index,name='index'),
     url(r'^signup/$', SignUp.as_view(), name='signup'),
+    url(r'^signup_mobile/$', signup_mobile, name='signup_mobile'),
     url(r'check_msg/$', CheckMsg.as_view(), name='check'),
     url(r'succeed/$', succeed),
     url(r'^sunup/$', alldetail, name='sunup'),

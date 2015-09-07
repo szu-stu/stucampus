@@ -12,6 +12,8 @@ from stucampus.account.permission import check_perms
 
 from django.db.models import Q
 import datetime
+def signup_mobile(request):
+     return render(request, 'dreamer/apply_mobile.html', {'form': Register_Form()})
 
 class SignUp(View):
     def get(self, request):
@@ -70,7 +72,7 @@ class SignUp(View):
                         reply.dept2 = '运营部';
                     return render(request, 'dreamer/succeed.html', {'form': msg})
         else:
-            return HttpResponse('dreamer/failed.html')
+            return render(request, 'dreamer/failed.html')
 
 
 def index(request):

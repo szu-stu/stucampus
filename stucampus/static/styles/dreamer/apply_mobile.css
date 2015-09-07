@@ -1,0 +1,176 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	font-family:"Microsoft YaHei";
+}
+li,a,input,img
+{
+	display: inline-block;
+}
+select 
+{
+	width: 7em;
+	font-size: 1.2em;
+	margin: 1em auto;
+	display: inline-block;
+	text-align: center;
+	font-family:"Microsoft YaHei";
+	border: 2px solid rgb(160,160,160);
+}
+
+input,select,textarea
+{
+	outline:none;
+	border:none;
+	background:#FFF;
+}
+
+/*-----------------------------content-------*/
+.big_box
+{
+	margin: 1em auto;
+	overflow: hidden;
+	width: 80%;
+	background: rgb(223,223,223);
+
+}
+.sign_form
+{
+	text-align: center;
+	background: rgb(238,238,238);
+	overflow: hidden;
+}
+.sign_form h1
+{	
+	font-size: 2em;
+	font-weight: 800;
+}
+.li_click
+{
+	background: rgb(121,123,233);
+	color: #fff;
+	border-radius: 8px;
+	
+}
+
+.sign_form .department_infor
+{
+	margin: 1em auto;
+	width: 80%;
+	text-align: left;
+	background: rgb(223,223,223);
+}
+.dreamer_infor h3
+{
+	margin: 1em auto;
+	width: 80%;
+	font-size: 1.6em;
+	font-weight: 800;
+
+}
+
+.dreamer_infor .department_select select
+{
+	width: 40%;
+	border: 2px solid rgb(168,168,168);
+	
+	
+}
+.department_select h3
+{
+	font-size: 0.9em;
+	font-weight: 600;
+
+}
+.department_img
+{
+	width: 100%;
+}
+.department_img>li
+{
+	width: 15%;
+
+}
+.department_img img
+{
+	width: 100%;
+	height: 4em;
+}
+.sex
+{
+	margin: 1em auto;
+	width: 70%;
+	text-align: left;
+
+}
+.retangle {
+	width: 0;
+	height: 0;
+	border-left: 1em solid transparent;
+	border-right: 1em solid transparent;
+	border-bottom: 2em solid rgb(223,223,223);
+}
+
+.stu_message input
+{
+	margin: 1em auto;
+	width: 70%;
+	height: 2em;
+	display: block;
+	font-size: 1.2em; 
+	border-bottom: 2px solid rgb(160,160,160);
+	color: rgb(160,160,160);
+	line-height: 2em;
+
+}
+
+
+.name
+{
+	display: inline-block;
+}
+
+.hobby textarea
+{
+	width: 100%;
+	border: 2px solid rgb(168,168,168);
+	font-size: 1.2em;
+	border-bottom: none;
+	color: rgb(64,64,61);
+	background: rgb(255,255,255);
+
+}
+.hobby p
+{	
+	text-align: right;
+	border: 2px solid rgb(168,168,168);
+	border-top: none;
+	color: rgb(64,64,61);
+	background: rgb(255,255,255);
+
+}
+.hobby input[type="submit"]
+{
+	margin: 1em auto;
+	width: 30%;
+	height: 3.5em;
+	font-size: 1.2em;
+	line-height: 3.5em;
+	border-radius: 8px;
+	background:rgb(73,73,255);
+	color: #FFF;
+}
+.xingzheng,.jishu,.sheji,.yunying,.caibian,.retangle
+{
+	display: none;
+
+
+}
+.click_more
+{
+	text-align: center;
+	color: white;
+	font-size: 1.5em;
+}
