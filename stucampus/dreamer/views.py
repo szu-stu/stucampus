@@ -41,7 +41,7 @@ class SignUp(View):
                 print "1"
                 return render(request, 'dreamer/failed.html')
             else:
-                if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>=5:  
+                if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>=50:  
                     return HttpResponse("您当前IP已于同一天成功报名五次，请等候第二天或换另一台电脑再进行报名.")
                 else:
                     msg.save()
