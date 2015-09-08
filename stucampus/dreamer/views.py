@@ -17,7 +17,10 @@ def signup_mobile(request):
 
 class SignUp(View):
     def get(self, request):
-        return render(request, 'dreamer/apply.html', {'form': Register_Form()})
+        if request.META['HTTP_USER_AGENT'].lower().find('mobile') > 0:
+            return render(request, 'dreamer/apply_mobile.html', {'form': Register_Form()})
+        else:
+            return render(request, 'dreamer/apply.html', {'form': Register_Form()})
     def post(self, request):
         msg = Register()
         tmp = Register_Form(request.POST)

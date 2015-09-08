@@ -68,9 +68,9 @@ body
 	padding: 0.5em;
 	display: inline-block;
 	text-decoration: none;
-	color: rgb(77,168,199);
+	color: rgb(89,196,188);
 	font-size: 18px;
-	border:2px solid;
+	border:2px solid rgb(89,196,188);
 	border-radius:10px;
 	-moz-border-radius:10px;
 	text-align: center;
@@ -79,7 +79,7 @@ body
 .failure_content a:hover
 {
 	color:#fff;
-	background: rgb(77,168,199);
+	background: rgb(89,196,188);;
 
 }
 .failure_content img
