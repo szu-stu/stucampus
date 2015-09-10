@@ -152,5 +152,4 @@ def search(request):
 def detail(request):
     apply_id = request.GET.get('id')
     app = Register.objects.get(id=apply_id)
-    print app.name
     return render(request,'dreamer/detail.html',{'app':app})
