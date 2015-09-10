@@ -18,7 +18,7 @@ def signup_mobile(request):
 class SignUp(View):
     def get(self, request):
         if request.META['HTTP_USER_AGENT'].lower().find('mobile') > 0:
-            return render(request, 'dreamer/apply_mobile.html', {'form': Register_Form()})
+            return HttpResponseRedirect('/dreamer/mobile/')
         else:
             return render(request, 'dreamer/apply.html', {'form': Register_Form()})
     def post(self, request):
@@ -45,34 +45,10 @@ class SignUp(View):
                 return render(request, 'dreamer/failed.html')
             else:
                 if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>=50:  
-                    return HttpResponse("您当前IP已于同一天成功报名五次，请等候第二天或换另一台电脑再进行报名.")
+                    tip="您当前IP已于同一天成功报名五十次，请等候第二天或换另一台电脑再进行报名"	
+                    return render(request, 'dreamer/failed.html',{'tip':tip})
                 else:
                     msg.save()
-                    reply = msg
-                    if(reply.gender=='male'):
-                        reply.gender = '男';
-                    elif(reply.gender=='female'):
-                        reply.gender = '女';
-                    if(reply.dept1=='jsb'):
-                        reply.dept1 = '技术部';
-                    elif(reply.dept1=='sjb'):
-                        reply.dept1 = '设计部';
-                    elif(reply.dept1=='cbb'):
-                        reply.dept1 = '采编部';
-                    elif(reply.dept1=='xzb'):
-                        reply.dept1 = '行政部';
-                    else:
-                        reply.dept1 = '运营部';
-                    if(reply.dept2=='jsb'):
-                        reply.dept2 = '技术部';
-                    elif(reply.dept2=='sjb'):
-                        reply.dept2 = '设计部';
-                    elif(reply.dept2=='cbb'):
-                        reply.dept2 = '采编部';
-                    elif(reply.dept1=='xzb'):
-                        reply.dept1 = '行政部';
-                    else:
-                        reply.dept2 = '运营部';
                     return render(request, 'dreamer/succeed.html', {'form': msg})
         else:
             return render(request, 'dreamer/failed.html')

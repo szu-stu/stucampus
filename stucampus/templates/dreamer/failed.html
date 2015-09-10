@@ -18,7 +18,10 @@
 	</div>
 	<div class="failure_box">
 		<div class="failure_content">
-			<h3>您可能已经报名或填写的信息格式有误</h3>
+			{% if tip %}
+			<h3>{{tip}}</h3>
+			{% else %}<h3>您可能已经报名或填写的信息有误</h3>
+			{%endif%}
 			<p>你可以：</p>
 			<p><a href="/dreamer/signup">返回继续报名</a><a href="">查询是否报名</a></p>
 		</div>

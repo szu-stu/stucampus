@@ -18,27 +18,29 @@
 		<li>
 			<img src="/static/images/dreamer/xingzheng.png">
 			<p>行政部</p>
-			<span class="retangle"></span>
+			<p>
+				<span class="retangle"></span>
+			</p>
 		</li>
 		<li>
 			<img src="/static/images/dreamer/jishu.png">
 			<p>技术部</p>
-			<span class="retangle"></span>
+			<p ><span class="retangle"></span></p>
 		</li>
 		<li>
 			<img src="/static/images/dreamer/caibian.png">
 			<p>采编部</p>
-			<span class="retangle"></span>
+			<p><span class="retangle"></span></p>
 		</li>
 		<li>
 			<img src="/static/images/dreamer/yunying.png">
 			<p>运营部</p>
-			<span class="retangle"></span>
+			<p><span class="retangle"></span></p>
 		</li>
 		<li>
 			<img src="/static/images/dreamer/sheji.png">
 			<p>设计部</p>
-			<span class="retangle"></span>
+			<p><span class="retangle"></span></p>
 		</li>
 	</ul>
 	<div class="department_infor big_box">
@@ -70,26 +72,25 @@
 				</div>
 			</div>
 			<div class="stu_message big_box">
-				<input  type="text" id="name" maxlength="26" name="name" value="姓名" onfocus="if(this.value=='姓名') {this.value='';}" onblur="if(this.value=='') {this.value='姓名';}" />
+				<input  type="text" class="validate[required]" id="name" maxlength="26" name="name" value="姓名" onfocus="if(this.value=='姓名') {this.value='';}" onblur="if(this.value=='') {this.value='姓名';}" />
 				<p class="sex">
 					<select name="gender" id="gender">
-						<option value="sex1" selected="selected" readonly="readonly">性别</option>
 						<option value="male">男</option>
 						<option value="female">女</option>
 					</select>
 				</p>
-				<input type="text" maxlength="11" id="stu_ID" name="stu_ID" value="学号" onfocus="if(this.value=='学号') {this.value='';}" onblur="if(this.value=='') {this.value='学号';}" />
-				<input type="text" maxlength="30" id="college" name="college" value="学院" onfocus="if(this.value=='学院') {this.value='';}" onblur="if(this.value=='') {this.value='学院';}"/>
-				<input type="text" id="tel" maxlength="11" name="mobile" name="mobile" value="手机号码" onfocus="if(this.value=='手机号码') {this.value='';}" onblur="if(this.value=='') {this.value='手机号码';}"/>
+				<input type="text" maxlength="11" class="validate[required]" id="stu_ID" name="stu_ID" value="学号" onfocus="if(this.value=='学号') {this.value='';}" onblur="if(this.value=='') {this.value='学号';}" />
+				<input type="text" maxlength="30" class="validate[required]" id="college" name="college" value="学院" onfocus="if(this.value=='学院') {this.value='';}" onblur="if(this.value=='') {this.value='学院';}"/>
+				<input type="text" class="validate[required]" id="tel" maxlength="11" name="mobile" name="mobile" value="手机号码" onfocus="if(this.value=='手机号码') {this.value='';}" onblur="if(this.value=='') {this.value='手机号码';}"/>
 			</div>
 			<div class="hobby  big_box">
 				<div class="middle_box">
-					<textarea class="text" name="self_intro" rows="10" id="self_intro" cols="10"  onfocus="if(this.value=='写下你的自我介绍（喜欢的运动、爱好特长等）') {this.value='';}" onblur="if(this.value=='') {this.value='写下你的自我介绍（喜欢的运动、爱好特长等）';}" onKeyDown="checkLen(this)" onKeyUp="checkLen(this)">写下你的自我介绍（喜欢的运动、爱好特长等）</textarea>
+					<textarea class="validate[required]" name="self_intro" rows="10" id="self_intro" cols="10"  onfocus="if(this.value=='写下你的自我介绍（喜欢的运动、爱好特长等）') {this.value='';}" onblur="if(this.value=='') {this.value='写下你的自我介绍（喜欢的运动、爱好特长等）';}" onKeyDown="checkLen(this)" onKeyUp="checkLen(this)">写下你的自我介绍（喜欢的运动、爱好特长等）</textarea>
 					<p><span id="count">0</span>/500</p>
 				</div>
 				
 			</div>
-			<input type="submit" value="报名" id="sub" onMouseOver="Judge()" onMouseDown="notify()" />
+			<input class="submit_btn" type="submit" value="报&nbsp&nbsp名" id="sub" onMouseOver="Judge()" onMouseDown="notify()" />
 		</form>
 	</div>
 
