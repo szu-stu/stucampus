@@ -87,28 +87,28 @@ def alldetail(request):
 
     cbb1 = aall.filter(dept1="cbb")
     cbb2 = aall.filter(dept2="cbb")
-    cbbb = cbb1.filter(gender="boy").count()+cbb2.filter(gender="boy").count()
-    cbbg = cbb1.filter(gender="girl").count()+cbb2.filter(gender="girl").count()
+    cbbb = cbb1.filter(gender="male").count()+cbb2.filter(gender="male").count()
+    cbbg = cbb1.filter(gender="female").count()+cbb2.filter(gender="female").count()
 
     jsb1 = aall.filter(dept1="jsb")
     jsb2 = aall.filter(dept2="jsb")
-    jsbb = jsb1.filter(gender="boy").count()+jsb2.filter(gender="boy").count()
-    jsbg = jsb1.filter(gender="girl").count()+jsb2.filter(gender="girl").count()
+    jsbb = jsb1.filter(gender="male").count()+jsb2.filter(gender="male").count()
+    jsbg = jsb1.filter(gender="female").count()+jsb2.filter(gender="female").count()
 
     sjb1 = aall.filter(dept1="sjb")
     sjb2 = aall.filter(dept2="sjb")
-    sjbb = sjb1.filter(gender="boy").count()+sjb2.filter(gender="boy").count()
-    sjbg = sjb2.filter(gender="girl").count()+sjb1.filter(gender="girl").count()
+    sjbb = sjb1.filter(gender="male").count()+sjb2.filter(gender="male").count()
+    sjbg = sjb2.filter(gender="female").count()+sjb1.filter(gender="female").count()
 
     xzb1 = aall.filter(dept1="xzb")
     xzb2 = aall.filter(dept2="xzb")
-    xzbb = xzb1.filter(gender="boy").count()+xzb2.filter(gender="boy").count()
-    xzbg = xzb1.filter(gender="girl").count()+xzb2.filter(gender="girl").count()
+    xzbb = xzb1.filter(gender="male").count()+xzb2.filter(gender="male").count()
+    xzbg = xzb1.filter(gender="female").count()+xzb2.filter(gender="female").count()
 
     yyb1 = aall.filter(dept1="yyb")
     yyb2 = aall.filter(dept2="yyb")
-    yybb = yyb1.filter(gender="boy").count()+yyb2.filter(gender="boy").count()
-    yybg = yyb1.filter(gender="girl").count()+yyb2.filter(gender="girl").count()
+    yybb = yyb1.filter(gender="male").count()+yyb2.filter(gender="male").count()
+    yybg = yyb1.filter(gender="female").count()+yyb2.filter(gender="female").count()
 
     return render(request,'dreamer/situation.html',{"jsb1":jsb1.count(),"jsb2":jsb2.count(),"jsbb":jsbb,"jsbg":jsbg,
                                                     "sjb1":sjb1.count(),"sjb2":sjb2.count(),"sjbb":sjbb,"sjbg":sjbg,
