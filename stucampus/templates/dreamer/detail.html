@@ -17,8 +17,10 @@
 </script>
 {% endblock %}
 {% block content %}
-		<div class="content">
-			<form class="modified_form" method="post">
+    <form class="modified_form" action="{% url 'dreamer:modify' %}" method="post">
+        {% csrf_token %}
+		<div  id='ha'></div>
+        <div class="content">
 				<table>
 					<tr>
 						<th>姓名:</th>
@@ -53,14 +55,13 @@
 						<td class="introduce">{{ app.self_intro }}</td>
 					</tr>
 				</table>
-			</form>
 		</div>
 		<div class="dialog_modal"></div>
 		<div class="management">
 			<a href="{% url 'dreamer:delete' %}?id={{ app.id }}" class="btn_delete">删除</a>
 			<a href="" class="btn_modify">修改</a>
 		</div>
-		</form>
+	</form>
 		<div class="pagination" id='pag'>
 		</div>
 	</div>
@@ -110,7 +111,7 @@
         		var desired_dept_2="<input type='text' name='desired_dept_2' value='"+$(".desired_dept_2").text()+"'>";
         		var introduce="<input type='text' name='introduce' value='"+$(".introduce").text()+"'>";
         		var submit_input="<input type='submit' value='完成'>"
-        		var return_input="<input type='button' value='返回'>"
+        		var return_input="<a class='btn_return' href='{% url 'dreamer:detail' %}?id={{ app.id }}'>返回</a>"
         		$(".name").replaceWith(name);
         		$(".sex").replaceWith(sex);
         		$(".stu_id").replaceWith(stu_id);
@@ -121,9 +122,10 @@
         		$(".introduce").replaceWith(introduce);
         		$(".btn_delete").replaceWith(submit_input);
         		$(".btn_modify").replaceWith(return_input);
+                document.getElementById('ha').innerHTML = "<input name='id' type='text' value='{{ app.id }}' style='display:none'>";
         		return false;
         	})
-        })
+        });
         </script>
 </script>
 {% endblock %}
