@@ -14,4 +14,5 @@ urlpatterns = patterns(
     url(r'^manage/delete/$', delete, name='delete'),
     url(r'^manage/search/$', search, name='search'),
     url(r'^manage/detail/$', detail, name='detail'),
+    url(r'^manage/modify/$', modify, name='modify'),
 )
