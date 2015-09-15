@@ -139,7 +139,9 @@ def delete(request):
 @check_perms('dreamer.manager')
 def search(request):
     search=request.GET.get('search')
-    app = Register.objects.filter(status=True).filter(Q(name=search)|Q(stu_ID=search))
+    app = Register.objects.filter(status=True).filter(name__contains=search)
+    if not app:
+        app = Register.objects.filter(status=True).filter(stu_ID=search)
     paginator = Paginator(app,8)
     page = request.GET.get('page')
     try:
