@@ -155,3 +155,40 @@ def detail(request):
     apply_id = request.GET.get('id')
     app = Register.objects.get(id=apply_id)
     return render(request,'dreamer/detail.html',{'app':app})
+
+@check_perms('dreamer.manager')
+def modify(request):
+    apply_id = request.POST['id']
+    a = Register.objects.get(id=apply_id)
+    a.name = request.POST['name']
+    gender = request.POST['sex']
+    if gender==u'男':
+        a.gender = 'male'
+    elif gender==u'女':
+        a.gender = 'female'
+    a.stu_ID = request.POST['stu_id']
+    a.college = request.POST['college']
+    a.mobile = request.POST['mobile']
+    if request.POST['desired_dept_1']==u'行政部':
+        a.dept1 = 'xzb'
+    if request.POST['desired_dept_1']==u'设计部':
+        a.dept1 = 'sjb'
+    if request.POST['desired_dept_1']==u'技术部':
+        a.dept1 = 'jsb'
+    if request.POST['desired_dept_1']==u'采编部':
+        a.dept1 = 'cbb'
+    if request.POST['desired_dept_1']==u'运营部':
+        a.dept1 = 'yyb'
+    if request.POST['desired_dept_2']==u'行政部':
+        a.dept2 = 'xzb'
+    if request.POST['desired_dept_2']==u'设计部':
+        a.dept2 = 'sjb'
+    if request.POST['desired_dept_2']==u'技术部':
+        a.dept2 = 'jsb'
+    if request.POST['desired_dept_2']==u'采编部':
+        a.dept2 = 'cbb'
+    if request.POST['desired_dept_2']==u'运营部':
+        a.dept2 = 'yyb'
+    a.self_intro = request.POST['introduce']
+    a.save()
+    return HttpResponseRedirect('/dreamer/manage/detail/?id='+apply_id)
