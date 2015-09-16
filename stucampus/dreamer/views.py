@@ -141,7 +141,8 @@ def search(request):
     search=request.GET.get('search')
     app = Register.objects.filter(status=True).filter(name__contains=search)
     if not app:
-        app = Register.objects.filter(status=True).filter(stu_ID=search)
+        if search.isdigit()==True:
+            app = Register.objects.filter(status=True).filter(stu_ID=search)
     paginator = Paginator(app,8)
     page = request.GET.get('page')
     try:
