@@ -73,6 +73,10 @@ function Judge()
 		var data4 = document.getElementById('tel').value.replace(/(^\s*)|(\s*$)/g,'');
 		var data5 = document.getElementById('gender').value.replace(/(^\s*)|(\s*$)/g,'');
 		var data6 = document.getElementById('self_intro').value.replace(/(^\s*)|(\s*$)/g,'');
+		if(!isNaN(data2))
+		{
+			alert("sb");
+		}
 		if (data1&&data2&&data3&&data4&&data5&&data6&&data1!="姓名"&&data2!="学号"&&data3!="学院"&&data4!="手机号码"&&data5!="性别")
 		{
 			flag = 1;

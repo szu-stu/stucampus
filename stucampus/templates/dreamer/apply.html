@@ -7,6 +7,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js" type="text/javascript"></script>
 <link href="http://www.imooc.com/data/jquery-ui.css" rel="stylesheet" type="text/css" />
 </head>
 {% block htmlhead %}
@@ -93,7 +94,8 @@
 							<option value="male">男</option>
 							<option value="female">女</option>
 						</select>
-						<input type="submit" value="报名" id="sub" onMouseOver="Judge()" onMouseDown="notify()"/>
+						<input  type="submit" value="报名" id="sub"
+						onsubmit="Judge()" />
 					</div>
 				</div>
 			</div>

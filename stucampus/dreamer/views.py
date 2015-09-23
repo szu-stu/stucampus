@@ -51,6 +51,7 @@ class SignUp(View):
                     msg.save()
                     return render(request, 'dreamer/succeed.html', {'form': msg})
         else:
+
             return render(request, 'dreamer/failed.html')
 
 
