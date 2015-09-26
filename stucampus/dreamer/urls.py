@@ -10,8 +10,8 @@ urlpatterns = patterns(
    # url(r'check_msg/$', CheckMsg.as_view(), name='check'),
     #url(r'succeed/$', succeed),
     #url(r'^sunup/$', alldetail, name='sunup'),
-    #url(r'^manage/$', alllist, name='list'),
-    #url(r'^manage/delete/$', delete, name='delete'),
-    #url(r'^manage/search/$', search, name='search'),
-    #url(r'^manage/modify/$', modify, name='modify'),
+    url(r'^manage/$', alllist, name='list'),
+    url(r'^manage/delete/$', delete, name='delete'),
+    url(r'^manage/search/$', search, name='search'),
+    url(r'^manage/modify/$', modify, name='modify'),
 )
