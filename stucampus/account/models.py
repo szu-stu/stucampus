@@ -21,6 +21,7 @@ class Student(models.Model):
             ('member_del', 'Remove a member from an organization.')
             ('website_admin', u'学子天地网站管理员'),
             ('student_manager', u'学生帐号管理员'),
+			('free_time_count', u'空闲时间查看系统'),
         )
 
     COLLEGE_CHOICES = (
