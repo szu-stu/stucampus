@@ -519,15 +519,16 @@ def insert_function(request):
 			print pieces[i]
 
 			if pieces[i - 1] != u'学号':
+				index = index + 1
 				try:
 					s = Students(id=index, stu_no=pieces[i - 1], name=pieces[i], sex=pieces[i + 1], major=pieces[i + 2],college=pieces[i + 3])
-					index = index + 1
+					query_set_list.append(s)
 				except:
 					print "error"
 
 
 
-			query_set_list.append(s)
+
 
 		i = i + 1
 
