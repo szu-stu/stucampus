@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-
+from django.template.response import TemplateResponse
 from stucampus.FreeTimeCount.models import *
 from django.http import StreamingHttpResponse
 import re
@@ -8,6 +8,10 @@ import datetime
 import json
 import copy
 import xlwt
+
+def index_function(request):
+	response = TemplateResponse(request, 'FreeTimeCount/index.html', {})
+	return response
 
 
 def date_function(request):
@@ -45,7 +49,7 @@ def date_function(request):
 
 		for member in Member.objects.all():
 
-			if member.stuID[3] != '4':
+			if member.stuID[3] != '5':
 				continue
 
 			is_time1_2_free = True
@@ -100,19 +104,20 @@ def date_function(request):
 										is_time9_10_free = False
 									if mass == '11' or mass == '12':
 										is_time11_12_free = False
+			if(len(student) != 0):
 
-			if is_time1_2_free:
-				time1_2.append(student[0].name)
-			if is_time3_4_free:
-				time3_4.append(student[0].name)
-			if is_time5_6_free:
-				time5_6.append(student[0].name)
-			if is_time7_8_free:
-				time7_8.append(student[0].name)
-			if is_time9_10_free:
-				time9_10.append(student[0].name)
-			if is_time11_12_free:
-				time11_12.append(student[0].name)
+				if is_time1_2_free:
+					time1_2.append(student[0].name)
+				if is_time3_4_free:
+					time3_4.append(student[0].name)
+				if is_time5_6_free:
+					time5_6.append(student[0].name)
+				if is_time7_8_free:
+					time7_8.append(student[0].name)
+				if is_time9_10_free:
+					time9_10.append(student[0].name)
+				if is_time11_12_free:
+					time11_12.append(student[0].name)
 
 
 	else:
@@ -193,7 +198,7 @@ def distribute_function(request):
 					for member in Member.objects.all():
 
 
-						if member.stuID[3] != '4':
+						if member.stuID[3] != '5':
 							continue
 
 						is_time1_2_free = True
@@ -205,7 +210,8 @@ def distribute_function(request):
 
 						student = Students.objects.filter(stu_no=member.stuID)
 
-						student_grade[student[0].name] = 0
+						if len(student) != 0:
+							student_grade[student[0].name] = 0
 
 						courseTable = CourseTable.objects.filter(student=student)
 						for ct in courseTable:
@@ -252,18 +258,20 @@ def distribute_function(request):
 												if mass == '11' or mass == '12':
 													is_time11_12_free = False
 
-						if is_time1_2_free:
-							time1_2.append(student[0].name)
-						if is_time3_4_free:
-							time3_4.append(student[0].name)
-						if is_time5_6_free:
-							time5_6.append(student[0].name)
-						if is_time7_8_free:
-							time7_8.append(student[0].name)
-						if is_time9_10_free:
-							time9_10.append(student[0].name)
-						if is_time11_12_free:
-							time11_12.append(student[0].name)
+						if len(student) != 0:
+
+							if is_time1_2_free:
+								time1_2.append(student[0].name)
+							if is_time3_4_free:
+								time3_4.append(student[0].name)
+							if is_time5_6_free:
+								time5_6.append(student[0].name)
+							if is_time7_8_free:
+								time7_8.append(student[0].name)
+							if is_time9_10_free:
+								time9_10.append(student[0].name)
+							if is_time11_12_free:
+								time11_12.append(student[0].name)
 
 					if is_single_week == 0:
 
@@ -398,8 +406,9 @@ def distribute_function(request):
 
 			for member in Member.objects.all():
 				student = Students.objects.filter(stu_no=member.stuID)
-				if (student[0].name not in selected_student) and student[0].stu_no[3] == '4':
-					free_student.append(student[0].name)
+				if len(student) != 0:
+					if (student[0].name not in selected_student) and student[0].stu_no[3] == '4':
+						free_student.append(student[0].name)
 
 			book = xlwt.Workbook(encoding='utf-8', style_compression=0)
 			sheet1 = book.add_sheet(u"值班表", cell_overwrite_ok=True)
@@ -512,10 +521,11 @@ def insert_function(request):
 			if pieces[i - 1] != u'学号':
 				try:
 					s = Students(id=index, stu_no=pieces[i - 1], name=pieces[i], sex=pieces[i + 1], major=pieces[i + 2],college=pieces[i + 3])
+					index = index + 1
 				except:
 					print "error"
 
-			index = index + 1
+
 
 			query_set_list.append(s)
 
@@ -629,35 +639,75 @@ def insert_function(request):
 	Member.objects.all().delete()
 
 
-	m = Member(stuID="2013150099"); m.save();
-	m = Member(stuID="2013150030"); m.save();
-	m = Member(stuID="2013800169"); m.save();
-	m = Member(stuID="2014150169"); m.save();
-	m = Member(stuID="2014150168"); m.save();
-	m = Member(stuID="2014160073"); m.save();
-	m = Member(stuID="2014072033"); m.save();
-	m = Member(stuID="2014020536"); m.save();
-	m = Member(stuID="2014150122"); m.save();
-	m = Member(stuID="2014150278"); m.save();
-	m = Member(stuID="2014150063"); m.save();
-	m = Member(stuID="2014150240"); m.save();
-	m = Member(stuID="2014150262"); m.save();
-	m = Member(stuID="2014150155"); m.save();
-	m = Member(stuID="2014150211"); m.save();
-	m = Member(stuID="2014150239"); m.save();
-	m = Member(stuID="2014150261"); m.save();
-	m = Member(stuID="2014160123"); m.save();
-	m = Member(stuID="2014150231"); m.save();
-	m = Member(stuID="2014150329"); m.save();
-	m = Member(stuID="2014130107"); m.save();
-	m = Member(stuID="2014150105"); m.save();
-	m = Member(stuID="2014160015"); m.save();
-	m = Member(stuID="2014150158"); m.save();
-	m = Member(stuID="2014130097"); m.save();
-	m = Member(stuID="2014150280"); m.save();
-	m = Member(stuID="2014080125"); m.save();
-	m = Member(stuID="2014160149"); m.save();
-	m = Member(stuID="2014080281"); m.save();
+	m = Member(stuID="2015080217"); m.save()
+	m = Member(stuID="2015072051"); m.save()
+	m = Member(stuID="2015072056"); m.save()
+	m = Member(stuID="2015150027"); m.save()
+	m = Member(stuID="2015071107"); m.save()
+	m = Member(stuID="2015150145"); m.save()
+	m = Member(stuID="2015150104"); m.save()
+	m = Member(stuID="2015072050"); m.save()
+	m = Member(stuID="2015072007"); m.save()
+	m = Member(stuID="2015080003"); m.save()
+	m = Member(stuID="2015040477"); m.save()
+	m = Member(stuID="2015072070"); m.save()
+	m = Member(stuID="2015150063"); m.save()
+	m = Member(stuID="2015150007"); m.save()
+	m = Member(stuID="2015150288"); m.save()
+	m = Member(stuID="2015150033"); m.save()
+	m = Member(stuID="2015150324"); m.save()
+	m = Member(stuID="2015150124"); m.save()
+	m = Member(stuID="2015150246"); m.save()
+	m = Member(stuID="2015150304"); m.save()
+	m = Member(stuID="2015150258"); m.save()
+	m = Member(stuID="2015160196"); m.save()
+	m = Member(stuID="2015150122"); m.save()
+	m = Member(stuID="2015150058"); m.save()
+	m = Member(stuID="2015130046"); m.save()
+	m = Member(stuID="2015150006"); m.save()
+	m = Member(stuID="2015150166"); m.save()
+	m = Member(stuID="2015150049"); m.save()
+	m = Member(stuID="2015150218"); m.save()
+	m = Member(stuID="2015150321"); m.save()
+	m = Member(stuID="2015150301"); m.save()
+	m = Member(stuID="2015150320"); m.save()
+	m = Member(stuID="2015080194"); m.save()
+	m = Member(stuID="2015150287"); m.save()
+	m = Member(stuID="2015072058"); m.save()
+	m = Member(stuID="2015140172"); m.save()
+	m = Member(stuID="2015242049"); m.save()
+	m = Member(stuID="2015010150"); m.save()
+	m = Member(stuID="2015241039"); m.save()
+	m = Member(stuID="2015020441"); m.save()
+	m = Member(stuID="2015080084"); m.save()
+	m = Member(stuID="2015150182"); m.save()
+	m = Member(stuID="2015050158"); m.save()
+	m = Member(stuID="2015010141"); m.save()
+	m = Member(stuID="2015150126"); m.save()
+	m = Member(stuID="2015150249"); m.save()
+	m = Member(stuID="2015012051"); m.save()
+	m = Member(stuID="2015110037"); m.save()
+	m = Member(stuID="2015080004"); m.save()
+	m = Member(stuID="2015040478"); m.save()
+	m = Member(stuID="2015160024"); m.save()
+	m = Member(stuID="2015080086"); m.save()
+	m = Member(stuID="2015200013"); m.save()
+	m = Member(stuID="2015080134"); m.save()
+	m = Member(stuID="2015140094"); m.save()
+	m = Member(stuID="2015160009"); m.save()
+	m = Member(stuID="2015200027"); m.save()
+	m = Member(stuID="2015150032"); m.save()
+	m = Member(stuID="2015150181"); m.save()
+	m = Member(stuID="2015140096"); m.save()
+	m = Member(stuID="2015080171"); m.save()
+	m = Member(stuID="2015160022"); m.save()
+	m = Member(stuID="2015150073"); m.save()
+	m = Member(stuID="2015150259"); m.save()
+	m = Member(stuID="2015140166"); m.save()
+	m = Member(stuID="2015140191"); m.save()
+
+	print "Done."
+
 
 
 	response = TemplateResponse(request, 'FreeTimeCount/distribute.html', {})

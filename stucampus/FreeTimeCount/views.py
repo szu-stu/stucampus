@@ -1,16 +1,11 @@
-
-
-from django.template.response import TemplateResponse
-
-from stucampus.FreeTimeCount import functions
+from stucampus.FreeTimeCount.functions import *
 from stucampus.account.permission import check_perms
 
 # Create your views here.
 
 @check_perms('FreeTimeCount.usable')
 def index(request):
-	response = TemplateResponse(request, 'FreeTimeCount/index.html', {})
-	return response
+	return index_function(request)
 
 @check_perms('FreeTimeCount.usable')
 def date(request):
