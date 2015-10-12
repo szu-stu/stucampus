@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv= "Content-Type" content="text/html;charset=UTF-8"/>
+<style type="text/css">
+    *{
+        padding:0;
+        margin:0;
+    }
+    body{
+    	background: rgb(225,226,235);
+    }
+    table{
+		width: 1000px;
+        margin: auto;
+		background-color: white;
+    }
+    tr{
+    	width:auto;
+    }
+    td{
+    	width:auto;
+    }
+    h1{
+    	font-size: 20px;
+    	font-family: "DFKai-SB";
+        text-align: center;
+        margin-top:25px;
+    }
+            .box1{
+            position: relative;
+            overflow: hidden;
+            width: 800px;
+            margin: auto;
+        }
+            .box2{
+            position: relative;
+            overflow: hidden;
+            padding: 0px 108px 68px;
+        }
+        .box2 p{
+            position: relative;
+            margin:10px 80px;
+            padding: 38px 0;
+        }
+        .box2 p label{
+            position: relative;
+            float: left;
+            background: rgb(51,133,255);
+            padding: 8px 8px 7px;
+            font-size: 1.1em;
+        }
+        .box2 p .ipt{
+            position: relative;
+            float: left;
+            background: white;
+            padding: 3px;
+            font-size: 1.5em;
+            width: 320px;
+            border: 0;
+        }
+        .box2 p .btn{
+            position: relative;
+            float: left;
+            background: rgb(51,133,255);
+            border: 0;
+            margin: 0 68px;
+            padding: 8px 8px 7px;
+            font-size: 1.1em;
+            color: white;
+        }
+        .box2 p .btn:hover{
+            background: rgb(51,163,255);
+        }
+           .box2 p .btn1{
+            position: relative;
+            float: left;
+            background: rgb(51,133,255);
+            border: 0;
+            margin-left: 0px;
+            padding: 8px 8px 7px;
+            font-size: 1.1em;
+            color: white;
+        }
+        .box2 p .btn1:hover{
+            background: rgb(51,163,255);
+        }
+        label{
+        	color:white;
+        }
+</style>
+</head>
+<body>
+    <h1>
+    {% if week_day == None %}
+	各时间段空闲成员查询
+    {% elif week_day != None %}
+    你正在查询的日期是
+    {% if date != None %}
+    {{ date }}
+    (星期{{ week_day }})
+    {% endif %}
+    {% endif %}</h1>
+	     		<table border="1">
+				<tbody>
+					<tr>
+						<td>课程时间</td>
+						<td>空闲成员</td>
+					</tr>
+					<tr>
+						<td>第一、二节</td>
+						<td id="td12">{{ time1_2 }}</td>
+					</tr>
+					<tr>
+						<td>第三、四节</td>
+						<td id="td34">{{ time3_4 }}</td>
+					</tr>
+					<tr>
+						<td>第五、六节</td>
+						<td id="td56">{{ time5_6 }}</td>
+					</tr>
+					<tr>
+						<td>第七、八节</td>
+						<td id="td78">{{ time7_8 }}</td>
+					</tr>
+                    <tr>
+                        <td>第九、十节</td>
+                        <td id="td910">{{ time9_10 }}</td>
+                    </tr>
+                    <tr>
+                        <td>第十一、十二节</td>
+                        <td id="td1112">{{ time11_12 }}</td>
+                    </tr>
+				</tbody>
+			</table>
+
+    
+    <div class="box1">
+        <div class="box2">
+        	<form action="#" method="post">
+            {% csrf_token %}
+            <p>
+                <label for="date">日期</label>
+                <input type="text" class="ipt" id="date" name="date" />
+            </p> 
+            
+            <p>
+                <input class="btn" type="submit" value="查询" />
+                <button class="btn1">excel表格下载</button>
+            </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

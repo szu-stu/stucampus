@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv= "Content-Type" content="text/html;charset=UTF-8"/>
+<style type="text/css">
+    *{
+        padding:0;
+        margin:0;
+    }
+    body{
+    	background: rgb(225,226,235);
+    }
+    table{
+		margin: auto;
+		background-color: white;
+    }
+    tr{
+    	width:auto;
+    }
+    td{
+    	width:auto;
+    }
+    h1, h4{
+    	font-size: 20px;
+    	font-family: "DFKai-SB";
+        text-align: center;
+        margin-top:25px;
+    }
+        .box1{
+            position: relative;
+            overflow: hidden;
+            width: 800px;
+            margin: auto;
+        }
+            .box2{
+            position: relative;
+            overflow: hidden;
+            padding: 0px 108px 68px;
+        }
+        .box2 p{
+            position: relative;
+            margin:10px 80px;
+            padding: 38px 0;
+        }
+        .box2 p label{
+            position: relative;
+            float: left;
+            background: rgb(51,133,255);
+            padding: 8px 8px 7px;
+            font-size: 1.1em;
+        }
+        .box2 p .ipt{
+            position: relative;
+            float: left;
+            background: white;
+            padding: 3px;
+            font-size: 1.5em;
+            width: 320px;
+            border: 0;
+        }
+        .box2 p .btn{
+            position: relative;
+            float: left;
+            background: rgb(51,133,255);
+            border: 0;
+            margin: 0 68px;
+            padding: 8px 8px 7px;
+            font-size: 1.1em;
+            color: white;
+        }
+        .box2 p .btn:hover{
+            background: rgb(51,163,255);
+        }
+           .box2 p .btn1{
+            position: relative;
+            float: left;
+            background: rgb(51,133,255);
+            border: 0;
+            margin-left: 0px;
+            padding: 8px 8px 7px;
+            font-size: 1.1em;
+            color: white;
+        }
+        .box2 p .btn1:hover{
+            background: rgb(51,163,255);
+        }
+        label{
+        	color:white;
+        }
+        .warning {
+        	color: red;
+        }
+        .tips {
+        	display: none;
+        	margin: auto;
+        }
+</style>
+<script type="text/javascript">
+	function insertIntoTable(x, y, rowspan, content) {
+
+		ele = document.getElementById("td" + x + y);
+		ele.setAttribute("rowspan", rowspan);
+
+        if(ele.innerHTML) {
+            ele.innerHTML += "<br>" + content;
+        }
+        else {
+            ele.innerHTML = content;
+        }
+		
+
+		for(i = 0; i < rowspan - 1; i++) {
+			ele = document.getElementById("td" + x + (y + i + 1));
+			ele.setAttribute("style", "display:none");
+		}
+
+	}
+
+	function updateCourseTable(course_name, weekday, time) {
+
+		if(weekday == '0'){
+			h5_tips = document.getElementById("tips");
+			tips += "[" + course_name + "]";
+			h5_tips.innerHTML = tips;
+			h5_tips.setAttribute("style", "display:block");
+			return;
+		}
+			
+
+		time = time.match(/\[&#39;(.+)&#39;]/);
+		time = time[1].split(',');
+
+		switch(weekday[0]) {
+			case '1':
+				course_name += "(单周)";
+			break;
+			case '2':
+				course_name += "(双周)";
+		}
+
+		insertIntoTable(parseInt(weekday[1], 10), parseInt(time[0], 10), time.length, course_name);
+
+		//alert("course_name=" + course_name + " weekday=" + weekday + " time=" + time[1]);
+		//alert(1);
+	}
+	tips = "备注：未能确定时间的课程有";
+	
+</script>
+</head>
+<body>
+	{% if students == None %}
+	<h1>成员课表查询</h1>
+	{% else %}
+	{% for student in students %}
+	<h1>姓名:{{ student.name}} 学院:{{ student.college }} 专业:{{ student.major }} 学号:{{ student.stu_no}}</h1>
+	{% endfor %}
+	{% endif %}
+	{% if len > 1 %}
+	<h4 class="warning">因为存在多个人具有相同的名字，所以得到的结果是不准确的，请使用重新使用学号查询</h4>
+	{% endif %}
+	<table border="1">
+		<tr>
+			<td>课程表</td>
+			<td>星期一</td>
+			<td>星期二</td>
+			<td>星期三</td>
+			<td>星期四</td>
+			<td>星期五</td>
+			<td>星期六</td>
+			<td>星期日</td>
+		</tr>
+		<script type="text/javascript">
+			for(i = 1; i <= 12; i++) {
+				document.write("<tr>");
+				document.write("<td>" + i + "</td>")
+				for(j = 0; j < 7; j++) {
+					document.write("<td id=\"td" + (j + 1) + i + "\"></td>");
+				}
+				document.write("</tr>");
+			}
+		</script>
+	</table>
+	<center><h5 id="tips" class="tips"></h5></center>
+    <div class="box1">
+        <div class="box2">
+          {% for course in courses %}
+          {% for each in course %}
+          <script type="text/javascript">
+          		updateCourseTable("{{ each.course_name}}", "{{ each.weekday}}", "{{ each.time}}");
+          </script>
+          {% endfor %}
+          {% endfor %}
+
+        	<form action="" method="post">
+        		{% csrf_token %}
+	            <p>
+	                <label for="name">姓名</label>
+	                <input type="text" class="ipt" id="name" name="name" />
+	            </p>
+	            <p>
+	                <label for="number">学号</label>
+	                <input type="number" class="ipt" id="number" name="number" />
+	            </p>
+
+	            <p>
+	                <button class="btn">查询</button>
+	                <input type="reset" class="btn1" value="重置" />
+	            </p>
+             </form>
+        </div>
+    </div>
+</body>
+</html>
