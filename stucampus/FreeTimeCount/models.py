@@ -1,8 +1,16 @@
+#-*- coding: utf-8
 from django.db import models
 
 # Create your models here.
 
 class Member(models.Model):
+
+	class Meta:
+		permissions = (
+			('usable', u'查看成员空闲时间'),
+		)
+
+
 
 	stuID 			= models.CharField(max_length=20)
 	'''name 			= models.CharField(max_length=20)
@@ -49,6 +57,3 @@ class Course(models.Model):
 class CourseTable(models.Model):
 	student 		= models.ForeignKey(Students)
 	course_id 		= models.IntegerField()
-
-
-	
