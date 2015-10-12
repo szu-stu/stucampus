@@ -12,7 +12,7 @@ class Member(models.Model):
 
 
 
-	stuID 			= models.CharField(max_length=20)
+	stuID 			= models.CharField(max_length=100)
 	'''name 			= models.CharField(max_length=20)
 	grade	 		= models.CharField(max_length=20)
 	sex 			= models.CharField(max_length=20)
@@ -35,21 +35,21 @@ class Member(models.Model):
 
 
 class Students(models.Model):
-	stu_no			= models.CharField(max_length=32)
-	name 			= models.CharField(max_length=32)
-	college			= models.CharField(max_length=32)
-	major			= models.CharField(max_length=32)
-	sex				= models.CharField(max_length=32)
+	stu_no			= models.CharField(max_length=100)
+	name 			= models.CharField(max_length=100)
+	college			= models.CharField(max_length=100)
+	major			= models.CharField(max_length=100)
+	sex				= models.CharField(max_length=100)
 
 	def __str__(self):
 		return self.name
 
 class Course(models.Model):
 	course_id		= models.IntegerField()
-	weekday 		= models.CharField(max_length=32)
-	time 			= models.CharField(max_length=32)
-	course_name 	= models.CharField(max_length=32)
-	place 			= models.CharField(max_length=32)
+	weekday 		= models.CharField(max_length=100)
+	time 			= models.CharField(max_length=100)
+	course_name 	= models.CharField(max_length=100)
+	place 			= models.CharField(max_length=100)
 
 	def __str__(self):
 		return self.course_name
