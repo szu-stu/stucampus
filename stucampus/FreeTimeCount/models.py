@@ -35,19 +35,19 @@ class Member(models.Model):
 
 
 class Students(models.Model):
-	stu_no			= models.CharField(max_length=10)
-	name 			= models.CharField(max_length=20)
-	college			= models.CharField(max_length=20)
-	major			= models.CharField(max_length=20)
-	sex				= models.CharField(max_length=3)
+	stu_no			= models.CharField(max_length=32)
+	name 			= models.CharField(max_length=32)
+	college			= models.CharField(max_length=32)
+	major			= models.CharField(max_length=32)
+	sex				= models.CharField(max_length=32)
 
 	def __str__(self):
 		return self.name
 
 class Course(models.Model):
 	course_id		= models.IntegerField()
-	weekday 		= models.CharField(max_length=5)
-	time 			= models.CharField(max_length=10)
+	weekday 		= models.CharField(max_length=32)
+	time 			= models.CharField(max_length=32)
 	course_name 	= models.CharField(max_length=32)
 	place 			= models.CharField(max_length=32)
 
