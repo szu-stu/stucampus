@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^date/', 'stucampus.FreeTimeCount.views.date'),
     url(r'^member/', 'stucampus.FreeTimeCount.views.member'),
     url(r'^distribute/', 'stucampus.FreeTimeCount.views.distribute'),
-    url(r'^insert/', 'stucampus.FreeTimeCount.views.insert'),
+    #url(r'^insert/', 'stucampus.FreeTimeCount.views.insert'),
 ]
