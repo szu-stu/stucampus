@@ -66,7 +66,7 @@
                     <a href="{% url 'szuspeech:manage_list' %}">讲座资源</a>
                     <a href="{% url 'szuspeech:add' %}">资源添加</a>
                 {% endif %}
-		
+
 
                 <!-- 以下代码未完成 -->
                 <!-- 以下为提供给社团组织的管理界面 -->
@@ -84,9 +84,11 @@
                 {% if perms.magazine.magazine_view %}
                     <a href="/magazine">社团杂志</a>
                 {% endif %}
+                {% if perms.FreeTimeCount.usable %}
 					<a href="/freetimecount">空闲时间</a>
+                {% endif %}
                 </div>
-            </div>    
+            </div>
             <div class="right_content" id="layout_content">
             {% block content %}
             {% endblock content %}
