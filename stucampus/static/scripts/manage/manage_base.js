@@ -7,14 +7,13 @@ function heightCtrol () {
         content.style.minHeight=heightNeed+"px";
         menu.style.position="fixed";
         menu.style.top="80px";
-        document.getElementById('menu_box').style.height=content.offsetHeight+"px";
+        //document.getElementById('menu_box').style.height=content.offsetHeight+"px";
     }
     else
     {
         content.style.minHeight=menu.offsetHeight+"px";
         menu.style.position="absolute";
         menu.style.top="0px";
-        document.getElementById('menu_box').style.height=content.offsetHeight+"px";
+        //document.getElementById('menu_box').style.height=content.offsetHeight+"px";
     }
 }
-    
