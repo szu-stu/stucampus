@@ -29,7 +29,7 @@ class Article(models.Model):
 
     title = models.CharField(max_length=20)
     summary = models.CharField(max_length=50)
-    content = UEditorField(height=500, width=300, toolbars='full')
+    content = UEditorField(height=500, width=900, toolbars='full')
     category = models.ForeignKey(Category, null=True,
                                  on_delete=models.SET_NULL)
 
@@ -46,4 +46,3 @@ class Article(models.Model):
     deleted = models.BooleanField(default=False)
     important = models.BooleanField(default=False)
     publish = models.BooleanField(default=False)
-
