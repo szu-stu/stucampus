@@ -69,6 +69,7 @@
 	border: 1px solid #eee;
 	background: #f8f8f8;
 	padding: 8px;
+	max-width: 90%;
 }
 
 .article .article_body .article_share{
