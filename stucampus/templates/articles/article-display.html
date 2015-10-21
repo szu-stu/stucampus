@@ -38,6 +38,13 @@
 		</div>
 	</div>
 
+    <script type="text/javascript">
+        article_images = document.getElementsByClassName("article_text")[0].getElementsByTagName("img");
+        for(i = 0; i < article_images.length; i++) {
+            article_images[i].style.height="auto";
+        }
+    </script>
+
 	<div class="article_footer">
 		<h2>网友评论</h2>
 <!-- Duoshuo Comment BEGIN -->
@@ -49,7 +56,7 @@ var duoshuoQuery = {short_name:"szustu"};
 		ds.type = 'text/javascript';ds.async = true;
 		ds.src = 'http://static.duoshuo.com/embed.js';
 		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
+		(document.getElementsByTagName('head')[0]
 		|| document.getElementsByTagName('body')[0]).appendChild(ds);
 	})();
 	</script>
