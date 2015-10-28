@@ -12,7 +12,7 @@ def index(request):
             Article.objects.filter(
                     publish=True,
                     deleted=False,
-                    important=True).order_by('-pk')[:3]
+                    important=True).order_by('-pk')[:5]
     # 不同类别的文章
     article_dict = \
             ((category, \
