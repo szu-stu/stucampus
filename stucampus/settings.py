@@ -11,7 +11,7 @@ def path(*a):
 # DjangoUeditor setting
 UEDITOR_SETTINGS = {
     "images_upload":{
-        'allow_type': 'jpg, png, gif',
+        'allow_type': 'jpg, png, gif, JPG, PNG, GIF',
         'path': 'img_upload_file/',
         'max_size': '3000kb',
         },
