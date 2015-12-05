@@ -9,12 +9,38 @@ body{
     font-size: 14px;
 }
 .container{
-    width: 1000px;
+   /* width: 1000px;*/
     position: relative;
     margin: 0 auto;
+    height: auto;
     overflow: hidden;
+    padding: 0;
+}
+.smNav{
+    position: absolute;
+    top: 0px;
+    height: 80px;
+    width: 80px;
+}
+.smNav ul{
+    margin: 0!important;
+}
+.smNav button{
+    background: #38c2a8;
+    color: #fff;
+    height: 80px;
+    width: 80px;
+    border: none;
+}
+.smNav a{
+    display: block;
+    height: 50px;
+    line-height: 50px !important;
+    background: #38c2a8;
+    color: #FFF !important;
 }
 #header{
+    position: relative;
     width: 100%;
     height: 80px;
     background: #424242;
@@ -22,6 +48,8 @@ body{
     overflow: hidden;
 }
 #header h1{
+    font-size: 28px;
+    margin: 0;
     color: #ffffff;
     font-weight: normal;
     line-height: 80px;
@@ -29,18 +57,45 @@ body{
     text-indent: 100px;
     float: left;
 }
-.nav{
+#header .phonevision h2{
+    font-size: 28px;
+    margin:0 0 0 80px;
     color: #ffffff;
-    line-height: 80px;
+    font-weight: normal;
+    line-height: 60px;
     vertical-align: middle;
-    margin-left: 150px;
+    text-align: center;
 }
-.nav a{
+
+.phonevision .navbox{
+    color: #ffffff;
+    line-height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 80px;
+    width: auto;
+    padding: 0;
+}
+.phonevision .navbox a{
     color: #ffffff;
     text-decoration: none;
     padding: 0px 5px;
 }
-.nav span{
+.phonevision .navbox span{
+    padding: 0px 5px;
+}
+.navbox{
+    color: #ffffff;
+    line-height: 80px;
+    vertical-align: middle;
+    padding-left: 150px;
+}
+.navbox a{
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0px 5px;
+}
+.navbox span{
     padding: 0px 5px;
 }
 .main{
@@ -55,7 +110,6 @@ body{
     position: absolute;
     top: 0px;
     left: 0px;
-    height: 100%;
 }
 .left_menu{
     overflow: hidden;
@@ -78,7 +132,7 @@ body{
     background: #31a592;
 }
 .right_content{
-    width: 900px;
+    width: 100%;
     background: #ffffff;
     position: relative;
     float: left;
@@ -87,7 +141,6 @@ body{
 }
 #footer{
     width: 100%;
-    height: 30px;
     position: relative;
     overflow: hidden;
     text-align: center;
