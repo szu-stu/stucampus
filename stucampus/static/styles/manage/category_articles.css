@@ -41,11 +41,15 @@
 }
 .category_add input[type=text]{
     width: 300px;
-    border: solid 0px #e5e5e5;
+    border: solid 1px #e5e5e5;
+    border-radius:5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
     font-size: 14px;
     line-height: 200%;
     font-family: "Microsoft Yahei";
     color: #7e7e7e;
+    padding-left: 3px;
 }
 .line{
     width: 80%;
