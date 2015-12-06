@@ -19,14 +19,16 @@
     line-height: 200%;
     font-family: "Microsoft Yahei";
     color: #7e7e7e;
+    border: 2px solid #e5e5e5;
 }
 .content input[type=text]{
     width: 300px;
-    border: solid 0px #e5e5e5;
+    border: solid 1px #e5e5e5;
     font-size: 14px;
     line-height: 200%;
     font-family: "Microsoft Yahei";
     color: #7e7e7e;
+    background: #e5e5e5;
 }
 .content textarea{
     width: 400px;
@@ -38,6 +40,7 @@
     margin: 10px 0px;
     border: 0px;
     resize: none;
+    background: #e5e5e5;
 }
 .content_title{
     width: 13%;
