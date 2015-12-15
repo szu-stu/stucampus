@@ -33,7 +33,7 @@ body{
     color: #ffffff;
     line-height: 80px;
     vertical-align: middle;
-    margin-left:150px;
+    margin-left: 150px;
 }
 .nav a{
     color: #ffffff;
@@ -71,7 +71,7 @@ body{
     line-height: 40px;
     vertical-align: middle;
 }
-.left_menu a:hover{
+.left_menu a:hover {
     background: #31a592;
 }
 .current {
