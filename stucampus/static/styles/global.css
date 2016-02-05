@@ -43,7 +43,7 @@ a,button,input,h1,h2,h3{
     position: relative;
     overflow: hidden;
     height: 380px;
-    background: #5bc4be url(/static/images/coverphoto/current.jpg) center top no-repeat;
+    background: #5bc4be url(/static/images/coverphoto/festival.jpg) center top no-repeat;
 }
 /** center url(static/images/coverphoto/current.jpg) no-repeat **/
 
@@ -152,7 +152,7 @@ a,button,input,h1,h2,h3{
     margin-bottom: 8px;
     padding-bottom: 3px;
     color: #000;
-    border-bottom: 2px solid #5bc4be;
+    border-bottom: 2px solid #EE4541;
 /**
     border-left: 8px solid #5bc4be;
     padding: 2px 0 3px 8px;
@@ -181,7 +181,7 @@ a,button,input,h1,h2,h3{
     display: inline-block;
     font-size: 16px;
     font-weight: normal;
-    background-color: #5bc4be;
+    background-color: #EE4541;
     color: #fff;
     padding: 11px 18px 8px;
     border-radius: 2px 2px 0 0;
@@ -207,7 +207,7 @@ a,button,input,h1,h2,h3{
 }
 
 .sidebar .widget .widget_content{
-    border-top: 3px solid #5bc4be;
+    border-top: 3px solid #EE4541;
 }
 
 .sidebar .widget .widget_content .widget_content_list li{
@@ -231,7 +231,7 @@ a,button,input,h1,h2,h3{
 
 .sidebar .widget .widget_content .widget_content_list li a:hover{
     background-color: #fcfcfc;
-    color: #5bc4be;
+    color: #9b1915;
 }
 
 /**style of footer**/
@@ -249,13 +249,13 @@ a,button,input,h1,h2,h3{
     display: inline-block;
     padding: 18px 28px;
     text-decoration: none;
-    background: #5bc4be;
+    background: #ee4551;
     color: #ecf8f8;
     font-size: 16px;
 }
 
 .footer a:hover{
-    background: rgb(9,108,111);
+    background: #9b1915;
 }
 
 /**style of copyright**/

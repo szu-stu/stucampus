@@ -13,7 +13,7 @@
 }
 
 .content .categories_list a:hover{
-	background: #f7f7f7;
+	background: rgb(247,247,247);
 }
 
 .content .categories_list a .categories_list_entry{
@@ -39,7 +39,7 @@
 	font-size: 18px;
 	padding: 3px 0;
 	margin-bottom: 3px;
-	color: rgb(9,108,111);
+	color: #9b1915;
 	text-align: left;
 }
 
@@ -73,7 +73,7 @@
 	position: relative;
 	overflow: hidden;
 	display: inline-block;
-	background: #5bc4be;
+	background: #ee4541;
 	text-decoration: none;
 	color: #fff;
 	font-size: 14px;
@@ -82,7 +82,7 @@
 }
 
 .content .pagingbar a:hover{
-	background: rgb(9,108,111)
+	background: #9b1915
 }
 
 .content .pagingbar span{
