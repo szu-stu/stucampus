@@ -39,7 +39,7 @@
 	font-size: 18px;
 	padding: 3px 0;
 	margin-bottom: 3px;
-	color: #9b1915;
+	color: #851613;
 	text-align: left;
 }
 
@@ -73,7 +73,7 @@
 	position: relative;
 	overflow: hidden;
 	display: inline-block;
-	background: #ee4541;
+	background: #cd3e3a;
 	text-decoration: none;
 	color: #fff;
 	font-size: 14px;
@@ -82,7 +82,7 @@
 }
 
 .content .pagingbar a:hover{
-	background: #9b1915
+	background: #851613
 }
 
 .content .pagingbar span{
