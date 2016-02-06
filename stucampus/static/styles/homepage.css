@@ -52,6 +52,9 @@
 	color: #999;
 	line-height: 21px;
 	padding: 0 5px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
 }
 
 .content .cont_articles{

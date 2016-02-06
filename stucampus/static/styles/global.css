@@ -43,7 +43,7 @@ a,button,input,h1,h2,h3{
     position: relative;
     overflow: hidden;
     height: 380px;
-    background: #5bc4be url(/static/images/coverphoto/festival.jpg) center top no-repeat;
+    background: #cd3e3a url(/static/images/coverphoto/festival.jpg) center top no-repeat;
 }
 /** center url(static/images/coverphoto/current.jpg) no-repeat **/
 
