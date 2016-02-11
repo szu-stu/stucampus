@@ -19,13 +19,6 @@ $(function(){
 	// 如果 tab-url 在 document-url 中出现（字符串匹配）
 	// 则认为 tab-url 对应当前页面
 	// 为 tab-url 对应的 li 节点添加 class="current" 样式
-	var thisUrl = document.location.toString().toLowerCase();
-	var group   = $('ul.block_menu li').children('a');
-	var i = 0;
-	for(i=0;i<group.length;i++){
-		var cursorUrl = group[i];
-		if ( thisUrl == cursorUrl ) {
-			$(group[i]).parent('li').addClass('current');
-		}
-	}
+	var thisUrl = location.pathname.toLowerCase();
+	var group   = $('#layout_left a[href="' + thisUrl + '"]').addClass('current');
 });
