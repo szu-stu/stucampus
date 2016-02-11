@@ -10,10 +10,14 @@
 {% csrf_token %}
 {% with formset=page.formset %}
     {{ formset.management_form }}
-    
+
     {% for form in formset %}
         <div class="act_lec_add">
-            <div class="line"></div>
+            {% if forloop.last %}
+                <li>
+                    <label>新增活动信息:</label>
+                </li>
+            {% endif %}
             <li>
                 <label>标题</label>
                 {{ form.title }}
@@ -77,8 +81,10 @@
             <li>
                 <label>已核</label>
                 {{ form.checked }}
-                <label>删除</label>
-                {{ form.DELETE }}
+                {% if forloop.last %}
+                    <label>删除</label>
+                    {{ form.DELETE }}
+                {% endif %}
             </li>
         </div>
         {{ form.id }}

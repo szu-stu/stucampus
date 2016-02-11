@@ -26,6 +26,9 @@
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
 }
+.act_lec_add:last-of-type{
+    margin-top: 80px;
+}
 .act_lec_add li{
     width: 100%;
     margin: 10px 0px;

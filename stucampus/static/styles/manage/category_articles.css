@@ -7,6 +7,9 @@
     overflow: hidden;
     font-size: 0px;
 }
+.category_add:last-of-type{
+    margin-top: 80px;
+}
 .category a{
     display: inline-block;
     background: #7e7e7e;

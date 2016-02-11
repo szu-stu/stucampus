@@ -18,6 +18,11 @@
     {% for form in formset %}
     {{ form.id }}
     <div class="category_add">
+        {% if forloop.last %}
+            <li>
+                <label>新建分类：</label>
+            </li>
+        {% endif %}
         <li>
             <label>分类名</label>
             {{ form.name }}
@@ -47,17 +52,19 @@
                 {% endfor %}
             </span>
         </li>
-        <div class="checkbox">
-            <span>删除</span>
-            {{ form.DELETE }}
-            <span class="error">
-                {% for error in form.DELETE.errors %}
-                    {{ error }}&nbsp;
-                {% endfor %}
-            </span>  
-        </div>
+        {% if not forloop.last %}
+            <div class="checkbox">
+                <span>删除</span>
+                {{ form.DELETE }}
+                <span class="error">
+                    {% for error in form.DELETE.errors %}
+                        {{ error }}&nbsp;
+                    {% endfor %}
+                </span>
+            </div>
+        {% endif %}
     </div>
     {% endfor %}
-    <input type="submit" value="提交" class="add">
+    <input type="submit" value="保存" class="add" />
 </form>
 {% endblock %}
