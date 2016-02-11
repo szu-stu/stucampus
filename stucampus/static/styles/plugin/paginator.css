@@ -30,7 +30,24 @@
     color: #ffffff;
     font-size: 14px;
 }
-.page a:hover {
+#_paginator_page{
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 1em 0;
+    vertical-align: top;
+    width: 4em;
+    height: 50%;
+    text-align: center;
+}
+#_jump_page{
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 1em 0;
+    vertical-align: top;
+    height: 50%;
+    text-align: center;
+}
+.page a:hover{
     background: #424242;
     color: #ffffff;
 }

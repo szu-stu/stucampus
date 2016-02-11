@@ -7,9 +7,21 @@
     {% if page.has_previous %}
         <a href="?page={{ page.previous_page_number }}">上一页</a>
     {% endif %}
-        <span class="present">{{ page.number }}</span>
+    {{ page.page_range }}
+        <select id="_paginator_page">
+            {% for p in page.paginator.page_range %}
+                <option value="{{ p }}"{% if p == page.number %} selected="selected"{% endif %}>{{ p }}</option>
+            {% endfor %}
+        </select>
+        <button id="_jump_page" onclick="jump_page()">跳页</button>
     {% if page.has_next %}
         <a href="?page={{ page.next_page_number }}">下一页</a>
     {% endif %}
         <a href="?page={{ page.paginator.num_pages }}">尾页</a>
 </div>
+<script type="text/javascript">
+	function jump_page(){
+		var page = $('#_paginator_page').val();
+		location.href += "?page="+page;
+	};
+</script>
