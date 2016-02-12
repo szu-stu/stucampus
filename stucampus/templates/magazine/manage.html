@@ -7,25 +7,31 @@
 {% endblock %}
 
 {% block content %}
-<div class="list_title">
-	<span style="width:8%">杂志</span>
-    <span style="width:27%">标题</span>
-    <span style="width:7%">期数</span>
-    <span style="width:45%">文件</span>
-    <span style="width:10%">操作</span>
-</div>
-<div class="message_container">
-{% for magazine in list %}
-	<li>
-		<span style="width:10%">{{ magazine.name }}</span>
-		<span style="width:26%">{{ magazine.title }}</span>
-		<span style="width:5%">{{ magazine.issue }}</span>
-		<span style="width:45%">{{ magazine.pdf_file }}</span>
-		<a href="{% url 'magazine:modify' %}?id={{ magazine.id }}" class="modify">修改</a>
-		<a href="{% url 'magazine:delete' %}?id={{ magazine.id }}" class="modify">删除</a>
-	</li>
-	<div class="line_list"></div>
-{% endfor %}
-</div> 
+
+<table id="magazine_list">
+	<thead>
+		<tr>
+			<td>杂志</td>
+		    <td>标题</td>
+		    <td>期数</td>
+		    <td>操作</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for magazine in list %}
+			<tr>
+				<td>{{ magazine.name }}</td>
+				<td><a href="{{MEDIA_URL}}{{ magazine.pdf_file }}" target="_blank">{{ magazine.title }}</a></td>
+				<td>{{ magazine.issue }}</td>
+				<td>
+					<a href="{% url 'magazine:modify' %}?id={{ magazine.id }}">修改</a>
+					<a href="{% url 'magazine:delete' %}?id={{ magazine.id }}">删除</a>
+				</td>
+			</tr>
+		{% empty %}
+			<tr><td colspan="4">无杂志</td></tr>
+		{% endfor %}
+	</tbody>
+</table>
 <a href="{% url 'magazine:add' %}" class="add">新增</a>
 {% endblock %}

@@ -1,5 +1,16 @@
-.modify{
-    display: inline-block;
-    width: 5%;
+#magazine_list{
+    width: 80%;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 45px;
+    padding: 20px;
     text-align: center;
+}
+#magazine_list thead tr td{
+	border-bottom: 1px solid gray;
+	border-collapse: collapse;
+}
+#magazine_list td{
+	padding: 10px;
 }
