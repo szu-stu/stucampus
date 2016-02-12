@@ -19,6 +19,8 @@
         <a href="{{ magazine.pdf_file.url }}" style="float: right; padding-right: 5px;">下载</a>
     </li>
     <div class="line"></div>
+    {% empty %}
+        <li>无内容</li>
     {% endfor %}
 </div>
 {% endblock %}
