@@ -52,8 +52,8 @@
         <div class="home_description">深圳大学学子天地  深大第一学生门户网站</div>
         <div class="home_nav">
             <a href="/">学子首页</a>
-            <a href="/articles/photography/">深大摄影</a>
-            <a href="/articles/interesting/">趣物志</a>
+            <a href="{% url 'articles:list' 'photography' %}">深大摄影</a>
+            <a href="{% url 'articles:list' 'interesting' %}">趣物志</a>
             <a href="{% url 'lecture:index' %}">深大讲座</a>
             <a href="{% url 'activity:index' %}">活动预告</a>
             
