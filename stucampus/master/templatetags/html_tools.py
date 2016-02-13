@@ -61,7 +61,7 @@ def nospaces(parser, token):
 def autoSwapCDN( context, filepath ):
     try:
         request = context['request']
-        ip = '123.123.123.123' # get_real_ip(request)
+        ip =  get_real_ip(request)
 
         fullpath = settings.STATIC_URL + filepath
 
