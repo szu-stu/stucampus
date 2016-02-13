@@ -3,8 +3,10 @@ import re
 from hashlib import md5
 
 from django import template
+from django.conf import settings
 
 from stucampus.settings import path
+from ipware.ip import get_real_ip
 
 
 register = template.Library()
@@ -53,3 +55,20 @@ def nospaces(parser, token):
     nodelist = parser.parse(('endnospaces',))
     parser.delete_first_token()
     return StripspacesNode(nodelist, replacement='')
+
+
+@register.simple_tag(takes_context=True)
+def autoSwapCDN( context, filepath ):
+    try:
+        request = context['request']
+        ip = '123.123.123.123' # get_real_ip(request)
+
+        fullpath = settings.STATIC_URL + filepath
+
+        #return cdn address if is public ip
+        if ip is not None and hasattr(settings,'QINIU_BUCKET_DOMAIN'):
+            # we have a real, public ip address for user
+            fullpath = '//' + settings.QINIU_BUCKET_DOMAIN + fullpath
+    except ValueError:
+        raise template.TemplateSyntaxError("%r tag requires exactly one argument" % filepath)
+    return fullpath
