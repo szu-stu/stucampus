@@ -16,7 +16,7 @@ class ListAccount(View):
     """List all accounts class-base view"""
     @method_decorator(check_perms('account.student_manager'))
     def get(self, request):
-        paginator = Paginator(Student.objects.all().order_by('-pk'), 4)
+        paginator = Paginator(Student.objects.all().order_by('-pk'), 10)
         try:
             page = paginator.page(request.GET.get('page'))
         except InvalidPage:
