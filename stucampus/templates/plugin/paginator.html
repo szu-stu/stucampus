@@ -3,9 +3,9 @@
 {{ 'plugin/paginator.css' | as_css }}
 {% endblock %}
 <div class="page">
-        <a href="?page=1">首页</a>
+        <a href="{% url_replace 'page' 1 %}">首页</a>
     {% if page.has_previous %}
-        <a href="?page={{ page.previous_page_number }}">上一页</a>
+        <a href="{% url_replace 'page' page.previous_page_number %}">上一页</a>
     {% endif %}
     {{ page.page_range }}
         <select id="_paginator_page">
@@ -15,13 +15,21 @@
         </select>
         <button id="_jump_page" onclick="jump_page()">跳页</button>
     {% if page.has_next %}
-        <a href="?page={{ page.next_page_number }}">下一页</a>
+        <a href="{% url_replace 'page' page.next_page_number %}">下一页</a>
     {% endif %}
-        <a href="?page={{ page.paginator.num_pages }}">尾页</a>
+        <a href="{% url_replace 'page' page.paginator.num_pages %}">尾页</a>
 </div>
 <script type="text/javascript">
 	function jump_page(){
 		var page = $('#_paginator_page').val();
-		location.href += "?page="+page;
+		location.href = replaceUrlParam( location.href, 'page', page );
 	};
+
+    function replaceUrlParam(url, paramName, paramValue){
+        var pattern = new RegExp('\\b('+paramName+'=).*?(&|$)')
+        if(url.search(pattern)>=0){
+            return url.replace(pattern,'$1' + paramValue + '$2');
+        }
+        return url + (url.indexOf('?')>0 ? '&' : '?') + paramName + '=' + paramValue
+    }
 </script>
