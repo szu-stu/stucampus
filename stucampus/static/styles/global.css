@@ -43,7 +43,9 @@ a,button,input,h1,h2,h3{
     position: relative;
     overflow: hidden;
     height: 380px;
-    background: #cd3e3a url(/static/images/coverphoto/festival.jpg) center top no-repeat;
+    background: #48857f url(/static/images/coverphoto/festival.jpg) center top no-repeat;
+    -webkit-background-size: cover;
+background-size: cover;
 }
 /** center url(static/images/coverphoto/current.jpg) no-repeat **/
 
@@ -152,7 +154,7 @@ a,button,input,h1,h2,h3{
     margin-bottom: 8px;
     padding-bottom: 3px;
     color: #000;
-    border-bottom: 2px solid #cd3e3a;
+    border-bottom: 2px solid #48857f;
 /**
     border-left: 8px solid #5bc4be;
     padding: 2px 0 3px 8px;
@@ -181,7 +183,7 @@ a,button,input,h1,h2,h3{
     display: inline-block;
     font-size: 16px;
     font-weight: normal;
-    background-color: #cd3e3a;
+    background-color: #48857f;
     color: #fff;
     padding: 11px 18px 8px;
     border-radius: 2px 2px 0 0;
@@ -207,7 +209,7 @@ a,button,input,h1,h2,h3{
 }
 
 .sidebar .widget .widget_content{
-    border-top: 3px solid #cd3e3a;
+    border-top: 3px solid #48857f;
 }
 
 .sidebar .widget .widget_content .widget_content_list li{
@@ -231,7 +233,7 @@ a,button,input,h1,h2,h3{
 
 .sidebar .widget .widget_content .widget_content_list li a:hover{
     background-color: #fcfcfc;
-    color: #851613;
+    color: #175650;
 }
 
 /**style of footer**/
@@ -249,13 +251,13 @@ a,button,input,h1,h2,h3{
     display: inline-block;
     padding: 18px 28px;
     text-decoration: none;
-    background: #cd3e3a;
+    background: #48857f;
     color: #ecf8f8;
     font-size: 16px;
 }
 
 .footer a:hover{
-    background: #851613;
+    background: #175650;
 }
 
 /**style of copyright**/

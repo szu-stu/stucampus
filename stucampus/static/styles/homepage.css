@@ -13,7 +13,7 @@
 }
 
 .content .cont_headline a:hover .cont_headline_entry h3{
-	background: #cd3e3a;
+	background: #48857f;
 	color: #fff;
 }
 
@@ -27,7 +27,7 @@
 .content .cont_headline a .cont_headline_entry .headline_pic{
 	position: absolute;
 	overflow: hidden;
-	background: #cd3e3a;
+	background: #48857f;
 	height: 120px;
 	width: 180px;
 	left: 0;
@@ -40,7 +40,7 @@
 	font-size: 22px;
 	padding: 5px 0;
 	margin-bottom: 5px;
-	color: #851613;
+	color: #175650;
 	text-align: center;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .content .cont_articles .articles_list ul a:hover,.content .cont_articles .articles_list ul a:hover p{
-	background: #cd3e3a;
+	background: #48857f;
 	color: #fff;
 }
 
@@ -167,7 +167,7 @@
 	position: relative;
 	overflow: hidden;
 	display: inline-block;
-	background-color: #cd3e3a;
+	background-color: #48857f;
 	color: #fff;
 	padding: 3px 5px 3px;
 	border-radius: 2px;
@@ -179,7 +179,7 @@
 }
 
 .content .co_social a:hover .co_social_box h3{
-	background: #851613;
+	background: #175650;
 }
 
 .content .co_media{
@@ -222,7 +222,7 @@
 	position: relative;
 	overflow: hidden;
 	display: inline-block;
-	background-color: #cd3e3a;
+	background-color: #48857f;
 	color: #fff;
 	padding: 3px 5px 3px;
 	border-radius: 2px;
@@ -234,7 +234,7 @@
 }
 
 .content .co_media a:hover .co_media_box h3{
-	background: #851613;
+	background: #175650;
 }
 
 /**style of widget_co_guide**/
@@ -249,11 +249,11 @@
 
 .sidebar .widget .widget_content ul.widget_co_guide li{
 	padding: 10px;
-	border-bottom: 1px solid #cd3e3a;
+	border-bottom: 1px solid #48857f;
 }
 
 .sidebar .widget .widget_content ul.widget_co_guide h3{
-	color: #cd3e3a;
+	color: #48857f;
 }
 
 .sidebar .widget .widget_content ul.widget_co_guide a{
@@ -265,13 +265,13 @@
 	padding: 2px 6px 3px;
 	margin: 2px;
 	color: #fff;
-	background-color: #cd3e3a;
+	background-color: #48857f;
 	border-radius: 2px;
 }
 
 .sidebar .widget .widget_content ul.widget_co_guide a:hover{
 	color: #fff;
-	background-color: #851613;
+	background-color: #175650;
 }
 
 /**style of widget_co_league**/
@@ -293,12 +293,12 @@
 	padding: 3px 8px 4px;
 	margin: 2px;
 	color: #fff;
-	background-color: #cd3e3a;
+	background-color: #48857f;
 	border-radius: 2px;
 }
 
 .sidebar .widget .widget_content ul.widget_co_league a:hover{
-	background-color: #851613;
+	background-color: #175650;
 }
 
 .sidebar .widget .widget_content .ds-recent-comments,.sidebar .widget .widget_content .ds-recent-visitors{
@@ -314,7 +314,7 @@
 }
 
 .sidebar .widget .widget_content .ds-recent-comments  a:hover{
-	color: #851613;
+	color: #175650;
 }
 .sidebar .widget .widget_banner li{
 	margin-bottom: 8px;
