@@ -9,6 +9,7 @@ class ActivityMessageForm(ModelForm):
     class Meta:
         model = ActivityMessage
         widgets = {'date': SelectDateWidget()}
+        exclude=['modified_date_time']
 
 
 ActivityMessageFormSet = modelformset_factory(ActivityMessage,

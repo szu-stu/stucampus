@@ -1,21 +1,18 @@
 from django.conf.urls import patterns, url
 
 from stucampus.master.views.manage.account import ListAccount, ShowAccount
-from stucampus.master.views.manage.infor import ListInfor, PostInfor
-from stucampus.master.views.manage.infor import Information
-from stucampus.master.views.manage.organization import ListOrganization
-from stucampus.master.views.manage.organization import ShowOrganization
-from stucampus.master.views.manage.organization import OrganzationManager
+from stucampus.master.views.manage.infor import ListInfor, PostInfor,Information
+from stucampus.master.views.manage.organization import ListOrganization,OrganzationManager,ShowOrganization
 from stucampus.organization.views import EditOrganization
+from stucampus.master.views.manage.index import redirect as admin_index_redirect,index as admin_index
+from stucampus.organization.views import organization_manage
 
-
-urlpatterns = patterns(
-    '',
-    url(r'^$', 'stucampus.master.views.manage.index.redirect',
+urlpatterns = [
+    url(r'^$', admin_index_redirect,
         name='admin_index_redirect'),
 
     url(r'^index$',
-        'stucampus.master.views.manage.index.index', name='admin_index'),
+        admin_index, name='admin_index'),
 
     url(r'^organization/list$', ListOrganization.as_view(),
         name='manage_organization_list'),
@@ -34,9 +31,9 @@ urlpatterns = patterns(
         name='manage_infor_infor'),
 
     url(r'^organization$',
-        'stucampus.organization.views.organization_manage',
+        organization_manage,
         name='organization_manage'),
     url(r'^organization/(?P<id>\d+)/edit$', EditOrganization.as_view(),
         name='organization_edit'),
 
-)
+]

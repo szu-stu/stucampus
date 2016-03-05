@@ -13,6 +13,15 @@ class MagazineForm(forms.ModelForm):
     name = forms.ChoiceField(choices=NAME_CHOICE)
     class Meta:
         model = Magazine
+        fields=['name','title','issue','summary','pdf_file']
+
+    
+    
+    
+     
+
+    
+    
 
     def clean(self):
         if 'issue' not in self.cleaned_data or \

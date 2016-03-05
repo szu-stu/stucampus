@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, url
 
+from .views import organization
 
-urlpatterns = patterns(
-    '',
-    url(r'^$', 'stucampus.organization.views.organization',
-        name='organization'),
-)
+urlpatterns = [
+    url(r'^$', organization, name='organization'),
+]

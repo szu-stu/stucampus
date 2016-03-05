@@ -29,25 +29,25 @@ class DecimalField(IntegerField):
         'invalid': _(ENTER_A_NUMBER),
         'max_digits': ungettext_lazy(
             # 'Ensure that there are no more than %(max)s digit in total.',
-            '请确保输入的值不大于 %(max)s'
+            '请确保输入的值不大于 %(max)s',
             # 'Ensure that there are no more than %(max)s digits in total.',
-            '请确保输入的值不大于 %(max)s'
+            '请确保输入的值不大于 %(max)s',
             # 'max',
             '最大'),
         'max_decimal_places': ungettext_lazy(
             # 'Ensure that there are no more than %(max)s decimal place.',
-            '请确保输入的值不大于 %(max)s'
+            '请确保输入的值不大于 %(max)s',
             # 'Ensure that there are no more than %(max)s decimal places.',
-            '请确保输入的值不大于 %(max)s'
+            '请确保输入的值不大于 %(max)s',
             # 'max',
             '最大'),
         'max_whole_digits': ungettext_lazy(
             # 'Ensure that there are no more than %(max)s '
             # 'digit before the decimal point.',
-            '请确保输入的值不大于 %(max)s'
+            '请确保输入的值不大于 %(max)s',
             # 'Ensure that there are no more than %(max)s '
             # 'digits before the decimal point.',
-            '请确保输入的值不大于 %(max)s'
+            '请确保输入的值不大于 %(max)s',
             # 'max',
             '最大'),
     }

@@ -13,7 +13,7 @@ class ResourceForm(forms.ModelForm):
 
     class Meta:
         model = Resource
-        exclude = ('is_top')
+        exclude = ['is_top']
 
     def _resize_img(self, field):
         if field is None:

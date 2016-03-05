@@ -17,5 +17,5 @@ class ArticleForm(forms.ModelForm):
         }
 
 
-CategoryFormset = modelformset_factory(Category, extra=1, can_delete=True)
+CategoryFormset = modelformset_factory(Category, fields=["name","english_name","priority"],extra=1, can_delete=True)
         

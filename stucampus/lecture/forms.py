@@ -9,6 +9,7 @@ class LectureForm(forms.ModelForm):
     class Meta:
         model = LectureMessage
         widgets = {'date': SelectDateWidget()}
+        exclude=["download_date"]
 
 
 LectureFormset = modelformset_factory(LectureMessage,

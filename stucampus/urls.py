@@ -3,48 +3,64 @@ import os
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
+from django.views.static import serve as static_serve
+
+from DjangoUeditor import urls as django_urls
+
+from stucampus.master import urls as master_urls
+from stucampus.account import urls as account_urls
+from stucampus.organization import urls as organization_urls
+from stucampus.articles import urls as articles_urls
+from stucampus.magazine import urls as magazine_urls
+from stucampus.lecture import urls as lecture_urls
+from stucampus.activity import urls as activity_urls
+from stucampus.szuspeech import urls as szuspeech_urls
+from stucampus.minivideo import urls as minivideo_urls
+from stucampus.spider import urls as spider_urls
+from stucampus.FreeTimeCount import urls as FreeTimeCount_urls
+from stucampus.master.views.front import index,about_us
+
 
 
 admin.autodiscover()
 
 
-urlpatterns = patterns(
-    '',
-    url(r'^ueditor/', include('DjangoUeditor.urls')),
-    url(r'^$', 'stucampus.master.views.front.index', name='home'),
-    url(r'^aboutus$', 'stucampus.master.views.front.about_us', name='aboutus'),
-    url(r'^manage/', include('stucampus.master.urls', namespace='master')),
-    url(r'^account/', include('stucampus.account.urls', namespace='account')),
-    url(r'^organization/', include('stucampus.organization.urls',
+urlpatterns = [
+    url(r'^ueditor/', include(django_urls)),
+    url(r'^$', index, name='home'),
+    url(r'^aboutus$',about_us, name='aboutus'),
+    url(r'^manage/', include(master_urls, namespace='master')),
+    url(r'^account/', include(account_urls, namespace='account')),
+    url(r'^organization/', include(organization_urls,
                                    namespace='organization')),
     #url(r'^infor/', include('stucampus.infor.urls', namespace='infor')),
-    url(r'^articles/', include('stucampus.articles.urls',
+    url(r'^articles/', include(articles_urls,
                                 namespace='articles')),
-    url(r'^magazine/', include('stucampus.magazine.urls',
+    url(r'^magazine/', include(magazine_urls,
                                 namespace='magazine')),
-    url(r'^lecture/', include('stucampus.lecture.urls',
+    url(r'^lecture/', include(lecture_urls,
                               namespace='lecture')),
-    url(r'^activity/', include('stucampus.activity.urls',
+    url(r'^activity/', include(activity_urls,
                                namespace='activity')),
-    url(r'^szuspeech/', include('stucampus.szuspeech.urls',
+    url(r'^szuspeech/', include(szuspeech_urls,
                                namespace='szuspeech')),
-    url(r'^minivideo/', include('stucampus.minivideo.urls',
+    url(r'^minivideo/', include(minivideo_urls,
                                namespace='minivideo')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^spider/', include('stucampus.spider.urls', namespace='spider')),
-    # url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
-	url(r'^freetimecount/', include('stucampus.FreeTimeCount.urls')),
-)
+    url(r'^spider/', include(spider_urls, namespace='spider')),
+    #url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
+	url(r'^freetimecount/', include(FreeTimeCount_urls,namespace='FreeTimeCount')),
+]
 
-# serve media file when using developing server
+#serve media file when using developing server
 if settings.DEBUG:
-    urlpatterns += patterns('',
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', static_serve,
             {'document_root': settings.MEDIA_ROOT,}),
-        url(r'^pdfjs/(?P<path>.*)$', 'django.views.static.serve',
+        url(r'^pdfjs/(?P<path>.*)$', static_serve,
             {'document_root': os.path.join(settings.ROOT, 'stucampus',
                                            'static', 'pdfjs'),}),
-        )
+        ]
 
 
 handler404 = 'stucampus.master.views.front.page_not_found'

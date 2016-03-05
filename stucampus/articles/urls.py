@@ -8,8 +8,7 @@ from stucampus.articles.views import CategoryView
 from stucampus.articles.views import article_list, article_display
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^manage/$', manage, name='manage'),
     url(r'^add/$', AddView.as_view(), name='add'),
     url(r'^modify/$', ModifyView.as_view(), name='modify'),
@@ -23,4 +22,4 @@ urlpatterns = patterns(
 
     url(r'^(?P<category>\D*)/$', article_list, name='list'),
     url(r'^(?P<id>\d*)/$', article_display, name='display'),
-)
+]
