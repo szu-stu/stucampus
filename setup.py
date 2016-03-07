@@ -5,7 +5,7 @@ install_requires = [l.strip() for l in open("requirements.txt", "r")]
 
 
 metadata = {"name": "stucampus",
-            "version": "0.1",
+            "version": "1.9.2",
             "packages": find_packages(),
             "author": "szulabs",
             "author_email": "szulabs@gmail.com",

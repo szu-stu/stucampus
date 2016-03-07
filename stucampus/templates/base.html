@@ -16,11 +16,12 @@
     {{ 'plugins/jquery.min.js' | as_js }}
     {{ 'plugins/jquery.tools.min.js' | as_js }}
     {{ 'plugins/jquery.form.js' | as_js}}
+    {{ 'plugins/jquery.lazyload.min.js' | as_js }}
     {{ 'ga.js' | as_js }}
     {{ 'global.js' | as_js }}
+
     {{ 'style-fix.css' | as_css }}
     {{ 'message-box.css' | as_css }}
-
     {{ 'global.css'  | as_css }}
     {{ 'responsive.css'  | as_css }}
     
@@ -33,12 +34,23 @@
 </head>
 <script type="text/javascript">
     $(function(){
-       $('.home_nav > a').each(function(){
+        $('.home_nav > a').each(function(){
            if( $(this).attr('href').search('^'+location.pathname,'i') == 0){
-            $(this).addClass('nav_current');
-            return false;
-        }
+                $(this).addClass('nav_current');
+                return false;
+            }
+        });
+
+        $("img").each(function() {
+            var original = $(this).attr("src");
+            $(this).attr("data-original", original)
+            .addClass("lazy");
+
+        });
+        $("img.lazy").lazyload({
+            effect : "fadeIn"
        }); 
+
     });
 </script>
 <body>
