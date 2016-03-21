@@ -1,0 +1,291 @@
+@media screen and (max-width: 1366px){
+    html{
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 768px){
+    html{
+        font-size: 20px ;
+    }
+}
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #ddd;
+}
+.inner_body{
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 1366px;
+}
+.header{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 1.733333rem;
+    width: 100%;
+    background-color: rgb(242,242,242);
+    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.16);
+    z-index: 998;
+}
+.header-secshadow{
+    position: absolute;
+    height: 1.733333rem;
+    width: 100%;
+    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.23);
+}
+.header ul{
+    position: absolute;
+    right: 6.433333rem;
+    top: 0;
+    display: block;
+    width: 20.0rem;
+    height: 1.733333rem;
+}
+.header ul li{
+    display: block;
+    width: 4.0rem;
+    height: 1.733333rem;
+    text-align: center;
+    float: left;
+}
+.nav-active{
+    color: #5BC5BE !important;
+}
+.now{
+    position: absolute;
+    height: 1.6rem !important;
+    border-bottom: 4px solid #5BC5BE;
+    transition: left 0.5s ease-out;
+    -moz-transition: left 0.5s ease-out; /* Firefox 4 */
+    -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
+    -o-transition: left 0.5s ease-out; /* Opera */
+}
+.header ul li a{
+    display: block;
+    width: 4.0rem;
+    height: 1.733333rem;
+    color: rgba(0,0,0,0.54);
+    font-size: 0.533333rem;
+    font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
+    letter-spacing: 0.106667rem;
+    line-height: 1.733333rem;
+    text-align: center;
+    text-decoration: none;
+}
+.header ul li a:hover{
+    color: rgb(0,0,0);
+}
+.fixed-logo{
+    display: block;
+    position: fixed;
+    left: 6.433333rem;
+    top: 0.133333rem;
+    border: 0.133333rem solid rgba(255,255,255,0.54);
+    border-radius: 90%;
+    height: 2.733333rem;
+    width: 2.733333rem;
+    z-index: 999;
+    overflow: hidden;
+    transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    -moz-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    -webkit-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    -o-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    box-shadow: 0 0.333333rem 0.333333rem rgba(0,0,0,0.19);
+}
+.fixed-logo img{
+    height: 2.733333rem;
+    width: 2.733333rem;
+    box-shadow: 0 0.2rem 0.1rem rgba(0,0,0,0.23);
+}
+.artical-header{
+    position: relative;
+    margin: 1.733333rem auto 0 auto;
+    height: 12.5rem;
+    width: 32rem;
+    overflow: hidden;
+    background-image: url("/images/artical-cover.jpg");
+    background-size: 100% 100%;
+}
+.blur{
+    position: absolute;
+    height: 12.5rem;
+    width: 32.0rem;
+    background-color: rgba(0,0,0,0.16);
+}
+.back{
+    display: none;
+}
+.artical-title{
+    position: absolute;
+    top: 3.0rem;
+    left: 6rem;
+    display: block;
+    display: -webkit-box;
+    width: 21rem;
+    height: auto;
+    text-align: center;
+    color: rgba(255,255,255,0.87);
+    font-size: 2.166667rem;
+    line-height: 3.2rem;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-family: "SourceHanSans-Medium","Roboto-Medium","Microsoft YaHei";
+}
+.btn{
+    display: none;
+}
+.artical-main{
+    margin: 0 auto;
+    width: 28.8rem;
+    padding: 0 1.6rem;
+    background-color: #FDFDFD;
+    overflow: hidden;
+    box-shadow: 0rem 0.1rem 0.1rem rgba(0,0,0,0.16);
+}
+.artical-information{
+    margin: 1.6rem auto;
+    width: 28.8rem;
+    text-align: center;
+    color: rgba(0,0,0,0.54);
+    font-size: 0.6rem;
+    letter-spacing: ;
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+
+}
+.artical-text {
+    overflow: hidden;
+}
+.artical-text img{
+    max-width: 90%;
+}
+.artical-foot{
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    height: 9.133333rem;
+}
+.artical-foot hr{
+    position: absolute;
+    top: 4.066667rem;
+    height: 1px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.08);
+}
+.like-content{
+    position: absolute;
+    top: 1.666667rem;
+    height: 1.0rem;
+    width: 100%;
+}
+.like-content img{
+    position: absolute;
+    height: 0.8rem;
+    width: 0.8rem;
+}
+.like-content p{
+    position: absolute;
+    display: block;
+    height: 1.0rem;
+    font-size: 0.6rem;
+    line-height: 0.8rem;
+    color: rgba(0,0,0,0.54);
+}
+.editor{
+    position: absolute;
+    right: 0;
+    color: rgba(0,0,0,0.87);
+    font-size: 0.6rem;
+    letter-spacing: 0;
+    font-family: "SourceHanSans-Blod","Roboto-Blod","Microsoft YaHei";
+    font-weight: 600;
+}
+.comment_img{
+    right: 5.33333rem;
+}
+.comment_p{
+    right: 3.5rem;
+}
+.eye_img{
+    right: 1.83333rem;
+}
+.eye_p{
+    right: 0rem;
+}
+.like-content div p{
+    position: static;
+    height: 1rem;
+}
+.foot{ 
+    position: absolute;
+    bottom: 0;
+    display: block;
+    height: 4.666667rem;
+    width: 10.9rem;
+    text-decoration: none;
+}
+.foot img{
+    position: absolute;
+    top: 1.066667rem;
+    right: 4.583333rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    transition: opacity 0.5s ;
+}
+.foot img:nth-child(2){
+    display: block;
+    opacity: 0;
+}
+.foot:active img:nth-child(2){
+    opacity: 1;
+}
+.foot:hover img:nth-child(2){
+    opacity: 1;
+}
+.foot p{
+    display: block;
+    position: absolute;
+    top: 2.666667rem;
+    width: 10.9rem;
+    text-align: center;
+    color: rgba(0,0,0,0.87);
+    font-size: 0.6rem;
+    line-height: 1rem;
+    letter-spacing: 0.02rem;
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
+    font-weight: 200;
+}
+.share{
+    left: 0rem;
+}
+.comment{
+    right: 0rem;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.clear_marginR{
+    margin-right:0 !important;
+}
+
+.comment-main{
+    margin: 1.066667rem auto;
+    width: 28.8rem;
+    padding: 0.6rem 1.6rem;
+    background-color: #FDFDFD;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0rem 0.1rem 0.1rem rgba(0,0,0,0.16);
+
+}

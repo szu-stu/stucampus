@@ -1,0 +1,436 @@
+
+@media screen and (max-width: 640px){
+    html{
+        font-size: 24.9px;
+    }
+}
+@media screen and (max-width: 480px){
+    html{
+        font-size: 18.5px;
+    }
+}
+@media screen and (max-width: 360px){
+    html{
+        font-size: 14.4px ;
+    }
+}
+
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: #ddd;
+}
+.clear-margin{
+    margin: 0 !important;
+}
+.header-pc{
+    display: none;
+}
+.header-phone{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3.466667rem;
+    width: 100%;
+    background-color: #5BC5BE;
+    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.16);
+    z-index: 999;
+}
+.header-phone a{
+    display: block;
+    width:1.6rem;
+    height: 1.6rem;
+    padding: 0.933333rem 1.4rem;
+    float: left;
+}
+.header-phone img{
+    width:1.6rem;
+    height: 1.6rem;
+}
+.header-phone p{
+    display:block; 
+    height: 3.466667rem;
+    color: rgba(255,255,255,0.87);
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+    font-size: 1.2rem;
+    line-height: 3.466667rem;
+    letter-spacing: 0.24rem;
+    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.32);
+}
+.fixed-logo{
+    display: block;
+    position: fixed;
+    right: 1.066667rem;
+    bottom: 1.066667rem;
+    border: 0.2rem solid rgba(255,255,255,0.54);
+    border-radius: 90%;
+    height: 3.333333rem;
+    width: 3.333333rem;
+    z-index: 999;
+    overflow: hidden;
+    transform: scale(0);
+    -webkit-transform: scale(0);
+    -o-transform: scale(0);
+    -moz-transform: scale(0);
+    transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    -webkit-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    -o-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    -moz-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+    box-shadow: 0 0.666667rem 0.666667rem rgba(0,0,0,0.19);
+}
+.fixed-logo img{
+    display: block;
+    height: 3.333333rem;
+    width: 3.333333rem;
+    box-shadow: 0 0.4rem 0.2rem rgba(0,0,0,0.23);
+    transition: all 0s ease-out;
+    -webkit-transition: all 0s ease-out;
+    -o-transition: all 0s ease-out;
+    -moz-transition: all 0s ease-out;
+}
+.sidebar{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -25rem;
+    width: 25rem;
+    height: 100%;
+    transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out; /* Firefox 4 */
+    -webkit-transition: all 0.5s ease-out; /* Safari 和 Chrome */
+    -o-transition: all 0.5s ease-out; /* Opera */
+    z-index: 999;
+}
+.sidebarout{
+    left: 0;
+}
+.sidebar-top{
+    position: relative;
+    width: 21.266667rem;
+    height: 11.466667rem;
+}
+.sidebar-blur{
+    position: absolute;
+    width: 21.266667rem;
+    height: 11.466667rem;
+    background-color: rgba(0,0,0,0.08);
+}
+.stucampus_name{
+    display: block;
+    overflow:hidden;
+    position: absolute;
+    left: 2.133333rem;
+    bottom: 3.733333rem;
+    width: 12.0rem;
+    height: 1.3rem;
+    line-height: 1.2rem;
+    font-family: "SourceHanSans-Regular","Microsoft YaHei";
+    color: rgba(255,255,255,0.87);
+    font-size: 1.2rem;
+    letter-spacing: 1.8rem;
+}
+.stuc_description{
+    display: block;
+    overflow:hidden;
+    position: absolute;
+    left: 2.133333rem;
+    bottom: 2.133333rem;
+    width: 12.0rem;
+    height: 0.9rem;
+    line-height: 0.8rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.87);
+    letter-spacing: 0.25rem;
+}
+.call-back{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    height: 100%;
+    width: 25rem;
+    float: right;
+    z-index: -1;
+    background-color: rgba(0,0,0,0.18);
+}
+.sidebar-main{
+    width: 21.266667rem;
+    height: 100%;
+    overflow: scroll;
+    float: left;
+    background-color: #FAFAFA;
+}
+.sidebar ul{
+    display: block;
+    width: 21.266667rem;
+    height: 16.566667rem;
+    background-color: #FAFAFA;
+    z-index: 999;
+}
+.sidebar img{
+    width: 21.266667rem;
+    height: 11.466667rem;
+    z-index: 999;
+}
+.sidebar hr{
+    margin-top: 0.533333rem;
+    margin-bottom: 0.533333rem;
+    height: 1px;
+    background-color: rgba(0,0,0,0.16);
+}
+.nav1{
+    overflow: hidden;
+}
+.nav1 li,a{
+    position: relative;
+    display: block;
+    height: 3.2rem;
+    line-height: 3.2rem;
+    color: rgba(0,0,0,1);
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+    font-size: 0.933333rem;
+    letter-spacing: 0.04666rem;
+    text-decoration: none;
+}
+.nav1 a{
+    padding-left: 4.8rem;
+}
+.nav1 li:nth-child(1){
+    margin-top: 0.533333rem;
+}
+.nav1 li img{
+    position: absolute;
+    top: 0.8rem;
+    left: 1.066667rem;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+.nav1 a:hover{
+    background-color: #E8E8E8;
+}
+.nav2{
+    display: block;
+    height: auto;
+}
+.nav2 li,a{
+    position: relative;
+    display: block;
+    height: 3.2rem;
+    line-height: 3.2rem;
+    color: rgba(0,0,0,1);
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+    font-size: 0.933333rem;
+    letter-spacing: 0.04666rem;
+    text-decoration: none;
+}
+.nav2 a{
+    padding-left: 4.8rem;
+}
+.nav2 li img{
+    position: absolute;
+    top: 0.8rem;
+    left: 1.066667rem;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+.nav2 a:hover{
+    background-color: #E8E8E8;
+}
+.banner{
+    position: relative;
+    margin-top: 3.466667rem;
+    width: 25.0rem;
+    height: 9.733333rem;
+    overflow: hidden;
+}
+.blur{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 9.733333rem;
+    background-color: rgba(0,0,0,0.32);
+}
+.selector{
+    position: absolute;
+    bottom: 0.8rem;
+    left: 40%;
+    display: block;
+    width: 5.4rem;
+    height: 0.6rem;
+    z-index: 20;
+    float: left;
+}
+.round1,.round2,.round3,.round4{
+    display: block;
+    margin-left: 0.933333rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    background-color: rgba(255,255,255,0.54);
+    border-radius: 50%;
+    float: left;
+}
+.round1{
+    margin-left:0 ;
+}
+.active{
+    background-color: rgba(91,197,190,0.54);
+}
+.b-container{
+    width: 100.0rem;
+    height: 9.733333rem;
+}
+#banner1,#banner2,#banner3,#banner4{
+    position: relative;
+    display: block;
+    width: 25.0rem;
+    height: 9.733333rem;
+    overflow: hidden;
+    text-decoration: none;
+    float: left;
+    /*background-color: rgba(0,0,0,0.32);*/
+    transition: left 0.5s ease-out;
+    -moz-transition: left 0.5s ease-out; /* Firefox 4 */
+    -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
+    -o-transition: left 0.5s ease-out; /* Opera */
+}
+.banner img{
+    position: absolute;
+    width: 100%;
+    height: 9.733333rem;
+    z-index: -1;
+}
+.banner_title{
+    position: absolute;
+    top: 2.066667rem;
+    width: 25.0rem;
+    color: rgba(255,255,255,0.87);
+    font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
+    font-size: 2.0rem;
+    letter-spacing: 0.4rem;
+    line-height: 2.0rem;
+    font-weight: bold;
+    text-align: center;
+}
+.banner_describe{
+    position: absolute;
+    top: 5.533333rem;
+    width: 25.0rem;
+    color: rgba(255,255,255,0.87);
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
+    font-size: 0.8rem;
+    letter-spacing: 0.16rem;
+    line-height: 0.8rem;
+    font-weight: 200;
+    text-align: center;
+}
+.banner_category{
+    display: none;
+}
+.main-content{
+    position: relative;
+    width: 25.0rem;
+    overflow: hidden;
+}
+.side-content{
+    display: none;
+}
+.artical{
+    overflow: hidden;
+    border-radius: 4px;
+    width: 23.4rem;
+    height: auto;
+    margin: 0.8rem;
+    background-color: rgba(255,255,255,0.87);
+    box-shadow: 0rem 0.2rem 0.2rem rgba(0,0,0,0.16);
+}
+.artical a{
+    overflow: hidden;
+    height: auto;
+    width: 23.4rem;
+    text-decoration: none;
+    box-shadow: 0rem 0.2rem 0.2rem rgba(0,0,0,0.23);
+}
+.artical a hr{
+    display: block;
+    height: 1px;
+    width: 21.266667rem;
+    margin: 0 1.066667rem;
+    background-color: rgba(0,0,0,0.08);
+}
+.a-pic{
+    display: block;
+    width: 23.4rem;
+    height: 11.666667rem;
+    text-decoration: none;
+}
+.a-content{
+    padding: 0.8rem 1.066667rem;   
+    width: 21.266667rem;
+}
+.a-title{
+    color: rgba(0,0,0,0.87);
+    font-family: "SourceHanSans-Medium","Roboto-Medium","Microsoft YaHei";
+    font-size: 1.2rem;
+    letter-spacing: 0.006rem;
+    line-height: 1.2rem;
+}
+.a-intro{
+    color: rgba(0,0,0,0.54);
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+    font-size: 0.8rem;
+    letter-spacing: 0.016rem;
+    line-height: 1.2rem;
+}
+.a-info{
+    position: relative;
+    height: 0.8rem;
+    margin: 0.8rem 0;
+    color: rgba(0,0,0,0.54);
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+    font-size: 0.8rem;
+    letter-spacing: 0.02rem;
+    line-height: 0.8rem;
+}
+.like-content{
+    position: relative;
+    padding: 0.8rem 1.066667rem;
+    height: 0.8rem;
+}
+.like-content img{
+    position: absolute;
+    top: 0.8rem;
+    height: 0.8rem;
+    width: 0.8rem;
+}
+.like-content p{
+    position: absolute;
+    top: 0.8rem;
+    display: block;
+    height: 0.8rem;
+    max-width: 2.5rem;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    color: rgba(0,0,0,0.54);
+}
+.comment_img{
+    right: 8.266667rem;
+}
+.comment_p{
+    right: 5.266667rem;
+}
+.eye_img{
+    right: 4rem;
+}
+.eye_p{
+    right: 1.066667rem;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}

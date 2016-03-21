@@ -6,239 +6,111 @@
 
 {% block description %}
 <meta name="description" content="深圳大学学子天地是深大最大的校园传媒网站，致力于为深大学子提供有价值的资讯和服务。" />
+<link href="/static/styles/global4phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />  
+<link href="/static/styles/global4pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
+  
+
+
 {% endblock %}
 
 {% block htmlhead %}
-    {% load html_tools %}
-    {{ 'plugins/basic-jquery-slider.js' | as_js }}
-    {{ 'homepage.css' | as_css }}
-    {{ 'basic-jquery-slider.css' | as_css }}
+{% load html_tools %}
+{{ 'global/index.js' | as_js }}
+
 {% endblock %}
 
 {% load py_utils %}
 
 {% block content %}
-<div class="central">
-
-    <div class="content">
-
-        <div class="cont_headline">
-            <h2>深大焦点</h2>
-            {% for article in important_articles %}
+<div class="main-content">
+    <div class="artical-content">
+        {% for article in important_articles %}
+        <div class="artical">
             <a href="{% url 'articles:display' article.pk %}">
-                <div class="cont_headline_entry">
-                    <div class="headline_pic"><img src="{{ article.cover }}" width="180" height="120" /></div>
-                    <h3>{{ article.title | truncatechars:19  }}</h3>
-                    <p>{{ article.summary }}</p>
+                <img class="a-pic" src="{{ article.cover }}">
+                <div class="a-content">
+                    <span class="a-title">{{ article.title | truncatechars:19  }}</span>
+                    <div class="a-info">
+                        精品收藏·{{ article.create_date |date:"Y-m-d" }}
+                    </div>
+                    <p class="a-intro">{{ article.summary }}</p>
+                </div>
+                <hr />
+                <div class="like-content">
+                    <!--<img class="left" src="images/like.png"><p  class="left">99999</p>-->
+                    <img src="/static/images/index/comment.png"  class="comment_img"><p class="comment_p">99999</p>
+                    <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
                 </div>
             </a>
-            {% endfor %}
-        </div><!--end of cont_headline-->
+        </div>
+        {% endfor %}
+    </div>
 
-        <div class="cont_articles">
-            {% for category, article_list in article_dict %}
-            <div class="articles_list {% cycle 'mgright' '' %}">
-                <h2>{{ category }}</h2>
-                <a class="articles_list_more" href="{% url 'articles:list' category.english_name %}">更多…</a>
-                <ul>
-                    {% for article in article_list %}
-                        {% if forloop.first %}
-                        <a href="{% url 'articles:display' article.pk %}">
-                            {{ article.title | truncatechars:20 }}
-                            <p>
-                                <img src="{{ article.cover }}" width="120" height="80" />
-                                {{ article.summary | truncatechars:45 }}
-                            </p>
-                        </a>
-                        {% else %}
-                        <a href="{% url 'articles:display' article.pk %}">
-                            {{ article.title | truncatechars:20  }}
-                        </a>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-            {% endfor %}
-        </div><!--end of cont_articles-->
-
-        <div class="co_social">
-            <h2>热门关注</h2>
-            <a href="/static/images/socialaccount/stucampusweixin.jpg" target="_blank">
-                <div class="co_social_box">
-                    <div class="co_social_logo"><img src="/static/images/socialaccount/stucampusweixin.jpg" height="130px" width="130px" /></div>
-                    <h3>学子天地官方微信</h3>
-                    <p>
-                        关注学子天地官方订阅号，<br />
-                        了解深圳大学最新资讯，<br />
-                        参与线上互动！
-                    </p>
+    <div class="side-content">
+        <div class="sidenav">
+            <div class="shadow">
+                <p class="card-title">深大导航</p>
+                <div class="nav-content">
+                    <a href="#">公文通</a>
+                    <a href="#">Blackboard</a>
+                    <a href="#">学生邮箱</a>
+                    <a href="#">校园场地申请</a>
+                    <a href="#">体育场馆订票</a>
                 </div>
-            </a>
-            <a href="http://weibo.com/stucampus" target="_blank">
-                <div class="co_social_box">
-                    <div class="co_social_logo"><img src="/static/images/stulogo.png" height="130px" width="130px" /></div>
-                    <h3>学子天地官方微博</h3>
-                    <p>
-                        关注学子天地官方微博，<br />
-                        捕捉深大校园热点。
-                    </p>
+                <div class="nav-content">
+                    <a href="#">网络服务</a>
+                    <a href="#">事务中心</a>
+                    <a href="#">公寓管理</a>
+                    <a href="#">图书馆</a>
+                    <a href="#">网上电视</a>
+                    <a href="#">火车订票</a>
                 </div>
-            </a>
-
-            <a href="http://weibo.com/szuspeech" target="_blank">
-                <div class="co_social_box">
-                    <div class="co_social_logo"><img src="/static/images/socialaccount/szupptwb.jpg" height="130px" width="130px" /></div>
-                    <h3>深大演讲</h3>
-                    <p>
-                        及时整理发布的深大资讯，<br />
-                        及时采集热辣的讲座咨询，<br />
-                        及时发布火热的讲座资源
-                    </p>
+                <div class="nav-content">
+                    <a href="#">教务管理</a>
+                    <a href="#">排课查询</a>
+                    <a href="#">网上选课</a>
+                    <a href="#">绩点查询</a>
+                    <a href="#">联系老师</a>
                 </div>
-            </a>
-
-            <a href="/static/images/socialaccount/szubaikewx.jpg" target="_blank">
-                <div class="co_social_box">
-                    <div class="co_social_logo"><img src="/static/images/socialaccount/szubaikewx.jpg" height="130px" width="130px" /></div>
-                    <h3>深大百科</h3>
-                    <p>
-                        深圳大学学生事务服务中心官方微信
-                    </p>
-                </div>
-            </a>
-        </div><!--end of co_social-->
-
-        <div class="co_media">
-            <h2>合作媒体</h2>
-            <a href="{% url 'magazine:list' 'szuyouth'%}">
-                <div class="co_media_box">
-                    <div class="co_media_logo"><img src="/static/images/szuyouth.png" height="130px" width="310px" /></div>
-                    <h3>深大青年杂志社</h3>
-                    <p>
-                        在这里，你可以了解深大的资讯，<br />
-                        在这里，你可以知晓明星师生背后的点点滴滴，<br />
-                        在这里，你可以分享自己对热点动态的独特视角，<br />
-                        在这里，你可以品读文学，阐释经典，解读行走，<br />
-                        在这里，读懂深大。<br />
-                    </p>
-                </div>
-            </a>
-            <a href="{% url 'magazine:list' 'langtaosha'%}">
-                <div class="co_media_box">
-                    <div class="co_media_logo"><img src="/static/images/langtaosha.png" height="130px" width="310px" /></div>
-                    <h3>浪淘沙文学社</h3>
-                    <p>
-                        假如现实世界残酷分崩离析，至少还有文字可以温暖彼此。
-                    </p>
-                </div>
-            </a>
-        </div><!--end of co_media-->
-
-    </div><!--end of content-->
-
-    <div class="sidebar">
-
-        <div class="widget">
-            <h2>深大导航</h2>
-            <div class="widget_content">
-                <ul class="widget_co_guide">
-                    <li>
-                        <h3>日常</h3>
-                        <a href="http://www.szu.edu.cn/board/" target="_blank">公文通</a>
-                        <a href="http://elearning.szu.edu.cn/" target="_blank">Blackboard</a>
-                        <a href="https://exmail.qq.com/domain/email.szu.edu.cn" target="_blank">学生邮箱</a>
-                        <a href="http://stu.szu.edu.cn:8080/" target="_blank">校园场地申请</a>
-                        <a href="http://tycg.szu.edu.cn/Home.aspx" target="_blank">体育场馆订票</a>
-                    </li>
-                    <li>
-                        <h3>生活</h3>
-                        <a href="http://www.szu.edu.cn/nc/" target="_blank">网络服务</a>
-                        <a href="http://swzx.szu.edu.cn/" target="_blank">事务中心</a>
-                        <a href="http://gyzx.szu.edu.cn/" target="_blank">公寓管理</a>
-                        <a href="http://www.lib.szu.edu.cn/" target="_blank">图书馆</a>
-                        <a href="http://www.szu.edu.cn/tv/" target="_blank">网上电视</a>
-                        <a href="http://192.168.2.113/" target="_blank">火车订票</a>
-                    </li>
-                    <li>
-                        <h3>学习</h3>
-                        <a href="http://192.168.2.20/" target="_blank">教务管理</a>
-                        <a href="http://192.168.2.168/paike/selectXYMC_BJMC.asp" target="_blank">排课查询</a>
-                        <a href="http://192.168.240.168/xuanke/edu_login.asp" target="_blank">网上选课</a>
-                        <a href="http://192.168.2.20/axsxx/AASZUstd.ASP" target="_blank">绩点查询</a>
-                        <a href="http://swzx.szu.edu.cn/swzx_view_affair_details.asp?affair_id=14c99c402ddab519" target="_blank">联系老师</a>
-                    </li>
-                </ul>
             </div>
         </div>
+        <div class="side-card">
+            <div class="shadow">
+                <p class="card-title">最新评论</p>
+                <div class="widget">
+                    
+                    <div class="widget_content">
+                        <ul class="ds-recent-comments"></ul>
+                    </div>
+                </div>
 
-<!--        <div class="widget">
-            <h2>讲座预告</h2><a class="widget_more" href="{% url 'lecture:index' %}">更多…</a>
-            <div class="widget_content">
-                <ul class="widget_content_list">
-                    {% for lecture in lecture_list %}
-                    <li>
-                        {% if lecture.url_id %}
-                        <a href="http://www.szu.edu.cn/board/view.asp?id={{ lecture.url_id }}" target="_blank">
-                            {{ lecture.title | truncatechars:18 }}
-                        </a>
-                        {% else %}
-                        <a href="{% url 'lecture:index' %}" target="_blank">
-                            {{ lecture.title | truncatechars:18 }}
-                        </a>
-                        {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
+                
             </div>
         </div>
--->
-
-        <div class="widget">
-            <h2>最新评论</h2>
-            <div class="widget_content">
-                <ul class="ds-recent-comments"></ul>
+        <div class="side-card">
+            <div class="shadow">
+                <p class="card-title">最近访客</p>
+                <div class="content">
+                    <ul class="ds-recent-visitors" data-num-items="25"></ul>
+                    
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div class="widget">
-            <h2>最近访客</h2>
-            <div class="widget_content">
-                <ul class="ds-recent-visitors" data-num-items="25"></ul>
-            </div>
-        </div>
-
-        <div class="widget">
-            <h2>合作社团</h2>
-            <div class="widget_content">
-                <ul class="widget_co_league">
-                    <a href="{% url 'magazine:list' 'langtaosha'%}" target="_blank">浪淘沙文学社</a>
-                    <a href="{% url 'magazine:list' 'szuyouth'%}" target="_blank">深大青年杂志社</a>
-                    <a href="{% url 'szuspeech:index' %}" target="_blank">深大演讲</a>
-                </ul>
-            </div>
-        </div>
-
-        <div class="widget">
-            <ul class="widget_banner">
-                <li><a href="http://192.168.2.113/" target="_blank" title="点击进入深圳大学铁路订票系统"><img src="/static/images/banner/train.gif" width="290px" height="155px" /></a></li>
-                <li><a href="http://stu.szu.edu.cn:8080" target="_blank" title="点击进入场地申请系统"><img src="/static/images/banner/cdsq.gif" width="290px" height="155px" /></a></li>
-            </ul>
-        </div>
-
-
-    </div><!--end of sidebar-->
-</div><!--end of central-->
 
 <!-- Duoshuo BEGIN -->
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"szustu"};
+    var duoshuoQuery = {short_name:"szustu"};
     (function() {
         var ds = document.createElement('script');
         ds.type = 'text/javascript';ds.async = true;
         ds.src = 'http://static.duoshuo.com/embed.js';
         ds.charset = 'UTF-8';
         (document.getElementsByTagName('head')[0] 
-        || document.getElementsByTagName('body')[0]).appendChild(ds);
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
 </script>
 <!-- Duoshuo END -->

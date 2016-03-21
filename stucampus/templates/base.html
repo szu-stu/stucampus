@@ -1,34 +1,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN" style="font-size: ;">
 <head>
     {% load html_tools %}
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="Content-Language" content="zh-CN" />
-    {% block htmltitle %}<title>深圳大学学子天地</title>{% endblock %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="keywords" content="深圳大学,深大,荔园,学子天地">
+    <meta name="description" content="深圳大学学子天地是深大最大的校园传媒网站，致力于为深大学子提供有价值的资讯和服务。">
+    <link href="images/stulogo.png" type="image/x-icon" rel="shortcut icon" />
+    {% block htmltitle %}
+    <title>深圳大学学子天地</title>
+    {% endblock %}
     {% block keywords %}{% endblock %}{% block description %}{% endblock %}
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="HandheldFriendly" content="true" />
-    <link rel="icon" href="{% autoSwapCDN 'favicon.ico' %}" type="image/x-icon" >
+    <link href="/static/styles/global4phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />  
+    <link href="/static/styles/global4pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
+   
     <!--[if IE]>
     {{ 'ie-fix.css' | as_css }}
     <![endif]-->
-    {{ 'plugins/jquery.min.js' | as_js }}
-    {{ 'plugins/jquery.tools.min.js' | as_js }}
+    {{ 'plugins/jquery.min.js' | as_js }}      
     {{ 'plugins/jquery.form.js' | as_js}}
+    {{ 'plugins/jquery.tools.min.js' | as_js }}
     {{ 'plugins/jquery.lazyload.min.js' | as_js }}
-    {{ 'ga.js' | as_js }}
-    {{ 'global.js' | as_js }}
-
-    {{ 'style-fix.css' | as_css }}
-    {{ 'message-box.css' | as_css }}
-    {{ 'global.css'  | as_css }}
-    {{ 'responsive.css'  | as_css }}
-    
-    <!--[if lte IE 8]>
-    {{ 'plugins/respond.min.js' | as_js }}
-    <![endif]-->
-    
+    {{ 'plugins/jquery.form.js' | as_js}}
+    {{ 'global/globals.js' | as_js}}
+    {{ 'global/chromeCookie.js' | as_js }}
     {% block htmlhead %}
     {% endblock %}
 </head>
@@ -57,70 +53,89 @@
 
 <div class="inner_body">
 {% block header %}
-<div class="header">
-    <div class="coverphoto_author"></div>
-    <div class="central">
-        <div class="home_title"><img src="/static/images/stulogo.png" border=0 alt="深圳大学学子天地" /></div>
-        <div class="home_description">深圳大学学子天地  深大第一学生门户网站</div>
-        <div class="home_nav">
-            <a href="/">学子首页</a>
-            <a href="{% url 'articles:list' 'photography' %}">深大摄影</a>
-            <a href="{% url 'articles:list' 'interesting' %}">趣物志</a>
-            <a href="{% url 'lecture:index' %}">深大讲座</a>
-            <a href="{% url 'activity:index' %}">活动预告</a>
-            
-            <a href="http://stu.szu.edu.cn:8080" rel="nofollow">服务专区</a>
+<div class="header-phone">
+            <a id="menu_call" href="javascript:void(0)" onclick="sidebaropen();">
+                <img src="/static/images/index/menu_call.png" alt="nav" />
+            </a>
+            <p>深圳大学学子天地</p>
         </div>
-        <div class="home_nav_switch home_nav">
-            <a class="home_nav_show" onclick="home_nav_switch(1);" href="#">显示菜单</a>
-            <a class="home_nav_hide" onclick="home_nav_switch(0);" href="#">隐藏菜单</a>
+        <div class="header-pc">
+            <div class="header-secshadow"></div>
+            <ul>
+                <li><a class="nav-active" id="nav0" href="/" onclick="navcome(0);">学子首页</a></li>
+                <li><a id="nav1" href="{% url 'lecture:index' %}" onclick="navcome(1);">深大讲座</a></li>
+                <li><a id="nav2" href="{% url 'activity:index' %}" onclick="navcome(2);">活动预告</a></li>
+                <li><a id="nav3" href="{% url 'articles:list' 'photography' %}" onclick="navcome(3);">深大摄影</a></li>
+                <li ><a id="nav4" href="http://stu.szu.edu.cn:8080" rel="nofollow" onclick="navcome(4);">服务专区</a></li>
+                <li class="now"></li>
+            </ul>
         </div>
-    </div>
-</div>
-<script type="text/javascript">
-    var home_nav=$('.home_nav');
-    var home_nav_show=$('.home_nav_show');
-    var home_nav_hide=$('.home_nav_hide');
 
-    function home_nav_switch(st) {
-    if (st == '0') {
-        home_nav[0].style.display='none';
-        home_nav_hide[0].style.display='none';
-        home_nav_show[0].style.display='block';
-    } else {
-        home_nav[0].style.display='block';
-        home_nav_hide[0].style.display='block';
-        home_nav_show[0].style.display='none';
-    }
-}
-</script>
+        <div class="sidebar">
+            <div class="sidebar-main">
+                <div class="sidebar-top">
+                    <div class="sidebar-blur"></div>
+                    <img class="pchomepic" src="http://stu.szu.cn/static/images/coverphoto/festival.jpg" />
+                    <p class="stucampus_name">学子天地</p> 
+                    <p class="stuc_description">深大第一学生门户网站</p>
+                </div>
+
+                <ul class="nav1">
+                    <li><a href="/"><img src="/static/images/index/home_48.png" alt="icon" />学子首页</a></li>
+                    <li><a href="{% url 'articles:list' 'photography' %}"><img src="/static/images/index/photo_48.png" alt="icon" />深大摄影</a></li>
+                    <li><a href="{% url 'articles:list' 'people' %}"><img src="/static/images/index/people_48.png" alt="icon" />深大人物</a></li>
+                    <li><a href="{% url 'articles:list' 'interesting' %}"><img src="/static/images/index/interesting_48.png" alt="icon" />趣物志</a></li>
+                    <li><a href="{% url 'articles:list' 'news' %}"><img src="/static/images/index/news_48.png" alt="icon" />新闻和通知</a></li>
+                </ul>
+                <hr />
+                <ul class="nav2">
+                    <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />深大导航</a></li>
+                    <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />最新评论</a></li>
+                    <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />最近访客</a></li>
+                    <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />合作社团</a></li>
+                    <li><a href="http://192.168.2.113/"><img src="/static/images/index/comment_48.png" alt="icon" />火车订票</a></li>
+                </ul>
+            </div>
+            <div class="call-back" onclick="sidebarclose();"></div>
+        </div>
+
+        <a href="javascript:void(0)" class="fixed-logo" onclick="hiddenthings()">
+            <img src="/static/images/index/stucampus_logo100px.png" alt="" />
+        </a>
+        <div class="banner">
+            <div class="selector">
+                <a class="round1 active" href="javascript:void(0)" onclick="bannerselect(0);"></a>
+                <a class="round2" href="javascript:void(0)" onclick="bannerselect(1);"></a>
+                <a class="round3" href="javascript:void(0)" onclick="bannerselect(2);"></a>
+                <a class="round4" href="javascript:void(0)" onclick="bannerselect(3);"></a>
+            </div>
+            <div id="banners" class="b-container" style="left: 0px;">
+            {% for nav_display_column in nav_display_columns %}
+           
+                <a id="banner{{ forloop.counter }}" href="{% url 'articles:display' article.pk %}" style="left: 0rem;" >
+                    <div class="blur">
+                    </div>
+                    <p class="banner_title">{{ nav_display_column.title | truncatechars:19 }}</p>
+                    <p class="banner_describe">{{ nav_display_column.summary }}</p>
+                    <img src="{{ nav_display_column.cover }}" alt="banner1" />
+                    <p class="banner_category">{{ nav_display_column.category }}</p>
+                </a>
+            {% endfor %}
+                
+            </div>
+        </div>
+</div>
+
 {% endblock %}
 
 {% block content %}
 {% endblock %}
 
-<div class="footer">
-    <div class="central">
-        {% nospaces %}
-        <!-- <a href="">开发团队</a> -->
-        <a href="http://weibo.com/stucampus">新浪微博</a>
-        {% if user.is_authenticated %}
-        <a href="{% url 'master:admin_index' %}">后台管理</a>
-        {% else %}
-        <a href="{% url 'account:sign_in' %}">后台登录</a>
-        {% endif %}
-        {% endnospaces %}
-    </div>
-</div>
 
-<div class="copyright central">
-    版权所有 © 2001～2015 深圳大学学子天地 - 粤ICP备05008884号
-    <div style="display: none;">
-        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5826529'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/stat.php%3Fid%3D5826529' type='text/javascript'%3E%3C/script%3E"));</script>
-    </div>
-</div>
 
-</div><!--end of inner_body-->
+
+
+
 
 </body>
 </html>

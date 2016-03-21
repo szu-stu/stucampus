@@ -1,0 +1,31 @@
+@font-face{
+	font-family: "SourceHanSans-Bold";/*为引入的字体命名*/
+	src:url('font/SourceHanSans/SourceHanSans-Bold.ttf');/*定义要引入字体文件的路径*/
+}
+@font-face{
+	font-family: "SourceHanSans-Light";/*为引入的字体命名*/
+	src:url('font/SourceHanSans/SourceHanSans-Light.ttf');/*定义要引入字体文件的路径*/
+}
+@font-face{
+	font-family: "SourceHanSans-Medium";/*为引入的字体命名*/
+	src:url('font/SourceHanSans/SourceHanSans-Medium.ttf');/*定义要引入字体文件的路径*/
+}
+@font-face{
+	font-family: "SourceHanSans-Regular";/*为引入的字体命名*/
+	src:url('font/SourceHanSans/SourceHanSans-Regular.ttf');/*定义要引入字体文件的路径*/
+}@font-face{
+	font-family: "Roboto-Bold";/*为引入的字体命名*/
+	src:url('font/Roboto/Roboto-Bold.ttf');/*定义要引入字体文件的路径*/
+}
+@font-face{
+	font-family: "Roboto-Light";/*为引入的字体命名*/
+	src:url('font/Roboto/Roboto-Light.ttf');/*定义要引入字体文件的路径*/
+}
+@font-face{
+	font-family: "Roboto-Medium";/*为引入的字体命名*/
+	src:url('font/Roboto/Roboto-Medium.ttf');/*定义要引入字体文件的路径*/
+}
+@font-face{
+	font-family: "Roboto-Regular";/*为引入的字体命名*/
+	src:url('font/Roboto/Roboto-Regular.ttf');/*定义要引入字体文件的路径*/
+}

@@ -1,0 +1,133 @@
+.ds-thread{
+    width: 21.8rem !important;
+    height: auto !important;
+    margin-top: 1.066667rem !important;
+    padding: 0 1.6rem !important;
+    background-color: #FDFDFD !important;
+    overflow: hidden !important;
+}
+.ds-reset{
+    width: 21.8rem !important;
+    height: auto !important;
+}
+.ds-rounded{
+    width: 21.8rem !important;
+    height: auto !important;
+    border:none !important;
+    margin: 0 !important;
+}
+.ds-header{
+    display: none !important;
+}
+.ds-post{
+    display: block !important;
+    width: 21.8rem !important;
+    height: auto !important;
+    border-bottom: 0.066667rem solid rgba(0,0,0,0.08) !important;
+}
+.ds-post-self{
+    position: relative !important;
+    display: block !important;
+    width: 21.8rem !important;
+    height: auto !important;
+    padding: 1.6rem 0 !important;
+    overflow: hidden !important;
+}
+.ds-avatar{
+    position: absolute !important;
+    top: 1.6rem !important;
+    left: 0 !important;
+    width: 2.4rem !important;
+    height: 2.4rem !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+}
+.ds-avatar img{
+    width: 2.4rem !important;
+    height: 2.4rem !important;
+}
+
+.ds-comment-body{
+    overflow: hidden !important;
+}
+.ds-comment-header{
+    position: absolute !important;
+    left: 4.0rem !important;
+}
+.ds-user-name{
+    display: block !important;
+    width: 10.266667rem !important;
+    height: 0.6rem !important; 
+    color: #5BC5BE !important;
+    font-size: 0.6rem !important;
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei" !important;
+}
+.ds-comment-body p{
+    margin-top: 3.333333rem !important;
+    padding: 0 0.533333rem !important;
+    color: rgba(0,0,0,0.87) !important;
+    font-size: 0.933333rem !important;
+    line-height: 1.6rem !important;
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei" !important;
+}
+.ds-comment-footer a{
+    position: absolute !important;
+    width: 2.666667rem !important;
+    color: rgba(0,0,0,0.54) !important;
+    font-size: 0.6rem !important;
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei" !important;
+    text-decoration: none !important;
+}
+.ds-time{
+    position: absolute !important;
+    top: 2.733333rem !important;
+    left: 4.0rem !important;
+    color: rgba(0,0,0,0.54) !important;
+    font-size: 0.6rem !important;
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei" !important;
+}
+.ds-icon{
+    float: left !important;
+    display: block !important;
+    width: 1.066667rem !important;
+    height: 1.066667rem !important;
+    background-size:1.066667rem 1.066667rem !important;
+    margin-right: 0.4rem !important; 
+    background:  transparent !important;
+}
+.ds-icon-reply{
+    background-image: url(/images/reply_32.png) !important;
+}
+.ds-post-reply{
+    left: 16.1rem !important;
+    top: 2.0rem !important;
+}
+.ds-post-likes{
+    right: 0rem !important;
+    top: 2.0rem !important;
+}
+.ds-icon-like{
+    background-image: url(/images/favorite_32.png) !important;
+}
+.ds-post-repost{
+    display: none !important;
+}
+.ds-post-report{
+    display: none !important;
+}
+.ds-comments-info{
+    display: none !important;
+}
+
+.ds-highlight{
+    color: #5BC5BE !important;
+}
+.ds-replybox{
+    display: none;
+}
+.ds-toolbar{
+    display: none;
+}
+.ds-powered-by{
+    display: none;
+}
