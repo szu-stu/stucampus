@@ -14,93 +14,122 @@
 {% endblock %}
 
 {% block htmlhead %}
-{% load html_tools %}
-{{ 'global/index.js' | as_js }}
-
+    {% load html_tools %}
+    {{ 'plugins/basic-jquery-slider.js' | as_js }}
+    {{ 'index.js' | as_js }}
+    {{ 'basic-jquery-slider.css' | as_css }}
+    <link href="/static/styles/index-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />  
+    <link href="/static/styles/index-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
 {% endblock %}
 
 {% load py_utils %}
 
+{% block header %}
+
+{% endblock %}
+
 {% block content %}
-
-<div class="main-content">
-    <div class="artical-content">
+    <div class="banner">
+        <div class="selector">
+        </div>
+        <div id="banners" class="b-container">
         {% for article in important_articles %}
-        <div class="artical">
-            <a href="{% url 'articles:display' article.pk %}">
-                <img class="a-pic" src="{{ article.cover }}">
-                <div class="a-content">
-                    <span class="a-title">{{ article.title | truncatechars:19  }}</span>
-                    <div class="a-info">
-                        精品收藏·{{ article.create_date |date:"Y-m-d" }}
-                    </div>
-                    <p class="a-intro">{{ article.summary }}</p>
+            <a  href="{% url 'articles:display' article.pk %}" style="left: 0rem;" >
+                <div class="blur">
                 </div>
-                <hr />
-                <div class="like-content">
-                    <!--<img class="left" src="images/like.png"><p  class="left">99999</p>-->
-                    <img src="/static/images/index/comment.png"  class="comment_img"><p class="comment_p">99999</p>
-                    <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
-                </div>
+                <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
+                <p class="banner_describe">{{ article.summary }}</p>
+                <img src="{{ article.cover }}" alt="{{ article.title | truncatechars:19  }}" />
+                <p class="banner_category">{{ article.category }}</p>
             </a>
-        </div>
         {% endfor %}
-    </div>
-
-    <div class="side-content">
-        <div class="sidenav">
-            <div class="shadow">
-                <p class="card-title">深大导航</p>
-                <div class="nav-content">
-                    <a href="#">公文通</a>
-                    <a href="#">Blackboard</a>
-                    <a href="#">学生邮箱</a>
-                    <a href="#">校园场地申请</a>
-                    <a href="#">体育场馆订票</a>
-                </div>
-                <div class="nav-content">
-                    <a href="#">网络服务</a>
-                    <a href="#">事务中心</a>
-                    <a href="#">公寓管理</a>
-                    <a href="#">图书馆</a>
-                    <a href="#">网上电视</a>
-                    <a href="#">火车订票</a>
-                </div>
-                <div class="nav-content">
-                    <a href="#">教务管理</a>
-                    <a href="#">排课查询</a>
-                    <a href="#">网上选课</a>
-                    <a href="#">绩点查询</a>
-                    <a href="#">联系老师</a>
-                </div>
-            </div>
-        </div>
-        <div class="side-card">
-            <div class="shadow">
-                <p class="card-title">最新评论</p>
-                <div class="widget">
-                    
-                    <div class="widget_content">
-                        <ul class="ds-recent-comments"></ul>
-                    </div>
-                </div>
-
-                
-            </div>
-        </div>
-        <div class="side-card">
-            <div class="shadow">
-                <p class="card-title">最近访客</p>
-                <div class="content">
-                    <ul class="ds-recent-visitors" data-num-items="25"></ul>
-                    
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-</div>
+    <div class="main-content">
+        <div class="artical-content">
+        {% for article in important_articles %}
+            <div class="artical">
+                <a href="{% url 'articles:display' article.pk %}">
+                    <img class="a-pic" src="{{ article.cover }}">
+                    <div class="a-content">
+                        <span class="a-title">{{ article.title | truncatechars:19  }}</span>
+                        <div class="a-info">
+                            {{ article.category }}·{{ article.create_date | date:"n月d日"}}
+                        </div>
+                        <p class="a-intro">{{ article.summary }}</p>
+                    </div>
+                    <hr />
+                    <div class="like-content">
+                        <!--<img class="left" src="images/like.png"><p  class="left">99999</p>-->
+                        <img src="/static/images/index/comment.png"  class="comment_img"><p class="comment_p">{{ article.comments }}</span></p>
+                        <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        </div><!--end of cont_articles-->
 
+        <div class="side-content">
+            <div class="sidenav">
+                <div class="shadow">
+                    <p class="card-title">深大导航</p>
+                    <div class="nav-content">
+                        <a href="#">公文通</a>
+                        <a href="#">Blackboard</a>
+                        <a href="#">学生邮箱</a>
+                        <a href="#">校园场地申请</a>
+                        <a href="#">体育场馆订票</a>
+                    </div>
+                    <div class="nav-content">
+                        <a href="#">网络服务</a>
+                        <a href="#">事务中心</a>
+                        <a href="#">公寓管理</a>
+                        <a href="#">图书馆</a>
+                        <a href="#">网上电视</a>
+                        <a href="#">火车订票</a>
+                    </div>
+                    <div class="nav-content">
+                        <a href="#">教务管理</a>
+                        <a href="#">排课查询</a>
+                        <a href="#">网上选课</a>
+                        <a href="#">绩点查询</a>
+                        <a href="#">联系老师</a>
+                    </div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="shadow">
+                    <p class="card-title">最新评论</p>
+                    {% for comment in comments %}
+                    <div class="comment">
+                        <a href="{{comment.comment_author_url}}">
+                            <img src="{{ comment.comment_author_avatar_url }}" alt="{{ comment.comment_author_name }}" />
+                            <span>{{ comment.comment_author_name }}</span>
+                        </a>
+                        <p class="comment-source">{{ comment.comment_created_at }} 在 {{ comment.article_title }} 中评论:</p>
+                        <p class="comment-value">{{ comment.comment_content }}</p>
+                        <a href="{{ comment.article_url }}">进入文章查看全文</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="shadow">
+                    <p class="card-title">最近访客</p>
+                    <div class="content">
+                        {% for visitor in visitors %}
+                        <a class="visitor" href="{{ visitor.url }}">
+                            <img src="{{ visitor.avatar_url }}" alt="{{ visitor.name }}" />
+                            <p>{{ visitor.name }}</p>
+                        </a>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end of sidebar-->
+</div><!--end of central-->
 
 <!-- Duoshuo BEGIN -->
 <script type="text/javascript">

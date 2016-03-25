@@ -6,93 +6,76 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'global/artical.js' | as_js }}
-    {{ 'global/globals.js' | as_js }}
-    {{ 'articles.css' | as_css }}
-    <link href="images/stulogo.png" type="image/x-icon" rel="shortcut icon" />
-    <link href="/static/styles/artical.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
-    <link href="/static/styles/artical4pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
-    
+    <link href="/static/styles/articles/artical.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
+    <link href="/static/styles/articles/artical4pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
+    {{ 'artical.js' | as_js }}
 {% endblock %}
 
 {% block content %}
-
-    <div class="inner_body">
-        
-        <div class="artical-header">
-            <div class="blur"></div>
-            <a href="javascript:void(0)" onclick="backhome();" class="back"><img src="images/back.png" alt="back" /></a>
-            <p class="artical-title">{{ artical.title }}</p>
-        </div>
-        <a href="javascript:void(0)" class="fixed-logo" onclick="showtools()">
-            <img src="images/stucampus_logo 100px.png" alt="" />
-        </a>
-        <a href="javascript:void(0)" id="backTop" class="btn" style="bottom: 1.6rem;">
-            <div></div>
-            <img src="images/top_48.png" alt="顶部" />
-        </a>
-        <a href="javascript:scroll(0,0)" id="share" class="btn" style="bottom: 1.6rem;">
-            <div></div>
-            <img src="images/share_48.png" alt="分享" />
-        </a>
-        <a href="javascript:scroll(0,0)" id="discuss" class="btn" style="bottom: 1.6rem;">
-            <div></div>
-            <img src="images/comment_48.png" alt="评论" />
-        </a>
-        <!--<a href="javascript:scroll(0,0)" id="like" class="btn" style="bottom: 1.6rem;">
-            <div></div>
-            <img src="images/favorite_48.png" alt="点赞" />
-        </a>-->
-        <div class="artical-main">
-            {% if article.source %}
-            <p class="artical-information">由 (/-_-\) 发表于 去污质</p>
-            {% endif %}
-            <div class="artical-text">
-                {% autoescape off %}
-                {{ article.content }}
-                {% endautoescape %}
-            </div>
-            <div class="artical-foot">
-                <p class="editor">责任编辑: {{ article.editor.student.true_name }}</p>
-                <div class="like-content">
-                    <!--<img class="left" src="images/like.png"><p  class="left">99999</p>-->
-                    <p class="artical-time">{{ article.create_date | date:"Y-n-d"}}</p>
-                    <img class="comment_img" src="/static/images/index/comment.png"><p class="comment_p">99999</p>
-                    <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
-                    </div>
-                    <hr />
-                    <a class="foot share" href="javascript:void(0)"><img id="share_normal" src="/static/images/index/share_48.png"><img id="share_active" src="/static/images/index/share_48.png"><p>分享</p></a>
-                    <a class="foot comment" href="javascript:void(0)"><img id="comment_normal" src="/static/images/index/comment_48.png"><img id="comment_active" src="/static/images/index/comment_48.png"><p>评论</p></a>
-                </div>
-            </div>
-
-         <div class="article_footer">
-
-            <div class="comment-main">
-            <!-- Duoshuo Comment BEGIN -->
-                <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}"></div>
-                <script type="text/javascript">
-                    var duoshuoQuery = {short_name:"szustu"};
-                    (function() {
-                        var ds = document.createElement('script');
-                        ds.type = 'text/javascript';ds.async = true;
-                        ds.src = 'http://static.duoshuo.com/embed.js';
-                        ds.charset = 'UTF-8';
-                        (document.getElementsByTagName('head')[0] 
-                        || document.getElementsByTagName('body')[0]).appendChild(ds);
-                    })();
-                </script>
-                <script type="text/javascript">
-                    likes = $(".ds-post-likes");
-                    for(i=0;i<likes.length;i++){
-                        var reg=/[\u4E00-\u9FA5]/g;
-                        var result=title.replace(reg,'');
-                        likenum = parseInt(likes[i].innerText.replace(reg,''));
-                        likes[i].innerText = likenum;
-                    }
-                </script>
-            <!-- Duoshuo Comment END -->
-            </div>
-        </div>
+    <a href="javascript:void(0)" id="backTop" class="btn" style="bottom: 1.6rem;">
+        <div></div>
+        <img src="/static/images/articles/top_48.png" alt="顶部" />
+    </a>
+    <a href="javascript:scroll(0,0)" id="share" class="btn" style="bottom: 1.6rem;">
+        <div></div>
+        <img src="/static/images/articles/share_48.png" alt="分享" />
+    </a>
+    <a href="javascript:scroll(0,0)" id="discuss" class="btn" style="bottom: 1.6rem;">
+        <div></div>
+        <img src="/static/images/articles/comment_48.png" alt="评论" />
+    </a>
+	<div class="artical-header">
+		<img class="artical-cover" src="{{ article.cover }}">
+        <div class="blur"></div>
+        <a href="/" class="back"><img src="/static/images/articles/back.png" alt="back" /></a>
+        <p class="artical-title">{{ article.title }}</p>
     </div>
+    <div class="artical-main">
+        <p class="artical-information">由 {{ article.author }} 发表于 {{ article.category }}</p>
+        <div class="artical-text">
+		{% autoescape off %}
+			{{ article.content }}
+		{% endautoescape %}
+		</div>
+        <div class="artical-foot">
+            <p class="editor">责任编辑: {{ article.editor.student.true_name }}</p>
+            <div class="like-content">
+                <!--<img class="left" src="/static/images/like.png"><p  class="left">99999</p>-->
+                <p class="artical-time">{{ article.create_date | date:"Y-n-d"}}</p>
+                <img class="comment_img" src="/static/images/index/comment.png"><p class="comment_p">99999</p>
+                <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
+                </div>
+                <hr />
+                <a class="foot share" href="javascript:void(0)"><img id="share_normal" src="/static/images/articles/share_48.png"><img id="share_active" src="/static/images/articles/share_48.png"><p>分享</p></a>
+                <a class="foot comment" href="javascript:void(0)"><img id="comment_normal" src="/static/images/articles/comment_48.png"><img id="comment_active" src="/static/images/articles/comment_48.png"><p>评论</p></a>
+            </div>
+        </div>
+            
+        <div class="comment-main">
+        <!-- Duoshuo Comment BEGIN -->
+            <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}"></div>
+            <script type="text/javascript">
+                var duoshuoQuery = {short_name:"szustu"};
+                (function() {
+                    var ds = document.createElement('script');
+                    ds.type = 'text/javascript';ds.async = true;
+                    ds.src = 'http://static.duoshuo.com/embed.js';
+                    ds.charset = 'UTF-8';
+                    (document.getElementsByTagName('head')[0] 
+                    || document.getElementsByTagName('body')[0]).appendChild(ds);
+                })();
+            </script>
+            <script type="text/javascript">
+                likes = $(".ds-post-likes");
+                for(i=0;i<likes.length;i++){
+                    var reg=/[\u4E00-\u9FA5]/g;
+                    var result=title.replace(reg,'');
+                    likenum = parseInt(likes[i].innerText.replace(reg,''));
+                    likes[i].innerText = likenum;
+                }
+            </script>
+        <!-- Duoshuo Comment END -->
+        </div>
+<!--end of central article-->
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 {% endblock %}

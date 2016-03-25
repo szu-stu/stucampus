@@ -46,5 +46,5 @@ class Article(models.Model):
     deleted = models.BooleanField(default=False)
     important = models.BooleanField(default=False)
     publish = models.BooleanField(default=False)
-    likes=models.IntegerField(default=0,null=True)
-    comments=models.IntegerField(default=0,null=True)
+    likes=models.IntegerField(default=0,null=True)#该字段由多说负责
+    comments=models.IntegerField(default=0,null=True)#该字段由多说负责

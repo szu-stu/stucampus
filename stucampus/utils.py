@@ -181,8 +181,8 @@ class DuoShuo(object):
             visitor={}
             visitor['user_id']=json['user_id']
             visitor['name']=json['name']
-            visitor['url']=json['url']
-            visitor['avatar_url']=json['url']
+            visitor['url']=handleNoneUrl(json['url'])
+            visitor['avatar_url']=handleNoneUrl(json['avatar_url'] )
             visitor['visited_at']=json['visited_at']
             visitors.append(visitor)
         return visitors
@@ -196,17 +196,27 @@ class DuoShuo(object):
         comments_json=cls.getJson(url)["response"]
         comments=[]
         for json in comments_json:
-            comment={}           
+            comment={}
+            comment["comment_author_url"]=handleNoneUrl(json["author"]['url'])          
             comment["comment_author_name"]=json["author"]['name']
-            comment["comment_author_avatar_url"]=json["author"]['avatar_url']
-            comment["comment_author_url"]=json["author"]['url']
-            comment["comment_created_at"]=json["thread"]['created_at']
+            comment["comment_author_avatar_url"]=handleNoneUrl(json["author"]['avatar_url']) 
+            comment["comment_created_at"]=handleDate(json["thread"]['created_at'])
             comment["comment_content"]=json["message"]
             comment["article_title"]=json["thread"]['title']
-            comment["article_url"]=json["thread"]['url']
+            comment["article_url"]=handleNoneUrl(json["thread"]['url'])
             comments.append(comment)
         return comments
 
+def handleNoneUrl(url):
+    if url is None:
+        return "javascript:void(0)"
+    return url
+
+def handleDate(date):
+    '''
+        {{ comment.comment_created_at|date:"Y-m-d" }}无效，无奈之举
+    '''
+    return date.split("T")[0]
 
 
 

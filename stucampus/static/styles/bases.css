@@ -1,0 +1,361 @@
+*{
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+body{
+    background-color: #ddd;
+}
+@media screen and (max-width: 767px){
+	@media screen and (max-width: 640px){
+	    html{
+		font-size: 24.9px;
+	    }
+	}
+	@media screen and (max-width: 480px){
+	    html{
+		font-size: 18.5px;
+	    }
+	}
+	@media screen and (max-width: 360px){
+	    html{
+		font-size: 14.4px ;
+	    }
+	}
+	.clear-margin{
+	    margin: 0 !important;
+	}
+	.header-pc{
+	    display: none;
+	}
+	.header-phone{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    height: 3.466667rem;
+	    width: 100%;
+	    background-color: #5BC5BE;
+	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.16);
+	    z-index: 999;
+	}
+	.header-phone a{
+	    display: block;
+	    width:1.6rem;
+	    height: 1.6rem;
+	    padding: 0.933333rem 1.4rem;
+	    float: left;
+	}
+	.header-phone img{
+	    width:1.6rem;
+	    height: 1.6rem;
+	}
+	.header-phone p{
+	    display:block; 
+	    height: 3.466667rem;
+	    color: rgba(255,255,255,0.87);
+	    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+	    font-size: 1.2rem;
+	    line-height: 3.466667rem;
+	    letter-spacing: 0.24rem;
+	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.32);
+	}
+	.fixed-logo{
+	    display: block;
+	    position: fixed;
+	    right: 1.066667rem;
+	    bottom: 1.066667rem;
+	    border: 0.2rem solid rgba(255,255,255,0.54);
+	    border-radius: 90%;
+	    height: 3.333333rem;
+	    width: 3.333333rem;
+	    z-index: 999;
+	    overflow: hidden;
+	    transform: scale(0);
+	    -webkit-transform: scale(0);
+	    -o-transform: scale(0);
+	    -moz-transform: scale(0);
+	    transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    -webkit-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    -o-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    -moz-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    box-shadow: 0 0.666667rem 0.666667rem rgba(0,0,0,0.19);
+	}
+	.fixed-logo img{
+	    display: block;
+	    height: 3.333333rem;
+	    width: 3.333333rem;
+	    box-shadow: 0 0.4rem 0.2rem rgba(0,0,0,0.23);
+	    transition: all 0s ease-out;
+	    -webkit-transition: all 0s ease-out;
+	    -o-transition: all 0s ease-out;
+	    -moz-transition: all 0s ease-out;
+	}
+	.sidebar{
+	    display: block;
+	    position: fixed;
+	    top: 0;
+	    left: -25rem;
+	    width: 25rem;
+	    height: 100%;
+	    transition: all 0.5s ease-out;
+	    -moz-transition: all 0.5s ease-out; /* Firefox 4 */
+	    -webkit-transition: all 0.5s ease-out; /* Safari 和 Chrome */
+	    -o-transition: all 0.5s ease-out; /* Opera */
+	    z-index: 999;
+	}
+	.sidebarout{
+	    left: 0;
+	}
+	.sidebar-top{
+	    position: relative;
+	    width: 21.266667rem;
+	    height: 11.466667rem;
+	}
+	.sidebar-blur{
+	    position: absolute;
+	    width: 21.266667rem;
+	    height: 11.466667rem;
+	    background-color: rgba(0,0,0,0.08);
+	}
+	.stucampus_name{
+	    display: block;
+	    overflow:hidden;
+	    position: absolute;
+	    left: 2.133333rem;
+	    bottom: 3.733333rem;
+	    width: 12.0rem;
+	    height: 1.3rem;
+	    line-height: 1.2rem;
+	    font-family: "SourceHanSans-Regular","Microsoft YaHei";
+	    color: rgba(255,255,255,0.87);
+	    font-size: 1.2rem;
+	    letter-spacing: 1.8rem;
+	}
+	.stuc_description{
+	    display: block;
+	    overflow:hidden;
+	    position: absolute;
+	    left: 2.133333rem;
+	    bottom: 2.133333rem;
+	    width: 12.0rem;
+	    height: 0.9rem;
+	    line-height: 0.8rem;
+	    font-size: 0.8rem;
+	    color: rgba(255,255,255,0.87);
+	    letter-spacing: 0.25rem;
+	}
+	.call-back{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    display: none;
+	    height: 100%;
+	    width: 25rem;
+	    float: right;
+	    z-index: -1;
+	    background-color: rgba(0,0,0,0.18);
+	}
+	.sidebar-main{
+	    width: 21.266667rem;
+	    height: 100%;
+	    overflow: scroll;
+	    float: left;
+	    background-color: #FAFAFA;
+	}
+	.sidebar ul{
+	    display: block;
+	    width: 21.266667rem;
+	    height: 16.566667rem;
+	    background-color: #FAFAFA;
+	    z-index: 999;
+	}
+	.sidebar img{
+	    width: 21.266667rem;
+	    height: 11.466667rem;
+	    z-index: 999;
+	}
+	.sidebar hr{
+	    margin-top: 0.533333rem;
+	    margin-bottom: 0.533333rem;
+	    height: 1px;
+	    background-color: rgba(0,0,0,0.16);
+	}
+	.nav1{
+	    overflow: hidden;
+	}
+	.nav1 li a{
+	    position: relative;
+	    display: block;
+	    height: 3.2rem;
+	    line-height: 3.2rem;
+	    color: rgba(0,0,0,1);
+	    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+	    font-size: 0.933333rem;
+	    letter-spacing: 0.04666rem;
+	    text-decoration: none;
+	}
+	.nav1 a{
+	    padding-left: 4.8rem;
+	}
+	.nav1 li:nth-child(1){
+	    margin-top: 0.533333rem;
+	}
+	.nav1 li img{
+	    position: absolute;
+	    top: 0.8rem;
+	    left: 1.066667rem;
+	    width: 1.6rem;
+	    height: 1.6rem;
+	}
+	.nav1 a:hover{
+	    background-color: #E8E8E8;
+	}
+	.nav2{
+	    display: block;
+	    height: auto;
+	}
+	.nav2 li,a{
+	    position: relative;
+	    display: block;
+	    height: 3.2rem;
+	    line-height: 3.2rem;
+	    color: rgba(0,0,0,1);
+	    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+	    font-size: 0.933333rem;
+	    letter-spacing: 0.04666rem;
+	    text-decoration: none;
+	}
+	.nav2 a{
+	    padding-left: 4.8rem;
+	}
+	.nav2 li img{
+	    position: absolute;
+	    top: 0.8rem;
+	    left: 1.066667rem;
+	    width: 1.6rem;
+	    height: 1.6rem;
+	}
+	.nav2 a:hover{
+	    background-color: #E8E8E8;
+	}
+}
+@media screen and (min-width:768px){
+	@media screen and (min-width:768px){
+	    html{
+		font-size:17px;
+	    }
+	}
+	@media screen and (min-width:1366px){
+	    html{
+		font-size:30px;
+	    }
+	}
+	@media screen and (min-width:1440px){
+	    html{
+		font-size:32px;
+	    }
+	}
+	@media screen and (min-width:1980px){
+	    html{
+		font-size:32px;
+	    }
+	}
+	.inner_body{
+	    position: relative;
+	    overflow: hidden;
+	    margin: 0 auto;
+	    max-width: 1366px;
+	}
+	.clear-margin{
+		margin: 0 !important;
+	}
+	.header-phone{
+	    display: none;
+	}
+	.header-pc{
+	    display: block;
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    height: 1.733333rem;
+	    width: 100%;
+	    background-color: rgb(242,242,242);
+	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.16);
+	    z-index: 998;
+	}
+	.header-secshadow{
+	    position: absolute;
+	    height: 1.733333rem;
+	    width: 100%;
+	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.23);
+	}
+	.header-pc ul{
+	    position: absolute;
+	    right: 6.433333rem;
+	    top: 0;
+	    display: block;
+	    width: 20.0rem;
+	    height: 1.733333rem;
+	}
+	.header-pc ul li{
+	    display: block;
+	    width: 4.0rem;
+	    height: 1.733333rem;
+	    text-align: center;
+	    float: left;
+	}
+	.nav-active{
+	    color: #5BC5BE !important;
+	}
+	.now{
+	    position: absolute;
+	    height: 1.6rem !important;
+	    border-bottom: 4px solid #5BC5BE;
+	    transition: left 0.5s ease-out;
+	    -moz-transition: left 0.5s ease-out; /* Firefox 4 */
+	    -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
+	    -o-transition: left 0.5s ease-out; /* Opera */
+	}
+	.header-pc ul li a{
+	    display: block;
+	    width: 4.0rem;
+	    height: 1.733333rem;
+	    color: rgba(0,0,0,0.54);
+	    font-size: 0.533333rem;
+	    font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
+	    letter-spacing: 0.106667rem;
+	    line-height: 1.733333rem;
+	    text-align: center;
+	    text-decoration: none;
+	}
+	.header-pc ul li a:hover{
+	    color: rgb(0,0,0);
+	}
+	.fixed-logo{
+	    display: block;
+	    position: fixed;
+	    left: 6.433333rem;
+	    top: 0.133333rem;
+	    border: 0.133333rem solid rgba(255,255,255,0.54);
+	    border-radius: 90%;
+	    height: 2.733333rem;
+	    width: 2.733333rem;
+	    z-index: 999;
+	    overflow: hidden;
+	    transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    -moz-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    -webkit-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    -o-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    box-shadow: 0 0.333333rem 0.333333rem rgba(0,0,0,0.19);
+	}
+	.fixed-logo img{
+	    height: 2.733333rem;
+	    width: 2.733333rem;
+	    box-shadow: 0 0.2rem 0.1rem rgba(0,0,0,0.23);
+	}
+	.sidebar{
+	    display: none;
+	}
+}
+
+

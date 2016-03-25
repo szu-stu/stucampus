@@ -1,0 +1,197 @@
+
+
+
+.banner{
+    position: relative;
+    margin-top: 3.466667rem;
+    width: 25.0rem;
+    height: 9.733333rem;
+    overflow: hidden;
+}
+.blur{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 9.733333rem;
+    background-color: rgba(0,0,0,0.32);
+}
+.selector{
+    position: absolute;
+    bottom: 0.8rem;
+    display: block;
+    margin:0 auto;
+    width: 100%;
+    height: 0.6rem;
+    z-index: 20;
+    text-align: center;
+}
+.round{
+    display: inline-block;
+    margin-left: 0.933333rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    background-color: rgba(255,255,255,0.54);
+    border-radius: 50%;
+}
+.round:nth-child(1){
+    margin-left:0 ;
+}
+.active{
+    background-color: rgba(91,197,190,0.54);
+}
+.b-container{
+    width: 125.0rem;
+    height: 9.733333rem;
+}
+.b-container a{
+    position: relative;
+    display: block;
+    width: 25.0rem;
+    height: 9.733333rem;
+    overflow: hidden;
+    text-decoration: none;
+    float: left;
+    /*background-color: rgba(0,0,0,0.32);*/
+    transition: left 0.5s ease-out;
+    -moz-transition: left 0.5s ease-out; /* Firefox 4 */
+    -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
+    -o-transition: left 0.5s ease-out; /* Opera */
+}
+.banner img{
+    position: absolute;
+    width: 100%;
+    height: 9.733333rem;
+    z-index: -1;
+}
+.banner_title{
+    position: absolute;
+    top: 2.066667rem;
+    width: 25.0rem;
+    color: rgba(255,255,255,0.87);
+    font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
+    font-size: 2.0rem;
+    letter-spacing: 0.4rem;
+    line-height: 2.0rem;
+    font-weight: bold;
+    text-align: center;
+}
+.banner_describe{
+    position: absolute;
+    top: 5.533333rem;
+    width: 25.0rem;
+    color: rgba(255,255,255,0.87);
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
+    font-size: 0.8rem;
+    letter-spacing: 0.16rem;
+    line-height: 0.8rem;
+    font-weight: 200;
+    text-align: center;
+}
+.banner_category{
+    display: none;
+}
+.main-content{
+    position: relative;
+    width: 25.0rem;
+    overflow: hidden;
+}
+.side-content{
+    display: none;
+}
+.artical{
+    overflow: hidden;
+    border-radius: 4px;
+    width: 23.4rem;
+    height: auto;
+    margin: 0.8rem;
+    background-color: rgba(255,255,255,0.87);
+    box-shadow: 0rem 0.2rem 0.2rem rgba(0,0,0,0.16);
+}
+.artical a{
+    overflow: hidden;
+    height: auto;
+    width: 23.4rem;
+    text-decoration: none;
+    box-shadow: 0rem 0.2rem 0.2rem rgba(0,0,0,0.23);
+}
+.artical a hr{
+    display: block;
+    height: 1px;
+    width: 21.266667rem;
+    margin: 0 1.066667rem;
+    background-color: rgba(0,0,0,0.08);
+}
+.a-pic{
+    display: block;
+    width: 23.4rem;
+    height: 11.666667rem;
+    text-decoration: none;
+}
+.a-content{
+    padding: 0.8rem 1.066667rem;   
+    width: 21.266667rem;
+}
+.a-title{
+    color: rgba(0,0,0,0.87);
+    font-family: "SourceHanSans-Medium","Roboto-Medium","Microsoft YaHei";
+    font-size: 1.2rem;
+    letter-spacing: 0.006rem;
+    line-height: 1.2rem;
+}
+.a-intro{
+    color: rgba(0,0,0,0.54);
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+    font-size: 0.8rem;
+    letter-spacing: 0.016rem;
+    line-height: 1.2rem;
+}
+.a-info{
+    position: relative;
+    height: 0.8rem;
+    margin: 0.8rem 0;
+    color: rgba(0,0,0,0.54);
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+    font-size: 0.8rem;
+    letter-spacing: 0.02rem;
+    line-height: 0.8rem;
+}
+.like-content{
+    position: relative;
+    padding: 0.8rem 1.066667rem;
+    height: 0.8rem;
+}
+.like-content img{
+    position: absolute;
+    top: 0.8rem;
+    height: 0.8rem;
+    width: 0.8rem;
+}
+.like-content p{
+    position: absolute;
+    top: 0.8rem;
+    display: block;
+    height: 0.8rem;
+    max-width: 2.5rem;
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+    color: rgba(0,0,0,0.54);
+}
+.comment_img{
+    right: 8.266667rem;
+}
+.comment_p{
+    right: 5.266667rem;
+}
+.eye_img{
+    right: 4rem;
+}
+.eye_p{
+    right: 1.066667rem;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
