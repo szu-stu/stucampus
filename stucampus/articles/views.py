@@ -11,6 +11,7 @@ from stucampus.articles.forms import CategoryFormset
 from stucampus.articles.models import Article, Category
 from stucampus.utils import get_client_ip 
 from stucampus.account.permission import check_perms
+from stucampus.utils import DuoShuo
 
 
 NO_CATEGORY = u'未分类'
@@ -174,6 +175,7 @@ def article_display(request, id=None):
     article = get_object_or_404(Article, pk=id, publish=True, deleted=False)
     article.click_count += 1
     article.save()
+    comments=DuoShuo.getListPosts(article.id)
     return render(request, 'articles/article-display.html',
-            {'article': article})
+            {'article': article,'comments':comments})
 

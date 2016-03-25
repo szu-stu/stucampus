@@ -41,8 +41,10 @@ class Article(models.Model):
 
     create_date = models.DateField(auto_now_add=True)
     modify_date = models.DateField(auto_now=True)
-    create_ip = models.GenericIPAddressField(editable=False)
+    create_ip = models.GenericIPAddressField(editable=False,null=True)
     click_count = models.IntegerField(default=0, editable=False)
     deleted = models.BooleanField(default=False)
     important = models.BooleanField(default=False)
     publish = models.BooleanField(default=False)
+    likes=models.IntegerField(default=0,null=True)
+    comments=models.IntegerField(default=0,null=True)

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from stucampus.articles.models import Article, Category
 from stucampus.lecture.models import LectureMessage
 from stucampus.activity.models import ActivityMessage
+from stucampus.utils import DuoShuo
 
 
 def index(request):
@@ -25,11 +26,17 @@ def index(request):
             LectureMessage.objects.filter(checked=True).order_by('-pk')[:7]
     activity_list = \
             ActivityMessage.objects.filter(checked=True).order_by('-pk')[:7]
+    comments = DuoShuo.getRecentComment()
+    visitors = DuoShuo.getListVisitors()
+    important_articles=DuoShuo.appendNumToArticles(important_articles)
+    
     return render(request, "index.html",
                   {'important_articles': important_articles,
                    'article_dict': article_dict,
                    'lecture_list': lecture_list,
-                   'activity_list': activity_list})
+                   'activity_list': activity_list,
+                   'comments':comments,
+                   'visitors':visitors})
 
 
 def about_us(request):
