@@ -1,0 +1,97 @@
+.ds-thread{
+    width: 100%;
+    height: auto ;
+    background-color: #FDFDFD ;
+    overflow: hidden ;
+}
+.comments{
+    position: relative;
+    display: block;
+    height: auto;
+    padding: 1.6rem 0 0 0;
+    border-bottom: 0.066667rem solid rgba(0,0,0,0.08);
+}
+.user_info{
+    display: block;
+    position: relative;
+    height: 2.4rem;
+    overflow: hidden;
+    text-decoration: none;
+}
+.avatar{
+    position: absolute;
+    width: 2.4rem ;
+    height: 2.4rem ;
+    border-radius: 50% ;
+    overflow: hidden ;
+}
+.name{
+    position: absolute;
+    left: 4.0rem;
+    display: block ;
+    width: 10.266667rem ;
+    height: 0.8rem ; 
+    color: #5BC5BE ;
+    font-size: 0.8rem ; 
+    line-height: 0.8rem;
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+}
+.c_createtime{
+    position: absolute ;
+    top: 1.26667rem ;
+    left: 4.0rem ;
+    color: rgba(0,0,0,0.54) ;
+    font-size: 0.8rem ;    
+    line-height: 0.8rem;
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei" ;
+}
+.reply,.like{
+    display: block;
+    position: absolute;
+    height: 1.06667rem;
+    font-size: 0.8rem;
+    color:rgba(0,0,0,0.64);
+    text-decoration: none;
+    overflow: hidden;
+
+}
+.reply img,.like img{
+    float: left;
+    width: 1.06667rem;
+    height: 1.06667rem;
+}
+.reply p,.like p{
+    display: block;
+    float: left;
+    line-height: 1.06667rem;
+}
+.reply{
+    right: 3rem;
+    top: 1.8rem;
+}
+.like{
+    right: 0rem ;
+    top: 1.8rem;
+}
+.message{
+    display: block;
+    margin: 1.6rem 0.5333rem;
+}
+.add-comment{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: ;
+    height: auto;
+    width: 100%;
+}
+.addcomment{
+    width: 80%;
+}
+.submit{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 1.06667rem;
+    height: 1.06667rem;
+}

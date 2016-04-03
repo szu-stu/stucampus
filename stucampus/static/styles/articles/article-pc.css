@@ -1,4 +1,4 @@
-@media screen and (max-width: 1366px){
+@media screen and (max-width: 960px){
     html{
         font-size: 30px;
     }
@@ -169,6 +169,7 @@ body{
 }
 .artical-text img{
     max-width: 90%;
+    height: auto !important;
 }
 .artical-foot{
     margin-top: 1.5rem;
@@ -285,7 +286,7 @@ body{
 .comment-main{
     margin: 1.066667rem auto;
     width: 28.8rem;
-    padding: 0.6rem 1.6rem;
+    padding:0 1.6rem;
     background-color: #FDFDFD;
     overflow: hidden;
     border-radius: 2px;

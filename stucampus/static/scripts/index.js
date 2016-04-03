@@ -38,18 +38,6 @@ function giveRoundsAndBannerNum(){
         rounds.eq(i).attr("id",i);
     }
 }
-function resized(windowswidth){
-    if(windowswidth<=767){
-        fontsize= windowswidth/750*30 ;
-    }
-    else if(windowswidth>=768&&windowswidth<=1366){
-        fontsize = windowswidth/1366*30;
-    } 
-    else if(windowswidth>1366){
-        fontsize = 30;
-    }
-    $("html").css("font-size",fontsize+"px");
-}
 function bannertouchstart(event){
     touch = event.originalEvent.targetTouches[0];
     firstPos = {

@@ -34,6 +34,7 @@ $(function(){
     resized(w);
     navcome(nownavid);
     $(".fixed-logo").bind('click',function(){showtools();});
+    $(".comment").bind('click',function(){showcommenttools();});
 });
 function showtools(){
     logoclicktime += 1;
@@ -49,4 +50,7 @@ function showtools(){
         $("#discuss").css("bottom","1.6rem");
         $("#like").css("bottom","1.6rem");
     }
+}
+function showcommenttools(){
+    $(".add-comment").show();
 }

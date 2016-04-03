@@ -6,9 +6,10 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    <link href="/static/styles/articles/artical.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
-    <link href="/static/styles/articles/artical4pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
+    <link href="/static/styles/articles/article-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
+    <link href="/static/styles/articles/article-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
     {{ 'artical.js' | as_js }}
+    {{ 'articles/duoshuo.css' | as_css }}
 {% endblock %}
 
 {% block content %}
@@ -42,38 +43,35 @@
             <div class="like-content">
                 <!--<img class="left" src="/static/images/like.png"><p  class="left">99999</p>-->
                 <p class="artical-time">{{ article.create_date | date:"Y-n-d"}}</p>
-                <img class="comment_img" src="/static/images/index/comment.png"><p class="comment_p">99999</p>
+                <img class="comment_img" src="/static/images/index/comment.png"><p class="comment_p">{{ article.comments }}</p>
                 <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
                 </div>
                 <hr />
                 <a class="foot share" href="javascript:void(0)"><img id="share_normal" src="/static/images/articles/share_48.png"><img id="share_active" src="/static/images/articles/share_48.png"><p>分享</p></a>
                 <a class="foot comment" href="javascript:void(0)"><img id="comment_normal" src="/static/images/articles/comment_48.png"><img id="comment_active" src="/static/images/articles/comment_48.png"><p>评论</p></a>
+                <div class="add-comment">
+                    <input class="addcomment">
+                    <input class="submit">
+                </div>
             </div>
         </div>
             
         <div class="comment-main">
         <!-- Duoshuo Comment BEGIN -->
-            <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}"></div>
-            <script type="text/javascript">
-                var duoshuoQuery = {short_name:"szustu"};
-                (function() {
-                    var ds = document.createElement('script');
-                    ds.type = 'text/javascript';ds.async = true;
-                    ds.src = 'http://static.duoshuo.com/embed.js';
-                    ds.charset = 'UTF-8';
-                    (document.getElementsByTagName('head')[0] 
-                    || document.getElementsByTagName('body')[0]).appendChild(ds);
-                })();
-            </script>
-            <script type="text/javascript">
-                likes = $(".ds-post-likes");
-                for(i=0;i<likes.length;i++){
-                    var reg=/[\u4E00-\u9FA5]/g;
-                    var result=title.replace(reg,'');
-                    likenum = parseInt(likes[i].innerText.replace(reg,''));
-                    likes[i].innerText = likenum;
-                }
-            </script>
+            <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}">
+                {% for comment in comments %}
+                <div class="comments">
+                    <a class="user_info" href="{{ comment.author.url }}">
+                        <img class="avatar" src="{{ comment.author.avatar_url }}" alt="{{ comment.author.name }}">
+                        <p class="name" >{{ comment.author.name }}</p>
+                        <p class="c_createtime">{{ comment.created_at }}</p>
+                        <a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a>
+                        <a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>{{ comment.likes }}</p></a>
+                    </a>
+                    <span class="message">{{ comment.message }}</span>
+                </div>
+                {% endfor %}
+            </div>
         <!-- Duoshuo Comment END -->
         </div>
 <!--end of central article-->

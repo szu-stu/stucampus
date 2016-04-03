@@ -244,21 +244,23 @@ body{
 	    html{
 		font-size:17px;
 	    }
+		.autoadapt{
+			width: 32rem;
+		    height: 1.733333rem;
+			margin: 0 auto;
+			z-index: 3;
+		}
 	}
-	@media screen and (min-width:1366px){
+	@media screen and (min-width:960px){
 	    html{
 		font-size:30px;
 	    }
-	}
-	@media screen and (min-width:1440px){
-	    html{
-		font-size:32px;
-	    }
-	}
-	@media screen and (min-width:1980px){
-	    html{
-		font-size:32px;
-	    }
+		.autoadapt{
+			width: 960px;
+		    height: 1.733333rem;
+			margin: 0 auto;
+			z-index: 3;
+		}
 	}
 	.inner_body{
 	    position: relative;
@@ -290,9 +292,8 @@ body{
 	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.23);
 	}
 	.header-pc ul{
-	    position: absolute;
-	    right: 6.433333rem;
-	    top: 0;
+		position: relative;
+		float: right;
 	    display: block;
 	    width: 20.0rem;
 	    height: 1.733333rem;

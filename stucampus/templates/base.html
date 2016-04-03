@@ -17,7 +17,6 @@
     {{ 'plugins/jquery.tools.min.js' | as_js }}
     {{ 'plugins/jquery.form.js' | as_js}}
     {{ 'plugins/jquery.lazyload.min.js' | as_js }}
-    {{ 'ga.js' | as_js }}
     {{ 'global.js' | as_js }}
     {{ 'chromeCookie.js' | as_js }}
     {{ 'cookie.js' | as_js }}
@@ -57,14 +56,16 @@
     </div>
     <div class="header-pc">
         <div class="header-secshadow"></div>
-        <ul>
-            <li><a class="nav-active" id="nav0" href="javascript:void(0)" onclick="navcome(0);">学子首页</a></li>
-            <li><a id="nav1" href="javascript:void(0)" onclick="navcome(1);">深大讲座</a></li>
-            <li><a id="nav2" href="javascript:void(0)" onclick="navcome(2);">活动预告</a></li>
-            <li><a id="nav3" href="javascript:void(0)" onclick="navcome(3);">深大摄影</a></li>
-            <li ><a id="nav4" href="javascript:void(0)" onclick="navcome(4);">服务专区</a></li>
-            <li class="now"></li>
-        </ul>
+        <div class="autoadapt">
+            <ul>
+                <li><a class="nav-active" id="nav0" href="javascript:void(0)" onclick="navcome(0);" tarurl="/">学子首页</a></li>
+                <li><a id="nav1" href="javascript:void(0)" onclick="navcome(1);" tarurl="{% url 'lecture:index' %}">深大讲座</a></li>
+                <li><a id="nav2" href="javascript:void(0)" onclick="navcome(2);" tarurl="{% url 'activity:index' %}">活动预告</a></li>
+                <li><a id="nav3" href="javascript:void(0)" onclick="navcome(3);" tarurl="{% url 'articles:list' 'photography' %}">深大摄影</a></li>
+                <li ><a id="nav4" href="javascript:void(0)" onclick="navcome(4);" tarurl="http://stu.szu.edu.cn:8080">服务专区</a></li>
+                <li class="now"></li>
+            </ul>
+        </div>
     </div>
 
     <div class="sidebar">

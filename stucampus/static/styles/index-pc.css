@@ -3,6 +3,7 @@
     margin-top: 1.733333rem;
     width: 45.533333rem;
 	height: 11.533333rem;
+    font-size: 30px;
 	overflow: hidden;
 }
 .blur{
@@ -15,18 +16,18 @@
 }
 .selector{
 	position: absolute;
-	bottom: 0.466667rem;
+	bottom: 0.466667em;
 	display: block;
 	width: 100%;
     text-align: center;
-	height: 0.6rem;
+	height: 0.6em;
 	z-index: 20;
 }
 .round{
 	display: inline-block;
-	margin-left: 0.6rem;
-	width: 0.533333rem;
-	height: 0.533333rem;
+	margin-left: 0.6em;
+	width: 0.533333em;
+	height: 0.533333em;
 	background-color: rgba(255,255,255,0.54);
 	border-radius: 50%;
 }
@@ -38,16 +39,18 @@
 }
 .b-container{
     position: relative;
-    width: 227.7666667rem;
-    height: 11.533333rem;
+    width: 227.7666667em;
+    height: 11.533333em;
+    font-size: inherit;
 }
 .b-container a{
     position: relative;
 	display: block;
-	width: 45.533333rem;
-	height: 11.533333rem;
+	width: 45.533333em;
+	height: 11.533333em;
 	overflow: hidden;
 	text-decoration: none;
+    font-size: inherit;
 	float: left;
     transition: left 0.5s ease-out;
     -moz-transition: left 0.5s ease-out; /* Firefox 4 */
@@ -56,51 +59,51 @@
 }
 .banner img{
 	position: absolute;
-	width: 45.533333rem;
-	height: 11.533333rem;
+	width: 45.533333em;
+	height: 11.533333em;
 	z-index: -1;
 }
 .banner_title{
     position: absolute;
-	top: 2.266667rem;
-    width: 45.533333rem;
+	top: 2.266667em;
+    width: 45.533333em;
 	color: rgba(255,255,255,0.87);
 	font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
-	font-size: 1.6rem;
-	letter-spacing: 0.4rem;
-	line-height: 1.6rem;
+	font-size: 1.6em;
+	letter-spacing: 0.4em;
+	line-height: 1.6em;
 	font-weight: bold;
 	text-align: center;
 }
 .banner_describe{
     position: absolute;
-	top: 4.933333rem;
-    width: 45.533333rem;
+	top: 4.933333em;
+    width: 45.533333em;
 	color: rgba(255,255,255,0.87);
 	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
-	font-size: 0.6rem;
-	letter-spacing: 0.16rem;
-	line-height: 0.6rem;
+	font-size: 0.6em;
+	letter-spacing: 0.16em;
+	line-height: 0.6em;
     font-weight: 200;
 	text-align: center;
 }
 .banner_category{
     display: block;
     position: absolute;
-    top: 7.666667rem;
-    width: 45.533333rem;
+    top: 7.666667em;
+    width: 45.533333em;
     font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
-    font-size: 0.6rem;
+    font-size: 0.6em;
     color: rgba(255,255,255,0.87);
-    letter-spacing: 0.16rem;
-    line-height: 0.6rem;
+    letter-spacing: 0.16em;
+    line-height: 0.6em;
     font-weight: normal;
     text-align: center;
 
 }
 .main-content{
     position: relative;
-    margin:0 6.433333rem;
+    margin:0 auto;
     width: 32.666667rem;
     overflow: hidden;
 }
