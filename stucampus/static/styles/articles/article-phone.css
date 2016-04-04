@@ -202,12 +202,16 @@ body{
     overflow: hidden;
     height: 9.133333rem;
 }
+.sharebox{
+    display: none;
+}
 .artical-foot hr{
     position: absolute;
     top: 4.4rem;
     height: 1px;
     width: 100%;
     background-color: rgba(0,0,0,0.08);
+    z-index: 101;
 }
 .like-content{
     position: absolute;

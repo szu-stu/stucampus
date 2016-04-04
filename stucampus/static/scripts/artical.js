@@ -35,6 +35,8 @@ $(function(){
     navcome(nownavid);
     $(".fixed-logo").bind('click',function(){showtools();});
     $(".comment").bind('click',function(){showcommenttools();});
+    $(".share").bind('click',function(){showsharetools();});
+    $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");});
 });
 function showtools(){
     logoclicktime += 1;
@@ -53,4 +55,7 @@ function showtools(){
 }
 function showcommenttools(){
     $(".add-comment").show();
+    setTimeout(function(){
+        $(".add-comment").addClass("appear");
+    },100);
 }

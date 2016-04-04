@@ -77,21 +77,79 @@
     display: block;
     margin: 1.6rem 0.5333rem;
 }
-.add-comment{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding: ;
-    height: auto;
-    width: 100%;
+@media screen and (max-width: 767px){
+    .add-comment{
+        display: none;
+        position: absolute;
+        bottom: 0;
+        left: -21.8rem;
+        padding:0.8rem 0;
+        height: 3.46667rem;
+        width: 21.8rem;
+        background-color: #FDFDFD;
+        z-index: 100;
+        transition:left 0.5s ease-in;
+    }
+    .backarticalfoot{
+        position: absolute;
+        top: 1.6rem;
+        width: 1.06667rem;
+        height: 1.06667rem;
+        background-image: url('/static/images/index/close.png');
+        background-size: 100%;
+    }
+    .addcomment{
+        position: absolute;
+        top: 0.8rem;
+        left: 2.4rem;
+        width: 17.4rem;
+        overflow-y:visible; 
+        height: 3.46667rem;
+        border-bottom: 1px solid #5BC5BE;
+    }
+    .submit{
+        position: absolute;
+        right: 0;
+        top: 1.6rem;
+        width: 1.06667rem;
+        height: 1.06667rem;
+        background-image: url('/static/images/index/send_32.png');
+        background-size: 100%;
+    }
+    .appear{
+        left: 0;
+    }
 }
-.addcomment{
-    width: 80%;
-}
-.submit{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: 1.06667rem;
-    height: 1.06667rem;
+@media screen and (min-width: 768px){
+    .add-comment{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding:1.6rem 0;
+        height: 3.46667rem;
+        width: 100%;
+        background-color: #FDFDFD;
+        z-index: 100;
+    }
+    .backarticalfoot{
+        display: none;
+    }
+    .addcomment{
+        position: absolute;
+        top: 1.6rem;
+        left: 0;
+        width: 26.13333rem;
+        overflow-y:visible; 
+        height: 3.46667rem;
+        border-bottom: 1px solid #5BC5BE;
+    }
+    .submit{
+        position: absolute;
+        right: 0;
+        bottom: 1.6rem;
+        width: 1.06667rem;
+        height: 1.06667rem;
+        background-image: url('/static/images/index/send_32.png');
+        background-size: 100%;
+    }
 }

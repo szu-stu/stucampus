@@ -90,6 +90,18 @@ class DuoShuo(object):
             comment={}
             parent_posts_value= parent_posts[parent_post]
             comment["author"]=parent_posts_value["author"]
+            '''
+                因为在返回数据中有None
+                而如果直接传输None的话
+                会导致读取不到头像
+                并且拖慢加载速度
+                因此加了以下几行
+                fixed by GearLiu<gearliu155@gmail.com>
+            '''
+            if comment["author"]["url"] is None:
+                comment["author"]["url"]="javascript:void(0)"   #无链接网址则不跳转
+                comment["author"]["avatar_url"]="http://static.duoshuo.com/images/noavatar_default.png"  #无头像时用多说默认头像
+
             comment["message"]=parent_posts_value["message"]
             comment["created_at"]=parent_posts_value["created_at"]
             comment["likes"]=parent_posts_value["likes"]

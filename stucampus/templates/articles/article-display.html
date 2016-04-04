@@ -47,15 +47,57 @@
                 <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
                 </div>
                 <hr />
+                <div class="sharebox">
+                    <span>分享到：</span>
+                    <a id="wechat" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><img src="/static/images/index/wechat.png"><span>微信</span></a>
+                    <a id="weibo" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><img src="/static/images/index/sina.png"><span>微博</span></a>
+                    <a id="QQ" href="http://connect.qq.com/widget/shareqq/index.html?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&desc=&summary=&site=" target="_blank"><img src="/static/images/index/QQ.png"><span>QQ</span></a>
+                    <a id="twitter" href="http://s.share.baidu.com/?click=1&url=http://stu.szu.cn{% url 'articles:display' article.pk %}&uid=0&to=twi&type=text&pic=&title={{ article.title }}-深圳大学学子天地&key=&desc=&comment=&relateUid=&searchPic=0&sign=on&l=1afglci3o1afglcj3k1afgokghr&linkid=imm21dvnzhc&firstime=" target="_blank"><img src="/static/images/index/twitter.png"><span>Twitter</span></a>
+                </div>
                 <a class="foot share" href="javascript:void(0)"><img id="share_normal" src="/static/images/articles/share_48.png"><img id="share_active" src="/static/images/articles/share_48.png"><p>分享</p></a>
                 <a class="foot comment" href="javascript:void(0)"><img id="comment_normal" src="/static/images/articles/comment_48.png"><img id="comment_active" src="/static/images/articles/comment_48.png"><p>评论</p></a>
+                <hr />
                 <div class="add-comment">
-                    <input class="addcomment">
-                    <input class="submit">
+                    <a class="backarticalfoot" href="javascript:void(0)"></a>
+                    <textarea class="addcomment"></textarea> 
+                    <a class="submit" href="javascript:sendMessageToDuoshuo()"></a>
                 </div>
             </div>
         </div>
-            
+        <!--duoshuodenglu-->
+        <!--<div class="ds-dialog-inner">
+            <div class="ds-dialog-body">
+                <h2>社交帐号登录</h2>
+                <div class="ds-icons-32"><a class="ds-weixin" href="http://szustu.duoshuo.com/login/weixin/">微信</a><a class="ds-weibo" href="http://szustu.duoshuo.com/login/weibo/">新浪微博</a><a class="ds-qq" href="http://szustu.duoshuo.com/login/qq/">QQ</a><a class="ds-renren" href="http://szustu.duoshuo.com/login/renren/">人人网</a><a class="ds-kaixin" href="http://szustu.duoshuo.com/login/kaixin/">开心网</a><a class="ds-douban" href="http://szustu.duoshuo.com/login/douban/">豆瓣网</a></div>
+                <h2>作为游客留言</h2>
+                <form>
+                    <div class="ds-control-group"><input type="text" name="author_name" id="ds-dialog-name" value="" required=""><label for="ds-dialog-name">名字(必填)</label></div>
+                    <div class="ds-control-group"><input type="email" name="author_email" id="ds-dialog-email" value="" required=""><label for="ds-dialog-email">邮箱(必填)</label></div><button type="submit">发布</button></form>
+            </div>
+            <div class="ds-dialog-footer">
+                <a href="http://duoshuo.com/" target="_blank" class="ds-logo"></a><span>社会化评论框</span></div>
+            <a class="ds-dialog-close" href="javascript:void(0)" title="关闭"></a>
+        </div>-->
+        <script>
+            function sendMessageToDuoshuo(){
+                var message = $(".addcomment").val();
+                var author_name = $("input[name='author_name']").val();
+                var author_email = $("input[name='author_email']").val();
+                var posturl="http://szustu.duoshuo.com/api/posts/create.json"
+                var Data="short_name=testapi&thread_key=article-comments-{{ article.id }}&message="+message+"&nonce=5700b85f9282b&author_name="+author_name+"&author_email="+author_email+"&v=16.3.18"
+                $.post(posturl,Data,function(result){
+                    d = result;
+                    var defaulticonurl="http://static.duoshuo.com/images/noavatar_default.png";
+                    if(result['response']["status"]=="approved"){
+                        userurl = result["response"]["author"]["url"]==null?'javascript:void(0)':result["response"]["author"]["url"];
+                        useravatarurl = result["response"]["author"]["avatar_url"]==null?defaulticonurl:result["response"]["author"]["avatar_url"];
+                        $(".ds-thread").prepend('<div class="comments"><a class="user_info" href='+userurl+'><img class="avatar" src='+useravatarurl+'><p class="name" >'+result["response"]["author"]["name"]+'</p><p class="c_createtime">'+result["response"]["created_at"]+'</p><a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a><a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>'+result['response']['likes']+'</p></a></a><span class="message">'+result["response"]["message"]+'</span></div>');
+                        $(".add-comment").removeClass("appear");
+                        $(".addcomment").val("");
+                    }
+                });
+            };
+        </script>
         <div class="comment-main">
         <!-- Duoshuo Comment BEGIN -->
             <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}">

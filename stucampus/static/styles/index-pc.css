@@ -1,6 +1,6 @@
 .banner{
 	position: relative;
-    margin-top: 1.733333rem;
+    margin: 1.733333rem auto 0 auto;
     width: 45.533333rem;
 	height: 11.533333rem;
     font-size: 30px;
@@ -16,18 +16,18 @@
 }
 .selector{
 	position: absolute;
-	bottom: 0.466667em;
+	bottom: 0.466667rem;
 	display: block;
 	width: 100%;
     text-align: center;
-	height: 0.6em;
+	height: 0.6rem;
 	z-index: 20;
 }
 .round{
 	display: inline-block;
-	margin-left: 0.6em;
-	width: 0.533333em;
-	height: 0.533333em;
+	margin-left: 0.6rem;
+	width: 0.533333rem;
+	height: 0.533333rem;
 	background-color: rgba(255,255,255,0.54);
 	border-radius: 50%;
 }
@@ -39,15 +39,15 @@
 }
 .b-container{
     position: relative;
-    width: 227.7666667em;
-    height: 11.533333em;
+    width: 227.7666667rem;
+    height: 11.533333rem;
     font-size: inherit;
 }
 .b-container a{
     position: relative;
 	display: block;
-	width: 45.533333em;
-	height: 11.533333em;
+	width: 45.533333rem;
+	height: 11.533333rem;
 	overflow: hidden;
 	text-decoration: none;
     font-size: inherit;
@@ -59,44 +59,44 @@
 }
 .banner img{
 	position: absolute;
-	width: 45.533333em;
-	height: 11.533333em;
+	width: 45.533333rem;
+	height: 11.533333rem;
 	z-index: -1;
 }
 .banner_title{
     position: absolute;
-	top: 2.266667em;
-    width: 45.533333em;
+	top: 2.266667rem;
+    width: 45.533333rem;
 	color: rgba(255,255,255,0.87);
 	font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
-	font-size: 1.6em;
-	letter-spacing: 0.4em;
-	line-height: 1.6em;
+	font-size: 1.6rem;
+	letter-spacing: 0.4rem;
+	line-height: 1.6rem;
 	font-weight: bold;
 	text-align: center;
 }
 .banner_describe{
     position: absolute;
-	top: 4.933333em;
-    width: 45.533333em;
+	top: 4.933333rem;
+    width: 45.533333rem;
 	color: rgba(255,255,255,0.87);
 	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
-	font-size: 0.6em;
-	letter-spacing: 0.16em;
-	line-height: 0.6em;
+	font-size: 0.6rem;
+	letter-spacing: 0.16rem;
+	line-height: 0.6rem;
     font-weight: 200;
 	text-align: center;
 }
 .banner_category{
     display: block;
     position: absolute;
-    top: 7.666667em;
-    width: 45.533333em;
+    top: 7.666667rem;
+    width: 45.533333rem;
     font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
-    font-size: 0.6em;
+    font-size: 0.6rem;
     color: rgba(255,255,255,0.87);
-    letter-spacing: 0.16em;
-    line-height: 0.6em;
+    letter-spacing: 0.16rem;
+    line-height: 0.6rem;
     font-weight: normal;
     text-align: center;
 
