@@ -48,7 +48,7 @@
 <body>
 
 <div class="inner_body">
-        <div class="header-phone">
+    <div class="header-phone">
         <a id="menu_call" href="javascript:void(0)" onclick="sidebaropen();">
             <img src="/static/images/index/menu_call.png" alt="nav" />
         </a>
@@ -79,19 +79,19 @@
 
             <ul class="nav1">
                 <li><a href="/"><img src="/static/images/index/home_48.png" alt="icon" />学子首页</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/photo_48.png" alt="icon" />深大摄影</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/people_48.png" alt="icon" />深大人物</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/interesting_48.png" alt="icon" />趣物志</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/news_48.png" alt="icon" />新闻和通知</a></li>
+                <li><a href="{% url 'articles:list' 'photography' %}"><img src="/static/images/index/photo_48.png" alt="icon" />深大摄影</a></li>
+                <li><a href="{% url 'articles:list' 'people' %}"><img src="/static/images/index/people_48.png" alt="icon" />深大人物</a></li>
+                <li><a href="{% url 'articles:list' 'interesting' %}"><img src="/static/images/index/interesting_48.png" alt="icon" />趣物志</a></li>
+                <li><a href="{% url 'articles:list' 'news' %}"><img src="/static/images/index/news_48.png" alt="icon" />新闻和通知</a></li>
             </ul>
-            <hr />
+            <!--<hr />
             <ul class="nav2">
                 <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />深大导航</a></li>
                 <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />最新评论</a></li>
                 <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />最近访客</a></li>
                 <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />合作社团</a></li>
                 <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />火车订票</a></li>
-            </ul>
+            </ul>-->
         </div>
         <div class="call-back" onclick="sidebarclose();"></div>
     </div>
@@ -99,11 +99,12 @@
     <a href="javascript:void(0)" class="fixed-logo">
         <img src="/static/images/stucampus_logo.png" alt="" />
     </a>
-{% block header %}
-{% endblock %}
-
-{% block content %}
-{% endblock %}
+    {% block header %}
+    {% endblock %}
+    <div class="inner_content">
+    {% block content %}
+    {% endblock %}
+    </div><!--end of inner_content-->
 
 </div><!--end of inner_body-->
 

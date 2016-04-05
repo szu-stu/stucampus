@@ -27,6 +27,9 @@
 body{
     background-color: #ddd;
 }
+.inner_content{
+    margin-top: 0;
+}
 .header-phone{
     display: none;
 }

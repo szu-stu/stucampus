@@ -106,6 +106,7 @@
         overflow-y:visible; 
         height: 3.46667rem;
         border-bottom: 1px solid #5BC5BE;
+        resize: none;
     }
     .submit{
         position: absolute;
@@ -121,6 +122,25 @@
     }
 }
 @media screen and (min-width: 768px){
+    .ds-dialog-inner{
+        position: fixed;
+        top: 40%;
+        left: 40%;
+        padding: 0.8rem;
+        width:10.6667rem;
+        height: 7.46667rem;
+        background-color: rgba(255,255,255,0.87);
+        z-index: 200;
+    }
+    .ds-dialog-inner p{
+        font-family: "SourceHanSans-Blod","Roboto-Blod","Microsoft YaHei" ;
+    }
+    .ds-dialog-inner input{
+        width:10.6667rem;
+        height: 1.6rem;
+        background-color: rgba(255,255,255,0);
+        z-index: 200;
+    }
     .add-comment{
         position: absolute;
         bottom: 0;

@@ -60,40 +60,44 @@
                 <div class="add-comment">
                     <a class="backarticalfoot" href="javascript:void(0)"></a>
                     <textarea class="addcomment"></textarea> 
-                    <a class="submit" href="javascript:sendMessageToDuoshuo()"></a>
+                    <a class="submit" href="javascript:showIdentityBox()"></a>
                 </div>
             </div>
         </div>
         <!--duoshuodenglu-->
-        <!--<div class="ds-dialog-inner">
-            <div class="ds-dialog-body">
-                <h2>社交帐号登录</h2>
-                <div class="ds-icons-32"><a class="ds-weixin" href="http://szustu.duoshuo.com/login/weixin/">微信</a><a class="ds-weibo" href="http://szustu.duoshuo.com/login/weibo/">新浪微博</a><a class="ds-qq" href="http://szustu.duoshuo.com/login/qq/">QQ</a><a class="ds-renren" href="http://szustu.duoshuo.com/login/renren/">人人网</a><a class="ds-kaixin" href="http://szustu.duoshuo.com/login/kaixin/">开心网</a><a class="ds-douban" href="http://szustu.duoshuo.com/login/douban/">豆瓣网</a></div>
-                <h2>作为游客留言</h2>
-                <form>
-                    <div class="ds-control-group"><input type="text" name="author_name" id="ds-dialog-name" value="" required=""><label for="ds-dialog-name">名字(必填)</label></div>
-                    <div class="ds-control-group"><input type="email" name="author_email" id="ds-dialog-email" value="" required=""><label for="ds-dialog-email">邮箱(必填)</label></div><button type="submit">发布</button></form>
-            </div>
-            <div class="ds-dialog-footer">
-                <a href="http://duoshuo.com/" target="_blank" class="ds-logo"></a><span>社会化评论框</span></div>
-            <a class="ds-dialog-close" href="javascript:void(0)" title="关闭"></a>
-        </div>-->
+        <div class="ds-dialog-inner" style="display:none;">
+            <div class="shadow"></div>
+            <b>作为游客留言</b>
+            <input name="author_name" type="text">
+            <input name="author_email" type="email">
+            <a href="javascript:sendMessageToDuoshuo()">提交</a>
+        </div>
         <script>
             function sendMessageToDuoshuo(){
-                var message = $(".addcomment").val();
                 var author_name = $("input[name='author_name']").val();
                 var author_email = $("input[name='author_email']").val();
-                var posturl="http://szustu.duoshuo.com/api/posts/create.json"
-                var Data="short_name=testapi&thread_key=article-comments-{{ article.id }}&message="+message+"&nonce=5700b85f9282b&author_name="+author_name+"&author_email="+author_email+"&v=16.3.18"
-                $.post(posturl,Data,function(result){
-                    d = result;
-                    var defaulticonurl="http://static.duoshuo.com/images/noavatar_default.png";
-                    if(result['response']["status"]=="approved"){
-                        userurl = result["response"]["author"]["url"]==null?'javascript:void(0)':result["response"]["author"]["url"];
-                        useravatarurl = result["response"]["author"]["avatar_url"]==null?defaulticonurl:result["response"]["author"]["avatar_url"];
-                        $(".ds-thread").prepend('<div class="comments"><a class="user_info" href='+userurl+'><img class="avatar" src='+useravatarurl+'><p class="name" >'+result["response"]["author"]["name"]+'</p><p class="c_createtime">'+result["response"]["created_at"]+'</p><a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a><a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>'+result['response']['likes']+'</p></a></a><span class="message">'+result["response"]["message"]+'</span></div>');
-                        $(".add-comment").removeClass("appear");
-                        $(".addcomment").val("");
+                var posturl="http://gearliu.duoshuo.com/api/posts/create.json";
+                if(author_name!="" && author_email!=""){
+                    var Data="short_name=szustu&thread_key=article-comments-{{ article.id }}&message="+message+"&nonce=5700b85f9282b&author_name="+author_name+"&author_email="+author_email+"&v=16.3.18";
+                        console.log(Data);
+                }
+                else{
+                    StuCampus.alert("请补全您的姓名和邮箱.");
+                }
+                $.post(posturl,Data,function(result,status){
+                    if(status=='success'){
+                        d = result;
+                        var defaulticonurl="http://static.duoshuo.com/images/noavatar_default.png";
+                        if(result['response']["status"]=="approved"){
+                            userurl = result["response"]["author"]["url"]==null?'javascript:void(0)':result["response"]["author"]["url"];
+                            useravatarurl = result["response"]["author"]["avatar_url"]==null?defaulticonurl:result["response"]["author"]["avatar_url"];
+                            $(".ds-thread").prepend('<div class="comments"><a class="user_info" href='+userurl+'><img class="avatar" src='+useravatarurl+'><p class="name" >'+result["response"]["author"]["name"]+'</p><p class="c_createtime">'+result["response"]["created_at"]+'</p><a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a><a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>'+result['response']['likes']+'</p></a></a><span class="message">'+result["response"]["message"]+'</span></div>');
+                            $(".add-comment").removeClass("appear");
+                            $(".addcomment").val("");
+                        }
+                    }
+                    else{
+                        $(".ds-dialog-inner").show();
                     }
                 });
             };

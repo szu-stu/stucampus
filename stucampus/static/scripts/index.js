@@ -106,27 +106,6 @@ function bannerselect(bannerid){
     return false;
 }
 
-function sidebaropen(){
-    $(".fixed-logo").css("transform","scale(0)");
-    $(".sidebar").show();
-    setTimeout(function(){
-        $(".sidebar").addClass("sidebarout");
-        $(".call-back").show();
-    },100);
-    return false;
-}
-function sidebarclose(){
-    setTimeout(function(){
-        $(".fixed-logo").css("transform","scale(1)");
-    },500);
-    $(".sidebar").removeClass("sidebarout");
-    $(".call-back").hide();
-    setTimeout(function(){
-        $(".sidebar").hide();
-    },500);
-    return false;
-}
-
 function hiddenthings(){
     logoclicktime += 1;
     if(logoclicktime<=5){

@@ -48,41 +48,52 @@ var navcome = function(navid){
     if(navid==0){
         nownav.css("left",navid*4.0+"rem");
         nownav.show();
-        $("#"+navid).addClass("nav-active");
-        setTimeout(function(){
-            window.location.href = "/";
-        },500);
+        $("#nav"+navid).addClass("nav-active");
     }
     else if(navid==1){
         nownav.css("left",navid*4.0+"rem");
         nownav.show();
-        $("#"+navid).addClass("nav-active");
-        setTimeout(function(){
-            window.location.href = "/lecture/";
-        },500);
+        $("#nav"+navid).addClass("nav-active");
     }
     else if(navid==2){
         nownav.css("left",navid*4.0+"rem");
         nownav.show();
-        $("#"+navid).addClass("nav-active");
-        setTimeout(function(){
-            window.location.href = "/activity/";
-        },500);
+        $("#nav"+navid).addClass("nav-active");
     }
     else if(navid==3){
         nownav.css("left",navid*4.0+"rem");
         nownav.show();
-        $("#"+navid).addClass("nav-active");
-        setTimeout(function(){
-            window.location.href = "/articles/photography/";
-        },500);
+        $("#nav"+navid).addClass("nav-active");
     }
-    else if("#"+navid==4){
+    else if(navid==4){
         nownav.css("left",navid*4.0+"rem");
         nownav.show();
-        $(navid).addClass("nav-active");
-        setTimeout(function(){
-            window.location.href = "http://stu.szu.edu.cn:8080/";
-        },500);
+        $("#nav"+navid).addClass("nav-active");
     }
+    else{
+        return false;
+    }
+    setTimeout(function(){
+        window.location.href = $("#nav"+navid).attr("tarurl");
+    },500);
+}
+function sidebaropen(){
+    $(".fixed-logo").css("transform","scale(0)");
+    $(".sidebar").show();
+    setTimeout(function(){
+        $(".sidebar").addClass("sidebarout");
+        $(".call-back").show();
+    },100);
+    return false;
+}
+function sidebarclose(){
+    setTimeout(function(){
+        $(".fixed-logo").css("transform","scale(1)");
+    },500);
+    $(".sidebar").removeClass("sidebarout");
+    $(".call-back").hide();
+    setTimeout(function(){
+        $(".sidebar").hide();
+    },500);
+    return false;
 }

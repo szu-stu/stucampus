@@ -59,3 +59,11 @@ function showcommenttools(){
         $(".add-comment").addClass("appear");
     },100);
 }
+function showIdentityBox(){
+    var message = $(".addcomment").val();
+    if(message==""){
+        alert("你还没有输入内容呢");
+        return false;
+    }
+    $(".ds-dialog-inner").show();
+}
