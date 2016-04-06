@@ -187,7 +187,7 @@
         width:10.6667rem;
         height: 7.46667rem;
         background-color: rgba(255,255,255,0.87);
-        z-index: 200;
+        z-index: 1001;
     }
     .ds-dialog-inner b{
         font-family: "SourceHanSans-Blod","Roboto-Blod","Microsoft YaHei" ;
