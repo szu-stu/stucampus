@@ -1,5 +1,5 @@
 window.onresize = function(){
-    w = document.body.clientWidth;
+    var w = document.body.clientWidth;
     resized(w);
 }
 $(function(){

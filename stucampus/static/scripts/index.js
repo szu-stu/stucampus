@@ -1,6 +1,13 @@
 var fontsize;
 var now = 0;
 var logoclicktime = 0;
+$(window).load(function(){
+    bannerall = $(".b-container a");
+    for(var i=0;i<bannerall.length;i++){
+        $(".selector").append('<a class="round" href="javascript:void(0)"></a>');
+    }
+    $(".selector >a:first-child").addClass("active");
+});
 window.onload = function(){
     $(".sidebar").hide();
     setTimeout(function(){
@@ -8,15 +15,6 @@ window.onload = function(){
     },500);
     var w = document.body.clientWidth;
     resized(w);
-    bannerall = $(".b-container a");
-    for(var i=0;i<bannerall.length;i++){
-        if(i==0){
-            $(".selector").append('<a class="round active" href="javascript:void(0)"></a>');
-        }
-        else{
-            $(".selector").append('<a class="round" href="javascript:void(0)"></a>');
-        }
-    }
     bannerwidth = parseInt($(".b-container a").css("width"))/fontsize;
     rounds = $(".round");
     giveRoundsAndBannerNum();
@@ -44,8 +42,9 @@ function bannertouchstart(event){
         x : Number(touch.pageX),
         y : Number(touch.pageY)
     };
+    console.log(firstPos['x']+" "+firstPos['y']);
     event.preventDefault();
-}
+};
 function bannertouchend(event){
     touch = event.originalEvent.changedTouches[0];
     lastPos = {
@@ -70,12 +69,11 @@ function bannertouchend(event){
             bannerselect(now+1);
         }
     }
-}
+};
 function bind(){
-    $(".b-container a")
+    $(".b-container > a")
        .bind('touchstart', bannertouchstart)
        .bind('touchend',bannertouchend);
-    //for(var i=bannerall.length-1;i>=0;i--){
     for(var i=0;i<bannerall.length;i++){
         rounds.eq(i).click(function(){ bannerselect(this.id)});
     }

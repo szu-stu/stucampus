@@ -36,7 +36,7 @@ $(function(){
     $(".fixed-logo").bind('click',function(){showtools();});
     $(".comment").bind('click',function(){showcommenttools();});
     $(".share").bind('click',function(){showsharetools();});
-    $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");});
+    $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");$(".sharebox").removeClass("appear");});
 });
 function showtools(){
     logoclicktime += 1;
@@ -59,11 +59,23 @@ function showcommenttools(){
         $(".add-comment").addClass("appear");
     },100);
 }
+function showsharetools(){
+    $(".sharebox").show();
+    setTimeout(function(){
+        $(".sharebox").addClass("appear");
+    },100);
+}
 function showIdentityBox(){
     var message = $(".addcomment").val();
-    if(message==""){
-        alert("你还没有输入内容呢");
+    if($.trim(message)==""){
+        StuCampus.alert("你还没有输入内容呢");
         return false;
     }
+    $(".background").show();
+    $(".background").bind('click',function(){
+        $(".background").hide();
+        $(".ds-dialog-inner").hide();
+        $(".ds-dialog-inner > input").val("");
+    });
     $(".ds-dialog-inner").show();
 }

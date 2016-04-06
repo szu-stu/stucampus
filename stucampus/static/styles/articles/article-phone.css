@@ -207,12 +207,71 @@ body{
 }
 .sharebox{
     display: none;
+    position: absolute;
+    top: 4.4rem;
+    left: -21.8rem;
+    height: 4.666667rem;
+    width: 21.8rem;
+    z-index: 110;
+    background-color: #FDFDFD;
+    transition:left 0.5s ease-in;
+}
+.sharebox span{
+    display: none;
+}
+.sharebox a{
+    position: absolute;
+    top: 1.06667rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    text-decoration: none;
+    color: rgba(0,0,0,0.54);
+}
+.sharebox a span{
+    display: block;
+    position: absolute;
+    left: -0.1rem;
+    top: 1.6667rem;
+    width: 1.2rem;
+    text-decoration: none;
+    color: rgba(0,0,0,0.54);
+    line-height: 0.8rem;
+    white-space: nowrap;
+}
+.sharebox a:nth-of-type(4) span{
+    left: 0.1rem;
+    width: auto;
+}
+.sharebox a:nth-of-type(5) span{
+    left: -0.4rem;
+    width: auto;
+}
+.sharebox a:nth-of-type(2){
+    position: absolute;
+    left: 5.13333rem;
+}
+.sharebox a:nth-of-type(3){
+    position: absolute;
+    left: 10.26667rem;
+}
+.sharebox a:nth-of-type(5){
+    position: absolute;
+    left: 15.4rem;
+}
+.sharebox a:nth-of-type(4){
+    position: absolute;
+    right: 0;
+}
+.sharebox a img{
+    width: 1.6rem;;
+    height: 1.6rem;;
 }
 .artical-foot hr{
     position: absolute;
     top: 4.4rem;
+    left: -0.5333rem;
     height: 1px;
-    width: 100%;
+    width: 22.86667rem;
     background-color: rgba(0,0,0,0.08);
     z-index: 101;
 }

@@ -217,7 +217,7 @@ body{
 	    display: block;
 	    height: auto;
 	}
-	.nav2 li,a{
+	.nav2 li, .nav2 a{
 	    position: relative;
 	    display: block;
 	    height: 3.2rem;
