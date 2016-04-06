@@ -1,15 +1,10 @@
 # -*- coding:utf-8 -*-
 import json
 import urllib2
-
+import arrow
 
 from django.http import HttpResponse
 from django.conf import settings
-
-
-
-
-
 
 
 
@@ -99,21 +94,13 @@ class DuoShuo(object):
                 因此加了以下几行
                 Corrected by GearLiu<gearliu155@gmail.com>
             '''
-            if comment["author"]["url"] is None:
-                comment["author"]["url"]="javascript:void(0)"   #无链接网址则不跳转
-                comment["author"]["avatar_url"]="http://static.duoshuo.com/images/noavatar_default.png"  #无头像时用多说默认头像
-
+            comment['author']['name']=cls.handleUndefinedName(comment["author"]["name"])
+            comment["author"]["url"]=cls.handleNoneUrl(comment["author"]["url"])
+            comment["author"]["avatar_url"]=cls.handleNoneAvatarUrl(comment["author"]["avatar_url"])  #无头像时用多说默认头像
             comment["message"]=parent_posts_value["message"]
-            comment["created_at"]=parent_posts_value["created_at"]
+            comment["created_at"]=cls.handleDate(parent_posts_value["created_at"])
             comment["likes"]=parent_posts_value["likes"]
             comments.append(comment)
-        '''
-            sorted排序函数会返回经排序过后的列表
-            所以要给comments赋值后才算是真正排序了  #当然直接return sorted(xxx)也是可以的
-            评论应该要从点赞数多的先排起
-            要加参数reverse=True 反转
-        '''
-        # sorted(comments, cmp=lambda x,y:cmp(x["likes"],y["likes"]))
         comments = sorted(comments, cmp=lambda x,y:cmp(x["likes"],y["likes"]),reverse=True)
         return comments
 
@@ -203,7 +190,7 @@ class DuoShuo(object):
             visitor['name']=json['name']
             visitor['url']=cls.handleNoneUrl(json['url'])
             visitor['avatar_url']=cls.handleNoneAvatarUrl(json['avatar_url'] )
-            visitor['visited_at']=json['visited_at']
+            visitor['visited_at']=cls.handleDate(json['visited_at'])
             visitors.append(visitor)
         return visitors
 
@@ -220,7 +207,7 @@ class DuoShuo(object):
             comment["comment_author_url"]=cls.handleNoneUrl(json["author"]['url'])          
             comment["comment_author_name"]=cls.handleUndefinedName(json["author"]['name'])
             comment["comment_author_avatar_url"]=cls.handleNoneAvatarUrl(json["author"]['avatar_url']) 
-            comment["comment_created_at"]=cls.handleDate(json["thread"]['created_at'])
+            comment["comment_created_at"]=cls.handleDate(json['created_at'])
             comment["comment_content"]=json["message"]
             comment["article_title"]=json["thread"]['title']
             comment["article_url"]=cls.handleNoneUrl(json["thread"]['url'])
@@ -242,14 +229,15 @@ class DuoShuo(object):
     @staticmethod
     def handleDate(date):
         '''
-            {{ comment.comment_created_at|date:"Y-m-d" }}无效，无奈之举
+            返回距离现在的时间间隔
         '''
-        return date.split("T")[0]
+        return arrow.get(date).humanize(locale='zh_CN')
+        
 
     @staticmethod
     def handleUndefinedName(name):
         if name == u"undefined":
-            return u"游客"
+            return u"匿名者"
         return name
     
 
@@ -262,7 +250,7 @@ class DuoShuo(object):
 
 #print DuoShuo.getListPosts(254)
 #print DuoShuo.getListVisitors()[0]
-#print DuoShuo.getRecentComment()
+#print DuoShuo.getRecentComment()[0]
 #print DuoShuo.getCommentsAndLikesNum(254)
 #print DuoShuo.getListTopThreads()
 #print DuoShuo.getUserMessage(254)
