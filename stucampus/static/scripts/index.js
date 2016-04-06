@@ -7,6 +7,12 @@ $(window).load(function(){
         $(".selector").append('<a class="round" href="javascript:void(0)"></a>');
     }
     $(".selector >a:first-child").addClass("active");
+    $(".banner_title").each(function(){
+        var w = document.body.clientWidth;
+        if($(this).text().length>10 && w<=767){
+            $(this).css("top","1.566667rem");
+        }
+    });
 });
 window.onload = function(){
     $(".sidebar").hide();
@@ -43,7 +49,6 @@ function bannertouchstart(event){
         y : Number(touch.pageY)
     };
     console.log(firstPos['x']+" "+firstPos['y']);
-    event.preventDefault();
 };
 function bannertouchend(event){
     touch = event.originalEvent.changedTouches[0];
