@@ -280,6 +280,9 @@ body{
 	.header-phone{
 	    display: none;
 	}
+	.sidebar-main{
+		display: none;
+	}
 	.header-pc{
 	    display: block;
 	    position: fixed;
@@ -365,4 +368,16 @@ body{
 	}
 }
 
+.scale0{
+	transform : scale(0) !important;
+	-webkit-transform : scale(0) !important;
+	-o-transform : scale(0) !important;
+	-moz-transform : scale(0) !important;
+}
+.scale1{
+	transform : scale(1) !important;
+	-webkit-transform : scale(1) !important;
+	-o-transform : scale(1) !important;
+	-moz-transform : scale(1) !important;
+}
 

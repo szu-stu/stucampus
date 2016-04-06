@@ -76,6 +76,8 @@
 .message{
     display: block;
     margin: 1.6rem 0.5333rem;
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
+    font-size: 0.6rem;
 }
 .background{
     display: none;
@@ -84,7 +86,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.24);
+    background-color: rgba(0,0,0,0.48);
     z-index: 1000;
 }
 @media screen and (max-width: 767px){
@@ -243,6 +245,7 @@
         overflow-y:visible; 
         height: 3.46667rem;
         border-bottom: 1px solid #5BC5BE;
+        resize: none;
     }
     .submit{
         position: absolute;

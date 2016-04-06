@@ -1,5 +1,6 @@
 var logoclicktime = 0;
-window.onscroll = function(){
+window.onscroll = scrolls;
+function scrolls(){
 	var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
     var biaogan = parseInt($(".artical-header").css("height"))*3/4;
 	if(scrollTop>=biaogan){
@@ -18,11 +19,11 @@ window.onscroll = function(){
 	}
 }
 $(function(){
-    $(".now").css("display","none");
+    scrolls();
+    $(".now").hide();
     $("#nav0").removeClass("nav-active");
     setTimeout(function(){
-        $(".fixed-logo").css({"transform":"scale(1)","-webkit-transform":"scale(1)"});
-        $(".btn").css({"transform":"scale(1)","-webkit-transform":"scale(1)"});
+        $(".fixed-logo").addClass("scale1");
     },500);
     $("#backTop").click(function() {
         $('html, body').animate({
@@ -36,27 +37,37 @@ $(function(){
     $(".fixed-logo").bind('click',function(){showtools();});
     $(".comment").bind('click',function(){showcommenttools();});
     $(".share").bind('click',function(){showsharetools();});
-    $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");$(".sharebox").removeClass("appear");});
+    $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");$(".sharebox").removeClass("appear");
+        $(".fixed-logo").addClass('scale1');});
+    $(".addcomment").focus(function(){$(".fixed-logo").removeClass('scale1');});
+    $(".addcomment").blur(function(){$(".fixed-logo").addClass('scale1');});
 });
 function showtools(){
     logoclicktime += 1;
     if(logoclicktime%2 != 0){
-        $("#backTop").css("bottom","5.86667rem");
-        $("#share").css("bottom","9.6rem");
-        $("#discuss").css("bottom","13.33333rem");
-        $("#like").css("bottom","17.06667rem");
+        $(".btn").addClass("scale1");
+        setTimeout(function(){
+            $("#backTop").css("bottom","5.86667rem");
+            $("#share").css("bottom","9.6rem");
+            $("#discuss").css("bottom","13.33333rem");
+            $("#like").css("bottom","17.06667rem");
+        },300);
     }
     else if(logoclicktime%2 == 0){
         $("#backTop").css("bottom","1.6rem");
         $("#share").css("bottom","1.6rem");
         $("#discuss").css("bottom","1.6rem");
         $("#like").css("bottom","1.6rem");
+        setTimeout(function(){
+            $(".btn").removeClass("scale1");
+        },500);
     }
 }
 function showcommenttools(){
     $(".add-comment").show();
     setTimeout(function(){
         $(".add-comment").addClass("appear");
+        $(".addcomment").focus();
     },100);
 }
 function showsharetools(){
@@ -77,5 +88,6 @@ function showIdentityBox(){
         $(".ds-dialog-inner").hide();
         $(".ds-dialog-inner > input").val("");
     });
+    StuCampus.alert("点击灰区关闭tips",5000);
     $(".ds-dialog-inner").show();
 }
