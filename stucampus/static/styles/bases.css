@@ -273,6 +273,7 @@ body{
 	}
 	.inner_content{
 	    margin-top: 1.733333rem;
+	    overflow: hidden;
 	}
 	.clear-margin{
 		margin: 0 !important;

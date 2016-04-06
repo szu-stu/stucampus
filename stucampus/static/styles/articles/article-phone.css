@@ -235,6 +235,7 @@ body{
     width: 1.2rem;
     text-decoration: none;
     color: rgba(0,0,0,0.54);
+    font-size: 0.8rem;
     line-height: 0.8rem;
     white-space: nowrap;
 }
