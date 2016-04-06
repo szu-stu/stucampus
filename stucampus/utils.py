@@ -201,8 +201,8 @@ class DuoShuo(object):
             visitor={}
             visitor['user_id']=json['user_id']
             visitor['name']=json['name']
-            visitor['url']=handleNoneUrl(json['url'])
-            visitor['avatar_url']=handleNoneUrl(json['avatar_url'] )
+            visitor['url']=cls.handleNoneUrl(json['url'])
+            visitor['avatar_url']=cls.handleNoneAvatarUrl(json['avatar_url'] )
             visitor['visited_at']=json['visited_at']
             visitors.append(visitor)
         return visitors
@@ -217,26 +217,43 @@ class DuoShuo(object):
         comments=[]
         for json in comments_json:
             comment={}
-            comment["comment_author_url"]=handleNoneUrl(json["author"]['url'])          
-            comment["comment_author_name"]=json["author"]['name']
-            comment["comment_author_avatar_url"]=handleNoneUrl(json["author"]['avatar_url']) 
-            comment["comment_created_at"]=handleDate(json["thread"]['created_at'])
+            comment["comment_author_url"]=cls.handleNoneUrl(json["author"]['url'])          
+            comment["comment_author_name"]=cls.handleUndefinedName(json["author"]['name'])
+            comment["comment_author_avatar_url"]=cls.handleNoneAvatarUrl(json["author"]['avatar_url']) 
+            comment["comment_created_at"]=cls.handleDate(json["thread"]['created_at'])
             comment["comment_content"]=json["message"]
             comment["article_title"]=json["thread"]['title']
-            comment["article_url"]=handleNoneUrl(json["thread"]['url'])
+            comment["article_url"]=cls.handleNoneUrl(json["thread"]['url'])
             comments.append(comment)
         return comments
 
-def handleNoneUrl(url):
-    if url is None:
-        return "javascript:void(0)"
-    return url
+    @staticmethod
+    def handleNoneUrl(url):
+        if url is None:
+            return "javascript:void(0)"
+        return url
 
-def handleDate(date):
-    '''
-        {{ comment.comment_created_at|date:"Y-m-d" }}无效，无奈之举
-    '''
-    return date.split("T")[0]
+    @staticmethod
+    def handleNoneAvatarUrl(url):
+        if url is None:
+            return "http://static.duoshuo.com/images/noavatar_default.png"
+        return url
+
+    @staticmethod
+    def handleDate(date):
+        '''
+            {{ comment.comment_created_at|date:"Y-m-d" }}无效，无奈之举
+        '''
+        return date.split("T")[0]
+
+    @staticmethod
+    def handleUndefinedName(name):
+        if name == u"undefined":
+            return u"游客"
+        return name
+    
+
+
 
 
 
@@ -245,7 +262,7 @@ def handleDate(date):
 
 #print DuoShuo.getListPosts(254)
 #print DuoShuo.getListVisitors()[0]
-#print DuoShuo.getRecentComment()[0]
+#print DuoShuo.getRecentComment()
 #print DuoShuo.getCommentsAndLikesNum(254)
 #print DuoShuo.getListTopThreads()
 #print DuoShuo.getUserMessage(254)

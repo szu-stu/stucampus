@@ -64,44 +64,8 @@
                 </div>
             </div>
         </div>
-        <!--duoshuodenglu-->
-        <div class="ds-dialog-inner" style="display:none;">
-            <div class="shadow"></div>
-            <b>作为游客留言</b>
-            <input name="author_name" type="text">
-            <input name="author_email" type="email">
-            <a href="javascript:sendMessageToDuoshuo()">提交</a>
+        <div>
         </div>
-        <script>
-            function sendMessageToDuoshuo(){
-                var author_name = $("input[name='author_name']").val();
-                var author_email = $("input[name='author_email']").val();
-                var posturl="http://gearliu.duoshuo.com/api/posts/create.json";
-                if(author_name!="" && author_email!=""){
-                    var Data="short_name=szustu&thread_key=article-comments-{{ article.id }}&message="+message+"&nonce=5700b85f9282b&author_name="+author_name+"&author_email="+author_email+"&v=16.3.18";
-                        console.log(Data);
-                }
-                else{
-                    StuCampus.alert("请补全您的姓名和邮箱.");
-                }
-                $.post(posturl,Data,function(result,status){
-                    if(status=='success'){
-                        d = result;
-                        var defaulticonurl="http://static.duoshuo.com/images/noavatar_default.png";
-                        if(result['response']["status"]=="approved"){
-                            userurl = result["response"]["author"]["url"]==null?'javascript:void(0)':result["response"]["author"]["url"];
-                            useravatarurl = result["response"]["author"]["avatar_url"]==null?defaulticonurl:result["response"]["author"]["avatar_url"];
-                            $(".ds-thread").prepend('<div class="comments"><a class="user_info" href='+userurl+'><img class="avatar" src='+useravatarurl+'><p class="name" >'+result["response"]["author"]["name"]+'</p><p class="c_createtime">'+result["response"]["created_at"]+'</p><a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a><a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>'+result['response']['likes']+'</p></a></a><span class="message">'+result["response"]["message"]+'</span></div>');
-                            $(".add-comment").removeClass("appear");
-                            $(".addcomment").val("");
-                        }
-                    }
-                    else{
-                        $(".ds-dialog-inner").show();
-                    }
-                });
-            };
-        </script>
         <div class="comment-main">
         <!-- Duoshuo Comment BEGIN -->
             <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}">
