@@ -48,7 +48,6 @@ function bannertouchstart(event){
         x : Number(touch.pageX),
         y : Number(touch.pageY)
     };
-    console.log(firstPos['x']+" "+firstPos['y']);
 };
 function bannertouchend(event){
     touch = event.originalEvent.changedTouches[0];

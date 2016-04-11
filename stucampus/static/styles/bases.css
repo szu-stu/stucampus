@@ -25,9 +25,6 @@ body{
 	.clear-margin{
 	    margin: 0 !important;
 	}
-	.header-pc{
-	    display: none;
-	}
 	.header-phone{
 	    position: fixed;
 	    top: 0;
@@ -93,8 +90,8 @@ body{
 	    -o-transition: all 0s ease-out;
 	    -moz-transition: all 0s ease-out;
 	}
-	.sidebar{
-	    display: block;
+	.header-nav{
+	    display: none;
 	    position: fixed;
 	    top: 0;
 	    left: -25rem;
@@ -165,19 +162,19 @@ body{
 	    float: left;
 	    background-color: #FAFAFA;
 	}
-	.sidebar ul{
+	.header-nav ul{
 	    display: block;
 	    width: 21.266667rem;
 	    height: 16.566667rem;
 	    background-color: #FAFAFA;
 	    z-index: 999;
 	}
-	.sidebar img{
+	.header-nav img{
 	    width: 21.266667rem;
 	    height: 11.466667rem;
 	    z-index: 999;
 	}
-	.sidebar hr{
+	.header-nav hr{
 	    margin-top: 0.533333rem;
 	    margin-bottom: 0.533333rem;
 	    height: 1px;
@@ -203,7 +200,7 @@ body{
 	.nav1 li:nth-child(1){
 	    margin-top: 0.533333rem;
 	}
-	.nav1 li img{
+	.nav1 li span{
 	    position: absolute;
 	    top: 0.8rem;
 	    left: 1.066667rem;
@@ -213,33 +210,25 @@ body{
 	.nav1 a:hover{
 	    background-color: #E8E8E8;
 	}
-	.nav2{
-	    display: block;
-	    height: auto;
+	span.home{
+		background: url(/static/images/index/home_48.png);
+		background-size: 100%;
 	}
-	.nav2 li, .nav2 a{
-	    position: relative;
-	    display: block;
-	    height: 3.2rem;
-	    line-height: 3.2rem;
-	    color: rgba(0,0,0,1);
-	    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
-	    font-size: 0.933333rem;
-	    letter-spacing: 0.04666rem;
-	    text-decoration: none;
+	span.photography{
+		background: url(/static/images/index/photo_48.png);
+		background-size: 100%;
 	}
-	.nav2 a{
-	    padding-left: 4.8rem;
+	span.people{
+		background: url(/static/images/index/people_48.png);
+		background-size: 100%;
 	}
-	.nav2 li img{
-	    position: absolute;
-	    top: 0.8rem;
-	    left: 1.066667rem;
-	    width: 1.6rem;
-	    height: 1.6rem;
+	span.interesting{
+		background: url(/static/images/index/interesting_48.png);
+		background-size: 100%;
 	}
-	.nav2 a:hover{
-	    background-color: #E8E8E8;
+	span.news{
+		background: url(/static/images/index/news_48.png);
+		background-size: 100%;
 	}
 }
 @media screen and (min-width:768px){
@@ -281,11 +270,11 @@ body{
 	.header-phone{
 	    display: none;
 	}
-	.sidebar-main{
+	.sidebar-top{
 		display: none;
 	}
-	.header-pc{
-	    display: block;
+	.header-nav{
+	    display: block !important;
 	    position: fixed;
 	    top: 0;
 	    left: 0;
@@ -301,14 +290,14 @@ body{
 	    width: 100%;
 	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.23);
 	}
-	.header-pc ul{
+	.header-nav ul{
 		position: relative;
 		float: right;
 	    display: block;
 	    width: 20.0rem;
 	    height: 1.733333rem;
 	}
-	.header-pc ul li{
+	.header-nav ul li{
 	    display: block;
 	    width: 4.0rem;
 	    height: 1.733333rem;
@@ -327,7 +316,7 @@ body{
 	    -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
 	    -o-transition: left 0.5s ease-out; /* Opera */
 	}
-	.header-pc ul li a{
+	.header-nav ul li a{
 	    display: block;
 	    width: 4.0rem;
 	    height: 1.733333rem;
@@ -339,10 +328,11 @@ body{
 	    text-align: center;
 	    text-decoration: none;
 	}
-	.header-pc ul li a:hover{
+	.header-nav ul li a:hover{
 	    color: rgb(0,0,0);
 	}
 	.fixed-logo{
+		transform: scale(1) !important;
 	    display: block;
 	    position: fixed;
 	    left: 6.433333rem;
@@ -363,9 +353,6 @@ body{
 	    height: 2.733333rem;
 	    width: 2.733333rem;
 	    box-shadow: 0 0.2rem 0.1rem rgba(0,0,0,0.23);
-	}
-	.sidebar{
-	    display: none;
 	}
 }
 

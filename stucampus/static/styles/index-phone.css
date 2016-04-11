@@ -59,7 +59,7 @@
 .banner img{
     position: absolute;
     width: 100%;
-    height: 9.733333rem;
+    height: auto;
     z-index: -1;
 }
 .banner_title{
@@ -159,15 +159,15 @@
     padding: 0.8rem 1.066667rem;
     height: 0.8rem;
 }
-.like-content img{
+.like-content span{
     position: absolute;
-    top: 0.8rem;
+    top: 0rem;
     height: 0.8rem;
     width: 0.8rem;
 }
 .like-content p{
     position: absolute;
-    top: 0.8rem;
+    top: 0rem;
     display: block;
     height: 0.8rem;
     max-width: 2.5rem;
@@ -175,21 +175,47 @@
     line-height: 0.8rem;
     color: rgba(0,0,0,0.54);
 }
+.acomments{
+    position: absolute;
+    right: 4.26667rem;
+    width: 3.2rem;
+    height: 0.8rem;
+}
 .comment_img{
-    right: 8.266667rem;
+    left: 0rem;
+    background: url(/static/images/index/comment.png);
+    background-size: 100%;
 }
 .comment_p{
-    right: 5.266667rem;
+    left: 1.2rem;
+}
+
+.aeyes{
+    position: absolute;
+    right: 1.06667rem;
+    width: 3.2rem;
+    height: 0.8rem;
 }
 .eye_img{
-    right: 4rem;
+    left: 0rem;
+    background :url(/static/images/index/eye.png);
+    background-size: 100%;
 }
 .eye_p{
-    right: 1.066667rem;
+    left: 1.2rem;
 }
 .left{
     float: left;
 }
 .right{
     float: right;
+}
+.findNext{
+    display: block;
+    width: 100%;
+    height: 2rem;
+    background-color: rgba(255,255,255,0.87);
+    font-size: 0.8rem;
+    line-height: 2rem;
+    text-align: center;
 }

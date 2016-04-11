@@ -52,8 +52,8 @@
                     <hr />
                     <div class="like-content">
                         <!--<img class="left" src="images/like.png"><p  class="left">99999</p>-->
-                        <img src="/static/images/index/comment.png"  class="comment_img"><p class="comment_p">{{ article.comments }}</span></p>
-                        <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
+                        <div class="acomments"><span class="comment_img"></span><p class="comment_p">{{ article.comments }}</span></p></div>
+                        <div class="aeyes"><span class="eye_img"></span><p class="eye_p">{{ article.click_count }}</p></div>
                     </div>
                 </a>
             </div>
@@ -120,6 +120,41 @@
             </div>
         </div>
     </div><!--end of sidebar-->
+    <span class="findNext">下拉显示更多</span>
+    <script type="text/javascript">
+        var getNextTimes = 1;
+        $(window).scroll(function(){
+            var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
+            var windowHeight = $(window).height(); //窗口的高度
+            var dbHiht = $(document).height(); //整个页面文件的高度
+            if(dbHiht - windowHeight <= scrollPos){
+                getNextTimes += 1;
+                setTimeout(function(){
+                    $.ajax({
+                        type: "GET",
+                        url: "/?page="+getNextTimes,
+                        //dataType: "json",
+                        success: function(data){
+                            if(data['next']=="none"){
+                                console.log(data['next']);
+                                $(".findNext").text("文章已全部加载");
+                            }
+                            else{
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/?page="+getNextTimes,
+                                    dataType: "html",
+                                    success: function(data){
+                                        $(".artical-content").append(data);
+                                    }
+                                });
+                            }
+                        }
+                    });
+                },500);
+            }
+        });
+    </script>
 </div><!--end of central-->
 
 {% endblock %}

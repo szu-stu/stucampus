@@ -52,21 +52,9 @@
         </a>
         <p>深圳大学学子天地</p>
     </div>
-    <div class="header-pc">
-        <div class="header-secshadow"></div>
-        <div class="autoadapt">
-            <ul>
-                <li><a class="nav-active" id="nav0" href="javascript:void(0)" onclick="navcome(0);" tarurl="/">学子首页</a></li>
-                <li><a id="nav1" href="javascript:void(0)" onclick="navcome(1);" tarurl="{% url 'lecture:index' %}">深大讲座</a></li>
-                <li><a id="nav2" href="javascript:void(0)" onclick="navcome(2);" tarurl="{% url 'activity:index' %}">活动预告</a></li>
-                <li><a id="nav3" href="javascript:void(0)" onclick="navcome(3);" tarurl="{% url 'articles:list' 'photography' %}">深大摄影</a></li>
-                <li ><a id="nav4" href="javascript:void(0)" onclick="navcome(4);" tarurl="http://stu.szu.edu.cn:8080">服务专区</a></li>
-                <li class="now"></li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="sidebar">
+    <div class="header-nav">
+        <div class="header-secshadow"></div>
         <div class="sidebar-main">
             <div class="sidebar-top">
                 <div class="sidebar-blur"></div>
@@ -74,22 +62,16 @@
                 <p class="stucampus_name">学子天地</p> 
                 <p class="stuc_description">深大第一学生门户网站</p>
             </div>
-
-            <ul class="nav1">
-                <li><a href="/"><img src="/static/images/index/home_48.png" alt="icon" />学子首页</a></li>
-                <li><a href="{% url 'articles:list' 'photography' %}"><img src="/static/images/index/photo_48.png" alt="icon" />深大摄影</a></li>
-                <li><a href="{% url 'articles:list' 'people' %}"><img src="/static/images/index/people_48.png" alt="icon" />深大人物</a></li>
-                <li><a href="{% url 'articles:list' 'interesting' %}"><img src="/static/images/index/interesting_48.png" alt="icon" />趣物志</a></li>
-                <li><a href="{% url 'articles:list' 'news' %}"><img src="/static/images/index/news_48.png" alt="icon" />新闻和通知</a></li>
-            </ul>
-            <!--<hr />
-            <ul class="nav2">
-                <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />深大导航</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />最新评论</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />最近访客</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />合作社团</a></li>
-                <li><a href="javascript:void(0)"><img src="/static/images/index/comment_48.png" alt="icon" />火车订票</a></li>
-            </ul>-->
+            <div class="autoadapt">
+                <ul class="nav1">
+                    <li><a class="nav-active" id="nav0" href="javascript:void(0)" onclick="navcome(0);" tarurl="/"><span class="home"></span>学子首页</a></li>
+                    <li><a id="nav1" href="javascript:void(0)" onclick="navcome(1);" tarurl="{% url 'articles:list' 'photography' %}"><span class="photography"></span>深大摄影</a></li>
+                    <li><a id="nav2" href="javascript:void(0)" onclick="navcome(2);" tarurl="{% url 'articles:list' 'people' %}"><span class="people"></span>深大人物</a></li>
+                    <li><a id="nav3" href="javascript:void(0)" onclick="navcome(3);" tarurl="{% url 'articles:list' 'interesting' %}"><span class="interesting"></span>趣物志</a></li>
+                    <li ><a id="nav4" href="javascript:void(0)" onclick="navcome(4);" tarurl="{% url 'articles:list' 'news' %}"><span class="news"></span>新闻和通知</a></li>
+                    <li class="now"></li>
+                </ul>
+            </div>
         </div>
         <div class="call-back" onclick="sidebarclose();"></div>
     </div>

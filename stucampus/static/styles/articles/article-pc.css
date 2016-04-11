@@ -105,7 +105,7 @@ body{
 }
 .artical-header{
     position: relative;
-    margin: 1.733333rem auto 0 auto;
+    margin:  0 auto;
     height: 12.5rem;
     width: 32rem;
     overflow: hidden;
@@ -166,6 +166,9 @@ body{
 }
 .artical-text {
     overflow: hidden;
+    font-size: 18px;
+    letter-spacing: 0.36px;
+    line-height: 36px;
 }
 .artical-text img{
     max-width: 90%;
