@@ -47,6 +47,7 @@ def index(request):
             important_articles = paginator.page(request.GET.get('page'))
         except InvalidPage:
             important_articles = paginator.page(1)
+        important_articles=DuoShuo.appendNumToArticles(important_articles)
         
         return render(request, "ajax_article_list.html",{'important_articles':important_articles})
 
