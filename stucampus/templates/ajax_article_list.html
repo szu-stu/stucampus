@@ -18,3 +18,8 @@
     </a>
 </div>
 {% endfor %}
+{% if important_articles.has_next %}
+<!-- <div class="page_number">{{ important_articles.number }}</div> -->
+{% else %}
+<div class="page_number">没有更多文章了</div>
+{% endif %}
