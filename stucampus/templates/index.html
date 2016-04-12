@@ -61,9 +61,9 @@
             </div>
         {% endfor %}
         {% if important_articles.has_next %}
-        <!-- <div class="page_number">{{ important_articles.number }}</div> -->
+            <div class="page_number">{{ important_articles.number }}</div>
         {% else %}
-        <div class="page_number">没有更多文章了</div>
+            <div class="page_number">没有更多文章了</div>
         {% endif %}
         </div><!--end of cont_articles-->
 
@@ -129,35 +129,27 @@
     </div><!--end of sidebar-->
     <script type="text/javascript">
         $(".inner_body").append("<span class='findNext'>下拉显示更多</span>");
-        var getNextTimes = 1;
         $(window).scroll(function(){
             var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
             var windowHeight = $(window).height(); //窗口的高度
             var dbHiht = $(document).height(); //整个页面文件的高度
             if(dbHiht - windowHeight <= scrollPos){
-                getNextTimes += 1;
-                setTimeout(function(){
-                    $.ajax({
-                        type: "GET",
-                        url: "/?page="+getNextTimes,
-                        //dataType: "json",
-                        success: function(data){
-                            if(data['next']=="none"){
-                                $(".findNext").text("文章已全部加载");
+                if($(".page_number").last().text()=="没有更多文章了"){
+                    $(".findNext").text("没有更多文章了");
+                }
+                else{
+                    getNextTimes = parseInt($(".page_number").last().text()) + 1;
+                    setTimeout(function(){
+                        $.ajax({
+                            type: "GET",
+                            url: "/?page="+getNextTimes,
+                            dataType: "html",
+                            success: function(data){
+                                $(".artical-content").append(data);
                             }
-                            else{
-                                $.ajax({
-                                    type: "GET",
-                                    url: "/?page="+getNextTimes,
-                                    dataType: "html",
-                                    success: function(data){
-                                        $(".artical-content").append(data);
-                                    }
-                                });
-                            }
-                        }
-                    });
-                },500);
+                        });
+                    },500);
+                }
             }
         });
     </script>

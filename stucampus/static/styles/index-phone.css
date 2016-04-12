@@ -1,4 +1,6 @@
-
+.page_number{
+    display: none;
+}
 .banner{
     position: relative;
     width: 25.0rem;
