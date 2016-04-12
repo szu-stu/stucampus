@@ -36,6 +36,12 @@ window.onload = function(){
             $(".b-container > a").width($(window).width()+"px");
             bannerwidth = parseInt($(".b-container > a").css("width"))/fontsize;
             bannerselect(now);
+            $(".banner_title").each(function(){
+                var w = document.body.clientWidth;
+                if($(this).text().length>10 && w<=767){
+                    $(this).css("top","1.566667rem");
+                }
+            });
         }; 
     }
     $(".fixed-logo").bind('click',function(){hiddenthings();});
