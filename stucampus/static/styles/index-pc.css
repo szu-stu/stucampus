@@ -1,5 +1,6 @@
 .banner{
 	position: relative;
+    max-width: 1366px;
     width: 45.533333rem;
 	height: 11.533333rem;
     font-size: 30px;
@@ -45,6 +46,7 @@
 .b-container a{
     position: relative;
 	display: block;
+    max-width: 1366px;
 	width: 45.533333rem;
 	height: 11.533333rem;
 	overflow: hidden;
@@ -58,14 +60,22 @@
 }
 .banner img{
 	position: absolute;
-	width: 45.533333rem;
+    top: 0;
+	width: 100%;
 	height: auto;
 	z-index: -1;
+}
+.infomation{
+    position: relative;
+    margin: 0 auto;
+    width: 32.66667rem;
+    height: 11.533333rem;
 }
 .banner_title{
     position: absolute;
 	top: 2.266667rem;
-    width: 45.533333rem;
+    width: 100%;
+    margin: 0 auto;
 	color: rgba(255,255,255,0.87);
 	font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
 	font-size: 1.6rem;
@@ -77,7 +87,7 @@
 .banner_describe{
     position: absolute;
 	top: 4.933333rem;
-    width: 45.533333rem;
+    width: 100%;
 	color: rgba(255,255,255,0.87);
 	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
 	font-size: 0.6rem;
@@ -90,7 +100,7 @@
     display: block;
     position: absolute;
     top: 7.666667rem;
-    width: 45.533333rem;
+    width: 100%;
     font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
     font-size: 0.6rem;
     color: rgba(255,255,255,0.87);
@@ -397,4 +407,12 @@
     overflow : hidden;
     text-overflow: ellipsis;
     white-space:nowrap; 
+}
+span.findNext{
+    display: block;
+    text-align: center;
+    font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
+    font-size: 0.6rem;
+    padding: 1.0667rem;
+    background-color: rgba(255,255,255,0.87);
 }

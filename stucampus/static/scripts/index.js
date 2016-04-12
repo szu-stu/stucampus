@@ -21,7 +21,9 @@ window.onload = function(){
     },500);
     var w = document.body.clientWidth;
     resized(w);
-    bannerwidth = parseInt($(".b-container a").css("width"))/fontsize;
+    $(".banner").width($(window).width()/fontsize+"rem");
+    $(".b-container > a").width($(window).width()+"px");
+    bannerwidth = $(".b-container a").width()/fontsize;
     rounds = $(".round");
     giveRoundsAndBannerNum();
     bannerRun();
@@ -30,7 +32,9 @@ window.onload = function(){
         eval("theOldFun="+window.onresize.toString()); 
         window.onresize=function(){
             theOldFun();
-            bannerwidth = parseInt($(".b-container a").css("width"))/fontsize;
+            $(".banner").width($(window).width()/fontsize+"rem");
+            $(".b-container > a").width($(window).width()+"px");
+            bannerwidth = parseInt($(".b-container > a").css("width"))/fontsize;
             bannerselect(now);
         }; 
     }
@@ -100,6 +104,7 @@ function bannerRun(){
     },3);
 }
 function bannerselect(bannerid){
+    var bannerwidth = $(".b-container a").width()/fontsize;
     bannerall.css("left",-bannerid*bannerwidth+"rem");
     time = 0;
     rounds.eq(now).removeClass("active");

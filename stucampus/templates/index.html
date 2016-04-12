@@ -28,10 +28,12 @@
             <a  href="{% url 'articles:display' article.pk %}" style="left: 0rem;" >
                 <div class="blur">
                 </div>
-                <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
-                <p class="banner_describe">{{ article.summary }}</p>
+                <div class="infomation">
+                    <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
+                    <p class="banner_describe">{{ article.summary }}</p>
+                    <p class="banner_category">{{ article.category }}</p>
+                </div>
                 <img src="{{ article.cover }}" alt="{{ article.title | truncatechars:19  }}" />
-                <p class="banner_category">{{ article.category }}</p>
             </a>
         {% endfor %}
         </div>
@@ -125,8 +127,8 @@
             </div>
         </div>
     </div><!--end of sidebar-->
-    <span class="findNext">下拉显示更多</span>
     <script type="text/javascript">
+        $(".inner_body").append("<span class='findNext'>下拉显示更多</span>");
         var getNextTimes = 1;
         $(window).scroll(function(){
             var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
@@ -141,7 +143,6 @@
                         //dataType: "json",
                         success: function(data){
                             if(data['next']=="none"){
-                                console.log(data['next']);
                                 $(".findNext").text("文章已全部加载");
                             }
                             else{
@@ -160,6 +161,6 @@
             }
         });
     </script>
-</div><!--end of central-->
+<!--end of central-->
 
 {% endblock %}

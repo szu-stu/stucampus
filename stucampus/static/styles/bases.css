@@ -230,6 +230,16 @@ body{
 		background: url(/static/images/index/news_48.png);
 		background-size: 100%;
 	}
+	span.copyright{
+		display: block;
+		height: 0.6rem;
+		width: 25rem;
+		padding:0 0 1.06667rem 0;
+		font-size: 0.6rem;
+		color: rgba(0,0,0,0.54);
+		text-align: center;
+		font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
+	}
 }
 @media screen and (min-width:768px){
 	@media screen and (min-width:768px){
@@ -353,6 +363,15 @@ body{
 	    height: 2.733333rem;
 	    width: 2.733333rem;
 	    box-shadow: 0 0.2rem 0.1rem rgba(0,0,0,0.23);
+	}
+	span.copyright{
+		display: block;
+		padding: 0 0 1.06667rem 0;
+		font-size: 0.6rem;
+		color: rgba(0,0,0,0.54);
+		text-align: center;
+		line-height: 0.6rem;
+		font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
 	}
 }
 

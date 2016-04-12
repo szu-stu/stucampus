@@ -22,10 +22,10 @@ function resized(windowswidth){
     if(windowswidth<=767){
         fontsize= windowswidth/750*30 ;
     }
-    else if(windowswidth>=768&&windowswidth<960){
-        fontsize = windowswidth/1366*30;
+    else if(windowswidth>=768&&windowswidth<980){
+        fontsize = windowswidth/980*30;
     } 
-    else if(windowswidth>=960){
+    else if(windowswidth>=980){
         fontsize = 30;
     }
     $("html").css("font-size",fontsize+"px");
