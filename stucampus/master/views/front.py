@@ -16,7 +16,14 @@ def index(request):
                 Article.objects.filter(
                         publish=True,
                         deleted=False,
-                        important=True).order_by('-pk')[:5]
+                        important=True).order_by('-pk')[:10]
+        paginator = Paginator(important_articles, 5)
+        try:
+            important_articles = paginator.page(request.GET.get('page'))
+        except InvalidPage:
+            important_articles = paginator.page(1)
+        important_articles=DuoShuo.appendNumToArticles(important_articles)
+        
         # 不同类别的文章
         article_dict = \
                 ((category, \
@@ -31,8 +38,7 @@ def index(request):
                 ActivityMessage.objects.filter(checked=True).order_by('-pk')[:7]
         comments = DuoShuo.getRecentComment()
         visitors = DuoShuo.getListVisitors()
-        important_articles=DuoShuo.appendNumToArticles(important_articles)
-    
+          
         return render(request, "index.html",
                     {'important_articles': important_articles,
                     'article_dict': article_dict,
