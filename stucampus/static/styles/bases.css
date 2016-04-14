@@ -85,10 +85,6 @@ body{
 	    height: 3.333333rem;
 	    width: 3.333333rem;
 	    box-shadow: 0 0.4rem 0.2rem rgba(0,0,0,0.23);
-	    transition: all 0s ease-out;
-	    -webkit-transition: all 0s ease-out;
-	    -o-transition: all 0s ease-out;
-	    -moz-transition: all 0s ease-out;
 	}
 	.header-nav{
 	    display: none;
@@ -97,10 +93,10 @@ body{
 	    left: -25rem;
 	    width: 25rem;
 	    height: 100%;
-	    transition: all 0.5s ease-out;
-	    -moz-transition: all 0.5s ease-out; /* Firefox 4 */
-	    -webkit-transition: all 0.5s ease-out; /* Safari 和 Chrome */
-	    -o-transition: all 0.5s ease-out; /* Opera */
+	    transition: all 0.2s ease-in-out;
+	    -moz-transition: all 0.2s ease-in-out; /* Firefox 4 */
+	    -webkit-transition: all 0.2s ease-in-out; /* Safari 和 Chrome */
+	    -o-transition: all 0.2s ease-in-out; /* Opera */
 	    z-index: 999;
 	}
 	.sidebarout{
@@ -154,6 +150,10 @@ body{
 	    float: right;
 	    z-index: -1;
 	    background-color: rgba(0,0,0,0.18);
+	    transition: all 0.3s ease-in-out;
+	    -moz-transition: all 0.3s ease-in-out; /* Firefox 4 */
+	    -webkit-transition: all 0.3s ease-in-out; /* Safari 和 Chrome */
+	    -o-transition: all 0.3s ease-in-out; /* Opera */
 	}
 	.sidebar-main{
 	    width: 21.266667rem;
@@ -321,10 +321,10 @@ body{
 	    position: absolute;
 	    height: 1.6rem !important;
 	    border-bottom: 4px solid #5BC5BE;
-	    transition: left 0.5s ease-out;
-	    -moz-transition: left 0.5s ease-out; /* Firefox 4 */
-	    -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
-	    -o-transition: left 0.5s ease-out; /* Opera */
+	    transition: left 0.2s ease-in-out;
+	    -moz-transition: left 0.2s ease-in-out; /* Firefox 4 */
+	    -webkit-transition: left 0.2s ease-in-out; /* Safari 和 Chrome */
+	    -o-transition: left 0.2s ease-in-out; /* Opera */
 	}
 	.header-nav ul li a{
 	    display: block;
@@ -353,10 +353,10 @@ body{
 	    width: 2.733333rem;
 	    z-index: 999;
 	    overflow: hidden;
-	    transition: transform 0.5s ease-out,opacity 0.5s ease-out;
-	    -moz-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
-	    -webkit-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
-	    -o-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
+	    transition: transform 0.5s ease-in-out,opacity 0.5s ease-in-out;
+	    -moz-transition: transform 0.5s ease-in-out,opacity 0.5s ease-in-out;
+	    -webkit-transition: transform 0.5s ease-in-out,opacity 0.5s ease-in-out;
+	    -o-transition: transform 0.5s ease-in-out,opacity 0.5s ease-in-out;
 	    box-shadow: 0 0.333333rem 0.333333rem rgba(0,0,0,0.19);
 	}
 	.fixed-logo img{

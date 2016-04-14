@@ -48,7 +48,7 @@
                 <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
                 </div>
                 <hr />
-                <div class="sharebox">
+                <div class="sharebox" id="sharebox">
                     <span>分享到：</span>
                     <a class="backarticalfoot" href="javascript:void(0)"><span>返回</span></a>
                     <a id="wechat" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><img src="/static/images/index/wechat.png"><span>微信</span></a>

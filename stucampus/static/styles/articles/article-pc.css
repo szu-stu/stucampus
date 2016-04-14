@@ -170,6 +170,9 @@ body{
     letter-spacing: 0.36px;
     line-height: 36px;
 }
+.artical-text p{
+	font-size: 0.6rem !important;
+}
 .artical-text img{
     max-width: 90%;
     height: auto !important;

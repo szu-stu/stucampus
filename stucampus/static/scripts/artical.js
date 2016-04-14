@@ -36,7 +36,9 @@ $(function(){
     navcome(nownavid);
     $(".fixed-logo").bind('click',function(){showtools();});
     $(".comment").bind('click',function(){showcommenttools();});
+    $("#discuss").bind('click',function(){showcommenttools();});
     $(".share").bind('click',function(){showsharetools();});
+    $("#share").bind('click',function(){showsharetools();});
     $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");$(".sharebox").removeClass("appear");
         $(".fixed-logo").addClass('scale1');});
     $(".addcomment").focus(function(){$(".fixed-logo").removeClass('scale1');});
@@ -68,12 +70,15 @@ function showcommenttools(){
     setTimeout(function(){
         $(".add-comment").addClass("appear");
         $(".addcomment").focus();
+        showtools();
     },100);
 }
 function showsharetools(){
     $(".sharebox").show();
     setTimeout(function(){
         $(".sharebox").addClass("appear");
+        location.hash="#sharebox";
+        showtools();
     },100);
 }
 function showIdentityBox(){
