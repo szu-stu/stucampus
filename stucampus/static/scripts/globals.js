@@ -16,6 +16,9 @@ $(function(){
     });
     navcome(nownavid);
     resized(w);
+    $(".sidebar-main")
+       .bind('touchstart', navtouchstart)
+       .bind('touchend',navtouchend);
 });
 
 function resized(windowswidth){
@@ -97,3 +100,21 @@ function sidebarclose(){
     },500);
     return false;
 }
+
+function navtouchstart(event){
+    touch = event.originalEvent.targetTouches[0];
+    firstPos = {
+        x : Number(touch.pageX),
+        y : Number(touch.pageY)
+    };
+};
+function navtouchend(event){
+    touch = event.originalEvent.changedTouches[0];
+    lastPos = {
+        x : Number(touch.pageX),
+        y : Number(touch.pageY)
+    };
+    if(lastPos["x"]<firstPos["x"]){
+        sidebarclose();
+    }
+};
