@@ -35,6 +35,13 @@ body{
 	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.16);
 	    z-index: 999;
 	}
+
+	.inner_body{
+	    position: relative;
+	    overflow: hidden;
+	    margin: 0 auto;
+	    max-width: 1366px;
+	}
 	.inner_content{
 		margin-top: 3.466667rem;
 	}
