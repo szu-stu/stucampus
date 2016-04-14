@@ -41,7 +41,7 @@ $(function(){
     $("#share").bind('click',function(){showsharetools();});
     $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");$(".sharebox").removeClass("appear");
         $(".fixed-logo").addClass('scale1');});
-    $(".addcomment").focus(function(){$(".fixed-logo").removeClass('scale1');});
+    $(".addcomment").focus(function(){setTimeout(function(){$(".fixed-logo").removeClass('scale1');},500);});
     $(".addcomment").blur(function(){$(".fixed-logo").addClass('scale1');});
 });
 function showtools(){
