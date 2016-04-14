@@ -31,15 +31,15 @@
         left: 4.0rem;
         display: block ;
         width: 10.266667rem ;
-        height: 0.8rem ; 
+        height: 0.933333rem; 
         color: #5BC5BE ;
-        font-size: 0.8rem ; 
-        line-height: 0.8rem;
+        font-size: 0.933333rem; 
+        line-height: 0.933333rem;
         font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
     }
     .c_createtime{
         position: absolute ;
-        top: 1.26667rem ;
+        top: 1.466667rem ;
         left: 4.0rem ;
         color: rgba(0,0,0,0.54) ;
         font-size: 0.8rem ;    
@@ -51,10 +51,10 @@
         position: absolute;
         height: 1.06667rem;
         font-size: 0.8rem;
-        color:rgba(0,0,0,0.64);
+        color:rgba(0,0,0,0.54);
         text-decoration: none;
         overflow: hidden;
-
+        font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei" ;
     }
     .reply img,.like img{
         float: left;
@@ -77,8 +77,10 @@
     .message{
         display: block;
         margin: 1.6rem 0.5333rem;
-        font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
-        font-size: 0.6rem;
+        font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
+        font-size: 0.933333rem;
+        line-height: 1.6rem;
+        color: rgba(0,0,0,0.87);
     }
     .background{
         display: none;
@@ -220,10 +222,10 @@
         position: absolute;
         height: 1.06667rem;
         font-size: 0.8rem;
-        color:rgba(0,0,0,0.64);
+        color:rgba(0,0,0,0.54);
         text-decoration: none;
         overflow: hidden;
-
+        font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei" ;
     }
     .reply img,.like img{
         float: left;
@@ -245,7 +247,7 @@
     }
     .message{
         display: block;
-        margin: 1.6rem 0.5333rem;
+        margin: 0.8rem 0 1.6rem 0;
         font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
         font-size: 0.6rem;
         color: rgba(0,0,0,0.87);
