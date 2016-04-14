@@ -94,7 +94,6 @@
 	color: rgba(255,255,255,0.87);
 	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
 	font-size: 0.6rem;
-	letter-spacing: 0.16rem;
 	line-height: 0.6rem;
     font-weight: 200;
 	text-align: center;
@@ -109,7 +108,7 @@
     color: rgba(255,255,255,0.87);
     letter-spacing: 0.16rem;
     line-height: 0.6rem;
-    font-weight: normal;
+    font-weight: 200;
     text-align: center;
 
 }
