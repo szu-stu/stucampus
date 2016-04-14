@@ -36,7 +36,7 @@ $(function(){
     navcome(nownavid);
     $(".fixed-logo").bind('click',function(){showtools();});
     $(".comment").bind('click',function(){showcommenttools();});
-    $("#discuss").bind('click',function(){showcommenttools();});
+    $("#discuss").bind('click',function(){showcommenttools();showtools();});
     $(".share").bind('click',function(){showsharetools();});
     $("#share").bind('click',function(){showsharetools();});
     $(".backarticalfoot").bind('click',function(){$(".add-comment").removeClass("appear");$(".sharebox").removeClass("appear");
@@ -70,7 +70,6 @@ function showcommenttools(){
     setTimeout(function(){
         $(".add-comment").addClass("appear");
         $(".addcomment").focus();
-        showtools();
     },100);
 }
 function showsharetools(){
