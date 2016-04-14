@@ -71,7 +71,7 @@
     font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
     font-size: 2.0rem;
     letter-spacing: 0.4rem;
-    line-height: 2.0rem;
+    line-height: 2.2rem;
     font-weight: bold;
     text-align: center;
 }
@@ -82,7 +82,7 @@
     color: rgba(255,255,255,0.87);
     font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
     font-size: 0.8rem;
-    line-height: 1rem;
+    line-height: 1.2rem;
     font-weight: 200;
     text-align: center;
 }
