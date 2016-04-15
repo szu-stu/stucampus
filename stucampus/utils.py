@@ -54,21 +54,28 @@ class DuoShuo(object):
 
     @staticmethod    
     def getJson(url):
-        response=urllib2.urlopen(url)
-        response_content=response.read()
-        response_json=json.loads(response_content)
-        return response_json
-
+        try:
+            response=urllib2.urlopen(url)
+            response_content=response.read()
+            response_json=json.loads(response_content)
+            return response_json
+        except Exception, e:
+            print str(e)
+            return False
+            
     @staticmethod
-    def post(url, data):  
-        req = urllib2.Request(url)  
-        data = urllib.urlencode(data)  
-        #enable cookie  
-        opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())  
-        response = opener.open(req, data) 
-        response_json=json.loads(response.read()) 
-        return response_json
-
+    def post(url, data): 
+        try: 
+            req = urllib2.Request(url)  
+            data = urllib.urlencode(data)  
+            #enable cookie  
+            opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())  
+            response = opener.open(req, data) 
+            response_json=json.loads(response.read()) 
+            return response_json
+        except Exception, e:
+            print str(e)
+            return False
 
     @classmethod
     def getListPosts(cls,id,page=1,limit=8,order='desc'):
@@ -80,7 +87,10 @@ class DuoShuo(object):
         '''
         thread_key="article-comments-"+str(id)
         url=cls.list_posts_url+"&order="+order+"&thread_key="+thread_key+"&page="+str(page)+"&limit="+str(limit)
-        parent_posts=cls.getJson(url)['parentPosts']
+        json=cls.getJson(url)
+        if json == False:
+            return json
+        parent_posts=json['parentPosts']
         comments=[]
         for parent_post in parent_posts:
             comment={}
@@ -120,6 +130,8 @@ class DuoShuo(object):
         threads="article-comments-"+str(id)
         url=cls.comments_num_url+"&threads="+threads
         comments_num_json=cls.getJson(url)
+        if comments_num_json == False:
+            return comments_num_json
         threads_json=comments_num_json.get("response").get(threads)
         comments_and_likes_num={}
         comments_and_likes_num["likes"]=threads_json.get("likes")
@@ -132,9 +144,12 @@ class DuoShuo(object):
             给文章添加评论数和点赞数
         '''
         for article in articles:
-            comments_and_likes_num=cls.getCommentsAndLikesNum(article.id)
-            article.comments=comments_and_likes_num['comments']
-            article.likes=comments_and_likes_num['likes']
+            try:
+                comments_and_likes_num=cls.getCommentsAndLikesNum(article.id)
+                article.comments=comments_and_likes_num['comments']
+                article.likes=comments_and_likes_num['likes']
+            except Exception,e:
+                print str(e)
         return articles
 
 
@@ -182,6 +197,9 @@ class DuoShuo(object):
             首页返回的最近访客
         '''
         url=cls.list_visitors_url+str(num_items)
+        json=cls.getJson(url)
+        if json == False:
+            return json
         visitors_json=cls.getJson(url)["response"]
         visitors=[]
         for json in visitors_json:
@@ -200,6 +218,9 @@ class DuoShuo(object):
             首页返回的最近评论
         '''
         url=cls.recent_comment_url
+        json=cls.getJson(url)
+        if json == False:
+            return json
         comments_json=cls.getJson(url)["response"]
         comments=[]
         for json in comments_json:
