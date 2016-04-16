@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 from DjangoUeditor.models import UEditorField
 
+
 from stucampus.custom.models_utils import file_save_path
+from stucampus.custom.model_field import QiniuUEditorField
 
 
 class Category(models.Model):
@@ -29,7 +31,7 @@ class Article(models.Model):
 
     title = models.CharField(max_length=20)
     summary = models.CharField(max_length=50)
-    content = UEditorField(height=500, width=900, toolbars='full')
+    content = QiniuUEditorField(height=500, width=900, toolbars='full')
     category = models.ForeignKey(Category, null=True,
                                  on_delete=models.SET_NULL)
 
@@ -37,14 +39,14 @@ class Article(models.Model):
     editor = models.ForeignKey(User)
     source = models.CharField(max_length=50, blank=True, null=True)
     source_link = models.URLField(blank=True, null=True)
-    cover = models.CharField(max_length=200, blank=True, null=True)
+    cover = models.ImageField(default="dfsdf.jpg")#默认图片自己目前是乱设置的
 
-    create_date = models.DateField(auto_now_add=True)
+    create_date = models.DateField(auto_now_add=True,editable=True)
     modify_date = models.DateField(auto_now=True)
     create_ip = models.GenericIPAddressField(editable=False,null=True)
     click_count = models.IntegerField(default=0, editable=False)
     deleted = models.BooleanField(default=False)
     important = models.BooleanField(default=False)
     publish = models.BooleanField(default=False)
-    likes=models.IntegerField(default=0,null=True)#该字段由多说负责
-    comments=models.IntegerField(default=0,null=True)#该字段由多说负责
+    likes=models.IntegerField(default=0,blank=True,null=True)#该字段由多说负责
+    comments=models.IntegerField(default=0,blank=True,null=True)#该字段由多说负责

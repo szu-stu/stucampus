@@ -101,3 +101,5 @@ class TextField(models.CharField):
         defaults.update(kwargs)
         defaults['form_class'] = CharField
         return super(TextField, self).formfield(**defaults)
+
+

@@ -1,8 +1,12 @@
+#-*- coding: utf-8
 from django.db import models
 from django.utils.text import capfirst
 from django.core import exceptions
 
+from DjangoUeditor.models import UEditorField
+
 from stucampus.custom.form_field import MultiSelectFormField
+from stucampus.custom.qiniu import upload_content_img_to_qiniu
 
 
 class MultiSelectField(models.Field):
@@ -63,4 +67,15 @@ class MultiSelectField(models.Field):
         for choice_selected in arr_choices:
             l.append(choice_selected[0])
         return l
+
+class QiniuUEditorField(UEditorField):
+    '''
+        @author:jimczj
+        e-mail:jimczj@gmail.com
+        将djangoUeditor里面的图片上传到七牛，保存到数据库的时候自动执行
+    '''
+    __metaclass__ = models.SubfieldBase
+
+    def get_prep_value(self, value):
+        return upload_content_img_to_qiniu(value)
 

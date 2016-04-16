@@ -32,8 +32,27 @@
 </head>
 <script type="text/javascript">
     $(function(){
+        $("script").each(function(){
+            var original = $(this).attr("src");
+            if(original.indexOf("http")==-1){
+                original='http://7xsx9g.com1.z0.glb.clouddn.com'+original;
+                $(this).attr("src",original);
+            }
+        });
+        $("link").each(function(){
+            var original = $(this).attr("href");
+            if(original.indexOf("http")==-1){
+                original='http://7xsx9g.com1.z0.glb.clouddn.com'+original;
+                $(this).attr("href",original);
+            }
+
+        });
         $("img").each(function() {
             var original = $(this).attr("src");
+            if(original.indexOf("http")==-1){
+                original='http://7xsx9g.com1.z0.glb.clouddn.com'+original;
+                $(this).attr("src",original);
+            }
             $(this).attr("data-original", original)
             .addClass("lazy");
 

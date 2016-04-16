@@ -6,6 +6,7 @@
 
 {% block htmlhead %}
     {% load html_tools %}
+    {% load qiniu_tools %}
     <link href="/static/styles/articles/article-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
     <link href="/static/styles/articles/article-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
     {{ 'artical.js' | as_js }}
@@ -27,7 +28,7 @@
         <img src="/static/images/articles/comment_48.png" alt="评论" />
     </a>
 	<div class="artical-header">
-		<img class="artical-cover" src="{{ article.cover }}">
+		<img class="artical-cover" src="{{ article.cover.url | scale_qiniu_img:request}}">
         <div class="blur"></div>
         <a href="/" class="back"><img src="/static/images/articles/back.png" alt="back" /></a>
         <p class="artical-title">{{ article.title }}</p>
@@ -36,7 +37,7 @@
         <p class="artical-information">由 {{ article.author }} 发表于 {{ article.category }}</p>
         <div class="artical-text">
 		{% autoescape off %}
-			{{ article.content }}
+			{{ article.content |scale_ueditor_img:request}}
 		{% endautoescape %}
 		</div>
         <div class="artical-foot">

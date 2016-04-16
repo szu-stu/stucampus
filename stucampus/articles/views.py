@@ -1,4 +1,6 @@
 #-*- coding: utf-8
+from __future__ import absolute_import, unicode_literals
+
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
@@ -12,6 +14,8 @@ from stucampus.articles.models import Article, Category
 from stucampus.utils import get_client_ip 
 from stucampus.account.permission import check_perms
 from stucampus.utils import DuoShuo
+
+from stucampus.custom.qiniu import upload_content_img_to_qiniu
 
 
 NO_CATEGORY = u'未分类'
@@ -53,7 +57,7 @@ class AddView(View):
 
     @method_decorator(check_perms('articles.article_add'))
     def post(self, request):
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST,request.FILES )
         if not form.is_valid():
             return render(request, 'articles/article-form.html',
                     {'form': form, 'post_url': reverse('articles:add')})
@@ -80,7 +84,7 @@ class ModifyView(View):
     def post(self, request):
         article_id = request.GET.get('id')
         article = get_object_or_404(Article, pk=article_id)
-        form = ArticleForm(request.POST, instance=article)
+        form = ArticleForm(request.POST,request.FILES,instance=article)
         page = request.GET.get('page')
         if not form.is_valid():
             return render(request, 'articles/article-form.html',

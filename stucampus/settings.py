@@ -44,14 +44,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     path('stucampus', 'static'),
 )
+#七牛的配置
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
 
-# DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
-# STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
-
-# QINIU_ACCESS_KEY =
-# QINIU_SECRET_KEY =
-# QINIU_BUCKET_NAME =
-# QINIU_BUCKET_DOMAIN =
+QINIU_ACCESS_KEY = '4JBSsVDFK80Vu6c3f36AtEYl-5wadK-ZoWb-os5w'
+QINIU_SECRET_KEY = 'F8bNfqtPKrlgswQfCqaKGsftm8ZCE12r5ySTsEXJ'
+QINIU_BUCKET_NAME = 'jimczj'
+QINIU_BUCKET_DOMAIN = '7xsx9g.com1.z0.glb.clouddn.com'
 QINIU_SECURE_URL = False
 
 STATICFILES_FINDERS = (
@@ -93,7 +93,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'stucampus.middleware.PutHTTPMethodDataMiddleware'
+    'stucampus.middleware.PutHTTPMethodDataMiddleware',
+    #'stucampus.middleware.qiniu.QiniuMiddleware'
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
