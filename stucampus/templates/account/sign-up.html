@@ -1,12 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'account/signup.css' | as_css }}
     {{ 'account/sign-up.js' | as_js }}
 {% endblock %}
+{% block templatetitle %}
+用户注册
+{% endblock %}
 
-{% block content %}
+{% block main %}
     <div class="page-center master-framework">
         <form id="sign-up-form" method="post" action="/account/signup" class="large-element">
         {% csrf_token %}
@@ -14,7 +17,7 @@
                 <li>
                     <label class="label" for="email">邮箱</label>
                     <input type="textbox" class="textbox" id="email" name="email" />
-                    <span class="comment">常用的邮箱，作为登录用户名</span>
+                    <span class="comment">作为登录用户名</span>
                 </li>
                 <li>
                     <label class="label" for="password">密码</label>

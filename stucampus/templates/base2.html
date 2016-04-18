@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block htmltitle %}
+{% endblock %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {% load qiniu_tools %}
+{% endblock %}
+
+{% block content %}
+    <div class="template-header">
+        <p class="artical-title">{% block templatetitle %}{% endblock %}</p>
+    </div>
+    <div class="template-main">
+        {% block main %}
+        {% endblock %}
+    </div>
+<!--end of central article-->
+{% endblock %}

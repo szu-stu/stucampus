@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% block htmltitle %}
 <title>深大校园讲座预告 - 深圳大学学子天地</title>
@@ -8,13 +8,17 @@
     {% load html_tools %}
     {{ 'lecture/lec_act_show.css' | as_css }}
     {{ 'table/table_lecture.js' | as_js }}
+    <link href="/static/styles/articles/article-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />
+    <link href="/static/styles/articles/article-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
+{% endblock %}
+{% block templatetitle %}
+深大校园讲座预告
 {% endblock %}
 
-{% block content %}
+{% block main %}
     <!-- 主体  Begin -->
     <div id="main-container">
         <table>
-            <caption>深圳大学校园讲座预告</caption>
             <tbody>
                 <tr>
                     <td class="time">时间</td>

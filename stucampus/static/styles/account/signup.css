@@ -1,3 +1,79 @@
+@media screen and (max-width: 767px){
+	.template-header{
+	    position: relative;
+	    top: 0;
+	    left: 0;
+	    height: 9.8rem;
+	    width: 25.0rem;
+	    overflow: hidden;
+	    background-size: 100%;
+	    background-image: url(/static/images/coverphoto/current.jpg);
+	}
+	.artical-title{
+	    position: absolute;
+	    top: 2.333333rem;
+	    margin: 0 4.4rem;
+	    display: block;
+	    display: -webkit-box;
+	    width: 16.333333rem;
+	    height: auto;
+	    text-align: center;
+	    color: rgba(255,255,255,0.87);
+	    font-size: 1.6rem;
+	    line-height: 2.4rem;
+	    overflow : hidden;
+	    text-overflow: ellipsis;
+	    -o-text-overflow: ellipsis;
+	    -webkit-line-clamp: 2;
+	    -webkit-box-orient: vertical;
+	    font-family: "SourceHanSans-Medium","Roboto-Medium","Microsoft YaHei";
+	}
+	.artical-main{
+	    width: 21.8rem;
+	    padding: 0 1.6rem;
+	    background-color: #FDFDFD;
+	    overflow: hidden;
+	    box-shadow: 0rem 0.1rem 0.1rem rgba(0,0,0,0.16);
+	}
+}
+@media screen and (min-width: 768px){
+	.template-header{
+	    position: relative;
+	    margin:  0 auto;
+	    height: 12.5rem;
+	    width: 32rem;
+	    overflow: hidden;
+	    background-size: 100%;
+	    background-image: url(/static/images/coverphoto/current.jpg);
+	}
+	.artical-title{
+	    position: absolute;
+	    top: 3.0rem;
+	    left: 6rem;
+	    display: block;
+	    display: -webkit-box;
+	    width: 21rem;
+	    height: auto;
+	    text-align: center;
+	    color: rgba(255,255,255,0.87);
+	    font-size: 2.166667rem;
+	    line-height: 3.2rem;
+	    overflow : hidden;
+	    text-overflow: ellipsis;
+	    -o-text-overflow: ellipsis;
+	    -webkit-line-clamp: 2;
+	    -webkit-box-orient: vertical;
+	    font-family: "SourceHanSans-Medium","Roboto-Medium","Microsoft YaHei";
+	}
+	.template-main{
+	    margin: 0 auto;
+	    width: 28.8rem;
+	    padding: 0 1.6rem;
+	    background-color: #FDFDFD;
+	    overflow: hidden;
+	    box-shadow: 0rem 0.1rem 0.1rem rgba(0,0,0,0.16);
+	}
+}
 div.master-framework {
 	overflow: hidden;
 }

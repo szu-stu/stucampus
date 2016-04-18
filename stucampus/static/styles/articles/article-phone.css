@@ -263,6 +263,9 @@
     width: 1.6rem;
     height: 1.6rem;
 }
+.close_img{
+	
+}
 .wechat_img{
 	background-image: url(/static/images/index/wechat.png);
 	background-size: 100%;

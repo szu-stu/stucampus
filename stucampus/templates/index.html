@@ -12,7 +12,6 @@
     {% load html_tools %}
     {{ 'plugins/basic-jquery-slider.js' | as_js }}
     {{ 'index.js' | as_js }}
-    {{ 'basic-jquery-slider.css' | as_css }}
     <link href="/static/styles/index-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />  
     <link href="/static/styles/index-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
 {% endblock %}
@@ -132,14 +131,13 @@
         </div>
     </div><!--end of sidebar-->
     <script type="text/javascript">
-        $(".inner_body").append("<span class='findNext'>下拉显示更多</span>");
         $(window).scroll(function(){
             var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
             var windowHeight = $(window).height(); //窗口的高度
             var dbHiht = $(document).height(); //整个页面文件的高度
             if(dbHiht - windowHeight <= scrollPos){
                 if($(".page_number").last().text()=="没有更多文章了"){
-                    $(".findNext").text("没有更多文章了");
+                    StuCampus.alert("没有更多文章了",1000);
                 }
                 else{
                     getNextTimes = parseInt($(".page_number").last().text()) + 1;

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% block htmltitle %}
 <title>深大校园活动预告移动版 - 深圳大学学子天地</title>
@@ -10,14 +10,13 @@
     {{ 'table/table_activity.js' | as_js }}
 {% endblock %}
 
-{% block content %}
+{% block templatetitle %}
+深大校园活动预告
+{% endblock %}
+
+{% block main %}
     <!-- 主体  Begin -->
     <div id="main-container">
-        <div class="table-header">
-            <h2>深圳大学校园活动预告</h2>
-            <p>由学子天地与深大百科联合驱动</p>
-        </div>
-        
         <table>
             <tbody>
                 <tr>

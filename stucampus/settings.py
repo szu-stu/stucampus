@@ -45,8 +45,8 @@ STATICFILES_DIRS = (
     path('stucampus', 'static'),
 )
 #七牛的配置
-DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
-STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
+#DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
+#STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
 
 QINIU_ACCESS_KEY = '4JBSsVDFK80Vu6c3f36AtEYl-5wadK-ZoWb-os5w'
 QINIU_SECRET_KEY = 'F8bNfqtPKrlgswQfCqaKGsftm8ZCE12r5ySTsEXJ'

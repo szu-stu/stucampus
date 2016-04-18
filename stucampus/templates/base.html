@@ -32,29 +32,8 @@
 </head>
 <script type="text/javascript">
     $(function(){
-        $("script").each(function(){
-            var original = $(this).attr("src");
-            if(original.indexOf("http")==-1){
-                original='http://7xsx9g.com1.z0.glb.clouddn.com'+original;
-                $(this).attr("src",original);
-            }
-        });
-        $("link").each(function(){
-            var original = $(this).attr("href");
-            if(original.indexOf("http")==-1){
-                original='http://7xsx9g.com1.z0.glb.clouddn.com'+original;
-                $(this).attr("href",original);
-            }
-
-        });
         $("img").each(function() {
-            var original = $(this).attr("src");
-            if(original.indexOf("http")==-1){
-                original='http://7xsx9g.com1.z0.glb.clouddn.com'+original;
-                $(this).attr("src",original);
-            }
-            $(this).attr("data-original", original)
-            .addClass("lazy");
+            $(this).addClass("lazy");
 
         });
         $("img.lazy").lazyload({
@@ -77,7 +56,6 @@
         <div class="sidebar-main">
             <div class="sidebar-top">
                 <div class="sidebar-blur"></div>
-                <img class="pchomepic" src="/static/images/coverphoto/festival.jpg" />
                 <p class="stucampus_name">学子天地</p> 
                 <p class="stuc_description">深大第一学生门户网站</p>
             </div>
@@ -103,7 +81,7 @@
     <div class="inner_content">
     {% block content %}
     {% endblock %}
-        <span class="copyright">版权所有 © 2001～2015 深圳大学学子天地 - 粤ICP备05008884号</span>
+        <div class="copyright">版权所有 © 2001～2015 深圳大学学子天地 - 粤ICP备05008884号</div>
     </div><!--end of inner_content-->
 
 </div><!--end of inner_body-->

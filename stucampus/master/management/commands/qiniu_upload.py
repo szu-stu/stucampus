@@ -16,7 +16,7 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 		articles=Article.objects.all()
 		for article in articles:
-			upload_img(article.cover.url)
+			upload_img(unicode(article.cover))
 			article.save()
 		print "completed upload to qiniu"
 

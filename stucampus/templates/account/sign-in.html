@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% block htmlhead %}
     {% load html_tools %}
@@ -6,7 +6,11 @@
     {{ 'account/sign-in.js' | as_js}}
 {% endblock %}
 
-{% block content %}
+{% block templatetitle %}
+后台登陆
+{% endblock %}
+
+{% block main %}
     <div class="page-center master-framework">
         <form id="sign-in-form" method="post" action="/account/signin" class="large-element">
         {% csrf_token %}
