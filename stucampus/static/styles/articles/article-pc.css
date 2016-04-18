@@ -190,7 +190,7 @@ body{
     width: 100%;
     font-size: 0.6rem;
 }
-.sharebox span{
+.sharebox > span{
     position: absolute;
     left: 3.2rem;
     line-height: 4.8rem;
@@ -203,7 +203,7 @@ body{
     text-decoration: none;
     color: rgba(0,0,0,0.54);
 }
-.sharebox a span{
+.sharebox a p{
     position: absolute;
     left: -0.1rem;
     top: 1.6667rem;
@@ -213,11 +213,11 @@ body{
     line-height: 0.8rem;
     white-space: nowrap;
 }
-.sharebox a:nth-of-type(4) span{
+.sharebox a:nth-of-type(4) p{
     left: 0.1rem;
     width: auto;
 }
-.sharebox a:nth-of-type(5) span{
+.sharebox a:nth-of-type(5) p{
     left: -0.4rem;
     width: auto;
 }
@@ -236,9 +236,26 @@ body{
     left: 24.8rem;
     top: 1.26667rem;
 }
-.sharebox a img{
+.sharebox a > span{
+	display: block;
     width: 1.0667rem;
     height: 1.0667rem;
+}
+.wechat_img{
+	background-image: url(/static/images/index/wechat.png);
+	background-size: 100%;
+}
+.weibo_img{
+	background-image: url(/static/images/index/sina.png);
+	background-size: 100%;
+}
+.QQ_img{
+	background-image: url(/static/images/index/QQ.png);
+	background-size: 100%;
+}
+.twitter_img{
+	background-image: url(/static/images/index/twitter.png);
+	background-size: 100%;
 }
 .artical-foot hr{
     position: absolute;
@@ -262,7 +279,7 @@ body{
     height: 1.0rem;
     width: 100%;
 }
-.like-content img{
+.like-content span{
     position: absolute;
     height: 0.8rem;
     width: 0.8rem;
@@ -286,12 +303,16 @@ body{
 }
 .comment_img{
     right: 5.33333rem;
+    background-image: url(/static/images/index/comment.png);
+    background-size: 100%;
 }
 .comment_p{
     right: 3.5rem;
 }
 .eye_img{
     right: 1.83333rem;
+    background-image: url(/static/images/index/eye.png);
+    background-size: 100%;
 }
 .eye_p{
     right: 0rem;

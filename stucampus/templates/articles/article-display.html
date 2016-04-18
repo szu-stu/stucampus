@@ -19,7 +19,7 @@
         <div></div>
         <img src="/static/images/articles/top_48.png" alt="顶部" />
     </a>
-    <a href="javascript:scroll(0,0)" id="share" class="btn" style="bottom: 1.6rem;">
+    <a href="javascript:showsharetools(),showtools()" id="share" class="btn" style="bottom: 1.6rem;">
         <div></div>
         <img src="/static/images/articles/share_48.png" alt="分享" />
     </a>
@@ -45,17 +45,17 @@
             <div class="like-content">
                 <!--<img class="left" src="/static/images/like.png"><p  class="left">99999</p>-->
                 <p class="artical-time">{{ article.create_date | date:"Y-n-d"}}</p>
-                <img class="comment_img" src="/static/images/index/comment.png"><p class="comment_p">{{ article.comments }}</p>
-                <img src="/static/images/index/eye.png" class="eye_img"><p class="eye_p">{{ article.click_count }}</p>
+                <span class="comment_img"></span><p class="comment_p">{{ article.comments }}</p>
+                <span class="eye_img"></span><p class="eye_p">{{ article.click_count }}</p>
                 </div>
                 <hr />
                 <div class="sharebox" id="sharebox">
                     <span>分享到：</span>
-                    <a class="backarticalfoot" href="javascript:void(0)"><span>返回</span></a>
-                    <a id="wechat" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><img src="/static/images/index/wechat.png"><span>微信</span></a>
-                    <a id="weibo" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><img src="/static/images/index/sina.png"><span>微博</span></a>
-                    <a id="QQ" href="http://connect.qq.com/widget/shareqq/index.html?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&desc=&summary=&site=" target="_blank"><img src="/static/images/index/QQ.png"><span>QQ</span></a>
-                    <a id="twitter" href="http://s.share.baidu.com/?click=1&url=http://stu.szu.cn{% url 'articles:display' article.pk %}&uid=0&to=twi&type=text&pic=&title={{ article.title }}-深圳大学学子天地&key=&desc=&comment=&relateUid=&searchPic=0&sign=on&l=1afglci3o1afglcj3k1afgokghr&linkid=imm21dvnzhc&firstime=" target="_blank"><img src="/static/images/index/twitter.png"><span>Twitter</span></a>
+                    <a class="backarticalfoot" href="javascript:void(0)"><span class="close_img"></span><p>返回</p></a>
+                    <a id="wechat" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><span class="wechat_img"></span><p>微信</p></a>
+                    <a id="weibo" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover }}" target="_blank"><span class="weibo_img"></span><p>微博</p></a>
+                    <a id="QQ" href="http://connect.qq.com/widget/shareqq/index.html?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&desc=&summary=&site=" target="_blank"><span class="QQ_img"></span><p>QQ</p></a>
+                    <a id="twitter" href="http://s.share.baidu.com/?click=1&url=http://stu.szu.cn{% url 'articles:display' article.pk %}&uid=0&to=twi&type=text&pic=&title={{ article.title }}-深圳大学学子天地&key=&desc=&comment=&relateUid=&searchPic=0&sign=on&l=1afglci3o1afglcj3k1afgokghr&linkid=imm21dvnzhc&firstime=" target="_blank"><span class="twitter_img"></span><p>Twitter</p></a>
                 </div>
                 <a class="foot share" href="javascript:showsharetools()"><img id="share_normal" src="/static/images/articles/share_48.png"><img id="share_active" src="/static/images/articles/share_48.png"><p>分享</p></a>
                 <a class="foot comment" href="javascript:void(0)"><img id="comment_normal" src="/static/images/articles/comment_48.png"><img id="comment_active" src="/static/images/articles/comment_48.png"><p>评论</p></a>
@@ -117,8 +117,8 @@
                         <img class="avatar" src="{{ comment.author.avatar_url }}" alt="{{ comment.author.name }}">
                         <p class="name" >{{ comment.author.name }}</p>
                         <p class="c_createtime">{{ comment.created_at }}</p>
-                        <a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a>
-                        <a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>{{ comment.likes }}</p></a>
+                        <!--<a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a>
+                        <a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>{{ comment.likes }}</p></a>-->
                     </a>
                     <span class="message">{{ comment.message }}</span>
                 </div>

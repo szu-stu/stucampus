@@ -100,10 +100,10 @@ body{
 	    left: -25rem;
 	    width: 25rem;
 	    height: 100%;
-	    transition: all 0.2s ease-in-out;
-	    -moz-transition: all 0.2s ease-in-out; /* Firefox 4 */
-	    -webkit-transition: all 0.2s ease-in-out; /* Safari 和 Chrome */
-	    -o-transition: all 0.2s ease-in-out; /* Opera */
+	    transition: all 0.3s ease-in-out;
+	    -moz-transition: all 0.3s ease-in-out; /* Firefox 4 */
+	    -webkit-transition: all 0.3s ease-in-out; /* Safari 和 Chrome */
+	    -o-transition: all 0.3s ease-in-out; /* Opera */
 	    z-index: 999;
 	}
 	.sidebarout{
@@ -328,10 +328,10 @@ body{
 	    position: absolute;
 	    height: 1.6rem !important;
 	    border-bottom: 4px solid #5BC5BE;
-	    transition: left 0.2s ease-in-out;
-	    -moz-transition: left 0.2s ease-in-out; /* Firefox 4 */
-	    -webkit-transition: left 0.2s ease-in-out; /* Safari 和 Chrome */
-	    -o-transition: left 0.2s ease-in-out; /* Opera */
+	    transition: left 0.3s ease-in-out;
+	    -moz-transition: left 0.3s ease-in-out; /* Firefox 4 */
+	    -webkit-transition: left 0.3s ease-in-out; /* Safari 和 Chrome */
+	    -o-transition: left 0.3s ease-in-out; /* Opera */
 	}
 	.header-nav ul li a{
 	    display: block;

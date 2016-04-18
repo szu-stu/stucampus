@@ -211,7 +211,7 @@
     background-color: #FDFDFD;
     transition:left 0.5s ease-in;
 }
-.sharebox span{
+.sharebox > span{
     display: none;
 }
 .sharebox a{
@@ -222,7 +222,7 @@
     text-decoration: none;
     color: rgba(0,0,0,0.54);
 }
-.sharebox a span{
+.sharebox a > p{
     display: block;
     position: absolute;
     left: -0.1rem;
@@ -234,11 +234,11 @@
     line-height: 0.8rem;
     white-space: nowrap;
 }
-.sharebox a:nth-of-type(4) span{
+.sharebox a:nth-of-type(4) p{
     left: 0.1rem;
     width: auto;
 }
-.sharebox a:nth-of-type(5) span{
+.sharebox a:nth-of-type(5) p{
     left: -0.4rem;
     width: auto;
 }
@@ -258,9 +258,26 @@
     position: absolute;
     right: 0;
 }
-.sharebox a img{
-    width: 1.6rem;;
-    height: 1.6rem;;
+.sharebox a > span{
+	display: block;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+.wechat_img{
+	background-image: url(/static/images/index/wechat.png);
+	background-size: 100%;
+}
+.weibo_img{
+	background-image: url(/static/images/index/sina.png);
+	background-size: 100%;
+}
+.QQ_img{
+	background-image: url(/static/images/index/QQ.png);
+	background-size: 100%;
+}
+.twitter_img{
+	background-image: url(/static/images/index/twitter.png);
+	background-size: 100%;
 }
 .artical-foot hr{
     position: absolute;
