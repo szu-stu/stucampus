@@ -169,10 +169,15 @@ def article_list(request, category=None):
         Article.objects.filter(
                 publish=True,
                 deleted=False).order_by('-pk')[:10]
+
+    comments = DuoShuo.getRecentComment()
+    visitors = DuoShuo.getListVisitors()
     return render(request, 'articles/article-list.html',
             {'page': page, 'category': category,
              'hot_articles_list': hot_articles_list,
-             'newest_articles_list': newest_articles_list})
+             'newest_articles_list': newest_articles_list,
+             'comments':comments,
+             'visitors':visitors})
 
 
 def article_display(request, id=None):

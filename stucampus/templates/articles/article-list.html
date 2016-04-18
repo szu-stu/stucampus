@@ -1,49 +1,152 @@
 {% extends 'base.html' %}
 
-{% block htmltitle %}
-<title>{{ category.name }} - 深圳大学学子天地</title>
+{% block keywords %}
+<meta name="keywords" content="深圳大学,深大,荔园,学子天地" />
+{% endblock %}
+
+{% block description %}
+<meta name="description" content="深圳大学学子天地是深大最大的校园传媒网站，致力于为深大学子提供有价值的资讯和服务。">
 {% endblock %}
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'categories.css' | as_css }}
+    {{ 'plugins/basic-jquery-slider.js' | as_js }}
+    {{ 'index.js' | as_js }}
+    <link href="/static/styles/index-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />  
+    <link href="/static/styles/index-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
+    <link rel="stylesheet" type="text/css" href="/static/styles/article-list.css">
 {% endblock %}
 
+{% load py_utils %}
+
+{% load qiniu_tools %}
+
 {% block content %}
+    <div class="banner">
+        <div class="infomation">
+            <p class="banner_title">{{ category }}</p>
+            <p class="banner_describe">{{ article.summary }}</p>
+            <p class="banner_category">{{ article.category }}</p>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="artical-content">
+        {% for article in page %}
+            <div class="artical">
+                <a href="{% url 'articles:display' article.pk %}">
+                    <img class="a-pic" src=" {{ article.cover.url | scale_qiniu_img:request }}">
+                    <div class="a-content">
+                        <span class="a-title">{{ article.title | truncatechars:19  }}</span>
+                        <div class="a-info">
+                            {{ article.category }}·{{ article.create_date | date:"n月d日"}}
+                        </div>
+                        <p class="a-intro">{{ article.summary }}</p>
+                    </div>
+                    <hr />
+                    <div class="like-content">
+                        <!--<img class="left" src="images/like.png"><p  class="left">99999</p>-->
+                        <div class="acomments"><span class="comment_img"></span><p class="comment_p">{{ article.comments }}</span></p></div>
+                        <div class="aeyes"><span class="eye_img"></span><p class="eye_p">{{ article.click_count }}</p></div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% if important_articles.has_next %}
+            <div class="page_number">{{ important_articles.number }}</div>
+        {% else %}
+            <div class="page_number">没有更多文章了</div>
+        {% endif %}
+        </div><!--end of cont_articles-->
 
-<div class="central">
-	<div class="content">
-
-		<div class="categories_list">
-			<h2>{{ category.name }}</h2>
-			{% for article in page %}
-			<a href="{% url 'articles:display' article.pk %}">
-				<div class="categories_list_entry">
-					<div class="entry_pic"><img src="{{ article.cover }}" width=135 height=90 ></div>
-					<h3>{{ article.title }}<span>{{ article.create_date | date:"Y年n月d日"}}</span></h3>
-					<p>{{ article.summary }}</p>
-				</div>
-			</a>
-			{% endfor %}
-		</div><!--end of categories_list-->
-
-		<div class="pagingbar">
-        	<a href="?category={{ category }}&page=1">首页</a>
-   			{% if page.has_previous %}
-        		<a href="?category={{ category }}&page={{ page.previous_page_number }}" class="previous">上一页</a>
-    		{% endif %}
-
-    		<span>第 {{ page.number }} 页，共 {{ page.paginator.num_pages }} 页</span>
-    
-    		{% if page.has_next %}
-        		<a class="next" href="?category={{ category }}&page={{ page.next_page_number }}">下一页</a>
-    		{% endif %}
-        	<a href="?category={{ category }}&page={{ page.paginator.num_pages }}">尾页</a>
-		</div>
-
-	</div><!--end of content-->
-
-	
-</div><!--end of central-->
+        <div class="side-content">
+            <div class="sidenav">
+                <div class="shadow">
+                    <p class="card-title">深大导航</p>
+                    <div class="nav-content">
+                        <a href="#">公文通</a>
+                        <a href="#">Blackboard</a>
+                        <a href="#">学生邮箱</a>
+                        <a href="#">校园场地申请</a>
+                        <a href="#">体育场馆订票</a>
+                    </div>
+                    <div class="nav-content">
+                        <a href="#">网络服务</a>
+                        <a href="#">事务中心</a>
+                        <a href="#">公寓管理</a>
+                        <a href="#">图书馆</a>
+                        <a href="#">网上电视</a>
+                        <a href="#">火车订票</a>
+                    </div>
+                    <div class="nav-content">
+                        <a href="#">教务管理</a>
+                        <a href="#">排课查询</a>
+                        <a href="#">网上选课</a>
+                        <a href="#">绩点查询</a>
+                        <a href="#">联系老师</a>
+                    </div>
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="shadow">
+                    <p class="card-title">最新评论</p>
+                    {% if comments %}
+                        {% for comment in comments %}
+                        <div class="comment">
+                            <a href="{{comment.comment_author_url}}">
+                                <img src="{{ comment.comment_author_avatar_url }}" alt="{{ comment.comment_author_name }}" />
+                                <span>{{ comment.comment_author_name }}</span>
+                            </a>
+                            <p class="comment-source">{{ comment.comment_created_at }} 在 {{ comment.article_title }} 中评论:</p>
+                            <p class="comment-value">{{ comment.comment_content }}</p>
+                            <a href="{{ comment.article_url }}">进入文章查看全文</a>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="side-card">
+                <div class="shadow">
+                    <p class="card-title">最近访客</p>
+                    <div class="content">
+                        {% if visitors %}
+                            {% for visitor in visitors %}
+                            <a class="visitor" href="{{ visitor.url }}">
+                                <img src="{{ visitor.avatar_url }}" alt="{{ visitor.name }}" />
+                                <p>{{ visitor.name }}</p>
+                            </a>
+                            {% endfor %}
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end of sidebar-->
+    <script type="text/javascript">
+        $(window).scroll(function(){
+            var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
+            var windowHeight = $(window).height(); //窗口的高度
+            var dbHiht = $(document).height(); //整个页面文件的高度
+            if(dbHiht - windowHeight <= scrollPos){
+                if($(".page_number").last().text()=="没有更多文章了"){
+                    StuCampus.alert("没有更多文章了",1000);
+                }
+                else{
+                    getNextTimes = parseInt($(".page_number").last().text()) + 1;
+                    setTimeout(function(){
+                        $.ajax({
+                            type: "GET",
+                            url: "/?page="+getNextTimes,
+                            dataType: "html",
+                            success: function(data){
+                                $(".artical-content").append(data);
+                            }
+                        });
+                    },500);
+                }
+            }
+        });
+    </script>
+<!--end of central-->
 
 {% endblock %}
