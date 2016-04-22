@@ -33,7 +33,9 @@
 <script type="text/javascript">
     $(function(){
         $("img").each(function() {
-            $(this).addClass("lazy");
+            var original = $(this).attr("src");
+            $(this).attr("data-original", original)
+            .addClass("lazy");
 
         });
         $("img.lazy").lazyload({
