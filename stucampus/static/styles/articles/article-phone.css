@@ -297,7 +297,7 @@
     height: 1.0rem;
     width: 100%;
 }
-.like-content img{
+.like-content span{
     position: absolute;
     height: 1.0rem;
     width: 1.0rem;
@@ -321,12 +321,16 @@
 }
 .comment_img{
     right: 7.133333rem;
+    background-image: url(/static/images/index/comment.png);
+    background-size: 100%;
 }
 .comment_p{
     right: 4.6rem;
 }
 .eye_img{
     right: 2.533333rem;
+    background-image: url(/static/images/index/eye.png);
+    background-size: 100%;
 }
 .eye_p{
     right: 0rem;
