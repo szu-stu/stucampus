@@ -95,7 +95,7 @@
                         if(result['response']["status"]=="approved"){
                             userurl = result["response"]["author"]["url"]==null?'javascript:void(0)':result["response"]["author"]["url"];
                             useravatarurl = result["response"]["author"]["avatar_url"]==null?defaulticonurl:result["response"]["author"]["avatar_url"];
-                            $(".ds-thread").prepend('<div class="comments"><a class="user_info" href='+userurl+'><img class="avatar" src='+useravatarurl+'><p class="name" >'+result["response"]["author"]["name"]+'</p><p class="c_createtime">'+result["response"]["created_at"]+'</p><a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a><a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>'+result['response']['likes']+'</p></a></a><span class="message">'+result["response"]["message"]+'</span></div>');
+                            $(".ds-thread").prepend('<div class="comments"><a class="user_info" href='+userurl+'><img class="avatar" src='+useravatarurl+'><p class="name" >'+result["response"]["author"]["name"]+'</p><p class="c_createtime">'+result["response"]["created_at"]+'</p><!--<a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a><a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>'+result['response']['likes']+'</p>--></a></a><span class="message">'+result["response"]["message"]+'</span></div>');
                             $(".add-comment").removeClass("appear");
                             $(".addcomment").val("");
                             $(".add-comment").addClass("scale1");

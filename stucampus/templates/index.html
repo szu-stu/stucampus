@@ -131,13 +131,18 @@
         </div>
     </div><!--end of sidebar-->
     <script type="text/javascript">
+        var reach_bottom_time = 0;
         $(window).scroll(function(){
             var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
             var windowHeight = $(window).height(); //窗口的高度
             var dbHiht = $(document).height(); //整个页面文件的高度
             if(dbHiht - windowHeight <= scrollPos){
-                if($(".page_number").last().text()=="没有更多文章了"){
+                if($(".page_number").last().text()=="没有更多文章了"&reach_bottom_time<3){
+                    reach_bottom_time += 1;
                     StuCampus.alert("没有更多文章了",1000);
+                }
+                else if($(".page_number").last().text()=="没有更多文章了"&reach_bottom_time>=3){
+
                 }
                 else{
                     getNextTimes = parseInt($(".page_number").last().text()) + 1;

@@ -66,6 +66,7 @@ function showtools(){
     }
 }
 function showcommenttools(){
+    $(".sharebox").hide();
     $(".add-comment").show();
     setTimeout(function(){
         $(".add-comment").addClass("appear");
@@ -73,11 +74,12 @@ function showcommenttools(){
     },100);
 }
 function showsharetools(){
+    $(".add-comment").hide();
     $(".sharebox").show();
     setTimeout(function(){
         $(".sharebox").addClass("appear");
         $("body,html").animate({ 
-            scrollTop:$(".sharebox").offset().top //让body的scrollTop等于pos的top，就实现了滚动 
+            scrollTop:$(".sharebox").offset().top+100 //让body的scrollTop等于pos的top，就实现了滚动 
         },0); 
     },100);
 }
