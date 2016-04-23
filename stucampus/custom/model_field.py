@@ -77,5 +77,7 @@ class QiniuUEditorField(UEditorField):
     __metaclass__ = models.SubfieldBase
 
     def get_prep_value(self, value):
+        if not value:
+            return value
         return upload_content_img_to_qiniu(value)
 
