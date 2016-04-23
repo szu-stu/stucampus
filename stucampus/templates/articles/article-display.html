@@ -120,7 +120,11 @@
                         <!--<a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a>
                         <a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>{{ comment.likes }}</p></a>-->
                     </a>
-                    <span class="message">{{ comment.message }}</span>
+                    <span class="message">
+                    {% autoescape off %}
+                        {{ comment.message }}
+                    {% endautoescape %}
+                    </span>
                 </div>
                 {% endfor %}
             {% endif %}
