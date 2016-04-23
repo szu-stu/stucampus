@@ -139,18 +139,36 @@ class DuoShuo(object):
         return comments_and_likes_num
 
     @classmethod
-    def appendNumToArticles(cls,articles):
+    def appendNumToArticle(cls,article):
         '''
             给文章添加评论数和点赞数
         '''
-        for article in articles:
-            try:
+        
+        try:
+            comments_and_likes_num=cls.getCommentsAndLikesNum(article.id)
+            article.comments=comments_and_likes_num['comments']
+            article.likes=comments_and_likes_num['likes']
+        except Exception,e:
+            print str(e)
+        finally:
+            return article
+
+    @classmethod
+    def appendNumToArticles(cls,articles):
+        '''
+            给文章列表添加评论数和点赞数
+        '''
+        try:
+            for article in articles:
                 comments_and_likes_num=cls.getCommentsAndLikesNum(article.id)
                 article.comments=comments_and_likes_num['comments']
                 article.likes=comments_and_likes_num['likes']
-            except Exception,e:
-                print str(e)
-        return articles
+        except Exception,e:
+            print str(e)
+        finally:
+            return articles
+
+   
 
 
     @classmethod
@@ -200,7 +218,7 @@ class DuoShuo(object):
         json=cls.getJson(url)
         if json == False:
             return json
-        visitors_json=cls.getJson(url)["response"]
+        visitors_json=json["response"]
         visitors=[]
         for json in visitors_json:
             visitor={}
@@ -221,7 +239,7 @@ class DuoShuo(object):
         json=cls.getJson(url)
         if json == False:
             return json
-        comments_json=cls.getJson(url)["response"]
+        comments_json=json["response"]
         comments=[]
         for json in comments_json:
             comment={}

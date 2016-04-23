@@ -13,3 +13,14 @@ def validate_file_extension(valid_file_extension):
                 return
         raise ValidationError(u'不能上传该格式的文件')
     return validate
+
+
+def validate_file(value):
+    ''' used by models.FileField '''
+
+    valid_file_extension = ['pdf']
+    for extension in valid_file_extension:
+        if value.name.endswith(extension):
+            return
+    raise ValidationError(u'不能上传该格式的文件')
+

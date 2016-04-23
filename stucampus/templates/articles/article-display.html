@@ -110,6 +110,7 @@
         <div class="comment-main">
         <!-- Duoshuo Comment BEGIN -->
             <div class="ds-thread" data-thread-key="article-comments-{{ article.id }}" data-title="{{ article.title }}">
+            {% if comments %}
                 {% for comment in comments %}
                 <div class="comments">
                     <a class="user_info" href="{{ comment.author.url }}">
@@ -122,6 +123,7 @@
                     <span class="message">{{ comment.message }}</span>
                 </div>
                 {% endfor %}
+            {% endif %}
             </div>
         <!-- Duoshuo Comment END -->
         </div>

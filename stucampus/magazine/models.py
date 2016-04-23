@@ -7,7 +7,7 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
 from stucampus.custom.models_utils import file_save_path
-from stucampus.custom.validator import validate_file_extension
+from stucampus.custom.validator import validate_file_extension,validate_file
 
 
 def save_path(instance, filename):
@@ -27,7 +27,7 @@ class Magazine(models.Model):
     issue = models.IntegerField()
     summary = models.CharField(max_length=300, null=True, blank=True)
     pdf_file = models.FileField(upload_to=save_path,
-                                validators=[validate_file_extension('pdf')])
+                                validators=[validate_file])
 
     create_date = models.DateField(auto_now_add=True)
     modify_date = models.DateField(auto_now=True)
