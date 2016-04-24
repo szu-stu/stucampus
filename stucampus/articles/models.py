@@ -39,7 +39,7 @@ class Article(models.Model):
     editor = models.ForeignKey(User)
     source = models.CharField(max_length=50, blank=True, null=True)
     source_link = models.URLField(blank=True, null=True)
-    cover = models.ImageField(default="dfsdf.jpg")#默认图片自己目前是乱设置的
+    cover = models.ImageField(max_length=200,default="dfsdf.jpg")#默认图片自己目前是乱设置的
 
     create_date = models.DateField(auto_now_add=True,editable=True)
     modify_date = models.DateField(auto_now=True)
