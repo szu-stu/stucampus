@@ -47,7 +47,7 @@ def index(request):
                     'comments':comments,
                     'visitors':visitors})
     else:
-        article_list = Article.objects.filter(publish=True,deleted=False).order_by('-pk')
+        article_list = Article.objects.filter(publish=True,deleted=False,important=True).order_by('-pk')
         paginator = Paginator(article_list, 5)
         try:
             important_articles = paginator.page(request.GET.get('page'))
