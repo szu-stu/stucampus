@@ -6,7 +6,7 @@ from DjangoUeditor.models import UEditorField
 
 
 from stucampus.custom.models_utils import file_save_path
-from stucampus.custom.model_field import QiniuUEditorField
+from stucampus.custom.model_field import QiniuUEditorField,QiniuImageField
 
 
 class Category(models.Model):
@@ -39,8 +39,7 @@ class Article(models.Model):
     editor = models.ForeignKey(User)
     source = models.CharField(max_length=50, blank=True, null=True)
     source_link = models.URLField(blank=True, null=True)
-    cover = models.ImageField(max_length=200,default="dfsdf.jpg")#默认图片自己目前是乱设置的
-
+    cover = QiniuImageField(max_length=200,default="default_cover.png")
     create_date = models.DateField(auto_now_add=True,editable=True)
     modify_date = models.DateField(auto_now=True)
     create_ip = models.GenericIPAddressField(editable=False,null=True)

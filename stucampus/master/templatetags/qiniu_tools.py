@@ -58,4 +58,6 @@ def _transform_img_href(img_src,size):
 	'''
 	if (settings.QINIU_BUCKET_DOMAIN in img_src) and (img_src.endswith(".jpg") or img_src.endswith(".png") or img_src.endswith(".gif")):
 		img_src=img_src.replace(img_src,img_src+"-"+size)
+	elif (settings.QINIU_BUCKET_DOMAIN not in img_src) and (img_src.endswith(".jpg") or img_src.endswith(".png") or img_src.endswith(".gif")):
+		img_src=img_src.replace(img_src,settings.QINIU_BUCKET_DOMAIN+img_src+"-"+size)
 	return img_src
