@@ -39,7 +39,7 @@
     </div>
     <div class="main-content">
         <div class="artical-content">
-        {% for article in important_articles %}
+        {% for article in newest_articles %}
             <div class="artical">
                 <a href="{% url 'articles:display' article.pk %}">
                     <img class="a-pic" src=" {{ article.cover.url | scale_qiniu_img:request }}">
@@ -59,8 +59,8 @@
                 </a>
             </div>
         {% endfor %}
-        {% if important_articles.has_next %}
-            <div class="page_number">{{ important_articles.number }}</div>
+        {% if newest_articles.has_next %}
+            <div class="page_number">{{ newest_articles.number }}</div>
         {% else %}
             <div class="page_number">没有更多文章了</div>
         {% endif %}
