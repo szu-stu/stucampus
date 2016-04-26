@@ -16,7 +16,6 @@ def index(request):
                         publish=True,
                         deleted=False,
                         important=True).order_by('-pk')[:5]
-        important_articles=DuoShuo.appendNumToArticles(important_articles)
         
         # 最新文章
         newest_articles = \
@@ -28,6 +27,7 @@ def index(request):
             newest_articles = paginator.page(request.GET.get('page'))
         except InvalidPage:
             newest_articles = paginator.page(1)
+        newest_articles=DuoShuo.appendNumToArticles(newest_articles)
         
         comments = DuoShuo.getRecentComment()
         visitors = DuoShuo.getListVisitors()
