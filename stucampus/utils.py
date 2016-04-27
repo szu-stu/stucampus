@@ -210,7 +210,7 @@ class DuoShuo(object):
     #     return response_json
 
     @classmethod
-    def getListVisitors(cls,num_items=25):
+    def getListVisitors(cls,num_items=10):
         '''
             首页返回的最近访客
         '''

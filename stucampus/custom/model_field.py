@@ -68,34 +68,8 @@ class MultiSelectField(models.Field):
             l.append(choice_selected[0])
         return l
 
-class QiniuImageField(models.ImageField):
-    '''
-        @author:jimczj
-        e-mail:jimczj@gmail.com
-        将ImageField里面的图片上传到七牛，保存到数据库的时候自动执行
-    '''
 
 
-    def to_python(self, value):
-        if not value:
-            return value
-        
-        upload_img(str(value))
-        return value
-
-class QiniuUEditorField(UEditorField):
-    '''
-        @author:jimczj
-        e-mail:jimczj@gmail.com
-        将djangoUeditor里面的图片上传到七牛，保存到数据库的时候自动执行
-    '''
-
-
-    def to_python(self, value):
-        if not value:
-            return value
-
-        return upload_content_img_to_qiniu(value)
 
 
 

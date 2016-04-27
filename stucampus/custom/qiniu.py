@@ -61,7 +61,6 @@ def upload_img(img_src):
     '''
         上传封面的图片
     '''
-    img_src=img_src.decode("utf-8")
     if "http://" not in img_src:
         img_name='/'+img_src.split("/")[-1]
         file_path=settings.MEDIA_ROOT+img_name
