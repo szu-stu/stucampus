@@ -29,10 +29,12 @@
             <a  href="{% url 'articles:display' article.pk %}" style="left: 0rem;" >
                 <div class="blur">
                 </div>
-                <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
-                <p class="banner_describe">{{ article.summary }}</p>
-                <img src="{{ article.cover.url | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
-                <p class="banner_category">{{ article.category }}</p>
+                <div class="infomation">
+                    <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
+                    <p class="banner_describe">{{ article.summary }}</p>
+                    <p class="banner_category">{{ article.category }}</p>
+                </div>
+                <img src="{{ article.cover.name | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
             </a>
         {% endfor %}
         </div>
@@ -42,7 +44,7 @@
         {% for article in newest_articles %}
             <div class="artical">
                 <a href="{% url 'articles:display' article.pk %}">
-                    <img class="a-pic" src=" {{ article.cover.url | scale_qiniu_img:request }}">
+                    <img class="a-pic" src=" {{ article.cover.name | scale_qiniu_img:request }}">
                     <div class="a-content">
                         <span class="a-title">{{ article.title | truncatechars:19  }}</span>
                         <div class="a-info">

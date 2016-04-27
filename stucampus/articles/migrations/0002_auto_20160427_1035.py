@@ -12,16 +12,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='article',
-            name='comments',
-            field=models.IntegerField(blank=True, default=0, null=True),
-        ),
-        migrations.AddField(
-            model_name='article',
-            name='likes',
-            field=models.IntegerField(blank=True, default=0, null=True),
-        ),
+
         migrations.AlterField(
             model_name='article',
             name='content',

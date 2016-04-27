@@ -40,7 +40,7 @@ def upload_content_img_to_qiniu(content,img=None):
     if img is not None:
         imgs_src.append(img)
     for img_src in imgs_src:
-        if "http://" not in img_src:
+        if settings.QINIU_BUCKET_DOMAIN not in img_src:
             img_name='/'+img_src.split("/")[-1]
             file_path=settings.MEDIA_ROOT+img_name
             qiniu_key='/'.join(img_src.split("/")[1:])
@@ -61,20 +61,23 @@ def upload_img(img_src):
     '''
         上传封面的图片
     '''
-    if "http://" not in img_src:
-        img_name='/'+img_src.split("/")[-1]
-        file_path=settings.MEDIA_ROOT+img_name
-        qiniu_key='/'.join(img_src.split("/")[1:])
-        try:
+    try:
+        if settings.QINIU_BUCKET_DOMAIN not in img_src:
+            img_name='/'+img_src.split("/")[-1]
+            file_path=settings.MEDIA_ROOT+img_name
+            qiniu_key='/'.join(img_src.split("/")[1:])
+        
             ret, info=put_file(up_token=get_qiniu_uptoken(), key=qiniu_key, file_path=file_path)
+            img_src="http://"+settings.QINIU_BUCKET_DOMAIN+img_name
             if  info.exception is None:
                 print  img_name+" upload to qiniu success "
             else:
                 print img_name+" upload to qiniu failed "          
-        except Exception,e:
-            print str(e)
-            print img_name+" upload to qiniu failed "
-    return img_src
+    except Exception,e:
+        print str(e)
+        print img_name+" upload to qiniu failed "
+    finally:
+        return img_src
 
 
 
