@@ -31,12 +31,15 @@ def index(request):
         
         comments = DuoShuo.getRecentComment()
         visitors = DuoShuo.getListVisitors()
+
+        categories=Category.objects.all().order_by("-priority")
           
         return render(request, "index.html",
                     {'important_articles': important_articles,
                     'newest_articles':newest_articles,
                     'comments':comments,
-                    'visitors':visitors})
+                    'visitors':visitors,
+                    'categories':categories})
     else:
         article_list = Article.objects.filter(publish=True,deleted=False).order_by('-pk')
         paginator = Paginator(article_list, 5)

@@ -172,12 +172,14 @@ def article_list(request, category=None):
     page = DuoShuo.appendNumToArticles(page)
     comments = DuoShuo.getRecentComment()
     visitors = DuoShuo.getListVisitors()
+    categories=Category.objects.all().order_by("-priority")
     return render(request, 'articles/article-list.html',
             {'page': page, 'category': category,
              'hot_articles_list': hot_articles_list,
              'newest_articles_list': newest_articles_list,
              'comments':comments,
-             'visitors':visitors})
+             'visitors':visitors,
+             'categories':categories})
 
 
 def article_display(request, id=None):
