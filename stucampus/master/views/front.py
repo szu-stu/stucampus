@@ -32,7 +32,7 @@ def index(request):
         comments = DuoShuo.getRecentComment()
         visitors = DuoShuo.getListVisitors()
 
-        categories=Category.objects.all().order_by("-priority")
+        categories=Category.objects.all().order_by("priority")
           
         return render(request, "index.html",
                     {'important_articles': important_articles,
