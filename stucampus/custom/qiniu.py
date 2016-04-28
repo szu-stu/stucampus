@@ -54,7 +54,7 @@ def upload_content_img_to_qiniu(content,img=None):
                     print img_name+" upload to qiniu success "
             except Exception,e:
                 print str(e)
-                print img_name+" upload to qiniu failed "
+                print " upload to qiniu failed "
     return content
 
 def upload_img(img_src):
