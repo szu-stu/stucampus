@@ -145,6 +145,7 @@
                 else{
                     getNextTimes = parseInt($(".page_number").last().text()) + 1;
                     setTimeout(function(){
+                        StuCampus.alert("正在加载更多文章",1000);
                         $.ajax({
                             type: "GET",
                             url: "/?page="+getNextTimes,
