@@ -282,6 +282,7 @@
     height: 1.0rem;
     font-size: 0.6rem;
     line-height: 0.8rem;
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
     color: rgba(0,0,0,0.54);
 }
 .editor{
