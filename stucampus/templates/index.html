@@ -48,7 +48,7 @@
                     <div class="a-content">
                         <span class="a-title">{{ article.title | truncatechars:19  }}</span>
                         <div class="a-info">
-                            {{ article.category }}·{{ article.create_date | date:"n月d日"}}
+                            {{ article.author }} · {{ article.category }} · {{ article.create_date | date:"n月d日"}}
                         </div>
                         <p class="a-intro">{{ article.summary }}</p>
                     </div>

@@ -327,6 +327,9 @@
         height: 3.46667rem;
         border-bottom: 1px solid #5BC5BE;
         resize: none;
+        font-size: 0.6rem;
+        color: rgba(0,0,0,0.54);
+        font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
     }
     .submit{
         position: absolute;
