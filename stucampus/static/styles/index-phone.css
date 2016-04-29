@@ -104,7 +104,7 @@
     height: auto;
     margin: 0.8rem;
     background-color: rgba(255,255,255,0.87);
-    box-shadow: 0rem 0.2rem 0.2rem rgba(0,0,0,0.16);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .artical a{
     overflow: hidden;
