@@ -116,10 +116,8 @@
     position: relative;
     margin:0 auto;
     width: 32.666667rem;
-    overflow: hidden;
 }
 .artical-content{
-    overflow: hidden;
     width: 19.333333rem;
     margin-top: 1.6rem;
     float: left;
@@ -130,13 +128,16 @@
     width: 19.333333rem;
     margin-bottom: 1.6rem;
     background-color: rgba(255,255,255,0.87);
-    box-shadow: 0 0.033333rem 0.066667rem rgba(0,0,0,0.24);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.artical:hover{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 .artical a{
     display: block;
     width: 19.333333rem;
     text-decoration: none;
-    box-shadow: 0 0.033333rem 0.066667rem rgba(0,0,0,0.12);
 }
 .artical a hr{
     display: block;
@@ -245,17 +246,10 @@
 }
 
 .sidenav{
-    background-color: rgba();
     width: 11.733333rem;
     background-color: rgba(255,255,255,0.87);
     border-radius: 2px;
-    box-shadow: 0 0.033333rem 0.066667rem rgba(0,0,0,0.12);
-}
-.shadow{
-    position: relative;
-    width: 11.733333rem;
-    height: 100%;
-    box-shadow: 0 0.033333rem 0.066667rem rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .card-title{
     position: relative;
@@ -310,10 +304,9 @@
     margin-top: 1.6rem;
     background-color: rgba();
     width: 11.733333rem;
-    overflow: hidden;
     background-color: rgba(255,255,255,0.87);
     border-radius: 2px;
-    box-shadow: 0 0.033333rem 0.066667rem rgba(0,0,0,0.12);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .comment{
     position: relative;
