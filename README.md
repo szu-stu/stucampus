@@ -57,4 +57,12 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+**注意：**开发新项目的时候，建议自己开一个分支，然后将分支push上github，将github上的分支pull下来的时候，也建议新开分支再pull
+比如pull newBrand这个分支
+
+```
+git checkout -b newBrand#新建分支并切换到该分支
+git pull origin newBrand#将newBrand的代码pull下来
+```
+
 
