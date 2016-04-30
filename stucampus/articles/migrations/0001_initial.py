@@ -35,6 +35,8 @@ class Migration(migrations.Migration):
                 ('deleted', models.BooleanField(default=False)),
                 ('important', models.BooleanField(default=False)),
                 ('publish', models.BooleanField(default=False)),
+                ('comments', models.IntegerField(blank=True, default=0, null=True)),
+                ('likes', models.IntegerField(blank=True, default=0, null=True)),
             ],
             options={
                 'permissions': (('article_add', '\u6dfb\u52a0\u6587\u7ae0'), ('article_manage', '\u7f16\u5ba1\u6587\u7ae0')),
