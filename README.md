@@ -1,33 +1,33 @@
-安装virtualenv
+**安装virtualenv**
 ```
 pip install virtualenv
 ```
 
-新建virtualenv
+**新建virtualenv**
 
 ```
 virtualenv stucampus_env
 ```
-启动虚拟环境
+**启动虚拟环境**
 ```
 cd stucampus_env
 source bin/activate 
 ```
 
-下载源码
+**下载源码**
 
 ```
  git clone https://github.com/jimczj/Stucampus.git
 ```
 
-安装依赖模块 
+**安装依赖模块** 
 
 ```
 sudo apt-get install libxml2-dev libxslt1-dev
 sudo apt-get install PIL --allow-external PIL --allow-unverified PIL
 pip install -r requirements.txt#如果有报错，自行谷歌，然后补充一下本文件
 ```
-更改配置
+**更改配置**
 copy一份stucampus/config/production.py.sample, 重命名为
 production.py, 记得把DEBUG改成True
 
@@ -35,7 +35,7 @@ production.py, 记得把DEBUG改成True
 cp Stucampus/stucampus/config/production.py.sample Stucampus/stucampus/config/production.py
 sudo vim Stucampus/stucampus/config/production.py
 ```
-在production.py添加数据库的配置，可以参考下图
+**在production.py添加数据库的配置**，可以参考下图
 
 ![这里写图片描述](http://img.blog.csdn.net/20160501014257812)
 
