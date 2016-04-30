@@ -5,7 +5,7 @@ stucampus
 
 安装virtualenv
 ```
-`pip install virtualenv`
+pip install virtualenv
 ```
 
 新建virtualenv
