@@ -160,23 +160,13 @@ def article_list(request, category=None):
         page = paginator.page(request.GET.get('page'))
     except InvalidPage:
         page = paginator.page(1)
-
-    hot_articles_list = \
-        Article.objects.filter(
-                publish=True,
-                deleted=False).order_by('click_count')[:10]
-    newest_articles_list = \
-        Article.objects.filter(
-                publish=True,
-                deleted=False).order_by('-pk')[:10]
     page = DuoShuo.appendNumToArticles(page)
     comments = DuoShuo.getRecentComment()
     visitors = DuoShuo.getListVisitors()
     categories=Category.objects.all().order_by("priority")
     return render(request, 'articles/article-list.html',
-            {'page': page, 'category': category,
-             'hot_articles_list': hot_articles_list,
-             'newest_articles_list': newest_articles_list,
+            {'page': page, 
+             'category': category,
              'comments':comments,
              'visitors':visitors,
              'categories':categories})
