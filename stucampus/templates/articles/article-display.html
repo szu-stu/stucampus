@@ -40,7 +40,7 @@
 		{% endautoescape %}
 		</div>
         <div class="artical-foot">
-            <p class="editor">责任编辑: {{ article.editor.get_full_name }}</p>
+            <p class="editor">责任编辑: {{ article.editor.last_name }}{{ article.editor.first_name }}</p>
             <div class="like-content">
                 <!--<img class="left" src="/static/images/like.png"><p  class="left">99999</p>-->
                 <p class="artical-time">{{ article.create_date | date:"Y-n-d"}}</p>
