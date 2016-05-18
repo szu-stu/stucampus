@@ -111,9 +111,9 @@ body{
 	}
 	.sidebar-top{
 	    position: relative;
-	    background-image: url(/static/images/coverphoto/current.jpg);
+	    background-image: url(/static/images/index/current.jpg);
 	    background-repeat:no-repeat;
-	    background-size: 140%;
+	    background-size: 100%;
 	    width: 21.266667rem;
 	    height: 11.466667rem;
 	}
