@@ -73,43 +73,25 @@
 .header ul li a:hover{
     color: rgb(0,0,0);
 }
-.fixed-logo{
-    display: block;
-    position: fixed;
-    left: 6.433333rem;
-    top: 0.133333rem;
-    border: 0.133333rem solid rgba(255,255,255,0.54);
-    border-radius: 90%;
-    height: 2.733333rem;
-    width: 2.733333rem;
-    z-index: 999;
-    overflow: hidden;
-    transition: transform 0.5s ease-out,opacity 0.5s ease-out;
-    -moz-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
-    -webkit-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
-    -o-transition: transform 0.5s ease-out,opacity 0.5s ease-out;
-    box-shadow: 0 0.333333rem 0.333333rem rgba(0,0,0,0.19);
-}
-.fixed-logo img{
-    height: 2.733333rem;
-    width: 2.733333rem;
-    box-shadow: 0 0.2rem 0.1rem rgba(0,0,0,0.23);
-}
 .artical-header{
     position: relative;
     margin:  0 auto;
-    height: 12.5rem;
+    height: 18.0rem;
     width: 32rem;
     overflow: hidden;
 }
 .artical-cover{
     position: absolute;
-    height: 12.5rem;
+    height: 18.0rem;
+    width: 32rem;
+}
+.artical-cover img{
+    position: absolute;
     width: 32rem;
 }
 .blur{
     position: absolute;
-    height: 12.5rem;
+    height: 18.0rem;
     width: 32.0rem;
     background-color: rgba(0,0,0,0.16);
 }
@@ -118,7 +100,7 @@
 }
 .artical-title{
     position: absolute;
-    top: 3.0rem;
+    top: 7.9rem;
     left: 6rem;
     display: block;
     display: -webkit-box;
@@ -154,7 +136,16 @@
     font-size: 0.6rem;
     letter-spacing: ;
     font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
-
+}
+.artical-information a{
+    text-decoration: none;
+    margin: 1.6rem auto;
+    width: 28.8rem;
+    text-align: center;
+    color: rgba(0,0,0,0.54);
+    font-size: 0.6rem;
+    letter-spacing: ;
+    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
 }
 .artical-text {
     overflow: hidden;

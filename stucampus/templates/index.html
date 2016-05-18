@@ -44,7 +44,7 @@
         {% for article in newest_articles %}
             <div class="artical">
                 <a href="{% url 'articles:display' article.pk %}">
-                    <img class="a-pic" src=" {{ article.cover.name | scale_qiniu_img:request }}">
+                    <div class="a-pic"><img src=" {{ article.cover.name | scale_qiniu_img:request }}"></div>
                     <div class="a-content">
                         <span class="a-title">{{ article.title | truncatechars:19  }}</span>
                         <div class="a-info">
@@ -130,6 +130,7 @@
     </div><!--end of sidebar-->
     <script type="text/javascript">
         var reach_bottom_time = 0;
+        var loadingStatus = false;
         $(window).scroll(function(){
             var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
             var windowHeight = $(window).height(); //窗口的高度
@@ -143,6 +144,12 @@
 
                 }
                 else{
+                    if(loadingStatus==true){
+                        StuCampus.alert("加载中",1000);
+                        return false;
+                    }
+                    loadingStatus=true;
+                    console.log(loadingStatus);
                     getNextTimes = parseInt($(".page_number").last().text()) + 1;
                     setTimeout(function(){
                         StuCampus.alert("正在加载更多文章",1000);
@@ -152,6 +159,11 @@
                             dataType: "html",
                             success: function(data){
                                 $(".artical-content").append(data);
+                                loadingStatus = false;
+                            },
+                            error: function(data, status, e){
+                                StuCampus.alert("发生错误,请重试.或联系学子技术开发部",1000);
+                                loadingStatus = false;
                             }
                         });
                     },500);

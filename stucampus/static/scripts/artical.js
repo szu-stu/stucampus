@@ -1,25 +1,27 @@
 var logoclicktime = 0;
-window.onscroll = scrolls;
-function scrolls(){
-	var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-    var biaogan = parseInt($(".artical-header").css("height"))*3/4;
-	if(scrollTop>=biaogan){
-		$(".artical-header").addClass("up");
-		$(".blur").hide();
-		$(".artical-title").addClass("artical-title-up");
-		$(".artical-main").addClass("main-up");
-        $(".artical-cover").hide();
-	}
-	else if(scrollTop<biaogan){
-		$(".artical-header").removeClass("up");
-		$(".blur").show();
-		$(".artical-title").removeClass("artical-title-up");
-		$(".artical-main").removeClass("main-up");
-        $(".artical-cover").show();
-	}
-}
 $(function(){
-    scrolls();
+    var biaogan = parseInt($(".artical-header").css("height"))*2/5;
+    window.onscroll = function scrolls(){
+        console.log(biaogan);
+        if(document.body.clientWidth>750){
+            return false;
+        }
+        var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        if(scrollTop>=biaogan){
+            $(".artical-header").addClass("up");
+            $(".blur").hide();
+            $(".artical-title").addClass("artical-title-up");
+            $(".artical-main").addClass("main-up");
+            $(".artical-cover").hide();
+        }
+        else if(scrollTop<biaogan){
+            $(".artical-header").removeClass("up");
+            $(".blur").show();
+            $(".artical-title").removeClass("artical-title-up");
+            $(".artical-main").removeClass("main-up");
+            $(".artical-cover").show();
+        }
+    }
     $(".now").hide();
     $("#nav0").removeClass("nav-active");
     setTimeout(function(){

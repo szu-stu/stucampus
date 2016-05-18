@@ -27,13 +27,15 @@
         <img src="/static/images/articles/comment_48.png" alt="评论" />
     </a>
 	<div class="artical-header">
-		<img class="artical-cover" src="{{ article.cover.name | scale_qiniu_img:request}}">
+        <div class="artical-cover">
+            <img src="{{ article.cover.name | scale_qiniu_img:request}}">
+        </div>
         <div class="blur"></div>
         <a href="/" class="back"><img src="/static/images/articles/back.png" alt="back" /></a>
         <p class="artical-title">{{ article.title }}</p>
     </div>
     <div class="artical-main">
-        <p class="artical-information">由 {{ article.author }} 发表于 {{ article.category }}</p>
+        <p class="artical-information">由 {{ article.author }} 发表于 <a href="/articles/{{ article.category.english_name }}">{{ article.category }}</a></p>
         <div class="artical-text">
 		{% autoescape off %}
 			{{ article.content |scale_ueditor_img:request}}
