@@ -151,6 +151,12 @@
     width: 19.333333rem;
     height: 11.666667rem;
     text-decoration: none;
+    overflow: hidden;
+}
+.a-pic img {
+    display: block;
+    width: 19.333333rem;
+    text-decoration: none;
 }
 .a-content{
     position: relative;
