@@ -1,66 +1,68 @@
 {% extends 'account/base.html' %}
 {% block htmltitle %}<title> {{ user.student.screen_name }} - 用户中心 - 深圳大学学子天地</title>{% endblock %}
 
-            {% block inside %}
-                <div class="change">
-                        <h4>修改{{ user.student.screen_name }}的个人资料</h4>
-                        <form method="put" action="/account/profile/edit" id="changeInfor">
-                        <ul>
-                            <li>
-                                <label>真实姓名</label><span>：</span>
-                                <input type="text" name="true_name" class="element" value="{{ user.student.true_name }}" />
-                            </li>
-                            <li>
-                                <label>学院</label><span>：</span>
-                                <select name="college">
-                                    {% for college in college_list %}
-                                    <option value="{{college.0}}" {% if user.student.college == college.0 %}selected{% endif %}>{{college.1}}</option>
-                                    {% endfor %}
-                                </select>
-                            </li>
-                            <li>
-                                <label>昵称</label><span>：</span>
-                                <input type="text" name="screen_name" class="element" value="{{ user.student.screen_name }}" />
-                            </li>
-                            <li>
-                                <label>性别</label><span>：</span>
-                                <select name="gender" class="select_type">
-                                    <option value="F">女</option>
-                                    <option value="M" {% if user.student.gender == 'M' %} selected="selected" {% endif %}>男</option>
-                                </select>
-                            </li>
-                            <li>
-                                <label>邮箱</label><span>：</span>
-                                {{ user.email }}
-                            </li>
-                            <li>
-                                <label>学号</label><span>：</span>
-                                <input type="text" name="job_id" maxlength="10" class="element" value="{{ user.student.job_id }}"/>
-                            </li>
-                            <li>
-                                <label>生日</label><span>：</span>
-                                {% if user.student.birthday %}
-                                <input type="date" name="birthday" class="element" value="{{ user.student.birthday | date:'Y-m-d' }}" />
-                                {% else %}
-                                <input type="date" name="birthday" class="element" value="{{ user.student.birthday }}" />
-                                {% endif %}
-                            </li>
-                            <li>
-                                <label>手机长号</label><span>：</span>
-                                <input type="text" name="mobile_phone_number" class="element" value="{{ user.student.mobile_phone_number }}" />
-                            </li>
-                            <li>
-                                <label>手机短号</label><span>：</span>
-                                <input type="text" name="internal_phone_number" class="element" value="{{ user.student.internal_phone_number }}"/>
-                            </li>
-                            <li>
-                                <label>校园卡号</label><span>：</span>
-                                <input type="text" name="card_id" maxlength="6" class="element" value="{{ user.student.card_id }}"/>
-                            </li>
-                            <li id="last">
-                                <input type="submit" value="确认修改" id="confirm_botton" />
-                            </li>
-                        </ul>
-                        </form>
-                    </div>
-                {% endblock %}
+{% block inside %}
+<div class="change">
+    <h4>修改{{ user.student.screen_name }}的个人资料</h4>
+    <form method="POST" action="/account/profile/edit" id="changeInfor">
+        {% csrf_token %}
+        <ul>
+            <li>
+                <label>真实姓名</label><span>：</span>
+                <input type="text" name="true_name" class="element" value="{{ user.student.true_name }}" />
+            </li>
+            <li>
+                <label>学院</label><span>：</span>
+                <select name="college">
+                    {% for college in college_list %}
+                    <option value="{{college.0}}" {% if user.student.college == college.0 %}selected{% endif %}>{{college.1}}</option>
+                    {% endfor %}
+                </select>
+            </li>
+            <li>
+                <label>昵称</label><span>：</span>
+                <input type="text" name="screen_name" class="element" value="{{ user.student.screen_name }}" />
+            </li>
+            <li>
+                <label>性别</label><span>：</span>
+                <select name="gender" class="select_type">
+                    <option value="F">女</option>
+                    <option value="M" {% if user.student.gender == 'M' %} selected="selected" {% endif %}>男</option>
+                </select>
+            </li>
+            <li>
+                <label>邮箱</label><span>：</span>
+                {{ user.email }}
+            </li>
+            <li>
+                <label>学号</label><span>：</span>
+                <input type="text" name="job_id" maxlength="10" class="element" value="{{ user.student.job_id }}"/>
+            </li>
+            <li>
+                <label>生日</label><span>：</span>
+                {% if user.student.birthday %}
+                <input type="date" name="birthday" class="element" value="{{ user.student.birthday | date:'Y-m-d' }}" />
+                {% else %}
+                <input type="date" name="birthday" class="element" value="{{ user.student.birthday }}" />
+                {% endif %}
+            </li>
+            <li>
+                <label>手机长号</label><span>：</span>
+                <input type="text" name="mobile_phone_number" class="element" value="{{ user.student.mobile_phone_number }}" />
+            </li>
+            <li>
+                <label>手机短号</label><span>：</span>
+                <input type="text" name="internal_phone_number" class="element" value="{{ user.student.internal_phone_number }}"/>
+            </li>
+            <li>
+                <label>校园卡号</label><span>：</span>
+                <input type="text" name="card_id" maxlength="6" class="element" value="{{ user.student.card_id }}"/>
+            </li>
+            <li id="last">
+                <input type="submit" value="确认修改" id="confirm_botton"/>
+            </li>
+        </ul>
+    </form>
+</div>
+
+{% endblock %}

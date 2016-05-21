@@ -76,9 +76,9 @@ class ProfileEdit(View):
                       {'college_list': college_list})
 
     @method_decorator(login_required)
-    def put(self, request):
+    def post(self, request):
         student = request.user.student
-        form = ProfileEditForm(request.PUT, instance=student)
+        form = ProfileEditForm(request.POST, instance=student)
         if not form.is_valid():
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
@@ -93,8 +93,8 @@ class Password(View):
         return render(request, 'account/password.html')
 
     @method_decorator(login_required)
-    def put(self, request):
-        form = PasswordForm(request.PUT)
+    def post(self, request):
+        form = PasswordForm(request.POST)
         if not form.is_valid():
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
