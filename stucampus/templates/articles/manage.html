@@ -3,6 +3,7 @@
 {% block htmlhead %}
     {% load html_tools %}
     {{ 'manage/articles_manage.css' | as_css }}
+    {{ 'global.js' | as_js }}
     {{ form.media }}
 {% endblock %}
 
@@ -58,8 +59,8 @@
                 {% endif %}
             </a>
             {% endif %}
-            {% if perms.articles.article_manage %}
-            <a href="{% url 'articles:set_important' %}?id={{ article.pk }}">
+            {% if perms.articles.article_manage and perms.carousels.slide_add %}
+            <a href="{% url 'carousels:add' %}?id={{ article.pk }}&fast=True">
                 {% if article.important %}
                     从首页焦点下架
                 {% else %}

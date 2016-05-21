@@ -124,7 +124,9 @@ INSTALLED_APPS = (
     'stucampus.spider',
     'stucampus.szuspeech',
     'stucampus.minivideo',
-    # 'stucampus.dreamer',
+    'stucampus.carousels',
+
+    #'stucampus.dreamer',
     'stucampus.FreeTimeCount',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

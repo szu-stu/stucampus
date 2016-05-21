@@ -6,16 +6,16 @@ from stucampus.articles.models import Article, Category
 from stucampus.lecture.models import LectureMessage
 from stucampus.activity.models import ActivityMessage
 from stucampus.utils import DuoShuo
+from stucampus.carousels.models import Slide
 
 
 def index(request):
     if not request.is_ajax():
         # 深大焦点
-        important_articles = \
-                Article.objects.filter(
-                        publish=True,
-                        deleted=False,
-                        important=True).order_by('-pk')[:5]
+        slides = Slide.objects.filter(
+                        published=True,
+                        deleted=False).order_by("-priority","-pk")[:5]
+        print slides[0].cover
         
         # 最新文章
         newest_articles = \
@@ -35,7 +35,7 @@ def index(request):
         categories=Category.objects.all().order_by("priority")
           
         return render(request, "index.html",
-                    {'important_articles': important_articles,
+                    {'slides': slides,
                     'newest_articles':newest_articles,
                     'comments':comments,
                     'visitors':visitors,

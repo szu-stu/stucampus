@@ -18,6 +18,7 @@ from stucampus.szuspeech import urls as szuspeech_urls
 from stucampus.minivideo import urls as minivideo_urls
 from stucampus.spider import urls as spider_urls
 from stucampus.FreeTimeCount import urls as FreeTimeCount_urls
+from stucampus.carousels import urls as carousels_urls
 from stucampus.master.views.front import index,about_us
 
 
@@ -48,6 +49,7 @@ urlpatterns = [
                                namespace='minivideo')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^spider/', include(spider_urls, namespace='spider')),
+    url(r'^carousels/', include(carousels_urls, namespace='carousels')),
     #url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
 	url(r'^freetimecount/', include(FreeTimeCount_urls,namespace='FreeTimeCount')),
 ]

@@ -25,16 +25,16 @@
         <div class="selector">
         </div>
         <div id="banners" class="b-container">
-        {% for article in important_articles %}
-            <a  href="{% url 'articles:display' article.pk %}" style="left: 0rem;" >
+        {% for slide in slides %}
+            <a  href="{{ slide.jumpUrl }}" style="left: 0rem;" >
                 <div class="blur">
                 </div>
                 <div class="infomation">
-                    <p class="banner_title">{{ article.title | truncatechars:19  }}</p>
-                    <p class="banner_describe">{{ article.summary }}</p>
-                    <p class="banner_category">{{ article.category }}</p>
+                    <p class="banner_title">{{ slide.title | truncatechars:19  }}</p>
+                    <p class="banner_describe">{{ slide.describe }}</p>
+                    <!--<p class="banner_category"></p>-->
                 </div>
-                <img src="{{ article.cover.name | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
+                <img src="{{ slide.cover.name | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
             </a>
         {% endfor %}
         </div>
