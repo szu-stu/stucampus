@@ -53,7 +53,7 @@ class ModifySlide(View):
         page = request.GET.get('page')
         return render(request, 'carousels/carousel-form.html',
                 {'form': form, 'slide_id': slide_id, 'page': page,
-                 'post_url': reverse('carousels:modify')})
+                 'slide':slide, 'post_url': reverse('carousels:modify')})
 
     @method_decorator(check_perms('carousels.slide_add'))
     def post(self, request):
@@ -65,9 +65,9 @@ class ModifySlide(View):
             return render(request, 'carousels/carousel-form.html',
                 {'form': form, 'slide_id': slide_id,
                  'post_url': reverse('carousels:modify')})
-        form.save(commit=False)
-        form.modifier = request.user
-        form.save()
+        slide = form.save(commit=False)
+        slide.modifier = request.user
+        slide.save()
         return HttpResponseRedirect(reverse('carousels:manage')+'?page='+page)
 
 @check_perms('carousels.slide_add')
