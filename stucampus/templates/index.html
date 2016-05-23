@@ -25,18 +25,31 @@
         <div class="selector">
         </div>
         <div id="banners" class="b-container">
-        {% for slide in slides %}
-            <a  href="{{ slide.jumpUrl }}" style="left: 0rem;" >
-                <div class="blur">
-                </div>
-                <div class="infomation">
-                    <p class="banner_title">{{ slide.title | truncatechars:19  }}</p>
-                    <p class="banner_describe">{{ slide.describe }}</p>
-                    <!--<p class="banner_category"></p>-->
-                </div>
-                <img src="{{ slide.cover.name | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
-            </a>
-        {% endfor %}
+        {% if slides %}
+            {% for slide in slides %}
+                <a  href="{{ slide.jumpUrl }}" style="left: 0rem;" >
+                    <div class="blur">
+                    </div>
+                    <div class="infomation">
+                        <p class="banner_title">{{ slide.title | truncatechars:19  }}</p>
+                        <p class="banner_describe">{{ slide.describe }}</p>
+                        <!--<p class="banner_category"></p>-->
+                    </div>
+                    <img src="{{ slide.cover.name | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
+                </a>
+            {% endfor %}
+        {% else %}
+<!--         默认幻灯片 -->
+            <a  href="javascript:void(0)" style="left: 0rem;" >
+                    <div class="blur">
+                    </div>
+                    <div class="infomation">
+                        <p class="banner_title">学子天地</p>
+                        <p class="banner_describe">浮游于世，不止自己</p>
+                    </div>
+                    <img src="/static/images/coverphoto/current.jpg" alt="学子封面" />
+                </a>
+        {% endif %}
         </div>
     </div>
     <div class="main-content">

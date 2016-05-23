@@ -160,8 +160,6 @@ def article_list(request, category=None):
         page = paginator.page(request.GET.get('page'))
     except InvalidPage:
         page = paginator.page(1)
-    for a in page:
-        print a
     if not request.is_ajax():
         page = DuoShuo.appendNumToArticles(page)
         comments = DuoShuo.getRecentComment()

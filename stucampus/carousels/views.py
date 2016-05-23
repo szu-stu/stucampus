@@ -92,9 +92,7 @@ def manage(request):
 def publish(request):
     slide_id = request.GET.get('id')
     slide = get_object_or_404(Slide, pk=slide_id)
-    print slide.published
     slide.published = not slide.published
-    print slide.published
     slide.save()
     return HttpResponseRedirect(reverse('carousels:manage'))
 

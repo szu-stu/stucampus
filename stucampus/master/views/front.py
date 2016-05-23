@@ -14,9 +14,7 @@ def index(request):
         # 深大焦点
         slides = Slide.objects.filter(
                         published=True,
-                        deleted=False).order_by("-priority","-pk")[:5]
-        print slides[0].cover
-        
+                        deleted=False).order_by("-priority","-pk")[:5]  
         # 最新文章
         newest_articles = \
                 Article.objects.filter(
