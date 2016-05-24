@@ -2,6 +2,7 @@
 from django.template.response import TemplateResponse
 from stucampus.FreeTimeCount.models import *
 from django.http import StreamingHttpResponse
+from django.shortcuts import render
 import re
 import string
 import datetime
@@ -10,7 +11,7 @@ import copy
 import xlwt
 
 def index_function(request):
-	response = TemplateResponse(request, 'FreeTimeCount/index.html', {})
+	response = render(request, 'FreeTimeCount/index.html', {})
 	return response
 
 
@@ -139,7 +140,7 @@ def date_function(request):
 		week_day = '六'
 
 
-	response = TemplateResponse(request, 'FreeTimeCount/date.html', {
+	response = render(request, 'FreeTimeCount/date.html', {
 		"time1_2" 	: ",".join(time1_2),
 		"time3_4" 	: ",".join(time3_4),
 		"time5_6" 	: ",".join(time5_6),
@@ -461,7 +462,7 @@ def distribute_function(request):
 
 	print result_tmp
 
-	response = TemplateResponse(request, 'FreeTimeCount/distribute.html', {"result" : json.dumps(result), "result_tmp" : json.dumps(result_tmp), "free_student" : json.dumps(free_student)})
+	response = render(request, 'FreeTimeCount/distribute.html', {"result" : json.dumps(result), "result_tmp" : json.dumps(result_tmp), "free_student" : json.dumps(free_student)})
 	return response
 
 def member_function(request):
@@ -492,7 +493,7 @@ def member_function(request):
 	else:
 		print 'not a post request'
 
-	response = TemplateResponse(request, 'FreeTimeCount/member.html', {"students": student, "courses": courses, "len": (len(student) if student != None else 0)})
+	response = render(request, 'FreeTimeCount/member.html', {"students": student, "courses": courses, "len": (len(student) if student != None else 0)})
 	return response
 
 def insert_function(request):
@@ -711,5 +712,5 @@ def insert_function(request):
 
 
 
-	response = TemplateResponse(request, 'FreeTimeCount/distribute.html', {})
+	response = render(request, 'FreeTimeCount/distribute.html', {})
 	return response
