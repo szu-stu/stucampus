@@ -3,7 +3,6 @@ from django.core.management.base import BaseCommand, CommandError
 
 from stucampus.articles.models import Article
 
-from stucampus.custom.qiniu import upload_img
     
 class Command(BaseCommand):
 	'''
