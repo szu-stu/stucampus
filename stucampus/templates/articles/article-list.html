@@ -148,7 +148,7 @@
                     setTimeout(function(){
                         $.ajax({
                             type: "GET",
-                            url: "/articles/{{ category.english_name }}?page="+getNextTimes,
+                            url: "/articles/{{ category.english_name }}/?page="+getNextTimes,
                             dataType: "html",
                             success: function(data){
                                 $(".artical-content").append(data);
