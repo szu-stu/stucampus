@@ -20,6 +20,7 @@ from stucampus.spider import urls as spider_urls
 from stucampus.FreeTimeCount import urls as FreeTimeCount_urls
 from stucampus.carousels import urls as carousels_urls
 from stucampus.master.views.front import index,about_us
+from stucampus.member_infor import urls as member_infor_url
 
 
 
@@ -52,6 +53,8 @@ urlpatterns = [
     url(r'^carousels/', include(carousels_urls, namespace='carousels')),
     #url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
 	url(r'^freetimecount/', include(FreeTimeCount_urls,namespace='FreeTimeCount')),
+    url(r'^member_infor/', include(member_infor_url,namespace='member_infor')),
+
 ]
 
 #serve media file when using developing server
