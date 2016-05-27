@@ -54,7 +54,7 @@
 			<tr>
 				<td>{{ student.name }}</td>
 				<td>{{ student.szu_no}}</td>
-				<td>{{ student.mobile_phone_number }}</td>
+				<td><a href="tel:{{ student.mobile_phone_number }}"><span></span>{{ student.mobile_phone_number }}</a></td>
 			</tr>
 			{% endfor %}
 		</table>
