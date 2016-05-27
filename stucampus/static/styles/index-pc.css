@@ -1,57 +1,44 @@
 .page_number{
     display: none;
 }
-.banner{
+.slide-container{
 	position: relative;
-    max-width: 1366px;
-    width: 45.533333rem;
-	height: 11.533333rem;
+    width: 100%;
+	height: 9.666667rem;
     font-size: 30px;
 	overflow: hidden;
 }
-.blur{
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 45.533333rem;
-    height: 11.533333rem;
-    background-color: rgba(0,0,0,0.32);
-}
-.selector{
+.swiper-pagination{
 	position: absolute;
-	bottom: 0.466667rem;
+	bottom: 0.266667rem !important;
 	display: block;
 	width: 100%;
     text-align: center;
 	height: 0.6rem;
 	z-index: 20;
 }
-.round{
+.swiper-pagination-bullet{
+    position: relative;
+    bottom: 0.1rem !important;
 	display: inline-block;
 	margin-left: 0.6rem;
-	width: 0.533333rem;
-	height: 0.533333rem;
-	background-color: rgba(255,255,255,0.54);
+	width: 0.4rem;
+	height: 0.4rem;
+	background-color: rgb(255,255,255);
 	border-radius: 50%;
 }
-.round:nth-child(1){
-	margin-left:0 ;
+.swiper-pagination-bullet-active{
+    bottom: 0 !important;
+    width: 0.6rem;
+    height: 0.6rem;
+	background-color: rgb(91,197,190);
 }
-.active{
-	background-color: rgba(91,197,190,0.54);
-}
-.b-container{
-    position: relative;
-    width: 227.7666667rem;
-    height: 11.533333rem;
-    font-size: inherit;
-}
-.b-container a{
+.swiper-slide ,.swiper-slide a{
     position: relative;
 	display: block;
     max-width: 1366px;
-	width: 45.533333rem;
-	height: 11.533333rem;
+	width: 17.166667rem;
+	height: 9.666667rem;
 	overflow: hidden;
 	text-decoration: none;
     font-size: inherit;
@@ -61,7 +48,18 @@
     -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
     -o-transition: left 0.5s ease-out; /* Opera */
 }
-.banner img{
+.blur{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 17.166667rem;
+    height: 9.666667rem;
+    background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* 标准的语法（必须放在最后） */
+}
+.swiper-wrapper img{
 	position: absolute;
     top: 0;
 	width: 100%;
@@ -71,20 +69,20 @@
 .infomation{
     position: relative;
     margin: 0 auto;
-    width: 32.66667rem;
-    height: 11.533333rem;
+    width: 17.166667rem;
+    height: 9.666667rem;
 }
 .banner_title{
     position: absolute;
-	top: 2.266667rem;
+	bottom: 2.166667rem;
     width: 100%;
     margin: 0 auto;
-	color: rgba(255,255,255,0.87);
+	color: rgba(255,255,255,1);
 	font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
-	font-size: 1.6rem;
+	font-size: 0.933333rem;
 	letter-spacing: 0.4rem;
-	line-height: 1.6rem;
-	font-weight: bold;
+	line-height: 1.066667rem;
+	font-weight: 500;
 	text-align: center;
 }
 .banner_describe{
@@ -97,20 +95,6 @@
 	line-height: 0.6rem;
     font-weight: 200;
 	text-align: center;
-}
-.banner_category{
-    display: block;
-    position: absolute;
-    top: 7.666667rem;
-    width: 100%;
-    font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.87);
-    letter-spacing: 0.16rem;
-    line-height: 0.6rem;
-    font-weight: 200;
-    text-align: center;
-
 }
 .main-content{
     position: relative;
@@ -149,7 +133,7 @@
 .a-pic{
     display: block;
     width: 19.333333rem;
-    height: 11.666667rem;
+    height: 10.866667rem;
     text-decoration: none;
     overflow: hidden;
 }

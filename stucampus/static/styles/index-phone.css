@@ -1,49 +1,40 @@
 .page_number{
     display: none;
 }
-.banner{
+.slide-container{
     position: relative;
     width: 25.0rem;
-    height: 9.8rem;
+    height: 14.133333rem;
     overflow: hidden;
 }
-.blur{
+.swiper-pagination{
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 14.133333rem;
-    background-color: rgba(0,0,0,0.32);
-}
-.selector{
-    position: absolute;
-    bottom: 0.8rem;
+    bottom: 0.866667rem !important;
     display: block;
     margin:0 auto;
     width: 100%;
-    height: 0.6rem;
+    height: 0.666667rem;
     z-index: 20;
     text-align: center;
 }
-.round{
+.swiper-pagination-bullet{
+    position: relative;
+    bottom: 0.1rem;
     display: inline-block;
-    margin-left: 0.933333rem;
-    width: 0.6rem;
-    height: 0.6rem;
-    background-color: rgba(255,255,255,0.54);
+    margin-left: 0.6rem;
+    width: 0.466667rem;
+    height: 0.466667rem;
+    background-color: rgb(255,255,255);
     border-radius: 50%;
 }
-.round:nth-child(1){
-    margin-left:0 ;
+.swiper-pagination-bullet-active{
+    bottom: 0;
+    width: 0.666667rem;
+    height: 0.666667rem;
+    background-color: rgb(91,197,190);
+    border-radius: 50%;
 }
-.active{
-    background-color: rgba(91,197,190,0.54);
-}
-.b-container{
-    width: 125.0rem;
-    height: 14.133333rem;
-}
-.b-container a{
+.swiper-slide ,.swiper-slide a{
     position: relative;
     display: block;
     width: 25.0rem;
@@ -57,7 +48,18 @@
     -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
     -o-transition: left 0.5s ease-out; /* Opera */
 }
-.banner img{
+.blur{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25.0rem;
+    height: 14.133333rem;
+    background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* 标准的语法（必须放在最后） */
+}
+.swiper-wrapper img{
     position: absolute;
     width: 100%;
     height: auto;
@@ -65,7 +67,7 @@
 }
 .banner_title{
     position: absolute;
-    top: 2.066667rem;
+    bottom: 2.133333rem;
     width: 25.0rem;
     color: rgba(255,255,255,0.87);
     font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";

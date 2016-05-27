@@ -10,8 +10,9 @@
 
 {% block htmlhead %}
     {% load html_tools %}
-    {{ 'plugins/basic-jquery-slider.js' | as_js }}
+    {{ 'plugins/swiper.min.js' | as_js }}
     {{ 'index.js' | as_js }}
+    {{ 'carousels/swiper.min.css' | as_css }}
     <link href="/static/styles/index-phone.css" rel="stylesheet" type="text/css" media="screen and (max-width:767px)" />  
     <link href="/static/styles/index-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
 {% endblock %}
@@ -21,35 +22,38 @@
 {% load qiniu_tools %}
 
 {% block content %}
-    <div class="banner">
-        <div class="selector">
-        </div>
-        <div id="banners" class="b-container">
-        {% if slides %}
-            {% for slide in slides %}
-                <a  href="{{ slide.jumpUrl }}" style="left: 0rem;" >
-                    <div class="blur">
-                    </div>
-                    <div class="infomation">
-                        <p class="banner_title">{{ slide.title | truncatechars:19  }}</p>
-                        <p class="banner_describe">{{ slide.describe }}</p>
-                        <!--<p class="banner_category"></p>-->
-                    </div>
-                    <img src="{{ slide.cover.name | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
-                </a>
-            {% endfor %}
-        {% else %}
-<!--         默认幻灯片 -->
-            <a  href="javascript:void(0)" style="left: 0rem;" >
-                    <div class="blur">
-                    </div>
-                    <div class="infomation">
-                        <p class="banner_title">学子天地</p>
-                        <p class="banner_describe">浮游于世，不止自己</p>
-                    </div>
-                    <img src="/static/images/coverphoto/current.jpg" alt="学子封面" />
-                </a>
-        {% endif %}
+    <div class="slide-container">
+        <div class="swiper-pagination"></div>
+        <div class="swiper-wrapper">
+            {% if slides %}
+                {% for slide in slides %}
+                <div id="banners" class="swiper-slide">
+                    <a  href="{{ slide.jumpUrl }}" style="left: 0rem;" >
+                        <div class="blur">
+                        </div>
+                        <div class="infomation">
+                            <p class="banner_title">{{ slide.title | truncatechars:19  }}</p>
+                            <!--<p class="banner_describe">{{ slide.describe }}</p>-->
+                            <!--<p class="banner_category"></p>-->
+                        </div>
+                        <img src="{{ slide.cover.name | scale_qiniu_img:request}}" alt="{{ article.title | truncatechars:19  }}" />
+                    </a>  
+                </div>
+                {% endfor %}
+            {% else %}
+    <!--         默认幻灯片 -->
+                <div id="banners" class="swiper-slide">
+                    <a  href="javascript:void(0)" style="left: 0rem;" >
+                        <div class="blur">
+                        </div>
+                        <div class="infomation">
+                            <p class="banner_title">学子天地</p>
+                            <p class="banner_describe">浮游于世，不止自己</p>
+                        </div>
+                        <img src="/static/images/coverphoto/current.jpg" alt="学子封面" />
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </div>
     <div class="main-content">
