@@ -22,7 +22,7 @@ class addSlide(View):
             slide.title = article.title
             slide.describe = article.summary
             slide.cover = article.cover
-            slide.jumpUrl = '/articles/'+article_id
+            slide.jumpUrl = '/articles/'+article_id+'/'
             slide.author = request.user
             slide.modifier = request.user
             slide.save()
