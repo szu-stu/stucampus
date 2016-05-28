@@ -74,6 +74,9 @@
                     <a href="{% url 'member_infor:add_list' %}">批量添加通讯录</a>
                     <a href="{% url 'member_infor:manage' %}">通讯录列表</a>
                 {% endif %}
+                {% if perms.member_infor.member_manage %}
+                <a href="{% url 'member_infor:pending_approve_members'%}">申请通讯录列表</a>
+                {% endif %}
 
 
                 <!-- 以下代码未完成 -->

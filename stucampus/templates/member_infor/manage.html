@@ -24,6 +24,9 @@
             <span style="width:25%">{{ member.mobile_phone_number }}</span>
         </a>
         {% if perms.member_infor.member_manage %}
+            {% if not member.approved %}
+            <a href="{% url 'member_infor:approve_member' %}?id={{ member.pk }}" class="control">通过</a>
+            {% endif %}
         <a href="{% url 'member_infor:delete' %}?id={{ member.pk }}" class="control">删除</a>
         {% endif %}
     </li>
