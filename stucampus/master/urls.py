@@ -11,29 +11,29 @@ urlpatterns = [
     url(r'^$', admin_index_redirect,
         name='admin_index_redirect'),
 
-    url(r'^index$',
+    url(r'^index/?$',
         admin_index, name='admin_index'),
 
-    url(r'^organization/list$', ListOrganization.as_view(),
+    url(r'^organization/list/?$', ListOrganization.as_view(),
         name='manage_organization_list'),
-    url(r'^organization/(?P<id>\d+)$', ShowOrganization.as_view(),
+    url(r'^organization/(?P<id>\d+)/?$', ShowOrganization.as_view(),
         name='manage_organization_show'),
-    url(r'^organization/(?P<id>\d+)/manager$', OrganzationManager.as_view(),
+    url(r'^organization/(?P<id>\d+)/manager/?$', OrganzationManager.as_view(),
         name='manage_organization_manage'),
 
-    url(r'^account/list$', ListAccount.as_view(), name='manage_account_list'),
-    url(r'^account/(?P<id>\d+)$', ShowAccount.as_view(),
+    url(r'^account/list/?$', ListAccount.as_view(), name='manage_account_list'),
+    url(r'^account/(?P<id>\d+)/?$', ShowAccount.as_view(),
         name='manage_account_show'),
 
-    url(r'^infor/list$', ListInfor.as_view(), name='manage_infor_list'),
-    url(r'^infor/post$', PostInfor.as_view(), name='manage_infor_post'),
-    url(r'^infor/(?P<id>\d+)$', Information.as_view(),
+    url(r'^infor/list/?$', ListInfor.as_view(), name='manage_infor_list'),
+    url(r'^infor/post/?$', PostInfor.as_view(), name='manage_infor_post'),
+    url(r'^infor/(?P<id>\d+)/?$', Information.as_view(),
         name='manage_infor_infor'),
 
-    url(r'^organization$',
+    url(r'^organization/?$',
         organization_manage,
         name='organization_manage'),
-    url(r'^organization/(?P<id>\d+)/edit$', EditOrganization.as_view(),
+    url(r'^organization/(?P<id>\d+)/edit/?$', EditOrganization.as_view(),
         name='organization_edit'),
 
 ]
