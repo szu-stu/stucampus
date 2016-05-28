@@ -48,7 +48,6 @@ class MemberListForm(forms.Form):
         file = self.cleaned_data.get('file')
         if file is None:
             raise ValidationError((u'文件不能为空'))
-            return file
         if  not file.name.endswith("xlsx"):
             raise ValidationError((u'只能批量处理xlsx文件'))
         try:

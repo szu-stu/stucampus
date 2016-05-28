@@ -77,6 +77,10 @@
                 {% if perms.member_infor.member_manage %}
                 <a href="{% url 'member_infor:pending_approve_members'%}">申请通讯录列表</a>
                 {% endif %}
+                
+                {% if perms.FreeTimeCount.usable %}
+                    <a href="{% url 'FreeTimeCount:index'%}">空闲时间</a>
+                {% endif %}
 
 
                 <!-- 以下代码未完成 -->
@@ -95,9 +99,6 @@
                 {% endif %}
                 {% if perms.magazine.magazine_view %}
                     <a href="/magazine">社团杂志</a>
-                {% endif %}
-                {% if perms.FreeTimeCount.usable %}
-					<a href="/freetimecount">空闲时间</a>
                 {% endif %}
                 </div>
             </div>
