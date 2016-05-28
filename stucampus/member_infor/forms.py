@@ -20,6 +20,11 @@ def szu_no_validate(value):
 
 
 class MemberForm(forms.ModelForm):
+    MONTHS = {
+        1:u'1月', 2:u'2月', 3:u'3月', 4:u'4月',
+        5:u'5月', 6:u'6月', 7:u'7月', 8:u'8月',
+        9:u'9月', 10:u'10月', 11:u'11月', 12:u'12月'
+    }
     name = forms.CharField(label=u"姓名",required=True,max_length=20,error_messages={'required':u'姓名不能为空'},
                             widget=forms.TextInput(attrs={'class':'form-control','placeholder':u'请输入姓名'}))
     mobile_phone_number = forms.CharField(label=u"手机号",required=True,max_length=11,validators=[mobile_validate,],error_messages={'required':u'手机号不能为空'},
@@ -27,7 +32,7 @@ class MemberForm(forms.ModelForm):
     szu_no = forms.CharField(label=u"学号",required=True,validators=[szu_no_validate,],error_messages={'required':u'学号不能为空'},
                             widget=forms.NumberInput(attrs={'class':'form-control','placeholder':u'请输入学号'}))
 
-    birthday = forms.DateField(label=u"生日",required=False,widget=forms.SelectDateWidget(empty_label=("年", "月", "日"),attrs={'class':'form-control'},years=range(datetime.datetime.now().year-30,datetime.datetime.now().year-15)))
+    birthday = forms.DateField(label=u"生日",required=False,widget=forms.SelectDateWidget(empty_label=("年", "月", "日"),attrs={'class':'form-control'},years=range(datetime.datetime.now().year-30,datetime.datetime.now().year-15),months = MONTHS))
 
     e_mail = forms.EmailField(label=u"邮箱",required=False,max_length = 30,widget = forms.EmailInput(attrs={'class':'form-control','placeholder':u'请输入邮箱'}))
     nick_name = forms.CharField(label=u"昵称",required=False,max_length = 30,widget = forms.TextInput(attrs={'class':'form-control','placeholder':u'请输入昵称'}))
