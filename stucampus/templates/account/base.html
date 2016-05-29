@@ -3,6 +3,7 @@
 
 {% block htmlhead %}
 {% load html_tools %}
+{{ 'plugins/jquery.form.js' | as_js }}
 {{ 'account/profile.css' | as_css }}
 {{ 'account/date-input.css' | as_css }}
 {{ 'plugins/ckeditor/ckeditor.js' | as_js}}
@@ -10,6 +11,7 @@
 {{ 'plugins/google/api.js' |as_js }}
 {{ 'account/profile.js' | as_js }}
 {{ 'admin/upload.js' | as_js }}
+
 {% endblock %}
 
 {% block content %}
