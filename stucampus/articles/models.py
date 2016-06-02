@@ -62,7 +62,7 @@ class Article(models.Model):
         super(Article, self).save(*args, **kwargs)
 
         if self.cover:
-            self.cover.name = upload_img(unicode(self.cover)) 
+            self.cover.name = upload_img(unicode(self.cover.name)) 
             
         super(Article, self).save(*args, **kwargs)
         

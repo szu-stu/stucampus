@@ -34,7 +34,9 @@ class Slide(models.Model):
         数据库保存的时候，会自动上传图片到七牛
         参考jimczj在stucampus.articles.models上写的
         '''
+        super(Slide, self).save(*args, **kwargs)
+
         if self.cover:
-            self.cover.name = upload_img(unicode(self.cover)) 
+            self.cover.name = upload_img(unicode(self.cover.name)) 
             
         super(Slide, self).save(*args, **kwargs)
