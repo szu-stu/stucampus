@@ -37,7 +37,7 @@ class SearchMember(View):
         if not Member.objects.filter(szu_no=request.session['szu_no'],approved=True).exists():
             return render(request, 'member_infor/login_fail.html')
         q = request.POST.get("q")
-        students = Member.objects.filter(Q(name__contains=q)|Q(szu_no__contains=q)|Q(nick_name__contains=q))
+        students = Member.objects.filter(Q(name__icontains=q)|Q(szu_no__contains=q)|Q(nick_name__icontains=q))
         if students.exists():
             tips = None
         else:
