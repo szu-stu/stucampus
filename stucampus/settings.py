@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'stucampus.minivideo',
     'stucampus.carousels',
     'stucampus.member_infor',
+    'stucampus.summer_plans',
 
     #'stucampus.dreamer',
     'stucampus.FreeTimeCount',

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>我的暑假计划</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	{% load html_tools %}
+	<link rel="stylesheet" href="/static/scripts/plugins/bootstrap2.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/scripts/plugins/bootstrap2.3.2/css/bootstrap-responsive.css">
+	<!-- 加载动画库 start -->
+	{{ 'plugin/loadding/style.css' | as_css }}
+	<!-- 加载动画库 end -->
+	{{ 'summer_plans/index.css' | as_css }}
+
+
+</head>
+<body>
+	<!-- 发表暑假计划的form Modal -->
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">发布你的暑假计划</h3>
+		</div>
+		<div class="modal-body">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 modal_form_box">
+			<form id="plan_form">
+				{% csrf_token %}
+				{{form.as_p}}
+			</form>
+				
+			</div>
+		</div>
+			
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+			<button class="btn btn-primary" id="submit_plan_form">Save changes</button>
+		</div>
+	</div>
+	<!-- 发表暑假计划的form  Modal end-->
+
+	<main class="container">
+		<div >
+			<div class="col-lg-12 col-sm-12 ">
+				<header>	
+					<div class="navbar clearfix">
+						<span class="pull-left">
+							<span class="logo">
+								<img src="/static/images/stucampus_logo.png" alt="szulogo">
+							</span>
+							<span class="theme_title">暑假计划</span>
+						</span>	
+						<!-- ajax全局加载 start-->
+						<span class="loadding_box hide">
+							<div class="loader3">
+								<i></i>
+							</div>
+						</span>	
+						<!-- ajax全局加载 end-->
+						<span class="pull-right">
+							<a href="#myModal" class="form_modal_btn" role="button" class="btn" data-toggle="modal">发布暑假计划</a>
+							<a href="{% url 'summer_plans:add_plan' %}">登录</a>
+						</span>
+					</div>
+					
+				</header>
+				<div class="plan_list">
+					<ul>
+						{% for plan in plan_list %}
+						<li class="plan_li">
+							<p class="plan_author"><a href="#">{{ plan.author.szu_name }}</a></p>
+							<p class="plan_content">{{ plan.content }}</p>
+							<div class="function_wrapper">
+								<span class="create_time">{{ plan.create_date }}</span>
+								<span class="icon-thumbs-up like_btn" data-plan_id="{{plan.pk}}"></span>
+							</div>
+							
+							<div class="like_persons_wrapper {% if not plan.like_persons.all %} hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
+								<img src="/static/images/summer_plan/l.png" alt="love" width="15px" height="15px;">
+								<span class="like_persons" id="like_persons{{plan.pk}}">{% for person in plan.like_persons.all %}{{ person.szu_name }},{% endfor %}</span>
+							</div>
+							
+						</li>
+						{% endfor %}
+					
+
+						{% if plan_list.has_next %}
+						<div class="page_number">{{ plan_list.number }}</div>
+						{% else %}
+						<div class="page_number">没有更多文章了</div>
+						{% endif %} 
+ 						
+					</ul>
+					<div class="loader1 hide">
+	        			<i></i><i></i>
+	        		</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	{{ 'plugins/jquery.min.js' | as_js }}
+	{{ 'plugins/bootstrap2.3.2/js/bootstrap.min.js' | as_js }}
+	{{ 'summer_plans/index.js' | as_js }}
+</body>
+</html>

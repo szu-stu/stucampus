@@ -1,0 +1,89 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul,li{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+body{
+	position: relative;
+	background-color:#F8F8F8;
+	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
+	padding-bottom: 20px;
+}
+.plan_list
+{
+	margin-top:50px;
+}
+.plan_list li
+{
+	padding: 10px;
+	border-bottom: 2px solid #eeeeee;
+	text-align: left;
+}
+.plan_list li .plan_author
+{
+	font-size: 1.3em;
+	overflow: hidden;
+	
+}
+.navbar{
+	position: fixed;
+	top:0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	font-size: 1.2em;
+	background-color: rgb(91,197,190);
+	overflow: hidden;
+	zoom:1;
+
+}
+.navbar span
+{
+	vertical-align: middle;
+}
+header{
+	position: relative;
+	overflow: hidden;
+}
+header .logo
+{
+	display: inline-block;
+	height: 1.7rem;
+    width: 1.7rem;
+}
+header .loadding_box
+{
+	position: fixed;
+	top: 0;
+	z-index: 100;
+	left: 50%;
+}
+.like_persons_wrapper
+{
+	padding: 5px;
+	color: #576b95;
+	background-color: #eeeeee;
+}
+.like_persons_wrapper .like_persons
+{
+	word-break:break-word;
+}
+.function_wrapper{
+	font-size: 0.8em;
+}
+.plan_content{
+	padding:5px 20px ;
+	word-break:break-word;
+}
+.modal_form_box input,.modal_form_box textarea
+{
+	width: 95%;
+}
+ 
+.page_number{
+	display: none;
+}
