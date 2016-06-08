@@ -1,50 +1,41 @@
 ;(function($)
 {
 	// 窗口滑动加载 start
-	var reach_bottom_time = 0;
 	var loadingStatus = false;
 	$(window).scroll(function(){
             var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
             var windowHeight = $(window).height(); //窗口的高度
             var dbHiht = $(document).height(); //整个页面文件的高度
-            if(dbHiht - windowHeight <= scrollPos){
-            	if($(".page_number").last().text()=="没有更多文章了"&reach_bottom_time<3){
-            		reach_bottom_time += 1;
-
-            	}
-            	else if($(".page_number").last().text()=="没有更多文章了"&reach_bottom_time>=3){
-
-            	}
-            	else{
-            		if(loadingStatus==true){
-
+            var page_number =$(".page_number").last().text()
+            if(dbHiht - windowHeight <= scrollPos && page_number!="没有更多文章了"){
+            	if(loadingStatus==true){
             			return false;
-            		}
-            		loadingStatus=true;
-            		getNextTimes = parseInt($(".page_number").last().text()) + 1;
-            		setTimeout(function(){
-
-            			$.ajax({
-            				type: "GET",
-            				url: "?page="+getNextTimes,
-            				dataType: "html",
-            				beforeSend: function(XMLHttpRequest){
-            					$(".loader1").removeClass('hide').addClass('show');
-            				},
-            				success: function(data){
-            					$(".plan_list ul").append(data);
-            				},
-            				error: function(data, status, e){
-            					console.log(data);
-            				},
-            				complete:function(XMLHttpRequest){
-            					loadingStatus = false;
-            					$(".loader1").removeClass('show').addClass('hide');
-            				}
-            			});
-            		},100);
             	}
+            	loadingStatus=true;
+            	getNextTimes = parseInt(page_number) + 1;
+            	setTimeout(function(){
+
+            	$.ajax({
+            			type: "GET",
+            			url: "?page="+getNextTimes,
+            			dataType: "html",
+            			beforeSend: function(XMLHttpRequest){
+            				$(".loader1").removeClass('hide').addClass('show');
+            			},
+            			success: function(data){
+            				$(".plan_list ul").append(data);
+            			},
+            			error: function(data, status, e){
+            				console.log(data);
+            			},
+            			complete:function(XMLHttpRequest){
+            				loadingStatus = false;
+            			$(".loader1").removeClass('show').addClass('hide');
+            			}
+            		});
+            	},100);
             }
+            
         });
         // 窗口滑动加载 end
         // 发表计划 start
@@ -60,16 +51,15 @@
             				},
             				success: function(data){
             					if(data.status=="success"){
-            						alert("success");
+            						alert("发表成功");
             						location.reload();
             					}
             					else{
-            						alert(data.messages);
+            						$("#plan_form_error").text(data.messages);
             					}
-            					
             				},
             				error: function(data, status, e){
-            					console.log(data);
+            					$("#plan_form_error").text(data);
             				},
             				complete:function(XMLHttpRequest){
             					loadingStatus = false;

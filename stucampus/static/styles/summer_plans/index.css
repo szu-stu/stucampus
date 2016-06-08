@@ -27,7 +27,16 @@ body{
 {
 	font-size: 1.3em;
 	overflow: hidden;
+	color: #08c;
 	
+}
+.plan_list .plan_li .tip
+{
+	text-align: center;
+}
+.pull-right a
+{
+	margin-right: 1.5em;
 }
 .navbar{
 	position: fixed;
@@ -55,6 +64,10 @@ header .logo
 	height: 1.7rem;
     width: 1.7rem;
 }
+header .theme_title
+{
+	vertical-align: middle;
+}
 header .loadding_box
 {
 	position: fixed;
@@ -79,11 +92,17 @@ header .loadding_box
 	padding:5px 20px ;
 	word-break:break-word;
 }
-.modal_form_box input,.modal_form_box textarea
+#plan_form input,#plan_form textarea
 {
 	width: 95%;
+	margin: 0 auto;
 }
  
 .page_number{
 	display: none;
+}
+
+#plan_form_error
+{
+	color: red;
 }

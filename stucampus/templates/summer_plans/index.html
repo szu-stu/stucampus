@@ -16,29 +16,50 @@
 </head>
 <body>
 	<!-- 发表暑假计划的form Modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="form_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">发布你的暑假计划</h3>
+			<h4 id="myModalLabel">发布你的暑假计划</h3>
 		</div>
 		<div class="modal-body">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 modal_form_box">
+			<p id="plan_form_error"></p>
 			<form id="plan_form">
-				{% csrf_token %}
-				{{form.as_p}}
+			{% csrf_token %}
+			<p><label for="id_content">计划:</label> <textarea class="form-control" cols="40" id="id_content" name="content" placeholder="写下你的计划吧" rows="10"></textarea></p>
+			<p><label for="id_email">邮箱:</label> <input class="form-control" id="id_email" name="email" placeholder="在暑假过后，我们将通过邮箱提醒您" type="email"></p>
 			</form>
-				
-			</div>
-		</div>
-			
+						
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-			<button class="btn btn-primary" id="submit_plan_form">Save changes</button>
+			<button class="btn btn-primary" id="submit_plan_form">Save</button>
 		</div>
 	</div>
 	<!-- 发表暑假计划的form  Modal end-->
+
+	<!-- 搜索（Modal） start -->
+	<div id="search" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h4 id="myModalLabel">搜索</h3>
+		</div>
+		<form id="search_form" action="{% url 'summer_plans:search' %}?plan_category={{plan_category.english_name}}" method="GET">
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 modal_form_box">
+					
+						<input type="text" name="q" placeholder="可模糊搜索发布内容，姓名，学院">
+					
+				</div>
+			</div>	
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+			<button class="btn btn-primary" id="submit_search_form" type="submit">search</button>
+		</div>
+		</form>
+	</div>
+<!-- /搜索.modal end-->
 
 	<main class="container">
 		<div >
@@ -59,17 +80,26 @@
 						</span>	
 						<!-- ajax全局加载 end-->
 						<span class="pull-right">
-							<a href="#myModal" class="form_modal_btn" role="button" class="btn" data-toggle="modal">发布暑假计划</a>
-							<a href="{% url 'summer_plans:add_plan' %}">登录</a>
+						<a href="#search" data-toggle="modal"><i class="icon-search"></i> </a>
+						{% if request.session.szu_no %}
+						<a href="#form_modal" class="form_modal_btn" role="button" class="btn" data-toggle="modal"><i class="icon-comment"></i></a>
+						{% else %}
+						<a href="{% url 'summer_plans:add_plan' %}?plan_category=1">登录</a>
+						{% endif %}	
 						</span>
 					</div>
 					
 				</header>
 				<div class="plan_list">
 					<ul>
+						{% if not plan_list %}
+						<li class="plan_li">
+							<p class="tip">没有相关信息</p>
+						</li>
+						{% endif %}
 						{% for plan in plan_list %}
 						<li class="plan_li">
-							<p class="plan_author"><a href="#">{{ plan.author.szu_name }}</a></p>
+							<p class="plan_author">{{ plan.author.szu_name }}</p>
 							<p class="plan_content">{{ plan.content }}</p>
 							<div class="function_wrapper">
 								<span class="create_time">{{ plan.create_date }}</span>

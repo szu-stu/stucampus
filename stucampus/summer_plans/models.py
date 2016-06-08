@@ -1,4 +1,6 @@
 #-*- coding: utf-8
+#@author:jimczj
+#@email:jimczj@gmail.com
 from __future__ import unicode_literals
 
 from django.db import models
@@ -29,10 +31,17 @@ class Plan(models.Model):
     category = models.ForeignKey(PlanCategory, null=False)
     author = models.ForeignKey(User,null=False,related_name="author")
     content = models.CharField(verbose_name=u'内容',max_length=1000)
-    click_count = models.IntegerField(default=0, editable=False)
+    like_count = models.IntegerField(default=0, editable=False)
     deleted = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now_add=True,editable=True)
     like_persons = models.ManyToManyField(User,blank=True,related_name="like_persons")
+
+    def save(self, *args, **kwargs):
+        '''
+            计算点赞个数，可以用此排序
+        '''
+        self.like_count = len(self.like_persons.all())
+        super(Plan, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.content
