@@ -47,10 +47,7 @@ STATICFILES_DIRS = (
     path('stucampus', 'static'),
 )
 
-#七牛的配置,如果开启，ImageField和FileField上传的图片不会保存在本地，会自动上传到七牛
 
-#DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuMediaStorage'
-#STATICFILES_STORAGE  = 'qiniustorage.backends.QiniuStaticStorage'
 
 QINIU_ACCESS_KEY = '4JBSsVDFK80Vu6c3f36AtEYl-5wadK-ZoWb-os5w'
 QINIU_SECRET_KEY = 'F8bNfqtPKrlgswQfCqaKGsftm8ZCE12r5ySTsEXJ'
@@ -180,5 +177,16 @@ LOGGING = {
         },
     }
 }
+SESSION_EXPIRE_AT_BROWSER_CLOSE=False
+SESSION_COOKIE_AGE=16538400 #半年 
+# django 发送邮件配置，用于summer_plans
+EMAIL_HOST=u'smtp.aliyun.com'
+EMAIL_HOST_USER=u'szudatalab@aliyun.com'
+EMAIL_HOST_PASSWORD=u'szudatalab01'
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL=EMAIL_HOST_USER
+EMAIL_PORT = 25
+EMAIL_SUBJECT_PREFIX = u'[深圳大学学子天地]'
+DEFAULT_CHARSET="utf-8"
 
 DUOSHUO_SHORT_NAME="szustu" #多说二级域名

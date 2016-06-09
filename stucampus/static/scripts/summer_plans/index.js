@@ -1,5 +1,26 @@
 ;(function($)
 {
+	function UrlUpdateParams(name, value) {
+		var r = window.location.href;
+		var url = window.location.href;
+		if (r != null && r != 'undefined' && r != "") {
+			value = encodeURIComponent(value);
+			var reg = new RegExp("(^|)" + name + "=([^&]*)(|$)");
+			var tmp = name + "=" + value;
+			if (url.match(reg) != null) {
+				r = url.replace(eval(reg), tmp);
+			}
+			else {
+				if (url.match("[\?]")) {
+					r = url + "&" + tmp;
+				} else {
+					r = url + "?" + tmp;
+				}
+			}
+		}
+		return r;
+	}
+
 	// 窗口滑动加载 start
 	var loadingStatus = false;
 	$(window).scroll(function(){
@@ -7,7 +28,7 @@
             var windowHeight = $(window).height(); //窗口的高度
             var dbHiht = $(document).height(); //整个页面文件的高度
             var page_number =$(".page_number").last().text()
-            if(dbHiht - windowHeight <= scrollPos && page_number!="没有更多文章了"){
+            if(dbHiht - windowHeight <= scrollPos && page_number!="没有更多了"){
             	if(loadingStatus==true){
             			return false;
             	}
@@ -17,7 +38,7 @@
 
             	$.ajax({
             			type: "GET",
-            			url: "?page="+getNextTimes,
+            			url: UrlUpdateParams("page",getNextTimes),
             			dataType: "html",
             			beforeSend: function(XMLHttpRequest){
             				$(".loader1").removeClass('hide').addClass('show');
@@ -26,7 +47,7 @@
             				$(".plan_list ul").append(data);
             			},
             			error: function(data, status, e){
-            				console.log(data);
+            				alert("出现错误，请联系qq：649743466");
             			},
             			complete:function(XMLHttpRequest){
             				loadingStatus = false;
@@ -41,14 +62,12 @@
         // 发表计划 start
         $("#submit_plan_form").click(
         	function(){
+        		var url=$("#submit_plan_form").data("url");
         		$.ajax({
             				type: "POST",
-            				url: "/summer_plans/add_plan/",
+            				url: url,
             				data:$("#plan_form").serialize(),
             				dataType: "json",
-            				beforeSend: function(XMLHttpRequest){
-            					$(".loader3").removeClass('hide').addClass('show');
-            				},
             				success: function(data){
             					if(data.status=="success"){
             						alert("发表成功");
@@ -59,7 +78,7 @@
             					}
             				},
             				error: function(data, status, e){
-            					$("#plan_form_error").text(data);
+            					$("#plan_form_error").text("出现错误，请联系qq：649743466");
             				},
             				complete:function(XMLHttpRequest){
             					loadingStatus = false;
@@ -71,17 +90,15 @@
 
 // 点赞功能 start
         $(".plan_list").delegate('.like_btn','click',function(){
-        	var plan_id = $(this).data('plan_id');
-        	console.log(plan_id);
+        	var url = $(this).data('url');
+        	var plan_id = $(this).data('plan_id')
         	$.ajax({
             				type: "GET",
-            				url: "/summer_plans/like/"+"?plan_id="+plan_id,
+            				url: url,
             				dataType: "json",
-            				beforeSend: function(XMLHttpRequest){
-            					$(".loader3").removeClass('hide').addClass('show');
-            				},
             				success: function(data){
             					if(data.status=="success"){
+            						// 处理人名
             						if (data.like_persons.length==0){
             							$('#like_persons_wrapper'+plan_id).addClass('hide');//人数为空就隐藏
             						}
@@ -89,11 +106,29 @@
             						{
             							$('#like_persons_wrapper'+plan_id).removeClass('hide');
             							var like_person_str="";
-            							for (var i=0;i<data.like_persons.length;i++){
+            							var i=0;
+            							for (i=0;i<data.like_persons.length-1;i++){
             								like_person_str+=data.like_persons[i].szu_name+",";
             							}
+            							like_person_str+=data.like_persons[i].szu_name;
             							$("#like_persons"+plan_id).text(like_person_str);
 
+            						}
+            						//处理szu_no，判断是否点赞
+            						var szu_no_str="";
+            						for (var i=0;i<data.like_persons.length;i++){
+            								szu_no_str+=data.like_persons[i].szu_no+",";
+            								console.log(data.like_persons[i].szu_no);
+
+            							}
+            						var user_id = $("#user_id").text()
+            						if (szu_no_str.indexOf(user_id)>=0)
+            						{
+            							$("#liked_tip"+plan_id).removeClass("hide");
+            						}
+            						else
+            						{	
+            							$("#liked_tip"+plan_id).addClass("hide");
             						}
             						
             					}
@@ -103,7 +138,7 @@
             					
             				},
             				error: function(data, status, e){
-            					console.log(data);
+            					alert("您需要登录才能点赞，如果登录完还不能点赞，请联系qq：649743466")
             				},
             				complete:function(XMLHttpRequest){
             					loadingStatus = false;
@@ -113,6 +148,40 @@
         	
         });
         // 点赞功能 end
+
+        // 发表感想 start
+        $(".plan_list").delegate('.post_thought','click',function(){
+        	var url = $(this).data('url');
+        	$("#submit_thought_form").data("url",url);
+        	$('#thought_modal').modal('show');
+        });
+
+        $("#submit_thought_form").click(function(){
+        	var url = $(this).data('url');
+        	console.log(url);
+        	$.ajax({
+            				type: "POST",
+            				url: url,
+            				dataType: "json",
+            				data:$("#thought_form").serialize(),
+            				success: function(data){
+            					if(data.status=="success"){
+            						alert("发表成功");
+            						location.reload();
+            					}
+            					else{
+            						$("#thought_form_error").text(data.messages);
+            					}
+            					
+            				},
+            				error: function(data, status, e){
+            					$("#thought_form_error").text("出现错误，请联系qq：649743466");
+            					console.log(data);
+            				},
+            			});
+        });
+
+        // 发表感想 end
         
 
     })(jQuery);

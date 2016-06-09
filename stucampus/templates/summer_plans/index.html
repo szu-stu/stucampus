@@ -2,9 +2,11 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>我的暑假计划</title>
+	<title>{{ plan_category.name }}【深大学子天地】</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link href="/static/images/stulogo.png" type="image/x-icon" rel="shortcut icon" />
 	{% load html_tools %}
+	{% load date_tools %}<!-- #用于算出距离现在的时间间隔-->
 	<link rel="stylesheet" href="/static/scripts/plugins/bootstrap2.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/static/scripts/plugins/bootstrap2.3.2/css/bootstrap-responsive.css">
 	<!-- 加载动画库 start -->
@@ -15,6 +17,7 @@
 
 </head>
 <body>
+	<div id="user_id" class="hide">{{request.session.szu_no}}</div>
 	<!-- 发表暑假计划的form Modal -->
 	<div id="form_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
@@ -32,7 +35,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-			<button class="btn btn-primary" id="submit_plan_form">Save</button>
+			<button class="btn btn-primary" data-url="{% url 'summer_plans:add_plan' plan_category.english_name %}" id="submit_plan_form">Save</button>
 		</div>
 	</div>
 	<!-- 发表暑假计划的form  Modal end-->
@@ -43,12 +46,12 @@
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			<h4 id="myModalLabel">搜索</h3>
 		</div>
-		<form id="search_form" action="{% url 'summer_plans:search' %}?plan_category={{plan_category.english_name}}" method="GET">
+		<form id="search_form" action="{% url 'summer_plans:search' plan_category.english_name %}" method="GET">
 		<div class="modal-body">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 modal_form_box">
 					
-						<input type="text" name="q" placeholder="可模糊搜索发布内容，姓名，学院">
+						<input id="search_input" type="text" name="q" placeholder="可模糊搜索发布内容，姓名，学院">
 					
 				</div>
 			</div>	
@@ -60,32 +63,88 @@
 		</form>
 	</div>
 <!-- /搜索.modal end-->
-
+<!-- 感悟 modal 由函数调用 start -->
+	<div id="thought_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="thought" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h4 id="thought">写下你的感悟</h3>
+		</div>
+		
+		<div class="modal-body">
+			<div class="row">
+				<form id="thought_form">
+					{% csrf_token %}
+					<p id="thought_form_error"></p>
+					<div class="col-xs-12 col-sm-12 modal_form_box">
+						<p>
+							<label for="id_thought">感悟:</label>
+							 <textarea class="form-control" cols="40" id="id_thought" name="thought" placeholder="写下你的感悟" rows="10"></textarea>
+						</p>			
+					</div>
+				</form>
+			</div>	
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+			<button class="btn btn-primary" data-url="" id="submit_thought_form" >Save</button>
+		</div>
+		
+	</div>
+<!-- 感悟.modal end-->
 	<main class="container">
 		<div >
 			<div class="col-lg-12 col-sm-12 ">
-				<header>	
+				<header class="clearfix">	
 					<div class="navbar clearfix">
 						<span class="pull-left">
-							<span class="logo">
+							<a href="/" class="logo">
 								<img src="/static/images/stucampus_logo.png" alt="szulogo">
-							</span>
-							<span class="theme_title">暑假计划</span>
+							</a>
+							<a href="{% url 'summer_plans:list' plan_category.english_name %}" class="theme_title">{{ plan_category.name }}</a>
 						</span>	
-						<!-- ajax全局加载 start-->
-						<span class="loadding_box hide">
-							<div class="loader3">
-								<i></i>
-							</div>
-						</span>	
-						<!-- ajax全局加载 end-->
-						<span class="pull-right">
-						<a href="#search" data-toggle="modal"><i class="icon-search"></i> </a>
-						{% if request.session.szu_no %}
-						<a href="#form_modal" class="form_modal_btn" role="button" class="btn" data-toggle="modal"><i class="icon-comment"></i></a>
-						{% else %}
-						<a href="{% url 'summer_plans:add_plan' %}?plan_category=1">登录</a>
-						{% endif %}	
+						<span class="pull-right right_box">
+						<a href="#search" data-toggle="modal" class="function_btn"><i class="icon-search my_icon"></i> </a>
+						<!-- 下拉框 start-->
+						<i class="icon-align-justify my_icon function_btn" id="dropdownMenu" data-toggle="dropdown"></i>
+						<!-- 下拉按钮 -->
+						<ul class="dropdown-menu pull-right" role="menu" 
+						aria-labelledby="dropdownMenu">
+							{% if not request.session.szu_no %}
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:add_plan' plan_category.english_name %}"><i class="icon-upload"></i> 登录</a>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:like_ranking_list' plan_category.english_name %}">
+									<i class="icon-hand-up"></i>点赞排行
+									</a>
+								</li>
+							</li>
+							{% else %}
+							<li role="presentation">
+								<a href="#form_modal" class="form_modal_btn" tabindex="-1" role="button" class="btn" data-toggle="modal"><i class="icon-edit"></i> 发表计划
+								</a>
+							</li>
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:self_plan' plan_category.english_name request.session.szu_no %}"><i class="icon-user"></i> 我的计划</a>
+							</li>
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:like_ranking_list' plan_category.english_name %}">
+									<i class="icon-hand-up"></i>点赞排行
+								</a>
+							</li>
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:logout' plan_category.english_name %}"><i class="icon-off"></i> 登出</a>
+							</li>
+							{% endif %}
+							{% if perms.summer_plans.send_email %}
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:senf_email_to_plan_author' plan_category.english_name %}"><i class="icon-envelope"></i> 发送邮件通知</a>
+							</li>
+							{% endif %}
+							
+							
+
+						</ul>
+						<!-- 下拉框 end-->
 						</span>
 					</div>
 					
@@ -101,14 +160,32 @@
 						<li class="plan_li">
 							<p class="plan_author">{{ plan.author.szu_name }}</p>
 							<p class="plan_content">{{ plan.content }}</p>
+							{% if plan.thought %} 
+							<p class="plan_thought_box">
+								<p class="thought_title">暑假过后:</p>
+								<p class="plan_thought">{{ plan.thought }}</p>
+							</p>
+							{% endif %}
 							<div class="function_wrapper">
-								<span class="create_time">{{ plan.create_date }}</span>
-								<span class="icon-thumbs-up like_btn" data-plan_id="{{plan.pk}}"></span>
+								<span class="create_time">{{ plan.create_date |from_now }}</span>
+								<span>from: {{ plan.author.szu_org_name }}</span>
+								{% ifequal plan.author.szu_no request.session.szu_no %}
+								<a class="delete_btn" href="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
+								{% endifequal %}
+								<p class="right_box">
+									{% if plan_category.tip_time|time_to_on and plan.author.szu_no == request.session.szu_no %}
+									<a class="post_thought" href="javascript:void(0);" data-url="{% url 'summer_plans:post_thought' plan_category.english_name plan.pk %}">发表感想</a>
+
+									{% endif %}
+									<span id="liked_tip{{plan.pk}}" class="liked_tip {% if request.session.szu_no not in plan.like_persons.all|show_szu_no %} hide {% endif %}">已赞</span>
+									
+									<span class="icon-thumbs-up like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"></span>
+								</p>
 							</div>
 							
 							<div class="like_persons_wrapper {% if not plan.like_persons.all %} hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
 								<img src="/static/images/summer_plan/l.png" alt="love" width="15px" height="15px;">
-								<span class="like_persons" id="like_persons{{plan.pk}}">{% for person in plan.like_persons.all %}{{ person.szu_name }},{% endfor %}</span>
+								<span class="like_persons" id="like_persons{{plan.pk}}">{{ plan.like_persons.all|show_name }}</span>
 							</div>
 							
 						</li>
@@ -118,7 +195,7 @@
 						{% if plan_list.has_next %}
 						<div class="page_number">{{ plan_list.number }}</div>
 						{% else %}
-						<div class="page_number">没有更多文章了</div>
+						<div class="page_number no_more_tip">没有更多了</div>
 						{% endif %} 
  						
 					</ul>
@@ -132,5 +209,16 @@
 	{{ 'plugins/jquery.min.js' | as_js }}
 	{{ 'plugins/bootstrap2.3.2/js/bootstrap.min.js' | as_js }}
 	{{ 'summer_plans/index.js' | as_js }}
+	<!-- 百度统计start -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4d0c962b688eb374c3f0a499db3087a4";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- 百度统计end -->
 </body>
 </html>
