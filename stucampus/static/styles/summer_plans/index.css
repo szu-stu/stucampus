@@ -20,7 +20,7 @@ body{
 .plan_list li
 {
 	padding: 10px;
-	border-bottom: 3px solid #eeeeee;
+	border-bottom: 2px solid #eeeeee;
 	text-align: left;
 }
 .plan_list li .plan_author
@@ -34,9 +34,14 @@ body{
 {
 	text-align: center;
 }
+.visi_hide
+{
+	visibility:hidden;
+}
 .right_box .function_btn
 {
 	margin-right: 1.5em;
+	padding: 10px 5px;
 }
 .my_icon
 {
@@ -98,20 +103,26 @@ header .navbar span
 	word-break:break-word;
 	vertical-align: middle;
 }
+.author_szu_org,.create_time,.liked_tip 
+{
+	font-size: 0.8em;
+	color: #7B7676;
+}
+
 .function_wrapper{
 	font-size: 0.8em;
 	overflow: hidden;
 	zoom:1;
-}
-.function_wrapper span
-{
-	margin-right: 0.5em;
 }
 
 .function_wrapper .right_box 
 {
 	text-align: right;
 
+}
+.function_wrapper .right_box .like_btn
+{
+	padding: 5px 10px;
 }
 .function_wrapper .right_box span,.function_wrapper .right_box a
 {
@@ -120,6 +131,7 @@ header .navbar span
 
 .plan_content{
 	padding:5px 20px ;
+	font-size: 1.1em;
 	word-break:break-word;
 }
 .plan_thought_box
@@ -163,4 +175,14 @@ header .navbar span
 {
 	width: 95%;
 	margin: 0 auto;
+}
+
+.dropdown-menu i,.dropdown-menu a
+{
+	text-align: left;
+	vertical-align: top;
+}
+.dropdown-menu i
+{
+	margin-right: 0.2em;
 }

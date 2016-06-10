@@ -71,6 +71,7 @@
             				success: function(data){
             					if(data.status=="success"){
             						alert("发表成功");
+                                    $('#form_modal').modal('hide');
             						location.reload();
             					}
             					else{
@@ -100,11 +101,11 @@
             					if(data.status=="success"){
             						// 处理人名
             						if (data.like_persons.length==0){
-            							$('#like_persons_wrapper'+plan_id).addClass('hide');//人数为空就隐藏
+            							$('#like_persons_wrapper'+plan_id).addClass('visi_hide');//人数为空就隐藏
             						}
             						else
             						{
-            							$('#like_persons_wrapper'+plan_id).removeClass('hide');
+            							$('#like_persons_wrapper'+plan_id).removeClass('visi_hide');
             							var like_person_str="";
             							var i=0;
             							for (i=0;i<data.like_persons.length-1;i++){
@@ -124,11 +125,11 @@
             						var user_id = $("#user_id").text()
             						if (szu_no_str.indexOf(user_id)>=0)
             						{
-            							$("#liked_tip"+plan_id).removeClass("hide");
+            							$("#liked_tip"+plan_id).removeClass("visi_hide");
             						}
             						else
             						{	
-            							$("#liked_tip"+plan_id).addClass("hide");
+            							$("#liked_tip"+plan_id).addClass("visi_hide");
             						}
             						
             					}
@@ -142,7 +143,7 @@
             				},
             				complete:function(XMLHttpRequest){
             					loadingStatus = false;
-            					$(".loader3").removeClass('show').addClass('hide');
+            					$(".loader3").removeClass('show').addClass('visi_hide');
             				}
             			});
         	
@@ -167,6 +168,7 @@
             				success: function(data){
             					if(data.status=="success"){
             						alert("发表成功");
+                                    $('#thought_modal').modal('hide');
             						location.reload();
             					}
             					else{

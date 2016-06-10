@@ -22,13 +22,13 @@
 	<div id="form_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h4 id="myModalLabel">发布你的暑假计划</h3>
+			<h4 id="myModalLabel">发布你的{{ plan_category.name }}</h3>
 		</div>
 		<div class="modal-body">
 			<p id="plan_form_error"></p>
 			<form id="plan_form">
 			{% csrf_token %}
-			<p><label for="id_content">计划:</label> <textarea class="form-control" cols="40" id="id_content" name="content" placeholder="写下你的计划吧" rows="10"></textarea></p>
+			<p><label for="id_content">计划:</label> <textarea class="form-control" cols="40" id="id_content" name="content" placeholder="写下你的计划吧" rows="3"></textarea></p>
 			<p><label for="id_email">邮箱:</label> <input class="form-control" id="id_email" name="email" placeholder="在暑假过后，我们将通过邮箱提醒您" type="email"></p>
 			</form>
 						
@@ -47,15 +47,11 @@
 			<h4 id="myModalLabel">搜索</h3>
 		</div>
 		<form id="search_form" action="{% url 'summer_plans:search' plan_category.english_name %}" method="GET">
-		<div class="modal-body">
-			<div class="row">
+			<div class="modal-body">
 				<div class="col-xs-12 col-sm-12 modal_form_box">
-					
-						<input id="search_input" type="text" name="q" placeholder="可模糊搜索发布内容，姓名，学院">
-					
+					<input id="search_input" type="text" name="q" placeholder="可模糊搜索发布内容，姓名，学院">
 				</div>
-			</div>	
-		</div>
+			</div>
 		<div class="modal-footer">
 			<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 			<button class="btn btn-primary" id="submit_search_form" type="submit">search</button>
@@ -105,7 +101,9 @@
 						<span class="pull-right right_box">
 						<a href="#search" data-toggle="modal" class="function_btn"><i class="icon-search my_icon"></i> </a>
 						<!-- 下拉框 start-->
-						<i class="icon-align-justify my_icon function_btn" id="dropdownMenu" data-toggle="dropdown"></i>
+						<a id="dropdownMenu"  class="function_btn" data-toggle="dropdown">
+							<i class="icon-align-justify my_icon" ></i>
+						</a>
 						<!-- 下拉按钮 -->
 						<ul class="dropdown-menu pull-right" role="menu" 
 						aria-labelledby="dropdownMenu">
@@ -159,6 +157,7 @@
 						{% for plan in plan_list %}
 						<li class="plan_li">
 							<p class="plan_author">{{ plan.author.szu_name }}</p>
+							<span class="author_szu_org">from: {{ plan.author.szu_org_name }}</span>
 							<p class="plan_content">{{ plan.content }}</p>
 							{% if plan.thought %} 
 							<p class="plan_thought_box">
@@ -168,22 +167,21 @@
 							{% endif %}
 							<div class="function_wrapper">
 								<span class="create_time">{{ plan.create_date |from_now }}</span>
-								<span>from: {{ plan.author.szu_org_name }}</span>
 								{% ifequal plan.author.szu_no request.session.szu_no %}
 								<a class="delete_btn" href="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
 								{% endifequal %}
-								<p class="right_box">
+								<span class="right_box pull-right">
 									{% if plan_category.tip_time|time_to_on and plan.author.szu_no == request.session.szu_no %}
 									<a class="post_thought" href="javascript:void(0);" data-url="{% url 'summer_plans:post_thought' plan_category.english_name plan.pk %}">发表感想</a>
 
 									{% endif %}
-									<span id="liked_tip{{plan.pk}}" class="liked_tip {% if request.session.szu_no not in plan.like_persons.all|show_szu_no %} hide {% endif %}">已赞</span>
+									<span id="liked_tip{{plan.pk}}" class="liked_tip {% if request.session.szu_no not in plan.like_persons.all|show_szu_no %} visi_hide {% endif %}">已赞</span>
 									
-									<span class="icon-thumbs-up like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"></span>
-								</p>
+									<span class="like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"><i class="icon-thumbs-up"></i></span>
+								</span>
 							</div>
 							
-							<div class="like_persons_wrapper {% if not plan.like_persons.all %} hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
+							<div class="like_persons_wrapper {% if not plan.like_persons.all %} visi_hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
 								<img src="/static/images/summer_plan/l.png" alt="love" width="15px" height="15px;">
 								<span class="like_persons" id="like_persons{{plan.pk}}">{{ plan.like_persons.all|show_name }}</span>
 							</div>

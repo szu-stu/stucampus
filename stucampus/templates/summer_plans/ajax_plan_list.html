@@ -2,6 +2,7 @@
 {% for plan in plan_list %}
 <li class="plan_li">
 	<p class="plan_author">{{ plan.author.szu_name }}</p>
+	<span class="author_szu_org">from: {{ plan.author.szu_org_name }}</span>
 	<p class="plan_content">{{ plan.content }}</p>
 	{% if plan.thought %} 
 	<p class="plan_thought_box">
@@ -11,22 +12,21 @@
 	{% endif %}
 	<div class="function_wrapper">
 		<span class="create_time">{{ plan.create_date |from_now }}</span>
-		<span>from: {{ plan.author.szu_org_name }}</span>
 		{% ifequal plan.author.szu_no request.session.szu_no %}
 		<a class="delete_btn" href="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
 		{% endifequal %}
-		<p class="right_box">
+		<span class="right_box pull-right">
 			{% if plan_category.tip_time|time_to_on and plan.author.szu_no == request.session.szu_no %}
 			<a class="post_thought" href="javascript:void(0);" data-url="{% url 'summer_plans:post_thought' plan_category.english_name plan.pk %}">发表感想</a>
 
 			{% endif %}
-			<span id="liked_tip{{plan.pk}}" class="liked_tip {% if request.session.szu_no not in plan.like_persons.all|show_szu_no %} hide {% endif %}">已赞</span>
+			<span id="liked_tip{{plan.pk}}" class="liked_tip {% if request.session.szu_no not in plan.like_persons.all|show_szu_no %} visi_hide {% endif %}">已赞</span>
 			
-			<span class="icon-thumbs-up like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"></span>
-		</p>
+			<span class="like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"><i class="icon-thumbs-up"></i></span>
+		</span>
 	</div>
 	
-	<div class="like_persons_wrapper {% if not plan.like_persons.all %} hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
+	<div class="like_persons_wrapper {% if not plan.like_persons.all %} visi_hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
 		<img src="/static/images/summer_plan/l.png" alt="love" width="15px" height="15px;">
 		<span class="like_persons" id="like_persons{{plan.pk}}">{{ plan.like_persons.all|show_name }}</span>
 	</div>
