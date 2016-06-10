@@ -48,6 +48,16 @@ def show_szu_no(person_list):
     
     return [person.szu_no for person in person_list] 
 
+@register.filter(name='show_last_name')
+def show_last_name(name):
+    '''
+        显示人物名字最后一个字
+    '''
+    
+    return name[-1:]
+
+
+
 
     
 

@@ -41,7 +41,7 @@
             			url: UrlUpdateParams("page",getNextTimes),
             			dataType: "html",
             			beforeSend: function(XMLHttpRequest){
-            				$(".loader1").removeClass('hide').addClass('show');
+            				$("#loading_plan_list").removeClass('hide').addClass('show');
             			},
             			success: function(data){
             				$(".plan_list ul").append(data);
@@ -51,7 +51,7 @@
             			},
             			complete:function(XMLHttpRequest){
             				loadingStatus = false;
-            			$(".loader1").removeClass('show').addClass('hide');
+            			$("#loading_plan_list").removeClass('show').addClass('hide');
             			}
             		});
             	},100);
@@ -72,7 +72,7 @@
             					if(data.status=="success"){
             						alert("发表成功");
                                     $('#form_modal').modal('hide');
-            						location.reload();
+                                    window.location=data.redirect_url;
             					}
             					else{
             						$("#plan_form_error").text(data.messages);
@@ -97,6 +97,9 @@
             				type: "GET",
             				url: url,
             				dataType: "json",
+                            beforeSend:function(){
+                                $("#like_loading"+plan_id).removeClass("visi_hide");
+                            },
             				success: function(data){
             					if(data.status=="success"){
             						// 处理人名
@@ -143,7 +146,7 @@
             				},
             				complete:function(XMLHttpRequest){
             					loadingStatus = false;
-            					$(".loader3").removeClass('show').addClass('visi_hide');
+            					$("#like_loading"+plan_id).addClass('visi_hide');
             				}
             			});
         	
@@ -184,6 +187,18 @@
         });
 
         // 发表感想 end
+
+        $("#id_is_anon").click(function(){
+            if ($(this).prop("checked")){
+                $("#alias_box").removeClass("visi_hide").focus();
+
+            }
+            else{
+                $("#alias_box").addClass("visi_hide");
+            }
+
+
+        });
         
 
     })(jQuery);

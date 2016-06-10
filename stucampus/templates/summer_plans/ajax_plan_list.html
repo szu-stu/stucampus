@@ -1,7 +1,12 @@
 {% load date_tools %}
 {% for plan in plan_list %}
 <li class="plan_li">
-	<p class="plan_author">{{ plan.author.szu_name }}</p>
+	{% if plan.author.is_anon %}
+	<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">匿</span><span class="author_name">{{ plan.author.alias }}</span></p>
+	{% else %}
+	<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">{{ plan.author.szu_name|show_last_name }}</span><span class="author_name">{{ plan.author.szu_name }}</span></p>
+	{% endif %}
+
 	<span class="author_szu_org">from: {{ plan.author.szu_org_name }}</span>
 	<p class="plan_content">{{ plan.content }}</p>
 	{% if plan.thought %} 
@@ -22,12 +27,14 @@
 			{% endif %}
 			<span id="liked_tip{{plan.pk}}" class="liked_tip {% if request.session.szu_no not in plan.like_persons.all|show_szu_no %} visi_hide {% endif %}">已赞</span>
 			
+			<img  class="loading visi_hide" id="like_loading{{plan.pk}}" src="/static/images/summer_plans/loading.gif" alt="loading">
+			
 			<span class="like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"><i class="icon-thumbs-up"></i></span>
 		</span>
 	</div>
 	
 	<div class="like_persons_wrapper {% if not plan.like_persons.all %} visi_hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
-		<img src="/static/images/summer_plan/l.png" alt="love" width="15px" height="15px;">
+		<img src="/static/images/summer_plans/l.png" alt="love" width="15px" height="15px;">
 		<span class="like_persons" id="like_persons{{plan.pk}}">{{ plan.like_persons.all|show_name }}</span>
 	</div>
 	

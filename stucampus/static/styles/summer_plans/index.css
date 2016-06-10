@@ -11,7 +11,7 @@ body{
 	position: relative;
 	background-color:#F8F8F8;
 	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 }
 .plan_list
 {
@@ -23,11 +23,27 @@ body{
 	border-bottom: 2px solid #eeeeee;
 	text-align: left;
 }
-.plan_list li .plan_author
+.plan_author .show_last_name
 {
-	font-size: 1.3em;
-	overflow: hidden;
+	width: 36px;
+	height: 36px;
+	border-radius: 36px;
+	-moz-border-radius: 36px; 
+	-webkit-border-radius: 36px; 
+	border-radius: 36px; 
+	font-size: 18px;
+	line-height: 36px;
+	display: inline-block;
+	box-sizing: content-box;
+	color: #fff;
+	text-align: center;
+	vertical-align: middle;
+}
+.plan_author .author_name
+{
+	margin-left: 1em;
 	color: #08c;
+	vertical-align: middle;
 	
 }
 .plan_list .plan_li .tip
@@ -40,7 +56,7 @@ body{
 }
 .right_box .function_btn
 {
-	margin-right: 1.5em;
+	margin-right: 1em;
 	padding: 10px 5px;
 }
 .my_icon
@@ -100,15 +116,20 @@ header .navbar span
 }
 .like_persons_wrapper .like_persons
 {
+	font-size: 0.8em;
 	word-break:break-word;
 	vertical-align: middle;
 }
-.author_szu_org,.create_time,.liked_tip 
+.author_szu_org,.create_time,.liked_tip ,.thought_title
 {
 	font-size: 0.8em;
 	color: #7B7676;
 }
-
+.modal-body p
+{
+	vertical-align: middle;
+	margin: 0;
+}
 .function_wrapper{
 	font-size: 0.8em;
 	overflow: hidden;
@@ -126,7 +147,8 @@ header .navbar span
 }
 .function_wrapper .right_box span,.function_wrapper .right_box a
 {
-	margin-right: 1.5em;
+	margin-right: 0.7em;
+	overflow: hidden;
 }
 
 .plan_content{
@@ -147,17 +169,40 @@ header .navbar span
 }
 .plan_thought_box .thought_title
 {
-	color: #272822;
 	margin-right: 0.7em;
 }
-#plan_form input,#plan_form textarea
+.form_p
 {
-	width: 95%;
-	margin: 0 auto;
+	text-align: center;
 }
- 
+.form_p label
+{
+	display: inline-block;
+	width: 15%;
+	vertical-align: middle;
+}
+.form_p input,.form_p textarea
+{
+	display: inline-block;
+	width: 70%;
+	text-align: left;
+}
+.form_inline
+{
+	text-align: center;
+}
+.form_inline input ,.form_inline label 
+{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
 .page_number{
 	display: none;
+}
+#search_form
+{
+	margin: 0;
 }
 
 #plan_form_error,#thought_form_error
@@ -171,12 +216,6 @@ header .navbar span
 	margin-top: 10px;
 	font-size: 1.1em;
 }
-#search_input
-{
-	width: 95%;
-	margin: 0 auto;
-}
-
 .dropdown-menu i,.dropdown-menu a
 {
 	text-align: left;
@@ -185,4 +224,14 @@ header .navbar span
 .dropdown-menu i
 {
 	margin-right: 0.2em;
+}
+#loading_plan_list
+{
+	text-align: center;
+	overflow: hidden;
+}
+.loading
+{
+	width: 25px;
+	height: 25px;
 }

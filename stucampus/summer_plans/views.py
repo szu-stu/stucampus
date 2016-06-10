@@ -15,7 +15,7 @@ from stucampus.account.permission import check_perms
 
 from login_szu import login_szu
 import datetime
-import time
+import time,random
 from itertools import chain
 
 
@@ -33,19 +33,35 @@ class AddPlan(View):
         if not form.is_valid():
             messages = form.errors.values()
             return spec_json(status='errors', messages=messages)
-        if User.objects.filter(szu_no=request.session['szu_no']).exclude(email=None).exists():#要考虑先点赞，后发表的情况
+        if User.objects.filter(szu_no=request.session['szu_no'],email=None).exclude().exists():
+            #用户存在,但是没有email
+            if not form.cleaned_data['email']:
+                return spec_json(status='errors', messages=u"email必填")
             author = get_object_or_404(User,szu_no=request.session['szu_no'])
-        elif User.objects.filter(szu_no=request.session['szu_no'],email=None).exists():
-            author = get_object_or_404(User,szu_no=request.session['szu_no'])
+            author.is_anon = form.cleaned_data['is_anon']
+            author.alias = form.cleaned_data['alias']
             author.email = form.cleaned_data['email']
             author.save()
+        elif User.objects.filter(szu_no=request.session['szu_no']).exclude(email=None).exists():
+            #用户存在,有email
+            author = get_object_or_404(User,szu_no=request.session['szu_no'])
+            author.is_anon = form.cleaned_data['is_anon']
+            author.alias = form.cleaned_data['alias']
+            author.email = form.cleaned_data['email'] if form.cleaned_data['email'] else author.email
+            author.save()
         else:
+            #用户不存在
+            if not form.cleaned_data['email']:
+                return spec_json(status='errors', messages=u"email必填")
             author = User(szu_no=request.session['szu_no'],
                         szu_name=request.session['szu_name'],
                         szu_ic=request.session['szu_ic'],
                         szu_org_name=request.session['szu_org_name'].split("/")[1],
                         szu_sex=request.session['szu_sex'],
-                        email=form.cleaned_data['email']
+                        email=form.cleaned_data['email'],
+                        is_anon = form.cleaned_data['is_anon'],
+                        alias = forms.cleaned_data['alias'],
+                        avatar_color=random.randint(1,5),
                         )
             author.save()
         plan_category = get_object_or_404(PlanCategory,english_name=category_english_name)
@@ -53,7 +69,7 @@ class AddPlan(View):
         plan.category = plan_category
         plan.author = author
         plan.save()
-        return spec_json(status='success')
+        return render_json({"status":"success","redirect_url":reverse('summer_plans:list',args=(category_english_name,))})
 
 @login_szu
 def like(request,category_english_name=None):
@@ -83,7 +99,8 @@ def search(request,category_english_name=None):
         return HttpResponseRedirect(reverse('summer_plans:list',args=(category_english_name,)))
     plan_category = get_object_or_404(PlanCategory,english_name=category_english_name,is_on=True)
     plan1 = Plan.objects.filter(Q(category=plan_category)&Q(content__icontains=q))
-    author_list = User.objects.filter(Q(szu_name__icontains=q)|Q(szu_org_name__icontains=q))
+    #查找不匿名的，或匿名按照昵称查找，或按照学院
+    author_list = User.objects.filter(Q(szu_name__icontains=q,is_anon=False)|Q(alias__icontains=q,is_anon=True)|Q(szu_org_name__icontains=q))
     plan_list=[]
     plan_list.extend(plan1)
     for author in author_list:          #将包含的作者的plan合并进来
@@ -91,7 +108,7 @@ def search(request,category_english_name=None):
         plan_list.extend(plan2)
     plan_list = set(plan_list)#去重
     plan_list =list(plan_list)
-    return return_plan_list(request,plan_list,plan_category)
+    return return_plan_list(request,plan_list,plan_category,title=u"【搜索结果】")
 
 def plan_list(request, category_english_name=None):
     plan_category = get_object_or_404(PlanCategory, english_name=category_english_name,is_on=True)
@@ -112,7 +129,7 @@ def self_plan(request,category_english_name,szu_no):
     plan_category = get_object_or_404(PlanCategory, english_name=category_english_name,is_on=True)
     author = get_object_or_404(User,szu_no=szu_no)
     plan_list = Plan.objects.filter(category=plan_category,author=author,deleted=False).order_by('-pk')
-    return return_plan_list(request,plan_list,plan_category)
+    return return_plan_list(request,plan_list,plan_category,title=u"【我的计划】")
 
 @login_szu
 def logout(request,category_english_name):
@@ -183,6 +200,8 @@ def get_user(request):
     '''
         工具函数 返回用户
     '''
+    if not request.session.get("szu_no"):
+        return None
     if User.objects.filter(szu_no=request.session['szu_no']).exists():#email
         author = get_object_or_404(User,szu_no=request.session['szu_no'])
     else:
@@ -190,13 +209,14 @@ def get_user(request):
                         szu_name=request.session['szu_name'],
                         szu_ic=request.session['szu_ic'],
                         szu_org_name=request.session['szu_org_name'].split("/")[1],
-                        szu_sex=request.session['szu_sex']
+                        szu_sex=request.session['szu_sex'],
+                        avatar_color=random.randint(1,5),
                         )
         author.save()
     return author
 
 
-def return_plan_list(request,plan_list,plan_category):
+def return_plan_list(request,plan_list,plan_category,title=""):
     '''
         工具函数 根据传来的list返回
     '''
@@ -206,6 +226,7 @@ def return_plan_list(request,plan_list,plan_category):
     except InvalidPage:
         plan_list = paginator.page(1)
     if not request.is_ajax():
-        return render(request, "summer_plans/index.html",{'plan_list':plan_list,'plan_category':plan_category})
+        user = get_user(request)
+        return render(request, "summer_plans/index.html",{'plan_list':plan_list,'plan_category':plan_category,'user':user,'title':title})
     else:
         return render(request, "summer_plans/ajax_plan_list.html",{'plan_list':plan_list,'plan_category':plan_category})
