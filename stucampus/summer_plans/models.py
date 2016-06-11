@@ -37,7 +37,7 @@ class PlanCategory(models.Model):
 class Plan(models.Model):
     category = models.ForeignKey(PlanCategory, null=False)
     author = models.ForeignKey(User,null=False,related_name="author")
-    content = models.CharField(verbose_name=u'内容',max_length=1000)
+    content = models.TextField(verbose_name=u'内容',max_length=1000)
     thought = models.CharField(verbose_name=u'感悟',max_length=1000,null=True,blank=True)
     like_count = models.IntegerField(default=0, editable=False)
     deleted = models.BooleanField(default=False)

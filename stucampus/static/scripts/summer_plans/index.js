@@ -1,5 +1,13 @@
 ;(function($)
 {
+
+    function error_tip(msg)
+    {
+        swal(
+            { title:"<small>"+msg+"</small>",text: "",type:"warning",timer: 3000,   showConfirmButton: true ,html: true}
+                                        
+        );
+    }
 	function UrlUpdateParams(name, value) {
 		var r = window.location.href;
 		var url = window.location.href;
@@ -47,7 +55,7 @@
             				$(".plan_list ul").append(data);
             			},
             			error: function(data, status, e){
-            				alert("出现错误，请联系qq：649743466");
+                            error_tip("出现错误，请联系qq：649743466!!");
             			},
             			complete:function(XMLHttpRequest){
             				loadingStatus = false;
@@ -70,16 +78,22 @@
             				dataType: "json",
             				success: function(data){
             					if(data.status=="success"){
-            						alert("发表成功");
-                                    $('#form_modal').modal('hide');
-                                    window.location=data.redirect_url;
+                                    swal(
+                                        { title:"<small>发表成功</small>",text: "",type:"success",timer: 1000,   showConfirmButton: false ,html:true},
+                                        function()
+                                        {
+                                            $('#form_modal').modal('hide');
+                                            window.location=data.redirect_url;
+                                        }
+                                    );
+                                    
             					}
             					else{
             						$("#plan_form_error").text(data.messages);
             					}
             				},
             				error: function(data, status, e){
-            					$("#plan_form_error").text("出现错误，请联系qq：649743466");
+                                error_tip("出现错误，请联系qq：649743466");
             				},
             				complete:function(XMLHttpRequest){
             					loadingStatus = false;
@@ -122,7 +136,6 @@
             						var szu_no_str="";
             						for (var i=0;i<data.like_persons.length;i++){
             								szu_no_str+=data.like_persons[i].szu_no+",";
-            								console.log(data.like_persons[i].szu_no);
 
             							}
             						var user_id = $("#user_id").text()
@@ -137,12 +150,12 @@
             						
             					}
             					else{
-            						alert(data.messages);
+            						error_tip(data.messages);
             					}
             					
             				},
             				error: function(data, status, e){
-            					alert("您需要登录才能点赞，如果登录完还不能点赞，请联系qq：649743466")
+                                error_tip("您需要登录才能点赞，如果登录完还不能点赞，请联系qq：649743466");
             				},
             				complete:function(XMLHttpRequest){
             					loadingStatus = false;
@@ -170,17 +183,23 @@
             				data:$("#thought_form").serialize(),
             				success: function(data){
             					if(data.status=="success"){
-            						alert("发表成功");
-                                    $('#thought_modal').modal('hide');
-            						location.reload();
+            						swal(
+                                        { title:"<small>发表成功</small>",text: "",type:"success",timer: 1000,   showConfirmButton: false ,html:true},
+                                        function()
+                                        {
+                                            $('#thought_modal').modal('hide');
+                                            location.reload();
+                                        }
+                                    );
+                                    
             					}
             					else{
-            						$("#thought_form_error").text(data.messages);
+            						error_tip(data.messages);
             					}
             					
             				},
             				error: function(data, status, e){
-            					$("#thought_form_error").text("出现错误，请联系qq：649743466");
+            					error_tip("出现错误，请联系qq：649743466");
             					console.log(data);
             				},
             			});
@@ -200,6 +219,37 @@
 
 
         });
+
+        //删除
+        $(".plan_list").delegate('.delete_btn','click',function(){
+            var url = $(this).data('url');
+            $.ajax({
+                            type: "GET",
+                            url: url,
+                            dataType: "json",
+                            success: function(data){
+                                if(data.status=="success"){
+                                    swal(
+                                        { title:"<small>删除成功</small>",text: "",type:"success",timer: 1000,   showConfirmButton: false ,html:true},
+                                        function()
+                                        {
+                                            window.location=data.redirect_url;
+                                        }
+                                    );
+                                    
+                                }
+                                else{
+                                    error_tip(data.messages);
+                                }
+                                
+                            },
+                            error: function(data, status, e){
+                                error_tip("出现错误，请联系qq：649743466");
+                                console.log(data);
+                            },
+                        });
+        });
+
         
 
     })(jQuery);

@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="/static/scripts/plugins/bootstrap2.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/static/scripts/plugins/bootstrap2.3.2/css/bootstrap-responsive.css">
 	{{ 'summer_plans/index.css' | as_css }}
+	{{ 'plugin/sweetalert/sweetalert.css' | as_css }}
 
 
 </head>
@@ -48,7 +49,7 @@
 			<div class="modal-body">
 				<p class="form_p">
 					<label for="search_input">搜索:</label>
-					<input id="search_input" type="text" required="required" name="q" placeholder="可模糊搜索发布内容，姓名或昵称，学院">
+					<input id="search_input" type="text" required="required" name="q" placeholder="搜索发布内容,姓名或昵称,学院">
 				</p>
 			</div>
 		<div class="modal-footer">
@@ -174,18 +175,18 @@
 							{% endif %}
 
 							<span class="author_szu_org">from: {{ plan.author.szu_org_name }}</span>
-							<p class="plan_content">{{ plan.content }}</p>
+							<div class="plan_content">{{ plan.content |linebreaks }}</div>
 							{% if plan.thought %} 
 							<p class="plan_thought_box">
 								<p class="thought_title">暑假过后:</p>
-								<p class="plan_thought">{{ plan.thought }}</p>
+								<div class="plan_thought">{{ plan.thought |linebreaks}}</div>
 							</p>
 							{% endif %}
 							<div class="function_wrapper clear-fixed">
 								<span class="pull-left">
 									<span class="create_time">{{ plan.create_date |from_now }}</span>
 									{% ifequal plan.author.szu_no request.session.szu_no %}
-									<a class="delete_btn" href="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
+									<a class="delete_btn" href="javascript:void(0);" data-url="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
 									{% endifequal %}
 								</span>
 								<span class="right_box pull-right">
@@ -226,6 +227,7 @@
 	</main>
 	{{ 'plugins/jquery.min.js' | as_js }}
 	{{ 'plugins/bootstrap2.3.2/js/bootstrap.min.js' | as_js }}
+	{{ 'plugins/sweetalert/sweetalert.min.js' | as_js }}
 	{{ 'summer_plans/index.js' | as_js }}
 	<!-- 百度统计start -->
 <script>

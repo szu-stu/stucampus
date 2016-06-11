@@ -53,6 +53,10 @@ h1,h2,h3,h4
 {
 	text-align: center;
 }
+#plan_form_error,#thought_form_error
+{
+	text-align: center;
+}
 .visi_hide
 {
 	visibility:hidden;

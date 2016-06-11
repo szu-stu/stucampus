@@ -151,7 +151,7 @@ def delete(request,category_english_name,id):
     plan = get_object_or_404(Plan, author=author,pk=id)
     plan.deleted = True
     plan.save()
-    return HttpResponseRedirect(reverse('summer_plans:list',args=(category_english_name,)))
+    return render_json({"status":"success","redirect_url":reverse('summer_plans:list',args=(category_english_name,))})
 
 @login_szu
 def post_thought(request,category_english_name,id):
