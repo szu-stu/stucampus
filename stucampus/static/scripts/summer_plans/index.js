@@ -41,7 +41,7 @@
             			url: UrlUpdateParams("page",getNextTimes),
             			dataType: "html",
             			beforeSend: function(XMLHttpRequest){
-            				$("#loading_plan_list").removeClass('hide').addClass('show');
+            				$("#loading_plan_list").removeClass('visi_hide');
             			},
             			success: function(data){
             				$(".plan_list ul").append(data);
@@ -51,7 +51,7 @@
             			},
             			complete:function(XMLHttpRequest){
             				loadingStatus = false;
-            			$("#loading_plan_list").removeClass('show').addClass('hide');
+                            $("#loading_plan_list").addClass('visi_hide');
             			}
             		});
             	},100);
