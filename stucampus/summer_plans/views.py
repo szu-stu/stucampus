@@ -128,7 +128,7 @@ def like_ranking_list(request, category_english_name=None):
     plan_category = get_object_or_404(PlanCategory, english_name=category_english_name,is_on=True)
     plan_list = Plan.objects.filter(category=plan_category,
                                           deleted=False).order_by('-like_count')
-    return return_plan_list(request,plan_list,plan_category)
+    return return_plan_list(request,plan_list,plan_category,title=u"【点赞排行】")
 
 def self_plan(request,category_english_name,szu_no):
     plan_category = get_object_or_404(PlanCategory, english_name=category_english_name,is_on=True)
