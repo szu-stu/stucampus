@@ -1,8 +1,8 @@
 {% load date_tools %}
 {% for plan in plan_list %}
 <li class="plan_li">
-	{% if plan.author.is_anon %}
-	<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">匿</span><span class="author_name">{{ plan.author.alias }}</span></p>
+	{% if plan.is_anon %}
+	<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">匿</span><span class="author_name">{{ plan.alias }}</span></p>
 	{% else %}
 	<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">{{ plan.author.szu_name|show_last_name }}</span><span class="author_name">{{ plan.author.szu_name }}</span></p>
 	{% endif %}

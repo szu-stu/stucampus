@@ -1,6 +1,6 @@
 from django.conf.urls import url, patterns
 
-from .views import AddPlan,like,search,plan_list,self_plan,delete,logout,post_thought,like_ranking_list,senf_email_to_plan_author
+from .views import AddPlan,like,search,plan_list,self_plan,delete,logout,post_thought,like_ranking_list,senf_email_to_plan_author,has_thought_plan_list
 
 
 urlpatterns = [
@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^(?P<category_english_name>\w*)/delete/(?P<id>\d*)/?$',delete,name='delete'),
     url(r'^(?P<category_english_name>\w*)/like_ranking_list/?$',like_ranking_list,name='like_ranking_list'),
     url(r'^(?P<category_english_name>\w*)/senf_email_to_plan_author/?$',senf_email_to_plan_author,name='senf_email_to_plan_author'),
+    url(r'^(?P<category_english_name>\w*)/has_thought_plan_list/?$',has_thought_plan_list,name='has_thought_plan_list'),
 ]	

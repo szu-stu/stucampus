@@ -16,8 +16,6 @@ class User(models.Model):
     szu_org_name = models.CharField(max_length=50,null=True)
     szu_sex = models.CharField(max_length=4,null=True)
     email = models.EmailField(null=True,blank=True)
-    is_anon = models.BooleanField(verbose_name=u'是否匿名',default=False)
-    alias = models.CharField(verbose_name=u'匿名昵称',max_length=10,null=True,blank=True,default="匿名")
 
     def __unicode__(self):
         return self.szu_name
@@ -45,7 +43,8 @@ class Plan(models.Model):
     deleted = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now_add=True,editable=True)
     like_persons = models.ManyToManyField(User,blank=True,related_name="like_persons")
-
+    is_anon = models.BooleanField(verbose_name=u'是否匿名',default=False,blank=True)
+    alias = models.CharField(verbose_name=u'匿名昵称',max_length=10,null=True,blank=True,default="匿名")
     def __unicode__(self):
         return self.content
 

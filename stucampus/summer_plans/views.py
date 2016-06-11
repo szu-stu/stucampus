@@ -25,6 +25,9 @@ class AddPlan(View):
 
     @login_szu
     def get(self,request,category_english_name=None):
+        '''
+            假登陆
+        '''
         return HttpResponseRedirect(reverse('summer_plans:list',args=(category_english_name,)))
 
     @login_szu
@@ -38,15 +41,11 @@ class AddPlan(View):
             if not form.cleaned_data['email']:
                 return spec_json(status='errors', messages=u"email必填")
             author = get_object_or_404(User,szu_no=request.session['szu_no'])
-            author.is_anon = form.cleaned_data['is_anon']
-            author.alias = form.cleaned_data['alias']
             author.email = form.cleaned_data['email']
             author.save()
         elif User.objects.filter(szu_no=request.session['szu_no']).exclude(email=None).exists():
             #用户存在,有email
             author = get_object_or_404(User,szu_no=request.session['szu_no'])
-            author.is_anon = form.cleaned_data['is_anon']
-            author.alias = form.cleaned_data['alias']
             author.email = form.cleaned_data['email'] if form.cleaned_data['email'] else author.email
             author.save()
         else:
@@ -59,8 +58,6 @@ class AddPlan(View):
                         szu_org_name=request.session['szu_org_name'].split("/")[1],
                         szu_sex=request.session['szu_sex'],
                         email=form.cleaned_data['email'],
-                        is_anon = form.cleaned_data['is_anon'],
-                        alias = forms.cleaned_data['alias'],
                         avatar_color=random.randint(1,5),
                         )
             author.save()
@@ -98,19 +95,27 @@ def search(request,category_english_name=None):
     if not q:
         return HttpResponseRedirect(reverse('summer_plans:list',args=(category_english_name,)))
     plan_category = get_object_or_404(PlanCategory,english_name=category_english_name,is_on=True)
-    plan1 = Plan.objects.filter(Q(category=plan_category)&Q(content__icontains=q))
-    #查找不匿名的，或匿名按照昵称查找，或按照学院
-    author_list = User.objects.filter(Q(szu_name__icontains=q,is_anon=False)|Q(alias__icontains=q,is_anon=True)|Q(szu_org_name__icontains=q))
-    plan_list=[]
-    plan_list.extend(plan1)
-    for author in author_list:          #将包含的作者的plan合并进来
-        plan2 = Plan.objects.filter(Q(category=plan_category)&Q(author_id=author.pk))
-        plan_list.extend(plan2)
-    plan_list = set(plan_list)#去重
-    plan_list =list(plan_list)
+    plan_list = Plan.objects.filter(
+                                    Q(content__icontains=q)|   #查找内容 
+                                    Q(author__szu_name__icontains=q,is_anon=False)|#查找真实姓名
+                                    Q(alias__icontains=q,is_anon=True)|#查找匿名
+                                    Q(author__szu_org_name__icontains=q),#查找学院
+                                    category=plan_category,
+                                ).distinct().order_by("-pk")#去重，按照时间先后排序
     return return_plan_list(request,plan_list,plan_category,title=u"【搜索结果】")
 
+def has_thought_plan_list(request,category_english_name):
+    '''
+        发表过感想的列表
+    '''
+    plan_category = get_object_or_404(PlanCategory,english_name=category_english_name,is_on=True)
+    plan_list = Plan.objects.filter(category=plan_category).exclude(thought=None).order_by("-like_count")
+    return return_plan_list(request,plan_list,plan_category,title=u"【计划感想】")
+
 def plan_list(request, category_english_name=None):
+    '''
+        首页显示
+    '''
     plan_category = get_object_or_404(PlanCategory, english_name=category_english_name,is_on=True)
     plan_list = Plan.objects.filter(category=plan_category,
                                           deleted=False).order_by('-pk')
@@ -150,6 +155,9 @@ def delete(request,category_english_name,id):
 
 @login_szu
 def post_thought(request,category_english_name,id):
+    '''
+        发表感想
+    '''
     plan_category = get_object_or_404(PlanCategory, english_name=category_english_name,is_on=True)
     if not plan_category.tip_time:
         messages=u"没有设置提醒时间"

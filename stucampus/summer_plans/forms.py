@@ -15,7 +15,7 @@ class PlanForm(forms.ModelForm):
     alias = forms.CharField(required=False,max_length=10)
     class Meta:
         model = Plan
-        fields = ['content']
+        fields = ['content',"is_anon","alias"]
 
 class PlanThoughtForm(forms.ModelForm):
     thought = forms.CharField(label=u"感悟",required=True,max_length=1000,error_messages={'required':u'感悟不能为空'},

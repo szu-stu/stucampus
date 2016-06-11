@@ -104,12 +104,22 @@
 							{% if not request.session.szu_no %}
 							<li role="presentation">
 								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:add_plan' plan_category.english_name %}"><i class="icon-upload"></i> 登录</a>
-								<li role="presentation">
-									<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:like_ranking_list' plan_category.english_name %}">
-									<i class="icon-hand-up"></i>点赞排行
-									</a>
-								</li>
 							</li>
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:like_ranking_list' plan_category.english_name %}">
+								<i class="icon-hand-up"></i> 点赞排行
+								</a>
+							</li>
+
+							{% if plan_category.tip_time|time_to_on %}
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:has_thought_plan_list' plan_category.english_name %}">
+									<i class="icon-pencil"></i> 计划感想
+								</a>
+							</li>
+							{% endif %}
+
+							
 							{% else %}
 							<li role="presentation">
 								<a href="#form_modal" class="form_modal_btn" tabindex="-1" role="button" class="btn" data-toggle="modal"><i class="icon-edit"></i> 发表计划
@@ -123,6 +133,13 @@
 									<i class="icon-hand-up"></i>点赞排行
 								</a>
 							</li>
+							{% if plan_category.tip_time|time_to_on %}
+							<li role="presentation">
+								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:has_thought_plan_list' plan_category.english_name %}">
+									<i class="icon-pencil"></i> 计划感想
+								</a>
+							</li>
+							{% endif %}
 							<li role="presentation">
 								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:logout' plan_category.english_name %}"><i class="icon-off"></i> 登出</a>
 							</li>
@@ -150,8 +167,8 @@
 						{% endif %}
 						{% for plan in plan_list %}
 						<li class="plan_li">
-							{% if plan.author.is_anon %}
-							<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">匿</span><span class="author_name">{{ plan.author.alias }}</span></p>
+							{% if plan.is_anon %}
+							<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">匿</span><span class="author_name">{{ plan.alias }}</span></p>
 							{% else %}
 							<p class="plan_author"><span class="show_last_name" style="background-color: {{ plan.author.get_avatar_color_display  }};">{{ plan.author.szu_name|show_last_name }}</span><span class="author_name">{{ plan.author.szu_name }}</span></p>
 							{% endif %}
