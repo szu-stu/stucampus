@@ -79,7 +79,7 @@
             				success: function(data){
             					if(data.status=="success"){
                                     swal(
-                                        { title:"<small>发表成功</small>",text: "",type:"success",timer: 1000,   showConfirmButton: false ,html:true},
+                                        { title:"<small>发表成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
                                         function()
                                         {
                                             $('#form_modal').modal('hide');
@@ -184,7 +184,7 @@
             				success: function(data){
             					if(data.status=="success"){
             						swal(
-                                        { title:"<small>发表成功</small>",text: "",type:"success",timer: 1000,   showConfirmButton: false ,html:true},
+                                        { title:"<small>发表成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
                                         function()
                                         {
                                             $('#thought_modal').modal('hide');
@@ -230,7 +230,7 @@
                             success: function(data){
                                 if(data.status=="success"){
                                     swal(
-                                        { title:"<small>删除成功</small>",text: "",type:"success",timer: 1000,   showConfirmButton: false ,html:true},
+                                        { title:"<small>删除成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
                                         function()
                                         {
                                             window.location=data.redirect_url;
