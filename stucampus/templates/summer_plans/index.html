@@ -164,11 +164,13 @@
 								<p class="plan_thought">{{ plan.thought }}</p>
 							</p>
 							{% endif %}
-							<div class="function_wrapper">
-								<span class="create_time">{{ plan.create_date |from_now }}</span>
-								{% ifequal plan.author.szu_no request.session.szu_no %}
-								<a class="delete_btn" href="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
-								{% endifequal %}
+							<div class="function_wrapper clear-fixed">
+								<span class="pull-left">
+									<span class="create_time">{{ plan.create_date |from_now }}</span>
+									{% ifequal plan.author.szu_no request.session.szu_no %}
+									<a class="delete_btn" href="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
+									{% endifequal %}
+								</span>
 								<span class="right_box pull-right">
 									{% if plan_category.tip_time|time_to_on and plan.author.szu_no == request.session.szu_no %}
 									<a class="post_thought" href="javascript:void(0);" data-url="{% url 'summer_plans:post_thought' plan_category.english_name plan.pk %}">发表感想</a>
@@ -182,7 +184,7 @@
 								</span>
 							</div>
 							
-							<div class="like_persons_wrapper {% if not plan.like_persons.all %} visi_hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
+							<div class="like_persons_wrapper {% if not plan.like_persons.all %} hide {% endif %}" id="like_persons_wrapper{{plan.pk}}">
 								<img src="/static/images/summer_plans/l.png" alt="love" width="15px" height="15px;">
 								<span class="like_persons" id="like_persons{{plan.pk}}">{{ plan.like_persons.all|show_name }}</span>
 							</div>
@@ -198,7 +200,7 @@
 						{% endif %} 
  						
 					</ul>
-					<div id="loading_plan_list">
+					<div id="loading_plan_list" class="hide">
 	        			<img src="/static/images/summer_plans/loading.gif" alt="loading">
 	        		</div>
 				</div>

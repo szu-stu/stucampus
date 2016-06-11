@@ -13,6 +13,10 @@ body{
 	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
 	padding-bottom: 10px;
 }
+h1,h2,h3,h4
+{
+	text-align: center;
+}
 .plan_list
 {
 	margin-top:50px;
@@ -131,9 +135,13 @@ header .navbar span
 	margin: 0;
 }
 .function_wrapper{
-	font-size: 0.8em;
+	font-size: 0.8em;/*要跟loading一样大*/
 	overflow: hidden;
 	zoom:1;
+}
+.loading{
+	width: 0.8em;
+	height: 0.8em;
 }
 
 .function_wrapper .right_box 
@@ -141,14 +149,12 @@ header .navbar span
 	text-align: right;
 
 }
-.function_wrapper .right_box .like_btn
+.function_wrapper  span,.function_wrapper  a
 {
-	padding: 5px 10px;
-}
-.function_wrapper .right_box span,.function_wrapper .right_box a
-{
-	margin-right: 0.7em;
+	margin-right: 0.2em;
+	padding: 5px 5px 5px 0px;
 	overflow: hidden;
+	vertical-align: middle;
 }
 
 .plan_content{
@@ -230,8 +236,8 @@ header .navbar span
 	text-align: center;
 	overflow: hidden;
 }
-.loading
+#loading_plan_list img
 {
-	width: 25px;
-	height: 25px;
+	width: 30px;
+	height: 30px;
 }

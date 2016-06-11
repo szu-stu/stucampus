@@ -104,11 +104,11 @@
             					if(data.status=="success"){
             						// 处理人名
             						if (data.like_persons.length==0){
-            							$('#like_persons_wrapper'+plan_id).addClass('visi_hide');//人数为空就隐藏
+            							$('#like_persons_wrapper'+plan_id).addClass('hide');//人数为空就隐藏
             						}
             						else
             						{
-            							$('#like_persons_wrapper'+plan_id).removeClass('visi_hide');
+            							$('#like_persons_wrapper'+plan_id).removeClass('hide');
             							var like_person_str="";
             							var i=0;
             							for (i=0;i<data.like_persons.length-1;i++){
@@ -188,6 +188,7 @@
 
         // 发表感想 end
 
+        //匿名
         $("#id_is_anon").click(function(){
             if ($(this).prop("checked")){
                 $("#alias_box").removeClass("visi_hide").focus();
