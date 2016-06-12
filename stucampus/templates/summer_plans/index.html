@@ -294,63 +294,65 @@
 
 
 <script>  
-var imgUrl = 'http://stu.szu.edu.cn/static/images/stulogo.jpg';  
-var lineLink = 'http://topic.xcar.com.cn/201403/ad_q3/index.php';  
-var descContent = "【奥迪Q3开启尊享礼遇季】报名试驾，赢取精美礼品";  
-var shareTitle = '【奥迪Q3开启尊享礼遇季】报名试驾，赢取精美礼品';  
-var appid = 'wx2d3f8ec039af6a99';  
-  
-function shareFriend() {  
-    WeixinJSBridge.invoke('sendAppMessage',{  
-                            "appid": appid,  
-                            "img_url": imgUrl,  
-                            "img_width": "640",  
-                            "img_height": "640",  
-                            "link": lineLink,  
-                            "desc": descContent,  
-                            "title": shareTitle  
-                            }, function(res) {  
-                            _report('send_msg', res.err_msg);  
-                            })  
+var lineLink    = 'http://../....';    // 要分享的页面的URL
+var imgUrl      = 'http://.../...';    // 显示在微信里的缩略图
+var shareTitle  = '页面标题';          // 页面标题
+var descContent = "页面内容简介";      // 内容简介
+var appid       = '';                  // APP ID, 可以为空
+
+
+function wx_shareFriend() {  
+  WeixinJSBridge.invoke('sendAppMessage',{  
+     "appid": appid,  
+     "img_url": imgUrl,  
+     "img_width": "640",  
+     "img_height": "640",  
+     "link": lineLink,  
+     "desc": descContent,  
+     "title": shareTitle  
+     }, function(res) {  
+       //alert(res.err_msg);  
+     })  
 }  
-function shareTimeline() {  
-    WeixinJSBridge.invoke('shareTimeline',{  
-                            "img_url": imgUrl,  
-                            "img_width": "640",  
-                            "img_height": "640",  
-                            "link": lineLink,  
-                            "desc": descContent,  
-                            "title": shareTitle  
-                            }, function(res) {  
-                            _report('timeline', res.err_msg);  
-                            });  
+
+function wx_shareTimeline() {  
+  WeixinJSBridge.invoke('shareTimeline',{  
+    "img_url": imgUrl,  
+    "img_width": "640",  
+    "img_height": "640",  
+    "link": lineLink,  
+    "desc": descContent,  
+    "title": shareTitle  
+    }, function(res) {  
+       //alert(res.err_msg);  
+    });  
 }  
-function shareWeibo() {  
-    WeixinJSBridge.invoke('shareWeibo',{  
-                            "content": descContent,  
-                            "url": lineLink,  
-                            }, function(res) {  
-                            _report('weibo', res.err_msg);  
-                            });  
+
+function wx_shareWeibo() {  
+  WeixinJSBridge.invoke('shareWeibo',{  
+    "content": descContent,  
+    "url": lineLink,  
+    }, function(res) {  
+      //alert(res.err_msg);  
+    });  
 }  
-// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。  
-document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {  
-  
-        // 发送给好友  
-        WeixinJSBridge.on('menu:share:appmessage', function(argv){  
-            shareFriend();  
-            });  
-  
-        // 分享到朋友圈  
-        WeixinJSBridge.on('menu:share:timeline', function(argv){  
-            shareTimeline();  
-            });  
-  
-        // 分享到微博  
-        WeixinJSBridge.on('menu:share:weibo', function(argv){  
-            shareWeibo();  
-            });  
-        }, false);  
+
+function onBridgeReady(){
+  WeixinJSBridge.on('menu:share:appmessage', wx_shareFriend);   // 发送给朋友
+  WeixinJSBridge.on('menu:share:timeline',   wx_shareTimeline); // 分享到朋友圈
+  WeixinJSBridge.on('menu:share:weibo',      wx_shareWeibo);    // 分享到微博
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+  if( document.addEventListener ){
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+  }else if (document.attachEvent){
+      document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+      document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+  }
+}else{
+  onBridgeReady();
+}
 </script> 
 
 <!-- 微信分享 -->
