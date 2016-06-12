@@ -14,6 +14,7 @@
 
 </head>
 <body>
+	<img src="/static/images/summer_plans/stulogo.jpg" width="0" height="0" />
 	<div id="user_id" class="hide">{{request.session.szu_no}}</div>
 	<!-- 发表暑假计划的form Modal -->
 
@@ -292,68 +293,6 @@
 <!-- 微信分享 -->
 
 
-
-<script>  
-var lineLink    = 'http://../....';    // 要分享的页面的URL
-var imgUrl      = 'http://.../...';    // 显示在微信里的缩略图
-var shareTitle  = '页面标题';          // 页面标题
-var descContent = "页面内容简介";      // 内容简介
-var appid       = '';                  // APP ID, 可以为空
-
-
-function wx_shareFriend() {  
-  WeixinJSBridge.invoke('sendAppMessage',{  
-     "appid": appid,  
-     "img_url": imgUrl,  
-     "img_width": "640",  
-     "img_height": "640",  
-     "link": lineLink,  
-     "desc": descContent,  
-     "title": shareTitle  
-     }, function(res) {  
-       //alert(res.err_msg);  
-     })  
-}  
-
-function wx_shareTimeline() {  
-  WeixinJSBridge.invoke('shareTimeline',{  
-    "img_url": imgUrl,  
-    "img_width": "640",  
-    "img_height": "640",  
-    "link": lineLink,  
-    "desc": descContent,  
-    "title": shareTitle  
-    }, function(res) {  
-       //alert(res.err_msg);  
-    });  
-}  
-
-function wx_shareWeibo() {  
-  WeixinJSBridge.invoke('shareWeibo',{  
-    "content": descContent,  
-    "url": lineLink,  
-    }, function(res) {  
-      //alert(res.err_msg);  
-    });  
-}  
-
-function onBridgeReady(){
-  WeixinJSBridge.on('menu:share:appmessage', wx_shareFriend);   // 发送给朋友
-  WeixinJSBridge.on('menu:share:timeline',   wx_shareTimeline); // 分享到朋友圈
-  WeixinJSBridge.on('menu:share:weibo',      wx_shareWeibo);    // 分享到微博
-}
-
-if (typeof WeixinJSBridge == "undefined"){
-  if( document.addEventListener ){
-      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-  }else if (document.attachEvent){
-      document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-      document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-  }
-}else{
-  onBridgeReady();
-}
-</script> 
 
 <!-- 微信分享 -->
 </body>
