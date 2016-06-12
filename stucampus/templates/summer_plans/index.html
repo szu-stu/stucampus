@@ -124,32 +124,21 @@
 						</span>	
 						<span class="pull-right right_box">
 						<a href="#search" data-toggle="modal" class="function_btn"><span class="glyphicon glyphicon-search my_icon"></span> </a>
-						<!-- xiala -->
-						<div class="dropdown">
-							<a class="dropdown-toggle" id="ddAction" data-toggle="dropdown" href=" ">
-								Action
-							</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="ddaction">
-								<li role="presentation">
-									<a role="menuitem" tabindex="-1" href="http://www.google.com">Open Google</a>
-								</li>
-							</ul>
-						</div>
-						<!-- xiala -->
 						<!-- 下拉框 start-->
-						<a id="dropdownMenu"  class="function_btn" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-align-justify my_icon" ></span>
-						</a>
-						<!-- 下拉按钮 -->
-						<ul class="dropdown-menu pull-right" role="menu" 
-						aria-labelledby="dropdownMenu">
+						<span class="dropdown">
+							<a id="dropdownMenu"  class="function_btn dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-align-justify my_icon" ></span>
+							</a>
+							<!-- 下拉按钮 -->
+							<ul class="dropdown-menu pull-right" role="menu" 
+							aria-labelledby="dropdownMenu">
 							{% if not request.session.szu_no %}
 							<li role="presentation">
 								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:add_plan' plan_category.english_name %}"><span class="glyphicon glyphicon-upload"></span> 登录</a>
 							</li>
 							<li role="presentation">
 								<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:like_ranking_list' plan_category.english_name %}">
-								<span class="glyphicon glyphicon-hand-up"></span> 点赞排行
+									<span class="glyphicon glyphicon-hand-up"></span> 点赞排行
 								</a>
 							</li>
 
@@ -196,6 +185,8 @@
 
 						</ul>
 						<!-- 下拉框 end-->
+					</span>
+						
 						</span>
 					</div>
 					
