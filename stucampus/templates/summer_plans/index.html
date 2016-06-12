@@ -14,7 +14,6 @@
 
 </head>
 <body>
-	<img src="/static/images/stulogo.jpg" width="0" height="0" />
 	<div id="user_id" class="hide">{{request.session.szu_no}}</div>
 	<!-- 发表暑假计划的form Modal -->
 
@@ -291,12 +290,15 @@
 <!-- 百度统计end -->
 
 <!-- 微信分享 -->
+
+
+
 <script>  
-var imgUrl = 'http://topic.xcar.com.cn/201403/ad_q3/pic/banner.jpg';  
+var imgUrl = 'http://stu.szu.edu.cn/static/images/stulogo.jpg';  
 var lineLink = 'http://topic.xcar.com.cn/201403/ad_q3/index.php';  
-var descContent = "http://topic.xcar.com.cn/201403/ad_q3/index.php";  
+var descContent = "【奥迪Q3开启尊享礼遇季】报名试驾，赢取精美礼品";  
 var shareTitle = '【奥迪Q3开启尊享礼遇季】报名试驾，赢取精美礼品';  
-var appid = 'wxc9937e3a66af6dc8';  
+var appid = 'wx2d3f8ec039af6a99';  
   
 function shareFriend() {  
     WeixinJSBridge.invoke('sendAppMessage',{  
