@@ -9,6 +9,20 @@
 
 	<span class="author_szu_org">from: {{ plan.author.szu_org_name }}</span>
 	<div class="plan_content">{{ plan.content |linebreaks }}</div>
+	{% if plan.plan_record.all %}
+	<div class="plan_record_content_box">
+		<p class="record_title">计划记录:</p>
+		{% for plan_record in plan.plan_record.all %}
+		<div class="plan_record">-----&nbsp&nbsp&nbsp{{plan_record.content}}</div>
+		<p class="plan_record_function">
+			<span class="plan_record_time">{{ plan_record.create_date|from_now }}</span>
+			{% ifequal plan.author.szu_no request.session.szu_no %}
+			<a class="delete_plan_record_btn" href="javascript:void(0);" data-url="{% url 'summer_plans:delete_plan_record' plan_category.english_name plan_record.pk %}">删除</a>
+			{% endifequal %}
+		</p>
+		{% endfor %}
+	</div>
+	{% endif %}
 	{% if plan.thought %} 
 	<p class="plan_thought_box">
 		<p class="thought_title">暑假过后:</p>
@@ -20,6 +34,8 @@
 			<span class="create_time">{{ plan.create_date |from_now }}</span>
 			{% ifequal plan.author.szu_no request.session.szu_no %}
 			<a class="delete_btn" href="javascript:void(0);" data-url="{% url 'summer_plans:delete' plan_category.english_name plan.pk %}">删除</a>
+
+			<a class="add_plan_record_btn" href="javascript:void(0);" data-url="{% url 'summer_plans:add_plan_record' plan_category.english_name plan.pk %}">记录进度</a>
 			{% endifequal %}
 		</span>
 		<span class="right_box pull-right">
@@ -31,7 +47,7 @@
 			
 			<img  class="loading visi_hide" id="like_loading{{plan.pk}}" src="/static/images/summer_plans/loading.gif" alt="loading">
 			
-			<span class="like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"><i class="icon-thumbs-up"></i></span>
+			<span class="like_btn" data-url="{% url 'summer_plans:like' plan_category.english_name %}?plan_id={{plan.pk}}" data-plan_id="{{ plan.pk }}"><span class="glyphicon glyphicon-thumbs-up"></span></span>
 		</span>
 	</div>
 	

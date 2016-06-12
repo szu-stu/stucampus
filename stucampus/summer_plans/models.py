@@ -48,4 +48,15 @@ class Plan(models.Model):
     def __unicode__(self):
         return self.content
 
+class PlanRecord(models.Model):
+    '''
+        记录
+    '''
+    plan = models.ForeignKey(Plan,null=False,related_name="plan_record")
+    content = models.TextField(verbose_name=u'记录的内容',max_length=1000)
+    create_date = models.DateTimeField(auto_now_add=True,editable=True)
+
+    def __unicode__(self):
+        return self.content
+
 

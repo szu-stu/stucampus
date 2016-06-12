@@ -8,6 +8,55 @@
                                         
         );
     }
+    // 提示输入框
+    function sweet_input(url)
+    {
+        swal(
+        {   
+            title: "记录进度",  
+            text: "", 
+            type: "input",   
+            showCancelButton: true,
+            closeOnConfirm: false,  
+            animation: "slide-from-top",
+            inputPlaceholder: "Write something"
+        }, 
+        function(inputValue){  
+            if (inputValue === false) return false;   
+            if (inputValue === "") {   
+             swal.showInputError("不能为空!"); 
+             return false  
+            }
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data:{content:inputValue,"csrfmiddlewaretoken":$("#csrf_token input").val()},
+                dataType: "json",
+                success: function(data){
+                    if(data.status=="success"){
+                        swal(
+                            { title:"<small>成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
+                            function()
+                            {
+                                window.location=data.redirect_url;
+                            }
+                            );
+
+                    }
+                    else{
+                        error_tip(data.messages);
+                    }
+                },
+                error: function(data, status, e){
+                    error_tip("出现错误，请联系qq：649743466");
+                },
+            }
+            );
+        });
+    
+     }
+     //添加url参数工具函数
 	function UrlUpdateParams(name, value) {
 		var r = window.location.href;
 		var url = window.location.href;
@@ -28,6 +77,49 @@
 		}
 		return r;
 	}
+    // 删除提示，工具函数 start
+    function delete_confirm(url){
+        swal(
+        {  
+         title: "Are you sure?",  
+         text: "是否确定删除？", 
+         type: "warning",   
+         showCancelButton: true,  
+         confirmButtonColor: "#DD6B55",  
+         confirmButtonText: "Yes",  
+         cancelButtonText: "No",  
+         closeOnConfirm: false,  
+         closeOnCancel: true }, 
+         function(isConfirm){  
+            if (isConfirm) {
+               $.ajax({
+                            type: "GET",
+                            url: url,
+                            dataType: "json",
+                            success: function(data){
+                                if(data.status=="success"){
+                                    swal(
+                                        { title:"<small>删除成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
+                                        function()
+                                        {
+                                            window.location=data.redirect_url;
+                                        }
+                                    );
+                                    
+                                }
+                                else{
+                                    error_tip(data.messages);
+                                }
+                                
+                            },
+                            error: function(data, status, e){
+                                error_tip("出现错误，请联系qq：649743466");
+                                console.log(data);
+                            },
+                        });     
+           } 
+       });
+    }// 删除提示，工具函数 end
 
 	// 窗口滑动加载 start
 	var loadingStatus = false;
@@ -220,35 +312,23 @@
 
         });
 
-        //删除
+        //删除plan
         $(".plan_list").delegate('.delete_btn','click',function(){
             var url = $(this).data('url');
-            $.ajax({
-                            type: "GET",
-                            url: url,
-                            dataType: "json",
-                            success: function(data){
-                                if(data.status=="success"){
-                                    swal(
-                                        { title:"<small>删除成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
-                                        function()
-                                        {
-                                            window.location=data.redirect_url;
-                                        }
-                                    );
-                                    
-                                }
-                                else{
-                                    error_tip(data.messages);
-                                }
-                                
-                            },
-                            error: function(data, status, e){
-                                error_tip("出现错误，请联系qq：649743466");
-                                console.log(data);
-                            },
-                        });
+            delete_confirm(url);
         });
+
+        //删除记录
+        $(".plan_list").delegate('.delete_plan_record_btn','click',function(){
+            var url = $(this).data('url');
+            delete_confirm(url);
+        });
+        //添加记录
+        $(".plan_list").delegate('.add_plan_record_btn','click',function(){
+            var url = $(this).data('url');
+            sweet_input(url);
+        });
+        
 
         
 

@@ -2,7 +2,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import User,PlanCategory,Plan
+from .models import User,PlanCategory,Plan,PlanRecord
 
 
 
@@ -23,3 +23,10 @@ class PlanThoughtForm(forms.ModelForm):
     class Meta:
         model = Plan
         fields = ['thought']
+
+class PlanRecordForm(forms.ModelForm):
+    content = forms.CharField(label=u"记录",required=True,max_length=1000,error_messages={'required':u'记录不能为空'},
+                            widget=forms.Textarea(attrs={'class':'form-control','placeholder':u'写下你的记录吧'}))
+    class Meta:
+        model = PlanRecord
+        fields = ['content',]

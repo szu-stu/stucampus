@@ -16,6 +16,10 @@ h1,h2,h3,h4
 {
 	text-align: center;
 }
+body p
+{
+	margin: 0;
+}
 .plan_list
 {
 	margin-top:50px;
@@ -44,7 +48,7 @@ h1,h2,h3,h4
 }
 .plan_author .author_name
 {
-	margin-left: 1em;
+	margin-left: 0.5rem;
 	color: #08c;
 	vertical-align: middle;
 	
@@ -63,7 +67,7 @@ h1,h2,h3,h4
 }
 .right_box .function_btn
 {
-	margin-right: 1em;
+	margin-right: 0.5rem;
 	padding: 10px 5px;
 }
 .my_icon
@@ -76,28 +80,35 @@ h1,h2,h3,h4
 	left: 0;
 	right: 0;
 	padding: 10px;
-	font-size: 1.2em;
+	font-size: 1.1rem;
 	background-color: rgb(91,197,190);
 	zoom:1;
+	z-index: 999;
 
 }
 .navbar span
 {
 	vertical-align: middle;
+	font-size: 1.1rem;
+}
 }
 header{
-	position: relative;
+	zoom:1;
 }
-header .logo
+.clear
+{
+	clear:both;
+}
+header .logo,header .logo img
 {
 	display: inline-block;
-	height: 1.7rem;
-    width: 1.7rem;
+	height: 1.8rem;
+    width: 1.8rem;
 }
 header .theme_title
 {
 	vertical-align: middle;
-	font-size: 0.9em;
+	font-size: 1.1rem;
 }
 header .loadding_box
 {
@@ -123,14 +134,19 @@ header .navbar span
 }
 .like_persons_wrapper .like_persons
 {
-	font-size: 0.8em;
+	font-size: 0.8rem;
 	word-break:break-word;
 	vertical-align: middle;
 }
-.author_szu_org,.create_time,.liked_tip ,.thought_title
+.author_szu_org,.create_time,.liked_tip ,.thought_title,.plan_record_content_box
 {
-	font-size: 0.8em;
+	font-size: 0.8rem;
 	color: #7B7676;
+}
+.plan_record_content_box
+{
+	border-top: 1px dashed #7d7d7d;
+	padding: 5px 0;
 }
 .modal-body p
 {
@@ -138,13 +154,13 @@ header .navbar span
 	margin: 0;
 }
 .function_wrapper{
-	font-size: 0.8em;/*要跟loading一样大*/
+	font-size: 0.8rem;/*要跟loading一样大*/
 	overflow: hidden;
 	zoom:1;
 }
 .loading{
-	width: 0.8em;
-	height: 0.8em;
+	width: 0.8rem;
+	height: 0.8rem;
 }
 
 .function_wrapper .right_box 
@@ -154,15 +170,13 @@ header .navbar span
 }
 .function_wrapper  span,.function_wrapper  a
 {
-	margin-right: 0.2em;
-	padding: 5px 5px 5px 0px;
 	overflow: hidden;
 	vertical-align: middle;
 }
 
 .plan_content{
 	padding:5px 20px ;
-	font-size: 1.1em;
+	font-size: 1.1rem;
 	word-break:break-word;
 }
 .plan_thought_box
@@ -178,7 +192,7 @@ header .navbar span
 }
 .plan_thought_box .thought_title
 {
-	margin-right: 0.7em;
+	margin-right: 0.7rem;
 }
 .form_p
 {
@@ -223,16 +237,16 @@ header .navbar span
 	display: block;
 	text-align: center;
 	margin-top: 10px;
-	font-size: 1.1em;
+	font-size: 1.1rem;
 }
-.dropdown-menu i,.dropdown-menu a
+.dropdown-menu li a span,.dropdown-menu a
 {
 	text-align: left;
 	vertical-align: top;
 }
-.dropdown-menu i
+.dropdown-menu span
 {
-	margin-right: 0.2em;
+	margin-right: 0.2rem;
 }
 #loading_plan_list
 {

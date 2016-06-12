@@ -8,8 +8,8 @@ from django.utils.decorators import method_decorator
 from django.db.models import Q
 from django.core.mail import send_mail,send_mass_mail,EmailMultiAlternatives
 
-from .forms import PlanForm,PlanThoughtForm
-from .models import Plan,PlanCategory,User
+from .forms import PlanForm,PlanThoughtForm,PlanRecordForm
+from .models import Plan,PlanCategory,User,PlanRecord
 from stucampus.utils import spec_json,render_json
 from stucampus.account.permission import check_perms
 
@@ -200,7 +200,44 @@ def senf_email_to_plan_author(request,category_english_name=None):
     finally:
         return  HttpResponse(u"已经成功发送邮件")
 
-    
+@login_szu
+def add_plan_record(request,category_english_name,id):
+    #此id是关联的plan的id
+    plan_category = get_object_or_404(PlanCategory,english_name=category_english_name)
+    plan = get_object_or_404(Plan,category=plan_category,pk=id)
+    form = PlanRecordForm(request.POST)
+    if plan.author.szu_no != request.session.get("szu_no"):
+        messages = u"你没有权限"
+        return spec_json(status='errors', messages=messages)
+    if not form.is_valid():
+        messages = form.errors.values()
+        return spec_json(status='errors', messages=messages)
+    plan_record = form.save(commit=False)
+    plan_record.plan = plan
+    plan_record.save()
+    return render_json({"status":"success","redirect_url":reverse('summer_plans:list',args=(category_english_name,))})
+
+@login_szu
+def delete_plan_record(request,category_english_name,id):
+    plan_record = get_object_or_404(PlanRecord,pk=id)
+    if plan_record.plan.author.szu_no != request.session.get("szu_no"):
+        messages = u"你没有权限"
+        return spec_json(status='errors', messages=messages)
+    plan_record.delete()
+    return render_json({"status":"success","redirect_url":reverse('summer_plans:list',args=(category_english_name,))})
+
+@login_szu
+def update_plan_record(request,category_english_name,id):
+    plan_record = get_object_or_404(PlanRecord,pk=id)
+    if plan_record.plan.author.szu_no != request.session.get("szu_no"):
+        messages = u"你没有权限"
+        return spec_json(status='errors', messages=messages)
+    form = PlanRecordForm(request.POST,instance=plan_record)
+    if not form.is_valid():
+        messages = form.errors.values()
+        return spec_json(status='errors', messages=messages)
+    form.save()
+    return render_json({"status":"success","redirect_url":reverse('summer_plans:list',args=(category_english_name,))})
 
 
 
