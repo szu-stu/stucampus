@@ -1,4 +1,4 @@
-;(function($)
+;(function($,jQuery)
 {
 
     function error_tip(msg)
@@ -124,14 +124,15 @@
 	// 窗口滑动加载 start
 	var loadingStatus = false;
 	$(window).scroll(function(){
-            var scrollPos = $(document).scrollTop(); //滚动条距离顶部的高度
-            var windowHeight = $(window).height(); //窗口的高度
-            var dbHiht = $(document).height(); //整个页面文件的高度
-            var page_number =$(".page_number").last().text()
+            var scrollPos = jQuery(document).scrollTop(); //滚动条距离顶部的高度
+            var windowHeight = jQuery(window).height(); //窗口的高度
+            var dbHiht = jQuery(document).height(); //整个页面文件的高度
+            var page_number =$(".page_number").last().text();
             if(dbHiht - windowHeight <= scrollPos && page_number!="没有更多了"){
             	if(loadingStatus==true){
             			return false;
             	}
+
             	loadingStatus=true;
             	getNextTimes = parseInt(page_number) + 1;
             	setTimeout(function(){
@@ -174,7 +175,7 @@
                                         { title:"<small>发表成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
                                         function()
                                         {
-                                            $('#form_modal').modal('hide');
+                                            jQuery('#form_modal').modal('hide');
                                             window.location=data.redirect_url;
                                         }
                                     );
@@ -262,7 +263,7 @@
         $(".plan_list").delegate('.post_thought','click',function(){
         	var url = $(this).data('url');
         	$("#submit_thought_form").data("url",url);
-        	$('#thought_modal').modal('show');
+        	jQuery('#thought_modal').modal('show');
         });
 
         $("#submit_thought_form").click(function(){
@@ -279,7 +280,7 @@
                                         { title:"<small>发表成功</small>",text: "",type:"success",timer: 3000,   showConfirmButton: true ,html:true},
                                         function()
                                         {
-                                            $('#thought_modal').modal('hide');
+                                            jQuery('#thought_modal').modal('hide');
                                             location.reload();
                                         }
                                     );
@@ -332,4 +333,4 @@
 
         
 
-    })(jQuery);
+    })(Zepto,jQuery);

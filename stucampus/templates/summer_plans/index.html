@@ -14,7 +14,7 @@
 
 </head>
 <body>
-	<img src="/static/images/summer_plans/stulogo.jpg" width="0" height="0" />
+	<img src="/static/images/summer_plans/stulogo.jpg" width="0" height="0" style="margin: 0;padding: 0;" />
 	<div id="user_id" class="hide">{{request.session.szu_no}}</div>
 	<!-- 发表暑假计划的form Modal -->
 
@@ -274,6 +274,7 @@
 			</div>
 		</div>
 	</main>
+	{{ 'plugins/zepto.min.js' | as_js }}
 	{{ 'plugins/jquery.min.js' | as_js }}
 	{{ 'plugins/bootstrap3/js/bootstrap.min.js' | as_js }}
 	{{ 'plugins/sweetalert/sweetalert.min.js' | as_js }}
