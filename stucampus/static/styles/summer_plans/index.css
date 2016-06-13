@@ -174,7 +174,7 @@ header .navbar span
 	vertical-align: middle;
 }
 
-.plan_content{
+.plan_content,.plan_thought{
 	padding:5px 20px ;
 	font-size: 1.1rem;
 	word-break:break-word;
@@ -184,11 +184,6 @@ header .navbar span
 	border-top:1px dashed #7d7d7d;
 	padding:5px 10px ;
 	word-break:break-word;
-}
-.plan_thought
-{
-	word-break:break-word;
-	padding:5px 20px ;
 }
 .plan_thought_box .thought_title
 {
