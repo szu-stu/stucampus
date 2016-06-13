@@ -15,7 +15,7 @@
 		{% for plan_record in plan.plan_record.all %}
 		<div class="plan_record">-----&nbsp&nbsp&nbsp{{plan_record.content}}</div>
 		<p class="plan_record_function">
-			<span class="plan_record_time">{{ plan_record.create_date|from_now }}</span>
+			<span class="plan_record_time">--&nbsp&nbsp&nbsp{{ plan_record.create_date|from_now }}</span>
 			{% ifequal plan.author.szu_no request.session.szu_no %}
 			<a class="delete_plan_record_btn" href="javascript:void(0);" data-url="{% url 'summer_plans:delete_plan_record' plan_category.english_name plan_record.pk %}">删除</a>
 			{% endifequal %}
