@@ -56,7 +56,7 @@ def upload_content_img_to_qiniu(content):
             file_path=settings.MEDIA_ROOT+img_name
             qiniu_key='/'.join(img_src.split("/")[1:])
             try:
-                ret, info=put_file(up_token=get_qiniu_uptoken(key=qiniu_key),key=None, file_path=file_path)
+                ret, info=put_file(up_token=get_qiniu_uptoken(key=qiniu_key),key=qiniu_key, file_path=file_path)
                 if info.exception is None:
                     qiniu_file_path="http://"+settings.QINIU_BUCKET_DOMAIN+img_src
                     content=content.replace(img_src,qiniu_file_path)
@@ -78,7 +78,7 @@ def upload_img(img_src):
             file_path=settings.MEDIA_ROOT+img_name
             qiniu_key='/'.join(img_src.split("/")[1:])
 
-            ret, info=put_file(up_token=get_qiniu_uptoken(key=qiniu_key), key=None,file_path=file_path)
+            ret, info=put_file(up_token=get_qiniu_uptoken(key=qiniu_key), key=qiniu_key,file_path=file_path)
             img_src="http://"+settings.QINIU_BUCKET_DOMAIN+img_name
             if  info.exception is None:
                 print  img_name+" upload to qiniu success "
