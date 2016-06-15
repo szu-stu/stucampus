@@ -268,7 +268,6 @@
 
         $("#submit_thought_form").click(function(){
         	var url = $(this).data('url');
-        	console.log(url);
         	$.ajax({
             				type: "POST",
             				url: url,
@@ -328,6 +327,36 @@
         $(".plan_list").delegate('.add_plan_record_btn','click',function(){
             var url = $(this).data('url');
             sweet_input(url);
+        });
+        //抽奖
+        $("#draw_btn").click(function(){
+            var url = $(this).data("url");
+            $.ajax({
+                            type: "GET",
+                            url: url,
+                            dataType: "json",
+                            success: function(data){
+                                if(data.status=="success"){
+                                    swal(
+                                        { title:"<small>抽奖成功</small>",text: "你的幸运值是"+data.lottery_result,type:"success",timer: 3000,   showConfirmButton: true ,html:true},
+                                        function()
+                                        {
+                                            location.reload();
+                                        }
+                                    );
+                                    
+                                    
+                                }
+                                else{
+                                    error_tip(data.messages);
+                                }
+                                
+                            },
+                            error: function(data, status, e){
+                                error_tip("您需要登录才能抽奖，如果登录完还不能抽奖，请联系qq：649743466");
+                            },
+                            
+                        });
         });
         
 

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="font-size: 14.56px;">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ plan_category.name }}【深大学子天地】</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link href="/static/images/stulogo.png" type="image/x-icon" rel="shortcut icon" />
+	{% load html_tools %}
+	{% load date_tools %}<!-- #用于算出距离现在的时间间隔,并处理姓名，学号-->
+	<link rel="stylesheet" href="/static/scripts/plugins/bootstrap3/css/bootstrap.min.css">
+	{{ 'summer_plans/index.css' | as_css }}
+	{{ 'plugin/sweetalert/sweetalert.css' | as_css }}
+
+
+</head>
+<body>
+	<img src="/static/images/summer_plans/stulogo.jpg" width="0" height="0" style="margin: 0;padding: 0;" />
+	<div id="user_id" class="hide">{{request.session.szu_no}}</div>
+	<!-- 发表暑假计划的form Modal -->
+
+<!-- new -->
+
+<div class="modal fade" id="form_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">发布你的{{ plan_category.name }}</h4>
+      </div>
+      <div class="modal-body">
+
+      	<p id="plan_form_error"></p>
+      	<form id="plan_form">
+      		{% csrf_token %}
+      		<p class="row"><textarea class="form-control col-xs-12 col-md-12" required="required" cols="40" id="id_content" name="content" placeholder="写下你的计划吧" rows="3" maxlength="1000"></textarea></p>
+      		{% if not user.email %}
+      		<p class="row">
+      			<label for="id_email" class="col-xs-3 col-md-3">邮箱:</label><input required="required" class="form-control col-xs-9 col-md-9" id="id_email" name="email" placeholder="在假期过后，我们将通过邮箱提醒您" type="email">
+      		</p>
+      		{% endif %}
+      		<!-- <p class="form_p"></p> -->
+      		<p class="row "><label for="id_is_anon" class="col-xs-3 col-md-3">匿名:</label> <input id="id_is_anon" class="col-xs-2 col-md-2" name="is_anon" type="checkbox"><span id="alias_box" class="visi_hide"><input class="form-control col-xs-6 col-md-6" id="id_alias" maxlength="10" name="alias" type="text" placeholder="昵称"></span></p>
+      	</form>		
+
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+		<button class="btn btn-primary" data-url="{% url 'summer_plans:add_plan' plan_category.english_name %}" id="submit_plan_form">Save</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- new	 -->
+
+	
+	<!-- 发表暑假计划的form  Modal end-->
+
+	<!-- 搜索（Modal） start -->
+	<!-- new	 -->
+	<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="search_form" action="{% url 'summer_plans:search' plan_category.english_name %}" method="GET">
+					<div class="modal-body">
+						<p class="form_p">
+							<label for="search_input">搜索:</label>
+							<input id="search_input" class="form-control" type="text" required="required" name="q" placeholder="搜索发布内容,姓名或昵称,学院">
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+						<button class="btn btn-primary" id="submit_search_form" type="submit">search</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- new -->
+<!-- /搜索.modal end-->
+<!-- 感悟 modal 由函数调用 start -->
+	<!-- new -->
+<p class="hide" id="csrf_token">{% csrf_token %}</p>
+
+	<div class="modal fade" id="thought_modal" tabindex="-1" role="dialog" aria-labelledby="thought">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="thought_form">
+					<div class="modal-body">
+						<p id="thought_form_error"></p>
+						{% csrf_token %}
+						<div class=" modal_form_box">
+							<p class="form_p">
+								<textarea class="form-control" cols="40" id="id_thought" name="thought" placeholder="写下你的感悟" rows="10" required="required" maxlength="1000"></textarea>
+							</p>			
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+						<button class="btn btn-primary" data-url="" id="submit_thought_form" >Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- new -->
+<!-- 感悟.modal end-->
+	<main class="container">
+		<div >
+			<div class="col-lg-12 col-sm-12 ">
+				<header class="clearfix">
+					<div class="clear"></div> 	
+					<div class="navbar clearfix">
+						<span class="pull-left">
+							<a href="/" class="logo">
+								<img src="/static/images/stucampus_logo.png" alt="szulogo">
+							</a>
+							<a href="{% url 'summer_plans:list' plan_category.english_name %}" class="theme_title">{{ plan_category.name }}</a>
+							<span class="theme_title">{{title}}</span>
+						</span>	
+						<span class="pull-right right_box">
+						<a href="#search" data-toggle="modal" class="function_btn"><span class="glyphicon glyphicon-search my_icon"></span> </a>
+						<!-- 下拉框 start-->
+						
+						<a id="dropdownMenu"  class="function_btn dropdown-toggle" data-toggle="dropdown" href="#">
+							<span class="glyphicon glyphicon-align-justify my_icon" ></span>
+						</a>
+						<!-- 下拉按钮 -->
+						<ul class="dropdown-menu pull-right" role="menu" 
+						aria-labelledby="dropdownMenu">
+						{% if not request.session.szu_no %}
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:add_plan' plan_category.english_name %}"><span class="glyphicon glyphicon-upload"></span> 登录</a>
+						</li>
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:like_ranking_list' plan_category.english_name %}">
+								<span class="glyphicon glyphicon-hand-up"></span> 点赞排行
+							</a>
+						</li>
+						{%  for lottery_list in plan_category.lottery_list.all %}
+						{% if lottery_list.is_on %}
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:show_lottery_list' plan_category.english_name lottery_list.pk %}">
+								<span class="glyphicon glyphicon glyphicon-folder-open"></span> {{ lottery_list.name }}
+							</a>
+						</li>
+						{% endif %}
+						{% endfor %}
+
+						{% if plan_category.tip_time|time_to_on %}
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:has_thought_plan_list' plan_category.english_name %}">
+								<span class="glyphicon glyphicon-pencil"></span> 计划感想
+							</a>
+						</li>
+						{% endif %}
+
+						
+						{% else %}
+						<li role="presentation">
+							<a href="#form_modal" class="form_modal_btn" tabindex="-1" role="button" class="btn" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> 发表计划
+							</a>
+						</li>
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:self_plan' plan_category.english_name request.session.szu_no %}"><span class="glyphicon glyphicon-user"></span> 我的计划</a>
+						</li>
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:like_ranking_list' plan_category.english_name %}">
+								<span class="glyphicon glyphicon-hand-up"></span> 点赞排行
+							</a>
+						</li>
+						{% if plan_category.tip_time|time_to_on %}
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:has_thought_plan_list' plan_category.english_name %}">
+								<span class="glyphicon glyphicon-pencil"></span> 计划感想
+							</a>
+						</li>
+						{% endif %}
+						{%  for lottery_list in plan_category.lottery_list.all %}
+						{% if lottery_list.is_on %}
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:show_lottery_list' plan_category.english_name lottery_list.pk %}">
+								<span class="glyphicon glyphicon glyphicon-folder-open"></span> {{ lottery_list.name }}
+							</a>
+						</li>
+						{% endif %}
+						{% endfor %}
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:logout' plan_category.english_name %}"><span class="glyphicon glyphicon-off"></span> 登出</a>
+						</li>
+						{% endif %}
+						{% if perms.summer_plans.send_email %}
+						<li role="presentation">
+							<a role="menuitem" tabindex="-1" href="{% url 'summer_plans:senf_email_to_plan_author' plan_category.english_name %}"><span class="glyphicon glyphicon-envelope"></span> 发送邮件通知</a>
+						</li>
+						{% endif %}
+						
+						
+
+					</ul>
+					<!-- 下拉框 end-->
+					
+						
+						</span>
+					</div>
+					
+				</header>
+				
+				{% block content %}
+    			{% endblock %}
+			</div>
+		</div>
+	</main>
+	{{ 'plugins/zepto.min.js' | as_js }}
+	{{ 'plugins/jquery.min.js' | as_js }}
+	{{ 'plugins/bootstrap3/js/bootstrap.min.js' | as_js }}
+	{{ 'plugins/sweetalert/sweetalert.min.js' | as_js }}
+	{{ 'summer_plans/index.js' | as_js }}
+	<!-- 百度统计start -->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4d0c962b688eb374c3f0a499db3087a4";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!-- 百度统计end -->
+
+<!-- 微信分享 -->
+
+
+
+<!-- 微信分享 -->
+</body>
+</html>

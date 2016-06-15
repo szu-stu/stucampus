@@ -30,6 +30,16 @@ def time_to_on(tip_time):
 		return True
 	return False
 
+@register.filter(name='time_to_off')
+def time_to_off(tip_time):
+    '''
+        是否开启
+    '''
+    time_interval = datetime.date.today() -tip_time
+    if time_interval.total_seconds()<=0:
+        return False
+    return True
+
 @register.filter(name='show_name')
 def show_name(person_list):
     '''
@@ -55,6 +65,13 @@ def show_last_name(name):
     '''
     
     return name[-1:]
+
+@register.filter(name='slice_sort_list')
+def slice_sort_list(lottery_list):
+    '''
+        显示人物名字最后一个字
+    '''
+    return lottery_list.order_by("-result")[:50]
 
 
 

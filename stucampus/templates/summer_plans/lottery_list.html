@@ -1,0 +1,46 @@
+{% extends 'summer_plans/base.html' %}
+{% load date_tools %}<!-- 使用slice_sort_list -->
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-xs-12 col-sm-12 advertisement">
+			广告位招租
+		</div>
+		{% if rank %}<div class="user_rank">你的幸运值排名目前是第{{ rank }}</div>
+		{% endif %}
+	</div>
+</div>
+<div class="table-responsive" id="lottery_list_table_box">
+	<table id="lottery_list_table" class="table table-bordered">
+		<tr>
+			<th>排名</th>
+			<th>姓名</th>
+			<th>学院</th>
+			<th>幸运值</th>
+		</tr>
+		{% for lottery in lottery_list.lottery.all|slice_sort_list %}
+		<tr>
+			<td>{{ forloop.counter }}</td>
+			<td>{{ lottery.person.szu_name }}</td>
+			<td>{{ lottery.person.szu_org_name }}</td>
+			<td>{{ lottery.result }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+<footer class="container-fluid fix_footer">
+	<div class="row">
+		<div class="col-md-8 col-xs-8 col-sm-8 tip_message">
+		{% if lottery_list.start_date|time_to_on and not lottery_list.end_date|time_to_off %}
+		抽奖已开始，将在{{lottery_list.end_date|from_now}}结束
+		{% elif not lottery_list.start_date|time_to_on %}
+		在{{lottery_list.start_date|from_now}}将进行抽奖
+		{% elif  lottery_list.end_date|time_to_off %}
+		抽奖已结束
+		{% endif %}
+		</div>
+		<div class="col-md-4 col-xs-4 col-sm-4"><a href="javascript:void(0)" id="draw_btn" data-url="{% url 'summer_plans:draw' plan_category.english_name lottery_list.pk %}">抽奖</a></div>
+	</div>
+</footer>
+
+{% endblock %}

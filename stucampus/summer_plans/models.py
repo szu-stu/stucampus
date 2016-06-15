@@ -7,7 +7,7 @@ from django.db import models
 
 class User(models.Model):
     AVATAR_COLOR_CHOICES = (
-            (1,"#A0C1E5"),(2,"#DAE5A0"),(3,"#E5A1A0"),(4,"#D6A0E5"),(5,"#506B90")
+            (1,"#A0C1E5"),(2,"#506B90"),(3,"#E5A1A0"),(4,"#D6A0E5"),(5,"#DAE5A0")
         )
     avatar_color = models.IntegerField(default=1,choices=AVATAR_COLOR_CHOICES)
     szu_no = models.CharField(max_length=10,null=False,unique=True)
@@ -18,7 +18,7 @@ class User(models.Model):
     email = models.EmailField(null=True,blank=True)
 
     def __unicode__(self):
-        return self.szu_name
+        return self.szu_name+"_"+self.szu_ic
 
 class PlanCategory(models.Model):
     class Meta:
@@ -60,3 +60,27 @@ class PlanRecord(models.Model):
         return self.content
 
 
+class Lottery(models.Model):
+    '''
+        抽奖彩票
+    '''
+    name = models.CharField(max_length=20,null=True,blank=True)
+    person = models.ForeignKey(User,null=False)
+    result = models.IntegerField(default=0,editable=False)
+
+    def __unicode__(self):
+        return u"%s_%s%s的彩票" %(self.person.szu_name,self.person.szu_ic,self.name)
+
+class LotteryList(models.Model):
+    '''
+        抽奖名单
+    '''
+    name = models.CharField(verbose_name=u'名称',max_length=20,null=True,blank=True)
+    category = models.ForeignKey(PlanCategory, null=False,related_name="lottery_list")
+    lottery = models.ManyToManyField(Lottery,blank=True)
+    start_date = models.DateField(verbose_name =u'开启抽奖的时间',blank=False, null=False)
+    end_date = models.DateField(verbose_name =u'关闭抽奖的时间',blank=False, null=False)
+    is_on = models.BooleanField(verbose_name=u'是否开启',default=False,blank=True)
+
+    def __unicode__(self):
+        return u"%s_%s抽奖名单" %(self.category.name,self.name)

@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.core.mail import send_mail,send_mass_mail,EmailMultiAlternatives
 
 from .forms import PlanForm,PlanThoughtForm,PlanRecordForm
-from .models import Plan,PlanCategory,User,PlanRecord
+from .models import Plan,PlanCategory,User,PlanRecord,Lottery,LotteryList
 from stucampus.utils import spec_json,render_json
 from stucampus.account.permission import check_perms
 
@@ -58,7 +58,7 @@ class AddPlan(View):
                         szu_org_name=request.session['szu_org_name'].split("/")[1],
                         szu_sex=request.session['szu_sex'],
                         email=form.cleaned_data['email'],
-                        avatar_color=random.randint(1,5),
+                        avatar_color=get_avator_color(request),
                         )
             author.save()
         plan_category = get_object_or_404(PlanCategory,english_name=category_english_name)
@@ -239,6 +239,55 @@ def update_plan_record(request,category_english_name,id):
     form.save()
     return render_json({"status":"success","redirect_url":reverse('summer_plans:list',args=(category_english_name,))})
 
+@login_szu
+def draw(request,category_english_name,id):
+    '''
+        用户抽奖,该id为抽奖名单id
+    '''
+
+    lottery_list = get_object_or_404(LotteryList,pk=id,is_on=True)
+    start_time_interval = datetime.date.today() - lottery_list.start_date
+    end_time_interval = datetime.date.today()-lottery_list.end_date
+    if start_time_interval.total_seconds()<0:
+        messages=u"还没到抽奖时间哦，敬请期待"
+        print messages
+        return spec_json(status='errors', messages=messages)
+    if end_time_interval.total_seconds()>0:
+        messages=u"抽奖已经结束，感谢你的参与"
+        print messages
+        return spec_json(status='errors', messages=messages)
+    user =get_user(request)
+    if  lottery_list.lottery.count() == 0:
+        messages = u"对不起，没有抽奖名单"
+        print messages
+        return spec_json(status='errors', messages=messages)
+    lottery_list_person = [lottery.person for lottery in lottery_list.lottery.all()]
+    if user not in lottery_list_person:
+        messages = u"对不起，你没有资格抽奖"
+        print messages
+        return spec_json(status='errors', messages=messages)
+    lotterys = lottery_list.lottery.filter(person=user,result=0)
+    if not lotterys.exists():
+        messages = u"对不起，你已经抽过奖了"
+        print messages
+        return spec_json(status='errors', messages=messages)
+    lottery = lotterys[0]
+    lottery.result = random.randint(1,10000000)
+    lottery.save()
+    return render_json({"status":"success","lottery_result":lottery.result,"redirect_url":reverse('summer_plans:list',args=(category_english_name,))})
+
+def show_lottery_list(request,category_english_name,id):
+    '''
+        用户抽奖,该id为抽奖名单id
+    '''
+    lottery_list = get_object_or_404(LotteryList,pk=id,is_on=True)
+    plan_category = get_object_or_404(PlanCategory,english_name=category_english_name)
+    title = "【%s】"%lottery_list.name
+    rank = get_rank(request,lottery_list)
+    print rank
+    return render(request, "summer_plans/lottery_list.html",{'lottery_list':lottery_list,'plan_category':plan_category,'title':title,"rank":rank})
+
+
 
 
 def get_user(request):
@@ -255,7 +304,7 @@ def get_user(request):
                         szu_ic=request.session['szu_ic'],
                         szu_org_name=request.session['szu_org_name'].split("/")[1],
                         szu_sex=request.session['szu_sex'],
-                        avatar_color=random.randint(1,5),
+                        avatar_color=get_avator_color(request),
                         )
         author.save()
     return author
@@ -275,3 +324,22 @@ def return_plan_list(request,plan_list,plan_category,title=""):
         return render(request, "summer_plans/index.html",{'plan_list':plan_list,'plan_category':plan_category,'user':user,'title':title})
     else:
         return render(request, "summer_plans/ajax_plan_list.html",{'plan_list':plan_list,'plan_category':plan_category})
+
+def get_rank(request,lottery_list):
+    '''
+        工具函数，获取排名
+    '''
+    user = get_user(request)
+    if user is None:
+        return None
+    sorted_lotterys = lottery_list.lottery.all().order_by("-result")
+    print len(sorted_lotterys)
+    for i in range(len(sorted_lotterys)):
+        if user == sorted_lotterys[i].person:
+            return i+1
+    return None
+
+def get_avator_color(request):
+    if request.session.get("szu_sex") == u"男":
+        return random.randint(1,2)
+    return random.randint(3,5)

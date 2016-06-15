@@ -1,7 +1,7 @@
 from django.conf.urls import url, patterns
 
 from .views import AddPlan,like,search,plan_list,self_plan,delete,logout,post_thought,like_ranking_list,senf_email_to_plan_author,has_thought_plan_list
-from .views import add_plan_record,delete_plan_record,update_plan_record
+from .views import add_plan_record,delete_plan_record,update_plan_record,draw,show_lottery_list
 
 urlpatterns = [
 	url(r'^(?P<category_english_name>\w*)/logout/?$',logout,name='logout'),
@@ -18,5 +18,7 @@ urlpatterns = [
     url(r'^(?P<category_english_name>\w*)/add_plan_record/(?P<id>\d*)/?$',add_plan_record,name='add_plan_record'),
     url(r'^(?P<category_english_name>\w*)/delete_plan_record/(?P<id>\d*)/?$',delete_plan_record,name='delete_plan_record'),
     url(r'^(?P<category_english_name>\w*)/update_plan_record/(?P<id>\d*)/?$',update_plan_record,name='update_plan_record'),
+    url(r'^(?P<category_english_name>\w*)/draw/(?P<id>\d*)/?$',draw,name='draw'),
+    url(r'^(?P<category_english_name>\w*)/show_lottery_list/(?P<id>\d*)/?$',show_lottery_list,name='show_lottery_list'),
 
 ]	

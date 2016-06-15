@@ -9,7 +9,7 @@ ul,li{
 }
 body{
 	position: relative;
-	background-color:#F8F8F8;
+	background-color:#fff;
 	font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
 }
 h1,h2,h3,h4
@@ -121,6 +121,10 @@ header .navbar span
 {
 	height: 100%;
 	vertical-align: middle;
+}
+header .navbar .dropdown-menu a
+{
+	padding: 0.8rem 0.8rem;
 }
 .like_persons_wrapper
 {
@@ -253,3 +257,53 @@ header .navbar span
 	width: 30px;
 	height: 30px;
 }
+/*lottery_list start*/
+#lottery_list_table_box
+{
+	margin: 3rem 0;
+}
+#lottery_list_table_box #lottery_list_table tr th,#lottery_list_table_box #lottery_list_table tr td
+{
+	text-align: center;
+}
+
+.fix_footer
+{
+	position: fixed;
+	bottom:0;
+	left: 0;
+	right: 0;
+	padding: 10px;
+	font-size: 0.9rem;
+	text-align: center;
+	background-color: #F8F8F8;
+	zoom:1;
+	z-index: 999;
+	padding: 0;  
+}
+.tip_message
+{
+	padding: 0.3rem;
+	vertical-align:middle;   
+  	display:table-cell;  
+}
+.fix_footer #draw_btn
+{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	padding: 0.3rem;
+	background: #337ab7;
+	color: #fff;
+
+}
+.advertisement
+{
+	margin-top: 3rem; 
+	text-align: center;
+}
+.user_rank
+{
+	text-align: center;
+}
+/*lottery_list end*/
