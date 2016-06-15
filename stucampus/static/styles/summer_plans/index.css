@@ -283,7 +283,7 @@ header .navbar .dropdown-menu a
 }
 .tip_message
 {
-	padding: 0.3rem;
+	padding: 0.5rem;
 	vertical-align:middle;   
   	display:table-cell;  
 }
@@ -292,7 +292,7 @@ header .navbar .dropdown-menu a
 	display: inline-block;
 	width: 100%;
 	height: 100%;
-	padding: 0.3rem;
+	padding: 0.5rem;
 	background: #337ab7;
 	color: #fff;
 
