@@ -109,7 +109,7 @@ def has_thought_plan_list(request,category_english_name):
         发表过感想的列表
     '''
     plan_category = get_object_or_404(PlanCategory,english_name=category_english_name,is_on=True)
-    plan_list = Plan.objects.filter(category=plan_category).exclude(thought=None).order_by("-like_count")
+    plan_list = Plan.objects.filter(category=plan_category,deleted=False).exclude(thought=None).order_by("-like_count")
     return return_plan_list(request,plan_list,plan_category,title=u"【计划感想】")
 
 def plan_list(request, category_english_name=None):
