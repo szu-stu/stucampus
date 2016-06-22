@@ -55,7 +55,7 @@ class AddPlan(View):
             author = User(szu_no=request.session['szu_no'],
                         szu_name=request.session['szu_name'],
                         szu_ic=request.session['szu_ic'],
-                        szu_org_name=request.session['szu_org_name'].split("/")[1],
+                        szu_org_name=request.session['szu_org_name'],
                         szu_sex=request.session['szu_sex'],
                         email=form.cleaned_data['email'],
                         avatar_color=get_avator_color(request),
