@@ -34,7 +34,7 @@
         {% for article in page %}
             <div class="artical">
                 <a href="{% url 'articles:display' article.pk %}">
-                    <img class="a-pic" src=" {{ article.cover.name | scale_qiniu_img:request }}">
+                    <div class="a-pic"><img src=" {{ article.cover.name | scale_qiniu_img:request }}"></div>
                     <div class="a-content">
                         <span class="a-title">{{ article.title | truncatechars:19  }}</span>
                         <div class="a-info">
