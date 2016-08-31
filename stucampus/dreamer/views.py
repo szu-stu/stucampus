@@ -5,59 +5,54 @@ from django.core.paginator import InvalidPage,Paginator
 from django.http import *
 from django.core.urlresolvers import reverse
 from django.views.generic import View
+from django.db.models import Q
 
 from stucampus.dreamer.models import Register
 from stucampus.dreamer.forms import Register_Form
 from stucampus.account.permission import check_perms
+from stucampus.utils import spec_json,render_json
 
-from django.db.models import Q
 import datetime
-def signup_mobile(request):
-     return render(request, 'dreamer/apply_mobile.html', {'form': Register_Form()})
+from login_szu import login_szu
+
+
 
 class SignUp(View):
     def get(self, request):
-        if request.META['HTTP_USER_AGENT'].lower().find('mobile') > 0:
-            return HttpResponseRedirect('/dreamer/mobile/')
+        if request.session.get('szu_no') is None:
+            is_login=False
+            return render(request, 'dreamer/index.html', {'is_login': is_login})
         else:
-            return render(request, 'dreamer/apply.html', {'form': Register_Form()})
+            is_login=True
+            is_registered=False
+            if Register.objects.filter(stu_ID=request.session['szu_no']).exists():
+                szu_name=request.session['szu_name']
+                is_registered=True
+                return render(request, 'dreamer/index.html', {'is_login': 				is_login,'is_registered':is_registered,'szu_name':szu_name})
+            return render(request, 'dreamer/index.html', {'is_login': is_login,'is_registered':is_registered,'Register_Form':Register_Form()})
+
+    @login_szu
     def post(self, request):
-        msg = Register()
-        tmp = Register_Form(request.POST)
-        if request.META.has_key('HTTP_X_FORWARDED_FOR'):  
-            msg.ip = request.META['HTTP_X_FORWARDED_FOR']
-        else:
-            msg.ip = request.META['REMOTE_ADDR'] 
-        msg.status = True
-        now = datetime.date.today()
-        if tmp.is_valid():
-            msg.name = tmp.cleaned_data['name']
-            msg.gender = tmp.cleaned_data['gender']
-            msg.stu_ID = tmp.cleaned_data['stu_ID']
-            msg.college = tmp.cleaned_data['college']
-            msg.mobile = tmp.cleaned_data['mobile']
-            msg.dept1 = tmp.cleaned_data['dept1']
-            msg.dept2 = tmp.cleaned_data['dept2']
-            msg.self_intro = tmp.cleaned_data['self_intro']
-            same_SID = Register.objects.filter(stu_ID = msg.stu_ID, status=True).count()
-            if same_SID > 0:
-                print "1"
-                return render(request, 'dreamer/failed.html')
-            else:
-                if Register.objects.filter(sign_up_date=now).filter(ip=msg.ip).count()>=50:  
-                    tip="您当前IP已于同一天成功报名五十次，请等候第二天或换另一台电脑再进行报名"	
-                    return render(request, 'dreamer/failed.html',{'tip':tip})
-                else:
-                    msg.save()
-                    return render(request, 'dreamer/succeed.html', {'form': msg})
-        else:
+        if Register.objects.filter(stu_ID=request.session['szu_no']).exists():
+            messages = u"您已经成功报名过，不能重复报名，如需更改信息，请联系学子天地工作人员"
+            return spec_json(status='errors', messages=messages)
+        form = Register_Form(request.POST)
+        if not form.is_valid():
+            messages = form.errors.values()
+            return spec_json(status='errors', messages=messages)
+        register = form.save(commit=False)
+        register.name=request.session['szu_name']
+        register.gender=request.session['szu_sex']
+        register.college=request.session['szu_org_name']
+        register.stu_ID=request.session['szu_no']
+        register.grade=request.session['szu_no'][:4]
+        register.save()
+        return render_json({"status":"success","name":register.name})
+		
 
-            return render(request, 'dreamer/failed.html')
-
-
-def index(request):
-    if request.method == 'GET':
-        return render(request, 'dreamer/index.html')
+@login_szu
+def login_redirect(request):
+    return HttpResponseRedirect(reverse('dreamer:signup')+"#page4")
 
 
 class CheckMsg(View):

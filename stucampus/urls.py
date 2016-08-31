@@ -51,7 +51,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^spider/', include(spider_urls, namespace='spider')),
     url(r'^carousels/', include(carousels_urls, namespace='carousels')),
-    #url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
+    url(r'^dreamer/', include('stucampus.dreamer.urls', namespace='dreamer')),
 	url(r'^freetimecount/', include(FreeTimeCount_urls,namespace='FreeTimeCount')),
     url(r'^member_infor/', include(member_infor_url,namespace='member_infor')),
     url(r'^summer_plans/', include(summer_plans_url,namespace='summer_plans')),

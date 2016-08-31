@@ -1,20 +1,27 @@
 #-*- coding: UTF-8 -*-   
 from django import forms
+from .models import Register
 
-class Register_Form(forms.Form):
-    DEPT = (
-        ('xzb', u'行政部'),
-        ('sjb', u'设计部'),
-        ('jsb', u'技术部'),
-        ('cbb', u'采编部'),
-        ('yyb', u'运营部'),
-        )
+import re
 
-    name = forms.CharField(max_length = 20)
-    gender = forms.CharField(max_length = 6)
-    stu_ID = forms.IntegerField(max_value = 2015999999, min_value = 2010000000)
-    college = forms.CharField(max_length = 30)
-    mobile = forms.CharField(max_length = 11)
-    dept1 = forms.ChoiceField(choices = DEPT)
-    dept2 = forms.ChoiceField(choices = DEPT)
-    self_intro = forms.CharField(widget = forms.Textarea({'max_length': 500}))
+class Register_Form(forms.ModelForm):
+    email = forms.CharField(required=True,error_messages={'required':u'邮箱不能为空'},
+                            )
+    mobile = forms.CharField(required=True,error_messages={'required':u'手机号码不能为空'})
+    self_intro = forms.CharField(required=False,max_length=500,error_messages={'max_length':u'自我介绍不能超过五百字'})
+    class Meta:
+        model = Register
+        fields = ['mobile','dept1','dept2','email','self_intro']
+    def clean_dept1(self):
+        dept1=self.cleaned_data.get("dept1")
+        if dept1==u"--":
+            raise forms.ValidationError((u'第一志愿部门必填'))
+        return dept1
+    def clean_mobile(self):
+        mobile = self.cleaned_data.get("mobile")
+        p2=re.compile('^0\d{2,3}\d{7,8}$|^1[358]\d{9}$|^147\d{8}')
+        if p2.match(mobile):
+            return mobile
+        raise forms.ValidationError((u'手机号码格式有误'))
+
+    	

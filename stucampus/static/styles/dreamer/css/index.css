@@ -1,0 +1,136 @@
+@import "base.css";
+@import "page-1.css";
+@import "page-2.css";
+@import "page-3.css";
+@import "page-4.css";
+@import "page-5.css";
+@import "page-6.css";
+@import "background.css";
+@import "movement.css";
+.resume-hide{
+    display: none;
+}
+
+.section.item-1 ,
+.section.item-2 ,
+.section.item-3 ,
+.section.item-4 ,
+.section.item-6 {
+    text-align: center;
+    font: 50px "Microsoft Yahei";
+    color: #fff;
+}
+
+
+/**********************å¯¼èˆªæ¡**********************************/
+.resume{
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    border: none;
+}
+.navbar {
+    background: rgba(0,0,0,0);
+    transition: 1s all ease;
+}
+.navbar.blue {
+    background: rgba(71, 166, 173,1);
+}
+.navbar.black {
+    background: rgba(51, 51, 51,.7);
+}
+
+.resume .navbar-brand,
+.resume .navbar-brand:visited,
+.resume .navbar-brand:hover
+{
+    color: #2bb0ad;
+    font-size: 18px;
+}
+.resume .navbar-right li a,
+.resume .navbar-right li a:visited{
+    color: #ffffff;!important;
+    font-weight: 500;
+    text-decoration: none;
+}
+.resume .navbar-right li a:hover {
+    color: #ffffff;!important;
+    text-decoration: none;
+}
+
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:visited,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: #ffffff;
+    background-color:#5BC5BE ;
+    text-decoration: none;
+}
+.navbar-default .navbar-toggle {
+    background-color: #122b40;
+}
+ .navbar-default .navbar-toggle:focus{
+     background-color: #122b40;
+}
+.navbar-default .navbar-toggle:hover {
+    background-color: #122b40;
+}
+/********************å¯¼èˆªæ¡End***************************************/
+
+/********************å³ä¾§å¯¼èˆªæ *************************************/
+
+#fp-nav{
+    top: 80%;
+}
+
+#fp-nav ul li{
+    vertical-align: middle;
+    margin: 10px 50px 0 ;
+}
+#fp-nav li .active {
+    background-position: 0 bottom;
+}
+#fp-nav ul li a {
+    display: block;
+    color: #8F9DA4;
+    width: 21px;
+    height: 21px;
+    background: url(../images/dot.png) 5px 5px no-repeat;
+    /*right: 0;*/
+}
+#fp-nav span {
+    display: none;
+}
+
+.clear{
+    clear: both;
+}
+#register_form{
+	text-align:center;
+}
+#register_form #error_msg{
+	padding:5px;
+	color:red;
+}
+#register_form #register_form_submit_btn
+{
+	margin-top:8px;
+}
+.tip_msg
+{
+    
+}
+.tip_msg a
+{
+    color: #337ab7;
+    text-decoration:none;
+}
+.success_msg
+{
+    color: #2bb0ad;
+}
+/****************************å³ä¾§å¯¼èˆªæ End******************************/
+
+
+
+

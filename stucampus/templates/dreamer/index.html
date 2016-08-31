@@ -1,5 +1,186 @@
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学子天地报名</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <!-- <link rel="shortcut icon" href="./images/favicon.ico"/> -->
+    {% load html_tools %}
+    <!--lib css-->
+    <link rel="stylesheet" href="/static/scripts/dreamer/lib/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/styles/dreamer/css/jquery.fullPage.css"/>
+    <link rel="stylesheet" href="/static/styles/dreamer/css/animate.css">
+
+    <!--personal css-->
+    <link rel="stylesheet" href="/static/styles/dreamer/css/index.css"/>
+</head>
 <body>
-This is index.
+<!--导航栏-->
+<nav class="navbar navbar-default resume black">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand EngName" data-menuanchor="page1" href="#page1">学子天地</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right" id="menu">
+                <li data-menuanchor="page2">
+                    <a href="#page2">学子简介</a>
+                </li>
+                <li data-menuanchor="page3">
+                    <a href="#page3">部门介绍</a>
+                </li>
+                <li data-menuanchor="page5">
+                    <a href="#page4">加入我们</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="guns sky">
+    <div class="clouds_one"></div>
+    <div class="clouds_two"></div>
+    <div class="clouds_three"></div>
+</div>
+<div class="pure">
+
+</div>
+<div id="resume">
+    <div class="section item-1">
+        <div class="row word">
+            <span class="resume-hide">学子天地</span>
+            <p class="motto resume-hide hinge-sty" style="position: relative">联结学子，创新天地。</p>
+            <a href="#" class="next-page ">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </div>
+        <div class="corner1 corner">
+            <img src="/static/images/dreamer/images/page_home/1.png" alt=""/>
+        </div>
+        <div class="corner2 corner">
+            <img src="/static/images/dreamer/images/page_home/2.png" alt=""/>
+        </div>
+        <div class="corner3 corner">
+            <img src="/static/images/dreamer/images/page_home/3.png" alt=""/>
+        </div>
+        <div class="corner4 corner">
+            <img src="/static/images/dreamer/images/page_home/4.png" alt=""/>
+        </div>
+    </div>
+    <div class="section item-6">
+        <h1>学子天地</h1>
+        <div class="word">
+        <p>
+            深圳大学唯一由学生自主运营的官方校园网站
+        </p>
+        </div>
+    <div class="word">
+        <p>
+           万千学子的风貌窗口与心灵港湾<br>
+        </p>
+    </div>
+    <div class="word">
+        <p>
+            仰望蓝天，这里学即有所成
+        </p>
+    </div>
+    <div class="word">
+        <p>
+            脚踏实地，这里成即有所行
+        </p>
+    </div>
+        <div class="top"></div>
+        <div class="foot"></div>
+    </div>
+    <div class="section item-2">
+        <div class="container">
+            <h class='hidden-xs hidden-sm page2-title'>基本部门</h>
+            <div class="row">
+                <div class=" icon-infomation col-xs-6 col-sm-6 col-md-3">
+                    <a href="#" onclick="introduce(1)"><img src="/static/images/dreamer/images/page-2/cb.png" alt="" ></a>
+                    <h4>采编部</h4>
+                </div>
+                <div class=" icon-infomation col-xs-6 col-sm-6 col-md-3">
+                    <a href="#" onclick="introduce(2)" ><img src="/static/images/dreamer/images/page-2/js.png" alt=""></a>
+                    <h4>技术部</h4>
+                </div>
+                <div class=" icon-infomation col-xs-6 col-sm-6 col-md-3">
+                    <a href="#" onclick="introduce(3)"><img src="/static/images/dreamer/images/page-2/xz.png" alt=""></a>
+                    <h4>行政部</h4>
+                </div>
+                <div class=" icon-infomation col-xs-6 col-sm-6 col-md-3">
+                    <a href="#" onclick="introduce(4)"><img src="/static/images/dreamer/images/page-2/sj.png" alt=""></a>
+                    <h4>设计部</h4>
+                </div>
+                <div class=" icon-infomation col-xs-6 col-sm-6 col-md-3">
+                    <a href="#" onclick="introduce(5)"><img src="/static/images/dreamer/images/page-2/yy.png" alt=""></a>
+                    <h4>运营部</h4>
+                </div>
+                <div class="clear"></div>
+                <div class="intro" id="intro"><p>点击部门了解更多</p></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="section item-5">
+        <div class="container">
+            <h1>报名表</h1>
+            <form id="register_form">
+                {% csrf_token %}
+                {% if is_login %}
+                    {% if is_registered %}
+                        <p>{{szu_name}}同学你好，你已经<span class="success_msg">成功报名</span>，如需修改信息，请联系qq：649743466</p>
+                    {% else %}
+                    <p id="error_msg"></p>
+                    <p><label for="mobile">手机号码:</label><input type="text" id="mobile" name="mobile"></p>
+                    <p><label for="email">邮箱:</label><input type="text" id="email" name="email"></p>
+                    
+                    <p>
+                    <label>志愿部门:</label>
+                    <select name="dept1">
+                        <option value="--">必选</option>
+                        <option value="cbb">采编部</option>
+                        <option value="sjb">技术部</option>
+                        <option value="xzb">行政部</option>
+                        <option value="sjb">设计部</option>
+                        <option value="yyb">运营部</option>
+                    </select>
+                    <select name="dept2">
+                        <option value="--">可选</option>
+                        <option value="cbb">采编部</option>
+                        <option value="jsb">技术部</option>
+                        <option value="xzb">行政部</option>
+                        <option value="sjb">设计部</option>
+                        <option value="yyb">运营部</option>
+                    </select>
+                    </p>
+                    <p><label for="self_intro">自我介绍:</label><br><textarea name="self_intro" rows="5" cols="34" maxlength="500"placeholder="写下你的自我介绍(喜欢的运动、爱好特长等)"></textarea></p>
+                    <p><span class="btn btn-group btn-default btn-group-lg" id="register_form_submit_btn">提交</span></p>
+                    {% endif %}
+                {% else %}
+                    <h4 class="tip_msg"><a href="{% url 'dreamer:login_redirect'%}">通过校园卡登录后报名</a></h4>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    
+</div>
 </body>
 </html>
+{{ 'plugins/jquery.min.js' | as_js }}
+{{ 'plugins/bootstrap3/js/bootstrap.min.js' | as_js }}
+<script src="/static/scripts/dreamer/lib/jquery.fullPage.min.js"></script>
+<script src="/static/scripts/dreamer/lib/jquery.easing.1.3.js"></script>
+<script src="/static/scripts/dreamer/lib/jquery.isotope.js"></script>
+<script src="/static/scripts/dreamer/js/handler.js"></script>
+<script src="/static/scripts/dreamer/js/resumeEnter.js"></script>
+<script src="/static/scripts/dreamer/js/bmintro.js"></script>
+<script src="/static/scripts/dreamer/js/submit_infor.js"></script>
+
