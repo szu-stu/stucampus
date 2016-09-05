@@ -110,7 +110,6 @@ $(function () {
           case 1:
             $('.item-1 .corner').hide();
             $('.resume-hide').hide();
-            $('.navbar').removeClass('black');
 
             break;
 
@@ -161,10 +160,12 @@ $(function () {
               $('.item-6 .top').animate({'height': '30%'},400);
               $('.item-6 .foot').animate({'height': '30%'},400);
             },500)
+              $('.navbar').addClass('black');
               break;
 
           case 'page3':
             $('.item-2 .container').show();
+            $('.navbar').addClass('black');
             break;
           // case 'page4':
           //   $('.navbar').addClass('blue');

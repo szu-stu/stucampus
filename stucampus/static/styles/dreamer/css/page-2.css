@@ -88,4 +88,17 @@
         padding: 10px;
     }
 }
+
+h4,.page2-title{
+    color: #5BC5BE;
+}
+
+.act{
+    -webkit-filter:grayscale(100%);
+    -moz-filter:grayscale(100%);
+    -ms-filter:grayscale(100%);
+    -o-filter:grayscale(100%);
+    filter: grayscale(100%);
+    filter:gray;
+}
 /**********************基本信息页面end*******************************

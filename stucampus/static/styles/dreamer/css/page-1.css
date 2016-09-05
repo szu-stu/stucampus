@@ -6,7 +6,7 @@
     font-size: 50px;
     font-weight: 700;
     color: #5BC5BE;
-    text-shadow: 5px -2px 8px #151414;
+    /*text-shadow: 5px -2px 8px #151414;*/
 }
 .item-1 .word>span.hidden-xs,
 .item-1 .word>span.col-xs-12{
@@ -30,7 +30,7 @@
 .item-1 .next-page,
 .item-1 .next-page:hover ,
 .item-1 .next-page:focus{
-    color: yellowgreen;
+    color: #5BC5BE;
 }
 
 .item-1 .next-page{
@@ -118,3 +118,38 @@
     animation: p-fly 2s ease;
 }
 
+.xuezititle{
+    letter-spacing: 32px;
+    display: block;
+    margin: 30px auto;
+}
+
+.motto{
+    color: black;
+    opacity: 0.51;
+    letter-spacing: 12px;
+}
+
+.EngName img{
+    height: 75px;
+    width: 75px;
+    box-shadow:0 32px 16px rgb(0,0,0,0.23);
+    position: absolute;
+    left:0;
+    top:0 ;
+}
+
+.EngName {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 82px;
+    width: 82px;
+    position: absolute;
+    left: 30px;
+    top: 10px;
+    border: 4px solid rgba(255,255,255,0.54);
+}
+
+*:focus{
+    outline:none !important;
+}
