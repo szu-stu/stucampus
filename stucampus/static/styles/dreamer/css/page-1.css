@@ -153,3 +153,28 @@
 *:focus{
     outline:none !important;
 }
+
+@media screen and (max-width: 768px){
+        .EngName img{
+        height: 37.5px;
+        width: 37.5px;
+        box-shadow:0 16px 8px rgb(0,0,0,0.23);
+        position: absolute;
+        left:0;
+        top:0 ;
+    }
+
+        .EngName {
+        border-radius: 50%;
+        overflow: hidden;
+        height: 41px;
+        width: 41px;
+        position: absolute;
+        left: 15px;
+        top: 5px;
+        border: 2px solid rgba(255,255,255,0.54);
+    }
+    .col-xs-6:nth-child(4),.col-xs-6:nth-child(5){
+    width: 50%;
+}
+}
