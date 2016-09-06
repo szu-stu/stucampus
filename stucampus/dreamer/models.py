@@ -33,6 +33,9 @@ class Register(models.Model):
 	self_intro = models.CharField(max_length = 500,blank=True,null=True)
 	grade=models.CharField(max_length=4)
 	email = models.EmailField(null=True,blank=True)
+
+	def __unicode__(self):
+        return self.name+"_"+self.stu_ID
 	
 
 

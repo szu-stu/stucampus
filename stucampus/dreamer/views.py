@@ -55,18 +55,7 @@ def login_redirect(request):
     return HttpResponseRedirect(reverse('dreamer:signup')+"#page4")
 
 
-class CheckMsg(View):
 
-    def get(self, request):
-        return render(request, 'dreamer/check_msg.html')
-
-    def post(self, request):
-        search=req.POST['search']
-        objects = Register.objects.filter(Q(name=search)|Q(stu_ID=search)&Q(status=True)).count()
-        if objects>0:
-            return HttpResponse("已报名成功")
-        else:
-            return HttpResponse("尚未进行报名或报名不成功，若有疑问请在群里反映.")
 
 
 def succeed(request):
