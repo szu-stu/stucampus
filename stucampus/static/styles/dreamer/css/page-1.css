@@ -122,12 +122,15 @@
     letter-spacing: 32px;
     display: block;
     margin: 30px auto;
+    text-align: center;
+    padding-left:32px; 
 }
 
 .motto{
     color: black;
     opacity: 0.51;
     letter-spacing: 12px;
+    padding-left: 12px;
 }
 
 .EngName img{
@@ -176,5 +179,5 @@
     }
     .col-xs-6:nth-child(4),.col-xs-6:nth-child(5){
     width: 50%;
-}
+    }
 }

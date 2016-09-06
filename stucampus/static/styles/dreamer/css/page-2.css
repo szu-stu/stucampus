@@ -44,6 +44,7 @@
     line-height: 20px;
     text-align: left;
     font-size: 20px;
+    font-weight: 200;
 }
 @media screen and (max-width: 768px) {
     .intro h1{
@@ -65,5 +66,10 @@ h4,.page2-title{
     -o-filter:grayscale(100%);
     filter: grayscale(100%);
     filter:gray;
+}
+
+h3{
+    font-weight: 500;
+    text-align: left;
 }
 /**********************基本信息页面end*******************************
