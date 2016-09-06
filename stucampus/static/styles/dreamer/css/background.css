@@ -5,7 +5,7 @@
     background-size:cover ;
 }
 .item-2 {
-    background: url("/static/images/dreamer/images/base.jpg") no-repeat center center;
+    background:rgba(255, 255, 255, .1);
     -webkit-background-size: cover;
     background-size:cover;
 }
