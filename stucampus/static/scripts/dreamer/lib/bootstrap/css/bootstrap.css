@@ -1420,6 +1420,7 @@ textarea {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+    font-size: 18px;
 }
 
 a {
