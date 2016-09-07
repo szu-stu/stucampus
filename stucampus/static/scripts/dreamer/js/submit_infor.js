@@ -1,10 +1,9 @@
 ;(function($)
 {
 	$("#register_form_submit_btn").click(function(){
-		console.log("success1");
 		$.ajax({
 			type:"post",
-			url:"/dreamer/signup",
+			url:"/dreamer/joinus",
 			dataType:"json",
 			data:$("#register_form").serialize(),
 			success:function(data){

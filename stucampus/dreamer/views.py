@@ -52,7 +52,7 @@ class SignUp(View):
 
 @login_szu
 def login_redirect(request):
-    return HttpResponseRedirect(reverse('dreamer:signup')+"#page4")
+    return HttpResponseRedirect(reverse('dreamer:joinus')+"#page4")
 
 
 
