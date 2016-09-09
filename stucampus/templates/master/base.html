@@ -72,7 +72,7 @@
                     <a href="{% url 'carousels:add' %}">添加焦点图</a>
                     <a href="{% url 'carousels:manage' %}">焦点图列表</a>
                 {% endif %}
-                {% if perms.manager.add %}
+                {% if perms.dreamer.manager %}
                     <a href="/dreamer/manage">报名管理</a>
                 {% endif %}
                 {% if perms.member_infor.member_add %}
