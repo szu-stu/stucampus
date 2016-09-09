@@ -45,7 +45,7 @@ class SignUp(View):
             return spec_json(status='errors', messages=messages)
         register = form.save(commit=False)
         register.name=request.session['szu_name']
-        register.gender=request.session['szu_sex']
+        register.gender=transfer_sex(request.session['szu_sex'])
         register.college=request.session['szu_org_name']
         register.stu_ID=request.session['szu_no']
         register.grade=request.session['szu_no'][:4]
@@ -188,3 +188,11 @@ def detail(request):
     apply_id = request.GET.get('id')
     app = Register.objects.get(id=apply_id)
     return render(request,'dreamer/detail.html',{'app':app})
+
+def transfer_sex(sex):
+    '''
+        转化sex
+    '''
+    if sex ==u'男':
+        return u"male"
+    return u"female"
