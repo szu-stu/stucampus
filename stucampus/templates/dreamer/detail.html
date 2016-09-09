@@ -5,20 +5,10 @@
 {{ 'manage/account.css' | as_css }}
 {% endblock %}
 {% block beforeload %}
-<script type="text/javascript">
-    var nowid = {{app.id}};
-    var nextid = nowid+1;
-    var status="{{ app.status }}";
-    var urlf = "{% url 'dreamer:detail' %}?id="+nextid;
-    if(status=="False")
-    {
-        location.href=urlf;
-    }
-</script>
+
 {% endblock %}
 {% block content %}
-    <form class="modified_form" action="{% url 'dreamer:modify' %}" method="post">
-        {% csrf_token %}
+<h3>{{ title }}</h3>
 		<div  id='ha'></div>
         <div class="content">
 				<table>
@@ -59,18 +49,11 @@
 		<div class="dialog_modal"></div>
 		<div class="management">
 			<a href="{% url 'dreamer:delete' %}?id={{ app.id }}" class="btn_delete">删除</a>
-			<a href="" class="btn_modify">修改</a>
-		</div>
-	</form>
-		<div class="pagination" id='pag'>
+			<a href="{% url 'dreamer:modify' %}?id={{ app.id }}" class="btn_modify">修改</a>
 		</div>
 	</div>
 <script type="text/javascript">
-        var nowid = {{app.id}};
-        var lastid = nowid-1;
-        var nextid = nowid+1;
-        var str = "<a href='{% url 'dreamer:detail' %}?id="+lastid+"' class='prev'>上一个报名者</a><a href='{% url 'dreamer:detail' %}?id="+nextid+"' class='next'>下一个报名者</a>";
-        document.getElementById('pag').innerHTML = str;
+
 		$(function () {
                 $(".btn_delete").bind("click", function () { //询问按钮事件
                     if ($(".name").html() != null) { //如果对象不为空
@@ -99,33 +82,7 @@
             		}
             	});
             }
-            //修改按钮
-        $(function(){
-        	$(".btn_modify").bind("click",function(){
-        		var name="<input type='text' name='name' value='"+$(".name").text()+"'>";
-        		var sex="<input type='text' name='sex' value='"+$(".sex").text()+"'>";
-        		var stu_id="<input type='text' name='stu_id' value='"+$(".stu_id").text()+"'>";
-        		var college="<input type='text' name='college' value='"+$(".college").text()+"'>";
-        		var mobile="<input type='text' name='mobile' value='"+$(".mobile").text()+"'>";
-        		var desired_dept_1="<input type='text' name='desired_dept_1' value='"+$(".desired_dept_1").text()+"'>";
-        		var desired_dept_2="<input type='text' name='desired_dept_2' value='"+$(".desired_dept_2").text()+"'>";
-        		var introduce="<input type='text' name='introduce' value='"+$(".introduce").text()+"'>";
-        		var submit_input="<input type='submit' value='完成'>"
-        		var return_input="<a class='btn_return' href='{% url 'dreamer:detail' %}?id={{ app.id }}'>返回</a>"
-        		$(".name").replaceWith(name);
-        		$(".sex").replaceWith(sex);
-        		$(".stu_id").replaceWith(stu_id);
-        		$(".college").replaceWith(college);
-        		$(".mobile").replaceWith(mobile);
-        		$(".desired_dept_1").replaceWith(desired_dept_1);
-        		$(".desired_dept_2").replaceWith(desired_dept_2);
-        		$(".introduce").replaceWith(introduce);
-        		$(".btn_delete").replaceWith(submit_input);
-        		$(".btn_modify").replaceWith(return_input);
-                document.getElementById('ha').innerHTML = "<input name='id' type='text' value='{{ app.id }}' style='display:none'>";
-        		return false;
-        	})
-        });
+            
         </script>
 </script>
 {% endblock %}

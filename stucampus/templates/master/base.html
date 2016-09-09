@@ -72,6 +72,9 @@
                     <a href="{% url 'carousels:add' %}">添加焦点图</a>
                     <a href="{% url 'carousels:manage' %}">焦点图列表</a>
                 {% endif %}
+                {% if perms.manager.add %}
+                    <a href="/dreamer/manage">报名管理</a>
+                {% endif %}
                 {% if perms.member_infor.member_add %}
                     <a href="{% url 'member_infor:add' %}">添加通讯录人员</a>
                     <a href="{% url 'member_infor:add_list' %}">批量添加通讯录</a>

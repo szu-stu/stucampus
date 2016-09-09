@@ -1,0 +1,52 @@
+{% extends 'master/base.html' %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ 'manage/add_articles.css' | as_css }}
+    {{ form.media }}
+{% endblock %}
+
+{% block beforeload %}
+<script type="text/javascript">
+    window.onload=function(){
+        $("#edui1").css("width","100%");
+        $("#edui1_iframeholder").css("width","100%");
+    }
+</script>
+<style>
+    .content,h2
+    {
+        text-align: center;
+        margin: 0 auto;
+    }
+    .content p
+    {
+        margin-bottom: 5px;
+    }
+    .content .errorlist
+    {
+        color: red;
+    }
+    .tips
+    {
+        width: 100%;
+        text-align: center;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<form method="POST" enctype="multipart/form-data"action="{{ post_url }}">
+    {% csrf_token %}
+    <div class="content">
+    {{ form.as_p }}
+    </div>
+    {% if tips %}
+    <p class="tips" > <span>注意事项： </span>{{ tips }}</p>
+    {% endif %}
+    <div class="line_aside"></div>
+    <input type="submit" value="提交" class="add">    
+</form>  
+{% endblock %}

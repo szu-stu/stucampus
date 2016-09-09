@@ -3,8 +3,53 @@
 {% load html_tools %}
 {{ 'dreamer/list.css' | as_css }}
 {{ 'manage/account.css' | as_css }}
+<style type="text/css">
+	.function_bar
+	{
+		padding: 10px;
+		margin: 5px 10px;
+		background-color: #38c2a8;
+		color:#fff;
+		display: inline-block;
+	}
+	h3
+	{
+		text-align: center;
+	}
+</style>
+<script type="text/javascript">
+	
+</script>
 {% endblock %}
 {% block content %}	
+		<form action="/dreamer/manage/" method="GET" class="function_bar">
+			<label for="grade">年级:
+				<select id="grade" name="grade">
+					<option value="2015">2015</option>
+					<option value="2016">2016</option>
+				</select>
+			</label>
+			<label>部门:
+				<select id="dept" name="dept">
+					<option value="--" select="selected">所有</option>
+					<option value="jsb">技术部</option>
+					<option value="sjb">设计部</option>
+					<option value="xzb">行政部</option>
+					<option value="yyb">运营部</option>
+					<option value="cbb">采编部</option>
+				</select>
+			</label>
+			<input id="select_grade_dept_btn" type="submit" value="查询">
+		</form>
+		<label class="function_bar">年级报名概况:
+			<select onchange="window.location=this.value;">
+				<option value="/" select="selected">年份</option>
+				<option value="{% url 'dreamer:show_situation' 2015 %}">2015</option>
+				<option value="{% url 'dreamer:show_situation' 2016 %}">2016</option>
+			</select>
+		</label>
+		<a href="{% url 'dreamer:add' %}" class="function_bar">添加报名者</a>
+		<h3>{{ title }}</h3>
 		<div class="search_form">
 			<form method="GET" action='/dreamer/manage/search/'>
 				<input name='search' class="search_input" type="text">
@@ -12,11 +57,12 @@
 			</form>
 		</div>	
 		<div class="content">
-			<table>
+			<table border="1px">
 				<tr>
 					<th>姓名</th>
 					<th>性别</th>
 					<th>学院</th>
+					<th>年级</th>
 					<th>学号</th>
 					<th>手机号</th>
 					<th>第一志愿</th>
@@ -27,6 +73,7 @@
 					<td><a href="{% url 'dreamer:detail' %}?id={{ resource.id }}">{{ resource.name }}<a></td>
 					<td>{{ resource.get_gender_display }}</td>
 					<td>{{ resource.college }}</td>
+					<td>{{ resource.grade }}</td>
 					<td>{{ resource.stu_ID }}</td>
 					<td>{{ resource.mobile }}</td>
 					<td>{{ resource.get_dept1_display }}</td>

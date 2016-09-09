@@ -2,7 +2,7 @@
 .content
 
 {
-	margin-top:50px;
+	margin-top:10px;
 	text-align: center;
 
 }
@@ -10,9 +10,7 @@
 .search_form
 
 {
-
-	margin-top: 50px;
-
+	margin-top: 10px;
 	text-align: center;
 
 }
@@ -20,41 +18,24 @@
 .search_input
 
 {
-
 	margin: 0;
-
 	display: inline-block;
-
-	width: 535px;
-
-	height: 36px;
-
-	line-height: 36px;
+	width: 300px;
+	height: 20px;
+	line-height: 20px;
 
 }
 
 .search_btn
 
 {
-
 	margin: 0;
-
 	display: inline-block;
-
 	width: 100px;
-
-	height: 36px;
-
-	background-color: rgb(43,176,173);
-
+	height: 23px;
+	background-color: #38c2a8;
 	border: 0;
-
-	font-size: 16px;
-
-	color: white;
-
-
-
+	color: #fff;
 }
 
 table
@@ -63,37 +44,13 @@ table
 
 	margin: 0 auto;
 
-	width: 80%;
-
-	background-color:#aaa;
+	width: 100%;
 
 	line-height:25px；
 
 }
 
-th
 
-{
-
-	background-color:#fff;
-
-	width: 15%;
-
-
-
-}
-
-td
-
-{
-
-	background-color:#fff;
-
-	text-align:center;
-
-	width:15%;
-
-}
 
 .pagination
 

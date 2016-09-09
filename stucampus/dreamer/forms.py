@@ -5,13 +5,13 @@ from .models import Register
 import re
 
 class Register_Form(forms.ModelForm):
-    email = forms.CharField(required=True,error_messages={'required':u'邮箱不能为空'},
+    email = forms.CharField(label=u"邮箱",required=True,error_messages={'required':u'邮箱不能为空'},
                             )
-    mobile = forms.CharField(required=True,error_messages={'required':u'手机号码不能为空'})
-    self_intro = forms.CharField(required=False,max_length=500,error_messages={'max_length':u'自我介绍不能超过五百字'})
+    mobile = forms.CharField(label=u"手机",required=True,error_messages={'required':u'手机号码不能为空'})
+    self_intro = forms.CharField(label=u"自我介绍",required=False,max_length=500,error_messages={'max_length':u'自我介绍不能超过五百字'})
     class Meta:
         model = Register
-        fields = ['mobile','dept1','dept2','email','self_intro']
+        fields = ['name','gender','stu_ID','grade','college','mobile','dept1','dept2','email','self_intro']
     def clean_dept1(self):
         dept1=self.cleaned_data.get("dept1")
         if dept1==u"--":

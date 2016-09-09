@@ -250,26 +250,21 @@ def draw(request,category_english_name,id):
     end_time_interval = datetime.date.today()-lottery_list.end_date
     if start_time_interval.total_seconds()<0:
         messages=u"还没到抽奖时间哦，敬请期待"
-        print messages
         return spec_json(status='errors', messages=messages)
     if end_time_interval.total_seconds()>0:
         messages=u"抽奖已经结束，感谢你的参与"
-        print messages
         return spec_json(status='errors', messages=messages)
     user =get_user(request)
     if  lottery_list.lottery.count() == 0:
         messages = u"对不起，没有抽奖名单"
-        print messages
         return spec_json(status='errors', messages=messages)
     lottery_list_person = [lottery.person for lottery in lottery_list.lottery.all()]
     if user not in lottery_list_person:
         messages = u"对不起，你没有资格抽奖"
-        print messages
         return spec_json(status='errors', messages=messages)
     lotterys = lottery_list.lottery.filter(person=user,result=0)
     if not lotterys.exists():
         messages = u"对不起，你已经抽过奖了"
-        print messages
         return spec_json(status='errors', messages=messages)
     lottery = lotterys[0]
     lottery.result = random.randint(1,10000000)
@@ -284,7 +279,6 @@ def show_lottery_list(request,category_english_name,id):
     plan_category = get_object_or_404(PlanCategory,english_name=category_english_name)
     title = "【%s】"%lottery_list.name
     rank = get_rank(request,lottery_list)
-    print rank
     return render(request, "summer_plans/lottery_list.html",{'lottery_list':lottery_list,'plan_category':plan_category,'title':title,"rank":rank})
 
 
@@ -333,7 +327,6 @@ def get_rank(request,lottery_list):
     if user is None:
         return None
     sorted_lotterys = lottery_list.lottery.all().order_by("-result")
-    print len(sorted_lotterys)
     for i in range(len(sorted_lotterys)):
         if user == sorted_lotterys[i].person:
             return i+1

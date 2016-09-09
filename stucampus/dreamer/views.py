@@ -1,18 +1,21 @@
 #-*- coding: UTF-8 -*-   
 
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.core.paginator import InvalidPage,Paginator
 from django.http import *
 from django.core.urlresolvers import reverse
 from django.views.generic import View
 from django.db.models import Q
+from django.utils.decorators import method_decorator
 
 from stucampus.dreamer.models import Register
 from stucampus.dreamer.forms import Register_Form
 from stucampus.account.permission import check_perms
 from stucampus.utils import spec_json,render_json
 
+
 import datetime
+import time
 from login_szu import login_szu
 
 
@@ -56,19 +59,11 @@ def login_redirect(request):
 
 
 
-
-
-def succeed(request):
-    return render(request, 'dreamer/succeed.html')
-
-def check(request):
-    aaa = Register.objects.all().count()
-    return HttpResponse(aaa)
-
 @check_perms('dreamer.manager')
-def alldetail(request):
-    aall = Register.objects.filter(status=True)
-    user = request.user
+def show_situation(request,grade):
+
+    aall = Register.objects.filter(status=True,grade=grade)
+    title = grade+u"报名概览"
 
     cbb1 = aall.filter(dept1="cbb")
     cbb2 = aall.filter(dept2="cbb")
@@ -95,23 +90,75 @@ def alldetail(request):
     yybb = yyb1.filter(gender="male").count()+yyb2.filter(gender="male").count()
     yybg = yyb1.filter(gender="female").count()+yyb2.filter(gender="female").count()
 
+    all_girls_num = aall.filter(gender="female").count()
+    all_boys_num = aall.filter(gender="male").count()
+
+    today_join_num=aall.filter(sign_up_date=datetime.date.today()).count()
     return render(request,'dreamer/situation.html',{"jsb1":jsb1.count(),"jsb2":jsb2.count(),"jsbb":jsbb,"jsbg":jsbg,
                                                     "sjb1":sjb1.count(),"sjb2":sjb2.count(),"sjbb":sjbb,"sjbg":sjbg,
                                                     "xzb1":xzb1.count(),"xzb2":xzb2.count(),"xzbb":xzbb,"xzbg":xzbg,
                                                     "yyb1":yyb1.count(),"yyb2":yyb2.count(),"yybb":yybb,"yybg":yybg,
                                                     "cbb1":cbb1.count(),"cbb2":cbb2.count(),"cbbb":cbbb,"cbbg":cbbg,
-                                                    "all" :aall.count(),"user":user})
+                                                    "all" :aall.count(),"all_girls_num":all_girls_num,"all_boys_num":all_boys_num,
+                                                    "today_join_num":today_join_num,"title":title})
 
 @check_perms('dreamer.manager')
 def alllist(request):
-    applyall = Register.objects.filter(status=True).order_by('sign_up_date')
-    paginator = Paginator(applyall,8)
+    grade=request.GET.get("grade") 
+    dept=request.GET.get("dept")
+    if grade is None and (dept ==u"--" or dept is None):
+        registers = Register.objects.filter(status=True).order_by('-pk')
+        title=u"历年全部报名报表"
+    elif grade is not None and (dept ==u"--" or dept is None):
+        registers = Register.objects.filter(status=True,grade=grade).order_by('-pk')
+        title=grade+u"报名报表"
+    else:
+        registers = Register.objects.filter(Q(dept1=dept)|Q(dept2=dept),status=True,grade=grade).order_by('-pk')
+        title=grade+dept+u"报名报表"
+    paginator = Paginator(registers,10)
     page = request.GET.get('page')
     try:
         page = paginator.page(page)
     except InvalidPage:
         page = paginator.page(1)
-    return render(request,'dreamer/list.html',{'page':page})
+    return render(request,'dreamer/list.html',{'page':page,'title':title})
+
+class AddRegisterView(View):
+    '''
+        管理员添加人员
+    '''
+    @method_decorator(check_perms('dreamer.manager'))
+    def get(self,request):
+        return render(request,"dreamer/form.html",{"form":Register_Form(),"post_url":reverse("dreamer:add"),"title":u"添加报名者资料"})
+
+    @method_decorator(check_perms('dreamer.manager'))
+    def post(self,request):
+        
+        form = Register_Form(request.POST)
+        if not form.is_valid():
+            return render(request,"dreamer/form.html",{"form":form,"post_url":reverse("dreamer:add"),"title":u"添加报名者资料"})
+        register = form.save()
+        return HttpResponseRedirect(reverse("dreamer:detail")+"?id="+str(register.id))
+
+class ModifyRegisterView(View):
+
+    @method_decorator(check_perms('dreamer.manager'))
+    def get(self,request):
+        id=request.GET.get("id")
+        register = get_object_or_404(Register,pk=id)
+        form = Register_Form(instance = register)
+        return render(request,"dreamer/form.html",{"form":form,"post_url":reverse("dreamer:modify")+"?id="+id,"title":u"修改报名者资料"})
+
+    @method_decorator(check_perms('dreamer.manager'))
+    def post(self,request):
+        id=request.GET.get("id")
+        register = get_object_or_404(Register,pk=id)
+        form = Register_Form(request.POST,instance=register)
+        if not form.is_valid():
+            return render(request,"dreamer/form.html",{"form":form,"post_url":reverse("dreamer:modify")+"?id="+id,"title":u"修改报名者资料"})
+        register = form.save()
+        return HttpResponseRedirect(reverse("dreamer:detail")+"?id="+str(register.id))
+
 
 @check_perms('dreamer.manager')
 def delete(request):
@@ -128,7 +175,7 @@ def search(request):
     if not app:
         if search.isdigit()==True:
             app = Register.objects.filter(status=True).filter(stu_ID=search)
-    paginator = Paginator(app,8)
+    paginator = Paginator(app,10)
     page = request.GET.get('page')
     try:
         page = paginator.page(page)
@@ -141,40 +188,3 @@ def detail(request):
     apply_id = request.GET.get('id')
     app = Register.objects.get(id=apply_id)
     return render(request,'dreamer/detail.html',{'app':app})
-
-@check_perms('dreamer.manager')
-def modify(request):
-    apply_id = request.POST['id']
-    a = Register.objects.get(id=apply_id)
-    a.name = request.POST['name']
-    gender = request.POST['sex']
-    if gender==u'男':
-        a.gender = 'male'
-    elif gender==u'女':
-        a.gender = 'female'
-    a.stu_ID = request.POST['stu_id']
-    a.college = request.POST['college']
-    a.mobile = request.POST['mobile']
-    if request.POST['desired_dept_1']==u'行政部':
-        a.dept1 = 'xzb'
-    if request.POST['desired_dept_1']==u'设计部':
-        a.dept1 = 'sjb'
-    if request.POST['desired_dept_1']==u'技术部':
-        a.dept1 = 'jsb'
-    if request.POST['desired_dept_1']==u'采编部':
-        a.dept1 = 'cbb'
-    if request.POST['desired_dept_1']==u'运营部':
-        a.dept1 = 'yyb'
-    if request.POST['desired_dept_2']==u'行政部':
-        a.dept2 = 'xzb'
-    if request.POST['desired_dept_2']==u'设计部':
-        a.dept2 = 'sjb'
-    if request.POST['desired_dept_2']==u'技术部':
-        a.dept2 = 'jsb'
-    if request.POST['desired_dept_2']==u'采编部':
-        a.dept2 = 'cbb'
-    if request.POST['desired_dept_2']==u'运营部':
-        a.dept2 = 'yyb'
-    a.self_intro = request.POST['introduce']
-    a.save()
-    return HttpResponseRedirect('/dreamer/manage/detail/?id='+apply_id)
