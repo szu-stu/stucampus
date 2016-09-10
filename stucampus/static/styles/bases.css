@@ -174,7 +174,7 @@ body{
 	.header-nav ul{
 	    display: block;
 	    width: 21.266667rem;
-	    height: 16.566667rem;
+	    height: 19.8800004rem;
 	    background-color: #FAFAFA;
 	    z-index: 999;
 	}
@@ -309,10 +309,10 @@ body{
 	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.23);
 	}
 	.header-nav ul{
-		position: relative;
-		float: right;
+	    position: relative;
+	    float: right;
 	    display: block;
-	    width: 20.0rem;
+	    width: 24.0rem;
 	    height: 1.733333rem;
 	}
 	.header-nav ul li{

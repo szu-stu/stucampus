@@ -35,7 +35,7 @@ function resized(windowswidth){
 }
 var navcome = function(navid){
     nownav = $(".now");
-    for(i=0;i<5;i++){
+    for(i=0;i<6;i++){
         $("#nav"+i).removeClass("nav-active");
     }
     if (navid==null) {
@@ -48,27 +48,7 @@ var navcome = function(navid){
         $("#"+navid).addClass("nav-active");
         return false;
     }
-    if(navid==0){
-        nownav.css("left",navid*4.0+"rem");
-        nownav.show();
-        $("#nav"+navid).addClass("nav-active");
-    }
-    else if(navid==1){
-        nownav.css("left",navid*4.0+"rem");
-        nownav.show();
-        $("#nav"+navid).addClass("nav-active");
-    }
-    else if(navid==2){
-        nownav.css("left",navid*4.0+"rem");
-        nownav.show();
-        $("#nav"+navid).addClass("nav-active");
-    }
-    else if(navid==3){
-        nownav.css("left",navid*4.0+"rem");
-        nownav.show();
-        $("#nav"+navid).addClass("nav-active");
-    }
-    else if(navid==4){
+    if(navid<=5&&navid>=0){
         nownav.css("left",navid*4.0+"rem");
         nownav.show();
         $("#nav"+navid).addClass("nav-active");
