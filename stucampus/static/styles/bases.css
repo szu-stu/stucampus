@@ -281,6 +281,8 @@ body{
 	.inner_content{
 	    margin-top: 1.733333rem;
 	    overflow: hidden;
+            background:url('/static/images/index/national_bgc.png') fixed no-repeat;
+            background-size:cover;
 	}
 	.clear-margin{
 		margin: 0 !important;
