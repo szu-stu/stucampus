@@ -5,6 +5,8 @@
 
 body{
 	background-color: #eaf4fc;
+        background: url(/static/images/index/national_bgc.png) fixed no-repeat;
+        background-size: cover;
 }
 
 .header{
