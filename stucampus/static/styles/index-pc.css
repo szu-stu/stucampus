@@ -31,7 +31,7 @@
     bottom: 0 !important;
     width: 0.6rem;
     height: 0.6rem;
-	background-color: rgb(91,197,190);
+	background-color: /*rgb(91,197,190);*/ #ed4520;
 }
 .swiper-slide ,.swiper-slide a{
     position: relative;
@@ -246,7 +246,7 @@
     left: 0.8rem;
     padding-top: 0.8rem;
     display: block;
-    color: #5BC5BE;
+    color: /*#5BC5BE;*/ #ed4520;
     font-size: 0.6rem;
     font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
     letter-spacing: 0.12rem;
@@ -283,7 +283,7 @@
     -o-transition: background-color 0.3s ease-out,color 0.3s ease-out; /* Opera */
 }
 .nav-content a:hover{
-    background-color: #5BC5BE;
+    background-color: /*#5BC5BE;*/ #ed4520;
     color: rgb(255,255,255);
 }
 
@@ -318,7 +318,7 @@
     position: absolute;
     top: 0;
     left: 2.266667rem;
-    color: #5BC5BE;
+    color: /*#5BC5BE;*/ #ed4520;
     font-size: 0.466667rem;
     line-height: 0.533333rem;
     letter-spacing: 0.011667rem;
@@ -354,7 +354,7 @@
     display: inline-block;
     padding-top: 0.266667rem;
     text-decoration: none;
-    color: #5BC5BE;
+    color: /*#5BC5BE;*/ #ed4520;
     font-size: 0.466667rem;
     font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
 }
