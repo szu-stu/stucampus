@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     'stucampus.member_infor',
     'stucampus.summer_plans',
 
-    'stucampus.dreamer',
+    # 'stucampus.dreamer',
     'stucampus.FreeTimeCount',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

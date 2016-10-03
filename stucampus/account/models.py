@@ -18,7 +18,7 @@ class Student(models.Model):
             ('members_list', 'List the members in an organization.'),
             ('member_show', 'Show the information of member.'),
             ('member_create', 'Create a new member in organization.'),
-            ('member_del', 'Remove a member from an organization.')
+            ('member_del', 'Remove a member from an organization.'),
             ('website_admin', u'学子天地网站管理员'),
             ('student_manager', u'学生帐号管理员'),
 			('free_time_count', u'空闲时间查看系统'),
