@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang='zh-CN' xml:lang='zh-CN' xmlns='http://www.w3.org/1999/xhtml'>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="UTF-8">
     <meta http-equiv="Content-Language" content="zh-CN" />
     <meta name="robots" content="noindex,nofollow" />
-    <title>深圳大学学子天地管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学子天地后台管理</title>
+    <link rel="stylesheet" type="text/css" href="./static/css/main.css">
+    <script src="./static/js/main.js"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     {% load html_tools %}
     {{ 'manage/base.css' | as_css }}
+    {{ 'manage/main.css' | as_css }}
     {{ 'manage/manage_base.js' | as_js }}
     {{ 'message-box.css' | as_css }}
 
@@ -20,103 +27,121 @@
     {% block htmlhead %}{% endblock %}
 </head>
 {% block beforeload %}{% endblock %}
-<body onload="heightCtrol()" onresize="heightCtrol()">
-    <div class="container">
-        <div id="header">
-            <h1>深圳大学学子天地 后台管理系统</h1>
-            <span class="nav" id="nav_menu">
-                <span><strong>{{ user.student.screen_name }}</strong></span>
-                <a href="/">返回首页</a>
-                {% if user.is_authenticated %}
-                <a href="{% url 'account:profile' %}">用户信息</a>
-                <a href="javascript:;" onclick="StuCampus.signOut()">退出登录</a>
-                {% else %}
-                <a href="{% url 'account:sign_in' %}">登录</a>
-                {% endif %}
-            </span>
-        </div>
-        <div class="main" id="layout_main">
-            <div class="menu_container">
-                <div class="left_menu" id="layout_left">
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/manage/index">学子天地后台管理</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" 
+            data-target="#example-navbar-collapse">
+            <span class="sr-only">Switch</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    {% if user.is_authenticated %}
+    <a type="button" class="btn btn-success navbar-right navbar-btn hidden-phone" href="javascript:;" onclick="StuCampus.signOut()">注销</a>
+    <a type="button" class="btn btn-default navbar-right navbar-btn hidden-phone" href="{% url 'account:profile' %}">用户信息</a>
+    {% else %}
+    <a type="button" class="btn btn-success navbar-right navbar-btn hidden-phone" href="{% url 'account:sign_in' %}">登录</a>
+    {% endif %}
+    <a type="button" class="btn btn-default navbar-right navbar-btn hidden-phone" href="/">学子首页</a> 
+
+    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/manage/index">首页</a></li>
+            <li class="dropdown">
                 {% load permission_check %}
                 {% if user %}
-                    <a href="/manage/index">后台管理</a>
-                {% endif %}
-
-                {% if perms.account.student_manager %}
-                    <a href="/manage/account/list">用户管理</a>
-                {% endif %}
-                {% if perms.magazine.magazine_add%}
-                    <a href="/magazine/manage/">杂志管理</a>
-                {% endif %}
-                {% if perms.organization.organization_manager %}
-                    <a href="/manage/organization/list">组织管理</a>
-                    <a href="/manage/organization">组织概况</a>
-                {% endif %}
-                {% if perms.articles.article_add %}
-                    <a href="{% url 'articles:add' %}">添加文章</a>
-                    <a href="{% url 'articles:manage' %}">文章列表</a>
-                {% endif %}
-                {% if perms.articles.article_manage %}
-                    <a href="{% url 'articles:category' %}">文章分类</a>
-                {% endif %}
-                {% if perms.account.website_admin %}
-                    <a href="{% url 'lecture:manage' %}">讲座信息</a>
-                    <a href="{% url 'activity:manage' %}">活动信息</a>
-                {% endif %}
-                {% if perms.szuspeech.manager %}
-                    <a href="{% url 'szuspeech:manage_list' %}">讲座资源</a>
-                    <a href="{% url 'szuspeech:add' %}">资源添加</a>
-                {% endif %}
-                {% if perms.carousels.slide_add %}
-                    <a href="{% url 'carousels:add' %}">添加焦点图</a>
-                    <a href="{% url 'carousels:manage' %}">焦点图列表</a>
-                {% endif %}
-                {% if perms.dreamer.manager %}
-                    <a href="/dreamer/manage">报名管理</a>
-                {% endif %}
-                {% if perms.member_infor.member_add %}
-                    <a href="{% url 'member_infor:add' %}">添加通讯录人员</a>
-                    <a href="{% url 'member_infor:add_list' %}">批量添加通讯录</a>
-                    <a href="{% url 'member_infor:manage' %}">通讯录列表</a>
-                {% endif %}
-                {% if perms.member_infor.member_manage %}
-                <a href="{% url 'member_infor:pending_approve_members'%}">申请通讯录列表</a>
-                {% endif %}
-                
-                {% if perms.FreeTimeCount.usable %}
-                    <a href="{% url 'FreeTimeCount:index'%}">空闲时间</a>
-                {% endif %}
-
-
-                <!-- 以下代码未完成 -->
-                <!-- 以下为提供给社团组织的管理界面 -->
-                {% if 0 %}
-                    <a href="/organization/">组织管理</a>
-                {% endif %}
-                {% if perms.infor.infors_list and user|is_org_manage %}
-                    <a href="/manage/infor/list">信息管理</a>
-                {% endif %}
-                {% if perms.infor.infor_create and user|is_org_manage %}
-                   <a href="/manage/infor/post">发布信息</a>
-                {% endif %}
-                {% if perms.infor.posted_infor_view %}
-                    <a href="#">已发信息</a>
-                {% endif %}
-                {% if perms.magazine.magazine_view %}
-                    <a href="/magazine">社团杂志</a>
-                {% endif %}
-                </div>
-            </div>
-            <div class="right_content" id="layout_content">
-            {% block content %}
-            {% endblock content %}
-            </div>
-        </div>
-        <div id="footer">
-            <p>Power By 深圳大学学子天地 技术开发部 Copyright &copy; 2010-2016 深圳大学学子天地 站务委员会</p>
-        </div>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    内容管理
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if perms.articles.article_add %}
+                    <li><a href="{% url 'articles:add' %}">添加文章</a></li>
+                    <li><a href="{% url 'articles:manage' %}">文章列表</a></li>
+                    {% endif %}
+                    {% if perms.articles.article_manage %}
+                    <li><a href="{% url 'articles:category' %}">文章分类</a></li>
+                    {% endif %}
+                    {% if perms.magazine.magazine_add%}
+                    <li><a href="/magazine/manage/">杂志管理</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    {% if perms.account.website_admin %}
+                    <li><a href="{% url 'lecture:manage' %}">讲座信息</a></li>
+                    <li><a href="{% url 'activity:manage' %}">活动信息</a></li>
+                    {% endif %}
+                    {% if perms.szuspeech.manager %}
+                    <li><a href="{% url 'szuspeech:manage_list' %}">讲座资源</a></li>
+                    <li><a href="{% url 'szuspeech:add' %}">资源添加</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    焦点图管理
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if perms.carousels.slide_add %}
+                    <li><a href="{% url 'carousels:add' %}">添加焦点图</a></li>
+                    <li><a href="{% url 'carousels:manage' %}">焦点图列表</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    学子管理
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if perms.account.student_manager %}
+                    <li><a href="/manage/account/list">用户管理</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    {% if perms.member_infor.member_add %}
+                    <li><a href="{% url 'member_infor:add' %}">添加通讯录人员</a></li>
+                    <li><a href="{% url 'member_infor:add_list' %}">批量添加通讯录</a></li>
+                    <li><a href="{% url 'member_infor:manage' %}">通讯录列表</a></li>
+                    {% endif %}
+                    {% if perms.member_infor.member_manage %}
+                    <li><a href="{% url 'member_infor:pending_approve_members'%}">申请通讯录列表</a></li>
+                    {% endif %}
+                    <li class="divider"></li>
+                    {% if perms.FreeTimeCount.usable %}
+                    <li><a href="{% url 'FreeTimeCount:index'%}">空闲时间</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    其他
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    {% if perms.organization.organization_manager %}
+                    <li><a href="/manage/organization/list">组织管理</a></li>
+                    <li><a href="/manage/organization">组织概况</a></li>
+                    {% endif %}
+                    {% if perms.dreamer.manager %}
+                    <li><a href="/dreamer/manage">报名管理</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
     </div>
+</nav>
 
+<div class="content" id="layout_content">
+{% block content %}
+{% endblock content %}
+</div>
+
+<div id="footer">
+            <p>Power By 深圳大学学子天地 技术部 Copyright &copy; 2010-2016 深圳大学学子天地 站务委员会</p>
+        </div>
 </body>
 </html>
