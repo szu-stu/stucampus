@@ -314,7 +314,7 @@ body{
 	    position: relative;
 	    float: right;
 	    display: block;
-	    width: 24.0rem;
+	    max-width: 24.0rem;
 	    height: 1.733333rem;
 	}
 	.header-nav ul li{
