@@ -33,7 +33,6 @@ body{
     color: #ffffff;
     line-height: 80px;
     vertical-align: middle;
-    margin-left: 150px;
 }
 .nav a{
     color: #ffffff;
@@ -57,32 +56,15 @@ body{
     left: 0px;
     height: 100%;
 }
-.left_menu{
-    overflow: hidden;
-    text-align: center;
-}
-.left_menu a{
-    display: block;
-    width: 100px;
-    height: 40px;
-    position: relative;
-    color: #ffffff;
-    text-decoration: none;
-    line-height: 40px;
-    vertical-align: middle;
-}
-.left_menu a:hover {
-    background: #31a592;
-}
 .current {
     background: #31a592;
 }
-.right_content{
+.content{
     width: 900px;
+    min-height: 600px;
     background: #ffffff;
     position: relative;
-    float: left;
-    margin-left: 100px;
+    margin: auto;
     overflow: hidden;
 }
 #footer{
