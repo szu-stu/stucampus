@@ -1,3 +1,7 @@
+html body{background-color: #f0f0f2; font-family: "Segoe UI","Microsoft YaHei","San Francisco",sans-serif;padding:0 5%;margin:0}
+nav .navbar-brand{font-size: 27px;}
+body .navbar-right{margin-right: 15px;}
+footer{height: 100px; background-color: #0f0; margin-top: 1em;float: left; width: 100%;}
 *{
     margin: 0px;
     padding: 0px;
