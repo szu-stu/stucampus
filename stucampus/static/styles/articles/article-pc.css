@@ -49,15 +49,6 @@
 .nav-active{
     color: #5BC5BE !important;
 }
-.now{
-    position: absolute;
-    height: 1.6rem !important;
-    border-bottom: 4px solid #5BC5BE;
-    transition: left 0.5s ease-out;
-    -moz-transition: left 0.5s ease-out; /* Firefox 4 */
-    -webkit-transition: left 0.5s ease-out; /* Safari 和 Chrome */
-    -o-transition: left 0.5s ease-out; /* Opera */
-}
 .header ul li a{
     display: block;
     width: 4.0rem;
