@@ -1,48 +1,39 @@
-.content{
+.article_content{
+    padding: 5%;
     width: 100%;
     position: relative;
     overflow: hidden;
 }
-.content li{
+.article_content li{
     list-style: none;
     line-height: 300%;
     vertical-align: middle;
 }
-.content label{
+.article_content label{
     display: inline-block;
-    width: 13%;
-    text-indent: 5%;
+    width: 15%;
+    text-align: left;
 }
-.content select{
-    border: 0px;
+.article_content select{
     font-size: 14px;
     line-height: 200%;
     font-family: "Microsoft Yahei";
-    color: #7e7e7e;
-    border: 2px solid #e5e5e5;
 }
-.content input[type=text]{
-    width: 300px;
-    border: solid 1px #e5e5e5;
+.article_content input[type=text]{
+    width: 50%;
     font-size: 14px;
     line-height: 200%;
     font-family: "Microsoft Yahei";
-    color: #7e7e7e;
-    background: #e5e5e5;
 }
-.content textarea{
-    width: 400px;
-    height: 60px;
+.article_content textarea{
+    width: 50%;
+    height: 100px;
     font-size: 14px;
     font-family: "Microsoft Yahei";
-    color: #7e7e7e;
     vertical-align: middle;
-    margin: 10px 0px;
-    border: 0px;
     resize: none;
-    background: #e5e5e5;
 }
-.content_title{
+.article_content_title{
     width: 13%;
     text-indent: 5%;
     line-height: 300%;

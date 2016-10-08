@@ -64,7 +64,8 @@ body{
     background: #31a592;
 }
 .content{
-    width: 900px;
+    width: 80%;
+    min-width: 700px;
     min-height: 600px;
     background: #ffffff;
     position: relative;

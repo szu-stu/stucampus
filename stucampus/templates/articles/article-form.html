@@ -19,7 +19,7 @@
 {% block content %}
 <form method="post" enctype="multipart/form-data"action="{{ post_url }}?id={{ article_id }}&page={{ page }}">
     {% csrf_token %}
-    <div class="content">
+    <div class="article_content">
         <li>
             <label>标题</label>
             {{ form.title }}
@@ -61,7 +61,7 @@
         </li>
     </div>
     <div class="line_aside"></div>
-    <div class="content">
+    <div class="article_content">
         <li>
             <label>来源</label>
             {{ form.source }}
@@ -93,9 +93,9 @@
         </li>
     </div>
     <div class="line_aside"></div>
-    <div class="content">
-        <p class="content_title">内容</p>
-        {{ form.content }}
+    <div class="article_content">
+        <p class="article_content_title">内容</p>
+            {{ form.content }}
         <p class="error" style="margin:10px 0px">
             {% for error in form.content.errors %}
                 {{ error }}

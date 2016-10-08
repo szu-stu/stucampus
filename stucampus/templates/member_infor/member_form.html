@@ -14,16 +14,23 @@
     }
 </script>
 <style>
-    .content,h2
+    .article_content,h2
     {
         text-align: center;
-        margin: 0 auto;
+        margin: 0 0 1em 0;
     }
-    .content p
+    .article_content input
     {
+        display: inline;
+        width: 50%;
         margin-bottom: 5px;
     }
-    .content .errorlist
+    .article_content select
+    {
+        display: inline;
+        width: 16%;
+    }
+    .article_content .errorlist
     {
         color: red;
     }
@@ -37,10 +44,10 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ title }}</h2>
 <form method="POST" enctype="multipart/form-data"action="{{ post_url }}?id={{ member_id }}&page={{ page }}">
     {% csrf_token %}
-    <div class="content">
+    <div class="article_content">
+    <h2>{{ title }}</h2>
     {{ form.as_p }}
     </div>
     {% if tips %}
