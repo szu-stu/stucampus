@@ -19,7 +19,7 @@
 {% block content %}
 <form method="post" enctype="multipart/form-data"action="{{ post_url }}?id={{ slide_id }}&page={{ page }}">
     {% csrf_token %}
-    <div class="content">
+    <div class="article_content">
         <li>
             <label>标题</label>
             {{ form.title }}
@@ -41,7 +41,7 @@
         </li>
     </div>
     <div class="line_aside"></div>
-    <div class="content">
+    <div class="article_content">
         <li>
             <label>跳转地址</label>
             {{ form.jumpUrl }}
@@ -73,7 +73,7 @@
         </li>
     </div>
     <div class="line_aside"></div>
-    <div class="content">
+    <div class="article_content">
         <li>
             <label>最后操作人</label>
             {{ slide.modifier.student.true_name | default:"xx"}}
