@@ -13,7 +13,7 @@ course_id = 0
 f1 = open('../info/course_detail.txt', 'w')
 
 
-url = "http://192.168.2.229/newkc/akcjj0.asp?xqh=20151"
+url = "http://192.168.2.229/newkc/akcjj0.asp?xqh=20161"
 cookiejar = cookielib.CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookiejar))
 urllib2.install_opener(opener)

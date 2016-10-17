@@ -36,7 +36,7 @@ def date_function(request):
 
 		end_date = request.POST['date']
 
-		start_date = datetime.datetime(2015, 9, 7)
+		start_date = datetime.datetime(2016, 9, 7)
 
 		obj = re.compile('(\d+)-(\d+)-(\d+)')
 		end_date = obj.findall(end_date)
@@ -50,7 +50,7 @@ def date_function(request):
 
 		for member in Member.objects.all():
 
-			if member.stuID[3] != '5':
+			if member.stuID[3] != '6':
 				continue
 
 			is_time1_2_free = True
@@ -199,7 +199,7 @@ def distribute_function(request):
 					for member in Member.objects.all():
 
 
-						if member.stuID[3] != '5':
+						if member.stuID[3] != '6':
 							continue
 
 						is_time1_2_free = True
@@ -395,7 +395,7 @@ def distribute_function(request):
 							tmp_list.append(each)
 							count = count + 1
 
-						if count == 2:
+						if count == 4:#set student num
 							break
 
 					result[tmp[i][0]][tmp[i][1]] = tmp_list
@@ -640,73 +640,76 @@ def insert_function(request):
 
 	Member.objects.all().delete()
 
-
-	m = Member(stuID="2015080217"); m.save()
-	m = Member(stuID="2015072051"); m.save()
-	m = Member(stuID="2015072056"); m.save()
-	m = Member(stuID="2015150027"); m.save()
-	m = Member(stuID="2015071107"); m.save()
-	m = Member(stuID="2015150145"); m.save()
-	m = Member(stuID="2015150104"); m.save()
-	m = Member(stuID="2015072050"); m.save()
-	m = Member(stuID="2015072007"); m.save()
-	m = Member(stuID="2015080003"); m.save()
-	m = Member(stuID="2015040477"); m.save()
-	m = Member(stuID="2015072070"); m.save()
-	m = Member(stuID="2015150063"); m.save()
-	m = Member(stuID="2015150007"); m.save()
-	m = Member(stuID="2015150288"); m.save()
-	m = Member(stuID="2015150033"); m.save()
-	m = Member(stuID="2015150324"); m.save()
-	m = Member(stuID="2015150124"); m.save()
-	m = Member(stuID="2015150246"); m.save()
-	m = Member(stuID="2015150304"); m.save()
-	m = Member(stuID="2015150258"); m.save()
-	m = Member(stuID="2015160196"); m.save()
-	m = Member(stuID="2015150122"); m.save()
-	m = Member(stuID="2015150058"); m.save()
-	m = Member(stuID="2015130046"); m.save()
-	m = Member(stuID="2015150006"); m.save()
-	m = Member(stuID="2015150166"); m.save()
-	m = Member(stuID="2015150049"); m.save()
-	m = Member(stuID="2015150218"); m.save()
-	m = Member(stuID="2015150321"); m.save()
-	m = Member(stuID="2015150301"); m.save()
-	m = Member(stuID="2015150320"); m.save()
-	m = Member(stuID="2015080194"); m.save()
-	m = Member(stuID="2015150287"); m.save()
-	m = Member(stuID="2015072058"); m.save()
-	m = Member(stuID="2015140172"); m.save()
-	m = Member(stuID="2015242049"); m.save()
-	m = Member(stuID="2015010150"); m.save()
-	m = Member(stuID="2015241039"); m.save()
-	m = Member(stuID="2015020441"); m.save()
-	m = Member(stuID="2015080084"); m.save()
-	m = Member(stuID="2015150182"); m.save()
-	m = Member(stuID="2015050158"); m.save()
-	m = Member(stuID="2015010141"); m.save()
-	m = Member(stuID="2015150126"); m.save()
-	m = Member(stuID="2015150249"); m.save()
-	m = Member(stuID="2015012051"); m.save()
-	m = Member(stuID="2015110037"); m.save()
-	m = Member(stuID="2015080004"); m.save()
-	m = Member(stuID="2015040478"); m.save()
-	m = Member(stuID="2015160024"); m.save()
-	m = Member(stuID="2015080086"); m.save()
-	m = Member(stuID="2015200013"); m.save()
-	m = Member(stuID="2015080134"); m.save()
-	m = Member(stuID="2015140094"); m.save()
-	m = Member(stuID="2015160009"); m.save()
-	m = Member(stuID="2015200027"); m.save()
-	m = Member(stuID="2015150032"); m.save()
-	m = Member(stuID="2015150181"); m.save()
-	m = Member(stuID="2015140096"); m.save()
-	m = Member(stuID="2015080171"); m.save()
-	m = Member(stuID="2015160022"); m.save()
-	m = Member(stuID="2015150073"); m.save()
-	m = Member(stuID="2015150259"); m.save()
-	m = Member(stuID="2015140166"); m.save()
-	m = Member(stuID="2015140191"); m.save()
+        student_list_rander = ["2016080031","2016020403","2016200036","2016020089","2016154069","2016150175","2016140007","2016190098","2016154039","2016150187","2016110156","2016190108","2016150055","2016150189","2016154119","2016040307","2016150011","2016150068","2016150106","2016150043","2016170125","2015150077","2015150101","2016180092","2016154093","2016222002","2016150083","2016154110","2016154074","2016154003","2016150097","2016154080","2016200065","2015130257","2016154103","2016150163","2016222042","2016080059","2016154099","2016154083","2016180023","2016190070","2016110064","2016090131","2016154091","2016154044","2016190095","2016080034","2016080069","2016102035","2016304106","2016080133","2016102047","2015101015","2016224004","2016102025","2016085085","2015020494","2015071025","2016101088","2016113104","2016071057","2016150001","2016150150","2016154038","2016080134","2016080065","2016042161","2016150148","2016114054","2016160047","2016073016","2016190104","2016101019","2016113097","2016242023","2016010119","2016085010","2016010137","2016150057","2016242030","2016154046","2016200004","2016080101","2016154114","2016080040","2016031214","2016180022"]
+	#m = Member(stuID="2015080217"); m.save()
+        for student_id_r in student_list_rander:
+            m = Member(stuID=student_id_r)
+            m.save()
+	#m = Member(stuID="2015072051"); m.save()
+	#m = Member(stuID="2015072056"); m.save()
+	#m = Member(stuID="2015150027"); m.save()
+	#m = Member(stuID="2015071107"); m.save()
+	#m = Member(stuID="2015150145"); m.save()
+	#m = Member(stuID="2015150104"); m.save()
+	#m = Member(stuID="2015072050"); m.save()
+	#m = Member(stuID="2015072007"); m.save()
+	#m = Member(stuID="2015080003"); m.save()
+	#m = Member(stuID="2015040477"); m.save()
+	#m = Member(stuID="2015072070"); m.save()
+	#m = Member(stuID="2015150063"); m.save()
+	#m = Member(stuID="2015150007"); m.save()
+	#m = Member(stuID="2015150288"); m.save()
+	#m = Member(stuID="2015150033"); m.save()
+	#m = Member(stuID="2015150324"); m.save()
+	#m = Member(stuID="2015150124"); m.save()
+	#m = Member(stuID="2015150246"); m.save()
+	#m = Member(stuID="2015150304"); m.save()
+	#m = Member(stuID="2015150258"); m.save()
+	#m = Member(stuID="2015160196"); m.save()
+	#m = Member(stuID="2015150122"); m.save()
+	#m = Member(stuID="2015150058"); m.save()
+	#m = Member(stuID="2015130046"); m.save()
+	#m = Member(stuID="2015150006"); m.save()
+	#m = Member(stuID="2015150166"); m.save()
+	#m = Member(stuID="2015150049"); m.save()
+	#m = Member(stuID="2015150218"); m.save()
+	#m = Member(stuID="2015150321"); m.save()
+	#m = Member(stuID="2015150301"); m.save()
+	#m = Member(stuID="2015150320"); m.save()
+	#m = Member(stuID="2015080194"); m.save()
+	#m = Member(stuID="2015150287"); m.save()
+	#m = Member(stuID="2015072058"); m.save()
+	#m = Member(stuID="2015140172"); m.save()
+	#m = Member(stuID="2015242049"); m.save()
+	#m = Member(stuID="2015010150"); m.save()
+	#m = Member(stuID="2015241039"); m.save()
+	#m = Member(stuID="2015020441"); m.save()
+	#m = Member(stuID="2015080084"); m.save()
+	#m = Member(stuID="2015150182"); m.save()
+	#m = Member(stuID="2015050158"); m.save()
+	#m = Member(stuID="2015010141"); m.save()
+	#m = Member(stuID="2015150126"); m.save()
+	#m = Member(stuID="2015150249"); m.save()
+	#m = Member(stuID="2015012051"); m.save()
+	#m = Member(stuID="2015110037"); m.save()
+	#m = Member(stuID="2015080004"); m.save()
+	#m = Member(stuID="2015040478"); m.save()
+	#m = Member(stuID="2015160024"); m.save()
+	#m = Member(stuID="2015080086"); m.save()
+	#m = Member(stuID="2015200013"); m.save()
+	#m = Member(stuID="2015080134"); m.save()
+	#m = Member(stuID="2015140094"); m.save()
+	#m = Member(stuID="2015160009"); m.save()
+	#m = Member(stuID="2015200027"); m.save()
+	#m = Member(stuID="2015150032"); m.save()
+	#m = Member(stuID="2015150181"); m.save()
+	#m = Member(stuID="2015140096"); m.save()
+	#m = Member(stuID="2015080171"); m.save()
+	#m = Member(stuID="2015160022"); m.save()
+	#m = Member(stuID="2015150073"); m.save()
+	#m = Member(stuID="2015150259"); m.save()
+	#m = Member(stuID="2015140166"); m.save()
+	#m = Member(stuID="2015140191"); m.save()
 
 	print "Done."
 

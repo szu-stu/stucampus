@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^date/?$', date,name="date"),
     url(r'^member/?$', member,name="member"),
     url(r'^distribute/?$',distribute,name="distribute"),
-    #url(r'^insert/', 'stucampus.FreeTimeCount.views.insert'),
+    url(r'^insert/', 'stucampus.FreeTimeCount.views.insert'),
 ]
