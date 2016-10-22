@@ -49,9 +49,10 @@
     <div class="collapse navbar-collapse" id="example-navbar-collapse">
         <ul class="nav navbar-nav">
             <li class="active"><a href="/manage/index">首页</a></li>
+            {% load permission_check %}
+            {% if user %}
+            {% if perms.articles or perms.magazine or perms.account or perms.szuspeech %}
             <li class="dropdown">
-                {% load permission_check %}
-                {% if user %}
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     内容管理
                     <b class="caret"></b>
@@ -78,18 +79,20 @@
                     {% endif %}
                 </ul>
             </li>
+            {% endif %}
+            {% if perms.carousels.slide_add %}
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     焦点图管理
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    {% if perms.carousels.slide_add %}
                     <li><a href="{% url 'carousels:add' %}">添加焦点图</a></li>
                     <li><a href="{% url 'carousels:manage' %}">焦点图列表</a></li>
-                    {% endif %}
                 </ul>
             </li>
+            {% endif %}
+            {% if perms.member_infor or perms.account or perms.FreeTimeCount %}
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     学子管理
@@ -114,6 +117,8 @@
                     {% endif %}
                 </ul>
             </li>
+            {% endif %}
+            {% if perms.organization.organization_manager or perms.dreamer.manager %}
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     其他
@@ -130,6 +135,7 @@
                 </ul>
             </li>
             {% endif %}
+            {% endif %}
         </ul>
     </div>
 </nav>
@@ -140,7 +146,7 @@
 </div>
 
 <div id="footer">
-            <p>Power By 深圳大学学子天地 技术部 Copyright &copy; 2010-2016 深圳大学学子天地 站务委员会</p>
+            <p>Powered By 深圳大学学子天地 技术部 Copyright &copy; 2010-2016 深圳大学学子天地 站务委员会</p>
         </div>
 </body>
 </html>
