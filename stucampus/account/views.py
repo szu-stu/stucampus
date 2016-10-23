@@ -110,5 +110,6 @@ class Password(View):
 def Register_szu(request):
     request.user.student.job_id = request.session['szu_no']
     request.user.student.true_name = request.session['szu_name']   
+    request.user.student.save()
     return HttpResponseRedirect('/manage/index')
     
