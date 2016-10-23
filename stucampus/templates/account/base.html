@@ -1,43 +1,91 @@
 {% extends 'base.html' %}
+
 {% block htmltitle %}<title> {{ user.student.screen_name }} - 用户中心 - 深圳大学学子天地</title>{% endblock %}
 
+
+
 {% block htmlhead %}
+
 {% load html_tools %}
+
 {{ 'plugins/jquery.form.js' | as_js }}
+
 {{ 'account/profile.css' | as_css }}
+
 {{ 'account/date-input.css' | as_css }}
+
 {{ 'plugins/ckeditor/ckeditor.js' | as_js}}
+
 {{ 'plugins/ckeditor/adapters/jquery.js' | as_js }}
+
 {{ 'plugins/google/api.js' |as_js }}
+
 {{ 'account/profile.js' | as_js }}
+
 {{ 'admin/upload.js' | as_js }}
+
+
 
 {% endblock %}
 
+
+
 {% block content %}
+
 <div class="main">
-    <div class="left-side">
+
+    <div class="top-side">
+
         {% load account_custom %}
+
         {% load permission_check %}
-        <img id="avater" src="http://www.gravatar.com/avatar/{{ user|user_avatar }}?s=164" alt="用户头像" />
+
+       <img id="avater" src="http://www.gravatar.com/avatar/{{ user|user_avatar }}?s=164" alt="用户头像" />
+
         <div class="list">
+
+            <div class="title">
+
+                <h4>{{ user.student.screen_name }}</h4>
+
+                <a href="javascript:void(0);" onclick="$S.signOut()"><img src="/static/images/account/out.png" alt="退出" /><span>退出</span></a>
+
+            </div>
+
             <ul>
+
                 <li><a href="/account/profile"><img src="/static/images/account/infor.png" alt="个人资料" /><span>个人资料</span></a></li>
+
                 <li><a href="/account/profile/password"><img src="/static/images/account/change-infor.png" alt="修改密码" /><span>修改密码</span></a></li>
-                <li><a href="/account/profile/edit"><img src="/static/images/account/change-infor.png" alt="修改资料" /><span>修改资料</span></a></li>
+
                 {% if user|is_admin %}
-                <li><a href="/manage"><img src="/static/images/account/to-write.png" alt="系统管理" /><span>系统管理</span></a></li>
+
+                <li><a href="/manage"><img src="/static/images/account/change-infor.png" alt="系统管理" /><span>系统管理</span></a></li>
+
                 {% endif %}
+
                 {% if user|is_org_manage %}
-                <li><a href="/manage/organization"><img src="/static/images/account/to-write.png" alt="组织管理" /><span>组织管理</span></a></li>
+
+                <li><a href="/manage/organization"><img src="/static/images/account/change-infor.png" alt="组织管理" /><span>组织管理</span></a></li>
+
                 {% endif %}
-                <li><a href="javascript:void(0);" onclick="$S.signOut()"><img src="/static/images/account/infor.png" alt="退出" /><span>退出</span></a></li>
+
             </ul>
+            <div class="space"></div>
+            <a href="/account/profile/edit" id="infochange-btn"><img src="/static/images/account/change-infor.png" alt="修改资料" /><span>修改资料</span></a>
+
         </div>
+
     </div>
-    <div class="right-side">
+
+    <div class="bottom-side">
+
         {% block inside %}
+
         {% endblock %}
+
     </div>
+
 </div>
+
 {% endblock %}
