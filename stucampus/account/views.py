@@ -108,12 +108,7 @@ class Password(View):
 
 @login_szu
 def Register_szu(request):
-    print "do someting"
-    print request.session['szu_no']
-    print request.session['szu_ic']
-    print request.session['szu_name']
-    print request.session['szu_org_name']
-    print request.session['szu_sex']
-    print request.session['szu_rank_name']
+    request.user.student.job_id = request.session['szu_no']
+    request.user.student.true_name = request.session['szu_name']   
     return HttpResponseRedirect('/manage/index')
     
