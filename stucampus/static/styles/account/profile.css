@@ -6,7 +6,7 @@
   	position: relative;
   	overflow: hidden;
   	clear: both;
-  	font-size: 0.7em;
+  	font-size: 0.6em;
 }
 
 .main li {
@@ -16,7 +16,7 @@
 .main a img{
 	width: 20px;
 	height: 20px;
-	padding-bottom: 2px;
+	padding-bottom: 1px;
 }
 .top-side {
 	position: relative;
@@ -87,7 +87,7 @@
 }
 
 .title a img{
-	padding-bottom: 8px;
+	padding-bottom: 9px;
 }
 .list ul{
 	position: relative;
@@ -110,6 +110,17 @@
 	margin:20px 20px 0 0;
 	right: 50px;
 	bottom: 20px;
+	background-color: rgba(56, 195, 169, 0.68);
+	border-radius: 3px;
+	padding: 8px 15px 8px 15px;
+	color: white;
+}
+
+.list a#infochange-btn:hover{
+	background-color:#38c2a8;
+}
+.list a#infochange-btn span{
+	margin-left: 0;
 }
 
 .bottom-side {
