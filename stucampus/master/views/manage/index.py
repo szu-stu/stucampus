@@ -17,4 +17,6 @@ def redirect(request):
 
 @login_required
 def index(request):
+    if not request.user.student.true_name or not request.user.student.job_id:
+        return HttpResponseRedirect('/account/register')
     return render(request, 'master/index.html')

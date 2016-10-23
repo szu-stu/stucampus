@@ -12,6 +12,8 @@ from stucampus.account.services import account_signup
 from stucampus.account.forms import SignInForm, SignUpForm
 from stucampus.account.forms import ProfileEditForm, PasswordForm
 
+from login_szu import login_szu
+from django.http import HttpResponseRedirect
 
 class SignIn(View):
     """Class-base view to handle account sign in request"""
@@ -103,3 +105,15 @@ class Password(View):
         current_user.set_password(form.cleaned_data.get('new_password'))
         current_user.save()
         return spec_json(status='success')
+
+@login_szu
+def Register_szu(request):
+    print "do someting"
+    print request.session['szu_no']
+    print request.session['szu_ic']
+    print request.session['szu_name']
+    print request.session['szu_org_name']
+    print request.session['szu_sex']
+    print request.session['szu_rank_name']
+    return HttpResponseRedirect('/manage/index')
+    
