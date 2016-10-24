@@ -46,6 +46,7 @@ class SignOut(View):
 class SignUp(View):
     '''View of account sign up page.'''
     @method_decorator(guest_or_redirect)
+    @login_szu
     def get(self, request):
         return render(request, 'account/sign-up.html')
 
