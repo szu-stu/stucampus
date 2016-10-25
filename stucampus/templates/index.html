@@ -112,6 +112,14 @@
                     </div>
             </div>
             <div class="side-card">
+                <p class="card-title">栏目频道</p>
+                <div class="nav-content">
+                    {% for category in categories%}
+                    <a href="{% url 'articles:list' category.english_name %}">{{category.name}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="side-card">
                 <p class="card-title">最新评论</p>
                 {% if comments %}
                     {% for comment in comments %}
