@@ -1,0 +1,36 @@
+.container{
+	width: 80%;
+	margin: 5% auto;
+	background-color: #fff;
+}
+.form_container{
+	width: 80%;
+	margin: auto;
+	padding: 3%;
+}
+.container_title{
+	display: block;
+	padding-top: 20px;
+	text-align: center;
+	font-weight: bold;
+}
+.forget_input{
+	display: inline-block;
+	border-bottom: 1px solid black;
+	outline:none;
+	font-size: 26px;
+	width: 100%;
+}
+.input_container{
+	margin: 3% auto;
+}
+.forget_submit{
+	display: block;
+	margin: 0 auto;
+	font-size: 26px;
+	background-color: #f18a8b;
+	color: #fff;
+	padding: 5px 20px;
+	border-radius: 2px;
+	cursor: pointer;
+}

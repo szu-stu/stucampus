@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block htmltitle %}<title>忘记密码-深圳大学学子天地</title>{% endblock %}
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'account/forget.css' | as_css }}
+{{ 'account/forget.js' | as_js }}
+{% endblock %}
+{% block content %}
+<div class="container">
+            <div class="title_head"><p class="container_title">忘记密码</p></div>
+            <div class="form_container">
+                <form action="/account/forget" method="post" id="forget_form" class="forget_form">
+                    {% csrf_token %}
+                    <div class="input_container">
+                    请输入邮箱：<input type="text" class="forget_input" name="useremail"/>
+                    </div>
+                    <div class = "input_container">
+                    请输入新密码：<input type="password" class="forget_input" name="userpasswd">
+                    </div>
+                    <div class="input_container">请重复新密码：<input type="password" class="forget_input" name="repeatpasswd"/></div>
+                    <div class="input_container"><input type="submit" class="forget_submit" value="确认提交" /></div>
+                </form>
+            </div>
+{% endblock %}

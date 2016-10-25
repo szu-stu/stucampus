@@ -139,3 +139,35 @@ class AccountBanForm(forms.Form):
             msg = _(u'Data is invalid.')
             raise forms.ValidationError(msg)
         return ban
+
+class ForgetForm(forms.Form):
+    useremail = forms.EmailField(
+        label=_(u'Email address'),
+        error_messages={'required': _(u'Email is required.')}
+    )
+    userpasswd = forms.CharField(
+        label=_(u'New password'), min_length=6,
+        error_messages={
+            'required':_(u'Password is required.'),
+            'min_length': _(u'Password must be 6 or more characters.')
+        }
+    )
+    repeatpasswd = forms.CharField(
+        label=_(u'Repeat password is required.'), min_length=6,
+        error_messages={
+            'required': _(u'Repeat password is required.'),
+            'min_length': _(u'Repeat password is required.')
+        }
+    )
+    def clean_useremail(self):
+        email = self.cleaned_data.get('useremail')
+        if not User.objects.filter(email=email).exists():
+            msg = _(u'Email is not exists.')
+            raise forms.ValidationError(msg)
+        return email                               
+    def clean_repeatpasswd(self):
+        password = self.cleaned_data.get('userpasswd')
+        confirm = self.cleaned_data.get('repeatpasswd')
+        if not password == confirm:
+            raise forms.ValidationError(_(u'Password must match'))
+        return confirm

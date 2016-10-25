@@ -14,6 +14,7 @@ from stucampus.account.forms import ProfileEditForm, PasswordForm
 
 from login_szu import login_szu
 from django.http import HttpResponseRedirect
+from stucampus.account.forms import ForgetForm
 
 class SignIn(View):
     """Class-base view to handle account sign in request"""
@@ -113,4 +114,21 @@ def Register_szu(request):
     request.user.student.true_name = request.session['szu_name']   
     request.user.student.save()
     return HttpResponseRedirect('/manage/index')
-    
+
+class Forget(View):
+    @login_szu
+    def get(self, request):
+        return render(request,'account/forget.html')
+    def post(self, request):
+        form = ForgetForm(request.POST)
+        if not form.is_valid():
+            messages = form.errors.values()
+            return spec_json(status='errors',messages=messages)
+        passwd = form.cleaned_data.get('userpasswd')
+        email = form.cleaned_data.get('useremail')
+        user = User.objects.get(email=email)
+        if user.student.job_id == request.session['szu_no']:
+            user.set_password(passwd)
+            user.save()
+            return spec_json(status='success')
+        return spec_json(status='errors',messages="can not reset your passwd ,because the stu_id does not match!")
