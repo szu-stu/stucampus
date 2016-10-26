@@ -126,9 +126,9 @@
 .bottom-side {
 	position: relative;
 	overflow: hidden;
-	width: 80%;
+	width: 100%;
 	height: auto !important;
-	padding: 20px;
+	padding: 20px 0;
 	background-color: #ffffff;
 	border: 0.5px solid #e4e8e7;
 	margin-top: 30px;
@@ -163,7 +163,6 @@
 }
 
 .infor ul {
-	width: 100%;
 	padding: 20px;
 	margin: 0px auto;
 	font-size: 16px;
