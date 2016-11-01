@@ -15,3 +15,5 @@ xlwt==1.0.0
 arrow==0.7.0
 login-szu==1.0.2
 xlrd==0.9.4
+beautifulsoup4==4.5.1
+numpy==1.11.1
