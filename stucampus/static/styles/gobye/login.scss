@@ -1,0 +1,271 @@
+@charset "utf-8";
+body {
+  margin: 0;
+  padding: 0;
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  font-family: 等线, 微软雅黑;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 设置默认光标，清除样式，取消文字选中 */
+h1, p, .title {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+/* 容器对对外框设置居中布局 */
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* 外框 */
+.main {
+  position: relative;
+  margin: 0 auto;
+  width: 27em;
+  max-height: 38em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* 使用指南页面的容器 */
+.container2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: -2;
+}
+
+/* 隐藏图层，实现平移动画 */
+.null {
+  position: relative;
+  width: 100%;
+  height: 102%;
+  transition: all 0.7s;
+}
+
+/* 使用指南 */
+.hand-book {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  img {
+    width: 90%;
+    height: auto;
+    opacity: 0.7;
+  }
+  #close {
+    width: 6em;
+    height: 2em;
+    line-height: 2em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  p {
+    font-size: 1em;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* 使用指南开关按钮 */
+#tm {
+  display: none;
+}
+
+#tm:checked ~ .container2 {
+  z-index: 2;
+}
+
+#tm:checked ~ .container2 .null {
+  height: 41%;
+}
+
+#tm:checked ~ .header {
+  opacity: 0.3;
+}
+
+#tm:checked ~ .content {
+  opacity: 0;
+}
+
+/* 使用指南的打开按钮 */
+.guide {
+  width: 9em;
+  margin: 0 auto;
+  transition: all 0.5s;
+}
+
+/* 外框的上半部分 */
+.header {
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+/* 外框的下半部分 */
+.content {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+/* 标题 */
+.title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 4px;
+  margin: 1.5em auto 0;
+}
+
+/* 文本框 */
+.area {
+  margin: 1em auto;
+  textarea {
+    display: block;
+    margin: 1.7em auto;
+    resize: none;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.6);
+    outline: none;
+    transition: all 0.3s;
+    overflow-y: hidden;
+  }
+  textarea::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  textarea:focus {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+/* 媒体查询 响应式设计 */
+@media screen and (max-width: 28em) {
+  .main {
+    border: none;
+  }
+}
+
+@media screen and(max-width: 350px) {
+  body {
+    font-size: 12px;
+  }
+  .title {
+    margin: 0 auto !important;
+  }
+  .btn {
+    margin: 0.8em auto !important;
+  }
+}
+
+@media screen and(max-height: 38em) and(min-width: 350px) {
+  body {
+    margin: 9em auto;
+  }
+}
+
+/* 按钮的特效 */
+.btn {
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: block;
+  font-size: 1.5em;
+  line-height: 60px;
+  margin: 0 auto 2em;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  width: auto;
+}
+
+.btn:hover {
+  text-decoration: none;
+
+}
+
+.btn-1 {
+  width: 200px;
+}
+
+.btn-1 svg {
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.btn-1 rect {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.6);
+  stroke-width: 3;
+  stroke-dasharray: 600, 10;
+  -webkit-transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-1:hover rect {
+  stroke-width: 5;
+  stroke-dasharray: 100, 409;
+  stroke-dashoffset: 200;
+  -webkit-transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-2 {
+  letter-spacing: 2px;
+}
+
+.btn-2:after,
+.btn-2:before {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 1px solid rgba(255, 255, 255, 0);
+  bottom: 0;
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  -webkit-transition: all 280ms ease-in-out;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+.btn-2:hover:after
+  /*,.btn-2:hover:before */
+{
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-color: rgba(255, 255, 255, 0.6);
+  -webkit-transition: width 350ms ease-in-out;
+  transition: width 350ms ease-in-out;
+  width: 76%;
+}
+
+.btn-2:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 90%;
+}

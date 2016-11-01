@@ -7,6 +7,7 @@ ROOT = os.path.dirname(os.path.dirname(__file__))
 
 # use config,DEBUG and DATABASES in it
 
+
 try:
     from stucampus.config.production import *
 except ImportError:
@@ -135,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'stucampus.gobye',
 )
 
 LOGGING = {

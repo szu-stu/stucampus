@@ -1,0 +1,101 @@
+@charset "utf-8";
+body {
+  margin: 0;
+  padding: 0;
+  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+  background: linear-gradient(to right, #25c481, #25b7c4);
+  overflow-x: hidden;
+}
+
+
+/* clear style of user agent stylesheet */
+p, h1 {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.dialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pretty-table {
+  max-width: 1200px;
+  overflow-x: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  margin: 1.2em auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+
+  table{
+    margin: 0 auto;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th{
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 1.3em;
+    color: #fff;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.4);
+  }
+  td{
+    padding: 15px;
+    text-align: left;
+    vertical-align:middle;
+    font-weight: 400;
+    font-size: 1.2em;
+    color: #fff;
+    border-bottom: solid 1px rgba(255,255,255,0.2);
+    /* 去除换行 */
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+
+  caption{
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.5em;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+  }
+  tr{
+    transition: all 0.3s;
+  }
+  tr:hover{
+    background-color: rgba(255,255,255,0.2);
+  }
+
+  input[type=checkbox] {
+    opacity: 0.8;
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: sub;
+  }
+  input[type=submit] {
+    margin: 0;
+    height: 2em;
+    font-size: 0.8em;
+    opacity: 0.8;
+  }
+}

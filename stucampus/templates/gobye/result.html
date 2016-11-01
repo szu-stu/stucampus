@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/styles/gobye/result.css">
+</head>
+<body>
+    <script>
+        plan = {
+            "publicRequired": {{ publicRequired }},
+            "professionalElective": {{ professionalElective }},
+            "artsStream": {{ artsStream }},
+            "scienceStream": {{ scienceStream }},
+            "elective": {{ elective }},
+            "professionalRequired": {{ professionalRequired }},
+            "double": 0.0
+        };
+    </script>
+    <div class="dialog">
+        <h1>你还差 <strong id="totalNeed"></strong> 个 学分</h1>
+        <p><a href="/feedback" style="display: inline-block;color: red;font-size: 18px">反馈</a></p>
+        <br>
+        <p><a href="javascript:void(0)" onclick="reset()">重置</a></p>
+    </div>
+    <div class="pretty-table">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>毕业最低学分要求({{ college }} {{ profession }})</caption>
+            <thead>
+                <tr>
+                    <th>课程类别</th>
+                    <th>最低学分要求(单击修改)</th>
+                    <th>附加要求</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>公共必修课</td>
+                    <td><span class="editableCredit" name="publicRequired">{{ publicRequired }}</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>专业必修课</td>
+                    <td><span class="editableCredit" name="professionalRequired">{{ professionalRequired }}</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>选修课</td>
+                    <td><span class="editableCredit" name="elective">{{ elective }}</span></td>
+                    <td>专业选修<span class="editableCredit" name="professionalElective">{{ professionalElective }}</span>分,文科<span class="editableCredit" name="artsStream">{{ artsStream }}</span>分,理科<span class="editableCredit" name="scienceStream">{{ scienceStream }}</span>分</td>
+                </tr>
+                {% if double %}
+                <tr>
+                    <td>双学位/双专业 | 辅修</td>
+                    <td><span class="editableCredit" name='double'>0.0</span></td>
+                    <td>辅修备注:{{ minorRemark }}<br>双修备注:{{ doubleRemark }}</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pretty-table match-error">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>未匹配成功课程</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>学期号</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in uncertainCourses %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                    <td>
+                        <select onchange="move_one(this)">
+                            <option value="null">无</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td colspan="6">
+                    </td>
+                    <td>
+                        <select onchange="move_all(this)">
+                            <option value="null">批量标记</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pretty-table public-must">
+        <table>
+            <caption>公共必修课(已修)</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>学期号</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in repairedPublicCourses %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                    <td>
+                        <select onchange="move_one(this)">
+                            <option value="null">无</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td colspan="6">
+                        综合必修总计：<strong id="publicCreditGet"></strong> 分
+                    </td>
+                    <td>
+                        <select onchange="move_all(this)">
+                            <option value="null">批量标记</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pretty-table profession-must">
+        <table>
+            <caption>学科专业核心课(已修)</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>学期号</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in repairedProfessionCourses %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                    <td>
+                        <select onchange="move_one(this)">
+                            <option value="null">无</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td colspan="6">
+                        专业必修总计：<strong id="professionCreditGet"></strong> 分
+                    </td>
+                    <td>
+                        <select onchange="move_all(this)">
+                            <option value="null">批量标记</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="pretty-table profession-select">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>学科专业选修课(已修)</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>学期号</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in repairedProfessionElective %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                    <td>
+                        <select onchange="move_one(this)">
+                            <option value="null">无</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td colspan="6">
+                        专业选修总计：<strong id="professionElectiveGet"></strong> 分
+                    </td>
+                    <td>
+                        <select onchange="move_all(this)">
+                            <option value="null">批量标记</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pretty-table public-select">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>公共选修课(已修)</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>学期号</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in repairedElective %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                    <td>
+                        <select onchange="move_one(this)">
+                            <option value="null">无</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            {% if course.creditType != '文' %}
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            {% endif %}
+                            {% if course.creditType != '理' %}
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            {% endif %}
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td>
+                    </td>
+                    <td colspan="6">
+                        公共选修总计：<strong id="electiveSum"></strong> 分【理科学分：<strong id="electiveGetscience"></strong> 分、文科学分：<strong id="electiveGetarts"></strong>分】
+                    </td>
+                    <td>
+                        <select onchange="move_all(this)">
+                            <option value="null">批量标记</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pretty-table double">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>辅修、双专业、双学位(已修)</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>学期号</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in repairedDoubleCourses %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                    <td>
+                        <select onchange="move_one(this)">
+                            <option value="null">无</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td colspan="6">
+                        双修总计：<strong id="doubleCoursesGet"></strong> 分
+                    </td>
+                    <td>
+                        <select onchange="move_all(this)">
+                            <option value="null">批量标记</option>
+                            <option value="failed">标记挂科</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pretty-table failed">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>挂科课程</caption>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>学期号</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in failCourses %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                    <td>
+                        <select onchange="move_one(this)">
+                            <option value="null">无</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td colspan="6">
+                        已挂总计：<strong id="failCredit"></strong> 分
+                    </td>
+                    <td>
+                        <select onchange="move_all(this)">
+                            <option value="null">批量标记</option>
+                            <option value="public-must">标记公共必修</option>
+                            <option value="profession-must">标记专业必修</option>
+                            <option value="profession-select">标记专业选修</option>
+                            <option value="arts-public-select">标记公共选修(文科)</option>
+                            <option value="science-public-select">标记公共选修(理科)</option>
+                            <option value="double">标记双修</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pretty-table public-must-need">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>公共必修课(需修)</caption>
+            <thead>
+                <tr>
+                    <th>建议修读学期</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in nonRepairedPublicCourses %}
+                <tr>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="6">
+                        未修总计：<strong id="publicCreditNeed"></strong> 分
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pretty-table profession-must-need">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>学科专业核心课(需修)</caption>
+            <thead>
+                <tr>
+                    <th>建议修读学期</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in nonRepairedProfessionCourses %}
+                <tr>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="6">
+                        至少需再修：<strong id="professionCreditNeed"></strong> 分
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="pretty-table select-need">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>可修选修列表</caption>
+            <thead>
+                <tr>
+                    <th>建议修读学期</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in optionalCourses %}
+                <tr>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="6">
+                        未修总计：<strong id="electiveNeedSum"></strong> 分【非学科专业选修至少需再修 理:<strong id="electiveNeedscience"></strong> 分 文:<strong id="electiveNeedarts"></strong> 分 学科专业选修至少需再修<strong id="professionElectiveNeed"></strong> 分】
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    {% if double %}
+    <div class="pretty-table double-need">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>辅修、双专业、双学位(可修)</caption>
+            <thead>
+                <tr>
+                    <th>建议修读学期</th>
+                    <th>课程号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>学分</th>
+                    <th>学分类别</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in nonRepairedDoubleCourses %}
+                <tr>
+                    <td>{{ course.termNum }}</td>
+                    <td>{{ course.courseNum }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseType }}</td>
+                    <td>{{ course.credit }}</td>
+                    <td>{{ course.creditType }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="7">辅修备注:{{ minorRemark }}</td>
+                </tr>
+                <tr>
+                    <td colspan="7">双学位/双专业备注:{{ doubleRemark }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6">
+                        可修总学分: <strong id="doubleCoursesNeed"></strong> 分
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    {% endif %}
+    <div class="pretty-table">
+
+        <table cellpadding="0" cellspacing="0" border="0">
+            <caption>此次分析所用到的培养方案</caption>
+            <tbody>
+                {% for url in programUrl %}
+                <tr>
+                    <td colspan="7">
+                        <a href="{{ url }}" target="blank">{{ url }}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="/static/js/jquery.min.js"></script> -->
+<script src="/static/scripts/gobye/credit.js"></script>
+<script src="/static/scripts/gobye/result.js"></script>
+</html>

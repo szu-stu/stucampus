@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/styles/gobye/login.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学分统计小工具</title>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="header">
+                <div class="title">学分统计小工具</div>
+                <div class="information"><a href="http://192.168.2.20/axsxx/AASZUstd.ASP"
+                    target="_blank" class="btn">
+                    点击进入学生信息查询系统
+                </a></div>
+            </div>
+            <div class="content">
+                <div class="area">
+                    <form action="result/" method="post" id="in_from">
+                        {% csrf_token %}
+                        <div class="row">
+                            <label for="stuNum" class="label-name"> 学 号 :</label>
+                            <input type="text" id="stuNum" name="stuNum" class="input-area" value="">
+                            <p class="error-hint">{{ error }}</p>
+                        </div>
+                        <div class="row">
+                            <label for="stuPwd" class="label-name"> 密 码 :</label>
+                            <input type="password" id="stuPwd" name="stuPwd" class="input-area" value="" placeholder="选课密码">
+                            <p class="error-hint"></p>
+                        </div>
+                        <div class="row">
+                            <!-- 验证码session -->
+                            <input type="text" name="capCookie" value="{{cookie}}" style="display: none;">
+                            
+                            <label for="captcha" class="label-name">验证码:</label>
+                            <input type="captcha" id="captcha" name=captcha class="input-area" value="">
+                            <img src="data:image/bmp;base64,{{ img }}" alt="captcha" id="captcha-img">
+                            <p class="error-hint"></p>
+                        </div>
+                        <div class="row">
+                            <a href="feedback" style="display: inline-block;color: white;">反馈</a>
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="confirm">
+                    <a href="#" class="btn btn-1" onclick="fo_sub()">
+                        <svg>
+                            <rect x="0" y="0" fill="none" width="100%" height="100%"/>
+                        </svg>
+                        开始分析
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function isStuNum(stuNum) {
+        return stuNum.length == 10
+    }
+    function isStuPwd(stuPwd) {
+        return stuPwd != ""
+    }
+    function isCaptcha(captcha) {
+        return captcha.length > 2 && captcha.length < 5
+    }
+    function fo_sub() {
+        a = document.getElementById('in_from');
+        stuNum = document.getElementById("stuNum").value
+        stuPwd = document.getElementById("stuPwd").value
+        captcha = document.getElementById("captcha").value
+        errorHints = document.getElementsByClassName("error-hint")
+        for (var i = 0; i < errorHints.length; i++) {
+            errorHints[i].innerHTML = ""
+        }
+        if (isStuNum(stuNum)) {
+            if (isStuPwd(stuPwd)) {
+                if (isCaptcha(captcha)) {
+                    a.submit();
+                } else {
+                    errorHints[2].innerHTML = "验证码不正确"
+                }
+            } else {
+                errorHints[1].innerHTML = "密码不正确"
+            }
+        } else {
+            errorHints[0].innerHTML = "学号不正确"
+        }
+    }
+</script>
+</html>
