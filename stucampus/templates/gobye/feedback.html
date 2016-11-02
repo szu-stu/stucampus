@@ -62,7 +62,13 @@
 		.btn:hover {
 		  text-decoration: none;
 		}
-
+                .input-textarea{
+		  background-color:transparent;
+                  border:1px solid rgba(255,255,255,0.8);   
+                }
+                .label-textarea{
+                  vertical-align:top;
+                }
 	</style>
 </head>
 <body>
@@ -74,8 +80,8 @@
 	            <input type="text" id="contact" name="contact" class="input-area" value="">
 	        </div>
 	        <div class="row">
-	            <label for="content" class="label-name">反馈内容</label>
-	            <input type="text" name="content" class="input-area" value="" required="required">
+	            <label for="content" class="label-name label-textarea">反馈内容</label>
+	            <textarea type="text" rows="5" cols="50" name="content" class="input-textarea" value="" required="required"></textarea>
 	        </div>
 	        <div class="row">
 	        	<input type="submit" value="提交" class="btn">
