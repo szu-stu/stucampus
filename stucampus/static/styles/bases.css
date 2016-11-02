@@ -7,7 +7,7 @@ body{
     background-color: #eee;
     background: url(/static/images/index/halloween_background.png) fixed no-repeat;
     background-size: cover;
-    background-position-y:45%;
+    background-position-y:100%;
 }
 @media screen and (max-width: 767px){
 	@media screen and (max-width: 640px){
