@@ -248,7 +248,7 @@ body{
 		width: 25rem;
 		padding:0 0 1.06667rem 0;
 		font-size: 0.6rem;
-		color: rgba(0,0,0,0.54);
+		color: /*rgba(0,0,0,0.54)*/ #e5a422;
 		text-align: center;
 		font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
 	}
@@ -379,7 +379,7 @@ body{
 		display: block;
 		padding: 1.06667rem 0 1.06667rem 0;
 		font-size: 0.6rem;
-		color: rgba(0,0,0,0.54);
+		color: /*rgba(0,0,0,0.54)*/ #e4a422;
 		text-align: center;
 		line-height: 0.6rem;
 		font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
