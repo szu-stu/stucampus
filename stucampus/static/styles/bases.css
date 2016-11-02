@@ -5,6 +5,9 @@
 }
 body{
     background-color: #eee;
+    background: url(/static/images/index/halloween_background.png) fixed no-repeat;
+    background-size: cover;
+    background-position-y:45%;
 }
 @media screen and (max-width: 767px){
 	@media screen and (max-width: 640px){
@@ -31,7 +34,7 @@ body{
 	    left: 0;
 	    height: 3.466667rem;
 	    width: 100%;
-	    background-color: #5BC5BE;
+	    background-color: /*#5BC5BE*/ #e5a422;
 	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.16);
 	    z-index: 999;
 	}
@@ -323,12 +326,12 @@ body{
 	    float: left;
 	}
 	.nav-active{
-	    color: #5BC5BE  !important;
+	    color: /*#5BC5BE*/ #e5a422  !important;
 	}
 	.now{
 	    position: absolute;
 	    height: 1.6rem !important;
-	    border-bottom: 4px solid #5BC5BE;
+	    border-bottom: 4px solid /*#5BC5BE*/ #e5a422;
 	    transition: left 0.3s ease-in-out;
 	    -moz-transition: left 0.3s ease-in-out; /* Firefox 4 */
 	    -webkit-transition: left 0.3s ease-in-out; /* Safari 和 Chrome */
