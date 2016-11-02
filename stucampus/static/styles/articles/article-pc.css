@@ -47,7 +47,7 @@
     float: left;
 }
 .nav-active{
-    color: #5BC5BE !important;
+    color: /*#5BC5BE*/ #e5a422 !important;
 }
 .header ul li a{
     display: block;
