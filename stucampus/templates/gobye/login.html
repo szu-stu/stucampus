@@ -18,7 +18,7 @@
             </div>
             <div class="content">
                 <div class="area">
-                    <form action="result/" method="post" id="in_from">
+                    <form action="{% url 'gobye:result' %}" method="post" id="in_from">
                         {% csrf_token %}
                         <div class="row">
                             <label for="stuNum" class="label-name"> 学 号 :</label>

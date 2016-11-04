@@ -2,8 +2,8 @@
 body {
   margin: 0;
   padding: 0;
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
+  background: -webkit-linear-gradient(left, #15b471, #15a7b4);
+  background: linear-gradient(to right, #15b471, #15a7b4);
   overflow-x: hidden;
 }
 
@@ -109,10 +109,16 @@ a {
 }
 
 select {
+  outline: none;
   color: #fff;
   font-size: 0.8em;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background-color: transparent;
+}
+
+select option {
+  color: black;
+  background-color: rgba(255, 255, 255, .5);
 }
 
 /*# sourceMappingURL=result.css.map */
