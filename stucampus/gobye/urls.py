@@ -20,8 +20,8 @@ from views import login, result, feedback, feedbackInfo
 
 urlpatterns = [
     
-    url(r'^$', login),
-    url(r'^result/', result),
-    url(r'^feedback/', feedback),
-    url(r'^feedbackinfo/', feedbackInfo),
+    url(r'^$', login, name='login'),
+    url(r'^result/', result, name='result'),
+    url(r'^feedback/', feedback, name='feedback'),
+    url(r'^feedbackinfo/', feedbackInfo, name='feedbackInfo'),
 ]

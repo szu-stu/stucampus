@@ -5,8 +5,8 @@ html, body {
   margin: 0;
 }
 body {
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
+  background: -webkit-linear-gradient(left, #15b471, #15a7b4);
+  background: linear-gradient(to right, #15b471, #15a7b4);
   font-family: 等线, 微软雅黑;
   position: relative;
   overflow: hidden;

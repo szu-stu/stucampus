@@ -17,9 +17,7 @@ from models import Professions, Plan, Courses, MCCourses
 
 # 在当前目录下创建可能的双专业个人信息
 import os
-DEBUG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "DEBUG")
-
-import traceback
+DEBUG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "DEBUG")
 
 class CreditStatistics(object):
 	def __init__(self, stuNum, stuPwd, captcha, cookies):
@@ -46,7 +44,6 @@ class CreditStatistics(object):
 
 		self.__init__changeProfession()
 
-		self._finish = False
 		self._success = False
 		self._errorInfo = None
 		self._latestSelectionResultUrl = None
@@ -113,6 +110,7 @@ class CreditStatistics(object):
 				"credit": float(td[5 + tableType].string.strip()),
 				"creditType": "无"
 			}
+			# 在挂科列表中则从挂科列表中删除
 			matchCourse = self._inCourseInCourseList(data, self.failCourses, "courseNum", "courseName");
 			if matchCourse:
 				self.failCourses.remove(matchCourse)
@@ -147,6 +145,7 @@ class CreditStatistics(object):
 				if creditGet == 0: # 取得学分为0 说明挂科
 					self.failCourses.append(data)
 				else :
+					# 在挂科列表中则从挂科列表中删除
 					matchCourse = self._inCourseInCourseList(data, self.failCourses, "courseNum", "courseName");
 					if matchCourse:
 						self.failCourses.remove(matchCourse)
@@ -180,7 +179,8 @@ class CreditStatistics(object):
 		# 登录成功返回 <script>top.location.href='../Amain.asp';</script>
 		if response.content.find("top.location.href=") == -1:
 			print "用户名或口令错误 in _login"
-			raise Exception("用户名或口令错误")
+			self._errorInfo = "用户名或口令错误"
+			return True
 
 	def _getBasicInfo(self):
 		'''
@@ -210,7 +210,8 @@ class CreditStatistics(object):
 		# 判断招生高考信息是否为空判断是否登录成功
 		if html.find(id="lblKsh").string == None:
 			print "用户名或口令错误 in _getBasicInfo"
-			raise Exception("用户名或口令错误")
+			self._errorInfo = "用户名或口令错误"
+			return True
 
 		cookies = response.headers["Set-cookie"]
 		self.cookies["ASP.NET_SessionId"] = cookies[cookies.find("=") + 1:cookies.find(";")]
@@ -227,7 +228,8 @@ class CreditStatistics(object):
 			profession = profession.replace("  ", "（") + "）"
 		else:
 			# 查询是否为双专业为双学位
-			self._getMinorInfo()
+			if (self._getMinorInfo()):
+				return True
 		self.profession = profession
 
 	def _getMinorInfo(self):
@@ -249,7 +251,7 @@ class CreditStatistics(object):
 		self.minorType = td[3].font.string.strip()
 		self.minorCollege = td[5].string.strip()
 
-		self._getMinorProfessionId()
+		return self._getMinorProfessionId()
 
 	def _getRelativeUrl(self):
 		'''
@@ -271,7 +273,8 @@ class CreditStatistics(object):
 					self._repairedCoursesUrl = "http://192.168.2.20/AXSXX/" + a["href"]
 					break
 		if self._latestSelectionResultUrl == None or self._repairedCoursesUrl == None:
-			raise Exception("获取最新选课页面URL失败")
+			self._errorInfo = "获取最新选课页面URL失败"
+			return True
 
 	def _getProfessionId(self):
 		'''
@@ -279,7 +282,8 @@ class CreditStatistics(object):
 		'''
 		query = Professions.objects.filter(grade=self.grade).filter(college=self.college)
 		if len(query) == 0:
-			raise Exception("查询不到专业id")
+			self._errorInfo = "查询不到专业id"
+			return True
 		profession = query.filter(profession=self.profession)
 		if len(profession) == 0:
 			profession = query.filter(profession__contains=self.profession)
@@ -300,14 +304,16 @@ class CreditStatistics(object):
 		'''
 		query = Professions.objects.filter(grade=self.minorGrade).filter(college=self.minorCollege).filter(profession=self.minorProfession)
 		if len(query) < 1:
-			raise Exception("查询不到双学位或者双修专业id")
+			self._errorInfo = "查询不到双学位或者双修专业id"
+			return True
 		self.minorProfessionId = query[0].id
 		self.programUrl.append(query[0].url)
 
 	def _getPlan(self):
 		query = Plan.objects.filter(professionId=self.professionId)
 		if len(query) < 1:
-			raise Exception("专业id不存在！")
+			self._errorInfo = "专业id不存在！"
+			return True
 		query = query[0]
 		artsStream = query.artsStream if query.artsStream else 0.0
 		scienceStream = query.scienceStream if query.scienceStream else 0.0
@@ -358,17 +364,6 @@ class CreditStatistics(object):
 				data = self._querySetToDic(course)
 				self.nonRepairedDoubleCourses.append(data)
 
-	def _retakeCourses(self):
-		'''
-			从挂科课程列表中找出未重修的课程，添加到新的挂科列表
-		'''
-		failCourses = []
-		for failCourse in self.failCourses:
-			if not (failCourse in self.repairedCourses or failCourse in self.latestSelectionResult):
-				# 挂科科目不在已修课程中，课程添加到挂科课程列表
-				failCourses.append(failCourse)
-		self.failCourses = failCourses
-
 	def _matchAllCourses(self):
 			self._matchCourses(self.latestSelectionResult) # 匹配最新选课结果
 			self._matchCourses(self.repairedCourses) # 匹配已修课程
@@ -378,10 +373,11 @@ class CreditStatistics(object):
 			find = False
 			if course["courseNum"][:2] == "MC": #判断是否为MOOC课程
 				self._matchMCCourse(course)
-			elif course["courseNum"][:5] == "53000": # 判断是否为体育课， 体育课前五位为53000
+			elif course["courseNum"][:5] == "53000" or course["courseName"].endswith("俱乐部"): # 判断是否为体育课， 体育课前五位为53000
 				self._matchPECourse(course)
 			else :
-				self._matchOtherCourse(course)
+				if (self._matchOtherCourse(course)):
+					return True
 
 	def _matchMCCourse(self, course):
 		'''
@@ -429,6 +425,7 @@ class CreditStatistics(object):
 			if publicCourse["courseNum"][:5] == "53000":
 				self.repairedPublicCourses.append(course)
 				self.nonRepairedPublicCourses.remove(publicCourse)
+				return 
 
 	def _matchOtherCourse(self, course):
 		'''
@@ -487,8 +484,9 @@ class CreditStatistics(object):
 						self.__init__changeProfession()
 						self.profession = result[0].profession
 						self.programUrl.append(result[0].url)
+						# 退出本次判断，重新选择专业进行分析
 						self._start(x.professionId)
-						raise Exception("更换专业")
+						return True
 			# 不在其他专业的话...归入不确定课程，让使用者自己放位置
 			if len(query) > 0:
 				course["creditType"] = query[0].creditType
@@ -565,10 +563,6 @@ class CreditStatistics(object):
 				return icourse
 			# print str(course[key]), str(icourse[key])
 		return None
-	
-	@property
-	def finish(self):
-		return self._finish
 
 	@property
 	def success(self):
@@ -579,32 +573,36 @@ class CreditStatistics(object):
 		return self._errorInfo
 
 	def _start(self, professionId=None):
-		try:
-			if professionId == None:
-				self._login()
-				self._getBasicInfo()
-				self._getRelativeUrl()
-			self._getRepairedCourses()
-			self._getLatestSelectionResult()
-			if professionId == None:
-				self._getProfessionId()
-			else:
-				self.professionId = professionId
-			self._getPlan()
-			self._getCourses()
-			self._retakeCourses()
-			self._matchAllCourses()
-		except Exception as e:
-			if e.message != "更换专业":
-				self._errorInfo = e.message
-				self._success = False
-				self._finish = True
+		#注意！！！！！！！！！！！！!!!！！！ 函数返回True表示出现错误
+		if professionId == None:
+			if (self._login() or self._getBasicInfo() or self._getRelativeUrl()):
+				self._saveErrorInfo()
+				return 
 
-				exstr = traceback.format_exc()
-				print exstr
-				# 保存错误时的页面信息
-				file(os.path.join(DEBUG_DIR, self.stuNum + self._errorInfo + ".txt"), "wb").write(exstr + "\n" + self._currentHtml)
+		self._getRepairedCourses()
+		self._getLatestSelectionResult()
+		if professionId == None:
+			if (self._getProfessionId()):
+				self._saveErrorInfo()
+				return 
+		else:
+			self.professionId = professionId
+		
+		if (self._getPlan()):
+			self._saveErrorInfo()
 			return
 		
+		self._getCourses()
+		if (self._matchAllCourses()):
+			return 
 		self._success = True
-		self._finish = True
+
+	def _saveErrorInfo(self):
+		# 保存错误时的页面信息
+		if os.path.exists(DEBUG_DIR) == False:
+			os.makedirs(DEBUG_DIR)
+		path = os.path.join(DEBUG_DIR, self.stuNum + ".txt")
+		if os.path.exists(path) == False:
+			f = open(path, 'w')
+			f.close()
+		file(os.path.join(DEBUG_DIR, self.stuNum + ".txt"), 'a').write(self._errorInfo + '\n' + self._currentHtml + '\n')
