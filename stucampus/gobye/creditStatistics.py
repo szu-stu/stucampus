@@ -19,8 +19,6 @@ from models import Professions, Plan, Courses, MCCourses
 import os
 DEBUG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "DEBUG")
 
-import traceback
-
 class CreditStatistics(object):
 	def __init__(self, stuNum, stuPwd, captcha, cookies):
 		self.stuNum = stuNum
