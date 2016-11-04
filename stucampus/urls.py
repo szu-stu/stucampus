@@ -57,7 +57,7 @@ urlpatterns = [
     url(r'^member_infor/', include(member_infor_url,namespace='member_infor')),
     url(r'^summer_plans/', include(summer_plans_url,namespace='summer_plans')),
 
-    url(r'^gobye/?', include(gobye_urls,namespace='gobye')),
+    url(r'^gobye/', include(gobye_urls,namespace='gobye')),
 ]
 
 #serve media file when using developing server
