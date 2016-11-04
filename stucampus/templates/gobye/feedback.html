@@ -14,21 +14,22 @@
 		  top: 50%;
 		  left: 50%;
 		  width:50%;
-		  height: 50%;
 			-webkit-transform: translateX(-50%) translateY(-50%);
 		}
-		.row .input-area {
-		  margin: 0.5em auto;
-		  resize: none;
-		  background-color: transparent;
-		  border: 1px solid rgba(255, 255, 255, 0.8);
+		.row .input-textarea, .row .input-area {
+			resize: none;
+			border: 1px solid rgba(255, 255, 255, 0.8);
 		  font-size: 1.2em;
-		  height: 1.3em;
-		  width: 8em;
 		  color: rgba(255, 255, 255, 0.8);
 		  outline: none;
 		  transition: all 0.3s;
-		  overflow-y: hidden;
+		  overflow-y: auto;
+		  background-color: transparent;
+		}
+		.row .input-area {
+		  margin: 0.5em auto;		  
+		  height: 1.3em;
+		  width: 8em;
 		}
 		.row .input-area::-webkit-input-placeholder {
 		  color: rgba(255, 255, 255, 0.8);
@@ -73,7 +74,7 @@
 </head>
 <body>
 	<div class="container">
-	    <form id="feedback" action="/feedbackinfo/" method="post">
+	    <form id="feedback" action="{% url 'gobye:feedbackInfo' %}" method="post">
 	        {% csrf_token %}
 	        <div class="row">
 	            <label for="contact" class="label-name">联系方式</label>

@@ -74,7 +74,7 @@ def feedbackInfo(request):
 		# for tmp in filecontent:
 		# 	tmpContent += tmp
 		# fil.close()
-		file(os.path.join(FEEDBACK_DIR, "feedback.txt"), "a").write(tmpContent + "[contact:" + contact + "]\ncontent:" + content + "\n")
+		file(os.path.join(FEEDBACK_DIR, "feedback.txt"), "a").write("[contact:" + contact + "]\ncontent:" + content + "\n")
 		
 		return render(request, 'gobye/feedbackInfo.html')
 	else :
