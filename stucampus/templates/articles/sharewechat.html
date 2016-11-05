@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>扫码分享到微信--学子天地</title>
+	{% load html_tools %}
+        {{ 'plugins/jquery.min.js' | as_js }}
+	{{ 'article/jquery.qrcode.min.js' | as_js }}
+	{{ 'article/qrcode.js' | as_js }}
+	
+</head>
+<body>
+	<div id="qrcode"></div>
+	<script>
+            jQuery('#qrcode').qrcode({
+                render : "table",
+                text   : "{{ url }}"
+            });
+        </script>
+</body>
+</html>

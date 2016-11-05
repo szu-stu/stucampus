@@ -6,7 +6,7 @@ from stucampus.articles.views import del_article, set_important, publish
 from stucampus.articles.views import CategoryView
 
 from stucampus.articles.views import article_list, article_display
-
+from stucampus.articles.views import sharewechat
 
 urlpatterns = [
     url(r'^manage/?$', manage, name='manage'),
@@ -22,4 +22,5 @@ urlpatterns = [
 
     url(r'^(?P<category>\D*)/$', article_list, name='list'),
     url(r'^(?P<id>\d*)/?$', article_display, name='display'),
+    url(r'^sharewechat/?', sharewechat, name='sharewechat'),
 ]

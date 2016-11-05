@@ -184,3 +184,8 @@ def article_display(request, id=None):
     return render(request, 'articles/article-display.html',
             {'article': article,'comments':comments})
 
+
+def sharewechat(requests):
+    url = requests.GET.get('url')
+    return render(requests, 'articles/sharewechat.html',
+            {'url':url})
