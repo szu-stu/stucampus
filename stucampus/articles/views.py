@@ -20,7 +20,7 @@ from stucampus.custom.qiniu import upload_content_img_to_qiniu
 
 NO_CATEGORY = u'未分类'
 
-@check_perms('articles.article_add')
+#@check_perms('articles.article_add')
 def manage(request):
     category = request.GET.get('category')
     editor = request.user
@@ -94,7 +94,7 @@ class ModifyView(View):
         return HttpResponseRedirect(reverse('articles:manage')+'?page='+page)
 
 
-@check_perms('articles.article_manage')
+#@check_perms('articles.article_manage')
 def del_article(request):
     article_id = request.GET.get('id')
     article = get_object_or_404(Article, pk=article_id)
@@ -103,7 +103,7 @@ def del_article(request):
     return HttpResponseRedirect(reverse('articles:manage'))
 
 
-@check_perms('articles.article_manage')
+#@check_perms('articles.article_manage')
 def set_important(request):
     article_id = request.GET.get('id')
     article = get_object_or_404(Article, pk=article_id)
@@ -111,7 +111,7 @@ def set_important(request):
     article.save()
     return HttpResponseRedirect(reverse('articles:manage'))
 
-@check_perms('articles.article_manage')
+#@check_perms('articles.article_manage')
 def publish(request):
     article_id = request.GET.get('id')
     article = get_object_or_404(Article, pk=article_id)

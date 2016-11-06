@@ -73,8 +73,10 @@ function showtools(){
 function showcommenttools(){
     $(".sharebox").show();
     $(".add-comment").show();
+    $(".add-comment-cover").show();
     setTimeout(function(){
         $(".add-comment").addClass("appear");
+        $(".add-comment-cover").addClass("appear");
         $(".addcomment").focus();
         $(".sharebox").removeClass("appear");
     },100);
