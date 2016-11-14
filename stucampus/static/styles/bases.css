@@ -376,7 +376,7 @@ body{
 		display: block;
 		padding: 1.06667rem 0 1.06667rem 0;
 		font-size: 0.6rem;
-		color: /*rgba(0,0,0,0.54)*/ #e4a422;
+		color: rgba(0,0,0,0.54);
 		text-align: center;
 		line-height: 0.6rem;
 		font-family: "SourceHanSans-Light","Roboto-Light","Microsoft YaHei";
