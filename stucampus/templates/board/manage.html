@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block htmltitle %}<title> 公文通汇总-深圳大学学子天地 </title>{% endblock %}
+{% block htmlhead %}
+{% load html_tools %}
+{{ 'board/index.css' | as_css }}
+{{ 'board/manage.js' | as_js }}
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+{% endblock %}
+{% block content %}
+        <div class="container">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>展示</th>
+                            <th>附件</th>
+                            <th>日期</th>
+                            <th>发布与撤回</th>
+                            <th>置顶与取消</th>
+                        </tr>
+                    </thead>
+                    {% for item in article_list%}
+                    <tr>
+                        <td>{{ article_list.start_index|add:forloop.counter|add:-1 }}</td>
+                        <td>
+                            {% if item.isTop %}
+                            <a href="http://www.szu.edu.cn/board/view.asp?id={{ item.UID }}"><span class="top">{{ item.title }}</span></a>
+                            {% else %}
+                            <a href="http://www.szu.edu.cn/board/view.asp?id={{ item.UID }}"><span class="normal">{{ item.title }}</span></a>
+                            {% endif %}
+                        </td>
+                        {% if item.isShow %}
+                        <td>√</td>
+                        {% else %}
+                        <td>×</td>
+                        {% endif %}
+                        {% if item.hasFile %}
+                        <td>√</td>
+                        {% else %}
+                        <td>×</td>
+                        {% endif %}
+                        <td>{{ item.date |date:"Y-m-d"}}</td>
+                        {% if item.isShow %}
+                        <td><button class="btn-sm btn-warning btn-show" name="{{ item.UID }}">撤下</button></td>
+                        {% else %}
+                        <td><button class="btn-sm btn-info btn-show" name="{{ item.UID }}">发布</button></td>
+                        {% endif %}
+                        {% if item.isTop %}
+                        <td><button class="btn-sm btn-warning btn-top" name="{{ item.UID }}">取消置顶</button></td>
+                        {% else %}
+                        <td><button class="btn-sm btn-info btn-top" name="{{ item.UID }}">置顶</button></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+                <ul class="pagination">
+                    {% if article_list.has_previous %}
+                        <li><a href="?page=1">首页</a></li>
+                        <li><a href="?page={{ article_list.previous_page_number }}">&laquo;</a></li>
+                    {% endif %}
+                    <li><span class="current">
+                        Page {{ article_list.number }}
+                    </span></li>
+                    {% if article_list.has_next %}
+                    <li><a href="?page={{ article_list.next_page_number }}">&raquo;</a></li>
+                    {% endif %}
+                </ul>
+        </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+
+.container{
+	width: 80%;
+	margin: 5% auto 5% auto;
+	background-color: #fff;
+}
+
+*{
+	box-sizing:content-box !important;
+}
+
+.top:before{
+	content: "【top】：";
+	color:red;
+}

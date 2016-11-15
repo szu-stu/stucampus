@@ -24,7 +24,7 @@ from stucampus.member_infor import urls as member_infor_url
 from stucampus.summer_plans import urls as summer_plans_url
 
 from stucampus.gobye import urls as gobye_urls
-
+from stucampus.board import urls as board_urls
 admin.autodiscover()
 
 
@@ -58,6 +58,7 @@ urlpatterns = [
     url(r'^summer_plans/', include(summer_plans_url,namespace='summer_plans')),
 
     url(r'^gobye/?', include(gobye_urls,namespace='gobye')),
+    url(r'^board/?', include(board_urls,namespace='board')),
 ]
 
 #serve media file when using developing server
