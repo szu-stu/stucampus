@@ -63,7 +63,7 @@ def result(request):
 
 def feedback(request):
 	return render(request, 'gobye/feedback.html')
-
+# make the feedback use the sql
 from .models import Feedback
 def feedbackInfo(request):
 	if request.method == "POST":

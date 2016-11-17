@@ -41,7 +41,7 @@ class MCCourses(models.Model):
 	creditType = models.CharField(max_length=10)
 	remark = models.CharField(max_length=300)
 
-
+#add the feedback
 class Feedback(models.Model):
         contact = models.CharField('联系人', max_length=100)
         content = models.TextField('反馈内容', max_length=10000)
