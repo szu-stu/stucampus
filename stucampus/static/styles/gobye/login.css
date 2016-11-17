@@ -33,6 +33,12 @@ h1, p, .title {
   display: flex;
   align-items: center;
   position: relative;
+  overflow: auto;
+}
+@media only screen and (max-height: 38em){
+    .container{
+        display: block;
+    }
 }
 
 /* 外框 */
