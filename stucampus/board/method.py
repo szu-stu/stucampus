@@ -51,7 +51,7 @@ def get_info(soup):
         each_dict['info_type'] = all_tr[i].td.next_sibling.next_sibling.a.string
         each_dict['info_unit'] = all_tr[i].td.next_sibling.next_sibling.next_sibling.next_sibling.a.string
         temp = all_tr[i].td.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.next_sibling.text
-        if (u'置顶' in temp):
+        if ('置顶' in temp):
             each_dict['info_top'] = True
             each_dict['info_title'] = temp.strip()[8:]
         else:
