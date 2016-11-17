@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <link rel="stylesheet" type="text/css" href="/static/styles/gobye/login.css"/>
+    {% load html_tools %}
+    {{ 'gobye/login.css' | as_css }}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>学分统计小工具--学子天地</title>

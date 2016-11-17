@@ -6,6 +6,12 @@ body {
   background: linear-gradient(to right, #15b471, #15a7b4);
   overflow-x: hidden;
 }
+/* addition item */
+.logo{
+    position:fixed;
+    bottom: 55px;
+    right: 55px;
+}
 
 /* clear style of user agent stylesheet */
 p, h1 {
