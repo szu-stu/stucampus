@@ -64,6 +64,7 @@ def result(request):
 def feedback(request):
 	return render(request, 'gobye/feedback.html')
 
+from .models import Feedback
 def feedbackInfo(request):
 	if request.method == "POST":
 		contact = request.POST.get("contact", "")
@@ -74,8 +75,8 @@ def feedbackInfo(request):
 		# for tmp in filecontent:
 		# 	tmpContent += tmp
 		# fil.close()
-		file(os.path.join(FEEDBACK_DIR, "feedback.txt"), "a").write("[contact:" + contact + "]\ncontent:" + content + "\n")
-		
+		#file(os.path.join(FEEDBACK_DIR, "feedback.txt"), "a").write("[contact:" + contact + "]\ncontent:" + content + "\n")
+		Feedback.objects.create(contact=contact, content=content)
 		return render(request, 'gobye/feedbackInfo.html')
 	else :
 		return HttpResponseRedirect(reverse('gobye:feedback'))

@@ -40,3 +40,13 @@ class MCCourses(models.Model):
 	credit = models.FloatField()
 	creditType = models.CharField(max_length=10)
 	remark = models.CharField(max_length=300)
+
+
+class Feedback(models.Model):
+        contact = models.CharField('联系人', max_length=100)
+        content = models.TextField('反馈内容', max_length=10000)
+        class Meta:
+            verbose_name = '反馈'
+            verbose_name_plural = verbose_name
+        def __unicode__(self):
+            return self.contact
