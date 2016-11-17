@@ -59,6 +59,19 @@ h1, p, .title {
   opacity: 1;
   transition: all 0.5s;
 }
+/*暂时添加项目 */
+.logo{
+    text-align: center;
+    margin-top: 1.5em;
+}
+sup{
+    font-size:40%;
+    position:relative;
+    top:-0.5em;
+}
+.information{
+    text-decoration:underline;
+}
 
 /* 标题 */
 .title {
@@ -67,7 +80,7 @@ h1, p, .title {
   font-weight: 500;
   color: rgba(255, 255, 255, 0.8);
   letter-spacing: 4px;
-  margin: 1.5em auto 0;
+  margin: /*1.5em*/0 auto 0;
 }
 
 /* 错误提示 */
