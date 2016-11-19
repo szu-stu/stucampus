@@ -35,6 +35,18 @@
 	    overflow: hidden;
 	    box-shadow: 0rem 0.1rem 0.1rem rgba(0,0,0,0.16);
 	}
+	form.large-element ul{
+		margin:4.285714rem 0 4.928571rem 0;
+	}
+	form.large-element ul li:nth-child(2){
+		margin: 3.178571rem 0 4.785714rem 0;
+	}
+	form.large-element ul li.buttons input:first-child{
+		margin: 0 5.571429rem 0 10%;
+	}
+	.copyright{
+		margin-bottom: 8.428571rem;
+	}
 }
 @media screen and (min-width: 768px){
 	.template-header{
@@ -73,6 +85,18 @@
 	    overflow: hidden;
 	    box-shadow: 0rem 0.1rem 0.1rem rgba(0,0,0,0.16);
 	}
+	form.large-element ul{
+		margin:1.392857rem 0 1.678571rem 0;
+	}
+	form.large-element ul li:nth-child(2){
+		margin: 1.321429rem 0 1.071429rem 0;
+	}
+	form.large-element ul li.buttons {
+		text-align: center;
+	}
+	form.large-element ul li.buttons input:first-child{
+		margin: 0 0.678571rem 0 0;
+	}
 }
 div.master-framework {
 	overflow: hidden;
@@ -83,20 +107,21 @@ form.large-element {
 }
 form.large-element label, 
 form.large-element input {
-	height: 30px;
-	line-height: 30px;
-	font-size: 28px;
+	height: 1.071429rem;
+	line-height: 1.071429rem;
+	font-size: 1.0rem;
 	font-family: "Microsoft Yahei";
 }
 
 form.large-element label.label {
 	display: inline-block;
 	text-align: right;
-	width: 200px;
+	width: 2rem;
+	padding-left: 7%;
 }
 form.large-element input.textbox {
-	width: 300px;
-	padding: 5px;
+	width: 10.714286rem;
+	padding: 0.178571rem;
 	margin: 0 1em;
 	border: 1px solid #ccc;
 }
@@ -104,10 +129,10 @@ form.large-element input.textbox {
 
 form.large-element input.button {
 	display: inline-block;
-	height: 52px;
-	padding: 5px 28px;
+	height: 1.857143rem;
+	padding: 0.178571rem 1.0rem;
 	border-width: 0;
-	border-radius: 2px;
+	border-radius: 0.357143rem;
 	background: #ff696a;
 	color: #fff;
 	cursor: pointer;
@@ -127,16 +152,16 @@ form.large-element span.comment {
 }
 
 form.large-element ul {
-	margin: 50px auto;
 	padding: 0;
-	width: 800px;
+	width: 100%;
+	text-align: center;
 }
 form.large-element ul li {
 	list-style: none;
-	margin: 20px 0;
 	padding: 0;
+	width: 100%;
 }
-form.large-element ul li.buttons {
-	text-align: center;
-	margin-top: 50px;
+.copyright{
+	height: auto;
 }
+
