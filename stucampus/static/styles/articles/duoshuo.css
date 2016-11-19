@@ -13,7 +13,6 @@
 }
 @media screen and (max-width: 767px){
     .user_info{
-        display: block;
         position: relative;
         height: 2.4rem;
         overflow: hidden;
@@ -30,7 +29,7 @@
         position: absolute;
         left: 4.0rem;
         display: block ;
-        width: 10.266667rem ;
+        width: 14.285714rem;
         height: 0.933333rem; 
         color: #5BC5BE ;
         font-size: 0.933333rem; 
@@ -204,10 +203,19 @@
     .appear{
         left: 0;
     }
+    .deletebtn{
+        text-decoration: none;
+        color: #767676;
+        font-size: 0.6em;
+        position: absolute;
+        right: 1.5rem;
+    }
+    .deletebtn:hover{
+        color: black;
+    }
 }
 @media screen and (min-width: 768px){
     .user_info{
-        display: block;
         position: relative;
         height: 1.6rem;
         overflow: hidden;
@@ -224,7 +232,7 @@
         position: absolute;
         left: 2.6667rem;
         display: block ;
-        width: 10.266667rem ;
+        width: 14.285714rem;
         height: 0.6rem ; 
         color: #5BC5BE ;
         font-size: 0.6rem ; 
@@ -386,5 +394,15 @@
         height: 1.06667rem;
         background-image: url('/static/images/index/send_32.png');
         background-size: 100%;
+    }
+   .deletebtn{
+        text-decoration: none;
+        color: #767676;
+        font-size: 0.6em;
+        position: absolute;
+        right: 1.5rem;
+    }
+    .deletebtn:hover{
+        color: black;
     }
 }

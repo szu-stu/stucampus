@@ -107,3 +107,12 @@ function showIdentityBox(){
     StuCampus.alert("点击灰区关闭tips",5000);
     $(".ds-dialog-inner").show();
 }
+$(document).ready(function(){
+    var total = $(".comments").length;
+    for(var i = 0 ; i < total ;++i)
+    {
+        var profindex =Math.round(Math.random()*3);
+        var newstr = "/static/images/articles/avatar"+profindex+".jpg";
+        $(".comments:eq("+i+")").find(".avatar").attr("src",newstr);
+    }
+})
