@@ -51,9 +51,9 @@
 .blur{
     position: absolute;
     left: 0;
-    top: 0;
+    bottom: 0;
     width: 25.0rem;
-    height: 14.133333rem;
+    height: 12.045454rem;
     background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Safari 5.1 - 6.0 */
     background: -o-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.64)); /* Firefox 3.6 - 15 */
@@ -72,7 +72,6 @@
     color: rgba(255,255,255,0.87);
     font-family: "SourceHanSans-Bold","Roboto-Bold","Microsoft YaHei";
     font-size: 1.5rem;
-    letter-spacing: 0.4rem;
     line-height: 1.8rem;
     font-weight: bold;
     text-align: center;
