@@ -128,7 +128,7 @@ def index(request):
     try:
         user = GiftSystem_user.objects.get(stu_no = request.session['szu_no'])
     except:
-        user = GiftSystem.create(stu_no=request.session['szu_no'], name=request.session['szu_name'])
+        user = GiftSystem_user.create(stu_no=request.session['szu_no'], name=request.session['szu_name'])
     return render(request, 'christmas/index.html', locals())
 
 
