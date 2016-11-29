@@ -31,7 +31,7 @@ class GiftSystem_user(models.Model):
     stu_no = models.CharField("学号", max_length=10)
     name = models.CharField("名字", max_length=100)
     phone = models.CharField("手机", max_length=11, null=True)
-    area = models.CharField("居住区域", max_length=1, choices=AREA, default=u'南区', null=True)
+    area = models.CharField("居住区域", max_length=1, choices=AREA, default="C", null=True)
     wechat = models.CharField("微信号", max_length=50, null=True)
     def __str__(self):
         return self.stu_no
