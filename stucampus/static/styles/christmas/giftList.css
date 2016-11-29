@@ -1,0 +1,11 @@
+.add_title{
+    border-top: 1px solid #9ED99D;
+    width: 100%;
+}
+.add_title h2{
+    text-align: center;
+}
+#dialog-main{
+    height: 30rem;
+    overflow: scroll;
+}

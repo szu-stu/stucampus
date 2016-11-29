@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Title</title>
+    {% load html_tools %}
+    {{ 'christmas/weui.style.css' | as_css }}
+    {{ 'christmas/weui.css' | as_css }}
+    {{ 'christmas/giftadd.css' | as_css }}
+</head>
+<body>
+    <form action="christmas/given/" method="POST" id="my_form">
+        {% csrf_token %}
+        {% if not current_user.phone or not current_user.area %}
+            <div class="weui-cells__title">个人信息</div>
+            <div class="weui-cells weui-cells_form weui-cell_primary">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label" for="id_phone" >手机:</label></div>
+                    <div class="weui-cell__bd">
+                        <input id="id_phone" maxlength="11" name="phone" type="text" class="weui-input"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="id_wechat" class="weui-label">微信号：</label></div>
+                    <div class="weui-cell__bd">
+                        <input type="text" id="id_wechat" maxlength="50" name="wechat" class="weui-input"/>
+                    </div>
+                </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label for="id_area" class="weui-label">居住区域:</label> </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" id="id_area" name="area">
+                            <option value="C">南区</option>
+                            <option value="A">西南</option>
+                            <option value="B">斋区</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+    {% endif %}
+        <div class="weui-cells__title">礼物信息</div>
+        <div class="weui-cells weui-cells_form weui-cell_primary">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label" for="id_name">礼物名称</label></div>
+                <div class="weui-cell__bd">
+                    <input id="id_name" class="weui-input" maxlength="100" name="name" type="text" placeholder="请输入礼物的名称" />
+                </div>
+        </div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label" for="id_type">礼物类别</label></div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" id="id_type" name="type">
+                        <option value="" selected="selected">---------</option>
+                        <option value="01">食物</option>
+                        <option value="02">服装配饰</option>
+                        <option value="03">钟表首饰</option>
+                        <option value="04">化妆品</option>
+                        <option value="05">运动户外</option>
+                        <option value="06">电器数码</option>
+                        <option value="07">小玩意</option>
+                        <option value="08">手工物件</option>
+                        <option value="09">二次元</option>
+                        <option value="10">图书音像</option>
+                        <option value="11">学习资源</option>
+                        <option value="12">其它</option>
+                    </select>
+                </div>
+        </div>
+        <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">礼物描述</label></div>
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" id="id_description" name="description" rows="3"></textarea>
+                </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="id_givenPerson" class="weui-label">收礼人姓名</label></div>
+            <div class="weui-cell__bd">
+                <input id="id_givenPerson" maxlength="100" name="givenPerson" type="text" class="weui-input" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="id_givenAdress" class="weui-label">收礼人地址</label></div>
+            <div class="weui-cell__bd">
+                <input id="id_givenAdress" maxlength="1000" name="givenAdress" type="text" class="weui-input" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="id_givenPhone" class="weui-label">收礼者手机号</label></div>
+            <div class="weui-cell__bd">
+                <input id="id_givenPhone" maxlength="11" name="givenPhone" type="text" class="weui-input" />
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_switch">
+                <div class="weui-cell__bd">
+                    匿名
+                </div>
+                <div class="weui-cell__ft">
+                    <input id="id_isAnonymous" name="isAnonymous" type="checkbox" class="weui-switch"/>
+                </div>
+        </div>
+            <div class="weui-btn-area">
+                <input type="submit" text="提交" class="weui-btn weui-btn_primary">
+            </div>
+        </div>
+    </form>
+    {{ 'christmas/jquery-1.11.3.min.js' | as_js }}
+    {{ 'christmas/jquery.form.min.js' | as_js }}
+    {{ 'christmas/weui.js' | as_js }}
+    {{ 'christmas/addGiven.js' |as_js }}
+</body>
+</html>

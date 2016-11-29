@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>Title</title>
+    {% load html_tools %}
+    {{ 'christmas/weui.style.css' | as_css }}
+    {{ 'christmas/weui.css' | as_css }}
+    {{ 'christmas/giftList.css' | as_css }}
+</head>
+<body>
+        {% for gift in gifts %}
+        {% if gift.isExchange %}
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__hd">
+                    <label class="weui-form-preview__label">礼物名称</label>
+                    <em class="weui-form-preview__value">{{ gift.name }}</em>
+                </div>
+                <div class="weui-form-preview__bd">
+                    <p>
+                        <label class="weui-form-preview__label">礼物ID</label>
+                        <span class="weui-form-preview__value">{{ gift.giftId }}</span>
+                    </p>
+                    <p class="own_phone">
+                        <label class="weui-form-preview__label">拥有者电话：</label>
+                        <span class="weui-form-preview__value">{{ gift.own.phone }}</span>
+                    </p>
+                    <p class="annoymous">
+                        <label class="weui-form-preview__label">是否匿名</label>
+                        <span class="weui-form-preview__value">{{ gift.isAnonymous }}</span>
+                    </p>
+                    <p class="gift_type">
+                        <label class="weui-form-preview__label">礼物类别</label>
+                        <span class="weui-form-preview__value">{{ gift.type }}</span>
+                    </p>
+                    <p class="aim_group">
+                        <label class="weui-form-preview__label">目标群体</label>
+                        <span class="weui-form-preview__value">{{ gift.exchangegift.aimGroup }}</span>
+                    </p>
+                    <p class="own_area">
+                        <label class="weui-form-preview__label">所在宿舍区</label>
+                        <span class="weui-form-preview__value">{{ gift.own.area }}</span>
+                    </p>
+                    {% if gift.exchangegift.changeresult.wangGiftType %}
+                    <p class="want_gift_type">
+                        <label class="weui-form-preview__label">想要的礼物类别</label>
+                        <span class="weui-form-preview__value">{{ gift.exchangegift.changeresult.wangGiftType }}</span>
+                    </p>
+                    {% endif %}
+                </div>
+            {% if not gift.exchangegift.changeresult.wangGiftType %}
+                <div class="weui-form-preview__ft">
+                    <a href="javascript:;" class="weui-form-preview__btn weui-form-preview__btn_primary choice-type-btn" data="{{ gift.giftId }}">选择交换的礼物类别↓↓↓</a>
+                </div>
+            {% endif %}
+            </div>
+        {% else  %}
+            <div class="weui-form-preview">
+                <div class="weui-form-preview__hd">
+                    <label class="weui-form-preview__label">礼物名称</label>
+                    <em class="weui-form-preview__value">{{ gift.name }}</em>
+                </div>
+                <div class="weui-form-preview__bd">
+                    <p>
+                        <label class="weui-form-preview__label">礼物ID</label>
+                        <span class="weui-form-preview__value">{{ gift.giftId }}</span>
+                    </p>
+                    <p class="own_phone">
+                        <label class="weui-form-preview__label">您的电话：</label>
+                        <span class="weui-form-preview__value">{{ gift.own.phone }}</span>
+                    </p>
+                    <p class="annoymous">
+                        <label class="weui-form-preview__label">是否匿名</label>
+                        <span class="weui-form-preview__value">{{ gift.isAnonymous }}</span>
+                    </p>
+                    <p>
+                        <label class="weui-form-preview__label">被赠予人</label>
+                        <span class="weui-form-preview__value">{{ gift.givengift.givenPerson }}</span>
+                    </p>
+                    <p>
+                        <label class="weui-form-preview__label">被赠予人电话</label>
+                        <span class="weui-form-preview__value">{{ gift.givengift.givenPhone }}</span>
+                    </p>
+                    <p class="given_address">
+                        <label class="weui-form-preview__label">被赠予人地址</label>
+                        <span class="weui-form-preview__value">{{ gift.givengift.givenAdress }}</span>
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% if gifts_count %}
+        <div class="add_title">
+            <h2 data-account="{{ gifts_count }}">您还可以添加{{ gifts_count }}个礼物</h2>
+        </div>
+        <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:;" id="gift-btn">点我添加礼物</a>
+        </div>
+    {% endif %}
+{#        <div class="dialogs">#}
+{#            <div class="js_dialog" id="iosDialog" style="display: none;">#}
+{#                <div class="weui-mask"></div>#}
+{#                <div class="weui-dialog">#}
+{#                    <div class="weui-dialog__hd"><strong class="weui-dialog__title">确认您的选择</strong></div>#}
+{#                    <div class="weui-dialog__bd" id="confirm-content"></div>#}
+{#                    <div class="weui-dialog__ft">#}
+{#                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" id="yes">确认</a>#}
+{#                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="no">放弃</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+        <div class="dialogs">
+            <div class="js_dialog" id="checkbox_dialog" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog weui-cells_checkbox" id="dialog-main">
+                    <div class="weui-dialog__hd"><strong class="weui-dialog__title">确认您的选择</strong></div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c01">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="01" id="c01" checked="checked">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>食物</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c02">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="02" id="c02">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>服装配饰</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c03">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="03" id="c03">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>钟表首饰</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c04">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="04" id="c04">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>化妆品</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c05">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="05" id="c05">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>运动户外</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c06">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="06" id="c06">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>电器数码</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c07">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="07" id="c07">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>小玩意</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c08">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="08" id="c08">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>手工物件</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c09">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="09" id="c09">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>二次元</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c10">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="10" id="c10">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>图书音像</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c11">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="11" id="c11">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>学习资源</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__bd">
+                        <label class="weui-cell weui-check__label" for="c12">
+                            <div class="weui-cell__hd">
+                                <input type="checkbox" class="weui-check" name="12" id="c12">
+                                <i class="weui-icon-checked"></i>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>其它</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" id="yes">确认</a>
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="no">放弃</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{ 'christmas/jquery-1.11.3.min.js' | as_js }}
+    {{ 'christmas/weui.js' | as_js }}
+    {{ 'christmas/weui.min.js' | as_js }}
+    <script>
+            $.ajaxSetup({
+                data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+            });
+    </script>
+    {{ 'christmas/giftList.js' | as_js }}
+    {{ 'christmas/format.js' | as_js }}
+</body>
+</html>
