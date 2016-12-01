@@ -5,9 +5,9 @@
 }
 body{
     background-color: #eee;
-    background: url("/static/images/index/thanksgiving_bgc.png") fixed no-repeat;
+/*    background: url("/static/images/index/thanksgiving_bgc.png") fixed no-repeat;
     background-position-y:80%;
-    background-size:cover;
+    background-size:cover;*/
 }
 @media screen and (max-width: 767px){
 	@media screen and (max-width: 640px){
@@ -34,7 +34,7 @@ body{
 	    left: 0;
 	    height: 3.466667rem;
 	    width: 100%;
-	    background-color: /*#5BC5BE*/ #f0a055 ;/*font */
+	    background-color: #5BC5BE ;/*font */
 	    box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.16);
 	    z-index: 999;
 	}
@@ -326,12 +326,12 @@ body{
 	    float: left;
 	}
 	.nav-active{
-	    color: /*#5BC5BE*/ #f0a055  !important;/*font */
+	    color: #5BC5BE  !important;/*font */
 	}
 	.now{
 	    position: absolute;
 	    height: 1.6rem !important;
-	    border-bottom: 4px solid /*#5BC5BE*/ #f0a055; /*font*/
+	    border-bottom: 4px solid #5BC5BE ; /*font*/
 	    transition: left 0.3s ease-in-out;
 	    -moz-transition: left 0.3s ease-in-out; /* Firefox 4 */
 	    -webkit-transition: left 0.3s ease-in-out; /* Safari 和 Chrome */

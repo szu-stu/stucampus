@@ -31,7 +31,7 @@
     bottom: 0;
     width: 0.666667rem;
     height: 0.666667rem;
-    background-color: /*rgb(91,197,190)*/ #f0a055; /*font */
+    background-color: rgb(91,197,190) ; /*font */
     border-radius: 50%;
 }
 .swiper-slide ,.swiper-slide a{

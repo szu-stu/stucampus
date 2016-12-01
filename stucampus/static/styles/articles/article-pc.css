@@ -47,7 +47,7 @@
     float: left;
 }
 .nav-active{
-    color: /*#5BC5BE*/ #f0a055 !important;/*font */
+    color: #5BC5BE !important;/*font */
 }
 .header ul li a{
     display: block;
