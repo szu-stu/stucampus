@@ -47,7 +47,7 @@ class ExchangeView(View):
         user = UserForm(request.POST)
         if not currentUser.phone or not currentUser.area:
             if user.is_valid():
-                phone = user.clean_data['phone']
+                phone = user.cleaned_data['phone']
                 area = user.data['area']
                 wechat = user.data['wechat']
             else:
@@ -62,7 +62,7 @@ class ExchangeView(View):
                 name = gift.data["name"],
                 type = gift.data["type"],
                 description = gift.data["description"],
-                isAnonymous = gift.clean_data["isAnonymous"],
+                isAnonymous = gift.cleaned_data["isAnonymous"],
                 giftId= currentUser.area + gift.data["type"] + "{:0>5}".format(
                     len(Gift.objects.filter(own__area=currentUser.area)) + 1)
             )
@@ -102,7 +102,7 @@ class GivenView(View):
         user = UserForm(request.POST)
         if not currentUser.phone or not currentUser.area:
             if user.is_valid():
-                phone = user.clean_data['phone']
+                phone = user.cleaned_data['phone']
                 area = user.data['area']
             else:
                 data = {"status": "error","message": user.errors.values()}
@@ -115,7 +115,7 @@ class GivenView(View):
                 name=gift.data["name"],
                 type=gift.data["type"],
                 description=gift.data["description"],
-                isAnonymous=gift.clean_data["isAnonymous"],
+                isAnonymous=gift.cleaned_data["isAnonymous"],
                 giftId=currentUser.area + gift.data["type"] + "{:0>5}".format(
                     len(Gift.objects.filter(own__area=currentUser.area)) + 1)
             )
@@ -123,7 +123,7 @@ class GivenView(View):
                 GivenGift.objects.create(
                     givenPerson=given.data["givenPerson"],
                     givenAdress=given.data["givenAdress"],
-                    givenPhone=given.clean_data["givenPhone"],
+                    givenPhone=given.cleaned_data["givenPhone"],
                     gift=t
                 )
             except:
