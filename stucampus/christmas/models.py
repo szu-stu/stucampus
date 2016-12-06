@@ -27,8 +27,13 @@ AIM_GROUP = (
     ('female', u'女性'),
     ('both', u'男女不限'),
 )
+GENDER_GROUP = (
+    ('male', u'男'),
+    ('female', u'女'),
+)
 class GiftSystem_user(models.Model):
     stu_no = models.CharField("学号", max_length=10)
+    gender = models.CharField("性别", max_length=6, choices=GENDER_GROUP, default="male")
     name = models.CharField("名字", max_length=100)
     phone = models.CharField("手机", max_length=11, null=True)
     area = models.CharField("居住区域", max_length=1, choices=AREA, default="C", null=True)
@@ -49,6 +54,7 @@ class Gift(models.Model):
     isExchange = models.BooleanField("是否为交换礼物", default=True)
     isUsed = models.BooleanField("是否已完成交换或赠与", default=False)
     isGet = models.BooleanField("是否已收取礼物", default=False)
+    isDelete = models.BooleanField("是否删除", default=False)
     def __str__(self):
         return self.name
     class Meta:

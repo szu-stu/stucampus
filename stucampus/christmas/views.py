@@ -144,9 +144,14 @@ def index(request):
     try:
         user = GiftSystem_user.objects.get(stu_no = request.session['szu_no'])
     except:
+        gender_dict = {
+            u'男': 'male',
+            u'女': 'female'
+        }
         user = GiftSystem_user.objects.create(
                stu_no=request.session['szu_no'],
-               name=request.session['szu_name']
+               name=request.session['szu_name'],
+               gender=gender_dict[request.session['szu_sex']]
         )
     return render(request, 'christmas/index.html', locals())
 
