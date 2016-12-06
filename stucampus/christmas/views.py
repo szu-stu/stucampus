@@ -7,6 +7,22 @@ from django.views.generic import View
 from .forms import ExchangeForm, GiftForm, UserForm, GivenForm
 import json
 from login_szu import login_szu
+from datetime import datetime, timedelta
+
+'''
+用来判断网页是否可用时间的装饰器，但只有判定开放时间，没判定关闭时间，有需求可改
+'''
+def time_require(time="2016-12-7"):
+    def decorator(function):
+        def wrapped_check(request, *args, **kwargs):
+            now = datetime.now().date()
+            year, month, day = time.split("-")
+            aimdate = datetime(int(year), int(month), int(day)).date()
+            if now < aimdate:
+                return HttpResponse("此网页还未开放")
+            return function(request, *args, **kwargs)
+        return wrapped_check
+    return decorator
 
 class ExchangeView(View):
     @login_szu
@@ -134,11 +150,18 @@ def index(request):
         )
     return render(request, 'christmas/index.html', locals())
 
-
+@time_require(time="2016-12-12")
 @login_szu
 def resultList(request):
     mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'])
-    return render(request, "christmas/resultList.html", locals())
+    id_list = []
+    for g in mygifts:
+        if g.isExchange:
+            if g.exchangegift.changeresult.getGiftId:
+                id_list.append(g.exchangegift.changeresult.getGiftId)
+    gifts = [Gift.objects.get(giftId=gid) for gid in id_list]
+    gifts_count = 0
+    return render(request, "christmas/giftList.html", locals())
 
 @login_szu
 def postWantType(request):
@@ -165,6 +188,8 @@ def postWantType(request):
                 return HttpResponse(json.dumps(data), content_type="application/json")
     data = {"status": "error", "message": "出了点不知道什么原因的错误呢= =、"}
     return HttpResponse(json.dumps(data), content_type="application/json")
+
+
 
 # def postWantType(request):
 #     if request.method == "POST":
