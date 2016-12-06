@@ -8,6 +8,7 @@ from .forms import ExchangeForm, GiftForm, UserForm, GivenForm
 import json
 from login_szu import login_szu
 from datetime import datetime, timedelta
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 '''
 用来判断网页是否可用时间的装饰器，但只有判定开放时间，没判定关闭时间，有需求可改
@@ -196,6 +197,15 @@ def postWantType(request):
     data = {"status": "error", "message": "出了点不知道什么原因的错误呢= =、"}
     return HttpResponse(json.dumps(data), content_type="application/json")
 
+def manageIndex(request):
+    gift_list = Gift.objects.all().order_by('giftId')
+    paginator = Paginator(gift_list, 100)
+    try:
+        page = int(request.GET.get('page', 1))
+        gift_list = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        gift_list = paginator.page(1)
+    return render(request, "christmas/manageIndex.html", locals())
 
 
 # def postWantType(request):

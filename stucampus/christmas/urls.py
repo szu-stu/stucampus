@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^giftResult/', views.resultList, name="giftResult"),
     url(r'^postWantType', views.postWantType, name="postWantType"),
+    url(r'^manage/', views.manageIndex, name="manage")
 ]
