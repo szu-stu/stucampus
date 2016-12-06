@@ -201,7 +201,7 @@ def postWantType(request):
 
 @check_perms('christmas.manager')
 def manageIndex(request):
-    gift_list = Gift.objects.all().order_by('giftId')
+    gift_list = Gift.objects.filter(isDelete=False).order_by('giftId')
     paginator = Paginator(gift_list, 100)
     try:
         page = int(request.GET.get('page', 1))
@@ -233,7 +233,7 @@ class manageGift(View):
         else:
             more = GivenForm(request.POST, instance=gift.givengift)
         more.save()
-        return HttpResponseRedirect("/christmas/manage")
+        return HttpResponseRedirect("/christmas/manage/")
 
 # def postWantType(request):
 #     if request.method == "POST":
