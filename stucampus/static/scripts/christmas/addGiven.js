@@ -1,7 +1,7 @@
 $(function(){
             var options = {
                 success: show,
-                clearForm: true,
+                clearForm: false,
                 timeout: 3000
             }
             function show(response) {

@@ -47,9 +47,9 @@ class ExchangeView(View):
         user = UserForm(request.POST)
         if not currentUser.phone or not currentUser.area:
             if user.is_valid():
-                phone = user.cleaned_data['phone']
-                area = user.cleaned_data['area']
-                wechat = user.cleaned_data['wechat']
+                phone = user.clean_data['phone']
+                area = user.data['area']
+                wechat = user.data['wechat']
             else:
                 data = {"status": "error", "message": user.errors.values()}
                 return HttpResponse(json.dumps(data), content_type="application/json")
@@ -59,16 +59,16 @@ class ExchangeView(View):
             currentUser.save()
         if exchange.is_valid() and gift.is_valid():
             t = Gift.objects.create(
-                name = gift.cleaned_data["name"],
-                type = gift.cleaned_data["type"],
-                description = gift.cleaned_data["description"],
-                isAnonymous = gift.cleaned_data["isAnonymous"],
-                giftId= currentUser.area + gift.cleaned_data["type"] + "{:0>5}".format(
+                name = gift.data["name"],
+                type = gift.data["type"],
+                description = gift.data["description"],
+                isAnonymous = gift.data["isAnonymous"],
+                giftId= currentUser.area + gift.data["type"] + "{:0>5}".format(
                     len(Gift.objects.filter(own__area=currentUser.area)) + 1)
             )
             try:
                 ExchangeGift.objects.create(
-                    aimGroup = exchange.cleaned_data["aimGroup"],
+                    aimGroup = exchange.data["aimGroup"],
                     gift = t
                 )
             except:
@@ -102,8 +102,8 @@ class GivenView(View):
         user = UserForm(request.POST)
         if not currentUser.phone or not currentUser.area:
             if user.is_valid():
-                phone = user.cleaned_data['phone']
-                area = user.cleaned_data['area']
+                phone = user.clean_data['phone']
+                area = user.data['area']
             else:
                 data = {"status": "error","message": user.errors.values()}
                 return HttpResponse(json.dumps(data), content_type="application/json")
@@ -112,18 +112,18 @@ class GivenView(View):
             currentUser.save()
         if given.is_valid() and gift.is_valid():
             t = Gift.objects.create(
-                name=gift.cleaned_data["name"],
-                type=gift.cleaned_data["type"],
-                description=gift.cleaned_data["description"],
-                isAnonymous=gift.cleaned_data["isAnonymous"],
-                giftId=currentUser.area + gift.cleaned_data["type"] + "{:0>5}".format(
+                name=gift.data["name"],
+                type=gift.data["type"],
+                description=gift.data["description"],
+                isAnonymous=gift.data["isAnonymous"],
+                giftId=currentUser.area + gift.data["type"] + "{:0>5}".format(
                     len(Gift.objects.filter(own__area=currentUser.area)) + 1)
             )
             try:
                 GivenGift.objects.create(
-                    givenPerson=given.cleaned_data["givenPerson"],
-                    givenAdress=given.cleaned_data["givenAdress"],
-                    givenPhone=given.cleaned_data["givenPhone"],
+                    givenPerson=given.data["givenPerson"],
+                    givenAdress=given.data["givenAdress"],
+                    givenPhone=given.clean_data["givenPhone"],
                     gift=t
                 )
             except:

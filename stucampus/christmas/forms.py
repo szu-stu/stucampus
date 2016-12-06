@@ -41,7 +41,7 @@ class GiftForm(forms.ModelForm):
         return type
     class Meta:
         model = Gift
-        exclude = ["id", "isExchange"]#, "giftId", "own", "isExchange", "isUsed", "isGet", "isDelete"]
+        exclude = ["id", "isExchange", "own", "giftId"]#, "giftId", "own", "isExchange", "isUsed", "isGet", "isDelete"]
 
 class UserForm(forms.ModelForm):
     wechat = forms.CharField(label="微信号", max_length=50, required=False)
