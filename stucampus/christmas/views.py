@@ -235,6 +235,22 @@ class manageGift(View):
         more.save()
         return HttpResponseRedirect("/christmas/manage/")
 
+class manageUser(View):
+    @method_decorator(check_perms('christmas.manager'))
+    def get(self, request):
+        uid = request.GET['id']
+        user = get_object_or_404(GiftSystem_user, pk=uid)
+        user = UserForm(instance=user)
+        return render(request, "christmas/user.html", locals())
+
+    @method_decorator(check_perms('christmas.manager'))
+    def post(self, request):
+        uid = request.GET['id']
+        user = get_object_or_404(GiftSystem_user, pk=uid)
+        user = UserForm(request.POST, instance=user)
+        user.save()
+        return HttpResponseRedirect("/christmas/manage/")
+
 # def postWantType(request):
 #     if request.method == "POST":
 #         wantType = request.POST["wanttype[]"]

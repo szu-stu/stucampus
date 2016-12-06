@@ -21,7 +21,7 @@
                         <tr>
                             <td>{{ gift.giftId }}</td>
                             <td><a href="gift?id={{ gift.id }}">{{ gift.name }}</a></td>
-                            <td>{{ gift.own.name }}/{{ gift.own.stu_no }}</td>
+                            <td><a href="user?id={{ gift.own.id }}">{{ gift.own.name }}/{{ gift.own.stu_no }}</a></td>
                             <td>{{ gift.type }}</td>
                             {% if gift.isExchange %}
                             <td>√</td>
