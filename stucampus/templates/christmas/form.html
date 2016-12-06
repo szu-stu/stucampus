@@ -1,0 +1,16 @@
+{% extends "master/base.html" %}
+
+{% block htmlhead %}
+    {% load html_tools %}
+    {{ form.media }}
+{% endblock %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>更多礼物信息</p>
+    {{ more.as_p }}
+    <input type="submit" value="提交">
+</form>
+{% endblock %}

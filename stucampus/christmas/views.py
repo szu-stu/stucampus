@@ -1,6 +1,6 @@
 #coding:utf-8
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from .models import ExchangeGift, Gift, GiftSystem_user, GivenGift, ChangeResult
 from django.views.generic import View
@@ -10,6 +10,8 @@ from login_szu import login_szu
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
+from stucampus.account.permission import check_perms
+from django.utils.decorators import method_decorator
 '''
 用来判断网页是否可用时间的装饰器，但只有判定开放时间，没判定关闭时间，有需求可改
 '''
@@ -197,6 +199,7 @@ def postWantType(request):
     data = {"status": "error", "message": "出了点不知道什么原因的错误呢= =、"}
     return HttpResponse(json.dumps(data), content_type="application/json")
 
+@check_perms('christmas.manager')
 def manageIndex(request):
     gift_list = Gift.objects.all().order_by('giftId')
     paginator = Paginator(gift_list, 100)
@@ -207,6 +210,30 @@ def manageIndex(request):
         gift_list = paginator.page(1)
     return render(request, "christmas/manageIndex.html", locals())
 
+class manageGift(View):
+    @method_decorator(check_perms('christmas.manager'))
+    def get(self, request):
+        gid = request.GET['id']
+        gift = get_object_or_404(Gift, pk=gid)
+        if gift.isExchange:
+            more = ExchangeForm(instance=gift.exchangegift)
+        else:
+            more = GivenForm(instance=gift.givengift)
+        form = GiftForm(instance=gift)
+        return render(request, "christmas/form.html", locals())
+
+    @method_decorator(check_perms('christmas.manager'))
+    def post(self, request):
+        gid = request.GET['id']
+        gift = get_object_or_404(Gift, pk=gid)
+        form = GiftForm(request.POST, instance=gift)
+        form.save()
+        if gift.isExchange:
+            more = ExchangeForm(request.POST, instance=gift.exchangegift)
+        else:
+            more = GivenForm(request.POST, instance=gift.givengift)
+        more.save()
+        return HttpResponseRedirect("/christmas/manage")
 
 # def postWantType(request):
 #     if request.method == "POST":

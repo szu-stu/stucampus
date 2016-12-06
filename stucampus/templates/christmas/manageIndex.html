@@ -1,8 +1,6 @@
-{% extends 'base.html' %}
-{% block htmltitle %}<title> 公文通汇总-深圳大学学子天地 </title>{% endblock %}
+{% extends 'master/base.html' %}
 {% block htmlhead %}
 {% load html_tools %}
-{{ 'board/index.css' | as_css }}
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
 {% endblock %}
 {% block content %}
@@ -22,7 +20,7 @@
                     {% for gift in gift_list %}
                         <tr>
                             <td>{{ gift.giftId }}</td>
-                            <td><a href="#">{{ gift.name }}</a></td>
+                            <td><a href="gift?id={{ gift.id }}">{{ gift.name }}</a></td>
                             <td>{{ gift.own.name }}/{{ gift.own.stu_no }}</td>
                             <td>{{ gift.type }}</td>
                             {% if gift.isExchange %}
