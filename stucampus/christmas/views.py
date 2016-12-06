@@ -62,7 +62,7 @@ class ExchangeView(View):
                 name = gift.data["name"],
                 type = gift.data["type"],
                 description = gift.data["description"],
-                isAnonymous = gift.data["isAnonymous"],
+                isAnonymous = gift.clean_data["isAnonymous"],
                 giftId= currentUser.area + gift.data["type"] + "{:0>5}".format(
                     len(Gift.objects.filter(own__area=currentUser.area)) + 1)
             )
@@ -115,7 +115,7 @@ class GivenView(View):
                 name=gift.data["name"],
                 type=gift.data["type"],
                 description=gift.data["description"],
-                isAnonymous=gift.data["isAnonymous"],
+                isAnonymous=gift.clean_data["isAnonymous"],
                 giftId=currentUser.area + gift.data["type"] + "{:0>5}".format(
                     len(Gift.objects.filter(own__area=currentUser.area)) + 1)
             )
