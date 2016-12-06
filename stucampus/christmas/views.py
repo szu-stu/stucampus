@@ -38,7 +38,7 @@ class ExchangeView(View):
     @login_szu
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
-        gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'])
+        gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
         if len(gifts) > 2:
             data = {"status": "full", "message": u"您的礼物数目满了噢"}
             return HttpResponse(json.dumps(data), content_type="application/json")
@@ -140,7 +140,7 @@ class GivenView(View):
 
 @login_szu
 def giftList(request):
-    gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'])
+    gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
     gifts_count = 3 - len(gifts)
     return render(request, "christmas/giftList.html", locals())
 
@@ -163,7 +163,7 @@ def index(request):
 @time_require(time="2016-12-12")
 @login_szu
 def resultList(request):
-    mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'])
+    mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
     id_list = []
     for g in mygifts:
         if g.isExchange:
