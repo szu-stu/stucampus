@@ -46,11 +46,13 @@ class ExchangeView(View):
             if user.is_valid():
                 phone = user.cleaned_data['phone']
                 area = user.cleaned_data['area']
+                wechat = user.cleaned_data['wechat']
             else:
                 data = {"status": "error", "message": user.errors.values()}
                 return HttpResponse(json.dumps(data), content_type="application/json")
             currentUser.area = area
             currentUser.phone = phone
+            currentUser.wechat = wechat
             currentUser.save()
         if exchange.is_valid() and gift.is_valid():
             t = Gift.objects.create(
