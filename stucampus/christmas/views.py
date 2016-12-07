@@ -170,7 +170,7 @@ class GivenView(View):
         data = {"status": "error", "message":  given_message + gift_message}
         return HttpResponse(json.dumps(data), content_type="application/json")
 
-@time_require(starttime="2016-12-8", endtime="2016-12-15")
+#@time_require(starttime="2016-12-8", endtime="2016-12-15")
 @login_szu
 @readRequire
 def giftList(request):
