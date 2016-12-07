@@ -46,6 +46,13 @@ def wechat_main(request):
         try:
             content = dealcontent(request_xml.find('Content').text, newxml)
         except:
+            child = root(request_xml)
+            rscv = {}
+            for i in child:
+                recv[i.tag] = i.text
+            
+            if 'Event' in recv.keys() and recv.get('Event') == 'subscribe' or recv.get('Event') == 'Hello2BizUser':
+                return HttpResponse(replyInfo(newxml, "hi"),content_type='application/xml')
             content = dealcontent("hhhwww", newxml)
         return HttpResponse(replyInfo(newxml,content),content_type='application/xml')
 
