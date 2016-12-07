@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>修改个人信息</title>
-    <link rel="stylesheet" href="/static/styles/weui.style.css">
-    <link rel="stylesheet" href="/static/styles/weui.css">
+    {% load html_tools %}
+    {{ 'christmas/weui.style.css' | as_css }}
+    {{ 'christmas/weui.css' | as_css }}
 </head>
 <body>
     <form action="" method="POST" id="my_form">
@@ -15,7 +16,11 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label" for="id_phone" >手机:</label></div>
                     <div class="weui-cell__bd">
+                        {% if user.phone %}
                         <input id="id_phone" maxlength="11" name="phone" type="text" class="weui-input" value="{{ user.phone }}"/>
+                        {% else %}
+                        <input id="id_phone" maxlength="11" name="phone" type="text" class="weui-input" />
+                        {% endif %}
                     </div>
                 </div>
                 <div class="weui-cell">
