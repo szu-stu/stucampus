@@ -32,7 +32,11 @@ def dealcontent(content, msg):
         user = lo.objects.create(openId = openId, lottery_id = str)
         return u"您的抽奖码是" + user.lottery_id
     else:
-        return u"嗯"
+        try:
+            t = kw.objects.get(keyword = content)
+            return t.content
+        except:
+            return u"嗯"
 
 
 from random import Random
