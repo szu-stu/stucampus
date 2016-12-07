@@ -44,7 +44,7 @@ def wechat_main(request):
         try:
             content = dealcontent(request_xml.find('Content').text, newxml)
         except:
-            content = "收到您的信息了"
+            content = dealcontent(u"我要抽奖", newxml)
         return HttpResponse(replyInfo(newxml,content),content_type='application/xml')
 
 def dealxml(xmlstr):
