@@ -175,7 +175,6 @@ def giftList(request):
     return render(request, "christmas/giftList.html", locals())
 
 @login_szu
-@readRequire
 def index(request):
     try:
         user = GiftSystem_user.objects.get(stu_no = request.session['szu_no'])
