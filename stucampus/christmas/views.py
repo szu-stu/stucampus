@@ -38,7 +38,7 @@ def readRequire(function):
     def wrapped_check(request, *args, **kwargs):
         current_user = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
         if not current_user.isRead:
-            return HttpResponseRedirect("/christmas/read")
+            return HttpResponseRedirect("/christmas/read/")
         return function(request, *args, **kwargs)
     return wrapped_check
 
