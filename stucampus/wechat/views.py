@@ -45,7 +45,7 @@ def wechat_main(request):
         request_xml = etree.fromstring(xml_str)
         newxml = dealxml(request_xml)
         if 'Event' in newxml:
-            if newxml['Event'] == newxml:
+            if newxml['Event'] == 'subscribe':
                 t = KeyWord.objects.get(keyword="attention")
                 content = t.content
                 return HttpResponse(replyInfo(newxml, content), content_type='application/xml')
