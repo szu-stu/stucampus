@@ -15,14 +15,20 @@ from django.utils.decorators import method_decorator
 '''
 用来判断网页是否可用时间的装饰器，但只有判定开放时间，没判定关闭时间，有需求可改
 '''
-def time_require(time="2016-12-7"):
+def time_require(starttime="2016-12-7", endtime=""):
     def decorator(function):
         def wrapped_check(request, *args, **kwargs):
             now = datetime.now().date()
-            year, month, day = time.split("-")
+            year, month, day = starttime.split("-")   
             aimdate = datetime(int(year), int(month), int(day)).date()
+            if endtime:
+                year, month, day = starttime.split("-")
+            enddate = datetime(int(year), int(month), int(day)).date()
             if now < aimdate:
                 return HttpResponse("此网页还未开放")
+            if endtime:
+                if now >= enddate:
+                    return HttpResponse("此网页已关闭")
             return function(request, *args, **kwargs)
         return wrapped_check
     return decorator
@@ -138,6 +144,7 @@ class GivenView(View):
         data = {"status": "error", "message":  given_message + gift_message}
         return HttpResponse(json.dumps(data), content_type="application/json")
 
+@time_require(starttime="2016-12-8", endtime="2016-12-15")
 @login_szu
 def giftList(request):
     gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
@@ -160,7 +167,7 @@ def index(request):
         )
     return render(request, 'christmas/index.html', locals())
 
-@time_require(time="2016-12-12")
+@time_require(starttime="2016-12-12")
 @login_szu
 def resultList(request):
     mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
