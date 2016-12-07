@@ -36,7 +36,8 @@ def dealcontent(content, msg):
             t = kw.objects.get(keyword = content)
             return t.content
         except:
-            return u"嗯"
+            t = kw.objects.get(keyword = 'default')
+            return t.content
 
 
 from random import Random
