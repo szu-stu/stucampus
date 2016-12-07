@@ -9,6 +9,7 @@ from dealmsg import replyInfo,dealcontent
 
 from django.shortcuts import render
 # Create your views here.
+from .models import KeyWord
 
 wechat_token = 'wueiz123'
 
@@ -33,7 +34,8 @@ def wechat_main(request):
         if tmp_str == signature:
             return HttpResponse(echostr)
         else:
-            return HttpResponse("hi")
+            k = KeyWord.objects.get(keyword = "attention")
+            return HttpResponse(k.content)
         '''
         上方get部分就不做修改了- -除了欢迎关注公众号之外
         '''
