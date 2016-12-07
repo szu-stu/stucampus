@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'stucampus.gobye',
     'stucampus.board',
     'stucampus.christmas',
+    'stucampus.wechat',
 )
 
 LOGGING = {
