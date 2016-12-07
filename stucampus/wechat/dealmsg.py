@@ -24,13 +24,13 @@ def dealcontent(content, msg):
         openId =  msg['FromUserName']
         if len(lo.objects.filter(openId = openId)):
             user = lo.objects.get(openId = openId)
-            return u"不要重复发送噢，您的抽奖码是：" + user.lottery_id
+            return u"您的抽奖码是：" + user.lottery_id
         while True:
             str = random_str()
             if not len(lo.objects.filter(lottery_id=str)):
                 break
         user = lo.objects.create(openId = openId, lottery_id = str)
-        return u"提交成功，您的抽奖码是" + user.lottery_id
+        return u"您的抽奖码是" + user.lottery_id
     else:
         return u"嗯"
 
