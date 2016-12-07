@@ -11,6 +11,8 @@ from django.shortcuts import render
 # Create your views here.
 from .models import KeyWord
 
+from wechat import *
+
 wechat_token = 'wueiz123'
 
 @csrf_exempt
@@ -46,13 +48,10 @@ def wechat_main(request):
         try:
             content = dealcontent(request_xml.find('Content').text, newxml)
         except:
-            child = root(request_xml)
-            rscv = {}
-            for i in child:
-                recv[i.tag] = i.text
-            
-            if 'Event' in recv.keys() and recv.get('Event') == 'subscribe' or recv.get('Event') == 'Hello2BizUser':
-                return HttpResponse(replyInfo(newxml, "hi"),content_type='application/xml')
+            xml = request.raw_post_data
+            wechat = Wechat(xml)
+            if wechat.Content == 'Hello2BizUser':
+                return HttpResponse(replyInfo(newxml, "hi"), content_type='application/xml')
             content = dealcontent("hhhwww", newxml)
         return HttpResponse(replyInfo(newxml,content),content_type='application/xml')
 
