@@ -38,6 +38,7 @@ class GiftSystem_user(models.Model):
     phone = models.CharField("手机", max_length=11, null=True)
     area = models.CharField("居住区域", max_length=1, choices=AREA, default="C", null=True)
     wechat = models.CharField("微信号", max_length=50, null=True)
+    isRead = models.BooleanField("是否阅读免责声明", default=False)
     def __str__(self):
         return self.stu_no
     class Meta:
