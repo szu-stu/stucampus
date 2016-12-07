@@ -49,7 +49,7 @@ class ReadView(View):
         return render(request, "christmas/read.html")
     @login_szu
     def post(self, request):
-        user = get_object_or_404(GiftSystem_user, stu_no="2015150003")
+        user = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
         user.isRead = True
         return render(request, 'christmas/index.html', locals())
 
