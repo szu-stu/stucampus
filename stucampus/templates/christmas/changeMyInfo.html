@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>修改个人信息</title>
+    <link rel="stylesheet" href="/static/styles/weui.style.css">
+    <link rel="stylesheet" href="/static/styles/weui.css">
+</head>
+<body>
+    <form action="" method="POST" id="my_form">
+        {% csrf_token %}
+            <div class="weui-cells__title">个人信息</div>
+            <div class="weui-cells weui-cells_form weui-cell_primary">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label" for="id_phone" >手机:</label></div>
+                    <div class="weui-cell__bd">
+                        <input id="id_phone" maxlength="11" name="phone" type="text" class="weui-input" value="{{ user.phone }}"/>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label for="id_wechat" class="weui-label">微信号：</label></div>
+                    <div class="weui-cell__bd">
+                        {% if user.wechat %}
+                        <input type="text" id="id_wechat" maxlength="50" name="wechat" class="weui-input" value="{{ user.wechat }}"/>
+                        {% else %}
+                        <input type="text" id="id_wechat" maxlength="50" name="wechat" class="weui-input" />
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                        <div class="weui-cell__hd"><label for="id_area" class="weui-label">居住区域:</label> </div>
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" id="id_area" name="area">
+                            <option value="C">南区</option>
+                            <option value="A">西南</option>
+                            <option value="B">斋区</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                    <input type="submit" text="提交" class="weui-btn weui-btn_primary">
+            </div>
+        </form>
+</body>
+</html>

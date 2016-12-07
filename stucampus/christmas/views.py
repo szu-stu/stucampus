@@ -204,6 +204,19 @@ def resultList(request):
     return render(request, "christmas/giftList.html", locals())
 
 @login_szu
+def changeMyInfo(request):
+    if request.method == "GET":
+        user = GiftSystem_user.objects.get(stu_no=request.session["szu_no"])
+        return render(request, "christmas/changeMyInfo.html", locals())
+    else:
+        user = GiftSystem_user.objects.get(stu_no=request.session["szu_no"])
+        userform = UserForm(request.POST, instance=user)
+        if userform.is_valid():
+            userform.save()
+            return HttpResponseRedirect("/christmas/")
+        return render(request, "christmas/changeMyInfo.html" ,locals())
+ 
+@login_szu
 def postWantType(request):
     if request.method == "POST":
         wantType = request.POST.getlist("wanttype[]")
