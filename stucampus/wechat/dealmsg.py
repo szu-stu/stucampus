@@ -20,7 +20,7 @@ def replyInfo(msg,content):
     return xml
 
 def dealcontent(content, msg):
-    if( content == u'我要抽奖'):
+    if( content == 'hhhwww'):
         openId =  msg['FromUserName']
         if len(lo.objects.filter(openId = openId)):
             user = lo.objects.get(openId = openId)
