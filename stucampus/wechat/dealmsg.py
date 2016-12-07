@@ -36,7 +36,7 @@ def dealcontent(content, msg):
 
 
 from random import Random
-def random_str(randomlength=16):
+def random_str(randomlength=12):
     str = ''
     chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
     length = len(chars) - 1
