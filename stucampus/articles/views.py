@@ -161,17 +161,17 @@ def article_list(request, category=None):
     except InvalidPage:
         page = paginator.page(1)
     if not request.is_ajax():
-        page = DuoShuo.appendNumToArticles(page)
-        comments = DuoShuo.getRecentComment()
-        visitors = DuoShuo.getListVisitors()
+        #page = DuoShuo.appendNumToArticles(page)
+        #comments = DuoShuo.getRecentComment()
+        #visitors = DuoShuo.getListVisitors()
         categories=Category.objects.all().order_by("priority")
         return render(request, 'articles/article-list.html',
                 {'page': page, 'category': category,
-                 'comments':comments,
-                 'visitors':visitors,
+               #  'comments':comments,
+              #   'visitors':visitors,
                  'categories':categories})
     else:
-        newest_articles=DuoShuo.appendNumToArticles(page)
+        #newest_articles=DuoShuo.appendNumToArticles(page)
         return render(request, "ajax_article_list.html",{'newest_articles':newest_articles})
 
 
@@ -179,10 +179,10 @@ def article_display(request, id=None):
     article = get_object_or_404(Article, pk=id, publish=True, deleted=False)
     article.click_count += 1
     article.save()
-    comments=DuoShuo.getListPosts(article.id)
-    article = DuoShuo.appendNumToArticle(article)
+    #comments=DuoShuo.getListPosts(article.id)
+    #article = DuoShuo.appendNumToArticle(article)
     return render(request, 'articles/article-display.html',
-            {'article': article,'comments':comments})
+            {'article': article})#,'comments':comments})
 
 
 def sharewechat(requests):
