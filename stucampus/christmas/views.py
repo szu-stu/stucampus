@@ -12,6 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 
 from stucampus.account.permission import check_perms
 from django.utils.decorators import method_decorator
+
 '''
 用来判断网页是否可用时间的装饰器，但只有判定开放时间，没判定关闭时间，有需求可改
 '''
@@ -33,7 +34,27 @@ def time_require(starttime="2016-12-7", endtime=""):
         return wrapped_check
     return decorator
 
+def readRequire(function):
+    def wrapped_check(request, *args, **kwargs):
+        current_user = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
+        if not current_user.isRead:
+            return HttpResponseRedirect("/christmas/read")
+        return function(request, *args, **kwargs)
+    return wrapped_check
+
+
+class ReadView(View):
+    @login_szu
+    def get(self, request):
+        return render(request, "read.html")
+    @login_szu
+    def post(self, request):
+        current_user = get_object_or_404(GiftSystem_user, stu_no="2015150003")
+        current_user.isRead = True
+        return render(request, 'index.html', locals())
+
 class ExchangeView(View):
+    @readRequire
     @login_szu
     def get(self, request):
         exchange = ExchangeForm()
@@ -41,6 +62,8 @@ class ExchangeView(View):
         current_user = GiftSystem_user.objects.get(stu_no=request.session['szu_no'])
         user = UserForm()
         return render(request, 'christmas/addExchange.html', locals())
+    
+    @readRequire
     @login_szu
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
@@ -90,6 +113,7 @@ class ExchangeView(View):
 
 class GivenView(View):
     @login_szu
+    @readRequire
     def get(self, request):
         given = GivenForm()
         gift = GiftForm()
@@ -97,6 +121,7 @@ class GivenView(View):
         user = UserForm()
         return render(request, "christmas/addGiven.html", locals())
     @login_szu
+    @readRequire
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
         gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'])
@@ -146,12 +171,14 @@ class GivenView(View):
 
 @time_require(starttime="2016-12-8", endtime="2016-12-15")
 @login_szu
+@readRequire
 def giftList(request):
     gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
     gifts_count = 3 - len(gifts)
     return render(request, "christmas/giftList.html", locals())
 
 @login_szu
+@readRequire
 def index(request):
     try:
         user = GiftSystem_user.objects.get(stu_no = request.session['szu_no'])
@@ -169,6 +196,7 @@ def index(request):
 
 @time_require(starttime="2016-12-12")
 @login_szu
+@readRequire
 def resultList(request):
     mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
     id_list = []
@@ -181,6 +209,7 @@ def resultList(request):
     return render(request, "christmas/giftList.html", locals())
 
 @login_szu
+@readRequire
 def postWantType(request):
     if request.method == "POST":
         wantType = request.POST.getlist("wanttype[]")
