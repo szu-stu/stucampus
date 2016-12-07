@@ -46,12 +46,12 @@ def readRequire(function):
 class ReadView(View):
     @login_szu
     def get(self, request):
-        return render(request, "read.html")
+        return render(request, "christmas/read.html")
     @login_szu
     def post(self, request):
-        current_user = get_object_or_404(GiftSystem_user, stu_no="2015150003")
-        current_user.isRead = True
-        return render(request, 'index.html', locals())
+        user = get_object_or_404(GiftSystem_user, stu_no="2015150003")
+        user.isRead = True
+        return render(request, 'christmas/index.html', locals())
 
 class ExchangeView(View):
     @readRequire
