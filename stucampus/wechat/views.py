@@ -11,7 +11,6 @@ from django.shortcuts import render
 # Create your views here.
 from .models import KeyWord
 
-from wechat import *
 
 wechat_token = 'wueiz123'
 
@@ -45,13 +44,14 @@ def wechat_main(request):
         xml_str = smart_str(request.body)
         request_xml = etree.fromstring(xml_str)
         newxml = dealxml(request_xml)
+        if 'Event' in newxml:
+            if newxml['Event'] == newxml:
+                t = KeyWord.objects.get(keyword="attention")
+                content = t.content
+                return HttpResponse(replyInfo(newxml, content), content_type='application/xml')
         try:
             content = dealcontent(request_xml.find('Content').text, newxml)
         except:
-            xml = request.raw_post_data
-            wechat = Wechat(xml)
-            if wechat.Content == 'Hello2BizUser':
-                return HttpResponse(replyInfo(newxml, "hi"), content_type='application/xml')
             content = dealcontent("hhhwww", newxml)
         return HttpResponse(replyInfo(newxml,content),content_type='application/xml')
 
