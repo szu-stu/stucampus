@@ -55,7 +55,6 @@ class ReadView(View):
         return render(request, 'christmas/index.html', locals())
 
 class ExchangeView(View):
-    @readRequire
     @login_szu
     def get(self, request):
         exchange = ExchangeForm()
@@ -64,7 +63,6 @@ class ExchangeView(View):
         user = UserForm()
         return render(request, 'christmas/addExchange.html', locals())
     
-    @readRequire
     @login_szu
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
@@ -114,7 +112,6 @@ class ExchangeView(View):
 
 class GivenView(View):
     @login_szu
-    @readRequire
     def get(self, request):
         given = GivenForm()
         gift = GiftForm()
@@ -122,7 +119,6 @@ class GivenView(View):
         user = UserForm()
         return render(request, "christmas/addGiven.html", locals())
     @login_szu
-    @readRequire
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
         gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'])
@@ -197,7 +193,6 @@ def index(request):
 
 @time_require(starttime="2016-12-12")
 @login_szu
-@readRequire
 def resultList(request):
     mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
     id_list = []
@@ -210,7 +205,6 @@ def resultList(request):
     return render(request, "christmas/giftList.html", locals())
 
 @login_szu
-@readRequire
 def postWantType(request):
     if request.method == "POST":
         wantType = request.POST.getlist("wanttype[]")
