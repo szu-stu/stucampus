@@ -11,8 +11,8 @@ from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import ImageMessage
 from models import KeyWord,Lottery
 WECHAT_TOKEN = 'wueiz123'
-AppID = 'wxae8f1122493c86b4'
-AppSecret = 'ae198ba478744c06576efd111deb94cb'
+AppID = 'wx2d3f8ec039af6a99'
+AppSecret = '08bad122f9ade213f4496d1b45253dc6 '
 
 conf = WechatConf(
     token=WECHAT_TOKEN,
