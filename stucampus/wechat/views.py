@@ -47,6 +47,11 @@ def wechat_main(request):
                             'name': u'我要送礼',
                             'url' : 'http://stu.szu.edu.cn/christmas/'
                         },
+                        {
+                            'type': 'click',
+                            'name': u'我要抽奖',
+                            'key' : 'lottery'
+                        }
                     ]
                 },
                 {
