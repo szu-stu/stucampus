@@ -40,11 +40,11 @@ def wechat_main(request):
         wechat_instance.create_menu({
             'button':[
                 {
-                    'name': '圣诞礼物',
+                    'name': u'圣诞礼物',
                     'sub_button': [
                         {
                             'type': 'view',
-                            'name': '我要送礼',
+                            'name': u'我要送礼',
                             'url' : 'http://stu.szu.edu.cn/christmas/'
                         },
                     ]
