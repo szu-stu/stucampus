@@ -1,67 +1,134 @@
 #coding=utf-8
 import hashlib
 import json
-from lxml import etree
-from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-from dealmsg import replyInfo,dealcontent
 
 from django.shortcuts import render
-# Create your views here.
-from .models import KeyWord
+from wechat_sdk import WechatBasic, WechatConf
+from django.http.response import HttpResponseBadRequest
+from wechat_sdk.exceptions import ParseError
+from wechat_sdk.messages import ImageMessage
+from models import KeyWord,Lottery
+WECHAT_TOKEN = 'wueiz123'
+AppID = 'wxae8f1122493c86b4'
+AppSecret = 'ae198ba478744c06576efd111deb94cb'
 
+conf = WechatConf(
+    token=WECHAT_TOKEN,
+    appid=AppID,
+    appsecret=AppSecret,
+    encrypt_mode='normal',
+)
 
-wechat_token = 'wueiz123'
-
+wechat_instance = WechatBasic(conf=conf)
 @csrf_exempt
-
 def wechat_main(request):
-    """
-    所有的消息都会先进入这个函数进行处理，函数包含两个功能，
-    微信接入验证是GET方法，
-    微信正常的收发消息是用POST方法。
-    """
-    if request.method == "GET":
-        signature = request.GET.get("signature", None)
-        timestamp = request.GET.get("timestamp", None)
-        nonce = request.GET.get("nonce", None)
-        echostr = request.GET.get("echostr", None)
-        token = wechat_token
-        tmp_list = [token, timestamp, nonce]
-        tmp_list.sort()
-        tmp_str = "%s%s%s" % tuple(tmp_list)
-        tmp_str = hashlib.sha1(tmp_str).hexdigest()
-        if tmp_str == signature:
-            return HttpResponse(echostr)
-        else:
-            k = KeyWord.objects.get(keyword = "attention")
-            return HttpResponse(k.content)
-        '''
-        上方get部分就不做修改了- -除了欢迎关注公众号之外
-        '''
+    if request.method == 'GET':
+        signature = request.GET.get('signature')
+        timestamp = request.GET.get('timestamp')
+        nonce = request.GET.get('nonce')
+        if not wechat_instance.check_signature(
+            signature=signature, timestamp=timestamp, nonce=nonce):
+            return HttpResponse('Verify Failed')
+        return HttpResponse(request.GET.get('echostr', ''), content_type='text/plain')
     else:
-        xml_str = smart_str(request.body)
-        request_xml = etree.fromstring(xml_str)
-        newxml = dealxml(request_xml)
-        if 'Event' in newxml:
-            if newxml['Event'] == 'subscribe':
-                t = KeyWord.objects.get(keyword="attention")
-                content = t.content
-                return HttpResponse(replyInfo(newxml, content), content_type='application/xml')
         try:
-            content = dealcontent(request_xml.find('Content').text, newxml)
-        except:
-            content = dealcontent("hhhwww", newxml)
-        return HttpResponse(replyInfo(newxml,content),content_type='application/xml')
+            wechat_instance.parse_data(data=request.body)
+        except ParseError:
+            return HttpResponseBadRequest('Invalid XML Data')
+        wechat_instance.create_menu({
+            'button':[
+                {
+                    'name': '圣诞礼物',
+                    'sub_button': [
+                        {
+                            'type': 'view',
+                            'name': '我要送礼',
+                            'url' : 'http://stu.szu.edu.cn/christmas/'
+                        },
+                    ]
+                },
+                {
+                    'type': 'view',
+                    'name': 'STU.TV',
+                    'url' : 'http://mp.weixin.qq.com/s/upaT7MwNgYGxM80WCMCOZA'
+                }    
+            ] 
+        })
+        message = wechat_instance.get_message()
 
-def dealxml(xmlstr):
-    """把接收到的xml消息解析"""
-    msg = {}
-    if xmlstr.tag == 'xml':
-        for child in xmlstr:
-            msg[child.tag] = smart_str(child.text)
-    return msg
+        if isinstance(message, ImageMessage):
+            openId = message.source
+            if len(Lottery.objects.filter(openId = openId)):
+                user = Lottery.objects.get(openId = openId)
+                reply_info = u"您的抽奖码是：" + user.lottery_id
+                response = wechat_instance.response_text(content=reply_info)
+                return HttpResponse(response, content_type="application/xml")
+            while True:
+                str = random_str()
+                if not len(Lottery.objects.filter(lottery_id=str)):
+                    break
+            user = Lottery.objects.create(openId = openId, lottery_id = str)
+            reply_info = u"您的抽奖码是：" + user.lottery_id
+            response = wechat_instance.response_text(content=reply_info)
+            return HttpResponse(response, content_type="application/xml")
+            
+        reply_info = KeyWord.objects.get(keyword='default').content
+        if message.type == "subscribe":
+            reply_objects = KeyWord.objects.get(keyword='attention')
+            reply_info = reply_objects.content
+        elif message.type == 'click':
+            reply_filter = KeyWord.objects.filter(keyword=message.key)
+            if reply_filter:
+                reply_objects = reply_filter[0]
+                if reply_objects.reply_type == '1':
+                    reply_info = reply_objects.content
+                else:
+                    reply_info = reply_objects.content
+                    reply_url = reply_objects.to_url
+                    reply_title = reply_objects.title
+                    reply_pic = reply_objects.pic_url
+                    response = wechat_instance.response_news([
+                        {
+                            'title': reply_title,
+                            'picurl': reply_pic,
+                            'description': reply_info,
+                            'url': reply_url
+                        }
+                    ])
+                    return HttpResponse(response, content_type="application/xml")
+        else:
+            content = message.content.strip()
+            reply_filter = KeyWord.objects.filter(keyword=content)
+            if reply_filter:
+                reply_objects = reply_filter[0]
+                if reply_objects.reply_type == '1':
+                    reply_info = reply_objects.content
+                else:
+                    reply_info = reply_objects.content
+                    reply_url = reply_objects.to_url
+                    reply_title = reply_objects.title
+                    reply_pic = reply_objects.pic_url
+                    response = wechat_instance.response_news([
+                        {
+                            'title': reply_title,
+                            'picurl': reply_pic,
+                            'description': reply_info,
+                            'url': reply_url
+                        }
+                    ])
+                    return HttpResponse(response, content_type="application/xml")
+        response = wechat_instance.response_text(content=reply_info)
+        return HttpResponse(response, content_type="application/xml")
 
 
- 
+from random import Random
+def random_str(randomlength=12):
+    str = ''
+    chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+    length = len(chars) - 1
+    random = Random()
+    for i in range(randomlength):
+        str+=chars[random.randint(0, length)]
+    return str 
