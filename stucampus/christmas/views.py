@@ -53,6 +53,16 @@ class ReadView(View):
         user.isRead = True
         user.save()
         return render(request, 'christmas/index.html', locals())
+class ReadDetailView(View):
+    @login_szu
+    def get(self, request):
+        return render(request, "christmas/readDetail.html")
+    @login_szu
+    def post(self, request):
+        user = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
+        user.isRead = True
+        user.save()
+        return render(request, 'christmas/index.html', locals())
 
 class ExchangeView(View):
     @login_szu

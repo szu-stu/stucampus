@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^manage/user', views.manageUser.as_view(), name="usermanage"),
     url(r'^read/$', views.ReadView.as_view(), name="read"),
     url(r'^changeMyInfo/$', views.changeMyInfo, name="changeinfo"),
+    url(r'^readDetail/$', views.ReadDetailView.as_view(), name='readDetail'),
 ]
