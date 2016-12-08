@@ -12,7 +12,7 @@ from wechat_sdk.messages import ImageMessage
 from models import KeyWord,Lottery
 WECHAT_TOKEN = 'wueiz123'
 AppID = 'wx2d3f8ec039af6a99'
-AppSecret = '08bad122f9ade213f4496d1b45253dc6 '
+AppSecret = '08bad122f9ade213f4496d1b45253dc6'
 
 conf = WechatConf(
     token=WECHAT_TOKEN,
