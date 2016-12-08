@@ -26,7 +26,7 @@ def time_require(starttime="2016-12-7", endtime=""):
                 year, month, day = starttime.split("-")
             enddate = datetime(int(year), int(month), int(day)).date()
             if now < aimdate:
-                return HttpResponse("此网页还未开放")
+                return render(request, 'christmas/error.html')
             if endtime:
                 if now >= enddate:
                     return HttpResponse("此网页已关闭")

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>错误</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    {% load html_tools %}
+    {{ 'christmas/weui.css' }}
+    {{ 'christmas/weui.style.css' }}
+</head>
+<body>
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">操作失败</h2>
+            <p class="weui-msg__desc">链接还未开放</p>
+        </div>
+        <div class="weui-msg__opr-area">
+            <p class="weui-btn-area">
+                <a href="javascript:history.back();" class="weui-btn weui-btn_primary">返回上一级</a>
+            </p>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
