@@ -37,15 +37,30 @@ def wechat_main(request):
             wechat_instance.parse_data(data=request.body)
         except ParseError:
             return HttpResponseBadRequest('Invalid XML Data')
-        wechat_instance.create_menu({
-            'button':[
-                {
-                    'type': 'view',
-                    'name': 'STU.TV',
-                    'url' : 'http://mp.weixin.qq.com/s/upaT7MwNgYGxM80WCMCOZA'
-                }    
-            ] 
-        })
+     #   wechat_instance.create_menu({
+      #      'button':[
+       #         {
+        #            'name': u'圣诞礼物',
+         #           'sub_button': [
+          #              {
+          #                  'type': 'view',
+           #                 'name': u'我要送礼',
+           #                 'url' : 'http://stu.szu.edu.cn/christmas/'
+           #             },
+           #             {
+           #                 'type': 'click',
+           #                 'name': u'我要抽奖',
+           #                 'key' : 'lottery'
+           #             }
+           #         ]
+           #     },
+           #     {
+           #         'type': 'view',
+           #         'name': 'STU.TV',
+           #         'url' : 'http://mp.weixin.qq.com/s/upaT7MwNgYGxM80WCMCOZA'
+           #     }    
+           # ] 
+       # })
         message = wechat_instance.get_message()
 
         if isinstance(message, ImageMessage):
