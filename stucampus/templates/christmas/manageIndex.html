@@ -5,6 +5,15 @@
 {% endblock %}
 {% block content %}
         <div class="container">
+		<form class="form-horizontal" role="form" method="GET">
+              		<div class="form-group">
+                		<label for="inputPassword" class="col-sm-1 control-label">查找信息</label>
+                		<div class="col-sm-3">
+                  			<input type="text" class="form-control" name="search" placeholder="输入要查找的姓名或礼物ID">
+                		</div>
+                  		<button type="submit" class="btn btn-default">查找</button>
+              		</div>
+            	</form>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>

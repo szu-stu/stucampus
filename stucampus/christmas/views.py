@@ -254,7 +254,16 @@ def postWantType(request):
 
 @check_perms('christmas.manager')
 def manageIndex(request):
-    gift_list = Gift.objects.filter(isDelete=False).order_by('giftId')
+    try:
+        search = request.GET.get("search")
+    except:
+        pass
+    if search:
+        gift_list = Gift.objects.filter(giftId=search).filter(isDelete=False)
+        if not gift_list:
+            gift_list = Gift.objects.filter(own__name=search).filter(isDelete=False)
+    else:
+        gift_list = Gift.objects.filter(isDelete=False).order_by('giftId')
     paginator = Paginator(gift_list, 100)
     try:
         page = int(request.GET.get('page', 1))
