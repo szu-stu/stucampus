@@ -2,6 +2,7 @@
 {% block htmlhead %}
 {% load html_tools %}
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+{{ 'christmas/manage.js' | as_js }}
 {% endblock %}
 {% block content %}
         <div class="container">
@@ -20,7 +21,7 @@
                             <th>礼物ID</th>
                             <th>礼物名称</th>
                             <th>拥有者/学号</th>
-                            <th>类型</th>
+                            <th>标记收到</th>
                             <th>是否交换</th>
                             <th>获得该礼物的人</th>
                             <th>获得者联系方式</th>
@@ -31,7 +32,13 @@
                             <td>{{ gift.giftId }}</td>
                             <td><a href="gift?id={{ gift.id }}">{{ gift.name }}</a></td>
                             <td><a href="user?id={{ gift.own.id }}">{{ gift.own.name }}/{{ gift.own.stu_no }}</a></td>
-                            <td>{{ gift.type }}</td>
+                            <td>
+                                {% if not gift.isGet %}
+                                <button class="btn-xs btn-default btn-get" name="{{ gift.id }}">收到</button>
+                                {% else %}
+                                <button class="btn-xs btn-default btn-get" disabled="disabled" name="{{ gift.id }}">收到</button>
+                                {% endif %}
+                            </td>
                             {% if gift.isExchange %}
                             <td>√</td>
                             <td> --- </td>

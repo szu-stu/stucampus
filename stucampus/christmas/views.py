@@ -272,6 +272,14 @@ def manageIndex(request):
         gift_list = paginator.page(1)
     return render(request, "christmas/manageIndex.html", locals())
 
+@check_perms('christmas.manager')
+def manageGet(request):
+    uid = request.POST.get("uid")
+    gift = Gift.objects.get(id=uid)
+    gift.isGet = True
+    gift.save()
+    return HttpResponse("")
+
 class manageGift(View):
     @method_decorator(check_perms('christmas.manager'))
     def get(self, request):

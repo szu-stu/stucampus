@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^manage/$', views.manageIndex, name="manage"),
     url(r'^manage/gift', views.manageGift.as_view(), name="giftmanage"),
     url(r'^manage/user', views.manageUser.as_view(), name="usermanage"),
+    url(r'^manage/get', views.manageGet, name="getmanage"),
     url(r'^read/$', views.ReadView.as_view(), name="read"),
     url(r'^changeMyInfo/$', views.changeMyInfo, name="changeinfo"),
     url(r'^readDetail/$', views.ReadDetailView.as_view(), name='readDetail'),
