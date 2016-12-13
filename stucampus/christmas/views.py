@@ -200,7 +200,7 @@ def index(request):
         )
     return render(request, 'christmas/index.html', locals())
 
-@time_require(starttime="2016-12-12")
+@time_require(starttime="2016-12-17")
 @login_szu
 def resultList(request):
     mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
