@@ -1,6 +1,6 @@
 #coding:utf-8
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, StreamingHttpResponse
 from django.shortcuts import get_object_or_404
 from .models import ExchangeGift, Gift, GiftSystem_user, GivenGift, ChangeResult
 from django.views.generic import View
@@ -320,6 +320,80 @@ class manageUser(View):
         user = UserForm(request.POST, instance=user)
         user.save()
         return HttpResponseRedirect("/christmas/manage/")
+
+from pyexcelerate import Workbook, Style, Alignment
+class makeExcel(View):
+    def __init__(self):
+        self.exchange_south_data = [[u'交换礼物登记表--南区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.exchange_wsouth_data = [[u'交换礼物登记表--西南'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.exchange_vege_data = [[u'交换礼物登记表--斋区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.given_south_data = [[u'赠与礼物登记表--南区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.given_wsouth_data = [[u'赠与礼物登记表--西南'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.given_vege_data = [[u'赠与礼物登记表--斋区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+
+    @method_decorator(check_perms('christmas.manager'))
+    def get(self, request):
+        self.make_array()
+        self.make_excel()
+
+        def file_iterator(file_name, chunk_size=512):
+            with open(file_name, "rb") as f:
+                while True:
+                    c = f.read(chunk_size)
+                    if c:
+                        yield c
+                    else:
+                        break
+
+
+        the_file_name = "stucampus/christmas/info/1.xlsx"
+        response = StreamingHttpResponse(file_iterator(the_file_name))
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+        return response
+
+    def make_array(self):
+        exchange_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+                                      Gift.objects.filter(isDelete=False).filter(own__area="C").filter(isExchange=True)]
+        exchange_wsouth_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+                                      Gift.objects.filter(isDelete=False).filter(own__area="A").filter(isExchange=True)]
+        exchange_vege_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+                                       Gift.objects.filter(isDelete=False).filter(own__area="B").filter(isExchange=True)]
+        given_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+                                      Gift.objects.filter(isDelete=False).filter(own__area="C").filter(isExchange=False)]
+        given_wsouth_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+                                       Gift.objects.filter(isDelete=False).filter(own__area="A").filter(isExchange=False)]
+        given_vege_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+                                     Gift.objects.filter(isDelete=False).filter(own__area="B").filter(isExchange=False)]
+        self.exchange_south_data = self.exchange_south_data + exchange_south_data_extend
+        self.exchange_wsouth_data = self.exchange_wsouth_data + exchange_wsouth_data_extend
+        self.exchange_vege_data = self.exchange_vege_data + exchange_vege_data_extend
+        self.given_south_data = self.given_south_data + given_south_data_extend
+        self.given_wsouth_data = self.given_wsouth_data + given_wsouth_data_extend
+        self.given_vege_data = self.given_vege_data + given_vege_data_extend
+
+    def make_excel(self):
+        def set_style(the_ws):
+            ws_style = Style(size=15, alignment=Alignment(horizontal="center", vertical="center"))
+            the_ws.range("A1", "E1").merge()
+            for i in range(1, 5):
+                the_ws.set_col_style(i, ws_style)
+            the_ws.set_col_style(5, Style(size=30, alignment=Alignment(horizontal="center", vertical="center")))
+
+        wb = Workbook()
+        ws = wb.new_sheet(u"南区交换", data=self.exchange_south_data)
+        set_style(ws)
+        ws = wb.new_sheet(u"西南交换", data=self.exchange_wsouth_data)
+        set_style(ws)
+        ws = wb.new_sheet(u"斋区交换", data=self.exchange_vege_data)
+        set_style(ws)
+        ws = wb.new_sheet(u"南区赠与", data=self.given_south_data)
+        set_style(ws)
+        ws = wb.new_sheet(u"西南赠与", data=self.given_wsouth_data)
+        set_style(ws)
+        ws = wb.new_sheet(u"斋区赠与", data=self.given_vege_data)
+        set_style(ws)
+        wb.save('stucampus/christmas/info/1.xlsx')
 
 # def postWantType(request):
 #     if request.method == "POST":

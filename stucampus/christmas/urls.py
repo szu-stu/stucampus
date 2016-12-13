@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^read/$', views.ReadView.as_view(), name="read"),
     url(r'^changeMyInfo/$', views.changeMyInfo, name="changeinfo"),
     url(r'^readDetail/$', views.ReadDetailView.as_view(), name='readDetail'),
+    url(r'^makeExcel/$', views.makeExcel.as_view(), name='makeExcel'),
 ]

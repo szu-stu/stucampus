@@ -104,6 +104,8 @@ venv
 stucampus/config/development.py
 stucampus/config/production.py
 
+#xlsx file.
+*.xlsx
 
 *~
 .gitignore
