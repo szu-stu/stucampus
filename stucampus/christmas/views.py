@@ -330,6 +330,34 @@ class makeExcel(View):
         self.given_south_data = [[u'赠与礼物登记表--南区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
         self.given_wsouth_data = [[u'赠与礼物登记表--西南'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
         self.given_vege_data = [[u'赠与礼物登记表--斋区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.gift_type = {
+            "01": u'食物',
+            "02": u'服装配饰',
+            "03": u'钟表首饰',
+            "04": u'化妆品',
+            "05": u'运动户外',
+            "06": u'电器数码',
+            "07": u'小玩意',
+            "08": u'手工物件',
+            "09": u'二次元',
+            "10": u'图书音像',
+            "11": u'学习资源',
+            "12": u'其他'
+        }
+#GIFT_TYPE = (
+#    ('01', u'食物'),
+#    ('02', u'服装配饰'),
+#    ('03', u'钟表首饰'),
+#    ('04', u'化妆品'),
+#    ('05', u'运动户外'),
+#    ('06', u'电器数码'),
+#    ('07', u'小玩意'),
+#    ('08', u'手工物件'),
+#    ('09', u'二次元'),
+#    ('10', u'图书音像'),
+#    ('11', u'学习资源'),
+#    ('12', u'其它'),
+#)
 
     @method_decorator(check_perms('christmas.manager'))
     def get(self, request):
@@ -353,17 +381,17 @@ class makeExcel(View):
         return response
 
     def make_array(self):
-        exchange_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+        exchange_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                       Gift.objects.filter(isDelete=False).filter(own__area="C").filter(isExchange=True)]
-        exchange_wsouth_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+        exchange_wsouth_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                       Gift.objects.filter(isDelete=False).filter(own__area="A").filter(isExchange=True)]
-        exchange_vege_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+        exchange_vege_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                        Gift.objects.filter(isDelete=False).filter(own__area="B").filter(isExchange=True)]
-        given_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+        given_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                       Gift.objects.filter(isDelete=False).filter(own__area="C").filter(isExchange=False)]
-        given_wsouth_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+        given_wsouth_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                        Gift.objects.filter(isDelete=False).filter(own__area="A").filter(isExchange=False)]
-        given_vege_data_extend = [[i.own.stu_no, i.own.name, i.giftId, i.type, i.description] for i in
+        given_vege_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                      Gift.objects.filter(isDelete=False).filter(own__area="B").filter(isExchange=False)]
         self.exchange_south_data = self.exchange_south_data + exchange_south_data_extend
         self.exchange_wsouth_data = self.exchange_wsouth_data + exchange_wsouth_data_extend
@@ -394,6 +422,7 @@ class makeExcel(View):
         ws = wb.new_sheet(u"斋区赠与", data=self.given_vege_data)
         set_style(ws)
         wb.save('stucampus/christmas/info/1.xlsx')
+
 
 # def postWantType(request):
 #     if request.method == "POST":
