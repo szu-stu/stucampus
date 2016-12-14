@@ -324,12 +324,14 @@ class manageUser(View):
 from pyexcelerate import Workbook, Style, Alignment
 class makeExcel(View):
     def __init__(self):
-        self.exchange_south_data = [[u'交换礼物登记表--南区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
-        self.exchange_wsouth_data = [[u'交换礼物登记表--西南'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
-        self.exchange_vege_data = [[u'交换礼物登记表--斋区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
-        self.given_south_data = [[u'赠与礼物登记表--南区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
-        self.given_wsouth_data = [[u'赠与礼物登记表--西南'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
-        self.given_vege_data = [[u'赠与礼物登记表--斋区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+#        self.exchange_south_data = [[u'交换礼物登记表--南区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+#        self.exchange_wsouth_data = [[u'交换礼物登记表--西南'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+#        self.exchange_vege_data = [[u'交换礼物登记表--斋区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+#        self.given_south_data = [[u'赠与礼物登记表--南区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+#        self.given_wsouth_data = [[u'赠与礼物登记表--西南'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+#        self.given_vege_data = [[u'赠与礼物登记表--斋区'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.exchange_data = [[u'交换礼物登记表'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
+        self.given_data = [[u'交换礼物登记表'], [u'学号', u'姓名', u'礼物编号', u'礼物类别', u'礼物描述']]
         self.gift_type = {
             "01": u'食物',
             "02": u'服装配饰',
@@ -381,7 +383,7 @@ class makeExcel(View):
         return response
 
     def make_array(self):
-        exchange_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
+        '''exchange_south_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                       Gift.objects.filter(isDelete=False).filter(own__area="C").filter(isExchange=True)]
         exchange_wsouth_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
                                       Gift.objects.filter(isDelete=False).filter(own__area="A").filter(isExchange=True)]
@@ -398,7 +400,13 @@ class makeExcel(View):
         self.exchange_vege_data = self.exchange_vege_data + exchange_vege_data_extend
         self.given_south_data = self.given_south_data + given_south_data_extend
         self.given_wsouth_data = self.given_wsouth_data + given_wsouth_data_extend
-        self.given_vege_data = self.given_vege_data + given_vege_data_extend
+        self.given_vege_data = self.given_vege_data + given_vege_data_extend'''
+        exchange_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
+                                        Gift.objects.filter(isDelete=False).filter(isExchange=True)]
+        given_data_extend = [[i.own.stu_no, i.own.name, i.giftId, self.gift_type[i.type], i.description] for i in
+                                        Gift.objects.filter(isDelete=False).filter(isExchange=False)]
+        self.exchange_data = self.exchange_data + exchange_data_extend
+        self.given_data = self.given_data + given_data_extend
 
     def make_excel(self):
         def set_style(the_ws):
@@ -409,17 +417,21 @@ class makeExcel(View):
             the_ws.set_col_style(5, Style(size=30, alignment=Alignment(horizontal="center", vertical="center")))
 
         wb = Workbook()
-        ws = wb.new_sheet(u"南区交换", data=self.exchange_south_data)
+       # ws = wb.new_sheet(u"南区交换", data=self.exchange_south_data)
+       # set_style(ws)
+       # ws = wb.new_sheet(u"西南交换", data=self.exchange_wsouth_data)
+       # set_style(ws)
+       # ws = wb.new_sheet(u"斋区交换", data=self.exchange_vege_data)
+       # set_style(ws)
+       # ws = wb.new_sheet(u"南区赠与", data=self.given_south_data)
+       # set_style(ws)
+       # ws = wb.new_sheet(u"西南赠与", data=self.given_wsouth_data)
+       # set_style(ws)
+       # ws = wb.new_sheet(u"斋区赠与", data=self.given_vege_data)
+       # set_style(ws)
+        ws = wb.new_sheet(u'交换表', data=self.exchange_data)
         set_style(ws)
-        ws = wb.new_sheet(u"西南交换", data=self.exchange_wsouth_data)
-        set_style(ws)
-        ws = wb.new_sheet(u"斋区交换", data=self.exchange_vege_data)
-        set_style(ws)
-        ws = wb.new_sheet(u"南区赠与", data=self.given_south_data)
-        set_style(ws)
-        ws = wb.new_sheet(u"西南赠与", data=self.given_wsouth_data)
-        set_style(ws)
-        ws = wb.new_sheet(u"斋区赠与", data=self.given_vege_data)
+        ws = wb.new_sheet(u'赠与表', data=self.given_data)
         set_style(ws)
         wb.save('stucampus/christmas/info/1.xlsx')
 
