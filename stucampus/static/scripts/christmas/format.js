@@ -70,4 +70,15 @@ $(function () {
         }
         $value[i].innerHTML = res;
     }
+    var $status = $(".gift_status");
+    var $value = $status.find(".weui-form-preview__value");
+    for(var i=0;i<$value.length;i++){
+        if($value[i].innerHTML=="False"){
+            $value[i].innerHTML= "未收到您的礼物或未完成登记";
+        }
+        else{
+            $value[i].innerHTML = "我们收到了您的礼物";
+        }
+    }
 });
+

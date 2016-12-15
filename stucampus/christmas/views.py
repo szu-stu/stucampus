@@ -23,7 +23,7 @@ def time_require(starttime="2016-12-7", endtime=""):
             year, month, day = starttime.split("-")   
             aimdate = datetime(int(year), int(month), int(day)).date()
             if endtime:
-                year, month, day = starttime.split("-")
+                year, month, day = endtime.split("-")
             enddate = datetime(int(year), int(month), int(day)).date()
             if now < aimdate:
                 return render(request, 'christmas/error.html')
@@ -184,6 +184,7 @@ def giftList(request):
     gifts_count = 3 - len(gifts)
     return render(request, "christmas/giftList.html", locals())
 
+@time_require(endtime="2016-12-17")
 @login_szu
 def index(request):
     try:
@@ -200,7 +201,7 @@ def index(request):
         )
     return render(request, 'christmas/index.html', locals())
 
-@time_require(starttime="2016-12-17")
+@time_require(starttime="2016-12-18")
 @login_szu
 def resultList(request):
     mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
@@ -210,7 +211,7 @@ def resultList(request):
             if g.exchangegift.changeresult.getGiftId:
                 id_list.append(g.exchangegift.changeresult.getGiftId)
     gifts = [Gift.objects.get(giftId=gid) for gid in id_list]
-    gifts_count = 0
+    gifts_count = len(gifts)
     return render(request, "christmas/giftList.html", locals())
 
 @login_szu

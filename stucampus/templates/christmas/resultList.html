@@ -2,10 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>交换结果</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    {% load html_tools %}
+    {{ 'christmas/weui.style.css' | as_css }}
+    {{ 'christmas/weui.css' | as_css }}
+    {{ 'christmas/giftList.css' | as_css }}
 </head>
 <body>
-    empty set!!
+{% for gift in gifts %}
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+                    <label class="weui-form-preview__label">礼物名称</label>
+                    <em class="weui-form-preview__value">{{ gift.name }}</em>
+                </div>
+                <div class="weui-form-preview__bd">
+                    <p>
+                        <label class="weui-form-preview__label">礼物ID</label>
+                        <span class="weui-form-preview__value">{{ gift.giftId }}</span>
+                    </p>
+                    <p class="gift_type">
+                        <label class="weui-form-preview__label">礼物类别</label>
+                        <span class="weui-form-preview__value">{{ gift.type }}</span>
+                    </p>
+    {% if not gift.isAnonymous %}
+                    <p class="own_phone">
+                        <label class="weui-form-preview__label">拥有者电话：</label>
+                        <span class="weui-form-preview__value">{{ gift.own.phone }}</span>
+                    </p>
+                    <p class="own_wechat">
+                        <label class="weui-form-preview__label">拥有者微信：</label>
+                        <span class="weui-form-preview__value">{{ gift.own.wechat }}</span>
+                    </p>
+    {% else %}
+        <p>
+            <label class="weui-form-preview__label">是否匿名</label>
+            <span class="weui-form-preview__value">礼物拥有者匿名了哦</span>
+        </p>
+    {% endif %}
+                <p class="own_phone">
+                        <label class="weui-form-preview__label">礼物描述：</label>
+                        <span class="weui-form-preview__value">{{ gift.description }}</span>
+
+                </p>
+                </div>
+    </div>
+
+    {% endfor %}
+        <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:history.back();" id="gift-btn">返回上一页</a>
+        </div>
+    {{ 'christmas/jquery-1.11.3.min.js' | as_js }}
+    {{ 'christmas/weui.js' | as_js }}
+    {{ 'christmas/weui.min.js' | as_js }}
+    {{ 'christmas/format.js' | as_js }}
 <!-- 百度统计start -->
 <script>
     var _hmt = _hmt || [];

@@ -42,6 +42,10 @@
                         <label class="weui-form-preview__label">所在宿舍区</label>
                         <span class="weui-form-preview__value">{{ gift.own.area }}</span>
                     </p>
+                    <p class="gift_status">
+                        <label class="weui-form-preview__label">礼物状态</label>
+                        <span class="weui-form-preview__value">{{ gift.isGet }}</span>
+                    </p>
                     {% if gift.exchangegift.changeresult.wangGiftType %}
                     <p class="want_gift_type">
                         <label class="weui-form-preview__label">想要的礼物类别</label>
