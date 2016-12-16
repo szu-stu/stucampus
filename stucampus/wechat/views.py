@@ -51,21 +51,21 @@ def wechat_main(request):
             pass
         message = wechat_instance.get_message()
 
-        if isinstance(message, ImageMessage):
-            openId = message.source
-            if len(Lottery.objects.filter(openId = openId)):
-                user = Lottery.objects.get(openId = openId)
-                reply_info = u"您的抽奖码是：" + user.lottery_id
-                response = wechat_instance.response_text(content=reply_info)
-                return HttpResponse(response, content_type="application/xml")
-            while True:
-                str = random_str()
-                if not len(Lottery.objects.filter(lottery_id=str)):
-                    break
-            user = Lottery.objects.create(openId = openId, lottery_id = str)
-            reply_info = u"您的抽奖码是：" + user.lottery_id
-            response = wechat_instance.response_text(content=reply_info)
-            return HttpResponse(response, content_type="application/xml")
+        #if isinstance(message, ImageMessage):
+        #    openId = message.source
+        #    if len(Lottery.objects.filter(openId = openId)):
+        #        user = Lottery.objects.get(openId = openId)
+        #        reply_info = u"您的抽奖码是：" + user.lottery_id
+        #        response = wechat_instance.response_text(content=reply_info)
+        #        return HttpResponse(response, content_type="application/xml")
+        #    while True:
+        #        str = random_str()
+        #        if not len(Lottery.objects.filter(lottery_id=str)):
+        #            break
+        #    user = Lottery.objects.create(openId = openId, lottery_id = str)
+        #    reply_info = u"您的抽奖码是：" + user.lottery_id
+        #    response = wechat_instance.response_text(content=reply_info)
+        #    return HttpResponse(response, content_type="application/xml")
             
         reply_info = KeyWord.objects.get(keyword='default').content
         if message.type == "subscribe":
@@ -93,6 +93,17 @@ def wechat_main(request):
                     return HttpResponse(response, content_type="application/xml")
         else:
             content = message.content.strip()
+            if content == u'我的抽奖码':
+                openId = message.source
+                if len(Lottery.objects.filter(openId = openId)):
+                    user = Lottery.objects.get(openId = openId)
+                    reply_info = u"您的抽奖码是：" + user.lottery_id
+                    response = wechat_instance.response_text(content=reply_info)
+                    return HttpResponse(response, content_type="application/xml")
+                else:
+                    reply_info = u'您没有参与该活动'    
+                    response = wechat_instance.response_text(content=reply_info)
+                    return HttpResponse(response, content_type="application/xml")
             reply_filter = KeyWord.objects.filter(keyword=content)
             if reply_filter:
                 reply_objects = reply_filter[0]
