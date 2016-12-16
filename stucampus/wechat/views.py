@@ -96,7 +96,7 @@ def wechat_main(request):
                     return HttpResponse(response, content_type="application/xml")
         else:
             content = message.content.strip()
-            if content == u'我的抽奖码':
+            if content == u'抽奖码':
                 openId = message.source
                 if len(Lottery.objects.filter(openId = openId)):
                     user = Lottery.objects.get(openId = openId)
