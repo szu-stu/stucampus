@@ -51,7 +51,10 @@ def wechat_main(request):
             pass
         message = wechat_instance.get_message()
 
-        #if isinstance(message, ImageMessage):
+        if isinstance(message, ImageMessage):
+            reply_info = u"收到您的图片了!" 
+            response = wechat_instance.response_text(content=reply_info)   
+            return HttpResponse(response, content_type="application/xml")
         #    openId = message.source
         #    if len(Lottery.objects.filter(openId = openId)):
         #        user = Lottery.objects.get(openId = openId)
