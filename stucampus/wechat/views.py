@@ -126,7 +126,10 @@ def wechat_main(request):
                         }
                     ])
                     return HttpResponse(response, content_type="application/xml")
-        response = wechat_instance.response_text(content=reply_info)
+        if reply_info:
+            response = wechat_instance.response_text(content=reply_info)
+        else:
+            response = wechat_instance.response_none()
         return HttpResponse(response, content_type="application/xml")
 
 
