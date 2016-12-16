@@ -65,7 +65,7 @@ class ReadDetailView(View):
         return render(request, 'christmas/index.html', locals())
 
 class ExchangeView(View):
-  #  @time_require(endtime="2016-12-16")
+    @time_require(endtime="2016-12-16")
     @login_szu
     def get(self, request):
         exchange = ExchangeForm()
@@ -74,7 +74,7 @@ class ExchangeView(View):
         user = UserForm()
         return render(request, 'christmas/addExchange.html', locals())
     
- #   @time_require(endtime="2016-12-16")
+    @time_require(endtime="2016-12-16")
     @login_szu
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
@@ -180,7 +180,7 @@ class GivenView(View):
         data = {"status": "error", "message":  given_message + gift_message}
         return HttpResponse(json.dumps(data), content_type="application/json")
 
-@time_require(starttime="2016-12-8", endtime="2016-12-15")
+#@time_require(starttime="2016-12-8", endtime="2016-12-15")
 @login_szu
 @readRequire
 def giftList(request):
