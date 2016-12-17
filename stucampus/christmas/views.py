@@ -65,7 +65,7 @@ class ReadDetailView(View):
         return render(request, 'christmas/index.html', locals())
 
 class ExchangeView(View):
-   # @time_require(endtime="2016-12-16")
+    @time_require(endtime="2016-12-16")
     @login_szu
     def get(self, request):
         exchange = ExchangeForm()
@@ -74,7 +74,7 @@ class ExchangeView(View):
         user = UserForm()
         return render(request, 'christmas/addExchange.html', locals())
     
-   # @time_require(endtime="2016-12-16")
+    @time_require(endtime="2016-12-16")
     @login_szu
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
@@ -123,7 +123,7 @@ class ExchangeView(View):
         return HttpResponse(json.dumps(data), content_type="application/json")
 
 class GivenView(View):
-   # @time_require(endtime="2016-12-16")
+    @time_require(endtime="2016-12-16")
     @login_szu
     def get(self, request):
         given = GivenForm()
@@ -131,7 +131,7 @@ class GivenView(View):
         current_user = GiftSystem_user.objects.get(stu_no=request.session['szu_no'])
         user = UserForm()
         return render(request, "christmas/addGiven.html", locals())
-   # @time_require(endtime="2016-12-16")
+    @time_require(endtime="2016-12-16")
     @login_szu
     def post(self, request):
         currentUser = get_object_or_404(GiftSystem_user, stu_no=request.session['szu_no'])
@@ -204,7 +204,7 @@ def index(request):
         )
     return render(request, 'christmas/index.html', locals())
 
-#@time_require(starttime="2016-12-18")
+@time_require(starttime="2016-12-18")
 @login_szu
 def resultList(request):
     mygifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
