@@ -438,6 +438,61 @@ class makeExcel(View):
         ws = wb.new_sheet(u'赠与表', data=self.given_data)
         set_style(ws)
         wb.save('stucampus/christmas/info/1.xlsx')
+class makeResultExcel(View):
+    def __init__(self):
+        self.exchange_data = [[u'礼物交换表'], [u'姓名', u'性别', u'礼物名字', u'礼物编号', u'获得礼物名字', u'礼物ID']]
+        self.gift_type = {
+            "01": u'食物',
+            "02": u'服装配饰',
+            "03": u'钟表首饰',
+            "04": u'化妆品',
+            "05": u'运动户外',
+            "06": u'电器数码',
+            "07": u'小玩意',
+            "08": u'手工物件',
+            "09": u'二次元',
+            "10": u'图书音像',
+            "11": u'学习资源',
+            "12": u'其他'
+        }
+
+    @method_decorator(check_perms('christmas.manager'))
+    def get(self, request):
+        self.make_array()
+        self.make_excel()
+
+        def file_iterator(file_name, chunk_size=512):
+            with open(file_name, "rb") as f:
+                while True:
+                    c = f.read(chunk_size)
+                    if c:
+                        yield c
+                    else:
+                        break
+
+        the_file_name = "stucampus/christmas/info/2.xlsx"
+        response = StreamingHttpResponse(file_iterator(the_file_name))
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+        return response
+
+    def make_array(self):
+        exchange_data_extend = [[i.own.name, i.own.gender , i.name, i.giftId, Gift.objects.get(giftId=i.exchangegift.changeresult.getGiftId), i.exchangegift.changeresult.getGiftId] for i in
+                                        Gift.objects.filter(isDelete=False).filter(isExchange=True).filter(isGet=True)]
+        self.exchange_data = self.exchange_data + exchange_data_extend
+
+    def make_excel(self):
+        def set_style(the_ws):
+            ws_style = Style(size=15, alignment=Alignment(horizontal="center", vertical="center"))
+            the_ws.range("A1", "F1").merge()
+            for i in range(1, 6):
+                the_ws.set_col_style(i, ws_style)
+            the_ws.set_col_style(6, Style(size=30, alignment=Alignment(horizontal="center", vertical="center")))
+
+        wb = Workbook()
+        ws = wb.new_sheet(u'交换表', data=self.exchange_data)
+        set_style(ws)
+        wb.save('stucampus/christmas/info/2.xlsx')
 
 
 # def postWantType(request):
