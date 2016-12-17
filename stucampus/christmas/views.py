@@ -215,7 +215,7 @@ def resultList(request):
                 id_list.append(g.exchangegift.changeresult.getGiftId)
     gifts = [Gift.objects.get(giftId=gid) for gid in id_list]
     gifts_count = len(gifts)
-    return render(request, "christmas/giftList.html", locals())
+    return render(request, "christmas/resultList.html", locals())
 
 @login_szu
 def changeMyInfo(request):
