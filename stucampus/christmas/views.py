@@ -464,7 +464,7 @@ class makeResultExcel(View):
         return response
 
     def make_array(self):
-        exchange_data_extend = [[i.own.name, i.own.gender , i.name, i.giftId, Gift.objects.get(giftId=i.exchangegift.changeresult.getGiftId), i.exchangegift.changeresult.getGiftId] for i in
+        exchange_data_extend = [[i.own.name, i.own.gender , i.name, i.giftId, Gift.objects.get(giftId=i.exchangegift.changeresult.getGiftId).name, i.exchangegift.changeresult.getGiftId] for i in
                                         Gift.objects.filter(isDelete=False).filter(isExchange=True).filter(isGet=True)]
         self.exchange_data = self.exchange_data + exchange_data_extend
 
