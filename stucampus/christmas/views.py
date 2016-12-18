@@ -211,8 +211,10 @@ def resultList(request):
     id_list = []
     for g in mygifts:
         if g.isExchange:
-            if g.exchangegift.changeresult.getGiftId:
+            try:
                 id_list.append(g.exchangegift.changeresult.getGiftId)
+            except:
+                pass
     gifts = [Gift.objects.get(giftId=gid) for gid in id_list]
     gifts_count = len(gifts)
     return render(request, "christmas/resultList.html", locals())
