@@ -26,6 +26,10 @@
                         <span class="weui-form-preview__value">{{ gift.type }}</span>
                     </p>
     {% if not gift.isAnonymous %}
+                    <p>
+                        <label class="weui-form-preview__label">拥有者姓名：</label>
+                        <span class="weui-form-preview__value">{{ gift.own.name }}</span>
+                    </p>
                     <p class="own_phone">
                         <label class="weui-form-preview__label">拥有者电话：</label>
                         <span class="weui-form-preview__value">{{ gift.own.phone }}</span>
