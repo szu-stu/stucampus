@@ -46,12 +46,6 @@
                         <label class="weui-form-preview__label">礼物状态</label>
                         <span class="weui-form-preview__value">{{ gift.isGet }}</span>
                     </p>
-                    {% if gift.exchangegift.changeresult.wangGiftType %}
-                    <p class="want_gift_type">
-                        <label class="weui-form-preview__label">想要的礼物类别</label>
-                        <span class="weui-form-preview__value">{{ gift.exchangegift.changeresult.wangGiftType }}</span>
-                    </p>
-                    {% endif %}
                 </div>
             {% if not gift.exchangegift.changeresult.wangGiftType %}
                 <div class="weui-form-preview__ft">
