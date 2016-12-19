@@ -186,6 +186,16 @@ class GivenView(View):
 def giftList(request):
     gifts = Gift.objects.filter(own__stu_no=request.session['szu_no'], isDelete=False)
     gifts_count = 3 - len(gifts)
+    gift_arr = []
+    for gift in gifts:
+        gift_dict = {}
+        gift_dict['gift'] = gift
+        if(gift.isUsed):
+            a = ChangeResult.objects.get(getGiftId=gift.giftId)
+            gift_dict['get_name'] = a.exchangegift.gift.own.name
+            gift_dict['get_phone'] = a.exchangegift.gift.own.phone
+            gift_dict['get_wechat'] = a.exchangegift.gift.own.wechat
+        gift_arr.append(gift_dict)
     return render(request, "christmas/giftList.html", locals())
 
 @login_szu

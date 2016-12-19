@@ -10,44 +10,58 @@
     {{ 'christmas/giftList.css' | as_css }}
 </head>
 <body>
-        {% for gift in gifts %}
-        {% if gift.isExchange %}
+        {% for gift_item in gift_arr %}
+        {% if gift_item.gift.isExchange %}
             <div class="weui-form-preview">
                 <div class="weui-form-preview__hd">
                     <label class="weui-form-preview__label">礼物名称</label>
-                    <em class="weui-form-preview__value">{{ gift.name }}</em>
+                    <em class="weui-form-preview__value">{{ gift_item.gift.name }}</em>
                 </div>
                 <div class="weui-form-preview__bd">
                     <p>
                         <label class="weui-form-preview__label">礼物ID</label>
-                        <span class="weui-form-preview__value">{{ gift.giftId }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.giftId }}</span>
                     </p>
                     <p class="own_phone">
                         <label class="weui-form-preview__label">拥有者电话：</label>
-                        <span class="weui-form-preview__value">{{ gift.own.phone }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.own.phone }}</span>
                     </p>
                     <p class="annoymous">
                         <label class="weui-form-preview__label">是否匿名</label>
-                        <span class="weui-form-preview__value">{{ gift.isAnonymous }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.isAnonymous }}</span>
                     </p>
                     <p class="gift_type">
                         <label class="weui-form-preview__label">礼物类别</label>
-                        <span class="weui-form-preview__value">{{ gift.type }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.type }}</span>
                     </p>
                     <p class="aim_group">
                         <label class="weui-form-preview__label">目标群体</label>
-                        <span class="weui-form-preview__value">{{ gift.exchangegift.aimGroup }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.exchangegift.aimGroup }}</span>
                     </p>
                     <p class="own_area">
                         <label class="weui-form-preview__label">所在宿舍区</label>
-                        <span class="weui-form-preview__value">{{ gift.own.area }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.own.area }}</span>
                     </p>
                     <p class="gift_status">
                         <label class="weui-form-preview__label">礼物状态</label>
-                        <span class="weui-form-preview__value">{{ gift.isGet }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.isGet }}</span>
                     </p>
+                    {% if gift_item.gift.isUsed %}
+                    <p class="gift_get_name">
+                        <label class="weui-form-preview__label">获得者</label>
+                        <span class="weui-form-preview__value">{{ gift_item.get_name }}</span>
+                    </p>
+                    <p class="gift_get_phone">
+                        <label class="weui-form-preview__label">获得者电话</label>
+                        <span class="weui-form-preview__value">{{ gift_item.get_phone }}</span>
+                    </p>
+                    <p class="gift_get_wechat">
+                        <label class="weui-form-preview__label">获得者微信</label>
+                        <span class="weui-form-preview__value">{{ gift_item.get_wechat }}</span>
+                    </p>
+                    {% endif %}
                 </div>
-            {% if not gift.exchangegift.changeresult.wangGiftType %}
+            {% if not gift_item.gift.exchangegift.changeresult.wangGiftType %}
                 <div class="weui-form-preview__ft">
                     <a href="javascript:;" class="weui-form-preview__btn weui-form-preview__btn_primary choice-type-btn" data="{{ gift.giftId }}">选择交换的礼物类别↓↓↓</a>
                 </div>
@@ -57,36 +71,36 @@
             <div class="weui-form-preview">
                 <div class="weui-form-preview__hd">
                     <label class="weui-form-preview__label">礼物名称</label>
-                    <em class="weui-form-preview__value">{{ gift.name }}</em>
+                    <em class="weui-form-preview__value">{{ gift_item.gift.name }}</em>
                 </div>
                 <div class="weui-form-preview__bd">
                     <p>
                         <label class="weui-form-preview__label">礼物ID</label>
-                        <span class="weui-form-preview__value">{{ gift.giftId }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.giftId }}</span>
                     </p>
                     <p class="own_phone">
                         <label class="weui-form-preview__label">您的电话：</label>
-                        <span class="weui-form-preview__value">{{ gift.own.phone }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.own.phone }}</span>
                     </p>
                     <p class="annoymous">
                         <label class="weui-form-preview__label">是否匿名</label>
-                        <span class="weui-form-preview__value">{{ gift.isAnonymous }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.isAnonymous }}</span>
                     </p>
                     <p>
                         <label class="weui-form-preview__label">被赠予人</label>
-                        <span class="weui-form-preview__value">{{ gift.givengift.givenPerson }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.givengift.givenPerson }}</span>
                     </p>
                     <p>
                         <label class="weui-form-preview__label">被赠予人电话</label>
-                        <span class="weui-form-preview__value">{{ gift.givengift.givenPhone }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.givengift.givenPhone }}</span>
                     </p>
                     <p class="given_address">
                         <label class="weui-form-preview__label">被赠予人地址</label>
-                        <span class="weui-form-preview__value">{{ gift.givengift.givenAdress }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.givengift.givenAdress }}</span>
                     </p>
                     <p class="gift_status">
                         <label class="weui-form-preview__label">礼物状态</label>
-                        <span class="weui-form-preview__value">{{ gift.isGet }}</span>
+                        <span class="weui-form-preview__value">{{ gift_item.gift.isGet }}</span>
                     </p>
                 </div>
             </div>
