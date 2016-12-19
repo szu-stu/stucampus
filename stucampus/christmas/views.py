@@ -485,6 +485,53 @@ class makeResultExcel(View):
         ws = wb.new_sheet(u'交换表', data=self.exchange_data)
         wb.save('stucampus/christmas/info/2.xlsx')
 
+class makeFinalExcel(View):
+        def __init__(self):
+            self.exchange_data = [[u'交换礼物结果表'], [u'礼物编号', u'礼物名', u'获得者学号', u'获得者姓名']]
+            self.given_data = [[u'交换礼物结果表'], [u'礼物编号', u'礼物名', u'被赠予者姓名', u'被赠予者电话']]
+
+        @method_decorator(check_perms('christmas.manager'))
+        def get(self, request):
+            self.make_array()
+            self.make_excel()
+
+            def file_iterator(file_name, chunk_size=512):
+                with open(file_name, "rb") as f:
+                    while True:
+                        c = f.read(chunk_size)
+                        if c:
+                            yield c
+                        else:
+                            break
+
+            the_file_name = "stucampus/christmas/info/3.xlsx"
+            response = StreamingHttpResponse(file_iterator(the_file_name))
+            response['Content-Type'] = 'application/octet-stream'
+            response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+            return response
+
+        def make_array(self):
+            exchange_data_extend = [[i.giftId, i.name, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.stu_no, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.name] for i in
+                                    Gift.objects.filter(isDelete=False).filter(isExchange=True)]
+            given_data_extend = [[i.giftId, i.name, i.givengift.givenPerson, i.givengift.givenPhone] for i in
+                                 Gift.objects.filter(isDelete=False).filter(isExchange=False)]
+            self.exchange_data = self.exchange_data + exchange_data_extend
+            self.given_data = self.given_data + given_data_extend
+
+        def make_excel(self):
+            def set_style(the_ws):
+                ws_style = Style(size=15, alignment=Alignment(horizontal="center", vertical="center"))
+                the_ws.range("A1", "D1").merge()
+                for i in range(1, 5):
+                    the_ws.set_col_style(i, ws_style)
+
+            wb = Workbook()
+            ws = wb.new_sheet(u'交换表', data=self.exchange_data)
+            set_style(ws)
+            ws = wb.new_sheet(u'赠与表', data=self.given_data)
+            set_style(ws)
+            wb.save('stucampus/christmas/info/3.xlsx')
+
 # def postWantType(request):
 #     if request.method == "POST":
 #         wantType = request.POST["wanttype[]"]
