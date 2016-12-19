@@ -512,9 +512,9 @@ class makeFinalExcel(View):
 
         def make_array(self):
             exchange_data_extend = [[i.giftId, i.name, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.stu_no, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.name] for i in
-                                    Gift.objects.filter(isDelete=False).filter(isExchange=True).filter(isGet=True).order_by("own.stu_no")]
+                                    Gift.objects.filter(isDelete=False).filter(isExchange=True).filter(isGet=True)]
             given_data_extend = [[i.giftId, i.name, i.givengift.givenPerson, i.givengift.givenPhone, i.givengift.givenAdress] for i in
-                                 Gift.objects.filter(isDelete=False).filter(isExchange=False).filter(isGet=True).order_by("own.stu_no")]
+                                 Gift.objects.filter(isDelete=False).filter(isExchange=False).filter(isGet=True)]
             self.exchange_data = self.exchange_data + exchange_data_extend
             self.given_data = self.given_data + given_data_extend
 
