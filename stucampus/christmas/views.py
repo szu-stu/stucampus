@@ -222,7 +222,8 @@ def resultList(request):
     for g in mygifts:
         if g.isExchange:
             try:
-                id_list.append(g.exchangegift.changeresult.getGiftId)
+                if g.exchangegift.changeresult.getGiftId:
+                    id_list.append(g.exchangegift.changeresult.getGiftId)
             except:
                 pass
     gifts = [Gift.objects.get(giftId=gid) for gid in id_list]
