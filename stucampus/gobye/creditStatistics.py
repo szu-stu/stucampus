@@ -306,7 +306,12 @@ class CreditStatistics(object):
 		if len(query) < 1:
 			self._errorInfo = "查询不到双学位或者双修专业id"
 			return True
-		self.minorProfessionId = query[0].id
+                profession = query.filter(profession=self.minorProfession)
+                if len(profession) > 0:
+                    profession = profession[0]
+                else:
+                    profession = query[0]
+                    self.minorProfessionId = profession.id
 		self.programUrl.append(query[0].url)
 
 	def _getPlan(self):
