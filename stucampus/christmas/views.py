@@ -488,7 +488,7 @@ class makeResultExcel(View):
 
 class makeFinalExcel(View):
         def __init__(self):
-            self.exchange_data = [[u'交换礼物结果表'], [u'礼物编号', u'礼物名', u'获得者学号', u'获得者姓名']]
+            self.exchange_data = [[u'交换礼物结果表'], [u'礼物编号', u'礼物名', u'拥有者姓名', u'拥有者学号', u'获得者学号', u'获得者姓名']]
             self.given_data = [[u'交换礼物结果表'], [u'礼物编号', u'礼物名', u'被赠予者姓名', u'被赠予者电话', u'住址', u'送礼人姓名', u'送礼人学号', u'是否匿名']]
 
         @method_decorator(check_perms('christmas.manager'))
@@ -512,7 +512,7 @@ class makeFinalExcel(View):
             return response
 
         def make_array(self):
-            exchange_data_extend = [[i.giftId, i.name, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.stu_no, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.name] for i in
+            exchange_data_extend = [[i.giftId, i.name, i.own.name, i.own.phone, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.stu_no, ChangeResult.objects.get(getGiftId=i.giftId).exchangegift.gift.own.name] for i in
                                     Gift.objects.filter(isDelete=False).filter(isExchange=True).filter(isGet=True)]
             given_data_extend = [[i.giftId, i.name, i.givengift.givenPerson, i.givengift.givenPhone, i.givengift.givenAdress, i.own.name, i.own.stu_no, i.isAnonymous] for i in
                                  Gift.objects.filter(isDelete=False).filter(isExchange=False).filter(isGet=True)]
