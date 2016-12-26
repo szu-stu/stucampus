@@ -61,7 +61,7 @@ urlpatterns = [
 
     url(r'^gobye/?', include(gobye_urls,namespace='gobye')),
     url(r'^board/?', include(board_urls,namespace='board')),
-    url(r'^christmas/?', include(christmas_urls,namespace='christmas')),
+   # url(r'^christmas/?', include(christmas_urls,namespace='christmas')),
     url(r'^wechat/?', include(wechat_urls, namespace='wechat')),
 ]
 
