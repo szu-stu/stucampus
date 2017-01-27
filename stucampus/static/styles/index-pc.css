@@ -245,7 +245,7 @@
     left: 0.8rem;
     padding-top: 0.8rem;
     display: block;
-    color: #5BC5BE ; /* font*/
+    color: /*#5BC5BE*/ #fda335 ; /* font*/
     font-size: 0.6rem;
     font-family: "SourceHanSans-Regular","Roboto-Regular","Microsoft YaHei";
     letter-spacing: 0.12rem;
