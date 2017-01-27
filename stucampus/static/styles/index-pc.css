@@ -31,7 +31,7 @@
     bottom: 0 !important;
     width: 0.6rem;
     height: 0.6rem;
-	background-color: rgb(91,197,190); /*font */
+	background-color: /*rgb(91,197,190)*/ #fda335; /*font */
 }
 .swiper-slide ,.swiper-slide a{
     position: relative;
@@ -282,7 +282,7 @@
     -o-transition: background-color 0.3s ease-out,color 0.3s ease-out; /* Opera */
 }
 .nav-content a:hover{
-    background-color: #5BC5BE ;/*font */
+    background-color: /*#5BC5BE*/ #fda335 ;/*font */
     color: rgb(255,255,255);
 }
 
