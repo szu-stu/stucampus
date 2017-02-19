@@ -37,9 +37,11 @@ def add_comment(request):
         关键是对当前有没用户的判断
     '''
     #一般是已经登陆的，但需要考虑到历史的进程，也需要靠自身的努力，所以判断一下有没有没登陆的吧
-    
-    if not request.session['szu_no']:
-        return HttpResponseBadRequest("没登陆别评论")
+    try:
+        if not request.session['szu_no']:
+            return HttpResponseBadRequest("没登陆别评论")
+    except:
+        return HttpResponseBadRequest(request.session)
     
     #判断是否保存用户信息
     users = CommentUser.objects.filter(stu_no=request.session["szu_no"])
