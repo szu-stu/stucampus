@@ -3,16 +3,12 @@ from django.db import models
 
 # Create your models here.
 
-Gender = (
-    ('M', u'男'),
-    ('F', u'女')
-)
 
 class CommentUser(models.Model):
     name = models.CharField(u'姓名', max_length=20)
     nick = models.CharField(u'昵称', max_length=20, default='stu_user~')
     stu_no = models.CharField(u'学号', max_length=10)
-    gender = models.CharField(u'性别', choices=Gender, max_length=1, default='M')
+    gender = models.CharField(u'性别',  max_length=5)
     collega = models.CharField(u'学院', max_length=20)
 
     def __unicode__(self):
