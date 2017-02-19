@@ -49,7 +49,7 @@ def add_comment(request):
     if not users:
         #没有注册的情况，继续注册
         try:
-            CommentUser.objects.create(stu_no=request.session['szu_no'], gender=request.session['szu_sex'], name=request.session['szu_name'], collega=request.session['szu_org_name'].split('/')[1])
+            CommentUser.objects.create(stu_no=request.session['szu_no'], gender=request.session['szu_sex'], name=request.session['szu_name'], collega=request.session['szu_org_name'])
         except:
             return HttpResponseBadRequest(request.session.items())
         users = CommentUser.objects.filter(stu_no=request.session['szu_no'])
