@@ -25,8 +25,9 @@ from stucampus.summer_plans import urls as summer_plans_url
 
 from stucampus.gobye import urls as gobye_urls
 from stucampus.board import urls as board_urls
-from stucampus.christmas import urls as christmas_urls
+#from stucampus.christmas import urls as christmas_urls
 from stucampus.wechat import urls as wechat_urls
+from stucampus.comment import urls as comment_urls
 admin.autodiscover()
 
 
@@ -63,6 +64,7 @@ urlpatterns = [
     url(r'^board/?', include(board_urls,namespace='board')),
    # url(r'^christmas/?', include(christmas_urls,namespace='christmas')),
     url(r'^wechat/?', include(wechat_urls, namespace='wechat')),
+    url(r'^comment/?', include(comment_urls, namespace='comment')),
 ]
 
 #serve media file when using developing server

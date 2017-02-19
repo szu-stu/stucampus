@@ -138,8 +138,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'stucampus.gobye',
     'stucampus.board',
-    'stucampus.christmas',
+    #'stucampus.christmas',
     'stucampus.wechat',
+    'stucampus.comment',
 )
 
 LOGGING = {
