@@ -41,7 +41,7 @@ def add_comment(request):
         if not request.session['szu_no']:
             return HttpResponseBadRequest("没登陆别评论")
     except:
-        return HttpResponseBadRequest(request.session)
+        return HttpResponseBadRequest(request.session.items())
     
     #判断是否保存用户信息
     users = CommentUser.objects.filter(stu_no=request.session["szu_no"])
