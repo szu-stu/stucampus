@@ -41,14 +41,17 @@ def add_comment(request):
         if not request.session['szu_no']:
             return HttpResponseBadRequest("没登陆别评论")
     except:
-        return HttpResponseBadRequest(request.session.items())
+        return HttpResponseBadRequest("没登陆别评论")
     
     #判断是否保存用户信息
     users = CommentUser.objects.filter(stu_no=request.session["szu_no"])
     
     if not users:
         #没有注册的情况，继续注册
-        CommentUser.objects.create(stu_no=request.session['szu_no'], gender=request.session['szu_sex'], name=request.session['szu_name'], collega=request.session['szu_org_name'].split('/')[1])
+        try:
+            CommentUser.objects.create(stu_no=request.session['szu_no'], gender=request.session['szu_sex'], name=request.session['szu_name'], collega=request.session['szu_org_name'].split('/')[1])
+        except:
+            return HttpResponseBadRequest(request.session.items())
         users = CommentUser.objects.filter(stu_no=request.session['szu_no'])
     
     user = users[0]
