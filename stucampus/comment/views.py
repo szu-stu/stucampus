@@ -62,8 +62,8 @@ def add_comment(request):
     success_dict = {
         'userName': newComment.user.nick,
         'commentContent': newComment.content,
-        'gender': i.user.gender,
-        'createTime': i.create_time.strftime('%y-%m-%d'),
-        'collega': i.user.collega
+        'gender': newComment.user.gender,
+        'createTime': newComment.create_time.strftime('%y-%m-%d'),
+        'collega': newComment.user.collega
     }
     return HttpResponse(json.dumps(success_dict, ensure_ascii=False), content_type="application/json")
