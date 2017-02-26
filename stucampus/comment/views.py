@@ -19,7 +19,7 @@ def get_comment(request):
                             'userName': i.user.nick,
                             'commentContent': i.content,
                             'gender': i.user.gender,
-                            'createTime': i.create_time.strftime("%y:%m:%d"),
+                            'createTime': i.create_time.strftime("%y-%m-%d"),
                             'collega': i.user.collega
                         } for i in comments]
     deal_dict['comment'] = comments_array
@@ -57,6 +57,13 @@ def add_comment(request):
     user = users[0]
     data = request.POST
     #接下来就是一些验证了
-    Comment.objects.create(user=user, content=data['commentContent'], article=data['articleId'])
+    newComment = Comment.objects.create(user=user, content=data['commentContent'], article=data['articleId'])
     #然后就欧克了
-    return HttpResponse("Success")
+    success_dict = {
+        'userName': newComment.user.nick,
+        'commentContent': newComment.content,
+        'gender': i.user.gender,
+        'createTime': i.create_time.strftime('%y-%m-%d'),
+        'collega': i.user.collega
+    }
+    return HttpResponse(json.dumps(success_dict, ensure_ascii=False), content_type="application/json")
