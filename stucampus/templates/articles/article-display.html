@@ -11,6 +11,7 @@
     <link href="/static/styles/articles/article-pc.css" rel="stylesheet" type="text/css" media="screen and (min-width:768px)" />
     {{ 'artical.js' | as_js }}
     {{ 'articles/duoshuo.css' | as_css }}
+    {{ 'article/comment.js' | as_js }}
 {% endblock %}
 
 {% block content %}
@@ -53,7 +54,7 @@
                 <div class="sharebox" id="sharebox">
                     <span>分享到：</span>
                     <a class="backarticalfoot" href="javascript:void(0)"><span class="close_img"></span><p>返回</p></a>
-                    <a id="wechat" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover.name }}" target="_blank"><span class="wechat_img"></span><p>微信</p></a>
+                    <a id="wechat" href="javascript:void(0)" onclick="window.open('/articles/sharewechat?url=http://stu.szu.edu.cn/articles/{{ article.id }}' ,'_blank','scrollbars=0,resizable=0,width=300,height=300,top=100,left=100;return false')"><span class="wechat_img"></span><p>微信</p></a>
                     <a id="weibo" href="http://service.weibo.com/share/share.php?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&pic=http://stu.szu.edu.cn{{ article.cover.name }}" target="_blank"><span class="weibo_img"></span><p>微博</p></a>
                     <a id="QQ" href="http://connect.qq.com/widget/shareqq/index.html?url=http://stu.szu.edu.cn{% url 'articles:display' article.pk %}&title={{ article.title }}-深圳大学学子天地&desc=&summary=&site=" target="_blank"><span class="QQ_img"></span><p>QQ</p></a>
                     <a id="twitter" href="http://s.share.baidu.com/?click=1&url=http://stu.szu.cn{% url 'articles:display' article.pk %}&uid=0&to=twi&type=text&pic=&title={{ article.title }}-深圳大学学子天地&key=&desc=&comment=&relateUid=&searchPic=0&sign=on&l=1afglci3o1afglcj3k1afgokghr&linkid=imm21dvnzhc&firstime=" target="_blank"><span class="twitter_img"></span><p>Twitter</p></a>
@@ -67,7 +68,7 @@
                     <a class="backarticalfoot" href="javascript:void(0)"></a>
                     <textarea class="addcomment" placeholder="说点什么吧......"></textarea>
                     <!-- to be modified by MoFang --> 
-                    <a class="submit" href="javascript:#######"></a>
+                    <a class="submit" href="javascript:void(0)"></a>
                     <!-- to be modified by MoFang -->
                 </div>
                 {% if not user.is_authenticated %}
@@ -88,7 +89,7 @@
                         <
                      <!--   <a class="reply" href="javascript:void(0)"><img src="/static/images/index/reply_32.png"><p>回复</p></a>
                         <a class="like" href="javascript:void(0)"><img src="/static/images/index/unfavorite_32.png"><p>{{ comment.likes }}</p></a>-->
-                         <a href="javascript:########" class="deletebtn">删除</a>
+                         <a href="javascript:void(0)" class="deletebtn">删除</a>
                     </div>
                     <span class="message">
                     {% autoescape off %}
