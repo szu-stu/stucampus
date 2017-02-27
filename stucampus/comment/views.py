@@ -67,3 +67,19 @@ def add_comment(request):
         'collega': newComment.user.collega
     }
     return HttpResponse(json.dumps(success_dict, ensure_ascii=False), content_type="application/json")
+
+def szu_oauth_info(request):
+    try:
+        if request.session['szu_no']:
+            info_dict = {
+                'isLogin': True,
+                'userStuNo': request.session['szu_no']
+            }
+            return HttpResponse(json.dumps(info_dict), content_type="application/json")
+    except:
+        pass
+    info_dict = {
+        'isLogin': False,
+        'userStuNo': ''
+    }
+    return HttpResponse(json.dumps(info_dict), content_type="application/json")
