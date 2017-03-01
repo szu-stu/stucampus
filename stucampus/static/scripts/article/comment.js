@@ -52,6 +52,7 @@ var StuComment = {
   ready: function() {
     //the function while the page onload
     var _this = this
+    this.loginJudge()
     this.getData()
     setTimeout(function() {
       if(_this.comments) {
@@ -67,26 +68,42 @@ var StuComment = {
     var content = $('.addcomment').val()
     //maybe we should detect the code for it can post right
     //所以开始用ajax了
-    $.ajax({
-      url: 'http://stu.szu.edu.cn/comment/add',
-      data: {
-        commentContent: content,
-        articleId: this.pk
-      },
-      type: 'POST',
-      success: res => {
-        //返回一条json以作更新评论的玩意
-        this.createComment(res)
-        $('.addcomment').val("")
-        StuCampus.notice('提交成功', 2000)
-      },
-      error: res => {
-        StuCampus.notice('发生不可预料的错误', 2000)
-      }
-    })
+    if (content) {
+      $.ajax({
+        url: 'http://stu.szu.edu.cn/comment/add',
+        data: {
+          commentContent: content,
+          articleId: this.pk
+        },
+        type: 'POST',
+        success: res => {
+          //返回一条json以作更新评论的玩意
+          this.createComment(res)
+          $('.addcomment').val("")
+          StuCampus.notice('提交成功', 2000)
+        },
+        error: res => {
+          StuCampus.notice('发生不可预料的错误', 2000)
+        }
+      })
+    } else {
+      StuCampus.notice('评论内容不可为空', 2000)
+    }
   },
   delete: function() {
     //a methods to del aim comment
+  },
+  loginJudge: function() {
+    $.ajax({
+      url: 'http://stu.szu.edu.cn/comment/getUserInfo',
+      success: res => {
+        if(res.isLogin) {
+          $('.add-comment-cover').remove()
+        } else {
+          console.log('no login')
+        }
+      }
+    })
   }
 }
 
@@ -97,3 +114,4 @@ setTimeout(function() {
     StuComment.post()
   })
 }, 3000)
+
