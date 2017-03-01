@@ -166,8 +166,6 @@ def article_list(request, category=None):
         #page = DuoShuo.appendNumToArticles(page)
         #comments = DuoShuo.getRecentComment()
         #visitors = DuoShuo.getListVisitors()
-        for article in page:
-            article.comments = len(Comment.objects.filter(article=str(article.id)))
         categories=Category.objects.all().order_by("priority")
         return render(request, 'articles/article-list.html',
                 {'page': page, 'category': category,

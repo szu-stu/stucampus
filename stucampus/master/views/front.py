@@ -8,6 +8,7 @@ from stucampus.activity.models import ActivityMessage
 from stucampus.utils import DuoShuo
 from stucampus.carousels.models import Slide
 
+from stucampus.comment.models import Comment
 
 def index(request):
     if not request.is_ajax():
@@ -29,7 +30,8 @@ def index(request):
         
         #comments = DuoShuo.getRecentComment()
         #visitors = DuoShuo.getListVisitors()
-
+        for article in newest_articles:
+            article.comments = len(Comment.objects.filter(article=str(article.id)))
         categories=Category.objects.all().order_by("priority")
           
         return render(request, "index.html",
@@ -46,6 +48,8 @@ def index(request):
         except InvalidPage:
             newest_articles = paginator.page(1)
         #newest_articles=DuoShuo.appendNumToArticles(newest_articles)
+        for article in newest_articles:
+            article.comments = len(Comment.objects.filter(article=str(article.id)))
         
         return render(request, "ajax_article_list.html",{'newest_articles':newest_articles})
 
