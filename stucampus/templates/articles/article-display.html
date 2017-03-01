@@ -71,9 +71,7 @@
                     <a class="submit" href="javascript:void(0)"></a>
                     <!-- to be modified by MoFang -->
                 </div>
-                {% if not user.is_authenticated %}
-                <div class="add-comment-cover">登录完才能评论哦..<a id="loginAndBack" href="../account/signin?redirect=/articles/{{article.id}}">点这里登录</a></div>
-                {% endif %}
+                <div class="add-comment-cover">登录完才能评论哦..<a id="loginAndBack" href="http://stu.szu.edu.cn/comment/login?redi=http://stu.szu.edu.cn/articles/{{article.id}}">点这里登录</a></div>
             </div>
         </div>
         <div class="comment-main">
