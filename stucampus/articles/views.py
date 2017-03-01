@@ -15,6 +15,8 @@ from stucampus.utils import get_client_ip
 from stucampus.account.permission import check_perms
 from stucampus.utils import DuoShuo
 
+from stucampus.comment.models import Comment
+
 from stucampus.custom.qiniu import upload_content_img_to_qiniu
 
 
@@ -164,6 +166,8 @@ def article_list(request, category=None):
         #page = DuoShuo.appendNumToArticles(page)
         #comments = DuoShuo.getRecentComment()
         #visitors = DuoShuo.getListVisitors()
+        for article in page:
+            article.comments = len(Comment.objects.filter(article=str(article.id)))
         categories=Category.objects.all().order_by("priority")
         return render(request, 'articles/article-list.html',
                 {'page': page, 'category': category,
