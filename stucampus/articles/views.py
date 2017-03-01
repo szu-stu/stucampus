@@ -181,6 +181,7 @@ def article_display(request, id=None):
     article = get_object_or_404(Article, pk=id, publish=True, deleted=False)
     article.click_count += 1
     article.save()
+    article.comments = len(Comment.objects.filter(article=str(id)))
     #comments=DuoShuo.getListPosts(article.id)
     #article = DuoShuo.appendNumToArticle(article)
     return render(request, 'articles/article-display.html',
