@@ -17,7 +17,7 @@ def get_comment(request):
     deal_dict = {}
     deal_dict['commentCount'] = len(comments)
     comments_array = [{
-                            'userName': i.user.nick,
+                            'userName': i.user.name[0]+u'同学',
                             'commentContent': i.content,
                             'gender': i.user.gender,
                             'createTime': i.create_time.strftime("%y-%m-%d"),
@@ -61,7 +61,7 @@ def add_comment(request):
     newComment = Comment.objects.create(user=user, content=data['commentContent'], article=data['articleId'])
     #然后就欧克了
     success_dict = {
-        'userName': newComment.user.nick,
+        'userName': newComment.user.name[0] + u'同学',
         'commentContent': newComment.content,
         'gender': newComment.user.gender,
         'createTime': newComment.create_time.strftime('%y-%m-%d'),
