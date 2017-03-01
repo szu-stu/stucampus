@@ -1,10 +1,11 @@
 #coding:utf-8
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseBadRequest, HttpResponseRedirect
 from django.views.generic import View
 from .models import Comment, CommentUser
 import json
 from django.views.decorators.csrf import csrf_exempt
+from login_szu import login_szu
 # Create your views here.
 
 
@@ -83,3 +84,10 @@ def szu_oauth_info(request):
         'userStuNo': ''
     }
     return HttpResponse(json.dumps(info_dict), content_type="application/json")
+
+@login_szu
+def szu_login(request):
+    redict_url = request.GET.get('redi')
+    if redict_url:
+        return HttpResponseRedirect(redict_url)
+    return HttpResponseBadRequest('error')
