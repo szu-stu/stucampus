@@ -90,6 +90,11 @@ def show_situation(request,grade):
     yybb = yyb1.filter(gender="male").count()+yyb2.filter(gender="male").count()
     yybg = yyb1.filter(gender="female").count()+yyb2.filter(gender="female").count()
 
+    tvb1 = aall.filter(dept1="tvb")
+    tvb2 = aall.filter(dept2="tvb")
+    tvbb = tvb1.filter(gender="male").count()+tvb2.filter(gender="male").count()
+    tvbg = tvb1.filter(gender="female").count()+tvb2.filter(gender="female").count()
+
     all_girls_num = aall.filter(gender="female").count()
     all_boys_num = aall.filter(gender="male").count()
 
@@ -99,6 +104,7 @@ def show_situation(request,grade):
                                                     "xzb1":xzb1.count(),"xzb2":xzb2.count(),"xzbb":xzbb,"xzbg":xzbg,
                                                     "yyb1":yyb1.count(),"yyb2":yyb2.count(),"yybb":yybb,"yybg":yybg,
                                                     "cbb1":cbb1.count(),"cbb2":cbb2.count(),"cbbb":cbbb,"cbbg":cbbg,
+                                                    "tvb1":tvb1.count(),"tvb2":tvb2.count(),"tvbb":tvbb,"tvbg":cbbg,
                                                     "all" :aall.count(),"all_girls_num":all_girls_num,"all_boys_num":all_boys_num,
                                                     "today_join_num":today_join_num,"title":title})
 
