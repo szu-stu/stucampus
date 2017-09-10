@@ -25,9 +25,9 @@
 		<form action="/dreamer/manage/" method="GET" class="function_bar">
 			<label for="grade">年级:
 				<select id="grade" name="grade">
-					<option value="2014">2014</option>
 					<option value="2015">2015</option>
 					<option value="2016">2016</option>
+					<option value="2017">2017</option>
 				</select>
 			</label>
 			<label>部门:
@@ -45,9 +45,9 @@
 		<label class="function_bar">年级报名概况:
 			<select onchange="window.location=this.value;">
 				<option value="/" select="selected">年份</option>
-				<option value="{% url 'dreamer:show_situation' 2014 %}">2014</option>
 				<option value="{% url 'dreamer:show_situation' 2015 %}">2015</option>
 				<option value="{% url 'dreamer:show_situation' 2016 %}">2016</option>
+				<option value="{% url 'dreamer:show_situation' 2017 %}">2017</option>
 			</select>
 		</label>
 		<a href="{% url 'dreamer:add' %}" class="function_bar">添加报名者</a>
