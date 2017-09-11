@@ -19,7 +19,7 @@ class Register_Form(forms.ModelForm):
         return dept1
     def clean_mobile(self):
         mobile = self.cleaned_data.get("mobile")
-        p2=re.compile('^0\d{2,3}\d{7,8}$|^1[358]\d{9}$|^147\d{8}')
+        p2=re.compile('^0\d{2,3}\d{7,8}$|^1[3578]\d{9}$|^147\d{8}')
         if p2.match(mobile):
             return mobile
         raise forms.ValidationError((u'手机号码格式有误'))
