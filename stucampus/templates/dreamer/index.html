@@ -137,7 +137,7 @@
                 {% csrf_token %}
                 {% if is_login %}
                     {% if is_registered %}
-                        <p>{{szu_name}}同学你好，你已经<span class="success_msg">成功报名</span>，如需修改信息，请联系qq：649743466</p>
+                        <p>{{szu_name}}同学你好，你已经<span class="success_msg">成功报名</span>，如需修改信息，请于学子天地公众号留言</p>
                     {% else %}
                     <p id="error_msg"></p>
                     <p><label for="mobile">手机号码:</label><input type="text" id="mobile" name="mobile"></p>
